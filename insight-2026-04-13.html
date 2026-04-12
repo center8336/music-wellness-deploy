@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INSIGHT — Monthly Research Synthesis</title>
+
+  <!-- Font Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========== Design System ========== */
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+
+      /* Spectrum palette */
+      --spectrum-1: #d4799c; /* rose */
+      --spectrum-2: #e8a87c; /* peach */
+      --spectrum-3: #d4c97a; /* sand */
+      --spectrum-4: #85c9a3; /* sage */
+      --spectrum-5: #7aaed4; /* sky */
+      --spectrum-6: #b8a9d4; /* lilac */
+
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0, 0, 0, 0.07);
+      --border-dark: rgba(255, 255, 255, 0.1);
+
+      --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+      --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 660px;
+    }
+
+    /* ========== Reset & Base ========== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--graphite);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ========== Skip Navigation ========== */
+    .skip-nav {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--signal);
+      color: white;
+      padding: 8px 16px;
+      text-decoration: none;
+      z-index: 999;
+      border-radius: var(--radius);
+      font-size: var(--text-sm);
+      font-weight: 600;
+    }
+
+    .skip-nav:focus {
+      top: 10px;
+      left: 10px;
+    }
+
+    /* ========== Navigation ========== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: var(--bg-light);
+      border-bottom: 1px solid var(--border-light);
+      z-index: 100;
+      padding: 1rem;
+    }
+
+    nav .nav-container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    nav .logo {
+      font-family: var(--font-display);
+      font-size: var(--text-h3);
+      font-weight: 700;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    nav .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    nav .nav-links a {
+      font-size: var(--text-sm);
+      color: var(--graphite);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color var(--dur) var(--ease);
+      position: relative;
+    }
+
+    nav .nav-links a:hover {
+      color: var(--signal);
+    }
+
+    nav .nav-links a.current {
+      color: var(--signal);
+      font-weight: 600;
+    }
+
+    nav .nav-links a.current::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--signal);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      background: var(--black);
+      transition: all var(--dur) var(--ease);
+    }
+
+    /* ========== Scroll-Snap Container ========== */
+    main {
+      scroll-snap-type: y mandatory;
+      scroll-padding-top: 80px;
+      height: 100vh;
+      overflow-y: scroll;
+      overflow-x: hidden;
+    }
+
+    /* Custom scrollbar */
+    main::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    main::-webkit-scrollbar-track {
+      background: var(--snow);
+    }
+
+    main::-webkit-scrollbar-thumb {
+      background: var(--silver);
+      border-radius: 4px;
+    }
+
+    main::-webkit-scrollbar-thumb:hover {
+      background: var(--grey-light);
+    }
+
+    /* ========== Page Structure ========== */
+    section {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 2rem;
+      position: relative;
+    }
+
+    section > * {
+      width: 100%;
+      max-width: var(--max-w);
+    }
+
+    /* Page number sidebar */
+    .page-num {
+      position: fixed;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--grey);
+      z-index: 50;
+      pointer-events: none;
+    }
+
+    /* Arrow navigation */
+    .page-nav {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      display: flex;
+      gap: 1rem;
+      z-index: 50;
+    }
+
+    .page-nav button {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border-light);
+      background: var(--white);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-lg);
+      transition: all var(--dur) var(--ease);
+      color: var(--graphite);
+      font-weight: 600;
+    }
+
+    .page-nav button:hover {
+      background: var(--signal-bg);
+      border-color: var(--signal);
+      color: var(--signal);
+    }
+
+    /* ========== Cover Page (01) ========== */
+    .cover {
+      background: linear-gradient(135deg,
+        rgba(212, 121, 156, 0.1) 0%,
+        rgba(232, 168, 124, 0.1) 25%,
+        rgba(212, 201, 122, 0.1) 50%,
+        rgba(133, 201, 163, 0.1) 75%,
+        rgba(122, 174, 212, 0.1) 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .cover-content {
+      max-width: var(--max-w-text);
+    }
+
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: var(--text-hero);
+      font-weight: 800;
+      color: var(--black);
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .cover-subtitle {
+      font-size: var(--text-h2);
+      color: var(--graphite);
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+
+    .cover-meta {
+      font-size: var(--text-sm);
+      color: var(--grey);
+      font-family: var(--font-mono);
+      line-height: 1.8;
+    }
+
+    /* ========== Section Headers ========== */
+    .section-header {
+      margin-bottom: 3rem;
+    }
+
+    .section-header h1 {
+      font-family: var(--font-display);
+      font-size: var(--text-h1);
+      color: var(--black);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .section-header p {
+      font-size: var(--text-body);
+      color: var(--graphite);
+      line-height: 1.8;
+      max-width: var(--max-w-text);
+    }
+
+    /* ========== Content Blocks ========== */
+    .content-block {
+      margin-bottom: 2.5rem;
+    }
+
+    .content-block h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-h2);
+      color: var(--black);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .content-block h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-h3);
+      color: var(--charcoal);
+      margin-bottom: 0.75rem;
+      margin-top: 1.5rem;
+      font-weight: 600;
+    }
+
+    .content-block p {
+      font-size: var(--text-body);
+      color: var(--graphite);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      max-width: var(--max-w-text);
+    }
+
+    .content-block ul {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-block li {
+      font-size: var(--text-body);
+      color: var(--graphite);
+      line-height: 1.8;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ========== Stat Strip ========== */
+    .stat-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .stat-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      border-left: 4px solid var(--signal);
+    }
+
+    .stat-item.spectrum-1 { border-left-color: var(--spectrum-1); }
+    .stat-item.spectrum-2 { border-left-color: var(--spectrum-2); }
+    .stat-item.spectrum-3 { border-left-color: var(--spectrum-3); }
+    .stat-item.spectrum-4 { border-left-color: var(--spectrum-4); }
+    .stat-item.spectrum-5 { border-left-color: var(--spectrum-5); }
+    .stat-item.spectrum-6 { border-left-color: var(--spectrum-6); }
+
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--grey);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: var(--text-h2);
+      color: var(--black);
+      font-weight: 700;
+    }
+
+    /* ========== Persona Callout ========== */
+    .persona-callout {
+      background: var(--bg-card);
+      border-left: 3px solid var(--signal);
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: var(--radius);
+      max-width: var(--max-w-text);
+    }
+
+    .persona-callout.academic { border-left-color: var(--spectrum-5); }
+    .persona-callout.market { border-left-color: var(--spectrum-1); }
+    .persona-callout.org { border-left-color: var(--spectrum-4); }
+    .persona-callout.government { border-left-color: var(--spectrum-2); }
+    .persona-callout.mentor { border-left-color: var(--spectrum-6); }
+    .persona-callout.design { border-left-color: var(--signal); }
+    .persona-callout.critical { border-left-color: var(--spectrum-3); }
+
+    .persona-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--grey);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .persona-text {
+      font-size: var(--text-body);
+      color: var(--graphite);
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    /* ========== Cross-Report Links ========== */
+    .cross-link {
+      display: inline-block;
+      margin: 0 0.25rem;
+      padding: 2px 6px;
+      background: var(--signal-bg);
+      border: 1px solid var(--signal-dim);
+      border-radius: var(--radius);
+      color: var(--signal);
+      text-decoration: none;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      transition: all var(--dur) var(--ease);
+    }
+
+    .cross-link:hover {
+      background: var(--signal-glow);
+      border-color: var(--signal);
+    }
+
+    /* ========== Timeline/Gates Visual ========== */
+    .gates-timeline {
+      margin: 2rem 0;
+      max-width: var(--max-w-text);
+    }
+
+    .gate {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .gate-marker {
+      flex-shrink: 0;
+      width: 12px;
+      height: 12px;
+      background: var(--signal);
+      border-radius: 50%;
+      margin-top: 5px;
+      position: relative;
+    }
+
+    .gate:not(:last-child) .gate-marker::after {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      width: 2px;
+      height: 50px;
+      background: var(--signal-bg);
+      transform: translateX(-50%);
+    }
+
+    .gate-content {
+      flex: 1;
+    }
+
+    .gate-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--grey);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+
+    .gate-date {
+      font-family: var(--font-display);
+      font-size: var(--text-h3);
+      color: var(--black);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .gate-desc {
+      font-size: var(--text-body);
+      color: var(--graphite);
+      line-height: 1.6;
+    }
+
+    /* ========== Convergence Table ========== */
+    .convergence-table {
+      width: 100%;
+      max-width: var(--max-w-text);
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+    }
+
+    .convergence-table th,
+    .convergence-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .convergence-table th {
+      background: var(--signal-bg);
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--black);
+      font-size: var(--text-sm);
+    }
+
+    .convergence-table td {
+      font-size: var(--text-body);
+      color: var(--graphite);
+      line-height: 1.6;
+    }
+
+    /* ========== Closing Section ========== */
+    .closing-box {
+      background: linear-gradient(135deg, rgba(212, 121, 156, 0.08), rgba(122, 174, 212, 0.08));
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      max-width: var(--max-w-text);
+    }
+
+    .closing-box h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-h2);
+      color: var(--black);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .closing-box p {
+      font-size: var(--text-body);
+      color: var(--graphite);
+      line-height: 1.8;
+    }
+
+    /* ========== Animator: Scroll Reveal & Micro-interactions ========== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-16px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes coverReveal {
+      from { opacity: 0; transform: scale(0.96) translateY(12px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    @keyframes gateGrow {
+      from { height: 0; }
+      to { height: 50px; }
+    }
+
+    /* Elements start hidden, revealed by IntersectionObserver */
+    .reveal { opacity: 0; }
+    .reveal.visible { animation: fadeInUp 0.6s var(--ease) forwards; }
+    .reveal-left { opacity: 0; }
+    .reveal-left.visible { animation: slideInLeft 0.5s var(--ease) forwards; }
+
+    /* Staggered children */
+    .stagger.visible > .stagger-item:nth-child(1) { animation-delay: 0s; }
+    .stagger.visible > .stagger-item:nth-child(2) { animation-delay: 0.12s; }
+    .stagger.visible > .stagger-item:nth-child(3) { animation-delay: 0.24s; }
+    .stagger.visible > .stagger-item:nth-child(4) { animation-delay: 0.36s; }
+    .stagger.visible > .stagger-item {
+      opacity: 0;
+      animation: fadeInUp 0.5s var(--ease) forwards;
+    }
+
+    /* Cover entrance */
+    .cover-content { animation: coverReveal 0.8s var(--ease) 0.2s both; }
+    .cover-meta { animation: fadeIn 0.6s var(--ease) 0.8s both; }
+
+    /* Gate timeline connector animation */
+    .gate-marker::after {
+      transition: height 0.5s var(--ease);
+    }
+
+    /* Persona callout hover lift */
+    .persona-callout {
+      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+    }
+    .persona-callout:hover {
+      transform: translateX(4px);
+      box-shadow: -3px 0 12px rgba(0,0,0,0.04);
+    }
+
+    /* Stat item hover */
+    .stat-item {
+      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+    }
+    .stat-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+
+    /* Gate hover */
+    .gate {
+      transition: transform var(--dur) var(--ease);
+    }
+    .gate:hover {
+      transform: translateX(4px);
+    }
+
+    /* Cross-link pulse on first appearance */
+    .cross-link {
+      transition: all var(--dur) var(--ease), background 0.4s var(--ease);
+    }
+
+    /* Convergence table row reveal */
+    .convergence-table tbody tr {
+      opacity: 0;
+      animation: fadeInUp 0.4s var(--ease) forwards;
+    }
+    .convergence-table.visible tbody tr:nth-child(1) { animation-delay: 0.1s; }
+    .convergence-table.visible tbody tr:nth-child(2) { animation-delay: 0.2s; }
+    .convergence-table.visible tbody tr:nth-child(3) { animation-delay: 0.3s; }
+    .convergence-table.visible tbody tr:nth-child(4) { animation-delay: 0.4s; }
+    .convergence-table:not(.visible) tbody tr { animation: none; opacity: 0; }
+
+    /* Closing box entrance */
+    .closing-box {
+      transition: transform var(--dur-slow) var(--ease), opacity var(--dur-slow) var(--ease);
+    }
+    .closing-box.reveal { opacity: 0; transform: scale(0.97); }
+    .closing-box.reveal.visible { opacity: 1; transform: scale(1); animation: none; }
+
+    /* ========== Responsive ========== */
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      nav .nav-container {
+        gap: 1rem;
+      }
+
+      nav .nav-links {
+        display: none;
+        gap: 1rem;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--white);
+        border-bottom: 1px solid var(--border-light);
+        padding: 1rem;
+        list-style: none;
+      }
+
+      nav .nav-links.active {
+        display: flex;
+      }
+
+      nav .nav-links a {
+        padding: 0.5rem 0;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      section {
+        padding: 5rem 1.5rem;
+      }
+
+      .page-num {
+        display: none;
+      }
+
+      .page-nav {
+        bottom: 1rem;
+        right: 1rem;
+      }
+
+      .page-nav button {
+        width: 36px;
+        height: 36px;
+        font-size: var(--text-sm);
+      }
+
+      .stat-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .cover-title {
+        font-size: clamp(2.5rem, 6vw, 3.5rem);
+      }
+
+      .persona-callout {
+        padding: 0.875rem 1rem;
+      }
+    }
+
+    /* ========== Accessibility ========== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal, .reveal-left, .stagger > .stagger-item,
+      .convergence-table tbody tr, .closing-box.reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+
+    /* High contrast for body text */
+    p, li, .persona-text, .gate-desc, .convergence-table td {
+      color: var(--graphite); /* Meets WCAG AA */
+    }
+
+    /* Decorative/meta text uses lighter grey */
+    .stat-label, .persona-label, .gate-label, .cover-meta {
+      color: var(--grey); /* For decorative purposes */
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-nav">Skip to main content</a>
+
+  <!-- Navigation -->
+  <nav role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <a href="index.html" class="logo" aria-label="Return to home">陳棉</a>
+      <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="plan.html">PLAN</a></li>
+        <li><a href="w1-report-global-npo-landscape.html">ORGS MAP</a></li>
+        <li><a href="w2-report-backline-case-study.html">CASE STUDY</a></li>
+        <li><a href="research.html">RESEARCH</a></li>
+        <li><a href="insight-2026-04-13.html" class="current">INSIGHT</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="main-content" role="main">
+    <!-- Page 01: Cover -->
+    <section class="cover" aria-label="Cover page">
+      <div class="cover-content">
+        <h1 class="cover-title">INSIGHT</h1>
+        <p class="cover-subtitle">Monthly Research Synthesis</p>
+        <div class="cover-meta">
+          April 2026<br>
+          17 personas · 7 dimensions<br>
+          March 20 – April 13, 2026
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 02: Executive Summary -->
+    <section aria-label="Executive summary">
+      <div>
+        <div class="section-header reveal">
+          <h1>Executive Summary</h1>
+          <p>Over the past month, the research has produced three substantial deliverables (<a href="w1-report-global-npo-landscape.html" class="cross-link">Global NPO Landscape</a>, <a href="w2-report-backline-case-study.html" class="cross-link">Backline case study</a>, <a href="research.html" class="cross-link">Détári critical reading</a>), formalized research infrastructure, and compiled foundational academic evidence. Across 17 personas spanning 7 dimensions, a clear pattern emerges: the research is academically rigorous but strategically incomplete. The most critical finding is not what we've learned about music mental health — it's what we haven't tested yet.</p>
+        </div>
+
+        <h2 class="reveal" style="font-family: var(--font-display); font-size: var(--text-h2); color: var(--black); margin-bottom: 1.5rem; font-weight: 600;">Three Convergence Signals</h2>
+
+        <div class="stat-strip stagger">
+          <div class="stat-item spectrum-5 stagger-item">
+            <div class="stat-label">Signal 01</div>
+            <div class="stat-value" style="font-size: var(--text-h3);">Intervention Evidence Gap</div>
+            <p style="font-size: var(--text-sm); color: var(--graphite); margin-top: 0.75rem; line-height: 1.6;">Sparse evidence requires Taiwan-specific validation (mental health specialist, occupational researcher, public health analyst, critical voice)</p>
+          </div>
+
+          <div class="stat-item spectrum-6 stagger-item">
+            <div class="stat-label">Signal 02</div>
+            <div class="stat-value" style="font-size: var(--text-h3);">Two-Track Tension</div>
+            <p style="font-size: var(--text-sm); color: var(--graphite); margin-top: 0.75rem; line-height: 1.6;">Productive but risky tension (mentor, organization strategist, critical voice, academic professionals)</p>
+          </div>
+
+          <div class="stat-item spectrum-4 stagger-item">
+            <div class="stat-label">Signal 03</div>
+            <div class="stat-value" style="font-size: var(--text-h3);">Model Transfer Risk</div>
+            <p style="font-size: var(--text-sm); color: var(--graphite); margin-top: 0.75rem; line-height: 1.6;">Backline model cannot be assumed to transfer without testing (government, target market, organization, critical voice)</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 03: Knowledge & Findings Part 1 -->
+    <section aria-label="Knowledge and findings part one">
+      <div>
+        <div class="section-header reveal">
+          <h1>Knowledge & Findings</h1>
+          <p>Part 1: Evidence Landscape & Policy Window</p>
+        </div>
+
+        <div class="content-block">
+          <h2>The Intervention Evidence Landscape</h2>
+          <p>Nicholl & Abbott (2025) shows MPA and depression are well-characterized in musicians, but treatment evidence is thin — only ACT and CBT show meaningful comparative support. Kegelaers & Gibney's 2025 scoping review of 89 studies represents an inflection point: the field is moving from "documenting the problem exists" to "what interventions work." For Taiwan specifically, it means the NPO cannot simply adopt Backline's intervention model without first validating what Taiwanese musicians actually need and will use.</p>
+
+          <div class="persona-callout academic reveal-left">
+            <div class="persona-label">Academic Researcher</div>
+            <div class="persona-text">"The evidence gap is exactly where Taiwan can contribute. Comparative occupational health analysis would be novel."</div>
+          </div>
+
+          <p>Détári et al.'s psychosocial work environment framework (demands-resources) is powerful, but Norway's welfare state context limits direct applicability. The real question is whether Taiwanese freelance musicians face the same stressor categories or fundamentally different ones — teaching-as-survival is ubiquitous in Taiwan but absent from Norwegian data.</p>
+        </div>
+
+        <div class="content-block">
+          <h2>The Policy Window</h2>
+          <p>Taiwan's 全民心理健康韌性計畫 (NT$5.63B, 2025-2030) is mid-implementation with 3 free counseling sessions for ages 15-45. This creates infrastructure an NPO could bridge onto — but only if it can articulate why music workers need specialized services beyond what's already available. Zero music-industry-specific activity in the plan — ambiguous signal (unclaimed niche vs. government doesn't perceive music workers as distinct).</p>
+
+          <div class="persona-callout government reveal-left">
+            <div class="persona-label">Government Policy Analyst</div>
+            <div class="persona-text">"The window is open now. But you need to position as occupational health, not mental health arts support. That's where the policy leverage is."</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 04: Knowledge & Findings Part 2 -->
+    <section aria-label="Knowledge and findings part two">
+      <div>
+        <div class="section-header reveal">
+          <h1>Knowledge & Findings (continued)</h1>
+          <p>Part 2: The Mandopop Blindspot & Structuring Principle</p>
+        </div>
+
+        <div class="content-block">
+          <h2>The Mandopop Blindspot</h2>
+          <p>Research treats "music" and "musicians" as generic categories, but Taiwan's industry is dominated by Mandopop structures fundamentally different from Western models. Idol culture, fan economy, agency contracts, C-pop stardom pressures. Teaching musicians have different stress profiles than performers — financial stability but burnout, isolation, identity crisis. Research hasn't distinguished between performer MH needs and teacher/crew/staff MH needs.</p>
+
+          <div class="persona-callout market reveal-left">
+            <div class="persona-label">Target Market Researcher</div>
+            <div class="persona-text">"You're designing for an imaginary musician. Taiwanese performers and teachers live in completely different stress ecosystems. Teachers are burnt out, not depressed. Performers are exhausted and exploited."</div>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <h2>The Structuring Principle — Industry Sustainability</h2>
+          <p>Both occupational health researcher and public health analyst pointed toward a unifying frame: occupational health for music workers, not just "mental health support for artists." In Taiwan's policy environment, an NPO positioned as occupational health advocacy for music workers might align better with government priorities and musician identity.</p>
+
+          <div class="persona-callout org reveal-left">
+            <div class="persona-label">Organization Strategist</div>
+            <div class="persona-text">"Occupational health frame wins on three fronts: policy alignment, musician identity (we're workers, not artists), and measurable impact metrics. Mental health is too soft for Taiwan funding."</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 05: Trajectory -->
+    <section aria-label="Trajectory and momentum analysis">
+      <div>
+        <div class="section-header reveal">
+          <h1>Trajectory</h1>
+          <p>What's moving, what's not, and why it matters</p>
+        </div>
+
+        <div class="content-block">
+          <h2>Infrastructure-to-Decision Ratio</h2>
+          <p>15+ work sessions on infrastructure, near-zero decision-making correlation. The infrastructure is excellent but it's become a leading indicator of knowledge production over decision validation.</p>
+
+          <div class="persona-callout org reveal-left">
+            <div class="persona-label">NPO Operator</div>
+            <div class="persona-text">"Backline validated demand first; Taiwan approach is academic-first, action-second. That's fine if the research question is exploratory. Not fine if it's discovery-oriented."</div>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <h2>Two-Track Dynamics</h2>
+          <p>Dual-track creates asymmetric labor allocation — research serves the academic track far more than the NPO track. If the core question is "will musicians use this?" then validation should be happening now. If it's "what does the evidence landscape show?" then current path is correct.</p>
+
+          <div class="persona-callout mentor reveal-left">
+            <div class="persona-label">Mentor</div>
+            <div class="persona-text">"Be explicit about which question drives the work. Both paths are legitimate. Different labor allocation and success metrics. Work clarifies most quickly once the underlying question is explicit."</div>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <h2>What's Not Moving</h2>
+          <p>Fundraising strategy is completely unmapped for Taiwan. Backline's $0 professional fundraising works in the US because of individual giving culture. Taiwan's NPO funding is dominated by government grants and corporate sponsorship.</p>
+
+          <div class="persona-callout critical reveal-left">
+            <div class="persona-label">Critical Voice</div>
+            <div class="persona-text">"Zero primary research, no stakeholder validation, research consuming time that could be validation. The infrastructure is distracting from the actual work."</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 06: Direction Reflections -->
+    <section aria-label="Direction reflections and interventions">
+      <div>
+        <div class="section-header reveal">
+          <h1>Direction Reflections</h1>
+          <p>Four concrete interventions to unlock next phase</p>
+        </div>
+
+        <div class="content-block">
+          <h2>1. Validation Over Documentation</h2>
+          <p>NPO track needs primary research now. Survey of 30-50 Taiwanese musicians (performers AND teachers): current MH challenges, willingness to use NPO, preferred service format. Corporate paternalism risk — independence from labels is critical.</p>
+        </div>
+
+        <div class="content-block">
+          <h2>2. Reframe from "What Helps?" to "What Works Here?"</h2>
+          <p>Adapting Détári framework means validating whether Taiwan has the same stressor categories. This changes research direction: "what is the occupational health profile of Taiwanese music workers?" Narrower but more actionable. Academic track becomes "comparative occupational health analysis."</p>
+        </div>
+
+        <div class="content-block">
+          <h2>3. Clarify the Mandopop Strategy</h2>
+          <p>Explicitly address Mandopop dynamics, idol culture, performer-teacher-crew segmentation. For NPO: which segment first? For academic track: comparative or focused?</p>
+        </div>
+
+        <div class="content-block">
+          <h2>4. Map Funding Pathways</h2>
+          <p>Create one-page funder landscape matrix: 文化部 grants, 國藝會 programs, municipal 文化局, MOHW grants, corporate sponsorship patterns.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 07: Workflow & Collaboration -->
+    <section aria-label="Workflow collaboration and decision gates">
+      <div>
+        <div class="section-header reveal">
+          <h1>Workflow & Collaboration</h1>
+          <p>Infrastructure, decision gates, and stakeholder mapping</p>
+        </div>
+
+        <div class="content-block">
+          <h2>Infrastructure is Excellent But Siloed</h2>
+          <p>Deploy infrastructure is genuinely excellent. But each report is an island — no cross-report navigation or thematic threading. Proposal: cross-report linking system with related reports, evidence types, decision implications.</p>
+        </div>
+
+        <div class="content-block">
+          <h2>Decision Gates</h2>
+          <div class="gates-timeline stagger">
+            <div class="gate stagger-item">
+              <div class="gate-marker"></div>
+              <div class="gate-content">
+                <div class="gate-label">Gate 1</div>
+                <div class="gate-date">May 15</div>
+                <div class="gate-desc">30-50 musician survey + 5-10 stakeholder interviews → Is there evidence of demand?</div>
+              </div>
+            </div>
+            <div class="gate stagger-item">
+              <div class="gate-marker"></div>
+              <div class="gate-content">
+                <div class="gate-label">Gate 2</div>
+                <div class="gate-date">June 15</div>
+                <div class="gate-desc">Funder matrix + academic thesis question finalized → Is seed funding plausible?</div>
+              </div>
+            </div>
+            <div class="gate stagger-item">
+              <div class="gate-marker"></div>
+              <div class="gate-content">
+                <div class="gate-label">Gate 3</div>
+                <div class="gate-date">July 31</div>
+                <div class="gate-desc">Service model + first partnership → Can NPO launch a pilot by year-end?</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <h2>Scaffolding Tension</h2>
+          <p>Cap infrastructure work. Current deploy is sufficient for 2 months. All labor to: primary research, decision-gate work, thesis framing. Infrastructure evolves only when new evidence types (survey data) need presenting.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 08: Convergence & Divergence -->
+    <section aria-label="Convergence and divergence summary">
+      <div>
+        <div class="section-header reveal">
+          <h1>Convergence & Divergence</h1>
+          <p>What aligns and what tensions remain</p>
+        </div>
+
+        <div class="content-block">
+          <h2>Convergence (3+ personas)</h2>
+          <table class="convergence-table">
+            <thead>
+              <tr>
+                <th>Signal</th>
+                <th>What It Means</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Intervention Evidence Sparse</strong></td>
+                <td>Validate in Taiwan context with primary research</td>
+              </tr>
+              <tr>
+                <td><strong>Two-Track Tension</strong></td>
+                <td>Clarify primary question (exploratory vs. discovery)</td>
+              </tr>
+              <tr>
+                <td><strong>Backline Model Can't Transfer</strong></td>
+                <td>Run survey to test assumption before design</td>
+              </tr>
+              <tr>
+                <td><strong>Taiwan Requires Segmentation</strong></td>
+                <td>Define Mandopop and occupational profiles first</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="content-block">
+          <h2>Divergence (Unresolved Tensions)</h2>
+          <ul>
+            <li><strong>Academic Rigor vs. Startup Speed:</strong> Parallel tracks, different metrics. Both legitimate if explicit.</li>
+            <li><strong>Generic "Music Workers" vs. Segmented:</strong> Define scope narrowly first (performer vs. teacher vs. crew).</li>
+            <li><strong>Government as Opportunity vs. Constraint:</strong> Test both via validation research before design.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 09: Closing -->
+    <section aria-label="Closing reflection">
+      <div class="closing-box reveal">
+        <h2>The Mentor's Challenge</h2>
+        <p>Be explicit about whether research is exploratory (knowledge base for future action) or discovery-oriented (testing what works in Taiwan). Both paths legitimate, different labor allocation and success metrics.</p>
+        <p style="margin-top: 1.5rem; font-style: italic;">Work clarifies most quickly once the underlying question is explicit.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Page Navigation -->
+  <div class="page-num" id="page-number" aria-live="polite" aria-label="Current page">01</div>
+
+  <div class="page-nav" role="navigation" aria-label="Page navigation">
+    <button id="prev-btn" aria-label="Previous page" aria-controls="main-content">←</button>
+    <button id="next-btn" aria-label="Next page" aria-controls="main-content">→</button>
+  </div>
+
+  <script>
+    // Hamburger menu toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.getElementById('nav-links');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', navLinks.classList.contains('active'));
+    });
+
+    // Close menu on link click
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', false);
+      });
+    });
+
+    // Page navigation
+    const main = document.querySelector('main');
+    const sections = document.querySelectorAll('section');
+    const pageNumber = document.getElementById('page-number');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+
+    let currentPage = 0;
+
+    function updatePageNumber() {
+      pageNumber.textContent = String(currentPage + 1).padStart(2, '0');
+      prevBtn.disabled = currentPage === 0;
+      nextBtn.disabled = currentPage === sections.length - 1;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (currentPage > 0) {
+        currentPage--;
+        sections[currentPage].scrollIntoView({ behavior: 'smooth' });
+        updatePageNumber();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentPage < sections.length - 1) {
+        currentPage++;
+        sections[currentPage].scrollIntoView({ behavior: 'smooth' });
+        updatePageNumber();
+      }
+    });
+
+    // Update page number on scroll
+    main.addEventListener('scroll', () => {
+      let closestIndex = 0;
+      let closestDistance = Infinity;
+
+      sections.forEach((section, index) => {
+        const rect = section.getBoundingClientRect();
+        const distance = Math.abs(rect.top - window.innerHeight / 2);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      currentPage = closestIndex;
+      updatePageNumber();
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowUp') {
+        prevBtn.click();
+      } else if (e.key === 'ArrowDown') {
+        nextBtn.click();
+      }
+    });
+
+    // Initialize
+    updatePageNumber();
+
+    // Animator: IntersectionObserver for scroll reveals
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15, root: main });
+
+    // Observe all reveal elements
+    document.querySelectorAll('.reveal, .reveal-left, .stagger, .convergence-table, .closing-box.reveal').forEach(el => {
+      revealObserver.observe(el);
+    });
+  </script>
+</body>
+</html>
