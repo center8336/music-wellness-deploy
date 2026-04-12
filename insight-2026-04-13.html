@@ -104,8 +104,7 @@
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-light);
     }
-    .nav-row { display: flex; align-items: center; justify-content: space-between; }
-    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links { display: flex; gap: 2.5rem; justify-content: flex-end; }
     .nav-links a {
       font-family: var(--font-mono); font-size: 0.85rem; font-weight: 400;
       color: var(--grey); text-decoration: none; text-transform: uppercase;
@@ -114,6 +113,10 @@
     .nav-links a:hover { color: var(--black); }
     .nav-links a.current { color: var(--black); }
     .nav-links a:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; border-radius: var(--radius); }
+
+    /* Compact inline brand mark — hidden on desktop, shown on mobile */
+    .nav-topbar { display: none; }
+    .nav-compact { font-family: var(--font-display); font-weight: 800; color: var(--charcoal); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem; opacity: 0.55; }
 
     .nav-toggle {
       display: none; background: none; border: none; cursor: pointer;
@@ -462,9 +465,12 @@
 
     /* ========== Responsive ========== */
     @media (max-width: 768px) {
-      nav.nav { padding: 1rem 1.25rem; padding-top: calc(1rem + env(safe-area-inset-top)); }
+      nav.nav { padding: 1.2rem 1.5rem; padding-top: calc(1.2rem + env(safe-area-inset-top)); right: 0; background: none; border-bottom: none; }
+      nav.nav.open { background: rgba(244,244,245,0.95); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-light); }
+      /* Inline topbar: hamburger + compact brand on one line */
+      .nav-topbar { display: flex; align-items: center; gap: 0.75rem; }
       .nav-toggle { display: block; }
-      .nav-links { display: none; flex-direction: column; gap: 0.6rem; margin-top: 0.75rem; }
+      .nav-links { display: none; flex-direction: column; gap: 0.75rem; margin-top: 1rem; }
       .nav-links.show { display: flex; }
       .nav-links a { font-size: 0.85rem; }
 
@@ -507,18 +513,19 @@
 
   <!-- Navigation -->
   <nav class="nav" role="navigation" aria-label="Main navigation">
-    <div class="nav-row">
-      <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show')">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
         <span></span><span></span><span></span>
       </button>
-      <div class="nav-links">
-        <a href="index.html">HOME</a>
-        <a href="plan.html">PLAN</a>
-        <a href="w1-report-global-npo-landscape.html">ORGS MAP</a>
-        <a href="w2-report-backline-case-study.html">CASE STUDY</a>
-        <a href="research.html">RESEARCH</a>
-        <a href="insight-2026-04-13.html" class="current">INSIGHT</a>
-      </div>
+      <span class="nav-compact">INSIGHT</span>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="plan.html">PLAN</a>
+      <a href="w1-report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="w2-report-backline-case-study.html">CASE STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight-2026-04-13.html" class="current">INSIGHT</a>
     </div>
   </nav>
 
