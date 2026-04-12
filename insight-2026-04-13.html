@@ -9,25 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- SVG Filters for Sketch Effect -->
-  <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
-    <defs>
-      <filter id="sketch" x="-5%" y="-5%" width="110%" height="110%">
-        <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" seed="2" result="noise"/>
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
-      </filter>
-      <filter id="sketch-strong" x="-5%" y="-5%" width="110%" height="110%">
-        <feTurbulence type="turbulence" baseFrequency="0.025" numOctaves="4" seed="5" result="noise"/>
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G"/>
-      </filter>
-      <filter id="paper-grain">
-        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" result="grain"/>
-        <feColorMatrix type="saturate" values="0" in="grain" result="grainBW"/>
-        <feBlend in="SourceGraphic" in2="grainBW" mode="multiply"/>
-      </filter>
-    </defs>
-  </svg>
-
   <style>
     /* ========== Design System Tokens (Non-negotiable) ========== */
     :root {
@@ -168,7 +149,6 @@
       font-family: var(--font-display); font-size: var(--text-hero);
       font-weight: 800; color: var(--black); letter-spacing: -0.02em;
       margin-bottom: 0.5rem;
-      /* sketch filter on title only */
 }
     .cover-subtitle {
       font-family: var(--font-hand); font-size: clamp(1.5rem, 3vw, 2.2rem);
