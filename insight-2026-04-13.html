@@ -161,8 +161,8 @@
     }
     /* Scattered dimension labels on cover */
     .cover-scatter {
-      position: absolute; font-family: var(--font-hand); font-size: 1.1rem;
-      font-weight: 600; opacity: 0.25; pointer-events: none; white-space: nowrap;
+      position: absolute; font-family: var(--font-hand); font-size: 1.55rem;
+      font-weight: 600; opacity: 0.22; pointer-events: none; white-space: nowrap;
     }
 
     /* ========== Section ========== */
@@ -173,7 +173,10 @@
     .topic-header {
       margin-bottom: 2.5rem;
       padding-bottom: 1.5rem;
-      border-bottom: 2px solid var(--charcoal);
+      border-bottom: none;
+      border-image: linear-gradient(90deg, var(--silver) 0%, transparent 100%) 1;
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
       position: relative;
     }
     .topic-number {
