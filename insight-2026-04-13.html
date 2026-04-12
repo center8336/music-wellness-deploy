@@ -5,13 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>INSIGHT — Monthly Research Synthesis</title>
 
-  <!-- Font Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- SVG Filters for Sketch Effect -->
+  <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+    <defs>
+      <filter id="sketch" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" seed="2" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <filter id="sketch-strong" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="turbulence" baseFrequency="0.025" numOctaves="4" seed="5" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <filter id="paper-grain">
+        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" result="grain"/>
+        <feColorMatrix type="saturate" values="0" in="grain" result="grainBW"/>
+        <feBlend in="SourceGraphic" in2="grainBW" mode="multiply"/>
+      </filter>
+    </defs>
+  </svg>
 
   <style>
-    /* ========== Design System ========== */
+    /* ========== Design System Tokens (Non-negotiable) ========== */
     :root {
       --black: #09090b;
       --off-black: #141416;
@@ -30,24 +48,24 @@
       --signal-bg: rgba(102, 103, 171, 0.08);
       --signal-glow: rgba(102, 103, 171, 0.2);
 
-      /* Spectrum palette */
-      --spectrum-1: #d4799c; /* rose */
-      --spectrum-2: #e8a87c; /* peach */
-      --spectrum-3: #d4c97a; /* sand */
-      --spectrum-4: #85c9a3; /* sage */
-      --spectrum-5: #7aaed4; /* sky */
-      --spectrum-6: #b8a9d4; /* lilac */
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
 
       --bg-light: var(--snow);
       --bg-dark: var(--black);
       --bg-card: var(--white);
       --bg-card-dark: var(--off-black);
-      --border-light: rgba(0, 0, 0, 0.07);
-      --border-dark: rgba(255, 255, 255, 0.1);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
 
       --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
       --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
       --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font-hand: 'Caveat', cursive;
       --font: var(--font-body);
 
       --text-hero: clamp(3.5rem, 8vw, 6.5rem);
@@ -59,6 +77,7 @@
       --text-xs: 0.75rem;
 
       --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
       --dur: 0.3s;
       --dur-slow: 0.6s;
 
@@ -68,754 +87,396 @@
       --max-w-text: 660px;
     }
 
-    /* ========== Reset & Base ========== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    /* ========== Reset ========== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: var(--font);
-      background: var(--bg-light);
+      background: var(--snow);
       color: var(--graphite);
       line-height: 1.6;
       overflow-x: hidden;
+      /* Paper grain texture */
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
     }
 
-    /* ========== Skip Navigation ========== */
+    ::selection { background: var(--signal); color: white; }
+
+    /* ========== Skip Nav ========== */
     .skip-nav {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: var(--signal);
-      color: white;
-      padding: 8px 16px;
-      text-decoration: none;
-      z-index: 999;
-      border-radius: var(--radius);
-      font-size: var(--text-sm);
-      font-weight: 600;
+      position: absolute; top: -40px; left: 0;
+      background: var(--signal); color: white;
+      padding: 8px 16px; text-decoration: none;
+      z-index: 999; border-radius: var(--radius);
+      font-size: var(--text-sm); font-weight: 600;
     }
+    .skip-nav:focus { top: 10px; left: 10px; }
 
-    .skip-nav:focus {
-      top: 10px;
-      left: 10px;
-    }
-
-    /* ========== Navigation (Détári Pattern) ========== */
+    /* ========== Navigation ========== */
     nav.nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      flex-direction: column;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; flex-direction: column;
       padding: 1.5rem 2.5rem;
       padding-top: calc(1.5rem + env(safe-area-inset-top));
-      background: transparent;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-    }
-
-    .nav-links a {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      font-weight: 400;
-      color: var(--grey);
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      transition: color var(--dur) var(--ease);
-    }
-
-    .nav-links a:hover {
-      color: var(--black);
-    }
-
-    .nav-links a.current {
-      color: var(--black);
-    }
-
-    .nav-toggle {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0.5rem;
-      z-index: 101;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .nav-toggle span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: var(--charcoal);
-      margin: 5px 0;
-      transition: all 0.3s var(--ease);
-    }
-
-    .nav-toggle.open span:nth-child(1) {
-      transform: rotate(45deg) translate(4px, 5px);
-    }
-
-    .nav-toggle.open span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .nav-toggle.open span:nth-child(3) {
-      transform: rotate(-45deg) translate(4px, -5px);
-    }
-
-    /* ========== Pages Container (Détári Pattern) ========== */
-    .pages-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      overflow-y: auto;
-      scroll-snap-type: y mandatory;
-      scroll-behavior: smooth;
-      overscroll-behavior-y: contain;
-    }
-
-    /* Custom scrollbar */
-    .pages-container::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    .pages-container::-webkit-scrollbar-track {
-      background: var(--snow);
-    }
-
-    .pages-container::-webkit-scrollbar-thumb {
-      background: var(--silver);
-      border-radius: 4px;
-    }
-
-    .pages-container::-webkit-scrollbar-thumb:hover {
-      background: var(--grey-light);
-    }
-
-    .page {
-      min-height: 100vh;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-      padding: 5rem 2.5rem 3rem 6.5rem;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .page-inner {
-      max-width: var(--max-w-text);
-      width: 100%;
-      margin: 0 auto;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* ========== Page Sidebar (Détári Pattern) ========== */
-    .page-sidebar {
-      position: fixed;
-      left: 2.5rem;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 50;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.15rem;
-    }
-
-    .page-nums {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.15rem;
-    }
-
-    .page-num {
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      color: var(--silver);
-      cursor: pointer;
-      padding: 0.2rem 0;
-      transition: color var(--dur) var(--ease);
-      letter-spacing: 0.05em;
-      user-select: none;
-    }
-
-    .page-num:hover {
-      color: var(--grey);
-    }
-
-    .page-num.active {
-      color: var(--black);
-      font-weight: 700;
-    }
-
-    .page-arrows {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      margin-top: 0.75rem;
-    }
-
-    .arrow-btn {
-      width: 28px;
-      height: 28px;
-      border: 1px solid var(--silver);
-      border-radius: 50%;
-      background: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--grey-light);
-      font-size: 0.7rem;
-      transition: all var(--dur) var(--ease);
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .arrow-btn:hover {
-      border-color: var(--signal);
-      color: var(--signal);
-    }
-
-    .arrow-btn svg {
-      width: 12px;
-      height: 12px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    /* ========== Cover Page ========== */
-    .page.cover {
-      background: linear-gradient(135deg,
-        rgba(212, 121, 156, 0.1) 0%,
-        rgba(232, 168, 124, 0.1) 25%,
-        rgba(212, 201, 122, 0.1) 50%,
-        rgba(133, 201, 163, 0.1) 75%,
-        rgba(122, 174, 212, 0.1) 100%);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .cover-eyebrow {
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      color: var(--grey);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 1rem;
-    }
-
-    .cover-title {
-      font-family: var(--font-display);
-      font-size: var(--text-hero);
-      font-weight: 800;
-      color: var(--black);
-      margin-bottom: 1rem;
-      letter-spacing: -0.02em;
-      text-align: center;
-    }
-
-    .cover-subtitle {
-      font-size: var(--text-h2);
-      color: var(--graphite);
-      margin-bottom: 2rem;
-      font-weight: 400;
-      text-align: center;
-    }
-
-    .cover-meta {
-      font-size: var(--text-sm);
-      color: var(--grey);
-      font-family: var(--font-mono);
-      line-height: 1.8;
-      text-align: center;
-    }
-
-    /* ========== Section Headers ========== */
-    .section-header {
-      margin-bottom: 3rem;
-    }
-
-    .section-header h1 {
-      font-family: var(--font-display);
-      font-size: var(--text-h1);
-      color: var(--black);
-      margin-bottom: 1rem;
-      font-weight: 700;
-    }
-
-    .section-header p {
-      font-size: var(--text-body);
-      color: var(--graphite);
-      line-height: 1.8;
-      max-width: var(--max-w-text);
-    }
-
-    /* ========== Content Blocks ========== */
-    .content-block {
-      margin-bottom: 2.5rem;
-    }
-
-    .content-block h2 {
-      font-family: var(--font-display);
-      font-size: var(--text-h2);
-      color: var(--black);
-      margin-bottom: 1rem;
-      font-weight: 600;
-    }
-
-    .content-block h3 {
-      font-family: var(--font-display);
-      font-size: var(--text-h3);
-      color: var(--charcoal);
-      margin-bottom: 0.75rem;
-      margin-top: 1.5rem;
-      font-weight: 600;
-    }
-
-    .content-block p {
-      font-size: var(--text-body);
-      color: var(--graphite);
-      line-height: 1.8;
-      margin-bottom: 1rem;
-      max-width: var(--max-w-text);
-    }
-
-    .content-block ul {
-      margin-left: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .content-block li {
-      font-size: var(--text-body);
-      color: var(--graphite);
-      line-height: 1.8;
-      margin-bottom: 0.5rem;
-    }
-
-    /* ========== Stat Strip ========== */
-    .stat-strip {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .stat-item {
-      background: var(--bg-card);
-      border: 1px solid var(--border-light);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      border-left: 4px solid var(--signal);
-      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
-    }
-
-    .stat-item:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-    }
-
-    .stat-item.spectrum-1 { border-left-color: var(--spectrum-1); }
-    .stat-item.spectrum-2 { border-left-color: var(--spectrum-2); }
-    .stat-item.spectrum-3 { border-left-color: var(--spectrum-3); }
-    .stat-item.spectrum-4 { border-left-color: var(--spectrum-4); }
-    .stat-item.spectrum-5 { border-left-color: var(--spectrum-5); }
-    .stat-item.spectrum-6 { border-left-color: var(--spectrum-6); }
-
-    .stat-label {
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      color: var(--grey);
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .stat-value {
-      font-family: var(--font-display);
-      font-size: var(--text-h2);
-      color: var(--black);
-      font-weight: 700;
-    }
-
-    /* ========== Persona Callout ========== */
-    aside.persona-callout {
-      background: var(--bg-card);
-      border-left: 3px solid var(--signal);
-      padding: 1rem 1.25rem;
-      margin: 1.5rem 0;
-      border-radius: var(--radius);
-      max-width: var(--max-w-text);
-      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
-    }
-
-    aside.persona-callout:hover {
-      transform: translateX(4px);
-      box-shadow: -3px 0 12px rgba(0, 0, 0, 0.04);
-    }
-
-    aside.persona-callout.academic { border-left-color: var(--spectrum-5); }
-    aside.persona-callout.market { border-left-color: var(--spectrum-1); }
-    aside.persona-callout.org { border-left-color: var(--spectrum-4); }
-    aside.persona-callout.government { border-left-color: var(--spectrum-2); }
-    aside.persona-callout.mentor { border-left-color: var(--spectrum-6); }
-    aside.persona-callout.design { border-left-color: var(--signal); }
-    aside.persona-callout.critical { border-left-color: var(--spectrum-3); }
-
-    .persona-label {
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      color: var(--grey);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
-
-    .persona-text {
-      font-size: var(--text-body);
-      color: var(--graphite);
-      line-height: 1.7;
-      font-style: italic;
-    }
-
-    /* ========== Cross-Report Links ========== */
-    .cross-link {
-      display: inline-block;
-      margin: 0 0.25rem;
-      padding: 2px 6px;
-      background: var(--signal-bg);
-      border: 1px solid var(--signal-dim);
-      border-radius: var(--radius);
-      color: var(--signal);
-      text-decoration: none;
-      font-size: var(--text-sm);
-      font-weight: 500;
-      transition: all var(--dur) var(--ease);
-    }
-
-    .cross-link:hover {
-      background: var(--signal-glow);
-      border-color: var(--signal);
-    }
-
-    .cross-link:focus-visible {
-      outline: 2px solid var(--signal);
-      outline-offset: 2px;
-      border-radius: var(--radius);
-    }
-
-    /* ========== Timeline/Gates Visual ========== */
-    ol.gates-timeline {
-      margin: 2rem 0;
-      max-width: var(--max-w-text);
-      list-style: none;
-    }
-
-    .gate {
-      display: flex;
-      gap: 1.5rem;
-      margin-bottom: 1.5rem;
-      align-items: flex-start;
-      transition: transform var(--dur) var(--ease);
-    }
-
-    .gate:hover {
-      transform: translateX(4px);
-    }
-
-    .gate-marker {
-      flex-shrink: 0;
-      width: 12px;
-      height: 12px;
-      background: var(--signal);
-      border-radius: 50%;
-      margin-top: 5px;
-      position: relative;
-    }
-
-    .gate:not(:last-child) .gate-marker::after {
-      content: '';
-      position: absolute;
-      top: 12px;
-      left: 50%;
-      width: 2px;
-      height: 50px;
-      background: var(--signal-bg);
-      transform: translateX(-50%);
-    }
-
-    .gate-content {
-      flex: 1;
-    }
-
-    .gate-label {
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      color: var(--grey);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.25rem;
-    }
-
-    .gate-date {
-      font-family: var(--font-display);
-      font-size: var(--text-h3);
-      color: var(--black);
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-
-    .gate-desc {
-      font-size: var(--text-body);
-      color: var(--graphite);
-      line-height: 1.6;
-    }
-
-    /* ========== Convergence Table ========== */
-    .convergence-table {
-      width: 100%;
-      max-width: var(--max-w-text);
-      border-collapse: collapse;
-      margin-bottom: 2rem;
-    }
-
-    .convergence-table caption {
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      color: var(--grey);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.75rem;
-      text-align: left;
-    }
-
-    .convergence-table th,
-    .convergence-table td {
-      padding: 1rem;
-      text-align: left;
+      background: rgba(244,244,245,0.85);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-light);
     }
+    .nav-row { display: flex; align-items: center; justify-content: space-between; }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: var(--font-mono); font-size: 0.85rem; font-weight: 400;
+      color: var(--grey); text-decoration: none; text-transform: uppercase;
+      letter-spacing: 0.04em; transition: color var(--dur) var(--ease);
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+    .nav-links a:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; border-radius: var(--radius); }
 
-    .convergence-table th {
-      background: var(--signal-bg);
-      font-family: var(--font-display);
-      font-weight: 600;
-      color: var(--black);
-      font-size: var(--text-sm);
+    .nav-toggle {
+      display: none; background: none; border: none; cursor: pointer;
+      padding: 0.5rem; z-index: 101; -webkit-tap-highlight-color: transparent;
+    }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--charcoal); margin: 5px 0; transition: all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(4px, 5px); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(4px, -5px); }
+
+    /* ========== Cover ========== */
+    .cover {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      padding: 6rem 2rem 3rem;
+      position: relative; overflow: hidden;
+    }
+    .cover::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 15% 20%, rgba(212,121,156,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 30%, rgba(122,174,212,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(133,201,163,0.10) 0%, transparent 50%),
+        radial-gradient(ellipse at 30% 60%, rgba(232,168,124,0.08) 0%, transparent 40%),
+        radial-gradient(ellipse at 70% 70%, rgba(184,169,212,0.10) 0%, transparent 45%);
+      z-index: 0;
+    }
+    .cover-inner { position: relative; z-index: 1; text-align: center; max-width: 800px; }
+    .cover-eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--grey); text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+    }
+    .cover-title {
+      font-family: var(--font-display); font-size: var(--text-hero);
+      font-weight: 800; color: var(--black); letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      filter: url(#sketch-strong);
+    }
+    .cover-subtitle {
+      font-family: var(--font-hand); font-size: clamp(1.5rem, 3vw, 2.2rem);
+      color: var(--signal); margin-bottom: 2rem; font-weight: 500;
+    }
+    .cover-meta {
+      font-family: var(--font-mono); font-size: var(--text-sm);
+      color: var(--grey); line-height: 2;
+    }
+    /* Scattered dimension labels on cover */
+    .cover-scatter {
+      position: absolute; font-family: var(--font-hand); font-size: 1.1rem;
+      font-weight: 600; opacity: 0.25; pointer-events: none; white-space: nowrap;
     }
 
-    .convergence-table td {
-      font-size: var(--text-body);
-      color: var(--graphite);
-      line-height: 1.6;
+    /* ========== Section ========== */
+    .topic-section {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+    }
+    .topic-header {
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid var(--charcoal);
+      position: relative;
+    }
+    .topic-number {
+      font-family: var(--font-hand); font-size: 3rem;
+      color: var(--signal); font-weight: 700;
+      line-height: 1; margin-bottom: 0.25rem;
+      opacity: 0.5;
+    }
+    .topic-title {
+      font-family: var(--font-display); font-size: var(--text-h1);
+      color: var(--black); font-weight: 700; margin-bottom: 0.5rem;
+    }
+    .topic-subtitle {
+      font-family: var(--font-body); font-size: var(--text-body);
+      color: var(--grey); max-width: var(--max-w-text);
     }
 
-    /* ========== Closing Section ========== */
-    .closing-box {
-      background: linear-gradient(135deg, rgba(212, 121, 156, 0.08), rgba(122, 174, 212, 0.08));
-      border: 1px solid var(--border-light);
+    /* ========== Filter Bar ========== */
+    .filter-bar {
+      position: sticky; top: 56px; z-index: 50;
+      padding: 0.75rem 2rem;
+      background: rgba(244,244,245,0.9);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-light);
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      justify-content: center;
+      max-width: var(--max-w); margin: 0 auto;
+    }
+    .filter-btn {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      text-transform: uppercase; letter-spacing: 0.04em;
+      padding: 0.35rem 0.75rem; border-radius: 20px;
+      border: 1.5px solid var(--silver); background: transparent;
+      color: var(--grey); cursor: pointer;
+      transition: all var(--dur) var(--ease);
+    }
+    .filter-btn:hover { border-color: var(--graphite); color: var(--graphite); }
+    .filter-btn.active {
+      background: var(--charcoal); color: var(--white);
+      border-color: var(--charcoal);
+    }
+    .filter-btn:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+    .filter-btn[data-dim="academic"].active { background: var(--spectrum-5); border-color: var(--spectrum-5); color: var(--black); }
+    .filter-btn[data-dim="market"].active { background: var(--spectrum-1); border-color: var(--spectrum-1); color: var(--black); }
+    .filter-btn[data-dim="org"].active { background: var(--spectrum-4); border-color: var(--spectrum-4); color: var(--black); }
+    .filter-btn[data-dim="government"].active { background: var(--spectrum-2); border-color: var(--spectrum-2); color: var(--black); }
+    .filter-btn[data-dim="mentor"].active { background: var(--spectrum-6); border-color: var(--spectrum-6); color: var(--black); }
+    .filter-btn[data-dim="design"].active { background: var(--signal); border-color: var(--signal); color: white; }
+    .filter-btn[data-dim="critical"].active { background: var(--spectrum-3); border-color: var(--spectrum-3); color: var(--black); }
+
+    /* ========== Card Grid ========== */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      padding: 0.5rem 0;
+    }
+
+    /* ========== Persona Card (Zine Style) ========== */
+    .persona-card {
+      background: var(--white);
       border-radius: var(--radius-lg);
-      padding: 2rem;
-      max-width: var(--max-w-text);
-      transition: transform var(--dur-slow) var(--ease), opacity var(--dur-slow) var(--ease);
+      padding: 1.5rem;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.4s var(--ease-spring), box-shadow var(--dur) var(--ease);
+      /* Paper texture */
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+      background-color: var(--white);
+      filter: url(#sketch);
+      /* Slight random rotation applied via JS */
+      transform-origin: center center;
+    }
+    .persona-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 5px; border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      /* Color set per dimension via inline style */
+    }
+    .persona-card:hover {
+      transform: rotate(0deg) translateY(-4px) !important;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
+      z-index: 10;
+    }
+    .persona-card:focus-visible {
+      outline: 2px solid var(--signal); outline-offset: 2px;
+    }
+    .persona-card.hidden { display: none; }
+
+    /* Dimension color wash */
+    .persona-card[data-dim="academic"] { background: linear-gradient(135deg, rgba(122,174,212,0.06) 0%, var(--white) 60%); }
+    .persona-card[data-dim="academic"]::before { background: var(--spectrum-5); }
+    .persona-card[data-dim="market"] { background: linear-gradient(135deg, rgba(212,121,156,0.06) 0%, var(--white) 60%); }
+    .persona-card[data-dim="market"]::before { background: var(--spectrum-1); }
+    .persona-card[data-dim="org"] { background: linear-gradient(135deg, rgba(133,201,163,0.06) 0%, var(--white) 60%); }
+    .persona-card[data-dim="org"]::before { background: var(--spectrum-4); }
+    .persona-card[data-dim="government"] { background: linear-gradient(135deg, rgba(232,168,124,0.06) 0%, var(--white) 60%); }
+    .persona-card[data-dim="government"]::before { background: var(--spectrum-2); }
+    .persona-card[data-dim="mentor"] { background: linear-gradient(135deg, rgba(184,169,212,0.06) 0%, var(--white) 60%); }
+    .persona-card[data-dim="mentor"]::before { background: var(--spectrum-6); }
+    .persona-card[data-dim="design"] { background: linear-gradient(135deg, rgba(102,103,171,0.06) 0%, var(--white) 60%); }
+    .persona-card[data-dim="design"]::before { background: var(--signal); }
+    .persona-card[data-dim="critical"] { background: linear-gradient(135deg, rgba(212,201,122,0.06) 0%, var(--white) 60%); }
+    .persona-card[data-dim="critical"]::before { background: var(--spectrum-3); }
+
+    /* Card inner structure */
+    .card-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+    .card-waveform { flex-shrink: 0; width: 48px; height: 32px; }
+    .card-waveform svg { width: 100%; height: 100%; }
+    .card-identity { flex: 1; }
+    .card-name {
+      font-family: var(--font-display); font-size: var(--text-sm);
+      font-weight: 700; color: var(--black);
+    }
+    .card-dim {
+      font-family: var(--font-mono); font-size: 0.65rem;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      margin-top: 0.15rem;
     }
 
+    /* Pin dot */
+    .card-pin {
+      position: absolute; top: 12px; right: 14px;
+      width: 8px; height: 8px; border-radius: 50%;
+      opacity: 0.5;
+    }
+
+    /* Stance (the bold take) */
+    .card-stance {
+      font-family: var(--font-hand); font-size: 1.2rem;
+      color: var(--black); line-height: 1.4;
+      margin-bottom: 0.75rem; font-weight: 600;
+    }
+
+    /* Reasoning (the supporting argument) */
+    .card-reasoning {
+      font-family: var(--font-body); font-size: var(--text-sm);
+      color: var(--graphite); line-height: 1.7;
+    }
+
+    /* Expand indicator */
+    .card-expand {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--grey-light); margin-top: 0.75rem;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      transition: color var(--dur) var(--ease);
+    }
+    .persona-card:hover .card-expand { color: var(--signal); }
+
+    /* ========== Convergence Section ========== */
+    .convergence {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 4rem 2rem 3rem;
+    }
+    .convergence-title {
+      font-family: var(--font-display); font-size: var(--text-h1);
+      color: var(--black); font-weight: 700; margin-bottom: 1rem;
+    }
+    .convergence-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem; margin-top: 2rem;
+    }
+    .conv-card {
+      border: 2px solid var(--charcoal);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      filter: url(#sketch);
+      background: var(--white);
+      transition: transform var(--dur) var(--ease);
+    }
+    .conv-card:hover { transform: translateY(-2px); }
+    .conv-signal {
+      font-family: var(--font-hand); font-size: 1.4rem;
+      color: var(--signal); font-weight: 700; margin-bottom: 0.5rem;
+    }
+    .conv-desc {
+      font-family: var(--font-body); font-size: var(--text-sm);
+      color: var(--graphite); line-height: 1.7;
+    }
+    .conv-personas {
+      display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.75rem;
+    }
+    .conv-tag {
+      font-family: var(--font-mono); font-size: 0.6rem;
+      text-transform: uppercase; letter-spacing: 0.04em;
+      padding: 0.2rem 0.5rem; border-radius: 10px;
+      border: 1px solid; opacity: 0.8;
+    }
+
+    /* ========== Closing ========== */
+    .closing {
+      max-width: var(--max-w-text); margin: 4rem auto 6rem;
+      padding: 3rem 2rem; text-align: center;
+    }
+    .closing-box {
+      background: linear-gradient(135deg, rgba(212,121,156,0.08), rgba(122,174,212,0.08));
+      border: 2px solid var(--charcoal);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      filter: url(#sketch);
+    }
     .closing-box h2 {
-      font-family: var(--font-display);
-      font-size: var(--text-h2);
-      color: var(--black);
-      margin-bottom: 1rem;
-      font-weight: 700;
+      font-family: var(--font-display); font-size: var(--text-h2);
+      color: var(--black); margin-bottom: 1rem; font-weight: 700;
     }
-
     .closing-box p {
-      font-size: var(--text-body);
-      color: var(--graphite);
-      line-height: 1.8;
+      font-family: var(--font-body); font-size: var(--text-body);
+      color: var(--graphite); line-height: 1.8;
+    }
+    .closing-hand {
+      font-family: var(--font-hand); font-size: 1.3rem;
+      color: var(--signal); margin-top: 1.5rem; font-weight: 600;
     }
 
-    /* ========== Animator: Scroll Reveal & Micro-interactions ========== */
+    /* ========== How-To ========== */
+    .how-to {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 0 2rem 2rem;
+    }
+    .how-to-inner {
+      background: var(--signal-bg); border: 1px solid var(--signal-dim);
+      border-radius: var(--radius-lg); padding: 1.25rem 1.5rem;
+      max-width: var(--max-w-text);
+    }
+    .how-to-inner p {
+      font-family: var(--font-body); font-size: var(--text-sm);
+      color: var(--graphite); line-height: 1.7;
+    }
+    .how-to-inner strong { color: var(--black); }
+
+    /* ========== Animations ========== */
+    @keyframes tumbleIn {
+      0% { opacity: 0; transform: rotate(var(--rot-start, -8deg)) translateY(40px) scale(0.9); }
+      60% { opacity: 1; transform: rotate(calc(var(--rot, 0deg) * 1.2)) translateY(-4px) scale(1.02); }
+      100% { opacity: 1; transform: rotate(var(--rot, 0deg)) translateY(0) scale(1); }
+    }
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(24px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    @keyframes coverPop {
+      0% { opacity: 0; transform: scale(0.92) rotate(-1deg); }
+      70% { opacity: 1; transform: scale(1.02) rotate(0.3deg); }
+      100% { opacity: 1; transform: scale(1) rotate(0deg); }
     }
 
-    @keyframes slideInLeft {
-      from { opacity: 0; transform: translateX(-16px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    @keyframes coverReveal {
-      from { opacity: 0; transform: scale(0.96) translateY(12px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
-    }
-
-    /* Elements start hidden, revealed by IntersectionObserver */
     .reveal { opacity: 0; }
     .reveal.visible { animation: fadeInUp 0.6s var(--ease) forwards; }
-    .reveal-left { opacity: 0; }
-    .reveal-left.visible { animation: slideInLeft 0.5s var(--ease) forwards; }
 
-    /* Staggered children */
-    .stagger.visible > .stagger-item:nth-child(1) { animation-delay: 0s; }
-    .stagger.visible > .stagger-item:nth-child(2) { animation-delay: 0.12s; }
-    .stagger.visible > .stagger-item:nth-child(3) { animation-delay: 0.24s; }
-    .stagger.visible > .stagger-item:nth-child(4) { animation-delay: 0.36s; }
-    .stagger.visible > .stagger-item {
+    .persona-card {
       opacity: 0;
-      animation: fadeInUp 0.5s var(--ease) forwards;
+    }
+    .persona-card.tumbled {
+      animation: tumbleIn 0.7s var(--ease-spring) forwards;
+      animation-delay: var(--delay, 0s);
     }
 
-    /* Cover entrance */
-    .cover-title { animation: coverReveal 0.8s var(--ease) 0.2s both; }
-    .cover-meta { animation: fadeIn 0.6s var(--ease) 0.8s both; }
-
-    /* Gate timeline connector animation */
-    .gate-marker::after {
-      transition: height 0.5s var(--ease);
-    }
-
-    /* Convergence table row reveal */
-    .convergence-table tbody tr {
-      opacity: 0;
-      animation: fadeInUp 0.4s var(--ease) forwards;
-    }
-    .convergence-table.visible tbody tr:nth-child(1) { animation-delay: 0.1s; }
-    .convergence-table.visible tbody tr:nth-child(2) { animation-delay: 0.2s; }
-    .convergence-table.visible tbody tr:nth-child(3) { animation-delay: 0.3s; }
-    .convergence-table.visible tbody tr:nth-child(4) { animation-delay: 0.4s; }
-    .convergence-table:not(.visible) tbody tr { animation: none; opacity: 0; }
-
-    /* Closing box entrance */
-    .closing-box.reveal { opacity: 0; transform: scale(0.97); }
-    .closing-box.reveal.visible { opacity: 1; transform: scale(1); animation: none; }
+    .cover-title { animation: coverPop 0.9s var(--ease-spring) 0.1s both; }
+    .cover-subtitle { animation: fadeInUp 0.6s var(--ease) 0.4s both; }
+    .cover-meta { animation: fadeInUp 0.5s var(--ease) 0.7s both; }
 
     /* ========== Responsive ========== */
     @media (max-width: 768px) {
-      nav.nav {
-        padding: 1rem 1.25rem;
-        padding-top: calc(1rem + env(safe-area-inset-top));
-        right: 0;
-        background: none;
-        border-bottom: none;
-      }
+      nav.nav { padding: 1rem 1.25rem; padding-top: calc(1rem + env(safe-area-inset-top)); }
+      .nav-toggle { display: block; }
+      .nav-links { display: none; flex-direction: column; gap: 0.6rem; margin-top: 0.75rem; }
+      .nav-links.show { display: flex; }
+      .nav-links a { font-size: 0.85rem; }
 
-      nav.nav.open {
-        background: rgba(244, 244, 245, 0.9);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-      }
+      .cover { padding: 5rem 1.25rem 2rem; }
+      .cover-title { font-size: clamp(2.5rem, 10vw, 4rem); }
+      .cover-scatter { display: none; }
 
-      .nav-toggle {
-        display: block;
-      }
+      .topic-section { padding: 3rem 1.25rem 2rem; }
+      .card-grid { grid-template-columns: 1fr; gap: 1rem; }
 
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        gap: 0.6rem;
-        margin-top: 0.75rem;
-      }
+      .filter-bar { top: 48px; padding: 0.6rem 1rem; gap: 0.4rem; }
+      .filter-btn { font-size: 0.6rem; padding: 0.3rem 0.6rem; }
 
-      .nav-links.show {
-        display: flex;
-      }
+      .convergence { padding: 3rem 1.25rem 2rem; }
+      .convergence-grid { grid-template-columns: 1fr; }
 
-      .nav-links a {
-        font-size: 0.85rem;
-      }
-
-      .page {
-        padding: 4.5rem 1.25rem 5rem 1.25rem;
-      }
-
-      .page-sidebar {
-        left: auto;
-        right: 1.25rem;
-        top: auto;
-        bottom: 1.5rem;
-        transform: none;
-        flex-direction: row;
-        align-items: center;
-        gap: 0.5rem;
-        background: rgba(244, 244, 245, 0.9);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        padding: 0.5rem 0.75rem;
-        border-radius: 20px;
-        border: 1px solid var(--border-light);
-      }
-
-      .page-nums {
-        flex-direction: row;
-        gap: 0.3rem;
-      }
-
-      .page-num {
-        font-size: 0.6rem;
-        padding: 0.15rem 0.2rem;
-      }
-
-      .page-arrows {
-        flex-direction: row;
-        margin-top: 0;
-        margin-left: 0.25rem;
-      }
-
-      .arrow-btn {
-        width: 24px;
-        height: 24px;
-      }
-
-      .arrow-btn svg {
-        width: 10px;
-        height: 10px;
-      }
-
-      .stat-strip {
-        grid-template-columns: 1fr;
-      }
-
-      .cover-title {
-        font-size: clamp(2.5rem, 6vw, 3.5rem);
-      }
-
-      aside.persona-callout {
-        padding: 0.875rem 1rem;
-      }
+      .closing { padding: 2rem 1.25rem 4rem; }
+      .closing-box { padding: 1.5rem; }
     }
 
     /* ========== Accessibility ========== */
@@ -825,21 +486,13 @@
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
       }
-      .reveal, .reveal-left, .stagger > .stagger-item,
-      .convergence-table tbody tr, .closing-box.reveal {
-        opacity: 1 !important;
-        transform: none !important;
-      }
+      .reveal, .persona-card { opacity: 1 !important; transform: none !important; }
     }
 
-    /* High contrast for body text */
-    p, li, .persona-text, .gate-desc, .convergence-table td {
-      color: var(--graphite);
-    }
-
-    /* Decorative/meta text uses lighter grey */
-    .stat-label, .persona-label, .gate-label, .cover-meta {
-      color: var(--grey);
+    /* Focus-visible on all interactive */
+    a:focus-visible, button:focus-visible, .persona-card:focus-visible {
+      outline: 2px solid var(--signal); outline-offset: 2px;
+      border-radius: var(--radius);
     }
   </style>
 </head>
@@ -848,393 +501,379 @@
 
   <!-- Navigation -->
   <nav class="nav" role="navigation" aria-label="Main navigation">
-    <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show');this.closest('.nav').classList.toggle('open')">
-      <span></span><span></span><span></span>
-    </button>
-    <div class="nav-links">
-      <a href="index.html">HOME</a>
-      <a href="plan.html">PLAN</a>
-      <a href="w1-report-global-npo-landscape.html">ORGS MAP</a>
-      <a href="w2-report-backline-case-study.html">CASE STUDY</a>
-      <a href="research.html">RESEARCH</a>
-      <a href="insight-2026-04-13.html" class="current">INSIGHT</a>
+    <div class="nav-row">
+      <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show')">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links">
+        <a href="index.html">HOME</a>
+        <a href="plan.html">PLAN</a>
+        <a href="w1-report-global-npo-landscape.html">ORGS MAP</a>
+        <a href="w2-report-backline-case-study.html">CASE STUDY</a>
+        <a href="research.html">RESEARCH</a>
+        <a href="insight-2026-04-13.html" class="current">INSIGHT</a>
+      </div>
     </div>
   </nav>
 
-  <!-- Page Sidebar -->
-  <div class="page-sidebar">
-    <div class="page-nums">
-      <span class="page-num active" data-page="0">01</span>
-      <span class="page-num" data-page="1">02</span>
-      <span class="page-num" data-page="2">03</span>
-      <span class="page-num" data-page="3">04</span>
-      <span class="page-num" data-page="4">05</span>
-      <span class="page-num" data-page="5">06</span>
-      <span class="page-num" data-page="6">07</span>
-      <span class="page-num" data-page="7">08</span>
-      <span class="page-num" data-page="8">09</span>
-    </div>
-    <div class="page-arrows">
-      <button class="arrow-btn" aria-label="Previous page" onclick="prevPage()">
-        <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
-      </button>
-      <button class="arrow-btn" aria-label="Next page" onclick="nextPage()">
-        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-    </div>
-  </div>
+  <!-- Cover -->
+  <header class="cover" aria-label="Cover">
+    <!-- Scattered dimension labels -->
+    <span class="cover-scatter" style="top:18%;left:8%;transform:rotate(-12deg);color:var(--spectrum-5)">Academic</span>
+    <span class="cover-scatter" style="top:25%;right:10%;transform:rotate(8deg);color:var(--spectrum-1)">Target Market</span>
+    <span class="cover-scatter" style="bottom:30%;left:5%;transform:rotate(-5deg);color:var(--spectrum-4)">Organization</span>
+    <span class="cover-scatter" style="bottom:22%;right:8%;transform:rotate(10deg);color:var(--spectrum-2)">Government</span>
+    <span class="cover-scatter" style="top:40%;right:3%;transform:rotate(-7deg);color:var(--spectrum-6)">Mentor</span>
+    <span class="cover-scatter" style="bottom:40%;left:12%;transform:rotate(6deg);color:var(--spectrum-3)">Critical</span>
+    <span class="cover-scatter" style="top:60%;left:3%;transform:rotate(-3deg);color:var(--signal)">Design</span>
 
-  <!-- Main Content -->
-  <div class="pages-container" id="main-content" role="main">
-    <!-- Page 01: Cover -->
-    <div class="page cover" aria-label="Cover page">
-      <div class="page-inner" style="justify-content: center;">
-        <div style="text-align: center;">
-          <h1 class="cover-title">INSIGHT</h1>
-          <p class="cover-subtitle">Monthly Research Synthesis</p>
-          <div class="cover-meta">
-            April 2026<br>
-            18 personas · 7 dimensions<br>
-            March 20 – April 13, 2026
-          </div>
-        </div>
+    <div class="cover-inner">
+      <div class="cover-eyebrow">MH&W Research · April 2026</div>
+      <h1 class="cover-title">INSIGHT</h1>
+      <p class="cover-subtitle">18 voices, 5 questions, 1 month of research</p>
+      <div class="cover-meta">
+        Monthly Research Synthesis<br>
+        18 personas · 7 dimensions · 5 topics<br>
+        March 20 – April 13, 2026
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- How to read -->
+    <div class="how-to reveal">
+      <div class="how-to-inner">
+        <p><strong>How to read this:</strong> Each card is a distinct analytical voice — a structured lens applied to the same evidence base. These are not interviews; they are 18 professional perspectives across 7 dimensions. Filter by dimension to follow one worldview, or browse by topic to see where voices converge and fracture. The handwritten text is each persona's core stance; the body text is their reasoning.</p>
       </div>
     </div>
 
-    <!-- Page 02: Executive Summary -->
-    <div class="page" aria-label="Executive summary">
-      <div class="page-inner">
-        <div class="section-header reveal">
-          <h1>Executive Summary</h1>
-          <p>Over the past month, the research has produced three substantial deliverables (<a href="w1-report-global-npo-landscape.html" class="cross-link">Global NPO Landscape</a>, <a href="w2-report-backline-case-study.html" class="cross-link">Backline case study</a>, <a href="research.html" class="cross-link">Détári critical reading</a>), formalized research infrastructure, and compiled foundational academic evidence. Across 18 personas spanning 7 dimensions, a clear pattern emerges: the research is academically rigorous but strategically incomplete. The most critical finding is not what we've learned about music mental health — it's what we haven't tested yet.</p>
-        </div>
-
-        <h2 class="reveal" style="font-family: var(--font-display); font-size: var(--text-h2); color: var(--black); margin-bottom: 1.5rem; font-weight: 600;">Three Convergence Signals</h2>
-
-        <div class="stat-strip stagger">
-          <div class="stat-item spectrum-5 stagger-item">
-            <div class="stat-label">Signal 01</div>
-            <div class="stat-value" style="font-size: var(--text-h3);">Intervention Evidence Gap</div>
-            <p style="font-size: var(--text-sm); color: var(--graphite); margin-top: 0.75rem; line-height: 1.6;">Sparse evidence requires Taiwan-specific validation (mental health specialist, occupational researcher, public health analyst, critical voice)</p>
-          </div>
-
-          <div class="stat-item spectrum-6 stagger-item">
-            <div class="stat-label">Signal 02</div>
-            <div class="stat-value" style="font-size: var(--text-h3);">Two-Track Tension</div>
-            <p style="font-size: var(--text-sm); color: var(--graphite); margin-top: 0.75rem; line-height: 1.6;">Productive but risky tension (mentor, organization strategist, critical voice, academic professionals)</p>
-          </div>
-
-          <div class="stat-item spectrum-4 stagger-item">
-            <div class="stat-label">Signal 03</div>
-            <div class="stat-value" style="font-size: var(--text-h3);">Model Transfer Risk</div>
-            <p style="font-size: var(--text-sm); color: var(--graphite); margin-top: 0.75rem; line-height: 1.6;">Backline model cannot be assumed to transfer without testing (government, target market, organization, critical voice)</p>
-          </div>
-        </div>
-
-        <aside class="persona-callout design reveal-left" role="note" aria-label="Methodology note">
-          <div class="persona-label">How This Was Made</div>
-          <div class="persona-text">This report synthesizes observations from 18 analytical personas across 7 dimensions — academic, target market, organization, government, life direction, design, and critical voice. These are not interviews; they are structured analytical lenses applied to the full body of research produced March 20 – April 13, 2026. Each persona brings a distinct professional perspective to the same evidence base.</div>
-        </aside>
-      </div>
+    <!-- Filter Bar -->
+    <div class="filter-bar" role="toolbar" aria-label="Filter by dimension">
+      <button class="filter-btn active" data-dim="all" onclick="filterCards('all')">All Voices</button>
+      <button class="filter-btn" data-dim="academic" onclick="filterCards('academic')">Academic</button>
+      <button class="filter-btn" data-dim="market" onclick="filterCards('market')">Target Market</button>
+      <button class="filter-btn" data-dim="org" onclick="filterCards('org')">Organization</button>
+      <button class="filter-btn" data-dim="government" onclick="filterCards('government')">Government</button>
+      <button class="filter-btn" data-dim="mentor" onclick="filterCards('mentor')">Life Direction</button>
+      <button class="filter-btn" data-dim="design" onclick="filterCards('design')">Design</button>
+      <button class="filter-btn" data-dim="critical" onclick="filterCards('critical')">Critical</button>
     </div>
 
-    <!-- Page 03: Knowledge & Findings Part 1 -->
-    <div class="page" aria-label="Knowledge and findings part one">
-      <div class="page-inner">
-        <div class="section-header reveal">
-          <h1>Knowledge & Findings</h1>
-          <p>Part 1: Evidence Landscape & Policy Window</p>
-        </div>
+    <!-- Topics rendered by JS -->
+    <div id="topics-container"></div>
 
-        <div class="content-block">
-          <h2>The Intervention Evidence Landscape</h2>
-          <p>Nicholl & Abbott (2025) shows MPA and depression are well-characterized in musicians, but treatment evidence is thin — only ACT and CBT show meaningful comparative support. Kegelaers & Gibney's 2025 scoping review of 89 studies represents an inflection point: the field is moving from "documenting the problem exists" to "what interventions work." For Taiwan specifically, it means the NPO cannot simply adopt Backline's intervention model without first validating what Taiwanese musicians actually need and will use.</p>
+    <!-- Convergence -->
+    <section class="convergence reveal" aria-label="Convergence signals">
+      <h2 class="convergence-title">Where Voices Converge</h2>
+      <p style="font-family:var(--font-body);color:var(--graphite);max-width:var(--max-w-text);line-height:1.7">Four signals emerged where 3+ personas independently reached the same conclusion — across different dimensions, applying different professional lenses to the same evidence.</p>
+      <div class="convergence-grid" id="convergence-grid"></div>
+    </section>
 
-          <aside class="persona-callout academic reveal-left" role="note" aria-label="Academic Researcher perspective">
-            <div class="persona-label">Academic Researcher</div>
-            <div class="persona-text">"The evidence gap is exactly where Taiwan can contribute. Comparative occupational health analysis would be novel."</div>
-          </aside>
-
-          <p>Détári et al.'s psychosocial work environment framework (demands-resources) is powerful, but Norway's welfare state context limits direct applicability. The real question is whether Taiwanese freelance musicians face the same stressor categories or fundamentally different ones — teaching-as-survival is ubiquitous in Taiwan but absent from Norwegian data.</p>
-        </div>
-
-        <div class="content-block">
-          <h2>The Policy Window</h2>
-          <p>Taiwan's 全民心理健康韌性計畫 (NT$5.63B, 2025-2030) is mid-implementation with 3 free counseling sessions for ages 15-45. This creates infrastructure an NPO could bridge onto — but only if it can articulate why music workers need specialized services beyond what's already available. Zero music-industry-specific activity in the plan — ambiguous signal (unclaimed niche vs. government doesn't perceive music workers as distinct).</p>
-
-          <aside class="persona-callout government reveal-left" role="note" aria-label="Government Policy Analyst perspective">
-            <div class="persona-label">Government Policy Analyst</div>
-            <div class="persona-text">"The window is open now. But you need to position as occupational health, not mental health arts support. That's where the policy leverage is."</div>
-          </aside>
-        </div>
+    <!-- Closing -->
+    <section class="closing reveal" aria-label="Closing reflection">
+      <div class="closing-box">
+        <h2>The Mentor's Challenge</h2>
+        <p>Be explicit about whether research is exploratory (knowledge base for future action) or discovery-oriented (testing what works in Taiwan). Both paths are legitimate. Different labor allocation and success metrics.</p>
+        <p class="closing-hand">Work clarifies most quickly once the underlying question is explicit.</p>
       </div>
-    </div>
-
-    <!-- Page 04: Knowledge & Findings Part 2 -->
-    <div class="page" aria-label="Knowledge and findings part two">
-      <div class="page-inner">
-        <div class="section-header reveal">
-          <h1>Knowledge & Findings (continued)</h1>
-          <p>Part 2: The Mandopop Blindspot & Structuring Principle</p>
-        </div>
-
-        <div class="content-block">
-          <h2>The Mandopop Blindspot</h2>
-          <p>Research treats "music" and "musicians" as generic categories, but Taiwan's industry is dominated by Mandopop structures fundamentally different from Western models. Idol culture, fan economy, agency contracts, C-pop stardom pressures. Teaching musicians have different stress profiles than performers — financial stability but burnout, isolation, identity crisis. Research hasn't distinguished between performer MH needs and teacher/crew/staff MH needs.</p>
-
-          <aside class="persona-callout market reveal-left" role="note" aria-label="Target Market Researcher perspective">
-            <div class="persona-label">Target Market Researcher</div>
-            <div class="persona-text">"You're designing for an imaginary musician. Taiwanese performers and teachers live in completely different stress ecosystems. Teachers are burnt out, not depressed. Performers are exhausted and exploited."</div>
-          </aside>
-        </div>
-
-        <div class="content-block">
-          <h2>The Structuring Principle — Industry Sustainability</h2>
-          <p>Both occupational health researcher and public health analyst pointed toward a unifying frame: occupational health for music workers, not just "mental health support for artists." In Taiwan's policy environment, an NPO positioned as occupational health advocacy for music workers might align better with government priorities and musician identity.</p>
-
-          <aside class="persona-callout org reveal-left" role="note" aria-label="Organization Strategist perspective">
-            <div class="persona-label">Organization Strategist</div>
-            <div class="persona-text">"Occupational health frame wins on three fronts: policy alignment, musician identity (we're workers, not artists), and measurable impact metrics. Mental health is too soft for Taiwan funding."</div>
-          </aside>
-        </div>
-      </div>
-    </div>
-
-    <!-- Page 05: Trajectory -->
-    <div class="page" aria-label="Trajectory and momentum analysis">
-      <div class="page-inner">
-        <div class="section-header reveal">
-          <h1>Trajectory</h1>
-          <p>What's moving, what's not, and why it matters</p>
-        </div>
-
-        <div class="content-block">
-          <h2>Infrastructure-to-Decision Ratio</h2>
-          <p>15+ work sessions on infrastructure, near-zero decision-making correlation. The infrastructure is excellent but it's become a leading indicator of knowledge production over decision validation.</p>
-
-          <aside class="persona-callout org reveal-left" role="note" aria-label="NPO Operator perspective">
-            <div class="persona-label">NPO Operator</div>
-            <div class="persona-text">"Backline validated demand first; Taiwan approach is academic-first, action-second. That's fine if the research question is exploratory. Not fine if it's discovery-oriented."</div>
-          </aside>
-        </div>
-
-        <div class="content-block">
-          <h2>Two-Track Dynamics</h2>
-          <p>Dual-track creates asymmetric labor allocation — research serves the academic track far more than the NPO track. If the core question is "will musicians use this?" then validation should be happening now. If it's "what does the evidence landscape show?" then current path is correct.</p>
-
-          <aside class="persona-callout mentor reveal-left" role="note" aria-label="Mentor perspective">
-            <div class="persona-label">Mentor</div>
-            <div class="persona-text">"Be explicit about which question drives the work. Both paths are legitimate. Different labor allocation and success metrics. Work clarifies most quickly once the underlying question is explicit."</div>
-          </aside>
-        </div>
-
-        <div class="content-block">
-          <h2>What's Not Moving</h2>
-          <p>Fundraising strategy is completely unmapped for Taiwan. Backline's $0 professional fundraising works in the US because of individual giving culture. Taiwan's NPO funding is dominated by government grants and corporate sponsorship.</p>
-
-          <aside class="persona-callout critical reveal-left" role="note" aria-label="Critical Voice perspective">
-            <div class="persona-label">Critical Voice</div>
-            <div class="persona-text">"Zero primary research, no stakeholder validation, research consuming time that could be validation. The infrastructure is distracting from the actual work."</div>
-          </aside>
-        </div>
-      </div>
-    </div>
-
-    <!-- Page 06: Direction Reflections -->
-    <div class="page" aria-label="Direction reflections and interventions">
-      <div class="page-inner">
-        <div class="section-header reveal">
-          <h1>Direction Reflections</h1>
-          <p>Four concrete interventions to unlock next phase</p>
-        </div>
-
-        <div class="content-block">
-          <h2>1. Validation Over Documentation</h2>
-          <p>NPO track needs primary research now. Survey of 30-50 Taiwanese musicians (performers AND teachers): current MH challenges, willingness to use NPO, preferred service format. Corporate paternalism risk — independence from labels is critical.</p>
-        </div>
-
-        <div class="content-block">
-          <h2>2. Reframe from "What Helps?" to "What Works Here?"</h2>
-          <p>Adapting Détári framework means validating whether Taiwan has the same stressor categories. This changes research direction: "what is the occupational health profile of Taiwanese music workers?" Narrower but more actionable. Academic track becomes "comparative occupational health analysis."</p>
-        </div>
-
-        <div class="content-block">
-          <h2>3. Clarify the Mandopop Strategy</h2>
-          <p>Explicitly address Mandopop dynamics, idol culture, performer-teacher-crew segmentation. For NPO: which segment first? For academic track: comparative or focused?</p>
-        </div>
-
-        <div class="content-block">
-          <h2>4. Map Funding Pathways</h2>
-          <p>Create one-page funder landscape matrix: 文化部 grants, 國藝會 programs, municipal 文化局, MOHW grants, corporate sponsorship patterns.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Page 07: Workflow & Collaboration -->
-    <div class="page" aria-label="Workflow collaboration and decision gates">
-      <div class="page-inner">
-        <div class="section-header reveal">
-          <h1>Workflow & Collaboration</h1>
-          <p>Infrastructure, decision gates, and stakeholder mapping</p>
-        </div>
-
-        <div class="content-block">
-          <h2>Infrastructure is Excellent But Siloed</h2>
-          <p>Deploy infrastructure is genuinely excellent. But each report is an island — no cross-report navigation or thematic threading. Proposal: cross-report linking system with related reports, evidence types, decision implications.</p>
-        </div>
-
-        <div class="content-block">
-          <h2>Decision Gates</h2>
-          <ol class="gates-timeline stagger" role="list">
-            <li class="gate stagger-item">
-              <div class="gate-marker"></div>
-              <div class="gate-content">
-                <div class="gate-label">Gate 1</div>
-                <div class="gate-date">May 15</div>
-                <div class="gate-desc">30-50 musician survey + 5-10 stakeholder interviews → Is there evidence of demand?</div>
-              </div>
-            </li>
-            <li class="gate stagger-item">
-              <div class="gate-marker"></div>
-              <div class="gate-content">
-                <div class="gate-label">Gate 2</div>
-                <div class="gate-date">June 15</div>
-                <div class="gate-desc">Funder matrix + academic thesis question finalized → Is seed funding plausible?</div>
-              </div>
-            </li>
-            <li class="gate stagger-item">
-              <div class="gate-marker"></div>
-              <div class="gate-content">
-                <div class="gate-label">Gate 3</div>
-                <div class="gate-date">July 31</div>
-                <div class="gate-desc">Service model + first partnership → Can NPO launch a pilot by year-end?</div>
-              </div>
-            </li>
-          </ol>
-        </div>
-
-        <div class="content-block">
-          <h2>Scaffolding Tension</h2>
-          <p>Cap infrastructure work. Current deploy is sufficient for 2 months. All labor to: primary research, decision-gate work, thesis framing. Infrastructure evolves only when new evidence types (survey data) need presenting.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Page 08: Convergence & Divergence -->
-    <div class="page" aria-label="Convergence and divergence summary">
-      <div class="page-inner">
-        <div class="section-header reveal">
-          <h1>Convergence & Divergence</h1>
-          <p>What aligns and what tensions remain</p>
-        </div>
-
-        <div class="content-block">
-          <h2>Convergence (3+ personas)</h2>
-          <table class="convergence-table">
-            <caption>Convergence Signals — 3+ personas agree</caption>
-            <thead>
-              <tr>
-                <th>Signal</th>
-                <th>What It Means</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Intervention Evidence Sparse</strong></td>
-                <td>Validate in Taiwan context with primary research</td>
-              </tr>
-              <tr>
-                <td><strong>Two-Track Tension</strong></td>
-                <td>Clarify primary question (exploratory vs. discovery)</td>
-              </tr>
-              <tr>
-                <td><strong>Backline Model Can't Transfer</strong></td>
-                <td>Run survey to test assumption before design</td>
-              </tr>
-              <tr>
-                <td><strong>Taiwan Requires Segmentation</strong></td>
-                <td>Define Mandopop and occupational profiles first</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="content-block">
-          <h2>Divergence (Unresolved Tensions)</h2>
-          <ul>
-            <li><strong>Academic Rigor vs. Startup Speed:</strong> Parallel tracks, different metrics. Both legitimate if explicit.</li>
-            <li><strong>Generic "Music Workers" vs. Segmented:</strong> Define scope narrowly first (performer vs. teacher vs. crew).</li>
-            <li><strong>Government as Opportunity vs. Constraint:</strong> Test both via validation research before design.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Page 09: Closing -->
-    <div class="page" aria-label="Closing reflection">
-      <div class="page-inner" style="justify-content: center;">
-        <div class="closing-box reveal">
-          <h2>The Mentor's Challenge</h2>
-          <p>Be explicit about whether research is exploratory (knowledge base for future action) or discovery-oriented (testing what works in Taiwan). Both paths legitimate, different labor allocation and success metrics.</p>
-          <p style="margin-top: 1.5rem; font-style: italic;">Work clarifies most quickly once the underlying question is explicit.</p>
-        </div>
-      </div>
-    </div>
-  </div>
+    </section>
+  </main>
 
   <script>
-    var container = document.querySelector('.pages-container');
-    var pages = document.querySelectorAll('.page');
-    var nums = document.querySelectorAll('.page-num');
-    var current = 0;
+    /* ========== DATA ========== */
+    var DIMS = {
+      academic: { color: '#7aaed4', label: 'ACADEMIC' },
+      market: { color: '#d4799c', label: 'TARGET MARKET' },
+      org: { color: '#85c9a3', label: 'ORGANIZATION' },
+      government: { color: '#e8a87c', label: 'GOVERNMENT' },
+      mentor: { color: '#b8a9d4', label: 'LIFE DIRECTION' },
+      design: { color: '#6667AB', label: 'DESIGN' },
+      critical: { color: '#d4c97a', label: 'CRITICAL' }
+    };
 
-    function goTo(index) {
-      if (index < 0 || index >= pages.length) return;
-      pages[index].scrollIntoView({ behavior: 'smooth' });
+    var TOPICS = [
+      {
+        id: 'evidence', number: '01',
+        title: 'Evidence & Intervention Gap',
+        subtitle: 'What do we know — and what\u2019s dangerously missing?',
+        voices: [
+          { name: 'Academic Researcher', dim: 'academic',
+            stance: 'The evidence gap is exactly where Taiwan can contribute.',
+            reasoning: '89 studies scoped, but intervention evidence remains thin — only ACT and CBT show comparative support. A comparative occupational health analysis from Taiwan would be genuinely novel.' },
+          { name: 'Mental Health Specialist', dim: 'academic',
+            stance: 'We\u2019re still documenting problems instead of testing solutions.',
+            reasoning: 'MPA and depression are well-characterized in musicians, but clinical trials in East Asian contexts are nearly nonexistent. The field is at an inflection point.' },
+          { name: 'Occupational Health Researcher', dim: 'academic',
+            stance: 'D\u00e9t\u00e1ri\u2019s framework is powerful, but Norway \u2260 Taiwan.',
+            reasoning: 'The demands-resources model works, but Taiwan\u2019s freelance music economy (teaching-as-survival) creates stressor categories absent from Norwegian welfare-state data.' },
+          { name: 'Public Health Analyst', dim: 'academic',
+            stance: 'The policy infrastructure exists. The music-specific gap doesn\u2019t.',
+            reasoning: 'Taiwan\u2019s \u5168\u6c11\u5fc3\u7406\u5065\u5eb7\u97cc\u6027\u8a08\u756b (NT$5.63B, 2025-2030) offers 3 free sessions for ages 15-45. Zero music-worker-specific activity — ambiguous signal.' },
+          { name: 'Working Musician', dim: 'market',
+            stance: 'Stop studying us. Start asking what we actually need.',
+            reasoning: 'I don\u2019t want CBT. I want someone who understands what it\u2019s like to lose a gig and your identity in the same week. Researchers study musicians without consulting musicians.' },
+          { name: 'Critical Voice', dim: 'critical',
+            stance: 'Sparse evidence \u2260 empty field. Check your search strategy.',
+            reasoning: 'Have you checked non-English databases? Mandarin-language studies? CEPS? The \u201Cevidence gap\u201D might be a language gap.' }
+        ]
+      },
+      {
+        id: 'two-track', number: '02',
+        title: 'Two-Track Tension',
+        subtitle: 'Academic research vs. NPO action — productive or paralysing?',
+        voices: [
+          { name: 'Mentor', dim: 'mentor',
+            stance: 'Be explicit about which question drives the work.',
+            reasoning: 'Both paths are legitimate — different labor allocation and success metrics. Work clarifies most quickly once the underlying question is explicit. Don\u2019t let ambiguity masquerade as flexibility.' },
+          { name: 'Organization Strategist', dim: 'org',
+            stance: 'Research is serving the academic track. The NPO is starving.',
+            reasoning: 'The dual track creates asymmetric labor allocation. If the core question is \u201Cwill musicians use this?\u201D then validation should be happening now, not after the literature review is complete.' },
+          { name: 'NPO Operator', dim: 'org',
+            stance: 'Backline validated demand first. This approach is backwards.',
+            reasoning: 'Backline proved musicians would call before building infrastructure. The Taiwan approach is academic-first, action-second. Fine for exploration, not for discovery.' },
+          { name: 'Career Advisor', dim: 'mentor',
+            stance: 'Two tracks is smart hedging — until it becomes avoidance.',
+            reasoning: 'Both tracks need explicit timelines and decision gates. If both are running indefinitely with no kill criteria, you\u2019re avoiding commitment, not managing risk.' },
+          { name: 'Academic Researcher', dim: 'academic',
+            stance: 'A thesis requires a research question, not a literature review.',
+            reasoning: 'If this becomes a thesis, the academic track has clear value. But define the question by June or the academic track is just procrastination with footnotes.' },
+          { name: 'Critical Voice', dim: 'critical',
+            stance: '15+ sessions on infrastructure, near-zero decisions made.',
+            reasoning: 'The infrastructure is excellent but it\u2019s become a leading indicator of knowledge production, not decision validation. The scaffolding has become the building.' }
+        ]
+      },
+      {
+        id: 'transfer', number: '03',
+        title: 'Model Transfer Risk',
+        subtitle: 'Can Backline\u2019s model work in Taiwan? Most say: not without testing.',
+        voices: [
+          { name: 'Government Policy Analyst', dim: 'government',
+            stance: 'Position as occupational health, not arts support.',
+            reasoning: 'The \u5168\u6c11\u5fc3\u7406\u5065\u5eb7\u97cc\u6027\u8a08\u756b won\u2019t add music-specific programming unless you frame it as a workforce issue. That\u2019s where the policy leverage is.' },
+          { name: 'Service Designer', dim: 'design',
+            stance: 'You can\u2019t transplant a US crisis hotline to Taiwan.',
+            reasoning: 'Service design must start from Taiwanese musicians\u2019 actual help-seeking behaviors, not Backline\u2019s touchpoints. Cultural context shapes every interaction.' },
+          { name: 'Organization Strategist', dim: 'org',
+            stance: 'Occupational health frame wins on three fronts.',
+            reasoning: 'Policy alignment, musician identity (\u201Cwe\u2019re workers, not suffering artists\u201D), and measurable impact metrics. \u201CMental health\u201D is too soft for Taiwan funding landscape.' },
+          { name: 'Fundraising Specialist', dim: 'org',
+            stance: 'Backline\u2019s fundraising model is irrelevant for Taiwan.',
+            reasoning: '$0 professional fundraising works in the US because of individual giving culture. Taiwan NPO funding is government grants + corporate sponsorship. Completely different playbook.' },
+          { name: 'Teaching Musician', dim: 'market',
+            stance: 'We\u2019re not performers with stage fright.',
+            reasoning: 'We\u2019re exhausted educators running between 6 private students and a cram school. Different problems need different services. Stop treating musicians as one category.' },
+          { name: 'Devil\u2019s Advocate', dim: 'critical',
+            stance: 'What if musicians don\u2019t want an NPO at all?',
+            reasoning: 'What if they want a union? What if the sustainable model isn\u2019t nonprofit but social enterprise? The organizational form should follow from the problem, not precede it.' }
+        ]
+      },
+      {
+        id: 'mandopop', number: '04',
+        title: 'Mandopop Blindspot',
+        subtitle: 'Research treats \u201Cmusician\u201D as generic. Taiwan\u2019s industry disagrees.',
+        voices: [
+          { name: 'Working Musician', dim: 'market',
+            stance: 'Idol trainees and jazz freelancers live on different planets.',
+            reasoning: 'Agency contracts, fan economy, C-pop stardom pressures. Idol trainees have zero agency over schedules, diet, relationships. That\u2019s not the same stress profile as a club freelancer.' },
+          { name: 'Industry Crew', dim: 'market',
+            stance: 'Everyone talks about performers. We\u2019re invisible.',
+            reasoning: 'Sound engineers working 16-hour festival days. Road crews. Studio session musicians. We exist in every study\u2019s blind spot.' },
+          { name: 'Cultural Affairs Officer', dim: 'government',
+            stance: 'Mandopop is soft power. Frame this as workforce protection.',
+            reasoning: '\u6587\u5316\u90e8 cares about industry sustainability, not mental health per se. Frame the NPO as protecting creative workforce productivity, and you align with ministry priorities.' },
+          { name: 'UX Researcher', dim: 'design',
+            stance: 'You\u2019re designing for an imaginary musician.',
+            reasoning: 'Do 20 contextual interviews before writing a single service spec. The segments will surprise you. Performer, teacher, crew, session — each needs distinct research.' },
+          { name: 'Mental Health Specialist', dim: 'academic',
+            stance: 'Different clinical profiles require different interventions.',
+            reasoning: 'Teaching musicians present with burnout and identity crisis. Performers present with anxiety and exploitation trauma. You cannot serve both with one program design.' },
+          { name: 'Academic Researcher', dim: 'academic',
+            stance: 'A comparative analysis across segments would be genuinely novel.',
+            reasoning: 'Research hasn\u2019t distinguished performer MH needs from teacher/crew/staff needs. This is a publishable gap — and directly useful for NPO service design.' }
+        ]
+      },
+      {
+        id: 'funding', number: '05',
+        title: 'Funding & Sustainability',
+        subtitle: 'The strategy nobody has mapped yet.',
+        voices: [
+          { name: 'Fundraising Specialist', dim: 'org',
+            stance: 'Map the landscape now. Relationships take months.',
+            reasoning: '\u6587\u5316\u90e8 grants, \u570b\u85dd\u6703 programs, municipal \u6587\u5316\u5c40, MOHW grants, corporate CSR. Taiwan\u2019s NPO sector runs on relationships, not online donations. Start building them yesterday.' },
+          { name: 'Government Policy Analyst', dim: 'government',
+            stance: 'The policy window is mid-cycle. Miss it and wait 5 years.',
+            reasoning: 'The \u5168\u6c11\u5fc3\u7406\u5065\u5eb7\u97cc\u6027\u8a08\u756b is mid-implementation (2025-2030). If you can\u2019t articulate why music workers need specialized services during this cycle, the next window is 2030.' },
+          { name: 'Organization Strategist', dim: 'org',
+            stance: 'Independence from labels is non-negotiable.',
+            reasoning: 'Corporate paternalism risk is real. If record labels fund you, they control the narrative. Credibility requires independence from the industry you\u2019re trying to serve.' },
+          { name: 'NPO Operator', dim: 'org',
+            stance: 'Start with one funded pilot, not a full organization.',
+            reasoning: 'Prove impact with 30 musicians, then scale. Nobody in Taiwan funds unproven concepts. A pilot is your minimum viable credibility.' },
+          { name: 'Critical Voice', dim: 'critical',
+            stance: 'This should have been the first priority, not the last.',
+            reasoning: 'Fundraising strategy is completely unmapped after a month of research. How can you design services without knowing what\u2019s fundable? The cart is before the horse.' },
+          { name: 'Devil\u2019s Advocate', dim: 'critical',
+            stance: 'What if the answer isn\u2019t an NPO?',
+            reasoning: 'Social enterprise, B Corp, embedding within existing music associations, university partnership — the nonprofit form is an assumption, not a conclusion.' }
+        ]
+      }
+    ];
+
+    var CONVERGENCE = [
+      {
+        signal: 'Intervention evidence is sparse',
+        desc: 'Taiwan-specific validation with primary research is non-negotiable before any service design.',
+        personas: [
+          { name: 'Mental Health Specialist', dim: 'academic' },
+          { name: 'Occupational Health Researcher', dim: 'academic' },
+          { name: 'Public Health Analyst', dim: 'academic' },
+          { name: 'Critical Voice', dim: 'critical' }
+        ]
+      },
+      {
+        signal: 'Two-track tension needs explicit resolution',
+        desc: 'Clarify the primary question (exploratory vs. discovery) and set decision gates with kill criteria.',
+        personas: [
+          { name: 'Mentor', dim: 'mentor' },
+          { name: 'Organization Strategist', dim: 'org' },
+          { name: 'Critical Voice', dim: 'critical' },
+          { name: 'Academic Researcher', dim: 'academic' }
+        ]
+      },
+      {
+        signal: 'Backline model cannot transfer directly',
+        desc: 'Run a musician survey to test assumptions before designing any service model.',
+        personas: [
+          { name: 'Government Policy Analyst', dim: 'government' },
+          { name: 'Teaching Musician', dim: 'market' },
+          { name: 'Service Designer', dim: 'design' },
+          { name: 'Devil\u2019s Advocate', dim: 'critical' }
+        ]
+      },
+      {
+        signal: 'Taiwan requires musician segmentation',
+        desc: 'Define Mandopop dynamics and occupational profiles (performer vs. teacher vs. crew) before anything else.',
+        personas: [
+          { name: 'Working Musician', dim: 'market' },
+          { name: 'Industry Crew', dim: 'market' },
+          { name: 'UX Researcher', dim: 'design' },
+          { name: 'Mental Health Specialist', dim: 'academic' }
+        ]
+      }
+    ];
+
+    /* ========== WAVEFORM GENERATOR ========== */
+    function hashStr(s) {
+      var h = 0;
+      for (var i = 0; i < s.length; i++) h = ((h << 5) - h) + s.charCodeAt(i);
+      return Math.abs(h);
     }
 
-    function nextPage() { goTo(current + 1); }
-    function prevPage() { goTo(current - 1); }
+    function genWaveform(name, color) {
+      var h = hashStr(name);
+      var pts = [];
+      for (var x = 0; x <= 48; x += 1.5) {
+        var y = 16
+          + Math.sin((x + h) * 0.12) * 8
+          + Math.sin((x * 0.3 + h * 0.7)) * 4
+          + Math.cos((x * 0.08 + h * 1.3)) * 3;
+        pts.push(x.toFixed(1) + ',' + y.toFixed(1));
+      }
+      return '<svg viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg">'
+        + '<polyline points="' + pts.join(' ') + '" fill="none" stroke="' + color
+        + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/></svg>';
+    }
 
-    var scrollRaf = null;
-    container.addEventListener('scroll', function() {
-      if (scrollRaf) return;
-      scrollRaf = requestAnimationFrame(function() {
-        scrollRaf = null;
-        var best = 0, bestDist = Infinity;
-        for (var i = 0; i < pages.length; i++) {
-          var dist = Math.abs(pages[i].offsetTop - container.scrollTop);
-          if (dist < bestDist) { bestDist = dist; best = i; }
-        }
-        if (best !== current) {
-          nums[current].classList.remove('active');
-          current = best;
-          nums[current].classList.add('active');
-        }
-      });
-    }, { passive: true });
+    /* ========== RENDER CARDS ========== */
+    var container = document.getElementById('topics-container');
 
-    nums.forEach(function(num) {
-      num.addEventListener('click', function() {
-        goTo(parseInt(this.getAttribute('data-page')));
+    TOPICS.forEach(function(topic) {
+      var section = document.createElement('section');
+      section.className = 'topic-section';
+      section.setAttribute('aria-label', topic.title);
+
+      var header = '<div class="topic-header reveal">'
+        + '<div class="topic-number">' + topic.number + '</div>'
+        + '<h2 class="topic-title">' + topic.title + '</h2>'
+        + '<p class="topic-subtitle">' + topic.subtitle + '</p>'
+        + '</div>';
+
+      var grid = '<div class="card-grid" data-topic="' + topic.id + '">';
+      topic.voices.forEach(function(v, i) {
+        var dim = DIMS[v.dim];
+        var rot = ((hashStr(v.name + topic.id) % 500) - 250) / 100;
+        var delay = (i * 0.1).toFixed(2);
+        var rotStart = rot * 3;
+
+        grid += '<article class="persona-card" data-dim="' + v.dim + '" tabindex="0"'
+          + ' role="article" aria-label="' + v.name + ' perspective"'
+          + ' style="--rot:' + rot + 'deg;--rot-start:' + rotStart + 'deg;--delay:' + delay + 's">'
+          + '<div class="card-pin" style="background:' + dim.color + '"></div>'
+          + '<div class="card-header">'
+          + '<div class="card-waveform">' + genWaveform(v.name, dim.color) + '</div>'
+          + '<div class="card-identity">'
+          + '<div class="card-name">' + v.name + '</div>'
+          + '<div class="card-dim" style="color:' + dim.color + '">' + dim.label + '</div>'
+          + '</div></div>'
+          + '<div class="card-stance">\u201C' + v.stance + '\u201D</div>'
+          + '<div class="card-reasoning">' + v.reasoning + '</div>'
+          + '</article>';
       });
+      grid += '</div>';
+
+      section.innerHTML = header + grid;
+      container.appendChild(section);
     });
 
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { nextPage(); e.preventDefault(); }
-      if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { prevPage(); e.preventDefault(); }
+    /* ========== RENDER CONVERGENCE ========== */
+    var convGrid = document.getElementById('convergence-grid');
+    CONVERGENCE.forEach(function(c) {
+      var tags = '';
+      c.personas.forEach(function(p) {
+        var d = DIMS[p.dim];
+        tags += '<span class="conv-tag" style="color:' + d.color + ';border-color:' + d.color + '">' + p.name + '</span>';
+      });
+      convGrid.innerHTML += '<div class="conv-card">'
+        + '<div class="conv-signal">' + c.signal + '</div>'
+        + '<div class="conv-desc">' + c.desc + '</div>'
+        + '<div class="conv-personas">' + tags + '</div>'
+        + '</div>';
     });
 
-    // IntersectionObserver for scroll reveals (animator)
-    var revealObserver = new IntersectionObserver(function(entries) {
+    /* ========== FILTER ========== */
+    function filterCards(dim) {
+      document.querySelectorAll('.filter-btn').forEach(function(b) {
+        b.classList.toggle('active', b.getAttribute('data-dim') === dim);
+      });
+      document.querySelectorAll('.persona-card').forEach(function(card) {
+        if (dim === 'all' || card.getAttribute('data-dim') === dim) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    /* ========== INTERSECTION OBSERVER ========== */
+    var revealObs = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
       });
-    }, { threshold: 0.15, root: container });
+    }, { threshold: 0.1 });
 
-    document.querySelectorAll('.reveal, .reveal-left, .stagger, .convergence-table, .closing-box.reveal').forEach(function(el) {
-      revealObserver.observe(el);
-    });
+    document.querySelectorAll('.reveal').forEach(function(el) { revealObs.observe(el); });
+
+    var cardObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && !entry.target.classList.contains('tumbled')) {
+          entry.target.classList.add('tumbled');
+        }
+      });
+    }, { threshold: 0.05 });
+
+    document.querySelectorAll('.persona-card').forEach(function(card) { cardObs.observe(card); });
   </script>
 </body>
 </html>
