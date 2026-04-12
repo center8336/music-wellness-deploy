@@ -374,45 +374,49 @@
       border: 1px solid; opacity: 0.8;
     }
 
-    /* ========== Closing ========== */
+    /* ========== Closing (handwritten note feel) ========== */
     .closing {
-      max-width: var(--max-w-text); margin: 4rem auto 6rem;
-      padding: 3rem 2rem; text-align: center;
+      max-width: var(--max-w-text); margin: 3rem auto 5rem;
+      padding: 2rem 2rem; text-align: center;
+      position: relative;
     }
     .closing-box {
-      background: linear-gradient(135deg, rgba(212,121,156,0.08), rgba(122,174,212,0.08));
-      border: 2px solid var(--charcoal);
-      border-radius: var(--radius-lg);
-      padding: 2.5rem;
+      background: transparent;
+      border: none;
+      border-top: 1.5px solid var(--silver);
+      border-radius: 0;
+      padding: 2.5rem 1rem 0;
     }
     .closing-box h2 {
-      font-family: var(--font-display); font-size: var(--text-h2);
-      color: var(--black); margin-bottom: 1rem; font-weight: 700;
+      font-family: var(--font-hand); font-size: clamp(1.6rem, 3vw, 2rem);
+      color: var(--signal); margin-bottom: 1rem; font-weight: 700;
     }
     .closing-box p {
-      font-family: var(--font-body); font-size: var(--text-body);
-      color: var(--graphite); line-height: 1.8;
+      font-family: var(--font-body); font-size: var(--text-sm);
+      color: var(--grey); line-height: 1.8;
     }
     .closing-hand {
-      font-family: var(--font-hand); font-size: 1.3rem;
-      color: var(--signal); margin-top: 1.5rem; font-weight: 600;
+      font-family: var(--font-hand); font-size: 1.4rem;
+      color: var(--black); margin-top: 1.5rem; font-weight: 600;
+      opacity: 0.7;
     }
 
-    /* ========== How-To ========== */
+    /* ========== How-To (inline hint, not a block) ========== */
     .how-to {
       max-width: var(--max-w); margin: 0 auto;
-      padding: 0 2rem 2rem;
+      padding: 0.5rem 2rem 1rem;
+      text-align: center;
     }
     .how-to-inner {
-      background: rgba(102, 103, 171, 0.12); border: 1.5px solid var(--signal-dim);
-      border-radius: var(--radius-lg); padding: 1.25rem 1.5rem;
-      max-width: var(--max-w-text);
+      display: inline-block;
+      font-family: var(--font-hand); font-size: 1.05rem;
+      color: var(--grey); line-height: 1.5;
+      max-width: 540px;
+      padding: 0;
+      background: none; border: none;
     }
-    .how-to-inner p {
-      font-family: var(--font-body); font-size: var(--text-sm);
-      color: var(--graphite); line-height: 1.7;
-    }
-    .how-to-inner strong { color: var(--black); }
+    .how-to-inner p { font-family: inherit; font-size: inherit; color: inherit; line-height: inherit; }
+    .how-to-inner strong { color: var(--signal-dim); font-weight: 600; }
 
     /* ========== Animations ========== */
     @keyframes tumbleIn {
@@ -463,7 +467,7 @@
 
       .cover { padding: 5rem 1.25rem 2rem; }
       .cover-title { font-size: clamp(2.5rem, 10vw, 4rem); }
-      .cover-scatter { display: none; }
+      .cover-scatter { font-size: 0.85rem; opacity: 0.18; }
 
       .topic-section { padding: 3rem 1.25rem 2rem; }
       .card-grid { grid-template-columns: 1fr; gap: 1rem; }
@@ -542,7 +546,7 @@
     <!-- How to read -->
     <div class="how-to reveal">
       <div class="how-to-inner">
-        <p><strong>How to read this:</strong> Each card is a distinct analytical voice — a structured lens applied to the same evidence base. These are not interviews; they are 18 professional perspectives across 7 dimensions. Filter by dimension to follow one worldview, or browse by topic to see where voices converge and fracture. The handwritten text is each persona's core stance; the body text is their reasoning.</p>
+        <p><strong>How to read:</strong> Each card is one analytical voice. Handwriting = their stance. Body = their reasoning. Filter by dimension or browse by topic.</p>
       </div>
     </div>
 
