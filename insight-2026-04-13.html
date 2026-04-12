@@ -168,8 +168,8 @@
       font-family: var(--font-display); font-size: var(--text-hero);
       font-weight: 800; color: var(--black); letter-spacing: -0.02em;
       margin-bottom: 0.5rem;
-      filter: url(#sketch-strong);
-    }
+      /* sketch filter on title only */
+}
     .cover-subtitle {
       font-family: var(--font-hand); font-size: clamp(1.5rem, 3vw, 2.2rem);
       color: var(--signal); margin-bottom: 2rem; font-weight: 500;
@@ -262,9 +262,10 @@
       /* Paper texture */
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
       background-color: var(--white);
-      filter: url(#sketch);
-      /* Slight random rotation applied via JS */
+      /* Slight random rotation + hand-drawn border feel */
       transform-origin: center center;
+      border: 1.5px solid rgba(0,0,0,0.08);
+      box-shadow: 1px 2px 6px rgba(0,0,0,0.04);
     }
     .persona-card::before {
       content: '';
@@ -359,9 +360,9 @@
       border: 2px solid var(--charcoal);
       border-radius: var(--radius-lg);
       padding: 1.5rem;
-      filter: url(#sketch);
       background: var(--white);
       transition: transform var(--dur) var(--ease);
+      border-style: solid;
     }
     .conv-card:hover { transform: translateY(-2px); }
     .conv-signal {
@@ -392,7 +393,6 @@
       border: 2px solid var(--charcoal);
       border-radius: var(--radius-lg);
       padding: 2.5rem;
-      filter: url(#sketch);
     }
     .closing-box h2 {
       font-family: var(--font-display); font-size: var(--text-h2);
