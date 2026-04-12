@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Design System v6.1 · MH&W</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+  /* ════════════════════════════════════════
+     DESIGN TOKENS v5.1
+     Purple duo + neutral + spectrum
+     3 font stacks · Reference: PERIMETRON
+     v5: paper-link component + logo integration
+     v5.1: type scale bump (body→1rem) + stat-meta + 560px breakpoint
+     v6: paper-link v2 (lighter, no duplication) + PERIMETRON-style logo
+     v6.1: logo removed from design system (not needed in report pages)
+     ════════════════════════════════════════ */
+  :root {
+    /* — Neutral Scale — */
+    --black: #09090b;
+    --off-black: #141416;
+    --charcoal: #27272a;
+    --graphite: #3f3f46;
+    --grey: #71717a;
+    --grey-light: #a1a1aa;
+    --silver: #d4d4d8;
+    --snow: #f4f4f5;
+    --white: #fafafa;
+
+    /* — Purple Duo — */
+    --purple-light: #CBB9D6;
+    --purple-deep: #6667AB;
+    --signal: var(--purple-deep);
+    --signal-dim: #565799;
+    --signal-bg: rgba(102,103,171,0.08);
+    --signal-glow: rgba(102,103,171,0.2);
+
+    /* — Spectrum (PERIMETRON-inspired) — */
+    --spectrum-1: #d4799c;
+    --spectrum-2: #e8a87c;
+    --spectrum-3: #d4c97a;
+    --spectrum-4: #85c9a3;
+    --spectrum-5: #7aaed4;
+    --spectrum-6: #b8a9d4;
+
+    /* — Surfaces — */
+    --bg-light: var(--snow);
+    --bg-dark: var(--black);
+    --bg-card: var(--white);
+    --bg-card-dark: var(--off-black);
+    --border-light: rgba(0,0,0,0.07);
+    --border-dark: rgba(255,255,255,0.1);
+
+    /* — Typography: 3 font stacks — */
+    --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+    --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+    --font-mono: 'Space Mono', 'Courier New', monospace;
+
+    /* legacy alias */
+    --font: var(--font-body);
+
+    /* — Sizing — */
+    --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+    --text-h1: clamp(2rem, 4.5vw, 3rem);
+    --text-h2: clamp(1.5rem, 3vw, 2rem);
+    --text-h3: clamp(1rem, 2vw, 1.3rem);
+    --text-body: 1rem;
+    --text-sm: 0.875rem;
+    --text-xs: 0.75rem;
+
+    /* — Motion — */
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --dur: 0.3s;
+    --dur-slow: 0.6s;
+
+    /* — Layout — */
+    --radius: 4px;
+    --radius-lg: 6px;
+    --max-w: 1100px;
+    --max-w-text: 660px;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg-light);
+    color: var(--charcoal);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    font-size: var(--text-body);
+  }
+
+  ::selection { background: var(--signal); color: var(--white); }
+
+  /* ── DEMO LAYOUT ── */
+  .ds-wrap {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  .ds-section {
+    margin-bottom: 4rem;
+  }
+
+  .ds-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  /* ════════════════════════════════════════
+     HERO DEMO — DARK
+     ════════════════════════════════════════ */
+  .demo-hero {
+    background: #8e8e8e;
+    color: var(--white);
+    padding: 6rem 3rem;
+    margin: -3rem -2rem 4rem;
+    position: relative;
+    overflow: hidden;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  /* — Nav (PERIMETRON-style: mono, editorial) — */
+  .demo-nav {
+    display: flex;
+    gap: 2.5rem;
+    margin-bottom: 5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .demo-nav a {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    color: var(--grey);
+    text-decoration: none;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color var(--dur) var(--ease);
+  }
+
+  .demo-nav a:hover,
+  .demo-nav a.active { color: var(--white); }
+
+  /* — Hero Typography — */
+  .hero-content {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 400;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: var(--text-hero);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+
+  .hero-title em {
+    font-style: normal;
+    color: var(--purple-light);
+  }
+
+  .hero-title .dot {
+    color: var(--purple-deep);
+  }
+
+  .hero-sub {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--purple-light);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--border-dark);
+    border-radius: 50px;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 400;
+    color: var(--grey-light);
+    letter-spacing: 0.05em;
+  }
+
+  /* ════════════════════════════════════════
+     COLOR PALETTE
+     ════════════════════════════════════════ */
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .swatch {
+    aspect-ratio: 1;
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0.75rem;
+    border: 1px solid var(--border-light);
+  }
+
+  .swatch.dark { border-color: transparent; }
+  .swatch-name { font-size: var(--text-xs); font-weight: 600; }
+  .swatch-hex { font-size: 0.62rem; opacity: 0.65; font-family: var(--font-mono); }
+
+  /* ════════════════════════════════════════
+     TYPOGRAPHY — 4 FONT STACKS
+     ════════════════════════════════════════ */
+  .type-row {
+    margin-bottom: 2.5rem;
+  }
+
+  .type-meta {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--grey);
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+  }
+
+  /* Display — Syne 800 */
+  .t-display {
+    font-family: var(--font-display);
+    font-size: var(--text-hero);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--black);
+  }
+  .t-display em { font-style: normal; color: var(--signal); }
+  .t-display .dot { color: var(--purple-light); }
+
+  /* H1 — Syne 700 */
+  .t-h1 {
+    font-family: var(--font-display);
+    font-size: var(--text-h1);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: var(--black);
+  }
+
+  /* H2 — Syne 600 */
+  .t-h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-h2);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+  }
+
+  /* H3 — Space Grotesk 600 */
+  .t-h3 {
+    font-family: var(--font-body);
+    font-size: var(--text-h3);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+  }
+
+  /* Body — Space Grotesk 400 */
+  .t-body {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: 1.8;
+    color: var(--graphite);
+    max-width: var(--max-w-text);
+  }
+
+  /* Editorial — Space Grotesk 300 */
+  .t-editorial {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 2vw, 1.35rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--graphite);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.6;
+    max-width: var(--max-w-text);
+  }
+
+  /* Mono — Space Mono */
+  .t-mono {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: var(--grey);
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+  }
+
+  /* Nav — Space Mono */
+  .t-nav {
+    font-family: var(--font-mono);
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--charcoal);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* Spectrum text */
+  .t-spectrum span {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-right: 2.5rem;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ════════════════════════════════════════
+     CARDS
+     ════════════════════════════════════════ */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+    cursor: pointer;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.06);
+  }
+
+  .card-accent { height: 4px; }
+  .card-body { padding: 1.5rem; }
+
+  .card-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--signal);
+    margin-bottom: 0.5rem;
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: var(--text-h3);
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 0.5rem;
+    line-height: 1.25;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .card-desc {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 400;
+    color: var(--grey);
+    line-height: 1.6;
+  }
+
+  .card-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    border-top: 1px solid var(--border-light);
+  }
+
+  .card-badge {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 400;
+    padding: 0.2rem 0.6rem;
+    border-radius: 50px;
+    background: var(--signal-bg);
+    color: var(--signal);
+  }
+
+  .card-arrow {
+    color: var(--silver);
+    font-size: 1.1rem;
+    transition: transform var(--dur) var(--ease), color var(--dur) var(--ease);
+  }
+
+  .card:hover .card-arrow { transform: translateX(4px); color: var(--signal); }
+
+  .card-dark { background: var(--bg-card-dark); border-color: var(--border-dark); }
+  .card-dark .card-title { color: var(--white); }
+  .card-dark .card-desc { color: var(--grey); }
+  .card-dark .card-foot { border-color: var(--border-dark); }
+  .card-dark:hover { box-shadow: 0 12px 36px rgba(0,0,0,0.25); }
+
+  /* ════════════════════════════════════════
+     STATS
+     ════════════════════════════════════════ */
+  .stat-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: var(--black);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .stat-item {
+    padding: 2rem 1.5rem;
+    text-align: center;
+    border-right: 1px solid var(--border-dark);
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--purple-light);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 400;
+    color: var(--grey);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .stat-meta {
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    color: var(--grey);
+    margin-top: 0.25rem;
+  }
+
+  /* ════════════════════════════════════════
+     TABLE
+     ════════════════════════════════════════ */
+  .table-wrap {
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--bg-card);
+  }
+
+  table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+  thead { background: var(--black); color: var(--silver); }
+  th { padding: 0.7rem 1rem; text-align: left; font-family: var(--font-mono); font-weight: 400; font-size: var(--text-xs); letter-spacing: 0.08em; text-transform: uppercase; }
+  td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--border-light); color: var(--charcoal); font-family: var(--font-body); }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--signal-bg); }
+
+  /* ════════════════════════════════════════
+     BUTTONS
+     ════════════════════════════════════════ */
+  .btn-row { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.65rem 1.4rem;
+    font-family: var(--font-body); font-size: var(--text-sm); font-weight: 500;
+    border: none; border-radius: var(--radius); cursor: pointer;
+    transition: all var(--dur) var(--ease); text-decoration: none; letter-spacing: 0.02em;
+  }
+
+  .btn-signal { background: var(--signal); color: var(--white); }
+  .btn-signal:hover { background: var(--signal-dim); transform: translateY(-1px); box-shadow: 0 4px 16px var(--signal-glow); }
+
+  .btn-dark { background: var(--black); color: var(--silver); }
+  .btn-dark:hover { background: var(--charcoal); }
+
+  .btn-outline { background: transparent; color: var(--charcoal); border: 1px solid var(--border-light); }
+  .btn-outline:hover { border-color: var(--charcoal); }
+
+  .btn-ghost { background: transparent; color: var(--signal); padding: 0.65rem 0.4rem; }
+  .btn-ghost:hover { color: var(--signal-dim); }
+
+  /* ════════════════════════════════════════
+     BADGES
+     ════════════════════════════════════════ */
+  .badge-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+  .badge {
+    display: inline-block; padding: 0.25rem 0.7rem;
+    border-radius: 50px; font-size: var(--text-xs); font-weight: 500;
+    font-family: var(--font-mono);
+  }
+
+  .badge-signal { background: var(--signal-bg); color: var(--signal); }
+  .badge-dark { background: var(--charcoal); color: var(--silver); }
+  .badge-outline { background: transparent; border: 1px solid var(--border-light); color: var(--grey); }
+
+  /* ════════════════════════════════════════
+     NAV PATTERNS
+     ════════════════════════════════════════ */
+
+  /* Nav dark — PERIMETRON style */
+  .nav-dark {
+    background: var(--black);
+    padding: 1.25rem 2rem;
+    border-radius: var(--radius-lg);
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 2.5rem;
+  }
+  .nav-dark a {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    color: var(--grey);
+    text-decoration: none;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    transition: color var(--dur) var(--ease);
+  }
+  .nav-dark a:hover { color: var(--white); }
+  .nav-dark a.active { color: var(--white); }
+
+  /* Nav light */
+  .nav-light {
+    text-align: center;
+    padding: 1.25rem 0;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    background: var(--bg-card);
+  }
+  .nav-light a {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    color: var(--grey);
+    text-decoration: none;
+    margin: 0 1.5rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    transition: color var(--dur) var(--ease);
+    position: relative;
+  }
+  .nav-light a:hover { color: var(--black); }
+  .nav-light a.active { color: var(--black); font-weight: 500; }
+  .nav-light a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0; right: 0;
+    height: 2px;
+    background: var(--signal);
+  }
+
+  /* ── Fixed Nav — Transparent overlay (detari-2020 pattern) ── */
+  .nav-fixed-demo {
+    position: relative;
+    background: var(--snow);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 0;
+    overflow: hidden;
+    min-height: 280px;
+    margin-bottom: 1rem;
+  }
+
+  .nav-fixed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 2.5rem;
+    background: transparent;
+  }
+
+  .nav-fixed .nav-links-fixed {
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  .nav-fixed .nav-links-fixed a {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--grey);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    transition: color var(--dur) var(--ease);
+  }
+
+  .nav-fixed .nav-links-fixed a:hover { color: var(--black); }
+  .nav-fixed .nav-links-fixed a.current { color: var(--black); }
+
+  .nav-toggle-demo {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 11;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .nav-toggle-demo span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--charcoal);
+    margin: 5px 0;
+    transition: all 0.3s var(--ease);
+  }
+
+  .nav-toggle-demo.open span:nth-child(1) { transform: rotate(45deg) translate(4px, 5px); }
+  .nav-toggle-demo.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle-demo.open span:nth-child(3) { transform: rotate(-45deg) translate(4px, -5px); }
+
+  .nav-fixed-content {
+    padding: 5rem 2.5rem 2rem;
+    text-align: center;
+    color: var(--grey);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* ── Page Sidebar — Vertical page indicators (detari-2020 pattern) ── */
+  .sidebar-demo {
+    position: relative;
+    background: var(--snow);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .page-sidebar-demo {
+    position: absolute;
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+  }
+
+  .page-nums-demo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+  }
+
+  .page-num-demo {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--silver);
+    cursor: pointer;
+    padding: 0.2rem 0;
+    transition: color var(--dur) var(--ease);
+    letter-spacing: 0.05em;
+    user-select: none;
+  }
+
+  .page-num-demo:hover { color: var(--grey); }
+  .page-num-demo.active { color: var(--black); font-weight: 700; }
+
+  .page-arrows-demo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+  }
+
+  .arrow-btn-demo {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--silver);
+    border-radius: 50%;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--grey-light);
+    font-size: 0.7rem;
+    transition: all var(--dur) var(--ease);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .arrow-btn-demo:hover {
+    border-color: var(--signal);
+    color: var(--signal);
+  }
+
+  .arrow-btn-demo svg {
+    width: 12px;
+    height: 12px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .sidebar-demo-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--grey);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* ════════════════════════════════════════
+     FINDINGS TABLE (detari-2020 pattern)
+     Purple header, alternating rows, eta bars
+     ════════════════════════════════════════ */
+  .findings-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+    margin: 0;
+  }
+
+  .findings-table thead {
+    background: var(--purple-deep);
+    color: var(--white);
+  }
+
+  .findings-table th {
+    padding: 0.6rem 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-family: var(--font-mono);
+  }
+
+  .findings-table td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--border-light);
+    font-family: var(--font-body);
+    color: var(--charcoal);
+  }
+
+  .findings-table tbody tr:nth-child(odd) { background: var(--white); }
+  .findings-table tbody tr:nth-child(even) { background: var(--snow); }
+  .findings-table tbody tr:last-child td { border-bottom: none; }
+
+  .eta-bar {
+    display: inline-block;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--purple-deep);
+    opacity: 0.6;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+  }
+
+  /* ════════════════════════════════════════
+     STATS STRIP v2 — inline stat cards
+     (detari-2020 / report-page pattern)
+     ════════════════════════════════════════ */
+  .stat-strip-v2 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border-light);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .stat-item-v2 {
+    padding: 1.5rem 1.25rem;
+    text-align: center;
+    background: var(--bg-card);
+  }
+
+  .stat-num-v2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--signal);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-label-v2 {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 400;
+    color: var(--grey);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .stat-sub-v2 {
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    color: var(--grey-light);
+    margin-top: 0.2rem;
+  }
+
+  /* ════════════════════════════════════════
+     PAPER LINK — Minimal source access
+     Left-border accent · no duplicate metadata
+     Link to PDF in deploy/ for direct reading
+     ════════════════════════════════════════ */
+  .paper-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.55rem 1.1rem 0.55rem 0.9rem;
+    border-left: 3px solid var(--signal);
+    background: var(--signal-bg);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    text-decoration: none;
+    transition: all var(--dur) var(--ease);
+    margin-bottom: 1.5rem;
+  }
+
+  .paper-link:hover {
+    background: var(--signal-glow);
+    box-shadow: 0 2px 12px rgba(102,103,171,0.1);
+  }
+
+  .paper-link-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--signal);
+  }
+
+  .paper-link-icon svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .paper-link-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 400;
+    color: var(--signal);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .paper-link-arrow {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--signal-dim);
+    transition: transform var(--dur) var(--ease);
+    flex-shrink: 0;
+  }
+
+  .paper-link:hover .paper-link-arrow {
+    transform: translateX(3px);
+  }
+
+  /* Paper link — floating badge (scroll-snap pages) */
+  .paper-link-badge {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 50;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.9rem 0.45rem 0.7rem;
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all var(--dur) var(--ease);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+
+  .paper-link-badge:hover {
+    border-color: var(--signal);
+    box-shadow: 0 4px 20px rgba(102,103,171,0.15);
+    transform: translateY(-2px);
+  }
+
+  .paper-link-badge .paper-link-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .paper-link-badge .paper-link-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .paper-link-badge .paper-link-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+  }
+
+  /* ════════════════════════════════════════
+     LOGO — Removed in v6.1
+     Logo not used in report pages or nav.
+     Assets remain in logo/ folder for future use.
+     If needed: -04 (black/light bg), -05 (white/dark bg)
+     ════════════════════════════════════════ */
+
+  /* ════════════════════════════════════════
+     RESPONSIVE
+     ════════════════════════════════════════ */
+  @media (max-width: 768px) {
+    .ds-wrap { padding: 2rem 1.25rem; }
+    .demo-hero { padding: 4rem 1.5rem; margin: -2rem -1.25rem 3rem; }
+    .palette-grid { grid-template-columns: repeat(3, 1fr); }
+    .card-grid { grid-template-columns: 1fr; }
+    .stat-strip { grid-template-columns: repeat(2, 1fr); }
+    .stat-item:nth-child(2) { border-right: none; }
+    .stat-item:nth-child(1), .stat-item:nth-child(2) { border-bottom: 1px solid var(--border-dark); }
+
+    /* Fixed nav — mobile hamburger */
+    .nav-toggle-demo { display: block; }
+    .nav-fixed { padding: 1rem 1.25rem; background: none; border-bottom: none; }
+    .nav-fixed.open { background: rgba(244,244,245,0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    .nav-fixed .nav-links-fixed { display: none; flex-direction: column; gap: 0.6rem; margin-top: 0.75rem; }
+    .nav-fixed .nav-links-fixed.show { display: flex; }
+    .nav-fixed .nav-links-fixed a { font-size: 0.85rem; }
+
+    /* Page sidebar — mobile bottom bar */
+    .page-sidebar-demo {
+      left: auto;
+      right: 1rem;
+      top: auto;
+      bottom: 1rem;
+      transform: none;
+      flex-direction: row;
+      gap: 0.5rem;
+      background: rgba(244,244,245,0.9);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 0.5rem 0.75rem;
+      border-radius: 20px;
+      border: 1px solid var(--border-light);
+    }
+    .page-nums-demo { flex-direction: row; gap: 0.3rem; }
+    .page-num-demo { font-size: 0.6rem; padding: 0.15rem 0.2rem; }
+    .page-arrows-demo { flex-direction: row; margin-top: 0; margin-left: 0.25rem; }
+    .arrow-btn-demo { width: 24px; height: 24px; }
+    .arrow-btn-demo svg { width: 10px; height: 10px; }
+
+    /* Stats strip v2 */
+    .stat-strip-v2 { grid-template-columns: repeat(2, 1fr); }
+
+    /* Findings table */
+    .findings-table { font-size: 0.7rem; }
+    .findings-table th, .findings-table td { padding: 0.4rem 0.5rem; }
+
+    /* Paper link — compact on mobile */
+    .paper-link { padding: 0.5rem 0.9rem 0.5rem 0.75rem; gap: 0.5rem; }
+    .paper-link-badge { bottom: 1rem; right: 1rem; }
+    .paper-link-badge .paper-link-label { display: none; }
+
+    /* (Logo removed in v6.1 — no responsive rules needed) */
+  }
+
+  @media (max-width: 560px) {
+    .stat-strip { grid-template-columns: 1fr; }
+    .stat-item { border-right: none; border-bottom: 1px solid var(--border-dark); }
+    .stat-item:last-child { border-bottom: none; }
+    .stat-strip-v2 { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .palette-grid { grid-template-columns: repeat(2, 1fr); }
+    .demo-nav { gap: 1.5rem; }
+    .demo-nav a { font-size: 0.85rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO DEMO ══ -->
+<div class="demo-hero">
+  <nav class="demo-nav">
+    <a href="#">Plan</a>
+    <a href="#">Org Overview</a>
+    <a href="#">Case Study</a>
+  </nav>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">陳 棉</div>
+    <h1 class="hero-title">Mental Health<br>& <em>Wellness</em><span class="dot">.</span></h1>
+    <div class="hero-sub">For Musicians</div>
+  </div>
+</div>
+
+
+<div class="ds-wrap">
+
+<!-- ══ COLORS ══ -->
+<section class="ds-section">
+  <div class="ds-label">Color Palette — Purple Duo + Neutral + Spectrum</div>
+  <div class="palette-grid">
+    <div class="swatch dark" style="background:var(--black);"><span class="swatch-name" style="color:var(--silver);">Black</span><span class="swatch-hex" style="color:var(--grey);">#09090b</span></div>
+    <div class="swatch dark" style="background:var(--off-black);"><span class="swatch-name" style="color:var(--silver);">Off Black</span><span class="swatch-hex" style="color:var(--grey);">#141416</span></div>
+    <div class="swatch dark" style="background:var(--charcoal);"><span class="swatch-name" style="color:var(--silver);">Charcoal</span><span class="swatch-hex" style="color:var(--grey);">#27272a</span></div>
+    <div class="swatch dark" style="background:var(--graphite);"><span class="swatch-name" style="color:var(--silver);">Graphite</span><span class="swatch-hex" style="color:var(--grey-light);">#3f3f46</span></div>
+    <div class="swatch dark" style="background:var(--grey);"><span class="swatch-name" style="color:var(--white);">Grey</span><span class="swatch-hex" style="color:var(--silver);">#71717a</span></div>
+    <div class="swatch" style="background:var(--grey-light);"><span class="swatch-name" style="color:var(--charcoal);">Grey Light</span><span class="swatch-hex" style="color:var(--graphite);">#a1a1aa</span></div>
+    <div class="swatch" style="background:var(--silver);"><span class="swatch-name" style="color:var(--charcoal);">Silver</span><span class="swatch-hex" style="color:var(--graphite);">#d4d4d8</span></div>
+    <div class="swatch" style="background:var(--snow);"><span class="swatch-name" style="color:var(--charcoal);">Snow</span><span class="swatch-hex" style="color:var(--graphite);">#f4f4f5</span></div>
+    <div class="swatch" style="background:var(--purple-light);"><span class="swatch-name" style="color:var(--charcoal);">Purple Light</span><span class="swatch-hex" style="color:var(--graphite);">#CBB9D6</span></div>
+    <div class="swatch dark" style="background:var(--purple-deep);"><span class="swatch-name" style="color:var(--white);">Purple Deep</span><span class="swatch-hex" style="color:rgba(255,255,255,0.75);">#6667AB</span></div>
+  </div>
+
+  <!-- Spectrum row -->
+  <div style="margin-top: 1.5rem;">
+    <div class="ds-label" style="border: none; margin-bottom: 0.75rem; padding-bottom: 0;">Spectrum Accents</div>
+    <div class="palette-grid" style="grid-template-columns: repeat(6, 1fr);">
+      <div class="swatch" style="background:var(--spectrum-1); aspect-ratio: 2/1;"><span class="swatch-name" style="color:var(--charcoal);">Rose</span><span class="swatch-hex" style="color:var(--graphite);">#d4799c</span></div>
+      <div class="swatch" style="background:var(--spectrum-2); aspect-ratio: 2/1;"><span class="swatch-name" style="color:var(--charcoal);">Peach</span><span class="swatch-hex" style="color:var(--graphite);">#e8a87c</span></div>
+      <div class="swatch" style="background:var(--spectrum-3); aspect-ratio: 2/1;"><span class="swatch-name" style="color:var(--charcoal);">Sand</span><span class="swatch-hex" style="color:var(--graphite);">#d4c97a</span></div>
+      <div class="swatch" style="background:var(--spectrum-4); aspect-ratio: 2/1;"><span class="swatch-name" style="color:var(--charcoal);">Sage</span><span class="swatch-hex" style="color:var(--graphite);">#85c9a3</span></div>
+      <div class="swatch" style="background:var(--spectrum-5); aspect-ratio: 2/1;"><span class="swatch-name" style="color:var(--charcoal);">Sky</span><span class="swatch-hex" style="color:var(--graphite);">#7aaed4</span></div>
+      <div class="swatch" style="background:var(--spectrum-6); aspect-ratio: 2/1;"><span class="swatch-name" style="color:var(--charcoal);">Lilac</span><span class="swatch-hex" style="color:var(--graphite);">#b8a9d4</span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ TYPOGRAPHY — 3 STACKS ══ -->
+<section class="ds-section">
+  <div class="ds-label">Typography — 3 Font Stacks</div>
+
+  <div class="type-row">
+    <div class="type-meta">Display — Syne 800 · Hero titles, page names</div>
+    <div class="t-display">Music & <em>Minds</em><span class="dot">.</span></div>
+  </div>
+
+  <div class="type-row">
+    <div class="type-meta">H1 — Syne 700</div>
+    <h1 class="t-h1">Backline Case Study: Operations & Growth</h1>
+  </div>
+
+  <div class="type-row">
+    <div class="type-meta">H2 — Syne 600</div>
+    <h2 class="t-h2">Financial Analysis — IRS 990 Data</h2>
+  </div>
+
+  <div class="type-row">
+    <div class="type-meta">H3 — Space Grotesk 600 · Section headings, card titles</div>
+    <h3 class="t-h3">Revenue Growth CAGR: 58%</h3>
+  </div>
+
+  <div class="type-row">
+    <div class="type-meta">Body — Space Grotesk 400 · Paragraphs, descriptions</div>
+    <p class="t-body">Backline was founded in 2019 to address a critical gap in the music industry: the lack of accessible, stigma-free mental health support for music professionals and their families. Operating as a 501(c)(3) nonprofit, the organization connects individuals with licensed therapists through a national referral network.</p>
+  </div>
+
+
+  <div class="type-row">
+    <div class="type-meta">Mono — Space Mono 400 · Labels, dates, footer, badges</div>
+    <p class="t-mono">陳棉 · MH&W · 2026</p>
+  </div>
+
+  <div class="type-row">
+    <div class="type-meta">Spectrum Text — Syne 700 · Colored phase/member names</div>
+    <div class="t-spectrum">
+      <span style="color:var(--spectrum-1);">Exploration</span>
+      <span style="color:var(--spectrum-5);">Launch</span>
+      <span style="color:var(--spectrum-4);">Synthesis</span>
+      <span style="color:var(--spectrum-2);">Backline</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ NAV PATTERNS ══ -->
+<section class="ds-section">
+  <div class="ds-label">Navigation — Mono, editorial (PERIMETRON style)</div>
+
+  <nav class="nav-dark">
+    <a href="#" class="active">Plan</a>
+    <a href="#">Org Overview</a>
+    <a href="#">Case Study</a>
+  </nav>
+
+  <nav class="nav-light">
+    <a href="#" class="active">Plan</a>
+    <a href="#">Org Overview</a>
+    <a href="#">Case Study</a>
+  </nav>
+</section>
+
+<!-- ══ FIXED NAV + PAGE SIDEBAR (detari-2020 pattern) ══ -->
+<section class="ds-section">
+  <div class="ds-label">Fixed Nav — Transparent overlay + hamburger (report pages)</div>
+
+  <div class="nav-fixed-demo">
+    <nav class="nav-fixed">
+      <button class="nav-toggle-demo" aria-label="Menu" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show');this.closest('.nav-fixed').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links-fixed">
+        <a href="#">Home</a>
+        <a href="#">Plan</a>
+        <a href="#">Orgs Map</a>
+        <a href="#">Case Study</a>
+        <a href="#" class="current">Research</a>
+      </div>
+    </nav>
+    <div class="nav-fixed-content" style="padding-top:6rem;">
+      <p>Fixed transparent nav overlays page content.<br>On mobile ≤768px → hamburger icon + slide-in menu.<br>Backdrop blur on scroll for readability.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ds-section">
+  <div class="ds-label">Page Sidebar — Vertical page indicators + arrows (scroll-snap pages)</div>
+
+  <div class="sidebar-demo">
+    <div class="page-sidebar-demo">
+      <div class="page-nums-demo">
+        <span class="page-num-demo active">01</span>
+        <span class="page-num-demo">02</span>
+        <span class="page-num-demo">03</span>
+        <span class="page-num-demo">04</span>
+        <span class="page-num-demo">05</span>
+        <span class="page-num-demo">06</span>
+        <span class="page-num-demo">07</span>
+      </div>
+      <div class="page-arrows-demo">
+        <button class="arrow-btn-demo" aria-label="Previous">
+          <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+        </button>
+        <button class="arrow-btn-demo" aria-label="Next">
+          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="sidebar-demo-label" style="padding-left: 4rem;">
+      Left sidebar on desktop · Bottom pill on mobile ≤768px<br>
+      Numbered pages track scroll-snap position<br>
+      Arrow buttons + keyboard arrows for navigation
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ CARDS ══ -->
+<section class="ds-section">
+  <div class="ds-label">Report Cards</div>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-accent" style="background:var(--signal);"></div>
+      <div class="card-body">
+        <div class="card-eyebrow">W2 · Case Study</div>
+        <div class="card-title">Backline</div>
+        <p class="card-desc">Operations, finances (990 data), growth trajectory, partnerships. First music-industry MH NPO deep-dive.</p>
+      </div>
+      <div class="card-foot">
+        <span class="card-badge">Verified</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent" style="background:var(--grey);"></div>
+      <div class="card-body">
+        <div class="card-eyebrow" style="color:var(--grey);">W1 · Landscape</div>
+        <div class="card-title">Global NPO Landscape</div>
+        <p class="card-desc">120+ organizations mapped. 8 Asia-related, zero independent music-MH NPOs in Asia-Pacific.</p>
+      </div>
+      <div class="card-foot">
+        <span class="badge badge-outline">Research</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </div>
+
+    <div class="card card-dark">
+      <div class="card-accent" style="background:var(--signal-dim);"></div>
+      <div class="card-body">
+        <div class="card-eyebrow">Live · Tracking</div>
+        <div class="card-title">Project Dashboard</div>
+        <p class="card-desc">9-month schedule, phase tracking, organization database, and weekly research progress.</p>
+      </div>
+      <div class="card-foot">
+        <span class="badge badge-dark">Phase 1</span>
+        <span class="card-arrow" style="color:var(--grey);">→</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ STATS ══ -->
+<section class="ds-section">
+  <div class="ds-label">Stats Strip — Dark (dashboard / landing)</div>
+  <div class="stat-strip">
+    <div class="stat-item">
+      <div class="stat-num">120+</div>
+      <div class="stat-label">Organizations</div>
+      <div class="stat-meta">Backline directory</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">0</div>
+      <div class="stat-label">Asia-Pacific NPOs</div>
+      <div class="stat-meta">Dedicated music MH</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">58%</div>
+      <div class="stat-label">Backline CAGR</div>
+      <div class="stat-meta">2020–2023</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">W3</div>
+      <div class="stat-label">Current Week</div>
+      <div class="stat-meta">April 2026</div>
+    </div>
+  </div>
+</section>
+
+<section class="ds-section">
+  <div class="ds-label">Stats Strip v2 — Light card grid (report pages)</div>
+  <div class="stat-strip-v2">
+    <div class="stat-item-v2">
+      <div class="stat-num-v2">1,607</div>
+      <div class="stat-label-v2">Musicians</div>
+      <div class="stat-sub-v2">Union survey, 2013</div>
+    </div>
+    <div class="stat-item-v2">
+      <div class="stat-num-v2">8,517</div>
+      <div class="stat-label-v2">Workforce</div>
+      <div class="stat-sub-v2">National survey, 2009–10</div>
+    </div>
+    <div class="stat-item-v2">
+      <div class="stat-num-v2">7</div>
+      <div class="stat-label-v2">Dimensions</div>
+      <div class="stat-sub-v2">JCQ / QPS-Nordic</div>
+    </div>
+    <div class="stat-item-v2">
+      <div class="stat-num-v2">51%</div>
+      <div class="stat-label-v2">Response Rate</div>
+      <div class="stat-sub-v2">Musician sample</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ TABLE ══ -->
+<section class="ds-section">
+  <div class="ds-label">Data Table — Dark header (dashboard / financial)</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Year</th><th>Revenue</th><th>Expenses</th><th>Net</th><th>Staff</th></tr></thead>
+      <tbody>
+        <tr><td>2020</td><td>$220,144</td><td>$191,835</td><td style="color:var(--signal);">+$28,309</td><td>3</td></tr>
+        <tr><td>2021</td><td>$418,669</td><td>$299,730</td><td style="color:var(--signal);">+$118,939</td><td>5</td></tr>
+        <tr><td>2022</td><td>$703,162</td><td>$576,506</td><td style="color:var(--signal);">+$126,656</td><td>8</td></tr>
+        <tr><td>2023</td><td>$874,455</td><td>$837,966</td><td style="color:var(--signal);">+$36,489</td><td>11</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="ds-section">
+  <div class="ds-label">Findings Table — Purple header + eta bars (research reports)</div>
+  <div class="table-wrap">
+    <table class="findings-table">
+      <thead>
+        <tr><th>Dimension</th><th>Direction</th><th>&eta;&sup2;</th><th>Magnitude</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Job demands</td><td>Musicians higher</td><td><span class="eta-bar" style="width:80px;"></span>0.155</td><td>Moderate</td></tr>
+        <tr><td>Work–family conflict</td><td>Musicians higher</td><td><span class="eta-bar" style="width:36px;"></span>0.069</td><td>Small–moderate</td></tr>
+        <tr><td>Job control</td><td>Musicians higher</td><td><span class="eta-bar" style="width:24px;"></span>0.047</td><td>Small</td></tr>
+        <tr><td>Acknowledgment</td><td>Musicians lower</td><td><span class="eta-bar" style="width:22px;"></span>0.044</td><td>Small</td></tr>
+        <tr><td>Social support</td><td>Musicians lower</td><td><span class="eta-bar" style="width:13px;"></span>0.026</td><td>Small</td></tr>
+        <tr><td>Reward–salary</td><td>Musicians lower</td><td><span class="eta-bar" style="width:8px;"></span>0.015</td><td>Trivial</td></tr>
+        <tr><td>Job motivation</td><td>Musicians lower</td><td><span class="eta-bar" style="width:4px;"></span>0.007</td><td>Trivial</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<!-- ══ PAPER LINK ══ -->
+<section class="ds-section">
+  <div class="ds-label">Paper Link — Minimal source access for research reports</div>
+
+  <p class="t-body" style="margin-bottom: 1rem;">Left-border accent bar. No duplicate metadata — title/author/DOI already appear in the report. Just a direct link to read.</p>
+  <p class="t-body" style="margin-bottom: 1.5rem; font-size: var(--text-sm); color: var(--grey);">Hosting: include PDF in <code style="font-family:var(--font-mono);font-size:0.8em;background:var(--snow);padding:0.1rem 0.3rem;border-radius:2px;">output/deploy/papers/</code> for direct reading. For paywalled papers, link to DOI.</p>
+
+  <a href="papers/detari-2020.pdf" target="_blank" rel="noopener" class="paper-link">
+    <div class="paper-link-icon">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    </div>
+    <span class="paper-link-label">Read Original Paper</span>
+    <span class="paper-link-arrow">→</span>
+  </a>
+
+  <p class="t-body" style="margin-bottom: 1rem; margin-top: 1.5rem; font-size: var(--text-sm); color: var(--grey);">Floating badge — fixed bottom-right for scroll-snap pages. Collapses to icon-only on mobile.</p>
+
+  <div style="position: relative; background: var(--snow); border: 1px solid var(--border-light); border-radius: var(--radius-lg); min-height: 120px; display: flex; align-items: center; justify-content: center;">
+    <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--grey);letter-spacing:0.15em;text-transform:uppercase;">(badge appears fixed bottom-right on live pages)</span>
+    <a href="papers/detari-2020.pdf" target="_blank" rel="noopener" class="paper-link-badge" style="position: absolute; bottom: 0.75rem; right: 0.75rem;">
+      <div class="paper-link-icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      </div>
+      <span class="paper-link-label">Paper</span>
+    </a>
+  </div>
+</section>
+
+
+<!-- (Logo section removed in v6.1 — assets in logo/ folder for future use) -->
+
+
+<!-- ══ BUTTONS ══ -->
+<section class="ds-section">
+  <div class="ds-label">Buttons</div>
+  <div class="btn-row">
+    <a class="btn btn-signal" href="#">Read Report →</a>
+    <a class="btn btn-dark" href="#">Dashboard</a>
+    <a class="btn btn-outline" href="#">Download PDF</a>
+    <a class="btn btn-ghost" href="#">View Sources →</a>
+  </div>
+</section>
+
+
+<!-- ══ BADGES ══ -->
+<section class="ds-section">
+  <div class="ds-label">Badges</div>
+  <div class="badge-row">
+    <span class="badge badge-signal">Case Study</span>
+    <span class="badge badge-dark">Phase 1</span>
+    <span class="badge badge-outline">Research</span>
+  </div>
+</section>
+
+
+<!-- ══ FOOTER ══ -->
+<section class="ds-section" style="text-align: center; padding-top: 2rem; border-top: 1px solid var(--border-light);">
+  <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); letter-spacing: 0.35em; text-transform: uppercase;">
+    Design System v6.1 · MH&W · 陳棉 · April 2026
+  </p>
+  <p style="font-family: var(--font-body); font-size: var(--text-xs); color: var(--grey-light); margin-top: 0.6rem; font-weight: 300; letter-spacing: 0.06em;">
+    Purple Duo: #CBB9D6 + #6667AB · Spectrum: 6 accent colors · Ref: PERIMETRON
+  </p>
+  <p style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--grey-light); margin-top: 0.3rem; letter-spacing: 0.15em;">
+    Syne (display) · Space Grotesk (body) · Space Mono (mono/nav)
+  </p>
+</section>
+
+</div>
+
+</body>
+</html>

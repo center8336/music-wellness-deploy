@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>MH&W</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+  :root {
+    --black: #09090b;
+    --off-black: #141416;
+    --charcoal: #27272a;
+    --graphite: #3f3f46;
+    --grey: #71717a;
+    --grey-light: #a1a1aa;
+    --silver: #d4d4d8;
+    --snow: #f4f4f5;
+    --white: #fafafa;
+    --purple-light: #CBB9D6;
+    --purple-deep: #6667AB;
+    --signal: var(--purple-deep);
+    --signal-dim: #565799;
+    --signal-bg: rgba(102,103,171,0.08);
+    --signal-glow: rgba(102,103,171,0.2);
+    --bg-light: var(--snow);
+    --bg-dark: var(--black);
+    --bg-card: var(--white);
+    --bg-card-dark: var(--off-black);
+    --border-light: rgba(0,0,0,0.07);
+    --border-dark: rgba(255,255,255,0.1);
+    --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+    --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+    --font-mono: 'Space Mono', 'Courier New', monospace;
+    --font: var(--font-body);
+    --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+    --text-h1: clamp(2rem, 4.5vw, 3rem);
+    --text-h2: clamp(1.5rem, 3vw, 2rem);
+    --text-h3: clamp(1rem, 2vw, 1.3rem);
+    --text-body: 1rem;
+    --text-sm: 0.875rem;
+    --text-xs: 0.75rem;
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --dur: 0.3s;
+    --dur-slow: 0.6s;
+    --radius: 4px;
+    --radius-lg: 6px;
+    --max-w: 1100px;
+    --max-w-text: 660px;
+  }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html, body { height:100%; overflow:hidden; }
+  body { font-family:var(--font-body); background:var(--bg-light); color:var(--charcoal); -webkit-font-smoothing:antialiased; font-size:var(--text-body); line-height:1.6; }
+  ::selection { background:var(--signal); color:var(--white); }
+
+  .nav { position:fixed; top:0; left:0; z-index:100; display:flex; flex-direction:column; padding:2rem 2.5rem; padding-top:calc(2rem + env(safe-area-inset-top)); padding-left:calc(2.5rem + env(safe-area-inset-left)); }
+  .nav-links { display:flex; gap:2.5rem; margin-bottom:1rem; }
+  .nav-links a { font-family:var(--font-mono); font-size:1.1rem; font-weight:400; color:var(--grey); text-decoration:none; text-transform:uppercase; letter-spacing:0.08em; transition:color var(--dur) var(--ease); }
+  .nav-links a:hover { color:var(--black); }
+  .nav-links a.current { color:var(--black); }
+  .nav-brand { font-family:var(--font-display); font-size:1.5rem; font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.12em; line-height:1.15; }
+  .nav-sub { font-family:var(--font-mono); font-size:var(--text-xs); font-weight:400; color:var(--signal); text-transform:uppercase; letter-spacing:0.5em; }
+
+  .hero { position:relative; width:100%; height:100vh; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  #three-canvas { position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; }
+
+  /* ASCII waveform overlay — inspired by Way of Code #8 */
+  #ascii-overlay {
+    position:absolute; top:0; left:0; width:100%; height:100%; z-index:1;
+    pointer-events:none;
+    display:flex; align-items:center; justify-content:center;
+  }
+  #ascii-canvas {
+    opacity: 0.18;
+  }
+
+  .bottom { position:fixed; bottom:0; left:0; right:0; z-index:100; display:flex; justify-content:flex-end; align-items:center; gap:0.75rem; padding:1.5rem 2.5rem; padding-bottom:calc(1.5rem + env(safe-area-inset-bottom)); padding-right:calc(2.5rem + env(safe-area-inset-right)); }
+  .bottom-year { font-family:var(--font-mono); font-size:var(--text-xs); font-weight:400; color:var(--white); opacity:0.5; letter-spacing:0.12em; text-transform:uppercase; }
+  .bottom-logo { width:48px; height:auto; opacity:0.5; transition:opacity var(--dur) var(--ease); }
+  .bottom-logo:hover { opacity:0.8; }
+
+  /* Hamburger toggle */
+  .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; z-index:101; -webkit-tap-highlight-color:transparent; }
+  .nav-toggle span { display:block; width:22px; height:2px; background:var(--grey); margin:5px 0; transition:all 0.3s var(--ease); }
+  .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+  .nav-toggle.open span:nth-child(2) { opacity:0; }
+  .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+
+  /* Compact inline brand mark — hidden on desktop, shown on mobile */
+  .nav-topbar { display:none; }
+  .nav-compact { font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.1em; font-size:0.75rem; opacity:0.55; }
+
+  @media (max-width:768px) {
+    .nav { padding:1.2rem 1.5rem; padding-top:calc(1.2rem + env(safe-area-inset-top)); right:0; background:transparent; border-bottom:none; }
+    .nav.open { background:rgba(244,244,245,0.95); border-bottom:1px solid var(--border-light); }
+    /* Inline topbar: hamburger + compact brand on one line */
+    .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
+    .nav-toggle { display:block; }
+    .nav-links { display:none; flex-direction:column; gap:0.75rem; margin-top:1rem; }
+    .nav-links.show { display:flex; }
+    .nav-links a { font-size:0.85rem; }
+    /* Full brand hidden on mobile — compact mark takes over */
+    .nav-brand { display:none; }
+    .nav-sub { display:none; }
+    /* When menu opens, restore full brand below links */
+    .nav.open .nav-brand { display:block; font-size:0.85rem; margin-top:0.75rem; }
+    .nav.open .nav-sub { display:block; font-size:0.55rem; letter-spacing:0.2em; }
+    .bottom { padding:1.2rem 1.5rem; padding-bottom:calc(1.2rem + env(safe-area-inset-bottom)); }
+    #ascii-canvas { opacity: 0.12; }
+  }
+  @media (max-width:480px) {
+    .nav { padding:1rem 1rem; padding-top:calc(1rem + env(safe-area-inset-top)); }
+    .nav-links a { font-size:0.75rem; letter-spacing:0.08em; }
+    .nav-compact { font-size:0.65rem; }
+    .nav.open .nav-brand { font-size:0.75rem; }
+    .nav.open .nav-sub { letter-spacing:0.15em; font-size:0.55rem; }
+    #ascii-canvas { opacity: 0.10; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-topbar">
+    <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <span class="nav-compact">MH&W</span>
+  </div>
+  <div class="nav-links">
+    <a href="#" class="current">HOME</a>
+    <a href="plan.html">PLAN</a>
+    <a href="w1-report-global-npo-landscape.html">ORGS MAP</a>
+    <a href="w2-report-backline-case-study.html">CASE STUDY</a>
+    <a href="research.html">RESEARCH</a>
+  </div>
+  <div class="nav-brand">MENTAL HEALTH<br>& WELLNESS</div>
+  <div class="nav-sub">FOR MUSICIANS</div>
+</nav>
+
+<section class="hero">
+  <canvas id="three-canvas"></canvas>
+  <div id="ascii-overlay">
+    <canvas id="ascii-canvas"></canvas>
+  </div>
+</section>
+
+<div class="bottom">
+  <span class="bottom-year">2026</span>
+  <img src="data:image/png;base64,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" alt="棉" class="bottom-logo">
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function() {
+  'use strict';
+
+  /* ═══════════════════════════════════════════════════
+     B4 — FINAL INTEGRATION
+     Way of Code inspirations:
+       #14: Dense parallel flowing lines (base fabric)
+       #1:  3D folding/twist (lines fold over themselves)
+       #8:  ASCII waveform overlay (rhythmic character energy)
+     ═══════════════════════════════════════════════════ */
+
+  /* ═══ RENDERER ═══ */
+  var canvas = document.getElementById('three-canvas');
+  var renderer = new THREE.WebGLRenderer({ canvas:canvas, alpha:false, antialias:true });
+  renderer.setClearColor(0xf4f4f5, 1);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  var scene = new THREE.Scene();
+
+  var camera = new THREE.PerspectiveCamera(30, window.innerWidth/window.innerHeight, 0.1, 200);
+
+  /* ═══ MOBILE-ADAPTIVE PARAMETERS ═══ */
+  var mobileFoldScale = 1.0;
+  var mobileWaveScale = 1.0;
+
+  /* Single source of truth for mobile/desktop — called at init AND on resize */
+  function applyViewMode() {
+    var mobile = window.innerWidth < 768;
+
+    // Camera — original working values restored
+    camera.fov = mobile ? 55 : 30;
+    camera.position.set(0, mobile ? 6 : 5, mobile ? 18 : 16);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    camera.lookAt(0, -0.5, 0);
+
+    // Displacement scaling
+    mobileFoldScale = mobile ? 0.85 : 1.0;
+    mobileWaveScale = mobile ? 0.9 : 1.0;
+
+    // Renderer
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    // ASCII overlay scale
+    var scale = Math.min(1, window.innerWidth / 1200);
+    asciiCanvas.style.transform = 'scale(' + scale + ')';
+  }
+
+  /* ═══ LAYER 1: FLOWING LINES (#14 base + #1 fold) ═══ */
+  var LINE_COUNT = 120;
+  var PTS = 220;
+  var SPAN_X = 24;
+  var SPREAD_Z = 10;
+  var HALF_X = SPAN_X / 2;
+  var HALF_Z = SPREAD_Z / 2;
+
+  var lineGroup = new THREE.Group();
+  scene.add(lineGroup);
+
+  var lineData = [];
+
+  for (var li = 0; li < LINE_COUNT; li++) {
+    var zBase = (li / (LINE_COUNT - 1)) * SPREAD_Z - HALF_Z;
+    var zNorm = li / (LINE_COUNT - 1);
+
+    var positions = new Float32Array(PTS * 3);
+    var geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+    var centerDist = Math.abs(zNorm - 0.5) * 2;
+    var opacity = 0.4 + (1 - centerDist) * 0.6;
+
+    var material = new THREE.LineBasicMaterial({
+      color: 0x000000,
+      transparent: true,
+      opacity: opacity
+    });
+
+    var line = new THREE.Line(geometry, material);
+    lineGroup.add(line);
+
+    lineData.push({
+      geo: geometry,
+      positions: positions,
+      zBase: zBase,
+      zNorm: zNorm,
+      mat: material,
+      baseOpacity: opacity
+    });
+  }
+
+  /* ═══ LAYER 2: ASCII WAVEFORM (#8 texture) ═══
+     Audio waveform + swimming keywords (游 身心 呼吸 喘氣)
+     Flowing like water — subtle, meaningful.
+  ═══ */
+  var asciiCanvas = document.getElementById('ascii-canvas');
+  var asciiCtx = asciiCanvas.getContext('2d');
+  var ASCII_COLS = 100;
+  var ASCII_ROWS = 18;
+  var CHAR_W = 14;
+  var CHAR_H = 22;
+
+  asciiCanvas.width = ASCII_COLS * CHAR_W;
+  asciiCanvas.height = ASCII_ROWS * CHAR_H;
+
+  // Audio waveform bars — the swimming EQ
+  var eqChars = '▁▂▃▄▅▆▇▆▅▄▃▂';
+
+  // Keywords that surface from the wave
+  var keywords = ['游', '游', '身心', '呼吸', '游', '喘氣', '游', '游'];
+  // Flatten into a long stream with spacing
+  var kwStream = '';
+  for (var ki = 0; ki < 12; ki++) {
+    for (var kj = 0; kj < keywords.length; kj++) {
+      kwStream += keywords[kj];
+      // Spacing between words — varies for organic feel
+      var gap = 3 + (kj * 2) % 5;
+      for (var ks = 0; ks < gap; ks++) kwStream += ' ';
+    }
+  }
+
+  function drawAsciiWave(time) {
+    asciiCtx.clearRect(0, 0, asciiCanvas.width, asciiCanvas.height);
+
+    for (var row = 0; row < ASCII_ROWS; row++) {
+      var yn = row / ASCII_ROWS;
+      // Vertical edge fade
+      var vFade = Math.sin(yn * Math.PI);
+
+      for (var col = 0; col < ASCII_COLS; col++) {
+        var xn = col / ASCII_COLS;
+
+        // Swimming wave — slow, horizontal drift
+        var wave = Math.sin(xn * 6 + time * 0.35 - yn * 2) * 0.5
+                 + Math.sin(xn * 3 - time * 0.2 + yn * 1.5) * 0.3;
+
+        // Horizontal edge fade
+        var hFade = Math.sin(xn * Math.PI);
+        var fade = hFade * vFade;
+
+        // Decide: EQ bar or keyword character?
+        // Keywords appear on certain rows, drifting like swimmers
+        var isKwRow = (row % 4 === 1 || row % 4 === 3);
+        var ch = '';
+
+        if (isKwRow && fade > 0.3) {
+          // Keyword stream — scrolls slowly like swimming
+          var streamOffset = Math.floor(time * 2.5 + row * 17 + col);
+          streamOffset = ((streamOffset % kwStream.length) + kwStream.length) % kwStream.length;
+          ch = kwStream[streamOffset];
+          if (ch === ' ') {
+            // Fill spaces with a subtle EQ bar
+            var eqIdx = Math.floor((wave + 1) * 0.5 * (eqChars.length - 1));
+            eqIdx = Math.max(0, Math.min(eqChars.length - 1, eqIdx));
+            ch = eqChars[eqIdx];
+          }
+        } else {
+          // Pure EQ waveform
+          var eqIdx = Math.floor((wave + 1) * 0.5 * (eqChars.length - 1));
+          eqIdx = Math.max(0, Math.min(eqChars.length - 1, eqIdx));
+          ch = eqChars[eqIdx];
+        }
+
+        // Draw with faded opacity
+        var alpha = fade * (0.5 + wave * 0.2);
+        alpha = Math.max(0, Math.min(1, alpha));
+
+        asciiCtx.globalAlpha = alpha;
+        asciiCtx.font = isKwRow && fade > 0.3 ? '13px "Noto Sans TC", "Space Grotesk", system-ui, sans-serif' : '13px "Space Mono", "Courier New", monospace';
+        asciiCtx.fillStyle = '#3a3a3a';
+        asciiCtx.fillText(ch, col * CHAR_W, (row + 1) * CHAR_H);
+      }
+    }
+    asciiCtx.globalAlpha = 1;
+  }
+
+  /* ═══ DISPLACEMENT FUNCTION ═══ */
+  function computeDisplacement(x, zBase, time) {
+    var xn = (x + HALF_X) / SPAN_X;
+
+    // Base path (gentler on mobile to maintain smooth flow)
+    var baseY = (Math.sin(x * 0.25 + time * 0.18) * 2.2
+              + Math.sin(x * 0.12 - time * 0.1) * 1.5) * mobileWaveScale;
+
+    // Fold regions
+    var foldCenter1 = 2.0 + Math.sin(time * 0.12) * 1.5;
+    var foldCenter2 = -4.0 + Math.sin(time * 0.09 + 2) * 2.0;
+    var foldCenter3 = -1.0 + Math.cos(time * 0.07) * 3.0;
+
+    var fold1 = Math.exp(-Math.pow((x - foldCenter1) * 0.18, 2)) * 3.2 * mobileFoldScale;
+    var fold2 = Math.exp(-Math.pow((x - foldCenter2) * 0.15, 2)) * 2.4 * mobileFoldScale;
+    var fold3 = Math.exp(-Math.pow((x - foldCenter3) * 0.12, 2)) * 1.4 * mobileFoldScale;
+    var foldAngle = (fold1 + fold2 + fold3) * (0.7 + Math.sin(time * 0.08) * 0.3);
+    var foldStrength = fold1 + fold2 + fold3;
+
+    var cosF = Math.cos(foldAngle);
+    var sinF = Math.sin(foldAngle);
+    var foldY = zBase * sinF;
+    var foldZ = zBase * cosF;
+
+    // Waveform layers (scaled for mobile to prevent bunching)
+    var wave = Math.sin(x * 0.6 + time * 0.4 + zBase * 0.3) * 0.4 * mobileWaveScale;
+    wave += Math.sin(x * 1.8 + time * 0.85 + zBase * 0.5) * 0.18 * mobileWaveScale;
+    wave += Math.sin(x * 1.2 - time * 0.6 + zBase * 0.8) * 0.12 * mobileWaveScale;
+    wave += Math.sin(x * 4.0 + zBase * 2.0 + time * 1.4) * 0.05 * mobileWaveScale;
+    wave += Math.sin(x * 6.5 - time * 2.0 + zBase * 1.2) * 0.025 * mobileWaveScale;
+    wave += Math.sin(time * 0.15) * 0.08 * mobileWaveScale;
+
+    // Edge fade — single application, gentler falloff
+    var edgeX = 1.0 - Math.pow(Math.abs(x) / HALF_X, 3.5);
+    edgeX = Math.max(0, edgeX);
+
+    var finalY = (baseY + foldY + wave) * edgeX;
+    var finalZ = foldZ;
+
+    return { y: finalY, z: finalZ, foldStrength: foldStrength * edgeX };
+  }
+
+  /* ═══ UPDATE: lines ═══ */
+  function updateLines(time) {
+    for (var li = 0; li < LINE_COUNT; li++) {
+      var ld = lineData[li];
+      var pos = ld.positions;
+
+      for (var pi = 0; pi < PTS; pi++) {
+        var u = pi / (PTS - 1);
+        var x = u * SPAN_X - HALF_X;
+
+        var result = computeDisplacement(x, ld.zBase, time);
+
+        var idx = pi * 3;
+        pos[idx]     = x;
+        pos[idx + 1] = result.y;
+        pos[idx + 2] = result.z;
+      }
+
+      ld.geo.getAttribute('position').needsUpdate = true;
+      ld.mat.opacity = ld.baseOpacity + Math.sin(time * 0.3 + li * 0.1) * 0.05;
+    }
+  }
+
+  /* ═══ MOUSE / TOUCH / GYRO ═══ */
+  var mouseX = 0, mouseY = 0, tMouseX = 0, tMouseY = 0;
+  var isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+  document.addEventListener('mousemove', function(e) {
+    tMouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+    tMouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+  });
+
+  // Touch fallback — drag to look around
+  document.addEventListener('touchmove', function(e) {
+    var touch = e.touches[0];
+    tMouseX = (touch.clientX / window.innerWidth - 0.5) * 2;
+    tMouseY = (touch.clientY / window.innerHeight - 0.5) * 2;
+  }, { passive: true });
+
+  // Device orientation — subtle tilt parallax on phones with gyro
+  if (isMobile && window.DeviceOrientationEvent) {
+    var gyroEnabled = false;
+    function handleOrientation(e) {
+      if (e.gamma === null) return;
+      gyroEnabled = true;
+      // gamma: left/right tilt (-90..90), beta: front/back tilt (-180..180)
+      tMouseX = Math.max(-1, Math.min(1, (e.gamma || 0) / 30));
+      tMouseY = Math.max(-1, Math.min(1, ((e.beta || 0) - 45) / 30));
+    }
+    // iOS 13+ requires permission
+    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+      document.addEventListener('touchstart', function reqGyro() {
+        DeviceOrientationEvent.requestPermission().then(function(state) {
+          if (state === 'granted') window.addEventListener('deviceorientation', handleOrientation);
+        }).catch(function(){});
+        document.removeEventListener('touchstart', reqGyro);
+      }, { once: true });
+    } else {
+      window.addEventListener('deviceorientation', handleOrientation);
+    }
+  }
+
+  /* ═══ ANIMATE ═══ */
+  var clock = new THREE.Clock();
+  var asciiFrame = 0;
+
+  function animate() {
+    requestAnimationFrame(animate);
+    var t = clock.getElapsedTime();
+
+    mouseX += (tMouseX - mouseX) * 0.03;
+    mouseY += (tMouseY - mouseY) * 0.03;
+
+    // Update layers
+    updateLines(t);
+
+    // ASCII overlay updates every 3rd frame for performance
+    asciiFrame++;
+    if (asciiFrame % 3 === 0) {
+      drawAsciiWave(t);
+    }
+
+    // Slow drift
+    lineGroup.rotation.y = Math.sin(t * 0.04) * 0.06 + mouseX * 0.05;
+    lineGroup.rotation.x = mouseY * 0.02;
+
+    // Camera parallax
+    camera.position.x += (mouseX * 1.8 - camera.position.x) * 0.01;
+    camera.position.y += (5 + mouseY * -1.0 - camera.position.y) * 0.01;
+    camera.lookAt(0, -0.5, 0);
+
+    renderer.render(scene, camera);
+  }
+
+  // Single source of truth — called at init AND on resize
+  applyViewMode();
+  window.addEventListener('resize', applyViewMode);
+
+  animate();
+
+})();
+</script>
+</body>
+</html>

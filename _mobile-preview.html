@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mobile Preview Harness</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #1a1a2e;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: flex-start;
+  min-height: 100vh;
+  font-family: -apple-system, 'Helvetica Neue', sans-serif;
+  color: #e0e0e0;
+  padding-top: 24px;
+}
+.controls {
+  display: flex; gap: 12px; margin-bottom: 16px; align-items: center;
+}
+.controls label {
+  font-size: 13px; color: #888; letter-spacing: 0.04em;
+}
+.controls select, .controls input {
+  background: #27272a; color: #e0e0e0; border: 1px solid #444;
+  border-radius: 4px; padding: 4px 8px; font-size: 13px;
+  font-family: 'SF Mono', 'Menlo', monospace;
+}
+.controls button {
+  background: #6667AB; color: #fafafa; border: none;
+  border-radius: 4px; padding: 6px 14px; font-size: 13px;
+  cursor: pointer; letter-spacing: 0.04em;
+}
+.controls button:hover { background: #565799; }
+.lbl {
+  font-size: 13px; margin-bottom: 12px; color: #888;
+  letter-spacing: 0.05em; font-family: 'SF Mono', 'Menlo', monospace;
+}
+.lbl strong { color: #CBB9D6; }
+.frame {
+  border: 3px solid #444;
+  border-radius: 40px;
+  padding: 12px 8px;
+  background: #000;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  transition: all 0.3s ease;
+}
+.notch {
+  width: 120px; height: 5px;
+  background: #333; border-radius: 3px;
+  margin: 0 auto 8px;
+}
+iframe {
+  display: block; border: none;
+  border-radius: 28px; background: #fff;
+  transition: width 0.3s ease, height 0.3s ease;
+}
+.no-frame .frame {
+  border: none; border-radius: 0; padding: 0;
+  box-shadow: none; background: transparent;
+}
+.no-frame .notch { display: none; }
+.no-frame iframe { border-radius: 0; }
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <label>Page:</label>
+  <select id="page-select">
+    <option value="plan.html">plan.html</option>
+    <option value="index.html">index.html</option>
+    <option value="research.html">research.html</option>
+    <option value="w1-report-global-npo-landscape.html">w1-report</option>
+    <option value="w2-report-backline-case-study.html">w2-report</option>
+    <option value="detari-2020-critical.html">detari-2020</option>
+    <option value="design-system.html">design-system</option>
+  </select>
+  <label>Device:</label>
+  <select id="device-select">
+    <option value="390,844">iPhone 15 (390×844)</option>
+    <option value="393,852">iPhone 15 Pro (393×852)</option>
+    <option value="430,932">iPhone 15 Pro Max (430×932)</option>
+    <option value="375,812">iPhone 13 mini (375×812)</option>
+    <option value="360,800">Android mid (360×800)</option>
+    <option value="560,1000">Tablet-narrow (560×1000)</option>
+    <option value="768,1024">iPad (768×1024)</option>
+    <option value="1024,768">iPad landscape (1024×768)</option>
+    <option value="1440,900">Desktop (1440×900)</option>
+  </select>
+  <label><input type="checkbox" id="show-frame" checked> Device frame</label>
+  <button onclick="applySettings()">Apply</button>
+</div>
+
+<div class="lbl" id="size-label">
+  MOBILE PREVIEW &mdash; <strong>plan.html</strong> &mdash; iPhone 15 (390&times;844)
+</div>
+
+<div class="frame" id="device-frame">
+  <div class="notch" id="notch"></div>
+  <iframe id="preview" src="plan.html" width="390" height="844"></iframe>
+</div>
+
+<script>
+function applySettings() {
+  var page = document.getElementById('page-select').value;
+  var dims = document.getElementById('device-select').value.split(',');
+  var w = parseInt(dims[0]);
+  var h = parseInt(dims[1]);
+  var showFrame = document.getElementById('show-frame').checked;
+  var deviceName = document.getElementById('device-select').selectedOptions[0].text;
+
+  var iframe = document.getElementById('preview');
+  iframe.src = page;
+  iframe.width = w;
+  iframe.height = h;
+
+  document.getElementById('size-label').innerHTML =
+    'MOBILE PREVIEW &mdash; <strong>' + page + '</strong> &mdash; ' + deviceName;
+
+  if (showFrame) {
+    document.body.classList.remove('no-frame');
+  } else {
+    document.body.classList.add('no-frame');
+  }
+}
+
+// Auto-apply from URL params
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  if (params.get('page')) {
+    document.getElementById('page-select').value = params.get('page');
+  }
+  if (params.get('device')) {
+    var opts = document.getElementById('device-select').options;
+    for (var i = 0; i < opts.length; i++) {
+      if (opts[i].text.toLowerCase().includes(params.get('device').toLowerCase())) {
+        document.getElementById('device-select').selectedIndex = i;
+        break;
+      }
+    }
+  }
+  if (params.get('w') && params.get('h')) {
+    // Custom dimensions - add option
+    var sel = document.getElementById('device-select');
+    var opt = document.createElement('option');
+    opt.value = params.get('w') + ',' + params.get('h');
+    opt.text = 'Custom (' + params.get('w') + '×' + params.get('h') + ')';
+    sel.add(opt);
+    sel.value = opt.value;
+  }
+  applySettings();
+})();
+</script>
+</body>
+</html>
