@@ -393,6 +393,61 @@
       line-height: 1.8;
     }
 
+    /* Checkable to-dos in reflective cards */
+    .card-todos {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px dashed rgba(102,103,171,0.18);
+    }
+    .card-todos-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--signal-dim);
+      margin-bottom: 0.6rem;
+    }
+    .card-todo-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      padding: 0.35rem 0;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      color: var(--charcoal);
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
+    .card-todo-item input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      min-width: 16px;
+      border: 1.5px solid var(--signal-dim);
+      border-radius: 3px;
+      margin-top: 3px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    .card-todo-item input[type="checkbox"]:checked {
+      background: var(--signal-dim);
+      border-color: var(--signal-dim);
+    }
+    .card-todo-item input[type="checkbox"]:checked::after {
+      content: '\2713';
+      position: absolute;
+      top: -1px;
+      left: 2px;
+      font-size: 11px;
+      color: white;
+    }
+    .card-todo-item.checked .card-todo-text {
+      text-decoration: line-through;
+      opacity: 0.45;
+    }
+
     /* Reflective card entrance animation */
     @keyframes fadeInReflect {
       0% { opacity: 0; transform: translateY(12px); }
@@ -824,19 +879,44 @@
         voices: [
           { name: 'Workflow Optimizer', dim: 'org',
             stance: 'Five automated tasks on Saturday is a traffic jam, not a schedule.',
-            reasoning: 'Saturday currently stacks: case study, wiki health check, mixing wiki health check, rules health check, and news trends. If any task runs long, the others pile up unreviewed. Stagger across the week \u2014 move news trends to Wednesday, rules health check to Monday. Also: 3+ sessions fixing the same hamburger menu means the scoping was wrong, not the fix. Define \u201Cdone\u201D before starting a fix session, not during.' },
+            reasoning: 'Saturday currently stacks: case study, wiki health check, mixing wiki health check, rules health check, and news trends. If any task runs long, the others pile up unreviewed. Stagger across the week \u2014 move news trends to Wednesday, rules health check to Monday. Also: 3+ sessions fixing the same hamburger menu means the scoping was wrong, not the fix. Define \u201Cdone\u201D before starting a fix session, not during.',
+            todos: [
+              'Move news-trends task from Saturday to Wednesday',
+              'Move rules-health-check task from Saturday to Monday',
+              'Write a \u201Cdefinition of done\u201D before each fix session'
+            ] },
           { name: 'Research Methodologist', dim: 'academic',
             stance: 'The health check finds problems. Nothing turns findings into action \u2014 and faster access needs quality gates.',
-            reasoning: 'Wiki health check runs every Saturday and flags staleness, gaps, and missing sources. But no scheduled step acts on those findings. Proposal: add a 15-minute \u201Chealth check triage\u201D to the first session after each Saturday. Second: NTU VPN enables direct literature searches \u2014 designate one collection session per biweekly cycle. But speed without filtering is dangerous: no predatory journals (Beall\u2019s List), no unverified open access (DOAJ check), PubMed/Scopus-indexed preferred. Filter before saving, not after.' },
+            reasoning: 'Wiki health check runs every Saturday and flags staleness, gaps, and missing sources. But no scheduled step acts on those findings. Proposal: add a 15-minute \u201Chealth check triage\u201D to the first session after each Saturday. Second: NTU VPN enables direct literature searches \u2014 designate one collection session per biweekly cycle. But speed without filtering is dangerous: no predatory journals (Beall\u2019s List), no unverified open access (DOAJ check), PubMed/Scopus-indexed preferred. Filter before saving, not after.',
+            todos: [
+              'Add 15-min health-check triage to the first session after each Saturday',
+              'Schedule one VPN literature-collection session per biweekly cycle',
+              'Create a source-quality checklist (Beall\u2019s List, DOAJ, PubMed/Scopus)'
+            ] },
           { name: 'Strategic Mentor', dim: 'mentor',
             stance: '110 sessions built the engine. The next 30 need to use it.',
-            reasoning: 'The wiki, deploy pipeline, design system, scheduled tasks, 8-role review \u2014 real infrastructure achievements. But the ratio is inverted: most sessions have been about how to work, not what to produce. Declare infrastructure \u201Cfeature-complete\u201D by April 20. After that, new rules only if triggered by a production incident. Target: 70% content-producing sessions, 30% infrastructure. And set June 1 as the deadline for resolving the two-track question. Not deciding is also a decision.' },
+            reasoning: 'The wiki, deploy pipeline, design system, scheduled tasks, 8-role review \u2014 real infrastructure achievements. But the ratio is inverted: most sessions have been about how to work, not what to produce. Declare infrastructure \u201Cfeature-complete\u201D by April 20. After that, new rules only if triggered by a production incident. Target: 70% content-producing sessions, 30% infrastructure. And set June 1 as the deadline for resolving the two-track question. Not deciding is also a decision.',
+            todos: [
+              'Declare infrastructure \u201Cfeature-complete\u201D by April 20',
+              'Track session ratio weekly: aim for 70% content / 30% infra',
+              'Set June 1 as hard deadline for the two-track decision'
+            ] },
           { name: 'Critical Auditor', dim: 'critical',
             stance: 'PROJECT_RULES.md grew to 770 lines in 10 days. How many wiki articles were written in the same period?',
-            reasoning: 'The rules document is thorough \u2014 that\u2019s not the problem. The problem is the ratio. Count: how many wiki articles exist vs. how many infrastructure sessions ran? If the governance layer grows faster than the knowledge layer, the system is optimizing for its own maintenance. Track two numbers monthly: \u201Cwiki articles created/updated\u201D and \u201Cinfrastructure sessions.\u201D Also: the rules-health-check task has never run. We\u2019re writing health checks for the health checks before the first one fires.' },
+            reasoning: 'The rules document is thorough \u2014 that\u2019s not the problem. The problem is the ratio. Count: how many wiki articles exist vs. how many infrastructure sessions ran? If the governance layer grows faster than the knowledge layer, the system is optimizing for its own maintenance. Track two numbers monthly: \u201Cwiki articles created/updated\u201D and \u201Cinfrastructure sessions.\u201D Also: the rules-health-check task has never run. We\u2019re writing health checks for the health checks before the first one fires.',
+            todos: [
+              'Count wiki articles vs. infrastructure sessions this month',
+              'Add monthly tracking: \u201Cwiki created/updated\u201D vs. \u201Cinfra sessions\u201D',
+              'Run the rules-health-check task for the first time'
+            ] },
           { name: 'Design Process Lead', dim: 'design',
             stance: 'The 8-role review is our best innovation. Running it for every border-radius fix will kill it.',
-            reasoning: 'The Kinetic Zine review proved the 8-role process produces dramatically better creative output. But it takes a full session. Proposal: tiered review. Full review (all 8 roles) for new pages and major redesigns. Light review (Web Engineer + UI Designer + Visual Designer) for CSS fixes and content updates. No review for typos and metadata. Also: the design system hit v6 in two weeks (v4\u2192v5\u2192v5.1\u2192v6). Declare a 2-week freeze \u2014 no token changes. Let the system settle.' }
+            reasoning: 'The Kinetic Zine review proved the 8-role process produces dramatically better creative output. But it takes a full session. Proposal: tiered review. Full review (all 8 roles) for new pages and major redesigns. Light review (Web Engineer + UI Designer + Visual Designer) for CSS fixes and content updates. No review for typos and metadata. Also: the design system hit v6 in two weeks (v4\u2192v5\u2192v5.1\u2192v6). Declare a 2-week freeze \u2014 no token changes. Let the system settle.',
+            todos: [
+              'Codify tiered review policy: Full (new pages) / Light (CSS fixes) / None (typos)',
+              'Declare a 2-week design-token freeze (no token changes)',
+              'Document the Kinetic Zine review as the reference case study'
+            ] }
         ]
       }
     ];
@@ -957,8 +1037,22 @@
           + '<div class="card-dim" style="color:' + dim.color + '">' + dim.label + '</div>'
           + '</div></div>'
           + '<div class="card-stance">\u201C' + v.stance + '\u201D</div>'
-          + '<div class="card-reasoning">' + v.reasoning + '</div>'
-          + '</article>';
+          + '<div class="card-reasoning">' + v.reasoning + '</div>';
+
+        /* Render to-do checklist if present */
+        if (v.todos && v.todos.length) {
+          grid += '<div class="card-todos">'
+            + '<div class="card-todos-label">Action Items</div>';
+          v.todos.forEach(function(todo, ti) {
+            grid += '<label class="card-todo-item">'
+              + '<input type="checkbox" data-todo="' + topic.id + '-' + i + '-' + ti + '">'
+              + '<span class="card-todo-text">' + todo + '</span>'
+              + '</label>';
+          });
+          grid += '</div>';
+        }
+
+        grid += '</article>';
       });
       grid += '</div>';
 
@@ -1068,17 +1162,36 @@
     });
 
     /* ========== REFLECTIVE CARD ENTRANCE ========== */
+    var reflectCards = document.querySelectorAll('.reflective .persona-card');
     var reflectObs = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting && !entry.target.classList.contains('revealed')) {
           entry.target.classList.add('revealed');
         }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.01, rootMargin: '0px 0px 80px 0px' });
 
-    document.querySelectorAll('.reflective .persona-card').forEach(function(card) {
+    reflectCards.forEach(function(card) {
       reflectObs.observe(card);
     });
+
+    /* iOS Safari fallback: if cards still hidden after section is scrolled into view */
+    var reflectSection = document.querySelector('.topic-section.reflective');
+    if (reflectSection) {
+      var sectionObs = new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) {
+          setTimeout(function() {
+            reflectCards.forEach(function(card) {
+              if (!card.classList.contains('revealed')) {
+                card.classList.add('revealed');
+              }
+            });
+          }, 400);
+          sectionObs.disconnect();
+        }
+      }, { threshold: 0.01 });
+      sectionObs.observe(reflectSection);
+    }
 
     /* ========== TORN EDGE ZINE EFFECT (skip reflective section) ========== */
     var tornClasses = ['torn-a', 'torn-b', 'torn-c'];
@@ -1088,6 +1201,18 @@
       // Apply torn edge to ~2 cards per section (deterministic via index)
       cards.forEach(function(card, i) {
         if (i % 3 === 1) card.classList.add(tornClasses[i % tornClasses.length]);
+      });
+    });
+
+    /* ========== CHECKBOX INTERACTION ========== */
+    document.querySelectorAll('.card-todo-item input[type="checkbox"]').forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        var item = cb.closest('.card-todo-item');
+        if (cb.checked) {
+          item.classList.add('checked');
+        } else {
+          item.classList.remove('checked');
+        }
       });
     });
 
