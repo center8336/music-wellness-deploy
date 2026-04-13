@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-TW" class="no-js">
+<script>document.documentElement.classList.replace('no-js','js');</script>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -8,25 +9,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- SVG Filters for Sketch Effect -->
-  <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
-    <defs>
-      <filter id="sketch" x="-5%" y="-5%" width="110%" height="110%">
-        <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" seed="2" result="noise"/>
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
-      </filter>
-      <filter id="sketch-strong" x="-5%" y="-5%" width="110%" height="110%">
-        <feTurbulence type="turbulence" baseFrequency="0.025" numOctaves="4" seed="5" result="noise"/>
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G"/>
-      </filter>
-      <filter id="paper-grain">
-        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" result="grain"/>
-        <feColorMatrix type="saturate" values="0" in="grain" result="grainBW"/>
-        <feBlend in="SourceGraphic" in2="grainBW" mode="multiply"/>
-      </filter>
-    </defs>
-  </svg>
 
   <style>
     /* ========== Design System Tokens (Non-negotiable) ========== */
@@ -50,7 +32,7 @@
 
       --spectrum-1: #d4799c;
       --spectrum-2: #e8a87c;
-      --spectrum-3: #d4c97a;
+      --spectrum-3: #b8ad52;
       --spectrum-4: #85c9a3;
       --spectrum-5: #7aaed4;
       --spectrum-6: #b8a9d4;
@@ -97,7 +79,7 @@
       line-height: 1.6;
       overflow-x: hidden;
       /* Paper grain texture */
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
     }
 
     ::selection { background: var(--signal); color: white; }
@@ -122,8 +104,7 @@
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-light);
     }
-    .nav-row { display: flex; align-items: center; justify-content: space-between; }
-    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links { display: flex; gap: 2.5rem; justify-content: flex-end; }
     .nav-links a {
       font-family: var(--font-mono); font-size: 0.85rem; font-weight: 400;
       color: var(--grey); text-decoration: none; text-transform: uppercase;
@@ -132,6 +113,12 @@
     .nav-links a:hover { color: var(--black); }
     .nav-links a.current { color: var(--black); }
     .nav-links a:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; border-radius: var(--radius); }
+
+    /* Compact inline brand mark — hidden on desktop, shown on mobile */
+    .nav-topbar { display: none; }
+    .nav-compact { display:none; }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:0.5rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:0.2em; }
 
     .nav-toggle {
       display: none; background: none; border: none; cursor: pointer;
@@ -168,8 +155,7 @@
       font-family: var(--font-display); font-size: var(--text-hero);
       font-weight: 800; color: var(--black); letter-spacing: -0.02em;
       margin-bottom: 0.5rem;
-      filter: url(#sketch-strong);
-    }
+}
     .cover-subtitle {
       font-family: var(--font-hand); font-size: clamp(1.5rem, 3vw, 2.2rem);
       color: var(--signal); margin-bottom: 2rem; font-weight: 500;
@@ -180,8 +166,8 @@
     }
     /* Scattered dimension labels on cover */
     .cover-scatter {
-      position: absolute; font-family: var(--font-hand); font-size: 1.1rem;
-      font-weight: 600; opacity: 0.25; pointer-events: none; white-space: nowrap;
+      position: absolute; font-family: var(--font-hand); font-size: 1.55rem;
+      font-weight: 600; opacity: 0.22; pointer-events: none; white-space: nowrap;
     }
 
     /* ========== Section ========== */
@@ -192,7 +178,10 @@
     .topic-header {
       margin-bottom: 2.5rem;
       padding-bottom: 1.5rem;
-      border-bottom: 2px solid var(--charcoal);
+      border-bottom: none;
+      border-image: linear-gradient(90deg, var(--silver) 0%, transparent 100%) 1;
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
       position: relative;
     }
     .topic-number {
@@ -212,7 +201,7 @@
 
     /* ========== Filter Bar ========== */
     .filter-bar {
-      position: sticky; top: 56px; z-index: 50;
+      position: sticky; top: 60px; z-index: 50;
       padding: 0.75rem 2rem;
       background: rgba(244,244,245,0.9);
       backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
@@ -227,9 +216,9 @@
       padding: 0.35rem 0.75rem; border-radius: 20px;
       border: 1.5px solid var(--silver); background: transparent;
       color: var(--grey); cursor: pointer;
-      transition: all var(--dur) var(--ease);
+      transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), color var(--dur) var(--ease), transform 0.15s var(--ease);
     }
-    .filter-btn:hover { border-color: var(--graphite); color: var(--graphite); }
+    .filter-btn:hover { border-color: var(--graphite); color: var(--graphite); transform: scale(1.04); }
     .filter-btn.active {
       background: var(--charcoal); color: var(--white);
       border-color: var(--charcoal);
@@ -241,7 +230,7 @@
     .filter-btn[data-dim="government"].active { background: var(--spectrum-2); border-color: var(--spectrum-2); color: var(--black); }
     .filter-btn[data-dim="mentor"].active { background: var(--spectrum-6); border-color: var(--spectrum-6); color: var(--black); }
     .filter-btn[data-dim="design"].active { background: var(--signal); border-color: var(--signal); color: white; }
-    .filter-btn[data-dim="critical"].active { background: var(--spectrum-3); border-color: var(--spectrum-3); color: var(--black); }
+    .filter-btn[data-dim="critical"].active { background: var(--spectrum-3); border-color: var(--spectrum-3); color: var(--white); }
 
     /* ========== Card Grid ========== */
     .card-grid {
@@ -257,14 +246,14 @@
       border-radius: var(--radius-lg);
       padding: 1.5rem;
       position: relative;
-      cursor: pointer;
-      transition: transform 0.4s var(--ease-spring), box-shadow var(--dur) var(--ease);
+      transition: transform 0.25s var(--ease-spring), box-shadow 0.25s var(--ease);
       /* Paper texture */
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
       background-color: var(--white);
-      filter: url(#sketch);
-      /* Slight random rotation applied via JS */
+      /* Slight random rotation + hand-drawn border feel */
       transform-origin: center center;
+      border: 1.5px solid rgba(0,0,0,0.08);
+      box-shadow: 1px 2px 6px rgba(0,0,0,0.04);
     }
     .persona-card::before {
       content: '';
@@ -273,29 +262,32 @@
       /* Color set per dimension via inline style */
     }
     .persona-card:hover {
-      transform: rotate(0deg) translateY(-4px) !important;
-      box-shadow: 0 12px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
+      transform: rotate(var(--rot, 0deg)) translateY(-8px) !important;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.06);
       z-index: 10;
     }
     .persona-card:focus-visible {
       outline: 2px solid var(--signal); outline-offset: 2px;
     }
-    .persona-card.hidden { display: none; }
+    /* Torn-edge zine variants */
+    .persona-card.torn-a { clip-path: polygon(0 0, 98% 1.5%, 100% 97%, 1.5% 100%); }
+    .persona-card.torn-b { clip-path: polygon(1% 0, 100% 0, 99% 98%, 0 100%); border-radius: var(--radius-lg); }
+    .persona-card.torn-c { clip-path: polygon(0 2%, 100% 0, 98% 100%, 2% 98%); }
 
     /* Dimension color wash */
-    .persona-card[data-dim="academic"] { background: linear-gradient(135deg, rgba(122,174,212,0.06) 0%, var(--white) 60%); }
+    .persona-card[data-dim="academic"] { background: linear-gradient(135deg, rgba(122,174,212,0.12) 0%, var(--white) 60%); }
     .persona-card[data-dim="academic"]::before { background: var(--spectrum-5); }
-    .persona-card[data-dim="market"] { background: linear-gradient(135deg, rgba(212,121,156,0.06) 0%, var(--white) 60%); }
+    .persona-card[data-dim="market"] { background: linear-gradient(135deg, rgba(212,121,156,0.12) 0%, var(--white) 60%); }
     .persona-card[data-dim="market"]::before { background: var(--spectrum-1); }
-    .persona-card[data-dim="org"] { background: linear-gradient(135deg, rgba(133,201,163,0.06) 0%, var(--white) 60%); }
+    .persona-card[data-dim="org"] { background: linear-gradient(135deg, rgba(133,201,163,0.12) 0%, var(--white) 60%); }
     .persona-card[data-dim="org"]::before { background: var(--spectrum-4); }
-    .persona-card[data-dim="government"] { background: linear-gradient(135deg, rgba(232,168,124,0.06) 0%, var(--white) 60%); }
+    .persona-card[data-dim="government"] { background: linear-gradient(135deg, rgba(232,168,124,0.12) 0%, var(--white) 60%); }
     .persona-card[data-dim="government"]::before { background: var(--spectrum-2); }
-    .persona-card[data-dim="mentor"] { background: linear-gradient(135deg, rgba(184,169,212,0.06) 0%, var(--white) 60%); }
+    .persona-card[data-dim="mentor"] { background: linear-gradient(135deg, rgba(184,169,212,0.12) 0%, var(--white) 60%); }
     .persona-card[data-dim="mentor"]::before { background: var(--spectrum-6); }
-    .persona-card[data-dim="design"] { background: linear-gradient(135deg, rgba(102,103,171,0.06) 0%, var(--white) 60%); }
+    .persona-card[data-dim="design"] { background: linear-gradient(135deg, rgba(102,103,171,0.12) 0%, var(--white) 60%); }
     .persona-card[data-dim="design"]::before { background: var(--signal); }
-    .persona-card[data-dim="critical"] { background: linear-gradient(135deg, rgba(212,201,122,0.06) 0%, var(--white) 60%); }
+    .persona-card[data-dim="critical"] { background: linear-gradient(135deg, rgba(184,173,82,0.12) 0%, var(--white) 60%); }
     .persona-card[data-dim="critical"]::before { background: var(--spectrum-3); }
 
     /* Card inner structure */
@@ -308,7 +300,7 @@
       font-weight: 700; color: var(--black);
     }
     .card-dim {
-      font-family: var(--font-mono); font-size: 0.65rem;
+      font-family: var(--font-mono); font-size: 0.7rem;
       text-transform: uppercase; letter-spacing: 0.06em;
       margin-top: 0.15rem;
     }
@@ -316,8 +308,10 @@
     /* Pin dot */
     .card-pin {
       position: absolute; top: 12px; right: 14px;
-      width: 8px; height: 8px; border-radius: 50%;
-      opacity: 0.5;
+      width: 11px; height: 11px; border-radius: 50%;
+      opacity: 0.85;
+      border: 2px solid rgba(255,255,255,0.8);
+      box-shadow: 0 0 6px currentColor;
     }
 
     /* Stance (the bold take) */
@@ -342,6 +336,144 @@
     }
     .persona-card:hover .card-expand { color: var(--signal); }
 
+    /* ========== Section Divider (Brainstorm → Reflection) ========== */
+    .section-shift {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 4rem 2rem 2rem;
+      text-align: center;
+      position: relative;
+    }
+    .section-shift::before {
+      content: '';
+      position: absolute; top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 60px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--signal), transparent);
+    }
+    .shift-label {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--signal-dim); display: inline-block;
+      padding: 0.4rem 1.2rem; border: 1px solid var(--signal-bg);
+      border-radius: 20px; background: var(--signal-bg);
+    }
+    .shift-subtext {
+      font-family: var(--font-hand); font-size: 1.1rem;
+      color: var(--grey); margin-top: 0.75rem;
+    }
+
+    /* ========== Reflective Layout (Topic 06) ========== */
+    .topic-section.reflective {
+      background: linear-gradient(180deg, var(--snow) 0%, rgba(102,103,171,0.08) 50%, var(--snow) 100%);
+    }
+    .topic-section.reflective .card-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: var(--max-w-text);
+      margin: 0 auto;
+    }
+    .topic-section.reflective .persona-card {
+      transform: none !important;
+      clip-path: none !important;
+      border-left: 3px solid var(--signal-dim);
+      padding: 2rem 2rem 2rem 2.25rem;
+      box-shadow: inset 3px 0 12px rgba(102,103,171,0.06);
+    }
+    .topic-section.reflective .persona-card::before {
+      height: 0;
+    }
+    .topic-section.reflective .persona-card:hover {
+      transform: translateY(-4px) !important;
+      border-left-color: var(--signal);
+    }
+    .topic-section.reflective .card-stance {
+      font-size: 1.1rem;
+    }
+    .topic-section.reflective .card-reasoning {
+      font-size: var(--text-body);
+      line-height: 1.8;
+    }
+
+    /* Checkable to-dos in reflective cards */
+    .card-todos {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px dashed rgba(102,103,171,0.18);
+    }
+    .card-todos-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--signal-dim);
+      margin-bottom: 0.6rem;
+    }
+    .card-todo-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      padding: 0.35rem 0;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      color: var(--charcoal);
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
+    .card-todo-item input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      min-width: 16px;
+      border: 1.5px solid var(--signal-dim);
+      border-radius: 3px;
+      margin-top: 3px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    .card-todo-item input[type="checkbox"]:checked {
+      background: var(--signal-dim);
+      border-color: var(--signal-dim);
+    }
+    .card-todo-item input[type="checkbox"]:checked::after {
+      content: '\2713';
+      position: absolute;
+      top: -1px;
+      left: 2px;
+      font-size: 11px;
+      color: white;
+    }
+    .card-todo-item.checked .card-todo-text {
+      text-decoration: line-through;
+      opacity: 0.45;
+    }
+
+    /* Reflective card entrance animation */
+    @keyframes fadeInReflect {
+      0% { opacity: 0; transform: translateY(12px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .js .topic-section.reflective .persona-card {
+      opacity: 0;
+    }
+    .topic-section.reflective .persona-card.revealed {
+      animation: fadeInReflect 0.6s ease-out forwards;
+      animation-delay: var(--delay, 0s);
+    }
+
+    /* Divider entrance animation */
+    @keyframes dividerReveal {
+      0% { opacity: 0; }
+      40% { opacity: 0; }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .js .section-shift { opacity: 0; }
+    .section-shift.visible {
+      animation: dividerReveal 1.6s ease-out forwards !important;
+    }
+
     /* ========== Convergence Section ========== */
     .convergence {
       max-width: var(--max-w); margin: 0 auto;
@@ -359,10 +491,16 @@
       border: 2px solid var(--charcoal);
       border-radius: var(--radius-lg);
       padding: 1.5rem;
-      filter: url(#sketch);
       background: var(--white);
       transition: transform var(--dur) var(--ease);
+      border-style: solid;
     }
+    .js .conv-card { opacity: 0; transform: translateY(20px); }
+    .conv-visible .conv-card { animation: fadeInUp 0.5s var(--ease) forwards; }
+    .conv-visible .conv-card:nth-child(1) { animation-delay: 0s; }
+    .conv-visible .conv-card:nth-child(2) { animation-delay: 0.15s; }
+    .conv-visible .conv-card:nth-child(3) { animation-delay: 0.3s; }
+    .conv-visible .conv-card:nth-child(4) { animation-delay: 0.45s; }
     .conv-card:hover { transform: translateY(-2px); }
     .conv-signal {
       font-family: var(--font-hand); font-size: 1.4rem;
@@ -382,46 +520,49 @@
       border: 1px solid; opacity: 0.8;
     }
 
-    /* ========== Closing ========== */
+    /* ========== Closing (handwritten note feel) ========== */
     .closing {
-      max-width: var(--max-w-text); margin: 4rem auto 6rem;
-      padding: 3rem 2rem; text-align: center;
+      max-width: var(--max-w-text); margin: 3rem auto 5rem;
+      padding: 2rem 2rem; text-align: center;
+      position: relative;
     }
     .closing-box {
-      background: linear-gradient(135deg, rgba(212,121,156,0.08), rgba(122,174,212,0.08));
-      border: 2px solid var(--charcoal);
-      border-radius: var(--radius-lg);
-      padding: 2.5rem;
-      filter: url(#sketch);
+      background: transparent;
+      border: none;
+      border-top: 1.5px solid var(--silver);
+      border-radius: 0;
+      padding: 2.5rem 1rem 0;
     }
     .closing-box h2 {
-      font-family: var(--font-display); font-size: var(--text-h2);
-      color: var(--black); margin-bottom: 1rem; font-weight: 700;
+      font-family: var(--font-hand); font-size: clamp(1.6rem, 3vw, 2rem);
+      color: var(--signal); margin-bottom: 1rem; font-weight: 700;
     }
     .closing-box p {
-      font-family: var(--font-body); font-size: var(--text-body);
-      color: var(--graphite); line-height: 1.8;
+      font-family: var(--font-body); font-size: var(--text-sm);
+      color: var(--grey); line-height: 1.8;
     }
     .closing-hand {
-      font-family: var(--font-hand); font-size: 1.3rem;
-      color: var(--signal); margin-top: 1.5rem; font-weight: 600;
+      font-family: var(--font-hand); font-size: 1.4rem;
+      color: var(--black); margin-top: 1.5rem; font-weight: 600;
+      opacity: 0.7;
     }
 
-    /* ========== How-To ========== */
+    /* ========== How-To (inline hint, not a block) ========== */
     .how-to {
       max-width: var(--max-w); margin: 0 auto;
-      padding: 0 2rem 2rem;
+      padding: 0.5rem 2rem 1rem;
+      text-align: center;
     }
     .how-to-inner {
-      background: var(--signal-bg); border: 1px solid var(--signal-dim);
-      border-radius: var(--radius-lg); padding: 1.25rem 1.5rem;
-      max-width: var(--max-w-text);
+      display: inline-block;
+      font-family: var(--font-hand); font-size: 1.05rem;
+      color: var(--grey); line-height: 1.5;
+      max-width: 540px;
+      padding: 0;
+      background: none; border: none;
     }
-    .how-to-inner p {
-      font-family: var(--font-body); font-size: var(--text-sm);
-      color: var(--graphite); line-height: 1.7;
-    }
-    .how-to-inner strong { color: var(--black); }
+    .how-to-inner p { font-family: inherit; font-size: inherit; color: inherit; line-height: inherit; }
+    .how-to-inner strong { color: var(--signal-dim); font-weight: 600; }
 
     /* ========== Animations ========== */
     @keyframes tumbleIn {
@@ -439,10 +580,10 @@
       100% { opacity: 1; transform: scale(1) rotate(0deg); }
     }
 
-    .reveal { opacity: 0; }
+    .js .reveal { opacity: 0; }
     .reveal.visible { animation: fadeInUp 0.6s var(--ease) forwards; }
 
-    .persona-card {
+    .js .persona-card {
       opacity: 0;
     }
     .persona-card.tumbled {
@@ -450,26 +591,38 @@
       animation-delay: var(--delay, 0s);
     }
 
+    /* Waveform breathing on hover */
+    @keyframes breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+    .persona-card:hover .card-waveform svg { animation: breathe 2s var(--ease) infinite; }
+
+    /* Card fade transition for filter */
+    .persona-card { transition: transform 0.25s var(--ease-spring), box-shadow 0.25s var(--ease), opacity 0.3s var(--ease); }
+    .persona-card.hidden { display: none; }
+
     .cover-title { animation: coverPop 0.9s var(--ease-spring) 0.1s both; }
     .cover-subtitle { animation: fadeInUp 0.6s var(--ease) 0.4s both; }
     .cover-meta { animation: fadeInUp 0.5s var(--ease) 0.7s both; }
 
     /* ========== Responsive ========== */
     @media (max-width: 768px) {
-      nav.nav { padding: 1rem 1.25rem; padding-top: calc(1rem + env(safe-area-inset-top)); }
+      nav.nav { padding: 1.2rem 1.5rem; padding-top: calc(1.2rem + env(safe-area-inset-top)); right: 0; background: none; border-bottom: none; }
+      nav.nav.open { background: rgba(244,244,245,0.95); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-light); }
+      /* Inline topbar: hamburger + compact brand on one line */
+      .nav-topbar { display: flex; align-items: center; gap: 0.75rem; }
       .nav-toggle { display: block; }
-      .nav-links { display: none; flex-direction: column; gap: 0.6rem; margin-top: 0.75rem; }
+      .nav-mobile-brand { display:block; }
+      .nav-links { display: none; flex-direction: column; gap: 0.75rem; margin-top: 1rem; }
       .nav-links.show { display: flex; }
       .nav-links a { font-size: 0.85rem; }
 
       .cover { padding: 5rem 1.25rem 2rem; }
       .cover-title { font-size: clamp(2.5rem, 10vw, 4rem); }
-      .cover-scatter { display: none; }
+      .cover-scatter { font-size: 0.85rem; opacity: 0.18; }
 
       .topic-section { padding: 3rem 1.25rem 2rem; }
       .card-grid { grid-template-columns: 1fr; gap: 1rem; }
 
-      .filter-bar { top: 48px; padding: 0.6rem 1rem; gap: 0.4rem; }
+      .filter-bar { top: 50px; padding: 0.6rem 1rem; gap: 0.4rem; }
       .filter-btn { font-size: 0.6rem; padding: 0.3rem 0.6rem; }
 
       .convergence { padding: 3rem 1.25rem 2rem; }
@@ -477,6 +630,15 @@
 
       .closing { padding: 2rem 1.25rem 4rem; }
       .closing-box { padding: 1.5rem; }
+
+      .section-shift { padding: 3rem 1.25rem 1.5rem; }
+      .topic-section.reflective .card-grid { max-width: 100%; }
+      .topic-section.reflective .persona-card { padding: 1.5rem 1.5rem 1.5rem 1.75rem; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
     }
 
     /* ========== Accessibility ========== */
@@ -486,7 +648,7 @@
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
       }
-      .reveal, .persona-card { opacity: 1 !important; transform: none !important; }
+      .reveal, .persona-card, .section-shift { opacity: 1 !important; transform: none !important; }
     }
 
     /* Focus-visible on all interactive */
@@ -501,18 +663,19 @@
 
   <!-- Navigation -->
   <nav class="nav" role="navigation" aria-label="Main navigation">
-    <div class="nav-row">
-      <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show')">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
         <span></span><span></span><span></span>
       </button>
-      <div class="nav-links">
-        <a href="index.html">HOME</a>
-        <a href="plan.html">PLAN</a>
-        <a href="w1-report-global-npo-landscape.html">ORGS MAP</a>
-        <a href="w2-report-backline-case-study.html">CASE STUDY</a>
-        <a href="research.html">RESEARCH</a>
-        <a href="insight-2026-04-13.html" class="current">INSIGHT</a>
-      </div>
+      <div class="nav-mobile-brand">MENTAL HEALTH & WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="plan.html">PLAN</a>
+      <a href="w1-report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="w2-report-backline-case-study.html">CASE STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight-2026-04-13.html" class="current">INSIGHT</a>
     </div>
   </nav>
 
@@ -530,10 +693,10 @@
     <div class="cover-inner">
       <div class="cover-eyebrow">MH&W Research · April 2026</div>
       <h1 class="cover-title">INSIGHT</h1>
-      <p class="cover-subtitle">18 voices, 5 questions, 1 month of research</p>
+      <p class="cover-subtitle">23 personas debating 6 questions</p>
       <div class="cover-meta">
         Monthly Research Synthesis<br>
-        18 personas · 7 dimensions · 5 topics<br>
+        35 perspective cards · 7 dimensions · 6 topics<br>
         March 20 – April 13, 2026
       </div>
     </div>
@@ -543,20 +706,20 @@
     <!-- How to read -->
     <div class="how-to reveal">
       <div class="how-to-inner">
-        <p><strong>How to read this:</strong> Each card is a distinct analytical voice — a structured lens applied to the same evidence base. These are not interviews; they are 18 professional perspectives across 7 dimensions. Filter by dimension to follow one worldview, or browse by topic to see where voices converge and fracture. The handwritten text is each persona's core stance; the body text is their reasoning.</p>
+        <p><strong>How to read:</strong> Each card is one analytical voice. Handwriting = their stance. Body = their reasoning. Filter by dimension or browse by topic.</p>
       </div>
     </div>
 
     <!-- Filter Bar -->
     <div class="filter-bar" role="toolbar" aria-label="Filter by dimension">
-      <button class="filter-btn active" data-dim="all" onclick="filterCards('all')">All Voices</button>
-      <button class="filter-btn" data-dim="academic" onclick="filterCards('academic')">Academic</button>
-      <button class="filter-btn" data-dim="market" onclick="filterCards('market')">Target Market</button>
-      <button class="filter-btn" data-dim="org" onclick="filterCards('org')">Organization</button>
-      <button class="filter-btn" data-dim="government" onclick="filterCards('government')">Government</button>
-      <button class="filter-btn" data-dim="mentor" onclick="filterCards('mentor')">Life Direction</button>
-      <button class="filter-btn" data-dim="design" onclick="filterCards('design')">Design</button>
-      <button class="filter-btn" data-dim="critical" onclick="filterCards('critical')">Critical</button>
+      <button class="filter-btn active" data-dim="all" aria-pressed="true">All Voices</button>
+      <button class="filter-btn" data-dim="academic" aria-pressed="false">Academic</button>
+      <button class="filter-btn" data-dim="market" aria-pressed="false">Target Market</button>
+      <button class="filter-btn" data-dim="org" aria-pressed="false">Organization</button>
+      <button class="filter-btn" data-dim="government" aria-pressed="false">Government</button>
+      <button class="filter-btn" data-dim="mentor" aria-pressed="false">Life Direction</button>
+      <button class="filter-btn" data-dim="design" aria-pressed="false">Design</button>
+      <button class="filter-btn" data-dim="critical" aria-pressed="false">Critical</button>
     </div>
 
     <!-- Topics rendered by JS -->
@@ -565,16 +728,16 @@
     <!-- Convergence -->
     <section class="convergence reveal" aria-label="Convergence signals">
       <h2 class="convergence-title">Where Voices Converge</h2>
-      <p style="font-family:var(--font-body);color:var(--graphite);max-width:var(--max-w-text);line-height:1.7">Four signals emerged where 3+ personas independently reached the same conclusion — across different dimensions, applying different professional lenses to the same evidence.</p>
+      <p style="font-family:var(--font-body);color:var(--graphite);max-width:var(--max-w-text);line-height:1.7">Five signals emerged where 3+ personas independently reached the same conclusion — across different dimensions, applying different professional lenses to the same evidence.</p>
       <div class="convergence-grid" id="convergence-grid"></div>
     </section>
 
     <!-- Closing -->
     <section class="closing reveal" aria-label="Closing reflection">
       <div class="closing-box">
-        <h2>The Mentor's Challenge</h2>
-        <p>Be explicit about whether research is exploratory (knowledge base for future action) or discovery-oriented (testing what works in Taiwan). Both paths are legitimate. Different labor allocation and success metrics.</p>
-        <p class="closing-hand">Work clarifies most quickly once the underlying question is explicit.</p>
+        <h2>The Question Beneath All Six</h2>
+        <p>Topics 01–05 circle the same unresolved tension: is this project building a knowledge base for future action, or testing what works in Taiwan right now? Topic 06 names the operational reality — 110 sessions built the engine, and the engine now needs fuel, not more parts. Both paths are legitimate, but they require different labor, different timelines, and different success metrics.</p>
+        <p class="closing-hand">The infrastructure phase earned its place. Now it earns its rest.</p>
       </div>
     </section>
   </main>
@@ -588,7 +751,7 @@
       government: { color: '#e8a87c', label: 'GOVERNMENT' },
       mentor: { color: '#b8a9d4', label: 'LIFE DIRECTION' },
       design: { color: '#6667AB', label: 'DESIGN' },
-      critical: { color: '#d4c97a', label: 'CRITICAL' }
+      critical: { color: '#b8ad52', label: 'CRITICAL' }
     };
 
     var TOPICS = [
@@ -716,6 +879,53 @@
             stance: 'What if the answer isn\u2019t an NPO?',
             reasoning: 'Social enterprise, B Corp, embedding within existing music associations, university partnership — the nonprofit form is an assumption, not a conclusion.' }
         ]
+      },
+      {
+        id: 'workflow', number: '06',
+        title: 'Workflow & Collaboration',
+        subtitle: 'How we work \u2014 and what should change after 110 sessions in 24 days.',
+        voices: [
+          { name: 'Workflow Optimizer', dim: 'org',
+            stance: 'Five automated tasks on Saturday is a traffic jam, not a schedule.',
+            reasoning: 'Saturday currently stacks: case study, wiki health check, mixing wiki health check, rules health check, and news trends. If any task runs long, the others pile up unreviewed. Stagger across the week \u2014 move news trends to Wednesday, rules health check to Monday. Also: 3+ sessions fixing the same hamburger menu means the scoping was wrong, not the fix. Define \u201Cdone\u201D before starting a fix session, not during.',
+            todos: [
+              'Move news-trends task from Saturday to Wednesday',
+              'Move rules-health-check task from Saturday to Monday',
+              'Write a \u201Cdefinition of done\u201D before each fix session'
+            ] },
+          { name: 'Research Methodologist', dim: 'academic',
+            stance: 'The health check finds problems. Nothing turns findings into action \u2014 and faster access needs quality gates.',
+            reasoning: 'Wiki health check runs every Saturday and flags staleness, gaps, and missing sources. But no scheduled step acts on those findings. Proposal: add a 15-minute \u201Chealth check triage\u201D to the first session after each Saturday. Second: NTU VPN enables direct literature searches \u2014 designate one collection session per biweekly cycle. But speed without filtering is dangerous: no predatory journals (Beall\u2019s List), no unverified open access (DOAJ check), PubMed/Scopus-indexed preferred. Filter before saving, not after.',
+            todos: [
+              'Add 15-min health-check triage to the first session after each Saturday',
+              'Schedule one VPN literature-collection session per biweekly cycle',
+              'Create a source-quality checklist (Beall\u2019s List, DOAJ, PubMed/Scopus)'
+            ] },
+          { name: 'Strategic Mentor', dim: 'mentor',
+            stance: '110 sessions built the engine. The next 30 need to use it.',
+            reasoning: 'The wiki, deploy pipeline, design system, scheduled tasks, 8-role review \u2014 real infrastructure achievements. But the ratio is inverted: most sessions have been about how to work, not what to produce. Declare infrastructure \u201Cfeature-complete\u201D by April 20. After that, new rules only if triggered by a production incident. Target: 70% content-producing sessions, 30% infrastructure. And set June 1 as the deadline for resolving the two-track question. Not deciding is also a decision.',
+            todos: [
+              'Declare infrastructure \u201Cfeature-complete\u201D by April 20',
+              'Track session ratio weekly: aim for 70% content / 30% infra',
+              'Set June 1 as hard deadline for the two-track decision'
+            ] },
+          { name: 'Critical Auditor', dim: 'critical',
+            stance: 'PROJECT_RULES.md grew to 770 lines in 10 days. How many wiki articles were written in the same period?',
+            reasoning: 'The rules document is thorough \u2014 that\u2019s not the problem. The problem is the ratio. Count: how many wiki articles exist vs. how many infrastructure sessions ran? If the governance layer grows faster than the knowledge layer, the system is optimizing for its own maintenance. Track two numbers monthly: \u201Cwiki articles created/updated\u201D and \u201Cinfrastructure sessions.\u201D Also: the rules-health-check task has never run. We\u2019re writing health checks for the health checks before the first one fires.',
+            todos: [
+              'Count wiki articles vs. infrastructure sessions this month',
+              'Add monthly tracking: \u201Cwiki created/updated\u201D vs. \u201Cinfra sessions\u201D',
+              'Run the rules-health-check task for the first time'
+            ] },
+          { name: 'Design Process Lead', dim: 'design',
+            stance: 'The 8-role review is our best innovation. Running it for every border-radius fix will kill it.',
+            reasoning: 'The Kinetic Zine review proved the 8-role process produces dramatically better creative output. But it takes a full session. Proposal: tiered review. Full review (all 8 roles) for new pages and major redesigns. Light review (Web Engineer + UI Designer + Visual Designer) for CSS fixes and content updates. No review for typos and metadata. Also: the design system hit v6 in two weeks (v4\u2192v5\u2192v5.1\u2192v6). Declare a 2-week freeze \u2014 no token changes. Let the system settle.',
+            todos: [
+              'Codify tiered review policy: Full (new pages) / Light (CSS fixes) / None (typos)',
+              'Declare a 2-week design-token freeze (no token changes)',
+              'Document the Kinetic Zine review as the reference case study'
+            ] }
+        ]
       }
     ];
 
@@ -759,6 +969,16 @@
           { name: 'UX Researcher', dim: 'design' },
           { name: 'Mental Health Specialist', dim: 'academic' }
         ]
+      },
+      {
+        signal: 'Infrastructure phase must end \u2014 shift to content production',
+        desc: 'Declare infrastructure feature-complete, set a 70/30 content-to-infrastructure ratio, and resolve the two-track question by June 1.',
+        personas: [
+          { name: 'Strategic Mentor', dim: 'mentor' },
+          { name: 'Critical Auditor', dim: 'critical' },
+          { name: 'Workflow Optimizer', dim: 'org' },
+          { name: 'Design Process Lead', dim: 'design' }
+        ]
       }
     ];
 
@@ -781,15 +1001,24 @@
       }
       return '<svg viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg">'
         + '<polyline points="' + pts.join(' ') + '" fill="none" stroke="' + color
-        + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/></svg>';
+        + '" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/></svg>';
     }
 
     /* ========== RENDER CARDS ========== */
     var container = document.getElementById('topics-container');
 
     TOPICS.forEach(function(topic) {
+      /* Insert shift divider before the workflow topic */
+      if (topic.id === 'workflow') {
+        var divider = document.createElement('div');
+        divider.className = 'section-shift reveal';
+        divider.innerHTML = '<div class="shift-label">From Brainstorm to Reflection</div>'
+          + '<p class="shift-subtext">The voices above explore what we\u2019re building. Below, we examine our rhythm.</p>';
+        container.appendChild(divider);
+      }
+
       var section = document.createElement('section');
-      section.className = 'topic-section';
+      section.className = 'topic-section' + (topic.id === 'workflow' ? ' reflective' : '');
       section.setAttribute('aria-label', topic.title);
 
       var header = '<div class="topic-header reveal">'
@@ -801,11 +1030,11 @@
       var grid = '<div class="card-grid" data-topic="' + topic.id + '">';
       topic.voices.forEach(function(v, i) {
         var dim = DIMS[v.dim];
-        var rot = ((hashStr(v.name + topic.id) % 500) - 250) / 100;
+        var rot = ((hashStr(v.name + topic.id) % 900) - 450) / 100;
         var delay = (i * 0.1).toFixed(2);
         var rotStart = rot * 3;
 
-        grid += '<article class="persona-card" data-dim="' + v.dim + '" tabindex="0"'
+        grid += '<article class="persona-card" data-dim="' + v.dim + '"'
           + ' role="article" aria-label="' + v.name + ' perspective"'
           + ' style="--rot:' + rot + 'deg;--rot-start:' + rotStart + 'deg;--delay:' + delay + 's">'
           + '<div class="card-pin" style="background:' + dim.color + '"></div>'
@@ -816,8 +1045,22 @@
           + '<div class="card-dim" style="color:' + dim.color + '">' + dim.label + '</div>'
           + '</div></div>'
           + '<div class="card-stance">\u201C' + v.stance + '\u201D</div>'
-          + '<div class="card-reasoning">' + v.reasoning + '</div>'
-          + '</article>';
+          + '<div class="card-reasoning">' + v.reasoning + '</div>';
+
+        /* Render to-do checklist if present */
+        if (v.todos && v.todos.length) {
+          grid += '<div class="card-todos">'
+            + '<div class="card-todos-label">Action Items</div>';
+          v.todos.forEach(function(todo, ti) {
+            grid += '<label class="card-todo-item">'
+              + '<input type="checkbox" data-todo="' + topic.id + '-' + i + '-' + ti + '">'
+              + '<span class="card-todo-text">' + todo + '</span>'
+              + '</label>';
+          });
+          grid += '</div>';
+        }
+
+        grid += '</article>';
       });
       grid += '</div>';
 
@@ -840,10 +1083,12 @@
         + '</div>';
     });
 
-    /* ========== FILTER ========== */
+    /* ========== FILTER (with URL state + section feedback) ========== */
     function filterCards(dim) {
       document.querySelectorAll('.filter-btn').forEach(function(b) {
-        b.classList.toggle('active', b.getAttribute('data-dim') === dim);
+        var isActive = b.getAttribute('data-dim') === dim;
+        b.classList.toggle('active', isActive);
+        b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
       });
       document.querySelectorAll('.persona-card').forEach(function(card) {
         if (dim === 'all' || card.getAttribute('data-dim') === dim) {
@@ -852,7 +1097,53 @@
           card.classList.add('hidden');
         }
       });
+      // Show/hide empty sections + add voice count
+      document.querySelectorAll('.topic-section').forEach(function(section) {
+        var grid = section.querySelector('.card-grid');
+        var visible = grid ? grid.querySelectorAll('.persona-card:not(.hidden)').length : 0;
+        var total = grid ? grid.querySelectorAll('.persona-card').length : 0;
+        // Remove old counter
+        var old = section.querySelector('.voice-count');
+        if (old) old.remove();
+        if (dim !== 'all') {
+          var counter = document.createElement('div');
+          counter.className = 'voice-count';
+          counter.style.cssText = 'font-family:var(--font-mono);font-size:var(--text-xs);color:var(--grey);text-transform:uppercase;letter-spacing:0.04em;margin-top:0.5rem;';
+          counter.textContent = visible + ' of ' + total + ' voices';
+          var header = section.querySelector('.topic-header');
+          if (header) header.appendChild(counter);
+        }
+        section.style.display = (visible === 0 && dim !== 'all') ? 'none' : '';
+      });
+      // Persist filter in URL
+      var url = new URL(window.location);
+      if (dim === 'all') { url.searchParams.delete('dim'); }
+      else { url.searchParams.set('dim', dim); }
+      history.replaceState(null, '', url);
     }
+
+    // Event delegation for filter buttons (replaces inline onclick)
+    document.querySelector('.filter-bar').addEventListener('click', function(e) {
+      var btn = e.target.closest('.filter-btn');
+      if (btn) filterCards(btn.getAttribute('data-dim'));
+    });
+
+    // Restore filter from URL on load
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var dim = params.get('dim');
+      if (dim && DIMS[dim]) { filterCards(dim); }
+    })();
+
+    /* ========== MOBILE NAV AUTO-CLOSE ========== */
+    document.querySelectorAll('.nav-links a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        var toggle = document.querySelector('.nav-toggle');
+        var links = document.querySelector('.nav-links');
+        if (toggle) toggle.classList.remove('open');
+        if (links) links.classList.remove('show');
+      });
+    });
 
     /* ========== INTERSECTION OBSERVER ========== */
     var revealObs = new IntersectionObserver(function(entries) {
@@ -873,7 +1164,76 @@
       });
     }, { threshold: 0.05 });
 
-    document.querySelectorAll('.persona-card').forEach(function(card) { cardObs.observe(card); });
+    document.querySelectorAll('.persona-card').forEach(function(card) {
+      /* Reflective cards use a separate, gentler observer */
+      if (!card.closest('.reflective')) { cardObs.observe(card); }
+    });
+
+    /* ========== REFLECTIVE CARD ENTRANCE ========== */
+    var reflectCards = document.querySelectorAll('.reflective .persona-card');
+    var reflectObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && !entry.target.classList.contains('revealed')) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, { threshold: 0.01, rootMargin: '0px 0px 80px 0px' });
+
+    reflectCards.forEach(function(card) {
+      reflectObs.observe(card);
+    });
+
+    /* iOS Safari fallback: if cards still hidden after section is scrolled into view */
+    var reflectSection = document.querySelector('.topic-section.reflective');
+    if (reflectSection) {
+      var sectionObs = new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) {
+          setTimeout(function() {
+            reflectCards.forEach(function(card) {
+              if (!card.classList.contains('revealed')) {
+                card.classList.add('revealed');
+              }
+            });
+          }, 400);
+          sectionObs.disconnect();
+        }
+      }, { threshold: 0.01 });
+      sectionObs.observe(reflectSection);
+    }
+
+    /* ========== TORN EDGE ZINE EFFECT (skip reflective section) ========== */
+    var tornClasses = ['torn-a', 'torn-b', 'torn-c'];
+    document.querySelectorAll('.card-grid').forEach(function(grid) {
+      if (grid.closest('.reflective')) return; /* No torn edges in reflective layout */
+      var cards = grid.querySelectorAll('.persona-card');
+      // Apply torn edge to ~2 cards per section (deterministic via index)
+      cards.forEach(function(card, i) {
+        if (i % 3 === 1) card.classList.add(tornClasses[i % tornClasses.length]);
+      });
+    });
+
+    /* ========== CHECKBOX INTERACTION ========== */
+    document.querySelectorAll('.card-todo-item input[type="checkbox"]').forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        var item = cb.closest('.card-todo-item');
+        if (cb.checked) {
+          item.classList.add('checked');
+        } else {
+          item.classList.remove('checked');
+        }
+      });
+    });
+
+    /* ========== CONVERGENCE CARD STAGGER ========== */
+    var convObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('conv-visible');
+          convObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    convObs.observe(document.querySelector('.convergence-grid'));
   </script>
 </body>
 </html>
