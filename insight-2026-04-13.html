@@ -334,6 +334,89 @@
     }
     .persona-card:hover .card-expand { color: var(--signal); }
 
+    /* ========== Section Divider (Brainstorm → Reflection) ========== */
+    .section-shift {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 4rem 2rem 2rem;
+      text-align: center;
+      position: relative;
+    }
+    .section-shift::before {
+      content: '';
+      position: absolute; top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 60px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--signal), transparent);
+    }
+    .shift-label {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--signal-dim); display: inline-block;
+      padding: 0.4rem 1.2rem; border: 1px solid var(--signal-bg);
+      border-radius: 20px; background: var(--signal-bg);
+    }
+    .shift-subtext {
+      font-family: var(--font-hand); font-size: 1.1rem;
+      color: var(--grey); margin-top: 0.75rem;
+    }
+
+    /* ========== Reflective Layout (Topic 06) ========== */
+    .topic-section.reflective {
+      background: linear-gradient(180deg, var(--snow) 0%, rgba(102,103,171,0.08) 50%, var(--snow) 100%);
+    }
+    .topic-section.reflective .card-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: var(--max-w-text);
+      margin: 0 auto;
+    }
+    .topic-section.reflective .persona-card {
+      transform: none !important;
+      clip-path: none !important;
+      border-left: 3px solid var(--signal-dim);
+      padding: 2rem 2rem 2rem 2.25rem;
+      box-shadow: inset 3px 0 12px rgba(102,103,171,0.06);
+    }
+    .topic-section.reflective .persona-card::before {
+      height: 0;
+    }
+    .topic-section.reflective .persona-card:hover {
+      transform: translateY(-4px) !important;
+      border-left-color: var(--signal);
+    }
+    .topic-section.reflective .card-stance {
+      font-size: 1.1rem;
+    }
+    .topic-section.reflective .card-reasoning {
+      font-size: var(--text-body);
+      line-height: 1.8;
+    }
+
+    /* Reflective card entrance animation */
+    @keyframes fadeInReflect {
+      0% { opacity: 0; transform: translateY(12px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .js .topic-section.reflective .persona-card {
+      opacity: 0;
+    }
+    .topic-section.reflective .persona-card.revealed {
+      animation: fadeInReflect 0.6s ease-out forwards;
+      animation-delay: var(--delay, 0s);
+    }
+
+    /* Divider entrance animation */
+    @keyframes dividerReveal {
+      0% { opacity: 0; }
+      40% { opacity: 0; }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .js .section-shift { opacity: 0; }
+    .section-shift.visible {
+      animation: dividerReveal 1.6s ease-out forwards !important;
+    }
+
     /* ========== Convergence Section ========== */
     .convergence {
       max-width: var(--max-w); margin: 0 auto;
@@ -489,6 +572,10 @@
 
       .closing { padding: 2rem 1.25rem 4rem; }
       .closing-box { padding: 1.5rem; }
+
+      .section-shift { padding: 3rem 1.25rem 1.5rem; }
+      .topic-section.reflective .card-grid { max-width: 100%; }
+      .topic-section.reflective .persona-card { padding: 1.5rem 1.5rem 1.5rem 1.75rem; }
     }
 
     /* ========== Accessibility ========== */
@@ -498,7 +585,7 @@
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
       }
-      .reveal, .persona-card { opacity: 1 !important; transform: none !important; }
+      .reveal, .persona-card, .section-shift { opacity: 1 !important; transform: none !important; }
     }
 
     /* Focus-visible on all interactive */
@@ -543,10 +630,10 @@
     <div class="cover-inner">
       <div class="cover-eyebrow">MH&W Research · April 2026</div>
       <h1 class="cover-title">INSIGHT</h1>
-      <p class="cover-subtitle">18 personas debating 5 questions</p>
+      <p class="cover-subtitle">23 personas debating 6 questions</p>
       <div class="cover-meta">
         Monthly Research Synthesis<br>
-        30 perspective cards · 7 dimensions · 5 topics<br>
+        35 perspective cards · 7 dimensions · 6 topics<br>
         March 20 – April 13, 2026
       </div>
     </div>
@@ -578,16 +665,16 @@
     <!-- Convergence -->
     <section class="convergence reveal" aria-label="Convergence signals">
       <h2 class="convergence-title">Where Voices Converge</h2>
-      <p style="font-family:var(--font-body);color:var(--graphite);max-width:var(--max-w-text);line-height:1.7">Four signals emerged where 3+ personas independently reached the same conclusion — across different dimensions, applying different professional lenses to the same evidence.</p>
+      <p style="font-family:var(--font-body);color:var(--graphite);max-width:var(--max-w-text);line-height:1.7">Five signals emerged where 3+ personas independently reached the same conclusion — across different dimensions, applying different professional lenses to the same evidence.</p>
       <div class="convergence-grid" id="convergence-grid"></div>
     </section>
 
     <!-- Closing -->
     <section class="closing reveal" aria-label="Closing reflection">
       <div class="closing-box">
-        <h2>The Question Beneath All Five</h2>
-        <p>Every topic above circles the same unresolved tension: is this project building a knowledge base for future action, or testing what works in Taiwan right now? Both paths are legitimate — but they require different labor, different timelines, and different success metrics.</p>
-        <p class="closing-hand">Work clarifies most quickly once the underlying question is explicit.</p>
+        <h2>The Question Beneath All Six</h2>
+        <p>Topics 01–05 circle the same unresolved tension: is this project building a knowledge base for future action, or testing what works in Taiwan right now? Topic 06 names the operational reality — 110 sessions built the engine, and the engine now needs fuel, not more parts. Both paths are legitimate, but they require different labor, different timelines, and different success metrics.</p>
+        <p class="closing-hand">The infrastructure phase earned its place. Now it earns its rest.</p>
       </div>
     </section>
   </main>
@@ -729,6 +816,28 @@
             stance: 'What if the answer isn\u2019t an NPO?',
             reasoning: 'Social enterprise, B Corp, embedding within existing music associations, university partnership — the nonprofit form is an assumption, not a conclusion.' }
         ]
+      },
+      {
+        id: 'workflow', number: '06',
+        title: 'Workflow & Collaboration',
+        subtitle: 'How we work \u2014 and what should change after 110 sessions in 24 days.',
+        voices: [
+          { name: 'Workflow Optimizer', dim: 'org',
+            stance: 'Five automated tasks on Saturday is a traffic jam, not a schedule.',
+            reasoning: 'Saturday currently stacks: case study, wiki health check, mixing wiki health check, rules health check, and news trends. If any task runs long, the others pile up unreviewed. Stagger across the week \u2014 move news trends to Wednesday, rules health check to Monday. Also: 3+ sessions fixing the same hamburger menu means the scoping was wrong, not the fix. Define \u201Cdone\u201D before starting a fix session, not during.' },
+          { name: 'Research Methodologist', dim: 'academic',
+            stance: 'The health check finds problems. Nothing turns findings into action \u2014 and faster access needs quality gates.',
+            reasoning: 'Wiki health check runs every Saturday and flags staleness, gaps, and missing sources. But no scheduled step acts on those findings. Proposal: add a 15-minute \u201Chealth check triage\u201D to the first session after each Saturday. Second: NTU VPN enables direct literature searches \u2014 designate one collection session per biweekly cycle. But speed without filtering is dangerous: no predatory journals (Beall\u2019s List), no unverified open access (DOAJ check), PubMed/Scopus-indexed preferred. Filter before saving, not after.' },
+          { name: 'Strategic Mentor', dim: 'mentor',
+            stance: '110 sessions built the engine. The next 30 need to use it.',
+            reasoning: 'The wiki, deploy pipeline, design system, scheduled tasks, 8-role review \u2014 real infrastructure achievements. But the ratio is inverted: most sessions have been about how to work, not what to produce. Declare infrastructure \u201Cfeature-complete\u201D by April 20. After that, new rules only if triggered by a production incident. Target: 70% content-producing sessions, 30% infrastructure. And set June 1 as the deadline for resolving the two-track question. Not deciding is also a decision.' },
+          { name: 'Critical Auditor', dim: 'critical',
+            stance: 'PROJECT_RULES.md grew to 770 lines in 10 days. How many wiki articles were written in the same period?',
+            reasoning: 'The rules document is thorough \u2014 that\u2019s not the problem. The problem is the ratio. Count: how many wiki articles exist vs. how many infrastructure sessions ran? If the governance layer grows faster than the knowledge layer, the system is optimizing for its own maintenance. Track two numbers monthly: \u201Cwiki articles created/updated\u201D and \u201Cinfrastructure sessions.\u201D Also: the rules-health-check task has never run. We\u2019re writing health checks for the health checks before the first one fires.' },
+          { name: 'Design Process Lead', dim: 'design',
+            stance: 'The 8-role review is our best innovation. Running it for every border-radius fix will kill it.',
+            reasoning: 'The Kinetic Zine review proved the 8-role process produces dramatically better creative output. But it takes a full session. Proposal: tiered review. Full review (all 8 roles) for new pages and major redesigns. Light review (Web Engineer + UI Designer + Visual Designer) for CSS fixes and content updates. No review for typos and metadata. Also: the design system hit v6 in two weeks (v4\u2192v5\u2192v5.1\u2192v6). Declare a 2-week freeze \u2014 no token changes. Let the system settle.' }
+        ]
       }
     ];
 
@@ -772,6 +881,16 @@
           { name: 'UX Researcher', dim: 'design' },
           { name: 'Mental Health Specialist', dim: 'academic' }
         ]
+      },
+      {
+        signal: 'Infrastructure phase must end \u2014 shift to content production',
+        desc: 'Declare infrastructure feature-complete, set a 70/30 content-to-infrastructure ratio, and resolve the two-track question by June 1.',
+        personas: [
+          { name: 'Strategic Mentor', dim: 'mentor' },
+          { name: 'Critical Auditor', dim: 'critical' },
+          { name: 'Workflow Optimizer', dim: 'org' },
+          { name: 'Design Process Lead', dim: 'design' }
+        ]
       }
     ];
 
@@ -801,8 +920,17 @@
     var container = document.getElementById('topics-container');
 
     TOPICS.forEach(function(topic) {
+      /* Insert shift divider before the workflow topic */
+      if (topic.id === 'workflow') {
+        var divider = document.createElement('div');
+        divider.className = 'section-shift reveal';
+        divider.innerHTML = '<div class="shift-label">From Brainstorm to Reflection</div>'
+          + '<p class="shift-subtext">The voices above explore what we\u2019re building. Below, we examine our rhythm.</p>';
+        container.appendChild(divider);
+      }
+
       var section = document.createElement('section');
-      section.className = 'topic-section';
+      section.className = 'topic-section' + (topic.id === 'workflow' ? ' reflective' : '');
       section.setAttribute('aria-label', topic.title);
 
       var header = '<div class="topic-header reveal">'
@@ -934,11 +1062,28 @@
       });
     }, { threshold: 0.05 });
 
-    document.querySelectorAll('.persona-card').forEach(function(card) { cardObs.observe(card); });
+    document.querySelectorAll('.persona-card').forEach(function(card) {
+      /* Reflective cards use a separate, gentler observer */
+      if (!card.closest('.reflective')) { cardObs.observe(card); }
+    });
 
-    /* ========== TORN EDGE ZINE EFFECT ========== */
+    /* ========== REFLECTIVE CARD ENTRANCE ========== */
+    var reflectObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && !entry.target.classList.contains('revealed')) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reflective .persona-card').forEach(function(card) {
+      reflectObs.observe(card);
+    });
+
+    /* ========== TORN EDGE ZINE EFFECT (skip reflective section) ========== */
     var tornClasses = ['torn-a', 'torn-b', 'torn-c'];
     document.querySelectorAll('.card-grid').forEach(function(grid) {
+      if (grid.closest('.reflective')) return; /* No torn edges in reflective layout */
       var cards = grid.querySelectorAll('.persona-card');
       // Apply torn edge to ~2 cards per section (deterministic via index)
       cards.forEach(function(card, i) {
