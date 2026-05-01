@@ -87,7 +87,9 @@
 
   /* Compact inline brand mark — hidden on desktop, shown on mobile */
   .nav-topbar { display:none; }
-  .nav-compact { font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.1em; font-size:0.75rem; opacity:0.55; }
+  .nav-compact { display:none; }
+  .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+  .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:0.5rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:0.2em; }
 
   @media (max-width:768px) {
     .nav { padding:1.2rem 1.5rem; padding-top:calc(1.2rem + env(safe-area-inset-top)); right:0; background:transparent; border-bottom:none; }
@@ -95,24 +97,21 @@
     /* Inline topbar: hamburger + compact brand on one line */
     .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
     .nav-toggle { display:block; }
+    .nav-mobile-brand { display:block; }
     .nav-links { display:none; flex-direction:column; gap:0.75rem; margin-top:1rem; }
     .nav-links.show { display:flex; }
     .nav-links a { font-size:0.85rem; }
-    /* Full brand hidden on mobile — compact mark takes over */
+    /* Full brand hidden on mobile — mobile brand takes over */
     .nav-brand { display:none; }
     .nav-sub { display:none; }
-    /* When menu opens, restore full brand below links */
-    .nav.open .nav-brand { display:block; font-size:0.85rem; margin-top:0.75rem; }
-    .nav.open .nav-sub { display:block; font-size:0.55rem; letter-spacing:0.2em; }
     .bottom { padding:1.2rem 1.5rem; padding-bottom:calc(1.2rem + env(safe-area-inset-bottom)); }
     #ascii-canvas { opacity: 0.12; }
   }
   @media (max-width:480px) {
     .nav { padding:1rem 1rem; padding-top:calc(1rem + env(safe-area-inset-top)); }
     .nav-links a { font-size:0.75rem; letter-spacing:0.08em; }
-    .nav-compact { font-size:0.65rem; }
-    .nav.open .nav-brand { font-size:0.75rem; }
-    .nav.open .nav-sub { letter-spacing:0.15em; font-size:0.55rem; }
+    .nav-mobile-brand { font-size:0.58rem; }
+    .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
     #ascii-canvas { opacity: 0.10; }
   }
 </style>
@@ -124,7 +123,7 @@
     <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
       <span></span><span></span><span></span>
     </button>
-    <span class="nav-compact">MH&W</span>
+    <div class="nav-mobile-brand">MENTAL HEALTH & WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
   </div>
   <div class="nav-links">
     <a href="#" class="current">HOME</a>
@@ -132,7 +131,7 @@
     <a href="w1-report-global-npo-landscape.html">ORGS MAP</a>
     <a href="w2-report-backline-case-study.html">CASE STUDY</a>
     <a href="research.html">RESEARCH</a>
-    <a href="insight-2026-04-13.html">INSIGHT</a>
+    <a href="insight-2026-05-01.html">INSIGHT</a>
   </div>
   <div class="nav-brand">MENTAL HEALTH<br>& WELLNESS</div>
   <div class="nav-sub">FOR MUSICIANS</div>

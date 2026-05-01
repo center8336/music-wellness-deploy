@@ -116,7 +116,9 @@
 
     /* Compact inline brand mark — hidden on desktop, shown on mobile */
     .nav-topbar { display: none; }
-    .nav-compact { font-family: var(--font-display); font-weight: 800; color: var(--charcoal); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem; opacity: 0.55; }
+    .nav-compact { display:none; }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:0.5rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:0.2em; }
 
     .nav-toggle {
       display: none; background: none; border: none; cursor: pointer;
@@ -608,6 +610,7 @@
       /* Inline topbar: hamburger + compact brand on one line */
       .nav-topbar { display: flex; align-items: center; gap: 0.75rem; }
       .nav-toggle { display: block; }
+      .nav-mobile-brand { display:block; }
       .nav-links { display: none; flex-direction: column; gap: 0.75rem; margin-top: 1rem; }
       .nav-links.show { display: flex; }
       .nav-links a { font-size: 0.85rem; }
@@ -631,6 +634,11 @@
       .section-shift { padding: 3rem 1.25rem 1.5rem; }
       .topic-section.reflective .card-grid { max-width: 100%; }
       .topic-section.reflective .persona-card { padding: 1.5rem 1.5rem 1.5rem 1.75rem; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
     }
 
     /* ========== Accessibility ========== */
@@ -659,7 +667,7 @@
       <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
         <span></span><span></span><span></span>
       </button>
-      <span class="nav-compact">INSIGHT</span>
+      <div class="nav-mobile-brand">MENTAL HEALTH & WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
     </div>
     <div class="nav-links">
       <a href="index.html">HOME</a>

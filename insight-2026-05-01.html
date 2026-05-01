@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="no-js">
+<script>document.documentElement.classList.replace('no-js','js');</script>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>INSIGHT 05 — Monthly Research Synthesis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102,103,171,0.08);
+      --signal-glow: rgba(102,103,171,0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+      --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font-hand: 'Caveat', cursive;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 660px;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--snow);
+      color: var(--graphite);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+    }
+    ::selection { background: var(--signal); color: white; }
+
+    /* Skip Nav */
+    .skip-nav {
+      position:absolute; top:-40px; left:0;
+      background:var(--signal); color:white;
+      padding:8px 16px; text-decoration:none;
+      z-index:999; border-radius:var(--radius);
+      font-size:var(--text-sm); font-weight:600;
+    }
+    .skip-nav:focus { top:10px; left:10px; }
+
+    /* Navigation */
+    nav.nav {
+      position:fixed; top:0; left:0; right:0; z-index:100;
+      display:flex; flex-direction:column;
+      padding:1.5rem 2.5rem;
+      padding-top:calc(1.5rem + env(safe-area-inset-top));
+      background:rgba(244,244,245,0.85);
+      backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border-light);
+    }
+    .nav-links { display:flex; gap:2.5rem; justify-content:flex-end; }
+    .nav-links a {
+      font-family:var(--font-mono); font-size:0.85rem; font-weight:400;
+      color:var(--grey); text-decoration:none; text-transform:uppercase;
+      letter-spacing:0.04em; transition:color var(--dur) var(--ease);
+    }
+    .nav-links a:hover { color:var(--black); }
+    .nav-links a.current { color:var(--black); }
+    .nav-links a:focus-visible { outline:2px solid var(--signal); outline-offset:2px; border-radius:var(--radius); }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:0.5rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:0.2em; }
+    .nav-toggle {
+      display:none; background:none; border:none; cursor:pointer;
+      padding:0.5rem; z-index:101; -webkit-tap-highlight-color:transparent;
+    }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity:0; }
+    .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+
+    /* Cover */
+    .cover {
+      min-height:100vh; display:flex; align-items:center; justify-content:center;
+      padding:6rem 2rem 3rem; position:relative; overflow:hidden;
+    }
+    .cover::before {
+      content:''; position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse at 15% 20%, rgba(212,121,156,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 30%, rgba(122,174,212,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(133,201,163,0.10) 0%, transparent 50%),
+        radial-gradient(ellipse at 30% 60%, rgba(232,168,124,0.08) 0%, transparent 40%),
+        radial-gradient(ellipse at 70% 70%, rgba(184,169,212,0.10) 0%, transparent 45%);
+      z-index:0;
+    }
+    .cover-inner { position:relative; z-index:1; text-align:center; max-width:800px; }
+    .cover-eyebrow {
+      font-family:var(--font-mono); font-size:var(--text-xs);
+      color:var(--grey); text-transform:uppercase; letter-spacing:0.1em;
+      margin-bottom:1.5rem;
+    }
+    .cover-title {
+      font-family:var(--font-display); font-size:var(--text-hero);
+      font-weight:800; color:var(--black); letter-spacing:-0.02em;
+      margin-bottom:0.5rem;
+    }
+    .cover-subtitle {
+      font-family:var(--font-hand); font-size:clamp(1.5rem,3vw,2.2rem);
+      color:var(--signal); margin-bottom:2rem; font-weight:500;
+    }
+    .cover-meta {
+      font-family:var(--font-mono); font-size:var(--text-sm);
+      color:var(--grey); line-height:2;
+    }
+    .cover-scatter {
+      position:absolute; font-family:var(--font-hand); font-size:1.55rem;
+      font-weight:600; opacity:0.18; pointer-events:none; white-space:nowrap;
+    }
+
+    /* Stat Strip */
+    .stat-strip {
+      display:grid; grid-template-columns:repeat(4,1fr);
+      max-width:var(--max-w); margin:0 auto;
+      background:var(--black); border-radius:var(--radius-lg);
+      overflow:hidden;
+    }
+    .stat-item {
+      padding:1.5rem 1.25rem; text-align:center;
+      border-right:1px solid var(--border-dark);
+    }
+    .stat-item:last-child { border-right:none; }
+    .stat-num {
+      font-family:var(--font-display); font-size:var(--text-h2);
+      font-weight:700; color:var(--white); margin-bottom:0.25rem;
+    }
+    .stat-label {
+      font-family:var(--font-mono); font-size:var(--text-xs);
+      text-transform:uppercase; letter-spacing:0.06em; color:var(--grey-light);
+    }
+    .stat-meta {
+      font-family:var(--font-mono); font-size:0.65rem;
+      color:var(--grey); margin-top:0.35rem; text-transform:uppercase;
+      letter-spacing:0.04em;
+    }
+
+    /* Section */
+    .section {
+      max-width:var(--max-w); margin:0 auto;
+      padding:5rem 2rem 3rem;
+    }
+    .section-header {
+      margin-bottom:2.5rem; padding-bottom:1.5rem;
+      border-bottom:1px solid transparent;
+      border-image:linear-gradient(90deg, var(--silver) 0%, transparent 100%) 1;
+    }
+    .section-num {
+      font-family:var(--font-hand); font-size:3rem;
+      color:var(--signal); font-weight:700;
+      line-height:1; margin-bottom:0.25rem; opacity:0.5;
+    }
+    .section-title {
+      font-family:var(--font-display); font-size:var(--text-h1);
+      color:var(--black); font-weight:700; margin-bottom:0.5rem;
+    }
+    .section-subtitle {
+      font-family:var(--font-body); font-size:var(--text-body);
+      color:var(--grey); max-width:var(--max-w-text);
+    }
+
+    /* Prose blocks */
+    .prose { max-width:var(--max-w-text); margin:0 auto 2rem; }
+    .prose h3 {
+      font-family:var(--font-display); font-size:var(--text-h3);
+      color:var(--black); font-weight:600; margin:2.5rem 0 1rem;
+    }
+    .prose p {
+      font-family:var(--font-body); font-size:var(--text-body);
+      color:var(--graphite); line-height:1.8; margin-bottom:1.25rem;
+    }
+    .prose strong { color:var(--charcoal); }
+    .prose .highlight-box {
+      background:var(--signal-bg); border-left:3px solid var(--signal);
+      padding:1.25rem 1.5rem; border-radius:0 var(--radius-lg) var(--radius-lg) 0;
+      margin:1.5rem 0;
+    }
+    .prose .highlight-box p { margin-bottom:0; color:var(--charcoal); }
+
+    /* Dimension tags */
+    .dim-tag {
+      display:inline-block; font-family:var(--font-mono); font-size:0.65rem;
+      text-transform:uppercase; letter-spacing:0.05em;
+      padding:0.2rem 0.5rem; border-radius:10px; margin-right:0.35rem; margin-bottom:0.35rem;
+      border:1px solid; line-height:1;
+    }
+    .dim-tag.academic { color:var(--spectrum-5); border-color:var(--spectrum-5); }
+    .dim-tag.market { color:var(--spectrum-1); border-color:var(--spectrum-1); }
+    .dim-tag.org { color:var(--spectrum-4); border-color:var(--spectrum-4); }
+    .dim-tag.govt { color:var(--spectrum-2); border-color:var(--spectrum-2); }
+    .dim-tag.life { color:var(--spectrum-6); border-color:var(--spectrum-6); }
+    .dim-tag.design { color:var(--signal); border-color:var(--signal); }
+    .dim-tag.critical { color:#7a7530; border-color:#9e9640; }
+
+    /* Convergence signals */
+    .convergence-grid {
+      display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr));
+      gap:1.25rem; margin:2rem 0;
+    }
+    .convergence-card {
+      background:var(--white); border:1px solid var(--border-light);
+      border-radius:var(--radius-lg); padding:1.5rem; position:relative;
+      transition:transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+    }
+    .convergence-card:hover { transform:translateY(-4px); box-shadow:0 8px 24px rgba(0,0,0,0.08); }
+    .convergence-card .cc-num {
+      font-family:var(--font-hand); font-size:2rem; color:var(--signal);
+      font-weight:700; opacity:0.4; line-height:1;
+    }
+    .convergence-card .cc-title {
+      font-family:var(--font-display); font-size:var(--text-sm);
+      font-weight:600; color:var(--black); margin:0.5rem 0;
+    }
+    .convergence-card .cc-body {
+      font-size:var(--text-sm); color:var(--graphite); line-height:1.7;
+    }
+
+    /* Section 4 Workflow personas */
+    .workflow-persona {
+      background:var(--white); border:1px solid var(--border-light);
+      border-left:4px solid var(--signal);
+      border-radius:0 var(--radius-lg) var(--radius-lg) 0;
+      padding:2rem; margin-bottom:2rem;
+      transition:border-left-color 0.3s var(--ease);
+    }
+    .workflow-persona:hover { border-left-color:var(--spectrum-5); }
+    .workflow-persona:nth-child(2):hover { border-left-color:var(--spectrum-4); }
+    .workflow-persona:nth-child(3):hover { border-left-color:var(--spectrum-6); }
+    .workflow-persona:nth-child(4):hover { border-left-color:var(--spectrum-3); }
+    .workflow-persona:nth-child(5):hover { border-left-color:var(--spectrum-1); }
+    .wp-header { display:flex; align-items:center; gap:1rem; margin-bottom:1rem; }
+    .wp-icon {
+      width:42px; height:42px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.2rem; flex-shrink:0;
+    }
+    .wp-name { font-family:var(--font-display); font-size:var(--text-h3); font-weight:600; color:var(--black); }
+    .wp-dim { font-family:var(--font-mono); font-size:var(--text-xs); text-transform:uppercase; letter-spacing:0.05em; color:var(--grey); }
+    .wp-stance {
+      font-family:var(--font-hand); font-size:1.2rem; color:var(--charcoal);
+      margin-bottom:1rem; font-weight:600; line-height:1.4;
+    }
+    .wp-body { font-size:var(--text-sm); color:var(--graphite); line-height:1.8; }
+    .wp-body p { margin-bottom:0.75rem; }
+    .wp-proposal {
+      background:var(--signal-bg); border-radius:var(--radius);
+      padding:1rem 1.25rem; margin-top:1rem;
+    }
+    .wp-proposal-label {
+      font-family:var(--font-mono); font-size:var(--text-xs);
+      text-transform:uppercase; letter-spacing:0.06em; color:var(--signal);
+      margin-bottom:0.5rem;
+    }
+    .wp-proposal p { font-size:var(--text-sm); color:var(--charcoal); line-height:1.7; margin-bottom:0.5rem; }
+
+    /* Table */
+    .table-wrap { overflow-x:auto; margin:1.5rem 0; }
+    table {
+      width:100%; border-collapse:collapse;
+      font-size:var(--text-sm); font-family:var(--font-body);
+    }
+    thead th {
+      background:var(--charcoal); color:var(--white);
+      font-family:var(--font-mono); font-size:var(--text-xs);
+      text-transform:uppercase; letter-spacing:0.04em;
+      padding:0.65rem 1rem; text-align:left; font-weight:400;
+    }
+    tbody td { padding:0.65rem 1rem; border-bottom:1px solid var(--border-light); color:var(--graphite); }
+    tbody tr:nth-child(even) { background:rgba(0,0,0,0.02); }
+
+    /* Closing */
+    .closing {
+      max-width:var(--max-w-text); margin:0 auto;
+      padding:4rem 2rem 6rem; text-align:center;
+    }
+    .closing-line {
+      width:60px; height:1px; margin:0 auto 2rem;
+      background:linear-gradient(90deg, transparent, var(--signal), transparent);
+    }
+    .closing h2 {
+      font-family:var(--font-display); font-size:var(--text-h2);
+      color:var(--black); font-weight:700; margin-bottom:1rem;
+    }
+    .closing p { font-size:var(--text-body); color:var(--graphite); line-height:1.8; }
+
+    /* Mobile */
+    @media(max-width:768px) {
+      nav.nav {
+        flex-direction:row; align-items:center; justify-content:space-between;
+        padding:1rem 1.25rem; padding-top:calc(1rem + env(safe-area-inset-top));
+      }
+      .nav-mobile-brand { display:block; }
+      .nav-toggle { display:block; }
+      .nav-links {
+        display:none; flex-direction:column; gap:0.75rem;
+        position:absolute; top:100%; left:0; right:0;
+        background:rgba(244,244,245,0.95); backdrop-filter:blur(12px);
+        padding:1.5rem; border-bottom:1px solid var(--border-light);
+      }
+      .nav-links.show { display:flex; }
+      .nav-links a { font-size:0.85rem; }
+      .cover { padding:5rem 1.5rem 2rem; min-height:90vh; }
+      .cover-scatter { display:none; }
+      .stat-strip { grid-template-columns:repeat(2,1fr); }
+      .stat-item:nth-child(2) { border-right:none; }
+      .stat-item:nth-child(3) { border-top:1px solid var(--border-dark); }
+      .stat-item:nth-child(4) { border-top:1px solid var(--border-dark); }
+      .section { padding:3rem 1.25rem 2rem; }
+      .convergence-grid { grid-template-columns:1fr; }
+      .workflow-persona { padding:1.5rem; }
+    }
+    @media(max-width:560px) {
+      .stat-strip { grid-template-columns:1fr; }
+      .stat-item { border-right:none; border-bottom:1px solid var(--border-dark); }
+      .stat-item:last-child { border-bottom:none; }
+      .stat-meta { font-size:0.7rem; }
+    }
+
+    /* Reduced motion */
+    @media(prefers-reduced-motion:reduce) {
+      *, *::before, *::after { transition-duration:0.01ms !important; animation-duration:0.01ms !important; }
+      html { scroll-behavior:auto; }
+    }
+
+    /* Section nav */
+    .section-nav {
+      max-width:var(--max-w-text); margin:2.5rem auto 0; padding:0 2rem;
+      display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap;
+    }
+    .section-nav a {
+      font-family:var(--font-mono); font-size:var(--text-xs);
+      text-transform:uppercase; letter-spacing:0.04em;
+      color:var(--grey); text-decoration:none;
+      transition:color var(--dur) var(--ease);
+    }
+    .section-nav a:hover { color:var(--black); }
+    .section-nav a:focus-visible { outline:2px solid var(--signal); outline-offset:2px; border-radius:var(--radius); }
+
+    /* Scroll reveal */
+    .reveal { opacity:0; transform:translateY(20px); transition:opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-mobile-brand">
+      MH&W<br><span class="mobile-sub">Music Health & Wellness</span>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="plan.html">PLAN</a>
+      <a href="w1-report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="w2-report-backline-case-study.html">CASE STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight-2026-05-01.html" class="current">INSIGHT</a>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- ═══════ COVER ═══════ -->
+    <section class="cover" aria-label="Cover">
+      <div class="cover-scatter" style="top:18%; left:8%; transform:rotate(-12deg); color:var(--spectrum-5);">Academic</div>
+      <div class="cover-scatter" style="top:25%; right:10%; transform:rotate(8deg); color:var(--spectrum-1);">Target Market</div>
+      <div class="cover-scatter" style="bottom:30%; left:12%; transform:rotate(5deg); color:var(--spectrum-4);">Organization</div>
+      <div class="cover-scatter" style="bottom:22%; right:15%; transform:rotate(-6deg); color:var(--spectrum-2);">Government</div>
+      <div class="cover-scatter" style="top:55%; left:5%; transform:rotate(-3deg); color:var(--spectrum-6);">Life Direction</div>
+      <div class="cover-scatter" style="top:60%; right:8%; transform:rotate(10deg); color:var(--signal);">Design</div>
+      <div class="cover-scatter" style="bottom:15%; left:35%; transform:rotate(-8deg); color:var(--spectrum-3);">Critical</div>
+      <div class="cover-inner">
+        <div class="cover-eyebrow">Monthly Research Synthesis · May 2026</div>
+        <h1 class="cover-title">INSIGHT</h1>
+        <div class="cover-subtitle">From evidence to action — the validation imperative</div>
+        <div class="cover-meta">
+          Period: April 13 – May 1, 2026<br>
+          20 wiki articles · 6 reports · 18 analytical personas · 5 workflow voices<br>
+          陳棉 · Music Mental Health NPO + Academic Research
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ STAT STRIP ═══════ -->
+    <div class="stat-strip reveal" style="margin:0 auto; max-width:var(--max-w); margin-left:auto; margin-right:auto; padding:0 2rem;" role="region" aria-label="Key statistics">
+      <div class="stat-item">
+        <div class="stat-num">20</div>
+        <div class="stat-label">Wiki Articles</div>
+        <div class="stat-meta">+2 since last insight</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">138.7</div>
+        <div class="stat-label">per 100K</div>
+        <div class="stat-meta">US male musician suicide rate</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">0</div>
+        <div class="stat-label">Asia-Pacific NPOs</div>
+        <div class="stat-meta">Independent music MH orgs</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">NT$5.63B</div>
+        <div class="stat-label">Policy Window</div>
+        <div class="stat-meta">Taiwan MH plan 2025–2030</div>
+      </div>
+    </div>
+
+    <nav class="section-nav reveal" aria-label="Section navigation">
+      <a href="#s1">01 Knowledge</a>
+      <a href="#s2">02 Trajectory</a>
+      <a href="#s3">03 Direction</a>
+      <a href="#s4">04 Workflow</a>
+    </nav>
+
+    <!-- ═══════ SECTION 1: KNOWLEDGE & FINDINGS ═══════ -->
+    <section class="section reveal" id="s1">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <h2 class="section-title">Knowledge & Findings</h2>
+        <p class="section-subtitle">What the research uncovered this cycle — new evidence, new patterns, new urgency</p>
+      </div>
+
+      <div class="prose">
+        <h3>The Suicide Epidemiology Breakthrough</h3>
+        <p>The single most important addition to the evidence base this month is Musgrave &amp; Lamis (2025), published in <em>Frontiers in Public Health</em>. This paper provides the first comprehensive epidemiological review of musician suicide rates across multiple countries. The headline statistic — US male musicians die by suicide at a rate of 138.7 per 100,000, nearly 10× the general population rate of 14.2 — transforms the advocacy landscape. Previously, music mental health arguments relied on prevalence data (depression rates, anxiety rates, general wellbeing surveys). Now there is mortality data, and it is staggering.</p>
+        <div class="dim-tag academic">Academic</div><div class="dim-tag critical">Critical</div>
+        <p>The critical dimension raises an important caveat: the US occupational classification groups "musicians, singers, and related workers" — a heterogeneous category. The 138.7 figure may include music teachers, sound engineers, and others beyond performing artists. This doesn't diminish the finding, but it does mean the NPO should be precise about which sub-populations carry highest risk. For Taiwan, where the musician-teacher distinction is especially blurred (many performers survive financially through teaching), this segmentation matters.</p>
+
+        <h3>MusiCares: The Institutional Anatomy</h3>
+        <p>The MusiCares case study completed this cycle provides the deepest financial and programmatic analysis of any music MH organization in the wiki. Key insights for Taiwan NPO design:</p>
+        <div class="highlight-box">
+          <p><strong>Scale effect:</strong> MusiCares revenue tripled during COVID ($32.4M) and settled at a permanently higher baseline ($14M vs. pre-pandemic $9M). Crisis events expand donor bases irreversibly. The implication: a Taiwan NPO should be designed to scale rapidly during crisis, not just operate at steady-state.</p>
+        </div>
+        <div class="dim-tag org">Organization</div><div class="dim-tag market">Target Market</div>
+        <p>MusiCares' Wellness in Music Survey — now in its 5th year — has become the field's benchmark dataset. The 2025 finding that 11.4% of respondents reported suicidal ideation (up from 8.3% in 2024, more than double the US national rate) is increasingly cited by other organizations and in policy discussions. For Taiwan, replicating this annual survey model is perhaps the single highest-leverage activity a new NPO could undertake: it generates evidence, legitimacy, media coverage, and advocacy ammunition simultaneously.</p>
+
+        <h3>The AI Intervention Question Mark</h3>
+        <p>Hu &amp; Hou (2026) present an AI-assisted piano intervention study with seemingly impressive results — an RCT with 120 Mandarin-speaking participants showing gains in resilience, mindfulness, and emotional processing. However, the critical reading revealed serious credibility concerns: Ukrainian-affiliated researchers conducting in-person sessions with Mandarin speakers during active military conflict, unexplained study logistics, and no mention of IRB details. This paper should not be cited as evidence without resolving these questions.</p>
+        <div class="dim-tag academic">Academic</div><div class="dim-tag critical">Critical</div>
+        <p>The methodological lesson is broader: as AI-assisted interventions gain popularity, quality filtering (Rule 12) becomes more important, not less. The paper passed journal peer review at Taylor &amp; Francis — journal acceptance alone is insufficient grounds for confidence.</p>
+
+        <h3>The Emerging Institutional Infrastructure</h3>
+        <p>Three developments signal a maturing field: (1) CMA's $3M investment in the first academic center for entertainment industry MH at Belmont University, led by former MusiCares VP Debbie Carroll; (2) the joint Backline–MusiCares–Amber Health touring research study (first multi-org collaborative research); (3) MusiCares × Jed Foundation suicide prevention training (first industry-specific certification). The field is moving from ad-hoc support organizations to systematic institutional infrastructure.</p>
+        <div class="dim-tag org">Organization</div><div class="dim-tag govt">Government</div>
+        <p>For Taiwan's positioning, the Belmont center is particularly significant: it validates the academic-NPO dual-track approach. An NPO that generates research creates a feedback loop that no purely-service organization can match. Taiwan's academic track isn't a detour — it's a strategic differentiator.</p>
+
+        <h3>The Asia-Pacific Silence Continues</h3>
+        <p>The News &amp; Trends scan found zero new independent music MH organizations in Asia-Pacific. South Korea's K-pop trainee contract reforms remain the sole policy-level action in the region. Taiwan's only relevant upcoming event is the MTAT International Conference (June 2026), which is music therapy–focused, not music industry MH–focused. The gap identified in earlier research is widening — Western organizations are scaling rapidly while Asia-Pacific remains unserved.</p>
+        <div class="dim-tag market">Target Market</div><div class="dim-tag life">Life Direction</div>
+      </div>
+    </section>
+
+    <!-- ═══════ SECTION 2: TRAJECTORY ═══════ -->
+    <section class="section reveal" id="s2">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <h2 class="section-title">Trajectory</h2>
+        <p class="section-subtitle">How the research is moving — momentum shifts, emerging patterns, and the gap between knowing and doing</p>
+      </div>
+
+      <div class="prose">
+        <h3>From Documentation to Operationalization</h3>
+        <p>The previous insight (April 13) identified the core tension: the research is excellent at documentation but has done zero primary validation. One cycle later, the diagnosis sharpens. The wiki now contains 20 articles, 6 completed reports (including two full case studies), and a comprehensive evidence base spanning prevalence data, organizational models, and policy analysis. The knowledge infrastructure is mature enough to support decision-making — but no decisions have been made.</p>
+        <div class="dim-tag critical">Critical</div><div class="dim-tag life">Life Direction</div>
+        <p>The critical dimension names this plainly: the project is approaching a transition where additional documentation yields diminishing returns without validation. A 21st wiki article adds less value than a single conversation with a Taiwanese musician who might use the service. This is not a criticism of the work — it's a statement about the current phase.</p>
+
+        <h3>The Evidence Base Has Reached Critical Mass</h3>
+        <p>Consider what the wiki now contains: Musgrave &amp; Lamis provide mortality data (138.7/100K). Soundcheck provides a methodological template for national surveys. Détári provides a psychosocial work environment framework. MusiCares and Backline case studies provide operational models and financial benchmarks. The Kegelaers &amp; Gibney scoping review synthesizes 89 studies. The policy scan confirms Taiwan's NT$5.63B mental health plan has no arts-sector component.</p>
+        <div class="dim-tag academic">Academic</div><div class="dim-tag org">Organization</div>
+        <p>This evidence base is sufficient to: (1) write a compelling NPO founding proposal, (2) design a Taiwan musician wellbeing survey, (3) approach potential partners with data-backed arguments, (4) frame a graduate thesis proposal. What it is not sufficient for: confirming that Taiwanese musicians would use such a service, or that the specific service model would fit Taiwan's cultural context.</p>
+
+        <h3>The Two-Track Clarification</h3>
+        <p>The Project Plan envisions NPO work through 2027 followed by academic research 2028–2031. But the research so far has served the academic track primarily (comprehensive literature review, systematic evidence synthesis). The NPO track needs different outputs: stakeholder conversations, survey design, funding pathway mapping, partnership proposals.</p>
+        <div class="dim-tag life">Life Direction</div><div class="dim-tag design">Design</div>
+        <p>The momentum signal is ambiguous: the project is moving fast in knowledge production but hasn't started moving on the validation work the April insight flagged as urgent. The decision gates proposed in April (Gate 1: primary research by May 15, Gate 2: funding landscape by June 15, Gate 3: NPO launch readiness by July 31) have now arrived — Gate 1's deadline is in two weeks, and no primary research has begun.</p>
+
+        <h3>Spotify's Role as Field Accelerator</h3>
+        <p>A cross-cutting trajectory shift: Spotify has emerged as the primary infrastructure funder for music mental health, sponsoring B-LINE ($3.5M), Heart &amp; Soul (global resource hub), and the MusiCares × JED Foundation training. This transforms Spotify from a music distribution platform into a mental health infrastructure partner. For Taiwan, Spotify's existing presence (Spotify Taiwan is active) could represent a more natural initial partner than replicating US grassroots fundraising models.</p>
+        <div class="dim-tag org">Organization</div><div class="dim-tag govt">Government</div>
+      </div>
+    </section>
+
+    <!-- ═══════ SECTION 3: DIRECTION REFLECTIONS ═══════ -->
+    <section class="section reveal" id="s3">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <h2 class="section-title">Direction Reflections</h2>
+        <p class="section-subtitle">Where to go next — strategic choices, open questions, and the validation imperative</p>
+      </div>
+
+      <div class="prose">
+        <h3>The May Imperative: Start Talking to People</h3>
+        <p>The convergence across all seven analytical dimensions is unusually strong this month: the research phase has produced what it can produce without primary data. Every additional literature search, case study, or news scan adds incremental value. What would add transformational value is one conversation with a Taiwanese musician about their mental health experience.</p>
+        <div class="highlight-box">
+          <p><strong>Proposed action:</strong> By May 31, have 5 informal conversations with people in Taiwan's music industry — performers, teachers, venue operators, label staff. Not a formal survey yet. Just listening. Record themes. Compare against the evidence base predictions.</p>
+        </div>
+        <div class="dim-tag critical">Critical</div><div class="dim-tag market">Target Market</div><div class="dim-tag life">Life Direction</div>
+
+        <h3>Reframe: The Survey as Launch Vehicle</h3>
+        <p>The MusiCares Wellness Survey model — replicated for Taiwan — could serve as the NPO's founding act. It generates evidence, media attention, policy leverage, and industry relationships simultaneously. Rather than thinking of the survey as a research step followed by an NPO launch, consider the survey as the NPO's first public action. Frame it as: "We are the Taiwan Music Industry Mental Health Initiative. Our first project: understanding what musicians in Taiwan actually need."</p>
+        <div class="dim-tag org">Organization</div><div class="dim-tag academic">Academic</div>
+        <p>This reframing solves the two-track tension: the survey serves both NPO (validation, visibility, partnerships) and academic (primary data for thesis) tracks simultaneously. Soundcheck (Canada) provides an excellent methodological template — 1,216 respondents, adapted from general MH instruments to music-specific contexts. The academic track benefits from a novel dataset; the NPO track benefits from credibility.</p>
+
+        <h3>The Mandopop Question Requires In-Market Insight</h3>
+        <p>The previous insight flagged the Mandopop blindspot — the research treats "musicians" generically while Taiwan's music industry operates under fundamentally different structures (idol culture, fan economy, agency contracts, Mandarin-language market dynamics). This gap cannot be addressed through literature review because there is no literature. It requires talking to people in Taiwan's Mandopop ecosystem.</p>
+        <div class="dim-tag market">Target Market</div><div class="dim-tag critical">Critical</div>
+
+        <h3>Funding Pathway Mapping: Still Unmapped</h3>
+        <p>The April insight proposed a one-page funder landscape matrix covering 文化部, 國藝會, municipal 文化局, Ministry of Health and Welfare, and corporate sponsors. This has not been created. The Research report confirmed that 國藝會 2026 categories have no mental health track, and 文化部 grants don't cover music worker MH directly. This absence is information — it means the NPO would need to create the category, not apply to an existing one.</p>
+        <div class="dim-tag govt">Government</div><div class="dim-tag org">Organization</div>
+        <p>The Spotify sponsorship model (Heart &amp; Soul, B-LINE) suggests a potentially more viable path than government grants for initial funding: approach Spotify Taiwan and KKBOX with a partnership proposal modeled on Heart &amp; Soul but adapted for the Taiwan market.</p>
+      </div>
+
+      <div class="prose">
+        <h3>Convergence Signals</h3>
+      </div>
+      <div class="convergence-grid" style="max-width:var(--max-w-text); margin-left:auto; margin-right:auto;">
+        <div class="convergence-card">
+          <div class="cc-num">1</div>
+          <div class="cc-title">Validation is now the bottleneck, not knowledge</div>
+          <div class="cc-body">All 7 dimensions converge: the evidence base is sufficient for action. Continuing to add literature without primary validation yields diminishing returns. The project needs voices from Taiwan's music industry, not more global evidence.</div>
+          <div style="margin-top:0.75rem;"><div class="dim-tag academic">Academic</div><div class="dim-tag market">Target Market</div><div class="dim-tag critical">Critical</div><div class="dim-tag life">Life Direction</div></div>
+        </div>
+        <div class="convergence-card">
+          <div class="cc-num">2</div>
+          <div class="cc-title">The survey-as-launch-vehicle reframe</div>
+          <div class="cc-body">A Taiwan musician wellbeing survey can serve both tracks simultaneously: primary data for thesis, founding credibility for NPO, media hook for visibility. MusiCares and Soundcheck provide proven templates.</div>
+          <div style="margin-top:0.75rem;"><div class="dim-tag org">Organization</div><div class="dim-tag academic">Academic</div><div class="dim-tag design">Design</div></div>
+        </div>
+        <div class="convergence-card">
+          <div class="cc-num">3</div>
+          <div class="cc-title">Suicide epidemiology transforms the urgency argument</div>
+          <div class="cc-body">Musgrave &amp; Lamis mortality data (138.7/100K) gives the advocacy movement something prevalence data never could: a body count. This changes how funders, government, and media respond.</div>
+          <div style="margin-top:0.75rem;"><div class="dim-tag academic">Academic</div><div class="dim-tag govt">Government</div><div class="dim-tag org">Organization</div></div>
+        </div>
+        <div class="convergence-card">
+          <div class="cc-num">4</div>
+          <div class="cc-title">Platform partnerships over grassroots fundraising</div>
+          <div class="cc-body">Spotify's emergence as infrastructure funder (B-LINE, Heart &amp; Soul, JED partnership) suggests a faster path to initial resources than replicating US individual-giving models in Taiwan. Spotify Taiwan and KKBOX are natural targets.</div>
+          <div style="margin-top:0.75rem;"><div class="dim-tag org">Organization</div><div class="dim-tag market">Target Market</div><div class="dim-tag govt">Government</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ SECTION 4: WORKFLOW & COLLABORATION ═══════ -->
+    <section class="section reveal" id="s4">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <h2 class="section-title">Workflow &amp; Collaboration</h2>
+        <p class="section-subtitle">How we work together — concrete proposals grounded in health check findings and project data</p>
+      </div>
+
+      <!-- Workflow Optimizer -->
+      <div class="workflow-persona">
+        <div class="wp-header">
+          <div class="wp-icon" style="background:var(--signal-bg); color:var(--signal);">&#9881;</div>
+          <div>
+            <div class="wp-name">Workflow Optimizer</div>
+            <div class="wp-dim">Organization Dimension</div>
+          </div>
+        </div>
+        <div class="wp-stance">"The monthly cadence works. The problem isn't frequency — it's the absence of a production track alongside the research track."</div>
+        <div class="wp-body">
+          <p>The April 21 schedule consolidation (moving from mixed weekly/biweekly/monthly to a clean monthly cadence distributed across the month) was the right call. Current schedule: Insight (day 1), Wiki health check (day 5), Research critical papers (day 10), Rules health check (day 12), Case Study (day 17), Mixing wiki health check (day 19), News &amp; Trends (day 24), Monthly tut (day 26). This gives 陳棉 breathing room between outputs.</p>
+          <p>However, the schedule is entirely research-oriented. None of the 8 monthly tasks produce NPO-track outputs (stakeholder outreach, survey design, partnership drafts). The schedule needs a production slot — not another automated report, but a concrete NPO action item with a deliverable.</p>
+        </div>
+        <div class="wp-proposal">
+          <div class="wp-proposal-label">&#9654; Proposal</div>
+          <p>Add <strong>"NPO Action Item" on day 15</strong> to the monthly schedule. This slot produces one concrete NPO-track deliverable per month: Month 1 (May): 5 informal musician conversations documented. Month 2 (June): Taiwan musician survey draft (adapted from Soundcheck). Month 3 (July): Partnership outreach draft (Spotify Taiwan / KKBOX). This creates accountability for the validation work without adding research burden.</p>
+        </div>
+      </div>
+
+      <!-- Research Methodologist -->
+      <div class="workflow-persona">
+        <div class="wp-header">
+          <div class="wp-icon" style="background:rgba(122,174,212,0.15); color:var(--spectrum-5);">&#128300;</div>
+          <div>
+            <div class="wp-name">Research Methodologist</div>
+            <div class="wp-dim">Academic Dimension</div>
+          </div>
+        </div>
+        <div class="wp-stance">"The wiki health check found 2 uncompiled raw files persisting across two check cycles. The pipeline works — the intake bottleneck doesn't."</div>
+        <div class="wp-body">
+          <p>The April 11 wiki health check flagged <code>bergson-et-al-2023</code> and <code>JWF Annual Report 2025</code> as uncompiled raw files. Two health check cycles later, they remain uncompiled. This isn't a system failure — the health check correctly surfaces the gap each time. It's an execution gap: the health check diagnoses, but nothing in the workflow ensures the diagnosis leads to action.</p>
+          <p>Similarly, 3 paper articles (loewy_batiste_2026, pan_2026, grapp_2026) lack local raw copies — requiring user action (institutional access/VPN) that hasn't happened. The Rules health check (April 18) found 2 broken paths, 14 stale items, and suggested the Visual Artist rule text still says "6" team members instead of "7" (post-expansion). These are small fixes that have accumulated because there's no "fix pass" in the workflow.</p>
+          <p>Source quality standards (Rule 12) are working well — the Hu &amp; Hou (2026) critical reading correctly identified credibility red flags that journal peer review missed. The pipeline from PubMed → quality check → wiki compilation is solid. What's missing is the reverse pipeline: health check findings → action items → completion tracking.</p>
+        </div>
+        <div class="wp-proposal">
+          <div class="wp-proposal-label">&#9654; Proposal</div>
+          <p><strong>Add a "Fix Pass" to the day after each health check.</strong> Day 6 (after wiki health check on day 5): compile uncompiled raw files, fix broken links, update stale frontmatter. Day 13 (after rules health check on day 12): apply suggested rule fixes, update naming conventions. The fix pass should take 30–60 minutes and closes the diagnosis → action loop. Track completion: if a fix pass is skipped, the next health check should flag it.</p>
+        </div>
+      </div>
+
+      <!-- Strategic Mentor -->
+      <div class="workflow-persona">
+        <div class="wp-header">
+          <div class="wp-icon" style="background:rgba(184,169,212,0.15); color:var(--spectrum-6);">&#127919;</div>
+          <div>
+            <div class="wp-name">Strategic Mentor</div>
+            <div class="wp-dim">Life Direction Dimension</div>
+          </div>
+        </div>
+        <div class="wp-stance">"The April insight proposed three decision gates. Gate 1 is due in two weeks. Are you ready to meet it, or should we honestly reset the timeline?"</div>
+        <div class="wp-body">
+          <p>The April insight proposed: Gate 1 (by May 15) — 30–50 musician survey completed and analyzed, 5–10 stakeholder interviews completed. Gate 2 (by June 15) — funder matrix completed, academic framing finalized. Gate 3 (by July 31) — NPO launch readiness assessment.</p>
+          <p>Gate 1 is 14 days away. No survey has been designed. No interviews have been conducted. No stakeholder contacts have been identified. This is not a criticism — the monthly cadence was only established on April 21, and the infrastructure work has been genuinely necessary. But it means the gate timeline was aspirational, not operational.</p>
+          <p>The uncomfortable observation: infrastructure-building can function as productive procrastination. The wiki, the design system, the deploy pipeline, the health checks — all are excellent and necessary. They also all defer the moment of contact with real people who might say "no, we don't need this" or "yes, but not the way you're imagining." The research is building a beautiful container. The question is whether the container is a preparation or a substitution for the thing that goes inside it.</p>
+        </div>
+        <div class="wp-proposal">
+          <div class="wp-proposal-label">&#9654; Proposal</div>
+          <p><strong>Reset the gates honestly.</strong> New Gate 1 (by June 30): 5 informal conversations with people in Taiwan's music industry — not a formal survey, just listening. Document themes. Compare against evidence base predictions. New Gate 2 (by August 31): Survey instrument designed and pilot-tested with 10 respondents. New Gate 3 (by October 31): Full survey deployed (target: 100+ respondents) + funder landscape mapped. This timeline is slower but achievable. The old timeline set the project up to fail and then feel bad about it.</p>
+        </div>
+      </div>
+
+      <!-- Critical Auditor -->
+      <div class="workflow-persona">
+        <div class="wp-header">
+          <div class="wp-icon" style="background:rgba(212,201,122,0.15); color:#9e9640;">&#128270;</div>
+          <div>
+            <div class="wp-name">Critical Auditor</div>
+            <div class="wp-dim">Critical Dimension</div>
+          </div>
+        </div>
+        <div class="wp-stance">"Last month proposed 8 specific actions. How many were executed? Let's count."</div>
+        <div class="wp-body">
+          <p><strong>April Insight Proposals vs. Execution:</strong></p>
+          <div class="table-wrap">
+            <table>
+              <caption style="text-align:left; font-family:var(--font-mono); font-size:var(--text-xs); text-transform:uppercase; letter-spacing:0.04em; color:var(--grey); padding:0.5rem 0; caption-side:top;">April 2026 Insight — Proposals vs. Execution Scorecard</caption>
+              <thead><tr><th>Proposal</th><th>Status</th><th>Evidence</th></tr></thead>
+              <tbody>
+                <tr><td>30-50 musician survey by May 15</td><td style="color:var(--spectrum-1);">&#10008; Not started</td><td>No survey instrument exists</td></tr>
+                <tr><td>5-10 stakeholder interviews by May 15</td><td style="color:var(--spectrum-1);">&#10008; Not started</td><td>No contacts identified</td></tr>
+                <tr><td>Cross-report linking system in deploy HTML</td><td style="color:var(--spectrum-1);">&#10008; Not built</td><td>Reports remain islands</td></tr>
+                <tr><td>Funder landscape matrix</td><td style="color:var(--spectrum-1);">&#10008; Not created</td><td>April research confirmed no existing MH grant category, but no matrix built</td></tr>
+                <tr><td>Stakeholder readiness map</td><td style="color:var(--spectrum-1);">&#10008; Not created</td><td>No stakeholder tracking exists</td></tr>
+                <tr><td>Cap infrastructure, redirect all labor to validation</td><td style="color:var(--spectrum-3);">&#9873; Partially</td><td>Monthly cadence established; MusiCares case study completed; but design/deploy work continued</td></tr>
+                <tr><td>Address Mandopop blindspot explicitly</td><td style="color:var(--spectrum-1);">&#10008; Not addressed</td><td>No Mandopop-specific research conducted</td></tr>
+                <tr><td>Define initial NPO scope (which musician populations)</td><td style="color:var(--spectrum-1);">&#10008; Not defined</td><td>Research remains generic "musicians"</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><strong>Execution rate: 0.5 out of 8 (6%).</strong> The infrastructure capping was partially achieved (monthly cadence is real progress). Everything else was not attempted. This isn't a process failure — these were aspirational proposals from a monthly insight, not committed sprint items. But the pattern is worth naming: the workflow produces excellent research outputs while validation proposals accumulate unexecuted.</p>
+          <p><strong>Meta-work ratio:</strong> PROJECT_RULES.md is now 843 lines. Wiki contains 20 articles. The rules-to-articles ratio (843:20 ≈ 42 lines of governance per article) suggests governance is outpacing production. This isn't inherently bad — robust governance prevents errors — but it's a signal to monitor.</p>
+        </div>
+        <div class="wp-proposal">
+          <div class="wp-proposal-label">&#9654; Proposal</div>
+          <p><strong>Introduce a "Proposals Executed" metric in each monthly insight.</strong> Section 4 of the next insight must open with a scorecard: "Last month proposed N items. X were executed, Y were deferred, Z were abandoned." This creates a feedback loop. If proposals are consistently not executed, either the proposals are unrealistic or the workflow doesn't support execution. Either way, it needs to be visible. Additionally: <strong>limit Section 4 proposals to 3 maximum</strong> — fewer proposals, higher execution rate.</p>
+        </div>
+      </div>
+
+      <!-- Design Process Lead -->
+      <div class="workflow-persona">
+        <div class="wp-header">
+          <div class="wp-icon" style="background:rgba(102,103,171,0.12); color:var(--signal);">&#9998;</div>
+          <div>
+            <div class="wp-name">Design Process Lead</div>
+            <div class="wp-dim">Design Dimension</div>
+          </div>
+        </div>
+        <div class="wp-stance">"The 8-role review works. But running it on every HTML change is unsustainable — we need a tiered system."</div>
+        <div class="wp-body">
+          <p>The 8-role design team review (Section 7) has produced genuinely higher creative quality — the insight-2026-04-13 Kinetic Zine format was a direct product of this process. But the full review takes significant context and effort. Running it on every deploy HTML change creates a process bottleneck that slows iteration.</p>
+          <p>The Rules health check (April 18) found the design system is stable at v6.1 — no token changes, no typography changes, no new components needed. This stability means most new reports are applying an existing system, not inventing a new one. The creative exploration that the full review enables is most valuable when establishing a new design direction, not when producing content within an established framework.</p>
+        </div>
+        <div class="wp-proposal">
+          <div class="wp-proposal-label">&#9654; Proposal</div>
+          <p><strong>Implement three review tiers:</strong></p>
+          <p><strong>Tier 1 — Full 8-role review:</strong> New page creation, major redesigns, new creative direction. (Example: this insight report, which uses a different layout than April's.)</p>
+          <p><strong>Tier 2 — Light 3-role review (Web Engineer + UI Designer + Content Strategist):</strong> New content within existing design patterns, CSS tweaks that affect layout. (Example: a new case study using the established report template.)</p>
+          <p><strong>Tier 3 — Self-review (deploy + dual-viewport check only):</strong> Text-only changes, minor bug fixes, metadata updates. (Example: updating nav links, fixing a typo.)</p>
+          <p>This preserves the full review's quality benefits for moments where it matters most, while unblocking routine work.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ CLOSING ═══════ -->
+    <div class="closing reveal">
+      <div class="closing-line"></div>
+      <h2>The Question This Month</h2>
+      <p>April's question was: "Which question actually drives this work?" May's question is sharper: <strong>"Who in Taiwan have you talked to?"</strong> The evidence base is ready. The infrastructure is built. The next insight should be able to answer this question with names, themes, and surprises. Everything else — the wiki, the design system, the deploy pipeline — exists to serve that conversation, not replace it.</p>
+    </div>
+
+  </main>
+
+  <script>
+    // Nav toggle
+    (function(){
+      var toggle = document.querySelector('.nav-toggle');
+      var links = document.querySelector('.nav-links');
+      if(toggle && links) {
+        toggle.addEventListener('click', function(){
+          var open = toggle.classList.toggle('open');
+          links.classList.toggle('show');
+          toggle.setAttribute('aria-expanded', open);
+        });
+      }
+    })();
+
+    // Scroll reveal with stagger
+    (function(){
+      var els = document.querySelectorAll('.reveal');
+      if(!els.length) return;
+      var idx = 0;
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){
+            var delay = (idx++) * 80;
+            e.target.style.transitionDelay = delay + 'ms';
+            e.target.classList.add('visible');
+            obs.unobserve(e.target);
+          }
+        });
+      }, {threshold:0.1});
+      els.forEach(function(el){ obs.observe(el); });
+    })();
+  </script>
+</body>
+</html>
