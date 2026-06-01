@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="no-js">
+<script>document.documentElement.classList.replace('no-js','js');</script>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>INSIGHT 06 — The Silent Month</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102,103,171,0.08);
+      --signal-glow: rgba(102,103,171,0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+      --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font-hand: 'Caveat', cursive;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 660px;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--snow);
+      color: var(--graphite);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+    }
+    ::selection { background: var(--signal); color: white; }
+
+    .skip-nav {
+      position:absolute; top:-40px; left:0;
+      background:var(--signal); color:white;
+      padding:8px 16px; text-decoration:none;
+      z-index:999; border-radius:var(--radius);
+      font-size:var(--text-sm); font-weight:600;
+    }
+    .skip-nav:focus { top:0; }
+
+    /* Nav */
+    nav.nav {
+      position:fixed; top:0; left:0; right:0; z-index:100;
+      display:grid; grid-template-columns:auto 1fr;
+      align-items:center; padding:1.25rem 2rem;
+      background:rgba(244,244,245,0.85); backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border-light);
+    }
+    .brand-mark {
+      font-family:var(--font-display); font-weight:800;
+      font-size:0.85rem; color:var(--black); letter-spacing:0.08em;
+      text-transform:uppercase;
+    }
+    .nav-links { display:flex; gap:2.5rem; justify-content:flex-end; }
+    .nav-links a {
+      font-family:var(--font-mono); font-size:0.75rem;
+      text-transform:uppercase; letter-spacing:0.08em;
+      color:var(--graphite); text-decoration:none; transition:color var(--dur) var(--ease);
+    }
+    .nav-links a:hover { color:var(--black); }
+    .nav-links a.current { color:var(--black); }
+    .nav-links a:focus-visible { outline:2px solid var(--signal); outline-offset:2px; border-radius:var(--radius); }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:0.5rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:0.2em; }
+    .nav-toggle {
+      display:none; background:none; border:none; cursor:pointer;
+      padding:0.5rem; z-index:101; -webkit-tap-highlight-color:transparent;
+    }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity:0; }
+    .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+
+    /* Cover — restrained, mostly empty */
+    .cover {
+      min-height:100vh; display:flex; align-items:center; justify-content:center;
+      padding:6rem 2rem 3rem; position:relative; overflow:hidden;
+    }
+    .cover::before {
+      content:''; position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse at 50% 110%, rgba(102,103,171,0.10) 0%, transparent 55%),
+        radial-gradient(ellipse at 20% 0%, rgba(212,121,156,0.06) 0%, transparent 40%);
+      z-index:0;
+    }
+    .cover-inner { position:relative; z-index:1; text-align:center; max-width:800px; }
+    .cover-eyebrow {
+      font-family:var(--font-mono); font-size:var(--text-xs);
+      color:var(--grey); text-transform:uppercase; letter-spacing:0.18em;
+      margin-bottom:2rem;
+    }
+    .cover-title {
+      font-family:var(--font-display); font-size:var(--text-hero);
+      font-weight:800; color:var(--black); letter-spacing:-0.02em;
+      margin-bottom:0.5rem; line-height:0.95;
+    }
+    .cover-subtitle {
+      font-family:var(--font-hand); font-size:clamp(1.5rem,3vw,2.2rem);
+      color:var(--signal); margin-bottom:2.5rem; font-weight:500;
+      line-height:1.3;
+    }
+    .cover-meta {
+      font-family:var(--font-mono); font-size:var(--text-sm);
+      color:var(--grey); line-height:2;
+    }
+    /* The single mark — a thin horizontal rule that visually shows "silence" */
+    .silence-mark {
+      width:80px; height:1px; margin:3rem auto 0;
+      background:linear-gradient(90deg, transparent, var(--graphite), transparent);
+      opacity:0.6;
+    }
+
+    /* Stat Strip */
+    .stat-strip {
+      display:grid; grid-template-columns:repeat(4,1fr);
+      max-width:var(--max-w); margin:0 auto;
+      background:var(--black); border-radius:var(--radius-lg);
+      overflow:hidden;
+    }
+    .stat-item {
+      padding:1.5rem 1.25rem; text-align:center;
+      border-right:1px solid var(--border-dark);
+    }
+    .stat-item:last-child { border-right:none; }
+    .stat-num {
+      font-family:var(--font-display); font-size:var(--text-h2);
+      font-weight:700; color:var(--white); margin-bottom:0.25rem;
+    }
+    .stat-num.zero { color:var(--spectrum-1); }
+    .stat-label {
+      font-family:var(--font-mono); font-size:var(--text-xs);
+      text-transform:uppercase; letter-spacing:0.06em; color:var(--grey-light);
+    }
+    .stat-meta {
+      font-family:var(--font-mono); font-size:0.65rem;
+      color:var(--grey); margin-top:0.35rem; text-transform:uppercase;
+      letter-spacing:0.04em;
+    }
+
+    /* Section */
+    .section {
+      max-width:var(--max-w); margin:0 auto;
+      padding:5rem 2rem 3rem;
+    }
+    .section-header {
+      margin-bottom:2.5rem; padding-bottom:1.5rem;
+      border-bottom:1px solid transparent;
+      border-image:linear-gradient(90deg, var(--silver) 0%, transparent 100%) 1;
+    }
+    .section-num {
+      font-family:var(--font-hand); font-size:3rem;
+      color:var(--signal); font-weight:700;
+      line-height:1; margin-bottom:0.25rem; opacity:0.5;
+    }
+    .section-title {
+      font-family:var(--font-display); font-size:var(--text-h1);
+      color:var(--black); font-weight:700; margin-bottom:0.5rem;
+    }
+    .section-subtitle {
+      font-family:var(--font-body); font-size:var(--text-body);
+      color:var(--grey); max-width:var(--max-w-text);
+    }
+
+    /* Section navigator */
+    .section-nav {
+      max-width:var(--max-w); margin:0 auto; padding:2.5rem 2rem;
+      display:flex; gap:2rem; flex-wrap:wrap; justify-content:center;
+    }
+    .section-nav a {
+      font-family:var(--font-mono); font-size:var(--text-xs);
+      text-transform:uppercase; letter-spacing:0.08em;
+      color:var(--graphite); text-decoration:none;
+      padding:0.5rem 1rem; border:1px solid var(--border-light);
+      border-radius:var(--radius); transition:all var(--dur) var(--ease);
+      background:var(--white);
+    }
+    .section-nav a:hover { background:var(--signal); color:white; border-color:var(--signal); }
+    .section-nav a:focus-visible { outline:2px solid var(--signal); outline-offset:2px; }
+
+    /* Prose */
+    .prose { max-width:var(--max-w-text); margin:0 auto 2rem; }
+    .prose h3 {
+      font-family:var(--font-display); font-size:var(--text-h3);
+      color:var(--black); font-weight:600; margin:2.5rem 0 1rem;
+    }
+    .prose p {
+      font-family:var(--font-body); font-size:var(--text-body);
+      color:var(--graphite); line-height:1.8; margin-bottom:1.25rem;
+    }
+    .prose strong { color:var(--charcoal); }
+    .prose em { color:var(--charcoal); }
+    .prose .quiet-box {
+      background:transparent; border-left:2px solid var(--silver);
+      padding:0.5rem 1.25rem; margin:1.5rem 0;
+      color:var(--grey);
+    }
+    .prose .quiet-box p { margin-bottom:0; color:var(--grey); font-style:italic; }
+    .prose .highlight-box {
+      background:var(--signal-bg); border-left:3px solid var(--signal);
+      padding:1.25rem 1.5rem; border-radius:0 var(--radius-lg) var(--radius-lg) 0;
+      margin:1.5rem 0;
+    }
+    .prose .highlight-box p { margin-bottom:0; color:var(--charcoal); }
+
+    /* Options grid (Section 3) */
+    .options-grid {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:1rem;
+      max-width:var(--max-w-text); margin:2rem auto;
+    }
+    .option-card {
+      background:var(--white); border:1px solid var(--border-light);
+      border-radius:var(--radius-lg); padding:1.5rem;
+      transition:all var(--dur) var(--ease);
+    }
+    .option-card:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,0.06); border-color:var(--signal); }
+    .option-num {
+      font-family:var(--font-hand); font-size:2.2rem; color:var(--signal);
+      font-weight:700; line-height:1; opacity:0.5; margin-bottom:0.5rem;
+    }
+    .option-title {
+      font-family:var(--font-display); font-size:var(--text-sm);
+      font-weight:600; color:var(--black); margin-bottom:0.5rem;
+      text-transform:uppercase; letter-spacing:0.04em;
+    }
+    .option-body { font-size:var(--text-sm); color:var(--graphite); line-height:1.7; }
+
+    /* Section 4 Workflow personas */
+    .workflow-persona {
+      background:var(--white); border:1px solid var(--border-light);
+      border-left:4px solid var(--signal);
+      border-radius:0 var(--radius-lg) var(--radius-lg) 0;
+      padding:2rem; margin-bottom:2rem;
+      transition:border-left-color 0.3s var(--ease);
+    }
+    .workflow-persona[data-color="2"] { border-left-color:var(--spectrum-4); }
+    .workflow-persona[data-color="3"] { border-left-color:var(--spectrum-6); }
+    .workflow-persona[data-color="4"] { border-left-color:var(--spectrum-3); }
+    .workflow-persona[data-color="5"] { border-left-color:var(--spectrum-1); }
+    .wp-header { display:flex; align-items:baseline; gap:0.75rem; margin-bottom:0.5rem; flex-wrap:wrap; }
+    .wp-name { font-family:var(--font-display); font-size:var(--text-h3); font-weight:700; color:var(--black); }
+    .wp-dim { font-family:var(--font-mono); font-size:var(--text-xs); text-transform:uppercase; letter-spacing:0.05em; color:var(--grey); }
+    .wp-lens {
+      font-family:var(--font-mono); font-size:var(--text-xs); color:var(--grey);
+      text-transform:uppercase; letter-spacing:0.05em; margin-bottom:1rem;
+    }
+    .wp-body { font-size:var(--text-sm); color:var(--graphite); line-height:1.8; }
+    .wp-body p { margin-bottom:0.75rem; }
+    .wp-body strong { color:var(--charcoal); }
+    .wp-proposal {
+      background:var(--signal-bg); border-radius:var(--radius);
+      padding:1rem 1.25rem; margin-top:1rem;
+    }
+    .wp-proposal-label {
+      font-family:var(--font-mono); font-size:var(--text-xs);
+      text-transform:uppercase; letter-spacing:0.06em; color:var(--signal);
+      margin-bottom:0.5rem;
+    }
+    .wp-proposal p { font-size:var(--text-sm); color:var(--charcoal); line-height:1.7; margin-bottom:0.5rem; }
+    .wp-no-proposal {
+      font-family:var(--font-hand); font-size:1.2rem; color:var(--graphite);
+      padding:0.75rem 0; border-top:1px dashed var(--border-light); margin-top:1rem;
+    }
+    /* Kill criterion — visually distinct from a proposal: dark, no purple */
+    .wp-kill {
+      background:var(--off-black); color:var(--white);
+      border-radius:var(--radius); padding:1rem 1.25rem; margin-top:1rem;
+      border-left:3px solid var(--spectrum-1);
+    }
+    .wp-kill-label {
+      font-family:var(--font-mono); font-size:var(--text-xs);
+      text-transform:uppercase; letter-spacing:0.08em; color:var(--spectrum-1);
+      margin-bottom:0.5rem;
+    }
+    .wp-kill p { font-size:var(--text-sm); color:var(--silver); line-height:1.7; margin-bottom:0; }
+    .wp-kill p em { color:var(--white); font-style:normal; font-weight:600; }
+    /* SR-only utility */
+    .sr-only {
+      position:absolute; width:1px; height:1px; padding:0; overflow:hidden;
+      clip:rect(0,0,0,0); white-space:nowrap; border:0;
+    }
+
+    /* Scorecard table */
+    .table-wrap { overflow-x:auto; margin:1.5rem 0; max-width:var(--max-w-text); margin-left:auto; margin-right:auto; }
+    table {
+      width:100%; border-collapse:collapse;
+      font-size:var(--text-sm); font-family:var(--font-body);
+    }
+    thead th {
+      background:var(--charcoal); color:var(--white);
+      font-family:var(--font-mono); font-size:var(--text-xs);
+      text-transform:uppercase; letter-spacing:0.04em;
+      padding:0.65rem 1rem; text-align:left; font-weight:400;
+    }
+    tbody td { padding:0.65rem 1rem; border-bottom:1px solid var(--border-light); color:var(--graphite); vertical-align:top; }
+    tbody tr:nth-child(even) { background:rgba(0,0,0,0.02); }
+    tbody td.status-x { color:var(--spectrum-1); font-family:var(--font-mono); font-weight:700; }
+
+    /* Closing */
+    .closing {
+      max-width:var(--max-w-text); margin:0 auto;
+      padding:4rem 2rem 6rem; text-align:center;
+    }
+    .closing-line {
+      width:60px; height:1px; margin:0 auto 2rem;
+      background:linear-gradient(90deg, transparent, var(--signal), transparent);
+    }
+    .closing .q-month {
+      font-family:var(--font-mono); font-size:var(--text-xs);
+      text-transform:uppercase; letter-spacing:0.08em; color:var(--grey);
+      margin-bottom:0.35rem;
+    }
+    .closing .q-text {
+      font-family:var(--font-display); font-size:var(--text-h3);
+      color:var(--graphite); margin-bottom:1.25rem; font-weight:500;
+    }
+    .closing .q-text.current {
+      font-family:var(--font-display); font-size:var(--text-h2);
+      color:var(--black); font-weight:700; margin:1.5rem 0 2.5rem;
+    }
+    .closing .q-text.current::before { content:'"'; color:var(--signal); }
+    .closing .q-text.current::after { content:'"'; color:var(--signal); }
+    .closing p {
+      font-family:var(--font-hand); font-size:1.4rem; color:var(--charcoal);
+      line-height:1.5; margin-top:2rem;
+    }
+
+    /* Reveal */
+    .reveal { opacity:0; transform:translateY(20px); transition:opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity:1; transform:none; transition:none; }
+      html { scroll-behavior:auto; }
+    }
+
+    /* Mobile */
+    @media (max-width:768px) {
+      nav.nav {
+        display:flex; flex-direction:row; align-items:center; justify-content:space-between;
+        padding:1rem 1.25rem; padding-top:calc(1rem + env(safe-area-inset-top));
+      }
+      .brand-mark { display:none; }
+      .nav-mobile-brand { display:block; }
+      .nav-toggle { display:block; }
+      .nav-links {
+        display:none; flex-direction:column; gap:0.75rem;
+        position:absolute; top:100%; left:0; right:0;
+        background:rgba(244,244,245,0.95); backdrop-filter:blur(12px);
+        padding:1.5rem; border-bottom:1px solid var(--border-light);
+      }
+      .nav-links.show { display:flex; }
+      .nav-links a { font-size:0.85rem; }
+      .options-grid { grid-template-columns:1fr; }
+      .section { padding:3.5rem 1.25rem 2rem; }
+      .stat-strip { padding:0 1.25rem; }
+    }
+    @media (max-width:560px) {
+      .stat-strip { grid-template-columns:repeat(2,1fr); }
+      .stat-item:nth-child(1), .stat-item:nth-child(2) { border-bottom:1px solid var(--border-dark); }
+      .stat-item:nth-child(2) { border-right:none; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <nav class="nav" aria-label="Site navigation">
+    <div class="brand-mark">MH&amp;W</div>
+    <div class="nav-mobile-brand">
+      MH&amp;W<br><span class="mobile-sub">Music Health &amp; Wellness</span>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="plan.html">PLAN</a>
+      <a href="w1-report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="w2-report-backline-case-study.html">CASE STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight-2026-06-01.html" class="current">INSIGHT</a>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- COVER -->
+    <section class="cover" aria-label="Cover">
+      <div class="cover-inner">
+        <div class="cover-eyebrow">Monthly Research Synthesis · June 2026</div>
+        <h1 class="cover-title">INSIGHT</h1>
+        <div class="cover-subtitle">The silent month — when the schedule keeps running and the work stops</div>
+        <div class="cover-meta">
+          Period: May 1 – June 1, 2026<br>
+          20 wiki articles (no change) · 6 reports (no change) · 0 new sessions<br>
+          陳棉 · Music Mental Health NPO + Academic Research
+        </div>
+        <div class="silence-mark" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- STAT STRIP -->
+    <div class="stat-strip reveal" role="region" aria-label="Cycle statistics">
+      <div class="stat-item">
+        <div class="stat-num zero">0</div>
+        <div class="stat-label">New Articles</div>
+        <div class="stat-meta">Since May 1</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num zero">0</div>
+        <div class="stat-label">New Reports</div>
+        <div class="stat-meta">Excl. this insight</div>
+      </div>
+      <div class="stat-item" aria-label="Conversations completed: zero out of five target">
+        <div class="stat-num zero" aria-hidden="true">0 / 5</div>
+        <div class="stat-label">Conversations</div>
+        <div class="stat-meta">May 31 target unmet</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">1</div>
+        <div class="stat-label">Health Check</div>
+        <div class="stat-meta">Only scheduled output</div>
+      </div>
+    </div>
+
+    <nav class="section-nav reveal" aria-label="Section navigation">
+      <a href="#s1">01 Knowledge</a>
+      <a href="#s2">02 Trajectory</a>
+      <a href="#s3">03 Direction</a>
+      <a href="#s4">04 Workflow</a>
+    </nav>
+
+    <!-- SECTION 1 -->
+    <section class="section reveal" id="s1">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <h2 class="section-title">Knowledge &amp; Findings</h2>
+        <p class="section-subtitle">What the research uncovered this cycle — including the finding that the cycle produced no new knowledge.</p>
+      </div>
+
+      <div class="prose">
+        <h3>The cycle produced no new knowledge</h3>
+        <p>The honest synthesis first: between May 1 and June 1, 2026, zero new wiki articles were authored, zero new reports were filed, and zero new raw sources were added to <code>raw/</code>. The only output of this cycle was the May 12 Rules Health Check — a scheduled audit of the rules file itself. The project produced governance about governance and nothing else.</p>
+        <p>This is not a small finding. It is <em>the</em> finding of the month, and Sections 1–3 must be read in that light. The "knowledge &amp; findings" section is not generated in a vacuum — it reports on what changed. What changed this month is the absence of change.</p>
+
+        <h3>What the evidence base still says (unchanged from May 1)</h3>
+        <p>The mortality data from Musgrave &amp; Lamis (2025) — US male musicians at 138.7 per 100,000 — remains the most consequential finding in the wiki. MusiCares' Wellness in Music Survey (11.4% suicidal ideation, &gt;2× US national rate) remains the strongest operational template. Soundcheck (Canada, n=1,216) remains the methodological model for a Taiwan-equivalent survey.</p>
+        <div class="quiet-box"><p>None of this is new. All of it was true on May 1. The advocacy case has been ready to make for 31 days.</p></div>
+
+        <h3>The Asia-Pacific silence is no longer just external</h3>
+        <p>Last month the Asia-Pacific silence referred to the field — zero independent music MH NPOs across Taiwan, Korea, China, SE Asia. This month, the silence is also internal. The May 1 insight directed: <em>"By May 31, have 5 informal conversations with people in Taiwan's music industry."</em> The June 1 wiki and report folders contain no evidence that any conversation occurred. If conversations happened off-the-record, they did not produce notes, contacts, or themes filed into the project.</p>
+        <div class="highlight-box"><p><strong>MTAT International Conference is happening this month (June 2026)</strong> — the only Taiwan event the wiki flagged as relevant. There is no indication of registration, attendance plan, or follow-up strategy. This is the single most concrete, time-bounded opportunity on the calendar.</p></div>
+
+        <h3>What the rules health check found</h3>
+        <p>The May 12 Rules Health Check ran on schedule and produced 18 findings (2 broken, 9 stale, 7 minor). Two findings worth carrying forward: (a) the naming-convention table is inconsistent and three actively-used report types — Insight, Academic_Biweekly, Critical_Reading — are unspecified; (b) PROJECT_RULES.md is 843 lines governing 20 wiki articles. The ratio of 42 lines of rules per wiki article was flagged by the Critical Auditor in May. It has not improved.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 2 -->
+    <section class="section reveal" id="s2">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <h2 class="section-title">Trajectory</h2>
+        <p class="section-subtitle">How the research is moving — the curve, the avoidance shape, and the cost of inaction.</p>
+      </div>
+
+      <div class="prose">
+        <h3>The trajectory has flattened</h3>
+        <p>A useful way to describe momentum: what is the curve of artifacts produced per month? April produced 7 reports plus the first monthly insight. May produced 1 report (the insight itself). June so far produces 1 report (this insight, again the insight itself). The curve is asymptoting toward <em>"the only thing the project produces is its monthly report about itself."</em></p>
+        <p>This is the failure mode the Strategic Mentor flagged in April and the Critical Auditor flagged in May: infrastructure-building becomes the work. The infrastructure now runs autonomously — scheduled tasks fire on day 1, 5, 12 — and the absence of human input doesn't break the schedule, it just makes the schedule's output thinner.</p>
+
+        <h3>The two-track question is no longer a question</h3>
+        <p>The April insight framed two tracks: NPO startup (career, near-term) and academic research (grad school 2027). The May insight noted that "research so far has served the academic track primarily." June must be more direct: <strong>neither track is moving</strong>. No primary research has begun. No thesis question is locked. No advisor is contacted. No graduate program is applied to. The two-track problem hasn't been resolved; both tracks have stalled together.</p>
+
+        <h3>The validation gap has widened, not closed</h3>
+        <p>In May, the validation gap was: enough secondary research, no primary data. In June, the gap is the same — except the cost of inaction is now visible. Every month of delay means: one less month of survey runway before grad school applications (Sep–Dec 2026), one less month of network-building before any 2027 NPO incorporation, one less month before MTAT (June 2026) becomes a missed opportunity rather than a future one.</p>
+
+        <h3>Spotify and platform partnerships remain unexplored</h3>
+        <p>May noted Spotify as the emerging field accelerator (B-LINE, Heart &amp; Soul, MusiCares × JED). No outreach was attempted to Spotify Taiwan or KKBOX in the intervening month. The hypothesis remains untested.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 3 -->
+    <section class="section reveal" id="s3">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <h2 class="section-title">Direction Reflections</h2>
+        <p class="section-subtitle">A decision among three options — and a gate to hold against the default of more silence.</p>
+      </div>
+
+      <div class="prose">
+        <h3>The question this cycle must answer</h3>
+        <p>The May insight closed with: <em>"Who in Taiwan have you talked to?"</em> The June answer, on the evidence in the workspace, is: nobody on record. June must therefore not pose a new question. It must hold the May question open and treat it as a yes/no gate.</p>
+
+        <h3>Three honest options</h3>
+        <p>The infrastructure is stable enough that the next month does not need more rules, more wiki articles, or more scheduled tasks. What it needs is a decision among three options:</p>
+      </div>
+
+      <div class="options-grid">
+        <div class="option-card">
+          <div class="option-num">01</div>
+          <div class="option-title">Resume as planned</div>
+          <div class="option-body">Execute the May proposals — five conversations, MTAT registration, one funder approach — within the next 30 days. Treat May 1–June 1 as a temporary pause.</div>
+        </div>
+        <div class="option-card">
+          <div class="option-num">02</div>
+          <div class="option-title">Pivot to academic-only</div>
+          <div class="option-body">Drop the NPO track explicitly. Use the existing evidence base as the foundation for a thesis proposal. The wiki is already sufficient for this. Begin advisor outreach.</div>
+        </div>
+        <div class="option-card">
+          <div class="option-num">03</div>
+          <div class="option-title">Hibernate explicitly</div>
+          <div class="option-body">Acknowledge that life circumstances make this month non-viable. Pause scheduled tasks. Set a return date. Avoid the cost of monthly insights that report on no work.</div>
+        </div>
+      </div>
+
+      <div class="prose">
+        <div class="highlight-box">
+          <p>The worst option — and the one currently being executed by default — is to keep the schedule running while producing nothing. This generates a record of inaction that compounds psychologically. The next insight (July 1) will be even harder to write if the pattern continues.</p>
+        </div>
+
+        <h3>The June 30 gate</h3>
+        <p>If option 1 is chosen, a measurable gate by June 30 is: (a) MTAT conference attended OR registered with a stated plan, (b) at least <strong>2 conversations on record</strong> with names, dates, and one-paragraph notes filed to <code>raw/notes/</code>, (c) one outreach email drafted (not necessarily sent) to Spotify Taiwan or KKBOX. If none of these three minimal deliverables is met by June 30, <strong>June 30 itself becomes the kill criterion</strong> for option 1.</p>
+
+        <h3>What the evidence base no longer needs</h3>
+        <p>It does not need: more competitor case studies (Backline + MusiCares is sufficient), more papers (the evidence is overdetermined), more rule revisions (Section 9 of PROJECT_RULES is the last addition that earned its keep), more design polish on existing pages. These are all forms of avoidance.</p>
+        <p>It does need: primary data, Taiwan-specific signal, real names of real people.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 4 -->
+    <section class="section reveal" id="s4">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <h2 class="section-title">Workflow &amp; Collaboration</h2>
+        <p class="section-subtitle">Five workflow personas — three proposals, two deliberate non-proposals. Constrained by May's "max 3" rule.</p>
+      </div>
+
+      <!-- Workflow Optimizer -->
+      <article class="workflow-persona" data-color="1" aria-label="Workflow Optimizer">
+        <div class="wp-header">
+          <div class="wp-name">Workflow Optimizer</div>
+          <div class="wp-dim">Organization</div>
+        </div>
+        <div class="wp-lens">Lens: session cadence, scheduling, throughput</div>
+        <div class="wp-body">
+          <p>The monthly cadence is operating exactly as designed. Day 1 produced this insight. Day 5 will produce a wiki health check. Day 12 will produce a rules health check. <strong>The schedule is not the problem.</strong> The problem is upstream of the schedule: there are no sessions feeding it. Between May 1 and June 1, the only "session" was the May 12 scheduled task running autonomously. The pipeline has perfect throughput on zero input.</p>
+        </div>
+        <div class="wp-proposal">
+          <div class="wp-proposal-label">Proposal 1 of 3</div>
+          <p>Add a single <strong>Taiwan Action Day on day 7</strong> of each month with one task only — <em>"Send one message to one person."</em> Not a session block, not a research task, not a writing assignment. One outbound message to a real human in Taiwan's music industry. Success is the message sent, regardless of reply. This is the smallest possible unit of NPO-track work and it is currently missing entirely.</p>
+        </div>
+      </article>
+
+      <!-- Research Methodologist -->
+      <article class="workflow-persona" data-color="2" aria-label="Research Methodologist">
+        <div class="wp-header">
+          <div class="wp-name">Research Methodologist</div>
+          <div class="wp-dim">Academic</div>
+        </div>
+        <div class="wp-lens">Lens: research pipeline efficiency, health check → action gap</div>
+        <div class="wp-body">
+          <p>The May health check found two uncompiled raw files persisting across two cycles (bergson-et-al-2023, JWF Annual Report 2025). The May insight proposed a "Fix Pass" the day after each health check. The June workspace contains no evidence of a Fix Pass having been added or executed. <strong>The proposal vanished into the same gap as the proposals it was meant to close.</strong></p>
+          <p>The pipeline has a second-order problem: the diagnostic system (health checks) is healthy, but the response system is not. Auditors keep auditing, the audited never act, and the audit reports become the only artifact.</p>
+        </div>
+        <div class="wp-proposal">
+          <div class="wp-proposal-label">Proposal 2 of 3</div>
+          <p>Convert one of the four monthly scheduled tasks into a <strong>"Fix-Pass + Conversation Log"</strong> task instead. Pick one to retire. Methodologist's recommendation: <strong>retire the rules health check for the next two cycles</strong> (May 12 found the rules are stable enough). Replace it with a 60-minute block whose only artifact is <code>raw/notes/conversations_YYYY-MM.md</code> listing any human contact made that month. If empty, the file says so.</p>
+        </div>
+      </article>
+
+      <!-- Strategic Mentor -->
+      <article class="workflow-persona" data-color="3" aria-label="Strategic Mentor">
+        <div class="wp-header">
+          <div class="wp-name">Strategic Mentor</div>
+          <div class="wp-dim">Life Direction</div>
+        </div>
+        <div class="wp-lens">Lens: pace sustainability, infrastructure vs. content ratio, decision gates</div>
+        <div class="wp-body">
+          <p>The pattern is unmistakable. April: 7 reports, 8 workflow proposals. May: 0 reports, 0.5 of 8 proposals executed. June: 0 reports, propose to re-propose. <strong>This is not a pace problem. This is an avoidance pattern</strong> — and naming it is what a mentor is for.</p>
+          <p>The avoidance has a shape: building governance is intellectually satisfying, low-risk, and produces visible artifacts. Sending one cold email to a Taiwanese venue owner is uncertain, ego-exposing, and may produce nothing. The brain reliably prefers the former. The schedule has been doing exactly what the brain wants — producing the comfortable artifact every month.</p>
+          <p>There is no shame in this. There is, however, a deadline. Grad school applications open in roughly four months. NPO 2027 incorporation requires partners who exist as relationships, not abstractions.</p>
+        </div>
+        <div class="wp-proposal">
+          <div class="wp-proposal-label">Proposal 3 of 3 — the only one that matters</div>
+          <p>Choose one of the three options from Section 3 by <strong>June 14</strong>. Not "by end of June" — by June 14. Two weeks. Write the choice down in <code>planning/</code> as a one-line decision: <em>"Option 1 / Option 2 / Option 3."</em> Without that line, the July 1 insight will say the same thing this one says, only worse.</p>
+        </div>
+      </article>
+
+      <!-- Critical Auditor -->
+      <article class="workflow-persona" data-color="4" aria-label="Critical Auditor">
+        <div class="wp-header">
+          <div class="wp-name">Critical Auditor</div>
+          <div class="wp-dim">Critical</div>
+        </div>
+        <div class="wp-lens">Lens: proposals vs. execution, meta-work ratio, kill criteria</div>
+        <div class="wp-body">
+          <p>Last month's scorecard, retrospectively:</p>
+          <div class="table-wrap">
+            <table>
+              <caption class="sr-only">May 1 insight proposals vs. execution as of June 1</caption>
+              <thead>
+                <tr><th scope="col">May 1 Section 4 proposal</th><th scope="col" style="width:140px;">Status June 1</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Add "NPO Action Item" on day 15</td><td class="status-x">Not done</td></tr>
+                <tr><td>Add "Fix Pass" day 6 + day 13</td><td class="status-x">Not done</td></tr>
+                <tr><td>Reset gates honestly (Jun 30 / Aug 31 / Oct 31)</td><td class="status-x">Not adopted</td></tr>
+                <tr><td>"Proposals Executed" scorecard</td><td class="status-x">Not adopted*</td></tr>
+                <tr><td>Three review tiers (Tier 1/2/3)</td><td class="status-x">Not implemented</td></tr>
+                <tr><td>5 conversations by May 31 (Section 3)</td><td class="status-x">Not executed</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><em>*This section is the first attempt.</em></p>
+          <p>Execution rate of May 1 proposals: <strong>0 of 6 (0%)</strong>. April was 6%. May is 0%. <strong>The trend is not flat — it is declining.</strong></p>
+          <p>The meta-work ratio has worsened: PROJECT_RULES.md is now 843 lines governing 20 wiki articles (42 lines/article, unchanged from May, but the wiki has not grown — so each rule line now governs a smaller share of <em>new</em> work, approaching infinity governance per unit of new content).</p>
+          <p>The May insight introduced a self-imposed constraint: "limit Section 4 proposals to 3 maximum." This June insight honors that constraint. Sections 1–3 contain zero new proposals. Section 4 contains three. The Auditor and Design Process Lead deliberately do not propose anything new — <strong>proposing without execution is itself the failure mode.</strong></p>
+        </div>
+        <div class="wp-no-proposal">No proposal this cycle. Only a kill criterion ↓</div>
+        <div class="wp-kill" role="note" aria-label="Kill criterion for the monthly insight task">
+          <div class="wp-kill-label">Kill criterion · not a proposal</div>
+          <p>If by <strong style="color:#fff;">July 1</strong> the execution rate of June's three proposals is again 0/3, the next insight should not contain Sections 1–3 at all. It should contain only Section 4, and Section 4 should contain only one sentence: <em>Pause the schedule.</em> This is the kill criterion for the monthly insight task itself.</p>
+        </div>
+      </article>
+
+      <!-- Design Process Lead -->
+      <article class="workflow-persona" data-color="5" aria-label="Design Process Lead">
+        <div class="wp-header">
+          <div class="wp-name">Design Process Lead</div>
+          <div class="wp-dim">Design</div>
+        </div>
+        <div class="wp-lens">Lens: review process sustainability, tiered review levels, design system stability</div>
+        <div class="wp-body">
+          <p>Per the Auditor's principle this cycle, no new design proposals. Status report only.</p>
+          <p>The design system has been stable at v6.1 since April 12. <strong>Zero deploy HTML files were created in May.</strong> The 8-role review process has not been exercised in this cycle (no new pages to review). The mobile preview harness, the GitHub → Netlify webhook, the design tokens — all of it works and has not been touched. This is, in fact, the one part of the project that is operating exactly as intended: built once, working, not requiring attention.</p>
+          <p>The Design Process Lead's role this month is to <em>not</em> propose anything. The design system has done its job. Process restraint is its own contribution.</p>
+          <p>The 8-role review of this insight page will run as required by §7. The review will be honest about what it finds — including the possibility that a report this stark may not warrant heavy design treatment.</p>
+        </div>
+        <div class="wp-no-proposal">No proposal this cycle. Design system is stable; restraint is the contribution.</div>
+      </article>
+
+    </section>
+
+    <!-- CLOSING -->
+    <section class="closing reveal" aria-label="Closing">
+      <div class="closing-line" aria-hidden="true"></div>
+      <div class="q-month">April</div>
+      <div class="q-text">Which question actually drives this work?</div>
+      <div class="q-month">May</div>
+      <div class="q-text">Who in Taiwan have you talked to?</div>
+      <div class="q-month">June</div>
+      <div class="q-text current">What changes between now and June 14?</div>
+      <p>If nothing changes by June 14,<br>the July 1 insight writes itself —<br>and it will not be an insight.<br>It will be a notice of pause.</p>
+    </section>
+
+  </main>
+
+  <script>
+    // Mobile nav toggle
+    (function() {
+      var toggle = document.querySelector('.nav-toggle');
+      var links = document.querySelector('.nav-links');
+      if (!toggle || !links) return;
+      toggle.addEventListener('click', function() {
+        var open = toggle.classList.toggle('open');
+        links.classList.toggle('show', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      links.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          toggle.classList.remove('open');
+          links.classList.remove('show');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    })();
+
+    // Reveal on scroll
+    (function() {
+      if (!('IntersectionObserver' in window)) {
+        document.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('visible'); });
+        return;
+      }
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+    })();
+  </script>
+</body>
+</html>
