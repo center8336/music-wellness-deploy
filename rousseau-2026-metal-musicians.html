@@ -143,7 +143,9 @@
       text-transform: uppercase; letter-spacing: 0.5em; margin-bottom: 2.5rem;
     }
     .cover-title {
-      font-family: var(--font-display); font-size: clamp(4.5rem, 11vw, 9rem); font-weight: 800;
+      /* Détári clamp(4.5rem,11vw,9rem) is calibrated for ~6-char surnames;
+         ROUSSEAU (8 chars) scales down so the name spans the same ~800px column */
+      font-family: var(--font-display); font-size: clamp(3.5rem, 8.5vw, 6.5rem); font-weight: 800;
       line-height: 0.85; letter-spacing: -0.03em; text-transform: uppercase;
       color: var(--black); margin-bottom: 0.25rem;
     }
@@ -290,8 +292,8 @@
     /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       .section { padding: 3rem 1.5rem; }
-      /* Détári-pattern mobile cover values */
-      .cover-title { font-size: clamp(3rem, 14vw, 5rem); }
+      /* Détári-pattern mobile cover values (title scaled for 8-char ROUSSEAU) */
+      .cover-title { font-size: clamp(2.4rem, 11vw, 4rem); }
       .cover-year { font-size: clamp(1.5rem, 6vw, 2rem); letter-spacing: 0.25em; }
       .cover-subtitle { font-size: 0.85rem; }
       .stat-strip { grid-template-columns: repeat(2, 1fr); }
