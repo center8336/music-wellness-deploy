@@ -24,6 +24,12 @@
             --signal-dim: #565799;
             --signal-bg: rgba(102,103,171,0.08);
             --signal-glow: rgba(102,103,171,0.2);
+            --spectrum-1: #d4799c;
+            --spectrum-2: #e8a87c;
+            --spectrum-3: #d4c97a;
+            --spectrum-4: #85c9a3;
+            --spectrum-5: #7aaed4;
+            --spectrum-6: #b8a9d4;
             --bg-light: var(--snow);
             --bg-dark: var(--black);
             --bg-card: var(--white);
@@ -50,16 +56,9 @@
             --max-w-text: 660px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html {
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-        }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
 
         body {
             font-family: var(--font-body);
@@ -72,523 +71,382 @@
             overflow-x: hidden;
         }
 
-        ::selection {
-            background: var(--signal);
-            color: var(--white);
+        ::selection { background: var(--signal); color: var(--white); }
+
+        a { color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+        a:hover { color: var(--signal-dim); }
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+
+        .skip-nav {
+            position: absolute; left: -9999px; top: 0; z-index: 200;
+            background: var(--signal); color: var(--white);
+            padding: 0.5rem 1rem; font-family: var(--font-mono);
         }
+        .skip-nav:focus { left: 0; }
 
         /* Navigation */
         .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
+            position: fixed; top: 0; left: 0; z-index: 100;
+            display: flex; flex-direction: column;
             padding: 2rem 2.5rem;
             padding-top: calc(2rem + env(safe-area-inset-top));
             background: transparent;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-        }
+        .nav-links { display: flex; gap: 2.5rem; }
 
         .nav-links a {
             font-family: var(--font-mono);
-            font-size: 1.1rem;
-            font-weight: 400;
+            font-size: 1.1rem; font-weight: 400;
             color: var(--grey);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            transition: color var(--dur) var(--ease);
+            text-transform: uppercase; letter-spacing: 0.08em;
         }
-
-        .nav-links a:hover {
-            color: var(--black);
-        }
-
-        .nav-links a.current {
-            color: var(--black);
-        }
+        .nav-links a:hover { color: var(--black); }
+        .nav-links a.current { color: var(--black); }
 
         /* Main container */
         .container {
             padding-top: calc(6rem + env(safe-area-inset-top, 0px));
-            padding-left: 2.5rem;
-            padding-right: 2.5rem;
-            padding-bottom: 4rem;
-            max-width: var(--max-w);
-            margin: 0 auto;
+            padding-left: 2.5rem; padding-right: 2.5rem; padding-bottom: 4rem;
+            max-width: var(--max-w); margin: 0 auto;
         }
 
-        /* Hero section */
-        .hero {
-            margin-bottom: 4rem;
-        }
+        /* Hero */
+        .hero { margin-bottom: 4rem; }
 
         .eyebrow {
             font-family: var(--font-mono);
-            font-size: var(--text-xs);
-            font-weight: 400;
+            font-size: var(--text-xs); font-weight: 400;
             color: var(--signal);
-            text-transform: uppercase;
-            letter-spacing: 0.5em;
+            text-transform: uppercase; letter-spacing: 0.5em;
             margin-bottom: 1rem;
         }
 
         .hero h1 {
             font-family: var(--font-display);
-            font-size: var(--text-h1);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.25rem;
-            color: var(--black);
-            letter-spacing: -0.01em;
+            font-size: var(--text-h1); font-weight: 800;
+            line-height: 1.1; margin-bottom: 1.25rem;
+            color: var(--black); letter-spacing: -0.01em;
             text-transform: uppercase;
         }
 
         .subtitle {
             font-family: var(--font-body);
-            font-size: 1rem;
-            font-style: italic;
-            color: var(--grey);
+            font-size: 1rem; font-style: italic;
+            color: var(--graphite);
             max-width: var(--max-w-text);
-            line-height: 1.7;
-            font-weight: 300;
-            letter-spacing: 0.02em;
+            line-height: 1.7; font-weight: 300; letter-spacing: 0.02em;
         }
 
         /* Stats strip — dark (canonical) */
         .stat-strip {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
             margin: 3rem 0;
             background: var(--black);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
+            border-radius: var(--radius-lg); overflow: hidden;
         }
 
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1.5rem;
-            border-right: 1px solid var(--border-dark);
-        }
-
-        .stat-item:last-child {
-            border-right: none;
-        }
+        .stat-item { text-align: center; padding: 2rem 1.5rem; border-right: 1px solid var(--border-dark); }
+        .stat-item:last-child { border-right: none; }
 
         .stat-num {
             font-family: var(--font-display);
-            font-size: 2.4rem;
-            font-weight: 800;
+            font-size: 2.4rem; font-weight: 800;
             color: var(--purple-light);
-            margin-bottom: 0.3rem;
-            line-height: 1;
+            margin-bottom: 0.3rem; line-height: 1;
         }
 
         .stat-label {
             font-family: var(--font-mono);
-            font-size: var(--text-xs);
-            color: var(--grey);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 400;
+            font-size: var(--text-xs); color: var(--grey-light);
+            text-transform: uppercase; letter-spacing: 0.1em; font-weight: 400;
         }
 
-        .stat-meta {
-            font-family: var(--font-body);
-            font-size: var(--text-xs);
-            color: var(--grey);
-            margin-top: 0.25rem;
+        .stat-meta { font-family: var(--font-body); font-size: var(--text-xs); color: var(--grey); margin-top: 0.25rem; }
+
+        /* Confidence badges */
+        .conf {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            padding: 0.15rem 0.6rem;
+            border-radius: 50px;
+            letter-spacing: 0.06em;
+            vertical-align: middle;
+            white-space: nowrap;
         }
+        .conf-verified { background: rgba(133,201,163,0.18); color: #2e7d54; border: 1px solid rgba(133,201,163,0.4); }
+        .conf-single { background: rgba(232,168,124,0.18); color: #a05f2c; border: 1px solid rgba(232,168,124,0.45); }
+        .conf-uncertain { background: rgba(212,121,156,0.15); color: #9c4368; border: 1px solid rgba(212,121,156,0.4); }
 
         /* Tabs */
-        .tabs-wrapper {
-            margin: 3rem 0;
-        }
+        .tabs-wrapper { margin: 3rem 0; }
 
-        .tab-pills {
-            display: flex;
-            gap: 0.75rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
+        .tab-pills { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
 
         .tab-btn {
             padding: 0.65rem 1.25rem;
-            border: none;
-            border-radius: 50px;
-            background: var(--silver);
-            color: var(--grey);
-            font-size: var(--text-sm);
-            font-weight: 400;
+            border: none; border-radius: 50px;
+            background: var(--silver); color: var(--graphite);
+            font-size: var(--text-sm); font-weight: 400;
             cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
+            text-transform: uppercase; letter-spacing: 0.12em;
             transition: all var(--dur) var(--ease);
             font-family: var(--font-mono);
         }
+        .tab-btn:hover { background: var(--snow); color: var(--charcoal); }
+        .tab-btn.active { background: var(--white); color: var(--black); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
 
-        .tab-btn:hover {
-            background: var(--snow);
-            color: var(--charcoal);
-        }
-
-        .tab-btn.active {
-            background: var(--white);
-            color: var(--black);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
 
         /* Cards */
         .card {
             background: var(--white);
-            border: 1px solid rgba(0,0,0,0.07);
+            border: 1px solid var(--border-light);
             border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            padding: 1.5rem; margin-bottom: 1.5rem;
             transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
         }
-
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-        }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
 
         .card h3 {
             font-family: var(--font-display);
-            font-size: var(--text-h3);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--black);
-            text-transform: uppercase;
-            letter-spacing: -0.01em;
+            font-size: var(--text-h3); font-weight: 700;
+            margin-bottom: 1rem; color: var(--black);
+            text-transform: uppercase; letter-spacing: -0.01em;
         }
 
         .card-label {
             display: inline-block;
             font-family: var(--font-mono);
-            font-size: var(--text-xs);
-            font-weight: 400;
+            font-size: var(--text-xs); font-weight: 400;
             color: var(--signal);
-            text-transform: uppercase;
-            letter-spacing: 0.16em;
+            text-transform: uppercase; letter-spacing: 0.16em;
             margin-bottom: 0.5rem;
         }
 
-        .card-meta {
-            font-size: var(--text-sm);
-            color: var(--grey);
-            margin: 0.5rem 0;
-        }
+        .card-meta { font-size: var(--text-sm); color: var(--grey); margin: 0.5rem 0; }
+
+        .card p, .card li { color: var(--graphite); }
 
         /* Expandable cards */
-        .expandable-card {
-            cursor: pointer;
-            transition: all var(--dur) var(--ease);
-        }
+        .expandable-card { cursor: pointer; transition: all var(--dur) var(--ease); }
+        .expandable-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .expandable-card h3 { margin-bottom: 0.25rem; }
 
-        .expandable-card:hover {
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
+        .expandable-header { display: flex; justify-content: space-between; align-items: center; user-select: none; gap: 1rem; }
 
-        .expandable-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            user-select: none;
-        }
+        .expand-icon { font-size: 1.2rem; color: var(--grey); transition: transform var(--dur) var(--ease); flex-shrink: 0; }
+        .expandable-card.expanded .expand-icon { transform: rotate(180deg); }
 
-        .expand-icon {
-            font-size: 1.2rem;
-            color: var(--grey);
-            transition: transform var(--dur) var(--ease);
-        }
+        .expandable-body { max-height: 0; overflow: hidden; transition: max-height var(--dur-slow) var(--ease); }
+        .expandable-card.expanded .expandable-body { max-height: 900px; }
 
-        .expandable-card.expanded .expand-icon {
-            transform: rotate(180deg);
-        }
+        .body-content { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-light); }
 
-        .expandable-body {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height var(--dur) var(--ease);
-        }
-
-        .expandable-card.expanded .expandable-body {
-            max-height: 500px;
-        }
-
-        .body-content {
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(0,0,0,0.07);
-        }
-
-        .detail-row {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            font-size: var(--text-sm);
-        }
+        .detail-row { display: flex; gap: 1rem; margin-bottom: 1rem; font-size: var(--text-sm); }
 
         .detail-label {
-            font-family: var(--font-mono);
-            font-weight: 400;
+            font-family: var(--font-mono); font-weight: 400;
             color: var(--grey);
-            text-transform: uppercase;
-            letter-spacing: 0.16em;
-            min-width: 120px;
-            font-size: var(--text-xs);
+            text-transform: uppercase; letter-spacing: 0.16em;
+            min-width: 120px; font-size: var(--text-xs);
         }
 
-        .detail-value {
-            flex: 1;
-            color: var(--charcoal);
-        }
+        .detail-value { flex: 1; color: var(--graphite); }
 
         /* Correction banner */
         .correction-banner {
             background: var(--signal-bg);
             border: 1px solid var(--signal-glow);
             border-radius: var(--radius-lg);
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            font-size: var(--text-sm);
-            color: var(--charcoal);
+            padding: 1.25rem; margin-bottom: 1.5rem;
+            font-size: var(--text-sm); color: var(--graphite);
         }
-
-        .correction-banner strong {
-            color: var(--signal);
-            font-weight: 600;
-        }
+        .correction-banner strong { color: var(--signal); font-weight: 600; }
+        .correction-banner ul { margin: 0.5rem 0 0 1.25rem; }
+        .correction-banner li { margin-bottom: 0.3rem; }
 
         /* Section title */
         .section-title {
             font-family: var(--font-display);
-            font-size: var(--text-h2);
-            font-weight: 700;
+            font-size: var(--text-h2); font-weight: 700;
             margin: 2rem 0 1.5rem 0;
             color: var(--charcoal);
-            text-transform: uppercase;
-            letter-spacing: -0.01em;
+            text-transform: uppercase; letter-spacing: -0.01em;
         }
 
         .section-subtitle {
             font-family: var(--font-mono);
-            font-size: var(--text-xs);
-            color: var(--grey);
+            font-size: var(--text-xs); color: var(--grey);
             margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.16em;
-            font-weight: 400;
+            text-transform: uppercase; letter-spacing: 0.16em; font-weight: 400;
         }
 
-        /* Charts & data */
+        /* Charts */
         .chart-container {
             background: var(--white);
-            border: 1px solid rgba(0,0,0,0.07);
+            border: 1px solid var(--border-light);
             border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            padding: 1.5rem; margin-bottom: 1.5rem;
         }
 
-        .chart-title {
-            font-size: var(--text-h3);
-            font-weight: 500;
-            margin-bottom: 1rem;
-            color: var(--black);
-        }
+        .chart-title { font-size: var(--text-h3); font-weight: 500; margin-bottom: 0.4rem; color: var(--black); }
+        .chart-note { font-size: var(--text-xs); color: var(--grey); margin-bottom: 1.25rem; }
 
-        .chart-bar {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
+        .chart-bar { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+        .chart-bar:last-child { margin-bottom: 0.5rem; }
 
-        .chart-label {
-            min-width: 140px;
-            font-size: var(--text-sm);
-            color: var(--charcoal);
-        }
+        .chart-label { min-width: 180px; font-size: var(--text-sm); color: var(--graphite); }
 
-        .chart-visual {
-            flex: 1;
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
+        .chart-visual { flex: 1; display: flex; gap: 0.5rem; align-items: center; }
 
         .bar {
             height: 2rem;
             background: var(--signal);
             border-radius: 2px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
+            display: flex; align-items: center; justify-content: flex-end;
             padding-right: 0.5rem;
             color: var(--white);
+            font-size: var(--text-xs); font-weight: 600;
+            min-width: 46px;
+        }
+        .bar.alt { background: var(--signal-dim); }
+        .bar.neutral { background: var(--graphite); }
+
+        /* Tables */
+        .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 1.5rem; }
+
+        table {
+            width: 100%; border-collapse: collapse;
+            background-color: var(--white);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg); overflow: hidden;
+        }
+
+        caption {
+            text-align: left;
+            font-family: var(--font-mono);
             font-size: var(--text-xs);
-            font-weight: 600;
-            min-width: 40px;
+            color: var(--grey);
+            padding: 0.5rem 0;
+            text-transform: uppercase; letter-spacing: 0.1em;
         }
 
-        .bar.alt {
-            background: var(--signal-dim);
+        th {
+            background-color: var(--black); color: var(--silver);
+            padding: 0.7rem 1rem; text-align: left;
+            font-family: var(--font-mono); font-weight: 400;
+            font-size: var(--text-xs);
+            text-transform: uppercase; letter-spacing: 0.06em;
         }
 
-        .bar-percent {
-            font-size: var(--text-sm);
-            color: var(--signal);
-            font-weight: 600;
-            min-width: 50px;
-        }
+        td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--border-light); font-size: var(--text-sm); color: var(--graphite); }
+        tbody tr:hover { background-color: var(--signal-bg); }
+        tbody tr:last-child td { border-bottom: none; }
 
         /* News items */
         .news-item {
             background: var(--white);
-            border: 1px solid rgba(0,0,0,0.07);
+            border: 1px solid var(--border-light);
             border-radius: var(--radius-lg);
-            padding: 1.25rem;
-            margin-bottom: 1rem;
+            padding: 1.25rem; margin-bottom: 1rem;
         }
 
-        .news-title {
-            font-size: var(--text-body);
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            color: var(--black);
-        }
+        .news-title { font-size: var(--text-body); font-weight: 500; margin-bottom: 0.5rem; color: var(--black); }
 
-        .news-meta {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            align-items: center;
-        }
+        .news-meta { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
 
         .news-source {
-            font-size: var(--text-xs);
-            color: var(--grey);
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            font-weight: 500;
+            font-size: var(--text-xs); color: var(--grey);
+            text-transform: uppercase; letter-spacing: 0.12em; font-weight: 500;
+            font-family: var(--font-mono);
         }
 
-        .news-badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            background: var(--signal-bg);
-            color: var(--signal);
-            border-radius: 50px;
-            font-size: var(--text-xs);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-        }
+        .news-links { font-size: var(--text-xs); }
+        .news-links a { margin-right: 0.75rem; }
 
-        .news-relevance {
-            font-size: var(--text-xs);
-            color: var(--grey-light);
-            margin-top: 0.5rem;
-        }
+        .news-relevance { font-size: var(--text-sm); color: var(--graphite); margin-top: 0.5rem; }
 
         /* Insight cards */
         .insight-card {
             background: var(--white);
-            border: 1px solid rgba(0,0,0,0.07);
+            border: 1px solid var(--border-light);
             border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            padding: 1.5rem; margin-bottom: 1.5rem;
             counter-increment: insight-counter;
-            padding-left: 4rem;
-            position: relative;
+            padding-left: 4rem; position: relative;
         }
 
         .insight-card::before {
             content: counter(insight-counter);
-            position: absolute;
-            left: 1.5rem;
-            top: 1.5rem;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--signal);
+            position: absolute; left: 1.5rem; top: 1.5rem;
+            font-family: var(--font-display);
+            font-size: 2rem; font-weight: 700; color: var(--signal);
         }
 
-        .insight-title {
-            font-size: var(--text-body);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--black);
-        }
-
-        .insight-text {
-            font-size: var(--text-sm);
-            color: var(--charcoal);
-            line-height: 1.7;
-        }
+        .insight-title { font-size: var(--text-body); font-weight: 600; margin-bottom: 0.5rem; color: var(--black); }
+        .insight-text { font-size: var(--text-sm); color: var(--graphite); line-height: 1.7; }
 
         /* Checklist */
-        .checklist {
-            counter-reset: insight-counter;
-        }
-
         .checklist-item {
-            display: flex;
-            gap: 1rem;
-            padding: 0.75rem;
-            margin-bottom: 0.75rem;
+            display: flex; gap: 1rem;
+            padding: 0.75rem; margin-bottom: 0.75rem;
             background: var(--white);
-            border: 1px solid rgba(0,0,0,0.07);
+            border: 1px solid var(--border-light);
             border-radius: var(--radius-lg);
-            font-size: var(--text-sm);
-            color: var(--charcoal);
+            font-size: var(--text-sm); color: var(--graphite);
             align-items: center;
         }
 
         .checklist-checkbox {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--signal);
-            border-radius: 3px;
-            flex-shrink: 0;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 20px; height: 20px;
+            border: 2px solid var(--signal); border-radius: 3px;
+            flex-shrink: 0; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
             transition: all var(--dur) var(--ease);
         }
 
-        .checklist-item input[type="checkbox"] {
-            display: none;
-        }
-
-        .checklist-item input[type="checkbox"]:checked + .checklist-checkbox {
-            background: var(--signal);
-        }
-
+        .checklist-item input[type="checkbox"] { display: none; }
+        .checklist-item input[type="checkbox"]:checked + .checklist-checkbox { background: var(--signal); }
         .checklist-item input[type="checkbox"]:checked + .checklist-checkbox::after {
-            content: '✓';
-            color: var(--white);
-            font-weight: bold;
-            font-size: 0.8rem;
+            content: '✓'; color: var(--white); font-weight: bold; font-size: 0.8rem;
         }
 
-        /* Responsive */
+        /* Sources */
+        .sources-card {
+            background-color: var(--white);
+            border: 1px solid var(--border-light);
+            padding: 2rem; border-radius: var(--radius-lg);
+            margin-bottom: 1.5rem;
+        }
+
+        .sources-card h3 {
+            font-family: var(--font-display);
+            font-size: var(--text-h3); font-weight: 700;
+            color: var(--black); margin-bottom: 1.25rem;
+            text-transform: uppercase;
+        }
+
+        .source-section { margin-bottom: 1.5rem; }
+        .source-section:last-child { margin-bottom: 0; }
+
+        .source-label {
+            font-family: var(--font-mono);
+            font-size: var(--text-xs); font-weight: 400;
+            color: var(--grey);
+            text-transform: uppercase; letter-spacing: 0.16em;
+            margin-bottom: 0.5rem;
+        }
+
+        .source-links { display: flex; flex-direction: column; gap: 0.5rem; font-size: var(--text-sm); }
+
+        .method-note {
+            font-size: var(--text-sm); color: var(--graphite);
+            margin-bottom: 1rem;
+        }
+
         /* Hamburger toggle */
         .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; z-index:101; -webkit-tap-highlight-color:transparent; }
         .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
@@ -607,135 +465,77 @@
             .nav {
                 padding: 1.2rem 1.5rem;
                 padding-top: calc(1.2rem + env(safe-area-inset-top));
-                right: 0;
-                background: none;
-                border-bottom: none;
+                right: 0; background: none; border-bottom: none;
             }
-            .nav.open {
-                background: var(--snow);
-                border-bottom: 1px solid var(--border-light);
-            }
+            .nav.open { background: var(--snow); border-bottom: 1px solid var(--border-light); }
 
             .nav-toggle { display:block; }
 
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                gap: 0.75rem;
-                margin-top: 1rem;
-            }
-
+            .nav-links { display: none; flex-direction: column; gap: 0.75rem; margin-top: 1rem; }
             .nav-links.show { display:flex; }
-
-            .nav-links a {
-                font-size: 0.85rem;
-            }
+            .nav-links a { font-size: 0.85rem; }
 
             .nav-mobile-brand { display:block; }
 
             .container {
-                padding-left: 1.5rem;
-                padding-right: 1.5rem;
+                padding-left: 1.5rem; padding-right: 1.5rem;
                 padding-top: calc(5.5rem + env(safe-area-inset-top, 0px));
             }
 
-            .stat-strip {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
+            .stat-strip { grid-template-columns: repeat(2, 1fr); }
             .stat-item:nth-child(2) { border-right: none; }
             .stat-item:nth-child(1),
             .stat-item:nth-child(2) { border-bottom: 1px solid var(--border-dark); }
 
-            .hero h1 {
-                font-size: 1.8rem;
-            }
+            .hero h1 { font-size: 1.8rem; }
 
-            .tab-pills {
-                gap: 0.5rem;
-            }
+            .tab-pills { gap: 0.5rem; }
+            .tab-btn { padding: 0.5rem 1rem; font-size: 0.75rem; }
 
-            .tab-btn {
-                padding: 0.5rem 1rem;
-                font-size: 0.75rem;
-            }
+            .detail-row { flex-direction: column; gap: 0.25rem; }
+            .detail-label { min-width: auto; }
 
-            .detail-row {
-                flex-direction: column;
-                gap: 0.25rem;
-            }
-
-            .detail-label {
-                min-width: auto;
-            }
-
-            .chart-bar {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 0.4rem;
-            }
-
-            .chart-label {
-                min-width: auto;
-            }
+            .chart-bar { flex-direction: column; align-items: stretch; gap: 0.4rem; }
+            .chart-label { min-width: auto; }
         }
 
         @media (max-width: 560px) {
-            .stat-strip {
-                grid-template-columns: 1fr;
-            }
+            .stat-strip { grid-template-columns: 1fr; }
             .stat-item { border-right: none; border-bottom: 1px solid var(--border-dark); }
             .stat-item:last-child { border-bottom: none; }
         }
 
         @media (max-width: 480px) {
-            .container {
-                padding-top: 4.5rem;
-            }
-
-            .nav {
-                padding: 1rem 1rem;
-            }
-
-            .hero h1 {
-                font-size: 1.5rem;
-            }
-
-            .nav-links {
-                padding: 1.2rem 1.5rem;
-            }
-
+            .container { padding-top: 4.5rem; }
+            .nav { padding: 1rem 1rem; }
+            .hero h1 { font-size: 1.5rem; }
+            .nav-links { padding: 1.2rem 1.5rem; }
             .nav-mobile-brand { font-size:0.58rem; }
             .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
         }
 
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+            html { scroll-behavior: auto; }
+        }
+
         /* Print */
         @media print {
-            .nav {
-                display: none;
-            }
-
-            .container {
-                padding-top: 1rem;
-            }
-
-            .tab-content {
-                display: block !important;
-            }
-
-            .tab-pills {
-                display: none;
-            }
+            .nav { display: none; }
+            .container { padding-top: 1rem; }
+            .tab-content { display: block !important; }
+            .tab-pills { display: none; }
         }
     </style>
 </head>
 <body>
-    <nav class="nav">
+    <a href="#main" class="skip-nav">Skip to content</a>
+    <nav class="nav" aria-label="Site navigation">
         <div class="nav-topbar">
             <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
                 <span></span><span></span><span></span>
             </button>
-            <div class="nav-mobile-brand">MENTAL HEALTH & WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+            <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
         </div>
         <div class="nav-links">
             <a href="index.html">HOME</a>
@@ -747,12 +547,12 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container" id="main">
         <!-- Hero -->
         <section class="hero">
-            <div class="eyebrow">Week 1 · Landscape Research</div>
+            <div class="eyebrow">Week 1 · Landscape Research · v3</div>
             <h1>Mapping the global music mental health ecosystem</h1>
-            <p class="subtitle">Comprehensive scan of 111 organizations worldwide, 27 documented in our research database. Key finding: zero existing music industry mental health organizations in Taiwan — confirming the market entry opportunity.</p>
+            <p class="subtitle">A verified scan of the global music-industry mental health field: 111 organizations listed in Backline's Global Resource Hub, nine profiled in depth in our research wiki — and zero serving Taiwan. This report maps who exists, what the evidence says, and where the entry point is.</p>
         </section>
 
         <!-- Primary stats -->
@@ -760,16 +560,16 @@
             <div class="stat-item">
                 <div class="stat-num">111</div>
                 <div class="stat-label">Global Organizations</div>
-                <div class="stat-meta">Backline Directory</div>
+                <div class="stat-meta">Backline directory · verified scrape</div>
             </div>
             <div class="stat-item">
-                <div class="stat-num">27</div>
-                <div class="stat-label">In Our Database</div>
-                <div class="stat-meta">Verified & categorized</div>
+                <div class="stat-num">9</div>
+                <div class="stat-label">Deep Profiles</div>
+                <div class="stat-meta">Research wiki, source-traced</div>
             </div>
             <div class="stat-item">
                 <div class="stat-num" style="color: var(--signal);">0</div>
-                <div class="stat-label">Taiwan Music MH</div>
+                <div class="stat-label">Taiwan Music MH Orgs</div>
                 <div class="stat-meta">Market opportunity</div>
             </div>
         </div>
@@ -778,84 +578,83 @@
         <div class="stat-strip" style="margin-top: 1rem;">
             <div class="stat-item">
                 <div class="stat-num">8</div>
-                <div class="stat-label">Asia-Pacific Orgs</div>
+                <div class="stat-label">Asia-Related Listings</div>
+                <div class="stat-meta">Only India has an independent music MH org</div>
             </div>
             <div class="stat-item">
-                <div class="stat-num">2</div>
-                <div class="stat-label">Academic Papers</div>
+                <div class="stat-num">6</div>
+                <div class="stat-label">Studies in Evidence Base</div>
+                <div class="stat-meta">Canada · Norway · UK · US · Australia</div>
             </div>
             <div class="stat-item">
-                <div class="stat-num">15</div>
-                <div class="stat-label">News Items Tracked</div>
+                <div class="stat-num">NT$5.63B</div>
+                <div class="stat-label">Taiwan MH Policy Plan</div>
+                <div class="stat-meta">全民心理健康韌性計畫 2025–2030</div>
             </div>
         </div>
 
         <!-- Tabs -->
         <div class="tabs-wrapper">
-            <div class="tab-pills">
+            <div class="tab-pills" role="tablist">
                 <button class="tab-btn active" data-tab="overview">Overview</button>
                 <button class="tab-btn" data-tab="organizations">Organizations</button>
                 <button class="tab-btn" data-tab="evidence">Evidence</button>
                 <button class="tab-btn" data-tab="trends">Trends</button>
                 <button class="tab-btn" data-tab="strategy">Strategy</button>
+                <button class="tab-btn" data-tab="sources">Sources &amp; Method</button>
             </div>
 
             <!-- Overview Tab -->
             <div id="overview" class="tab-content active">
                 <div class="correction-banner">
-                    <strong>v2 (2026-04-09)</strong> — Soundcheck reclassified from organization to research study. Org count corrected: 28 → 27.
+                    <strong>v3 (2026-06-11) — full fact-check against primary sources.</strong> Corrections in this revision:
+                    <ul>
+                        <li>Organization profiles rebuilt from verified sources. The previous Amber Health and Jeremy Wilson Foundation cards contained factual errors and were removed (Amber Health is a for-profit clinical service founded 2020, not a Canadian nonprofit; JWF is an Oregon healthcare-access fund founded 2010, not a suicide-prevention org).</li>
+                        <li>Backline benchmark corrected: founded late 2019 (not 2007); 84K+ people served cumulatively (not "200K annually").</li>
+                        <li>Soundcheck figures now quoted as published from the report PDF (ranges and exact items), not invented point values.</li>
+                        <li>Geographic distribution recomputed from the directory snapshot — the field has two poles (US and Europe), not "70% NA/UK/AU".</li>
+                        <li>All Trends items replaced with linked, verifiable news; unverifiable items removed.</li>
+                        <li>Database count updated: the retired spreadsheet count (27) is replaced by 9 source-traced wiki deep profiles.</li>
+                    </ul>
+                    <div style="margin-top:0.6rem;"><strong>v2 (2026-04-09)</strong> — Soundcheck reclassified from organization to research study.</div>
                 </div>
 
                 <div class="card">
                     <h3>Key Findings</h3>
-                    <p style="color: var(--charcoal); font-size: var(--text-body); line-height: 1.7; margin-bottom: 1rem;">Our landscape scan identified 111 organizations globally working in music mental health, wellness, or artist support. Detailed research on 27 organizations reveals:</p>
-                    <ul style="margin-left: 1.5rem; color: var(--charcoal); font-size: var(--text-body); line-height: 1.7;">
-                        <li>Concentrated geographic distribution: 70% in North America / UK / Australia</li>
-                        <li>Business models span nonprofit (60%), for-profit (25%), academic (15%)</li>
-                        <li>Most organizations focus on crisis intervention, mental health education, or artist welfare</li>
-                        <li>Zero dedicated music mental health organizations currently operating in Taiwan</li>
-                        <li>Funding mechanisms: grants, individual donations, government support (limited)</li>
+                    <p style="font-size: var(--text-body); line-height: 1.7; margin-bottom: 1rem;">Backline's Global Resource Hub lists 111 unique organizations working in music-industry mental health and wellness (all 13 directory pages scraped and deduplicated, April 2026). Findings:</p>
+                    <ul style="margin-left: 1.5rem; font-size: var(--text-body); line-height: 1.7;">
+                        <li style="margin-bottom:0.5rem;"><strong>Two geographic poles, not one.</strong> The US leads (~21 standalone orgs plus most multi-country networks), but continental Europe is the second pole — Germany (~8), UK (~7), France (~6), with Austria, Iceland, Switzerland and Romania at 3 each. Australia has 3. <span class="conf conf-verified">✅ directory snapshot</span></li>
+                        <li style="margin-bottom:0.5rem;"><strong>Zero organizations serve Taiwan</strong> — and zero independent, music-specific MH organizations exist anywhere in East or Southeast Asia. Japan's B-Side Project is corporate (Sony-contracted artists only); India's TATVA is the region's only independent music-specific org. <span class="conf conf-verified">✅ 2 scrapes, 2 dates</span></li>
+                        <li style="margin-bottom:0.5rem;"><strong>Service models cluster into five types:</strong> crisis support, case management / healthcare navigation, peer support communities, financial aid, and education/research. Successful organizations combine two or three rather than attempting all five. <span class="conf conf-verified">✅ 9 wiki profiles</span></li>
+                        <li style="margin-bottom:0.5rem;"><strong>Funding is donation- and partnership-driven.</strong> Verified examples: Backline runs on ~100% donations ($874K FY2023, 990); MusiCares is anchored by the Recording Academy ($14M FY2024); Busyhead raised $6.6M through artist-led campaigns; Music Health Alliance reports $1 → $30 leverage on healthcare savings. <span class="conf conf-verified">✅ 990s / official reports</span></li>
+                        <li><strong>Taiwan has a policy tailwind:</strong> the 全民心理健康韌性計畫 commits NT$5.63B over 2025–2030, including free counseling for ages 15–45 — a national framework a music-industry MH NPO can align with. <span class="conf conf-verified">✅ 行政院 / 衛福部</span></li>
                     </ul>
                 </div>
 
                 <div class="card">
                     <h3>Market Entry Assessment</h3>
-                    <p style="color: var(--charcoal); font-size: var(--text-body); line-height: 1.7;">Taiwan's music industry lacks dedicated mental health infrastructure. Global precedent shows strong demand and diverse operational models. Recommended entry point: hybrid nonprofit-social enterprise model with government partnership potential.</p>
+                    <p style="font-size: var(--text-body); line-height: 1.7;">Taiwan has music-therapy organizations (臺灣音樂治療學會, est. 2024; 中華民國應用音樂推廣協會) — but these treat patients <em>with</em> music. No organization supports <em>music professionals</em> as a population. Global precedent shows the most replicable startup path is case management plus a vetted referral network (Backline scaled to 84K+ people served with 8 staff), embedded in existing industry institutions rather than built alone (Help Musicians' Allies model). Recommended entry: nonprofit core with research-first credibility and policy alignment via the 2025–2030 national mental health plan.</p>
                 </div>
             </div>
 
             <!-- Organizations Tab -->
             <div id="organizations" class="tab-content">
+                <p class="section-subtitle">9 deep profiles · tap to expand · each traced to sources</p>
+
                 <div class="card expandable-card" data-expandable>
                     <div class="expandable-header">
                         <div>
-                            <h3 style="margin-bottom: 0.25rem;">Amber Health</h3>
-                            <div class="card-meta">Canada · Nonprofit</div>
+                            <h3>Backline</h3>
+                            <div class="card-meta">US · 501(c)(3) nonprofit · founded late 2019 <span class="conf conf-verified">✅ 990 + official site</span></div>
                         </div>
-                        <span class="expand-icon">▼</span>
+                        <span class="expand-icon" aria-hidden="true">▼</span>
                     </div>
                     <div class="expandable-body">
                         <div class="body-content">
-                            <div class="detail-row">
-                                <div class="detail-label">Type</div>
-                                <div class="detail-value">Nonprofit Organization</div>
-                            </div>
-                            <div class="detail-row">
-                                <div class="detail-label">Country</div>
-                                <div class="detail-value">Canada</div>
-                            </div>
-                            <div class="detail-row">
-                                <div class="detail-label">Focus</div>
-                                <div class="detail-value">Artist mental health support, crisis intervention, peer support networks</div>
-                            </div>
-                            <div class="detail-row">
-                                <div class="detail-label">Key Insight</div>
-                                <div class="detail-value">Grassroots model leveraging artist community networks; strong social media presence</div>
-                            </div>
-                            <div class="detail-row">
-                                <div class="detail-label">Significance</div>
-                                <div class="detail-value">Demonstrates viability of community-driven nonprofit in music sector</div>
-                            </div>
+                            <div class="detail-row"><div class="detail-label">Focus</div><div class="detail-value">Case management with vetted provider network (1,257+); B-LINE 24/7 crisis line (Jan 2026); peer support groups; Global Resource Hub (111+ orgs)</div></div>
+                            <div class="detail-row"><div class="detail-label">Scale</div><div class="detail-value">84,000+ people served cumulatively · FY2023 revenue $874K · Charity Navigator 97% Four-Star</div></div>
+                            <div class="detail-row"><div class="detail-label">Key Insight</div><div class="detail-value">8 staff, ~100% donation-funded, first two years all-volunteer. A referral model scales without building clinical services in-house.</div></div>
+                            <div class="detail-row"><div class="detail-label">For Taiwan</div><div class="detail-value">The most transferable startup blueprint. Its Global Hub has zero Taiwan listings — partnership potential as an East Asia node. Full analysis in the <a href="w2-report-backline-case-study.html">W2 case study</a>.</div></div>
                         </div>
                     </div>
                 </div>
@@ -863,33 +662,140 @@
                 <div class="card expandable-card" data-expandable>
                     <div class="expandable-header">
                         <div>
-                            <h3 style="margin-bottom: 0.25rem;">Jeremy Wilson Foundation</h3>
-                            <div class="card-meta">USA · Nonprofit</div>
+                            <h3>MusiCares</h3>
+                            <div class="card-meta">US · Recording Academy affiliate · founded 1989 <span class="conf conf-verified">✅ 990 + official site</span></div>
                         </div>
-                        <span class="expand-icon">▼</span>
+                        <span class="expand-icon" aria-hidden="true">▼</span>
                     </div>
                     <div class="expandable-body">
                         <div class="body-content">
-                            <div class="detail-row">
-                                <div class="detail-label">Type</div>
-                                <div class="detail-value">Nonprofit Foundation</div>
-                            </div>
-                            <div class="detail-row">
-                                <div class="detail-label">Country</div>
-                                <div class="detail-value">United States</div>
-                            </div>
-                            <div class="detail-row">
-                                <div class="detail-label">Focus</div>
-                                <div class="detail-value">Music industry suicide prevention, mental health awareness, resource development</div>
-                            </div>
-                            <div class="detail-row">
-                                <div class="detail-label">Key Insight</div>
-                                <div class="detail-value">Founded in response to specific tragedy; focuses on prevention & awareness messaging</div>
-                            </div>
-                            <div class="detail-row">
-                                <div class="detail-label">Significance</div>
-                                <div class="detail-value">Shows demand-driven organizational model; crisis-response presents both opportunity and risk</div>
-                            </div>
+                            <div class="detail-row"><div class="detail-label">Focus</div><div class="detail-value">Mental health, addiction recovery (acquired MAP 2004), and financial assistance; annual Wellness in Music survey</div></div>
+                            <div class="detail-row"><div class="detail-label">Scale</div><div class="detail-value">$14.0M revenue (FY2024) · $33.8M assets · 200,000+ served since founding · $100M+ total assistance</div></div>
+                            <div class="detail-row"><div class="detail-label">Key Insight</div><div class="detail-value">Industry-institution anchoring (GRAMMYs) gives durable funding and brand reach — the ceiling of what institutional backing can build.</div></div>
+                            <div class="detail-row"><div class="detail-label">For Taiwan</div><div class="detail-value">US-only scope. A Taiwan analogue would anchor to 金曲獎 / major industry bodies rather than stand alone. Deep dive completed 2026-04-18.</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card expandable-card" data-expandable>
+                    <div class="expandable-header">
+                        <div>
+                            <h3>Music Health Alliance</h3>
+                            <div class="card-meta">US · nonprofit · founded 2013, Nashville <span class="conf conf-verified">✅ official reports</span></div>
+                        </div>
+                        <span class="expand-icon" aria-hidden="true">▼</span>
+                    </div>
+                    <div class="expandable-body">
+                        <div class="body-content">
+                            <div class="detail-row"><div class="detail-label">Focus</div><div class="detail-value">Healthcare navigation: insurance advocacy, MH counseling referrals, financial aid — free for music professionals with 3+ industry years</div></div>
+                            <div class="detail-row"><div class="detail-label">Scale</div><div class="detail-value">40,000+ served · $160M+ healthcare costs saved · every $1 donated ≈ $30 in healthcare resources</div></div>
+                            <div class="detail-row"><div class="detail-label">Key Insight</div><div class="detail-value">Navigation (not service delivery) is the product. Partnered with UMG's Music Industry Mental Health Fund and Project Healthy Minds (Oct 2025).</div></div>
+                            <div class="detail-row"><div class="detail-label">For Taiwan</div><div class="detail-value">Less directly applicable (Taiwan has NHI), but the "navigator" concept maps to guiding musicians through 健保 resources and the new free-counseling program.</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card expandable-card" data-expandable>
+                    <div class="expandable-header">
+                        <div>
+                            <h3>Music Minds Matter / Help Musicians</h3>
+                            <div class="card-meta">UK · charity · parent est. 1921 <span class="conf conf-verified">✅ 2024 annual report</span></div>
+                        </div>
+                        <span class="expand-icon" aria-hidden="true">▼</span>
+                    </div>
+                    <div class="expandable-body">
+                        <div class="body-content">
+                            <div class="detail-row"><div class="detail-label">Focus</div><div class="detail-value">24/7 mental health support line (0808 802 8008), peer support groups, self-care sessions, MH education</div></div>
+                            <div class="detail-row"><div class="detail-label">Scale</div><div class="detail-value">2024: 3,300+ people supported · 1,572 helpline calls · 602 self-care session attendees · £1.0M direct service expenditure</div></div>
+                            <div class="detail-row"><div class="detail-label">Key Insight</div><div class="detail-value">The Allies program embeds MH support into six existing institutions (BIMM, BPI, FAC, MMF, Musicians' Union, WATU) — industry-wide reach without owning every channel.</div></div>
+                            <div class="detail-row"><div class="detail-label">For Taiwan</div><div class="detail-value">The single most relevant partnership model: ally with unions, labels, festivals, and schools instead of operating alone. Deep dive scheduled (June case study).</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card expandable-card" data-expandable>
+                    <div class="expandable-header">
+                        <div>
+                            <h3>The Busyhead Project</h3>
+                            <div class="card-meta">US · nonprofit · founded 2023 by Noah Kahan <span class="conf conf-single">⚠️ single-source</span></div>
+                        </div>
+                        <span class="expand-icon" aria-hidden="true">▼</span>
+                    </div>
+                    <div class="expandable-body">
+                        <div class="body-content">
+                            <div class="detail-row"><div class="detail-label">Focus</div><div class="detail-value">Fundraising and awareness amplifier — distributes funds to community MH organizations; tour-linked Action Villages and fan engagement</div></div>
+                            <div class="detail-row"><div class="detail-label">Scale</div><div class="detail-value">$6.6M+ raised since 2023 · 170+ community organizations supported · co-sponsor of Backline's B-LINE</div></div>
+                            <div class="detail-row"><div class="detail-label">Key Insight</div><div class="detail-value">Artist-as-catalyst: an artist's platform converts into funding velocity that institutional channels can't match.</div></div>
+                            <div class="detail-row"><div class="detail-label">For Taiwan</div><div class="detail-value">A Taiwanese artist champion could compress years of donor development into months — candidate mapping is a live action item.</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card expandable-card" data-expandable>
+                    <div class="expandable-header">
+                        <div>
+                            <h3>Project Healthy Minds</h3>
+                            <div class="card-meta">US · MH tech nonprofit <span class="conf conf-verified">✅ official site</span></div>
+                        </div>
+                        <span class="expand-icon" aria-hidden="true">▼</span>
+                    </div>
+                    <div class="expandable-body">
+                        <div class="body-content">
+                            <div class="detail-row"><div class="detail-label">Focus</div><div class="detail-value">Free digital mental health marketplace — matches users to screened services by need, price, location, and care level</div></div>
+                            <div class="detail-row"><div class="detail-label">Scale</div><div class="detail-value">300,000+ served in the platform's first 18 months; entered music via Music Health Alliance partnership (Oct 2025) and UMG initiative (May 2026)</div></div>
+                            <div class="detail-row"><div class="detail-label">Key Insight</div><div class="detail-value">A tech triage layer can serve a vertical (music) without being music-native — partnerships supply the vertical trust.</div></div>
+                            <div class="detail-row"><div class="detail-label">For Taiwan</div><div class="detail-value">Digital-first matching suits Taiwan's high digital adoption; a Mandarin resource-matching layer could be an early, low-cost product.</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card expandable-card" data-expandable>
+                    <div class="expandable-header">
+                        <div>
+                            <h3>TATVA</h3>
+                            <div class="card-meta">India · wellness organization <span class="conf conf-verified">✅ directory + press</span></div>
+                        </div>
+                        <span class="expand-icon" aria-hidden="true">▼</span>
+                    </div>
+                    <div class="expandable-body">
+                        <div class="body-content">
+                            <div class="detail-row"><div class="detail-label">Focus</div><div class="detail-value">Therapy, crisis support, festival safe spaces and creative retreats for music/arts professionals</div></div>
+                            <div class="detail-row"><div class="detail-label">Key Insight</div><div class="detail-value">Co-running "It's Time to Talk" (launched Nov 2025) — India's first national music-industry MH survey, with Global Music Institute, Goldsmiths (Dr. George Musgrave), and IPRS.</div></div>
+                            <div class="detail-row"><div class="detail-label">For Taiwan</div><div class="detail-value">The only independent music-specific MH org in Asia-Pacific. Its festival-integration model maps onto 大港開唱 / 春天吶喊; its survey is a second methodology template after Soundcheck.</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card expandable-card" data-expandable>
+                    <div class="expandable-header">
+                        <div>
+                            <h3>Sangath</h3>
+                            <div class="card-meta">India · mental health organization <span class="conf conf-verified">✅ directory</span></div>
+                        </div>
+                        <span class="expand-icon" aria-hidden="true">▼</span>
+                    </div>
+                    <div class="expandable-body">
+                        <div class="body-content">
+                            <div class="detail-row"><div class="detail-label">Focus</div><div class="detail-value">Leading Indian MH organization; free telephone counseling; "Listening Circle"; entered music via Global Music Institute collaboration</div></div>
+                            <div class="detail-row"><div class="detail-label">Key Insight</div><div class="detail-value">A general MH org can enter the music vertical through one institutional partnership rather than a new entity.</div></div>
+                            <div class="detail-row"><div class="detail-label">For Taiwan</div><div class="detail-value">The same play is available to established Taiwan MH organizations + music institutions — relevant if building a new NPO proves slow.</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card expandable-card" data-expandable>
+                    <div class="expandable-header">
+                        <div>
+                            <h3>The B-Side Project</h3>
+                            <div class="card-meta">Japan · Sony Music corporate initiative · 2021 <span class="conf conf-verified">✅ directory</span></div>
+                        </div>
+                        <span class="expand-icon" aria-hidden="true">▼</span>
+                    </div>
+                    <div class="expandable-body">
+                        <div class="body-content">
+                            <div class="detail-row"><div class="detail-label">Focus</div><div class="detail-value">Free, confidential counseling by clinical psychologists; wellness workshops — for Sony Music Japan contracted artists only</div></div>
+                            <div class="detail-row"><div class="detail-label">Key Insight</div><div class="detail-value">East Asia's only music-industry MH initiative is corporate and label-exclusive — the broader Japanese industry remains unserved.</div></div>
+                            <div class="detail-row"><div class="detail-label">For Taiwan</div><div class="detail-value">Confirms the regional gap is structural, not cultural: demand exists, but no independent body serves it. First-mover space remains open.</div></div>
                         </div>
                     </div>
                 </div>
@@ -897,213 +803,304 @@
 
             <!-- Evidence Tab -->
             <div id="evidence" class="tab-content">
-                <div class="section-title">Soundcheck Canada Study</div>
-                <p class="section-subtitle">Mental health prevalence in music professionals</p>
+                <div class="section-title">Soundcheck (Revelios / Harrison, 2026)</div>
+                <p class="section-subtitle">Canada's first national music-industry MH study · n=1,216 · final report Feb 2026 <span class="conf conf-verified">✅ verified — report PDF in raw/</span></p>
 
                 <div class="chart-container">
-                    <div class="chart-title">Mental Health Challenges: Music Professionals vs. General Population</div>
+                    <div class="chart-title">Mental health challenges: music professionals vs. general workforce</div>
+                    <div class="chart-note">86% personally experienced MH challenges; prevalence across measures spans 50–86% (anxiety 86%, persistent sadness 70%). General Canadian workforce baseline ≈ 12%.</div>
                     <div class="chart-bar">
-                        <div class="chart-label">Music Professionals</div>
-                        <div class="chart-visual">
-                            <div class="bar" style="width: 68%;">68%</div>
-                        </div>
+                        <div class="chart-label">Music professionals</div>
+                        <div class="chart-visual"><div class="bar" style="width: 86%;">86%</div></div>
                     </div>
                     <div class="chart-bar">
-                        <div class="chart-label">General Population</div>
-                        <div class="chart-visual">
-                            <div class="bar alt" style="width: 12%;">12%</div>
-                        </div>
+                        <div class="chart-label">General workforce</div>
+                        <div class="chart-visual"><div class="bar neutral" style="width: 12%;">12%</div></div>
                     </div>
                 </div>
 
                 <div class="chart-container">
-                    <div class="chart-title">Financial Precarity & Suicidal Ideation</div>
+                    <div class="chart-title">Financial instability &amp; suicidal ideation</div>
+                    <div class="chart-note">84% name financial instability as a leading cause of stress, depression, and suicidal ideation. 43% have thought about taking their own life (lifetime; related lifetime measures range 42–53%) vs. 12% in the general Canadian population.</div>
                     <div class="chart-bar">
-                        <div class="chart-label">Financial Precarity</div>
-                        <div class="chart-visual">
-                            <div class="bar" style="width: 84%;">84%</div>
-                        </div>
+                        <div class="chart-label">Financial instability as leading stressor</div>
+                        <div class="chart-visual"><div class="bar" style="width: 84%;">84%</div></div>
                     </div>
                     <div class="chart-bar">
-                        <div class="chart-label">Suicidal Ideation</div>
-                        <div class="chart-visual">
-                            <div class="bar" style="width: 45%;">45%</div>
-                        </div>
+                        <div class="chart-label">Lifetime suicidal thoughts — musicians</div>
+                        <div class="chart-visual"><div class="bar alt" style="width: 43%;">43%</div></div>
                     </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">Lifetime suicidal thoughts — general pop.</div>
+                        <div class="chart-visual"><div class="bar neutral" style="width: 12%;">12%</div></div>
+                    </div>
+                </div>
+
+                <div class="section-title">Cross-Study Evidence</div>
+                <p class="section-subtitle">From the wiki evidence base · each row traced to its paper</p>
+
+                <div class="table-wrap">
+                <table>
+                    <caption>Prevalence findings across six studies</caption>
+                    <thead>
+                        <tr><th>Study</th><th>Country</th><th>Key finding</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Soundcheck / Harrison 2026</td><td>Canada</td><td>50–86% report MH challenges vs ~12% general workforce (n=1,216)</td></tr>
+                        <tr><td>Musgrave &amp; Lamis 2025</td><td>UK/US</td><td>Musicians among top-5 occupations for suicide; US male musicians 138.7/100K vs 14.2 general</td></tr>
+                        <tr><td>Détari et al. 2020</td><td>Norway</td><td>Higher demands, lower support, more work–family conflict vs general workforce (all p&lt;0.001, n≈10K)</td></tr>
+                        <tr><td>Vaag et al. 2016</td><td>Norway</td><td>Depression/anxiety ~2x higher in musicians than general workforce</td></tr>
+                        <tr><td>Kenny et al. 2014</td><td>Australia</td><td>23% depression, 33% social phobia among orchestral musicians</td></tr>
+                        <tr><td>UK Musicians' Census</td><td>UK</td><td>~30% of professional musicians report poor mental health</td></tr>
+                    </tbody>
+                </table>
                 </div>
 
                 <div class="section-title">Operational Benchmarks</div>
-                <p class="section-subtitle">Established organizations in similar markets</p>
+                <p class="section-subtitle">Corrected · verified against 990 filings and annual reports</p>
 
                 <div class="card">
-                    <div class="card-label">Backline (USA)</div>
-                    <h3>Crisis Support & Helpline</h3>
-                    <div class="detail-row">
-                        <div class="detail-label">Founded</div>
-                        <div class="detail-value">2007</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label">Model</div>
-                        <div class="detail-value">Nonprofit; text/call support for music industry members</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label">Scale</div>
-                        <div class="detail-value">Serves 200,000+ music industry members annually</div>
-                    </div>
+                    <div class="card-label">Backline (US) <span class="conf conf-verified">✅ 990 / ProPublica API</span></div>
+                    <h3>Case Management + Crisis Line</h3>
+                    <div class="detail-row"><div class="detail-label">Founded</div><div class="detail-value">Late 2019 (IRS ruling Apr 2020)</div></div>
+                    <div class="detail-row"><div class="detail-label">Model</div><div class="detail-value">Nonprofit; intake → care plan → vetted referral network; B-LINE 24/7 line since Jan 2026</div></div>
+                    <div class="detail-row"><div class="detail-label">Scale</div><div class="detail-value">FY2023 revenue $874K · 8 staff · 84,000+ people served cumulatively · Charity Navigator 97%</div></div>
                 </div>
 
                 <div class="card">
-                    <div class="card-label">Help Musicians UK</div>
-                    <h3>Integrated Welfare & Financial Aid</h3>
-                    <div class="detail-row">
-                        <div class="detail-label">Founded</div>
-                        <div class="detail-value">1921</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label">Model</div>
-                        <div class="detail-value">Charity providing financial assistance, counseling, and hardship grants</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label">Scale</div>
-                        <div class="detail-value">£2M+ annual budget; 2,000+ beneficiaries</div>
-                    </div>
+                    <div class="card-label">Music Minds Matter / Help Musicians (UK) <span class="conf conf-verified">✅ 2024 annual report</span></div>
+                    <h3>24/7 Support Line + Allies Network</h3>
+                    <div class="detail-row"><div class="detail-label">Founded</div><div class="detail-value">Parent charity 1921; MMM is its mental health service</div></div>
+                    <div class="detail-row"><div class="detail-label">Model</div><div class="detail-value">Charity; helpline + peer support + Allies partnerships with six industry institutions</div></div>
+                    <div class="detail-row"><div class="detail-label">Scale</div><div class="detail-value">2024: 3,300+ people supported · 1,572 helpline calls · £1.0M direct service spend</div></div>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">MusiCares (US) <span class="conf conf-verified">✅ 990</span></div>
+                    <h3>Institutional Anchor Benchmark</h3>
+                    <div class="detail-row"><div class="detail-label">Founded</div><div class="detail-value">1989 (Recording Academy)</div></div>
+                    <div class="detail-row"><div class="detail-label">Model</div><div class="detail-value">Affiliate charity: MH + addiction recovery + financial assistance</div></div>
+                    <div class="detail-row"><div class="detail-label">Scale</div><div class="detail-value">$14.0M revenue (FY2024) · $33.8M assets · 200,000+ served since founding</div></div>
                 </div>
             </div>
 
             <!-- Trends Tab -->
             <div id="trends" class="tab-content">
-                <p class="section-subtitle">Global & Taiwan-specific news items</p>
+                <p class="section-subtitle">Verified developments · every item linked to its source</p>
 
                 <div class="news-item">
-                    <div class="news-title">Backline Expands Text Crisis Support to 24/7 Operations</div>
+                    <div class="news-title">Backline launches B-LINE — 24/7 crisis line for the US music industry</div>
                     <div class="news-meta">
-                        <span class="news-source">Backline Press · March 2026</span>
-                        <span class="news-badge">Verified</span>
+                        <span class="news-source">Jan 27, 2026</span>
+                        <span class="conf conf-verified">✅ verified</span>
+                        <span class="news-links"><a href="https://newsroom.spotify.com/2026-01-27/b-line-mental-health-hotline/" target="_blank" rel="noopener">Spotify Newsroom</a><a href="https://news.pollstar.com/2026/01/27/backline-launches-music-industry-specific-24-7-crisis-hotline/" target="_blank" rel="noopener">Pollstar</a></span>
                     </div>
-                    <div class="news-relevance">Global trend: Digital-first crisis support gaining traction among younger musicians</div>
+                    <div class="news-relevance">Spotify as lead sponsor with Noah Kahan and Live Nation; $3.5M invested to date. Crisis support is converging with case management into full-stack care.</div>
                 </div>
 
                 <div class="news-item">
-                    <div class="news-title">UK Mental Health Strategy Includes Music Sector Outreach</div>
+                    <div class="news-title">Soundcheck final report published — Canada's first national music MH study</div>
                     <div class="news-meta">
-                        <span class="news-source">UK Government · Q1 2026</span>
-                        <span class="news-badge">Verified</span>
+                        <span class="news-source">Feb 2026</span>
+                        <span class="conf conf-verified">✅ verified</span>
+                        <span class="news-links"><a href="https://www.revelios.com/soundcheck/" target="_blank" rel="noopener">Revelios</a></span>
                     </div>
-                    <div class="news-relevance">Policy recognition: Mental health orgs receiving government validation and potential funding</div>
+                    <div class="news-relevance">n=1,216 with policy recommendations (industry code of conduct, minimum fees, portable benefits). The clearest methodology template for a Taiwan study.</div>
                 </div>
 
                 <div class="news-item">
-                    <div class="news-title">Taiwan Music Industry Growth: Emerging Artist Support Gap</div>
+                    <div class="news-title">UMG partners with Amber Health and Project Healthy Minds on artist mental health</div>
                     <div class="news-meta">
-                        <span class="news-source">台灣音樂產業年鑑 · 2026</span>
-                        <span class="news-badge">Verified</span>
+                        <span class="news-source">May 2026</span>
+                        <span class="conf conf-verified">✅ verified</span>
+                        <span class="news-links"><a href="https://www.billboard.com/pro/universal-music-group-mental-health-initiatives/" target="_blank" rel="noopener">Billboard</a><a href="https://musically.com/2026/05/14/two-umg-partnerships-focus-on-mental-health-for-musicians/" target="_blank" rel="noopener">Music Ally</a></span>
                     </div>
-                    <div class="news-relevance">Local opportunity: Growing music industry without corresponding mental health infrastructure</div>
+                    <div class="news-relevance">Major labels are now buying MH capability through partnerships — corporate budgets entering the field create service-provider opportunities.</div>
                 </div>
 
                 <div class="news-item">
-                    <div class="news-title">Australia's Music Venue Association Launches Wellness Initiative</div>
+                    <div class="news-title">"It's Time to Talk" — India's first national music-industry MH survey launches</div>
                     <div class="news-meta">
-                        <span class="news-source">AVMA · February 2026</span>
-                        <span class="news-badge">Verified</span>
+                        <span class="news-source">Nov 2025</span>
+                        <span class="conf conf-verified">✅ verified</span>
+                        <span class="news-links"><a href="https://musically.com/2025/11/13/new-survey-its-time-to-talk-will-examine-indian-musicians-mental-health-challenges/" target="_blank" rel="noopener">Music Ally</a><a href="https://www.gold.ac.uk/news/2025/its-time-to-talk/" target="_blank" rel="noopener">Goldsmiths</a></span>
                     </div>
-                    <div class="news-relevance">Sector evolution: Industry associations now including mental health as core priority</div>
+                    <div class="news-relevance">GMI × TATVA × Goldsmiths (Dr. George Musgrave) × IPRS. The Soundcheck playbook is being replicated in Asia — Taiwan could be next.</div>
                 </div>
 
                 <div class="news-item">
-                    <div class="news-title">Academic: Long-term Mental Health Outcomes in Professional Musicians</div>
+                    <div class="news-title">"Headlining Mental Health: A Tour Study" — IRB-approved research on touring professionals</div>
                     <div class="news-meta">
-                        <span class="news-source">Journal of Occupational Health · 2025</span>
-                        <span class="news-badge">Academic</span>
+                        <span class="news-source">2025– · ongoing</span>
+                        <span class="conf conf-verified">✅ verified</span>
+                        <span class="news-links"><a href="https://www.musicares.org/news/headlining-mental-health-tour-study-amber-health-sign-up" target="_blank" rel="noopener">MusiCares</a><a href="https://www.billboard.com/pro/musicares-amber-health-mental-health-study/" target="_blank" rel="noopener">Billboard</a></span>
                     </div>
-                    <div class="news-relevance">Research foundation: Longitudinal data supporting sustained intervention necessity</div>
+                    <div class="news-relevance">MusiCares × Amber Health studying MH risk factors and on-demand care efficacy on live tours — evidence for the touring-support service line.</div>
                 </div>
 
                 <div class="news-item">
-                    <div class="news-title">Hong Kong Expands Mental Health Services to Entertainment Sector</div>
+                    <div class="news-title">Taiwan's 全民心理健康韌性計畫 in implementation — NT$5.63B over 2025–2030</div>
                     <div class="news-meta">
-                        <span class="news-source">HK Department of Health · January 2026</span>
-                        <span class="news-badge">Verified</span>
+                        <span class="news-source">2025–2030 · policy</span>
+                        <span class="conf conf-verified">✅ verified</span>
+                        <span class="news-links"><a href="https://www.ey.gov.tw/Page/5A8A0CB5B41DA11E/8e8835ef-5b07-4e02-8b19-906b6964a10c" target="_blank" rel="noopener">行政院</a><a href="https://dep.mohw.gov.tw/DOMHAOH/lp-329-107.html" target="_blank" rel="noopener">衛福部心理健康司</a></span>
                     </div>
-                    <div class="news-relevance">Regional: Asia-Pacific showing increasing government engagement with music mental health</div>
+                    <div class="news-relevance">Six strategies across 13 ministries, including free counseling for ages 15–45 — the policy window a Taiwan music MH NPO would align with.</div>
                 </div>
 
                 <div class="news-item">
-                    <div class="news-title">Taiwan Youth Mental Health Crisis: Recorded Industry-Specific Suicides</div>
+                    <div class="news-title">Chappell Roan's Grammy speech triggers Backline's "We Got You!" campaign</div>
                     <div class="news-meta">
-                        <span class="news-source">衛生福利部 · 2025</span>
-                        <span class="news-badge">Verified</span>
+                        <span class="news-source">Feb 2025</span>
+                        <span class="conf conf-verified">✅ verified</span>
+                        <span class="news-links"><a href="https://news.pollstar.com/2025/02/10/backline-launches-we-got-you-campaign-to-support-artists-mental-health-with-donations-from-chappell-roan-noah-kahan-charli-xcx/" target="_blank" rel="noopener">Pollstar</a><a href="https://www.billboard.com/pro/chappell-roan-support-mental-health-charity-backline/" target="_blank" rel="noopener">Billboard</a></span>
                     </div>
-                    <div class="news-relevance">Local urgency: Taiwan-specific data supporting local need narrative</div>
+                    <div class="news-relevance">$25K seed donations from Chappell Roan, Noah Kahan, Charli XCX — matched by Sabrina Carpenter, Live Nation, AEG and others; $353K netted within a month. Artist advocacy converts to funding at speed.</div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-title">Help Musicians &amp; Music Minds Matter release 2025 annual report</div>
+                    <div class="news-meta">
+                        <span class="news-source">2026</span>
+                        <span class="conf conf-verified">✅ verified</span>
+                        <span class="news-links"><a href="https://www.helpmusicians.org.uk/about-us/news/help-musicians-and-music-minds-matter-release-2025-annual-report" target="_blank" rel="noopener">Help Musicians</a></span>
+                    </div>
+                    <div class="news-relevance">Fresh UK benchmark data for the upcoming Music Minds Matter deep-dive case study.</div>
                 </div>
             </div>
 
             <!-- Strategy Tab -->
             <div id="strategy" class="tab-content">
                 <div class="section-title">Strategic Insights</div>
-                <p class="section-subtitle">5 key findings from landscape analysis</p>
+                <p class="section-subtitle">5 findings · each labeled with confidence and evidence</p>
 
                 <div style="counter-reset: insight-counter;">
                     <div class="insight-card">
-                        <div class="insight-title">Market Gap Confirmed in Taiwan</div>
-                        <p class="insight-text">Zero dedicated music mental health organizations currently operating in Taiwan, despite 111 organizations globally demonstrating viability of this sector. Market entry is optimal now.</p>
+                        <div class="insight-title">The Taiwan gap is real — and structural across East Asia <span class="conf conf-verified">✅ verified</span></div>
+                        <p class="insight-text">Two independent scrapes of the 111-org global directory (Apr 3 &amp; 4, 2026) found zero Taiwan organizations and zero independent music-specific MH orgs anywhere in East/Southeast Asia. Japan's only initiative is Sony-internal. Taiwan's music therapy associations serve patients, not music professionals. The first-mover space is open.</p>
                     </div>
 
                     <div class="insight-card">
-                        <div class="insight-title">Hybrid Model Shows Greatest Sustainability</div>
-                        <p class="insight-text">Most successful organizations combine nonprofit legal structure with social enterprise revenue streams (workshops, training, consulting). Pure donation models struggle; pure for-profit models lack credibility.</p>
+                        <div class="insight-title">Case management + referral network is the replicable startup model <span class="conf conf-verified">✅ verified — 990s</span></div>
+                        <p class="insight-text">Backline reached 84K+ people with 8 staff and $874K annual revenue by curating referrals instead of delivering clinical care — and ran its first two years all-volunteer. For a Taiwan founding team without clinical licenses or large capital, this is the proven low-cost entry: intake, care plans, and a vetted Mandarin-speaking provider network.</p>
                     </div>
 
                     <div class="insight-card">
-                        <div class="insight-title">Government Partnership Amplifies Impact</div>
-                        <p class="insight-text">Organizations with government contracts (UK, Australia, Hong Kong) show 3-5x higher operational budgets and reach. Taiwan's reformed mental health policy (2023+) creates partnership opportunity.</p>
+                        <div class="insight-title">Embed in existing institutions; don't build alone <span class="conf conf-verified">✅ verified</span></div>
+                        <p class="insight-text">Help Musicians' Allies program reaches the industry through six existing bodies (union, label association, education). Sangath entered music via one partnership with Global Music Institute. The Taiwan equivalents are identifiable now: 文化部影視及流行音樂產業局, MUST, streaming platforms (KKBOX, Spotify Taiwan), festivals (大港開唱, 春天吶喊), and university music departments.</p>
                     </div>
 
                     <div class="insight-card">
-                        <div class="insight-title">Digital-First Service Delivery is Essential</div>
-                        <p class="insight-text">Crisis support organizations increasingly offer text, chat, and app-based services. Low barrier to access aligns with musician preferences. Development cost: moderate; impact: high.</p>
+                        <div class="insight-title">Artist-as-catalyst funding moves faster than institutional fundraising <span class="conf conf-verified">✅ verified — multiple press</span></div>
+                        <p class="insight-text">One Grammy speech (Chappell Roan, Feb 2025) generated $353K for Backline within a month; Noah Kahan's Busyhead Project has raised $6.6M since 2023. Funding velocity follows artist advocacy. The Taiwan plan should treat "first artist champion" as a milestone equal in weight to government partnership.</p>
                     </div>
 
                     <div class="insight-card">
-                        <div class="insight-title">Academic Legitimacy Accelerates Trust</div>
-                        <p class="insight-text">Organizations partnering with universities and publishing research (Soundcheck, Backline) gain stakeholder trust faster. Taiwan's grad school pathway (2027) provides research credibility engine.</p>
+                        <div class="insight-title">Research-first sequencing builds credibility and policy leverage <span class="conf conf-verified">✅ verified</span></div>
+                        <p class="insight-text">Soundcheck (Canada) turned a national survey into policy recommendations; India replicated the playbook within two years (It's Time to Talk, with Goldsmiths academic backing). A Taiwan musicians' mental health survey — aligned with the NT$5.63B national plan and the 2027 grad school track — is both the NPO's entry wedge and its academic foundation.</p>
                     </div>
                 </div>
 
-                <div class="section-title" style="margin-top: 3rem;">Action Items — Next Week</div>
-                <p class="section-subtitle">W2 objectives</p>
+                <div class="section-title" style="margin-top: 3rem;">Next Steps</div>
+                <p class="section-subtitle">Updated 2026-06-11 · carried into the monthly schedule</p>
 
                 <div class="checklist">
                     <label class="checklist-item">
                         <input type="checkbox">
                         <span class="checklist-checkbox"></span>
-                        <span>Contact Backline leadership for operational best practices interview</span>
+                        <span>Music Minds Matter deep-dive case study (monthly case study slot, June 17) — use the new 2025 annual report</span>
                     </label>
                     <label class="checklist-item">
                         <input type="checkbox">
                         <span class="checklist-checkbox"></span>
-                        <span>Deep-dive case study: Backline financial model, team structure, funding breakdown</span>
+                        <span>Complete TATVA and Sangath full profiles (Week 4 backlog) — include It's Time to Talk methodology notes</span>
                     </label>
                     <label class="checklist-item">
                         <input type="checkbox">
                         <span class="checklist-checkbox"></span>
-                        <span>Research Taiwan government mental health funding mechanisms & NGO registration requirements</span>
+                        <span>Draft a Taiwan musicians' MH survey instrument modeled on Soundcheck + It's Time to Talk</span>
                     </label>
                     <label class="checklist-item">
                         <input type="checkbox">
                         <span class="checklist-checkbox"></span>
-                        <span>Map 3-5 potential government partners (Ministry of Health, local health bureaus)</span>
+                        <span>Map contact points: 文化部影視及流行音樂產業局, 衛福部心理健康司 (全民心理健康韌性計畫 windows)</span>
                     </label>
                     <label class="checklist-item">
                         <input type="checkbox">
                         <span class="checklist-checkbox"></span>
-                        <span>Begin academic paper literature review for grad school track (10 papers minimum)</span>
+                        <span>Shortlist candidate Taiwanese artist partners for a future "We Got You!"-style campaign</span>
                     </label>
                 </div>
             </div>
-        </div>
 
-        <!-- footer removed for consistency with other pages -->
+            <!-- Sources & Method Tab -->
+            <div id="sources" class="tab-content">
+                <div class="section-title">Method</div>
+                <p class="method-note">This report's claims trace to four method classes. <strong>Directory data:</strong> Backline Global Resource Hub scraped page-by-page via browser automation (13 pages, deduplicated to 111 unique organizations), twice on consecutive days (Apr 3–4, 2026) to confirm counts; snapshots stored in <span style="font-family:var(--font-mono); font-size:0.8rem;">wiki/snapshots/</span>. <strong>Financial data:</strong> IRS Form 990 figures pulled from the ProPublica Nonprofit Explorer API (re-verified Jun 11, 2026). <strong>Study data:</strong> quoted directly from primary report PDFs held in <span style="font-family:var(--font-mono); font-size:0.8rem;">raw/papers/</span>. <strong>News &amp; organization facts:</strong> cross-checked against official organization sites and at least one independent press source. Anything not verifiable by two methods is labeled.</p>
+
+                <div class="card" style="padding: 1.25rem;">
+                    <span class="conf conf-verified">✅ Verified</span>&nbsp; cross-checked with 2+ methods or primary source&nbsp;&nbsp;
+                    <span class="conf conf-single">⚠️ Single-source</span>&nbsp; one method only&nbsp;&nbsp;
+                    <span class="conf conf-uncertain">❓ Uncertain</span>&nbsp; tool may not have captured complete content
+                </div>
+
+                <div class="sources-card">
+                    <h3>Sources</h3>
+
+                    <div class="source-section">
+                        <div class="source-label">Primary Data</div>
+                        <div class="source-links">
+                            <a href="https://backline.care/global-resources/" target="_blank" rel="noopener">Backline Global Resource Hub (111-org directory)</a>
+                            <a href="https://projects.propublica.org/nonprofits/organizations/843338712" target="_blank" rel="noopener">ProPublica Nonprofit Explorer — Backline Care Inc. (990s)</a>
+                            <a href="https://projects.propublica.org/nonprofits/organizations/954470909" target="_blank" rel="noopener">ProPublica Nonprofit Explorer — MusiCares (990s)</a>
+                            <a href="https://www.revelios.com/soundcheck/" target="_blank" rel="noopener">Soundcheck final report (Revelios, Feb 2026) — PDF held in raw/papers/</a>
+                        </div>
+                    </div>
+
+                    <div class="source-section">
+                        <div class="source-label">Organizations</div>
+                        <div class="source-links">
+                            <a href="https://backline.care" target="_blank" rel="noopener">Backline</a>
+                            <a href="https://www.musicares.org" target="_blank" rel="noopener">MusiCares</a>
+                            <a href="https://www.musichealthalliance.com" target="_blank" rel="noopener">Music Health Alliance</a>
+                            <a href="https://www.musicmindsmatter.org.uk" target="_blank" rel="noopener">Music Minds Matter</a>
+                            <a href="https://www.helpmusicians.org.uk/about-us/news/help-musicians-release-2024-annual-report" target="_blank" rel="noopener">Help Musicians — 2024 annual report</a>
+                            <a href="https://www.busyheadproject.org/" target="_blank" rel="noopener">The Busyhead Project</a>
+                            <a href="https://www.projecthealthyminds.com" target="_blank" rel="noopener">Project Healthy Minds</a>
+                        </div>
+                    </div>
+
+                    <div class="source-section">
+                        <div class="source-label">Research</div>
+                        <div class="source-links">
+                            <a href="https://doi.org/10.3389/fpsyg.2020.01315" target="_blank" rel="noopener">Détari et al. 2020 — Frontiers in Psychology</a>
+                            <a href="https://www.gold.ac.uk/news/2025/its-time-to-talk/" target="_blank" rel="noopener">It's Time to Talk — Goldsmiths, University of London</a>
+                            <a href="https://www.musicares.org/news/headlining-mental-health-tour-study-amber-health-sign-up" target="_blank" rel="noopener">Headlining Mental Health: A Tour Study — MusiCares</a>
+                        </div>
+                    </div>
+
+                    <div class="source-section">
+                        <div class="source-label">News &amp; Policy</div>
+                        <div class="source-links">
+                            <a href="https://newsroom.spotify.com/2026-01-27/b-line-mental-health-hotline/" target="_blank" rel="noopener">Spotify Newsroom — B-LINE launch (Jan 27, 2026)</a>
+                            <a href="https://news.pollstar.com/2025/02/10/backline-launches-we-got-you-campaign-to-support-artists-mental-health-with-donations-from-chappell-roan-noah-kahan-charli-xcx/" target="_blank" rel="noopener">Pollstar — We Got You! campaign (Feb 2025)</a>
+                            <a href="https://www.billboard.com/pro/universal-music-group-mental-health-initiatives/" target="_blank" rel="noopener">Billboard — UMG mental health initiatives (May 2026)</a>
+                            <a href="https://www.ey.gov.tw/Page/5A8A0CB5B41DA11E/8e8835ef-5b07-4e02-8b19-906b6964a10c" target="_blank" rel="noopener">行政院 — 全民心理健康韌性計畫</a>
+                            <a href="https://dep.mohw.gov.tw/DOMHAOH/lp-329-107.html" target="_blank" rel="noopener">衛福部心理健康司 — 計畫專區</a>
+                        </div>
+                    </div>
+
+                    <div class="source-section">
+                        <div class="source-label">Wiki Articles (internal)</div>
+                        <div class="source-links">
+                            <span style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey);">orgs/ — backline · musicares · music_health_alliance · music_minds_matter · busyhead_project · project_healthy_minds · tatva · sangath · b_side_project</span>
+                            <span style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey);">concepts/ — asia_pacific_gap · taiwan_opportunity · evidence_base · npo_service_models</span>
+                            <span style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey);">papers/ — soundcheck_2026 · detari_2020 · musgrave_lamis_2025</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -1111,12 +1108,8 @@
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const tabName = btn.getAttribute('data-tab');
-
-                // Remove active class from all tabs and contents
                 document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
                 document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-
-                // Add active class to clicked tab and corresponding content
                 btn.classList.add('active');
                 document.getElementById(tabName).classList.add('active');
             });
@@ -1124,7 +1117,8 @@
 
         // Expandable cards
         document.querySelectorAll('[data-expandable]').forEach(card => {
-            card.addEventListener('click', () => {
+            card.addEventListener('click', (e) => {
+                if (e.target.closest('a')) return; // don't toggle when following links
                 card.classList.toggle('expanded');
             });
         });
