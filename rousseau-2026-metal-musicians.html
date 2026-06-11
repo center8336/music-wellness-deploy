@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Metal Musicians' Health — Critical Reading · MH&amp;W</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+      --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 660px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--black);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection { background: var(--signal); color: var(--white); }
+
+    a { color: var(--signal); }
+
+    /* Skip nav */
+    .skip-nav {
+      position: absolute; left: -999px; top: 0; z-index: 200;
+      background: var(--black); color: var(--white);
+      padding: 0.75rem 1.25rem; border-radius: var(--radius);
+      font-family: var(--font-mono); font-size: var(--text-sm);
+    }
+    .skip-nav:focus { left: 1rem; top: 1rem; }
+
+    :focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 2px; }
+
+    /* ===== NAVIGATION (PERIMETRON editorial) ===== */
+    nav.nav {
+      position: fixed; top: 0; left: 0; z-index: 100;
+      display: flex; flex-direction: column;
+      padding: 2rem 2.5rem;
+      padding-top: calc(2rem + env(safe-area-inset-top));
+      background: transparent;
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: var(--font-mono); font-size: 1.1rem; font-weight: 400;
+      color: var(--grey); text-decoration: none; text-transform: uppercase;
+      letter-spacing: 0.08em; transition: color var(--dur) var(--ease);
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a.current { color: var(--white); }
+    .nav-topbar { display:none; }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; z-index:101; -webkit-tap-highlight-color:transparent; }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--snow); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity:0; }
+    .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--snow); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:0.5rem; font-weight:400; color:var(--purple-light); text-transform:uppercase; letter-spacing:0.2em; }
+
+    @media (max-width: 768px) {
+      nav.nav {
+        padding: 1.2rem 1.5rem;
+        padding-top: calc(1.2rem + env(safe-area-inset-top));
+        right: 0; background: none;
+      }
+      nav.nav.open {
+        background: rgba(9, 9, 11, 0.92);
+        -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--border-dark);
+      }
+      .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
+      .nav-toggle { display:block; }
+      .nav-links { display:none; flex-direction:column; gap:0.75rem; margin-top:1rem; }
+      .nav-links.show { display:flex; }
+      .nav-links a { font-size: 0.85rem; }
+      .nav-mobile-brand { display:block; }
+    }
+
+    /* ===== COVER ===== */
+    .cover {
+      position: relative; min-height: 100vh;
+      background: var(--bg-dark); color: var(--snow);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 7rem 2.5rem 4rem;
+      overflow: hidden;
+    }
+    .cover::before {
+      content: ""; position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 18% 28%, rgba(102,103,171,0.22), transparent 42%),
+        radial-gradient(circle at 82% 78%, rgba(212,121,156,0.14), transparent 46%);
+      pointer-events: none;
+    }
+    .cover-inner { position: relative; max-width: var(--max-w); margin: 0 auto; width: 100%; }
+    .spectrum-dots { display: flex; gap: 0.5rem; margin-bottom: 2.5rem; }
+    .spectrum-dots span { width: 12px; height: 12px; border-radius: 50%; }
+    .sd1 { background: var(--spectrum-1); } .sd2 { background: var(--spectrum-2); }
+    .sd3 { background: var(--spectrum-3); } .sd4 { background: var(--spectrum-4); }
+    .sd5 { background: var(--spectrum-5); } .sd6 { background: var(--spectrum-6); }
+    .cover-eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-sm); color: var(--purple-light);
+      text-transform: uppercase; letter-spacing: 0.22em; margin-bottom: 1.5rem;
+    }
+    .cover-title {
+      font-family: var(--font-display); font-size: var(--text-hero); font-weight: 800;
+      line-height: 0.98; letter-spacing: -0.01em; margin-bottom: 1.75rem;
+    }
+    .cover-title .accent { color: var(--purple-light); }
+    .cover-sub {
+      font-family: var(--font-body); font-size: clamp(1.05rem, 2.2vw, 1.4rem); font-weight: 300;
+      color: var(--silver); max-width: 46ch; line-height: 1.5; margin-bottom: 2.5rem;
+    }
+    .cover-meta {
+      font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey-light);
+      text-transform: uppercase; letter-spacing: 0.1em; line-height: 1.9;
+      border-top: 1px solid var(--border-dark); padding-top: 1.5rem; max-width: 60ch;
+    }
+    .cover-meta a { color: var(--purple-light); text-decoration: none; }
+    .cover-meta a:hover { text-decoration: underline; }
+
+    /* ===== SECTIONS ===== */
+    main { display: block; }
+    .section { padding: 4.5rem 2.5rem; }
+    .section-inner { max-width: var(--max-w); margin: 0 auto; }
+    .text-col { max-width: var(--max-w-text); }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal);
+      text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 0.9rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--signal); display: inline-block; }
+    h2.sec-title {
+      font-family: var(--font-display); font-size: var(--text-h1); font-weight: 800;
+      line-height: 1.05; color: var(--black); margin-bottom: 1.5rem;
+    }
+    .section p { font-size: var(--text-body); color: var(--graphite); margin-bottom: 1.15rem; }
+    .section p.lead { font-size: clamp(1.1rem, 1.8vw, 1.3rem); color: var(--charcoal); font-weight: 400; }
+
+    .alt { background: var(--white); border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); }
+
+    /* ===== AT A GLANCE STAT STRIP ===== */
+    .stat-strip {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      background: var(--bg-dark); border-radius: var(--radius-lg); overflow: hidden;
+      margin-top: 2rem;
+    }
+    .stat-item { padding: 1.6rem 1.25rem; border-right: 1px solid var(--border-dark); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; color: var(--white); line-height: 1; }
+    .stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey-light); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.5rem; line-height: 1.4; }
+    .stat-num.purple { color: var(--purple-light); }
+
+    /* ===== DOMAIN GRID ===== */
+    .domain-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2.25rem; }
+    .domain-card {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-left: 3px solid var(--signal); border-radius: var(--radius-lg);
+      padding: 1.4rem 1.5rem;
+    }
+    .domain-card .dc-head { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.6rem; }
+    .domain-card h3 { font-family: var(--font-display); font-size: var(--text-h3); font-weight: 700; color: var(--charcoal); }
+    .dc-count { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--white); background: var(--signal); padding: 0.15rem 0.5rem; border-radius: 100px; white-space: nowrap; letter-spacing: 0.04em; }
+    .domain-card p { font-size: var(--text-sm); color: var(--graphite); margin: 0; }
+    .domain-card .dc-num { color: var(--signal-dim); font-weight: 600; }
+    /* spectrum left-borders to differentiate domains */
+    .domain-card.d1 { border-left-color: var(--spectrum-1); } .domain-card.d1 .dc-count { background: var(--spectrum-1); color: var(--off-black); }
+    .domain-card.d2 { border-left-color: var(--spectrum-5); } .domain-card.d2 .dc-count { background: var(--spectrum-5); color: var(--off-black); }
+    .domain-card.d3 { border-left-color: var(--spectrum-4); } .domain-card.d3 .dc-count { background: var(--spectrum-4); color: var(--off-black); }
+    .domain-card.d4 { border-left-color: var(--spectrum-6); } .domain-card.d4 .dc-count { background: var(--spectrum-6); color: var(--off-black); }
+    .domain-card.d5 { border-left-color: var(--spectrum-2); } .domain-card.d5 .dc-count { background: var(--spectrum-2); color: var(--off-black); }
+    .domain-card.d6 { border-left-color: var(--spectrum-3); } .domain-card.d6 .dc-count { background: var(--spectrum-3); color: var(--off-black); }
+
+    /* ===== COMMENT (numbered critical points) ===== */
+    .comment-list { list-style: none; counter-reset: crit; margin-top: 1.5rem; }
+    .comment-list > li {
+      position: relative; counter-increment: crit;
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg); padding: 1.5rem 1.6rem 1.5rem 4.2rem;
+      margin-bottom: 1rem;
+    }
+    .comment-list > li::before {
+      content: counter(crit); position: absolute; left: 1.25rem; top: 1.4rem;
+      font-family: var(--font-display); font-weight: 800; font-size: 1.5rem;
+      color: var(--signal); line-height: 1;
+    }
+    .comment-list h3 { font-family: var(--font-display); font-size: var(--text-h3); font-weight: 700; color: var(--charcoal); margin-bottom: 0.5rem; }
+    .comment-list p { font-size: var(--text-sm); color: var(--graphite); margin: 0; }
+
+    /* ===== CALLOUT (for this project) ===== */
+    .callout {
+      background: var(--signal-bg); border: 1px solid var(--signal-glow);
+      border-left: 4px solid var(--signal); border-radius: var(--radius-lg);
+      padding: 1.75rem 2rem; margin-top: 1.5rem;
+    }
+    .callout h3 { font-family: var(--font-display); font-size: var(--text-h3); font-weight: 700; color: var(--charcoal); margin-bottom: 0.75rem; }
+    .callout p { font-size: var(--text-body); color: var(--graphite); }
+    .callout p:last-child { margin-bottom: 0; }
+
+    .verdict {
+      font-family: var(--font-display); font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+      font-weight: 600; color: var(--black); line-height: 1.35;
+      border-top: 2px solid var(--signal); padding-top: 1.5rem; margin-top: 2.5rem;
+    }
+
+    /* ===== Citations (§6.11 inline tier) ===== */
+    .cite { font-size: 0.72em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.25em; position: relative; text-transform: none; font-weight: 400; text-decoration: none; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body); font-size: 0.78rem;
+      font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+
+    /* ===== References + confidence ===== */
+    .refs { background-color: var(--white); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem; }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-sm); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs li a { color: var(--signal); }
+
+    .conf-block { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin: 1.75rem 0; }
+    .conf-item { border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.1rem 1.2rem; background: var(--bg-card); }
+    .conf-tag { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem; }
+    .conf-item.ok { border-top: 3px solid var(--spectrum-4); }
+    .conf-item.warn { border-top: 3px solid var(--spectrum-2); }
+    .conf-item.warn2 { border-top: 3px solid var(--spectrum-3); }
+    .conf-item p { font-size: var(--text-sm); color: var(--graphite); margin: 0; }
+
+    .smeta { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 1.5rem; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .section { padding: 3rem 1.5rem; }
+      .cover { padding: 6rem 1.5rem 3rem; }
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(1), .stat-item:nth-child(2) { border-bottom: 1px solid var(--border-dark); }
+      .domain-grid { grid-template-columns: 1fr; }
+      .conf-block { grid-template-columns: 1fr; }
+      .comment-list > li { padding: 1.3rem 1.3rem 1.3rem 3.6rem; }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+      .reveal.in { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open');this.setAttribute('aria-expanded',o)">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="plan.html">PLAN</a>
+      <a href="w1-report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="w2-report-backline-case-study.html">CASE STUDY</a>
+      <a href="research.html" class="current">RESEARCH</a>
+      <a href="insight-2026-06-01.html">INSIGHT</a>
+    </div>
+  </nav>
+
+  <!-- COVER -->
+  <header class="cover">
+    <div class="cover-inner">
+      <div class="spectrum-dots"><span class="sd1"></span><span class="sd2"></span><span class="sd3"></span><span class="sd4"></span><span class="sd5"></span><span class="sd6"></span></div>
+      <div class="cover-eyebrow">Critical Reading · Research</div>
+      <h1 class="cover-title">Health in<br><span class="accent">Metal Musicians</span></h1>
+      <p class="cover-sub">The first attempt to map the physical and mental health of metal — and rock — musicians. A genre-specific catalogue of risk, built on a thin evidence base. Here is what it found, and how to read it.</p>
+      <div class="cover-meta">
+        Rousseau, Möller, Vincent &amp; Charbonnier · <em>Frontiers in Psychology</em> 2026;17:1737492 · Scoping review<br>
+        Published 13 Apr 2026 (open access) · <a href="https://doi.org/10.3389/fpsyg.2026.1737492" target="_blank" rel="noopener">doi.org/10.3389/fpsyg.2026.1737492</a><br>
+        Reading prepared 2026-06-12 — for readers who have not read the paper, or are about to present it.
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- SUMMARY -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="eyebrow">Summary</div>
+        <h2 class="sec-title">What the paper set out to do, and found</h2>
+        <div class="text-col">
+          <p class="lead">Rousseau and colleagues set out to map — for the first time, they argue — what is known about the physical and mental health of metal musicians, a population long crowded out of musicians'-health research by classical players.<sup class="cite"><a href="#src-1" data-src="rousseau-2026" data-tip="Rousseau et al., Health and well-being in metal musicians: a scoping review. Front Psychol 2026;17:1737492. Full text (CC-BY) + Crossref cross-check, accessed 2026-06-12.">1</a></sup></p>
+          <p>Two questions drive the review: the prevalence of physical and mental health disorders among these musicians, and the main risk factors. Expecting thin, scattered evidence, the authors chose a <strong>scoping</strong> rather than a systematic review (Arksey &amp; O'Malley / JBI / PRISMA-ScR) — which carries one consequence worth stating up front: <strong>no methodological quality appraisal was performed</strong>, by design.<sup class="cite"><a href="#src-2" data-src="rousseau-counts" data-tip="Methods/Results: scoping methodology, no quality appraisal (by design); five databases + grey literature; August 2025 search; 47 studies in six domains. As reported in the full text, accessed 2026-06-12.">2</a></sup> They searched five databases plus grey literature in four languages, explicitly excluding studies of metal <em>listeners</em>, and included <strong>47 studies</strong> across six domains: mental health (12), hearing (10), musculoskeletal/neurological (9), vocal (9), mortality (4) and "other" (3).<sup class="cite"><a href="#src-2" data-src="rousseau-counts" data-tip="Six domains and counts — mental 12, hearing 10, musculoskeletal/neuro 9, vocal 9, mortality 4, other 3. As reported in the full text.">2</a></sup></p>
+          <p>The findings are a catalogue of genre-tinted risks rather than firm rates. Hearing loss and tinnitus are common and tend to exceed classical musicians', with one Norwegian survey putting hearing loss at <span style="color:var(--signal-dim);font-weight:600">37.8%</span>, singers worst affected.<sup class="cite"><a href="#src-4" data-src="dom-hearing" data-tip="Hearing: Størmer 2015 (37.8%, 95% CI 28.8–46.8, singers worst); Santoni 2010 / Axelsson 1995 (~22%); Di Stadio 2018 (pop/rock greater risk). As reported in Rousseau et al. 2026 — primaries not independently verified.">4</a></sup> The review's signature physical hazard is <strong>headbanging</strong>, linked in case reports to everything from cervical strain to vertebral-artery aneurysm and traumatic brain injury, with a biomechanical model predicting injury once neck excursions pass ~75° at typical tempos.<sup class="cite"><a href="#src-5" data-src="dom-msk" data-tip="MSK/neuro: Azar 2020 (~68% lifetime in drummers), Rigg 2003 (~61% past-year, guitarists), Patton &amp; McIntosh 2008 BMJ (injury >75° at ~146 BPM), Meiling 2022 (headbanging TBI, all case reports). As reported in Rousseau et al. 2026.">5</a></sup> The most counter-intuitive result concerns the voice: extreme techniques (growling, screaming, distortion) were <em>not</em> shown to damage the larynx in cross-sectional work, and supraglottic phonation may even be protective — a "vocal resilience."<sup class="cite"><a href="#src-6" data-src="dom-vocal" data-tip="Vocal: extreme techniques not shown to damage larynx cross-sectionally; supraglottic phonation may protect (Guzman 2014/2019; Caffier 2018; Aaen 2024); Unterhofer 2025 (12.2% dysphonia, none in full-time/trained). As reported in Rousseau et al. 2026.">6</a></sup> On mental health the picture is heterogeneous: elevated alcohol use, and one study of touring professionals reporting depressive predisposition (50% vs 4%) and suicidality (40% vs 8%) far above the general population, alongside biographical case studies the authors are careful not to over-read.<sup class="cite"><a href="#src-7" data-src="dom-mental" data-tip="Mental health: Newman 2022 (depressive predisposition 50% vs 4%; suicidality 40% vs 8%); Butkovic 2017 (higher alcohol, p<0.05); Stormer 2017; biographical case studies. As reported in Rousseau et al. 2026.">7</a></sup> Four mortality studies report higher-than-population death rates among rock/pop musicians, elevated in women and from cancer.<sup class="cite"><a href="#src-8" data-src="dom-mortality" data-tip="Mortality: Bellis 2007 (album-list stars; cancer 20%, overdose 19%, CVD 14%); Kenny &amp; Asher 2016/2017; Orchard 2024 (SMR 1.35, 95% CI 1.07–1.71). Fame-based sampling frames. As reported in Rousseau et al. 2026.">8</a></sup> The authors conclude that metal musicians share most stressors with other musicians but face genuinely distinctive demands, and that the literature is dominated by case reports and small cross-sections, with a "clear lack of longitudinal and prevalence studies."<sup class="cite"><a href="#src-1" data-src="rousseau-2026" data-tip="Discussion &amp; conclusions, as reported in the full text, accessed 2026-06-12.">1</a></sup></p>
+        </div>
+
+        <div class="stat-strip" role="group" aria-label="At a glance">
+          <div class="stat-item"><div class="stat-num">47</div><div class="stat-label">studies included</div></div>
+          <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">health domains</div></div>
+          <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">databases + grey lit</div></div>
+          <div class="stat-item"><div class="stat-num purple">0</div><div class="stat-label">quality appraisals (by design)</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EVIDENCE BY DOMAIN -->
+    <section class="section alt">
+      <div class="section-inner">
+        <div class="eyebrow">The evidence, by domain</div>
+        <h2 class="sec-title">Six buckets of risk</h2>
+        <div class="text-col">
+          <p>A presenter's cheat-sheet. Each card is one of the review's six themes, with the study count and the headline finding <em>as the review reports it</em> — single numbers from heterogeneous, mostly non-metal samples, so read them as illustrative, not as rates.</p>
+        </div>
+        <div class="domain-grid">
+          <div class="domain-card d1">
+            <div class="dc-head"><h3>Mental health</h3><span class="dc-count">12 studies</span></div>
+            <p>Elevated alcohol use; touring professionals show <span class="dc-num">50%</span> depressive predisposition (vs 4%) and <span class="dc-num">40%</span> suicidality (vs 8%). Biographical cases handled with deliberate caution.<sup class="cite"><a href="#src-7" data-src="dom-mental" data-tip="Newman 2022; Butkovic 2017 (alcohol, p<0.05); Stormer 2017; biographical cases. As reported in Rousseau et al. 2026.">7</a></sup></p>
+          </div>
+          <div class="domain-card d2">
+            <div class="dc-head"><h3>Hearing</h3><span class="dc-count">10 studies</span></div>
+            <p>Loss and tinnitus common and exceeding classical players; <span class="dc-num">37.8%</span> hearing loss in one survey, ~22% in others; tinnitus the most reported complaint.<sup class="cite"><a href="#src-4" data-src="dom-hearing" data-tip="Størmer 2015 (37.8%); Santoni 2010 / Axelsson 1995 (~22%); Di Stadio 2018. As reported in Rousseau et al. 2026.">4</a></sup></p>
+          </div>
+          <div class="domain-card d3">
+            <div class="dc-head"><h3>Musculoskeletal / neuro</h3><span class="dc-count">9 studies</span></div>
+            <p><span class="dc-num">~68%</span> lifetime in drummers, <span class="dc-num">~61%</span> past-year in guitarists; <strong>headbanging</strong> → cervical strain to vertebral-artery aneurysm / TBI (case reports); injury modelled past ~75° neck movement.<sup class="cite"><a href="#src-5" data-src="dom-msk" data-tip="Azar 2020; Rigg 2003; Patton &amp; McIntosh 2008 BMJ; Meiling 2022. As reported in Rousseau et al. 2026.">5</a></sup></p>
+          </div>
+          <div class="domain-card d4">
+            <div class="dc-head"><h3>Vocal</h3><span class="dc-count">9 studies</span></div>
+            <p><strong>Vocal resilience:</strong> growl/scream not shown to damage the larynx cross-sectionally; supraglottic phonation may protect. <span class="dc-num">12.2%</span> dysphonia, none in full-time or formally-trained singers.<sup class="cite"><a href="#src-6" data-src="dom-vocal" data-tip="Guzman 2014/2019; Caffier 2018; Aaen 2024; Unterhofer 2025 (12.2% dysphonia). As reported in Rousseau et al. 2026.">6</a></sup></p>
+          </div>
+          <div class="domain-card d5">
+            <div class="dc-head"><h3>Mortality</h3><span class="dc-count">4 studies</span></div>
+            <p>Higher-than-population death rates in rock/pop stars (SMR <span class="dc-num">1.35</span>), elevated in women and from cancer — but built on fame-based cohorts (album lists, Wikipedia).<sup class="cite"><a href="#src-8" data-src="dom-mortality" data-tip="Bellis 2007; Kenny &amp; Asher 2016/2017; Orchard 2024 (SMR 1.35, 95% CI 1.07–1.71). Fame-based sampling frames. As reported in Rousseau et al. 2026.">8</a></sup></p>
+          </div>
+          <div class="domain-card d6">
+            <div class="dc-head"><h3>Other</h3><span class="dc-count">3 studies</span></div>
+            <p>Skin conditions ("drummer's digit", "guitar nipple"); metal drumming rates as vigorous exercise (VO₂ up to 90% of max). The thinnest, most scattered bucket.<sup class="cite"><a href="#src-2" data-src="rousseau-counts" data-tip="'Other' domain (skin, cardiometabolic) — 3 studies. As reported in the full text, accessed 2026-06-12.">2</a></sup></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMENT -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="eyebrow">Comment</div>
+        <h2 class="sec-title">How to read it — and present it</h2>
+        <div class="text-col">
+          <p class="lead">This is a useful and likeably ambitious paper: the first to gather a genuinely scattered literature, it treats musicians as workers and athletes, picks the right tool for an immature evidence base, and is admirably careful not to pathologise the metal subculture. For arguing that musicians' health is a serious, under-served problem, it is a rich single entry point. Several things, though, should shape how you take it.</p>
+        </div>
+        <ol class="comment-list">
+          <li>
+            <h3>The title says "metal"; the evidence is mostly rock</h3>
+            <p>The population was deliberately widened to metal, rock <em>and</em> punk because metal-only studies are so few, and much of what is cited — the hearing-loss cohorts, every mortality study — is rock/pop, with metal a subset at best.<sup class="cite"><a href="#src-1" data-src="rousseau-2026" data-tip="PCC population = metal/rock/punk; much included evidence is rock/pop. As reported in the full text, accessed 2026-06-12.">1</a></sup> A defensible design choice that quietly inflates the apparent metal evidence base. When presenting, separate the genuinely metal-specific findings (headbanging injury, growl/scream resilience, the few metal-singer and metal-drummer studies) from those borrowed from rock/pop. The honest title is "metal <em>and rock</em> musicians."</p>
+          </li>
+          <li>
+            <h3>It cannot really answer its first question</h3>
+            <p>Research question 1 asks for <em>prevalence</em>, but the authors concede the corpus is "mostly case reports, case series, or small cross-sectional studies" with no longitudinal or true-prevalence designs — and, being a scoping review, they appraised none of it for quality.<sup class="cite"><a href="#src-2" data-src="rousseau-counts" data-tip="Authors state corpus is mostly case reports/small cross-sections; no quality appraisal. As reported in the full text.">2</a></sup> So the headline percentages (37.8%, 68%, 50%, 40%) are not prevalence estimates; they are single numbers from heterogeneous, mostly non-metal samples. Quote any one as "the rate" and you mislead. Lead with the range and the heterogeneity.</p>
+          </li>
+          <li>
+            <h3>The screening numbers don't reconcile</h3>
+            <p>The narrative reports 5,182 references identified and 3,550 screened after de-duplication; the PRISMA flow diagram (Figure 2) reports 5,484 identified, 1,934 duplicates and 3,320 excluded.<sup class="cite"><a href="#src-3" data-src="rousseau-prisma" data-tip="Internal discrepancy: narrative 5,182→3,550 vs Figure 2 flowchart 5,484 / 1,934 dups / 3,320 excluded; both yield 47. Protocol not fully registered. Observed directly in the full text.">3</a></sup> The "47 included" is stable, but for a paper whose value rests on transparent, reproducible mapping, a funnel that disagrees with its own figure is a real blemish — and the authors admit the protocol "was not fully registered." Don't over-lean on the search counts.</p>
+          </li>
+          <li>
+            <h3>Mortality is the thinnest story — and the most quotable</h3>
+            <p>It rests on just four studies, built on an "All-Time Top 1,000 Albums" list and a Wikipedia-derived cohort.<sup class="cite"><a href="#src-8" data-src="dom-mortality" data-tip="Bellis 2007 (album list); Orchard 2024 (Wikipedia-derived). Fame-based frames → selection/survivorship bias; rock/pop stars ≠ working metal musicians. As reported in Rousseau et al. 2026.">8</a></sup> Those sample <em>famous</em> musicians, so fame, selection and survivorship bias are baked in; the people studied are rock/pop stars, not working metal musicians, and the designs cannot speak to causation. "Elevated mortality, especially in women and from cancer" is exactly the line an audience will remember and exactly the one to caveat hardest.</p>
+          </li>
+          <li>
+            <h3>The genuine novelty is "vocal resilience," not the risk list</h3>
+            <p>That extreme vocal techniques appear <em>not</em> to damage the larynx — and may protect it via supraglottic phonation — is counter-intuitive, metal-specific, and the most original thing here.<sup class="cite"><a href="#src-6" data-src="dom-vocal" data-tip="Vocal resilience finding (Guzman, Caffier, Aaen, Unterhofer). Cross-sectional only; longitudinal data absent. As reported in Rousseau et al. 2026.">6</a></sup> Foreground it. By contrast the risk factors the review consolidates (loud volume → hearing loss, repetition → injury, touring → stress) have been known for years; the contribution there is a tidy map, not a discovery. Frame it that way and the paper is stronger, not weaker.</p>
+          </li>
+          <li>
+            <h3>Credit on stigma — but keep anecdote and data apart</h3>
+            <p>The authors explicitly warn against "simplistic associations between extreme music genres and psychopathology" and cleanly exclude fans from musicians, which is the right instinct.<sup class="cite"><a href="#src-7" data-src="dom-mental" data-tip="Authors resist genre↔psychopathology associations and exclude listeners; yet interleave biographical cases with empirical studies. As reported in Rousseau et al. 2026.">7</a></sup> Yet the mental-health section still interleaves biographical case studies (Per "Dead" Ohlin's posthumous Cotard's syndrome; Kurt Cobain read through a "Werther effect" lens) with small empirical studies. For a reader those belong in separate buckets — colourful illustration on one side, measured evidence on the other — or the section sounds more conclusive than it is.</p>
+          </li>
+        </ol>
+
+        <div class="callout">
+          <h3>For this project</h3>
+          <p>The review is a clean "problem-size" citation: it establishes musicians as an occupational population with real, under-managed physical and mental risk, and documents a genuine evidence gap (no longitudinal or prevalence studies; several domains barely touched). It pairs naturally with the Cerdá-Díaz musculoskeletal umbrella review already in our wiki — together they let us say <em>the burden is large and the evidence is immature.</em></p>
+          <p>But it offers nothing Asia- or Taiwan-specific, nothing on the structure of the music economy or access to care, and despite "well-being" in the title it barely touches social or financial well-being — precisely where an NPO service-model angle would live. A breadth and framing citation, and a tidy model of scoping methodology; not evidence for what an intervention should do.</p>
+        </div>
+
+        <p class="verdict">A careful and welcome first map whose real message is the <em>shape of the evidence gap</em>. Read it as an agenda-setter, foreground the metal-specific findings, and discount the rock-star mortality headline.</p>
+      </div>
+    </section>
+
+    <!-- SOURCE / METHOD / CONFIDENCE -->
+    <section class="section alt">
+      <div class="section-inner">
+        <div class="eyebrow">Source · Method · Confidence</div>
+        <h2 class="sec-title">How this reading was verified</h2>
+        <div class="text-col">
+          <p><strong>Source:</strong> Full text of the article, <em>Frontiers in Psychology</em> 17:1737492 (open access, CC-BY 4.0); bibliographic record cross-checked against Crossref.</p>
+          <p><strong>Method:</strong> Publisher full-text HTML (primary source) read in full via web fetch; metadata — title, four authors, journal, volume, publication date, 71-item reference list — independently confirmed via the Crossref API. Two independent retrieval paths (PROJECT_RULES §2, Rule 2).</p>
+        </div>
+        <div class="conf-block">
+          <div class="conf-item ok">
+            <div class="conf-tag" style="color:var(--spectrum-4)">✅ Verified</div>
+            <p>Everything describing the review's own design and reported content — aims, scoping method, no quality appraisal, databases, August 2025 search, 47 studies, the six domains and counts, the named findings and conclusions — taken directly from the published full text and the verified Crossref record.</p>
+          </div>
+          <div class="conf-item warn2">
+            <div class="conf-tag" style="color:var(--spectrum-3)">✅ Verified discrepancy</div>
+            <p>The PRISMA count mismatch in Comment §3 is observed directly in the source (narrative text vs. Figure 2 flow diagram).</p>
+          </div>
+          <div class="conf-item warn">
+            <div class="conf-tag" style="color:var(--spectrum-2)">⚠️ As reported</div>
+            <p>The specific primary-study figures (37.8% hearing loss, 68% musculoskeletal, 50%/40% mental-health, mortality ratios) are quoted <em>as the scoping review reports them</em>; the underlying primary papers were not independently retrieved or appraised. Treat single-study percentages as illustrative (Rule 12).</p>
+          </div>
+        </div>
+        <p class="smeta">Per the published Frontiers full text and Crossref. To upgrade the ⚠️ figures to ✅, add the relevant primary PDFs to raw/papers/.</p>
+
+        <div class="refs">
+          <div class="refs-title">References</div>
+          <ol>
+            <li id="src-1" data-src="rousseau-2026">Rousseau C, Möller D, Vincent A, Charbonnier C. <em>Health and well-being in metal musicians: a scoping review.</em> Front Psychol 2026;17:1737492. <a href="https://doi.org/10.3389/fpsyg.2026.1737492" target="_blank" rel="noopener">DOI 10.3389/fpsyg.2026.1737492</a>. Open access (CC-BY 4.0). Method: publisher full-text HTML read in full (web fetch, accessed 2026-06-12) + Crossref metadata cross-check. ✅ Verified.</li>
+            <li id="src-2" data-src="rousseau-counts">Same source, Methods &amp; Results — scoping methodology with no quality appraisal (by design); six thematic categories with counts (mental 12, hearing 10, musculoskeletal/neuro 9, vocal 9, mortality 4, other 3); 47 studies included. Accessed 2026-06-12. ✅ Verified.</li>
+            <li id="src-3" data-src="rousseau-prisma">Same source — internal discrepancy between the narrative screening counts (5,182 identified; 3,550 screened post-deduplication) and the PRISMA Figure 2 flow diagram (5,484 identified; 1,934 duplicates; 3,320 excluded); both yield 47 included. Protocol not fully registered. Observed directly in the full text, accessed 2026-06-12. ✅ Verified (discrepancy).</li>
+            <li id="src-4" data-src="dom-hearing">Hearing domain, as reported in the review: Størmer et al. 2015 (hearing loss 37.8%, 95% CI 28.8–46.8, singers most affected); Santoni &amp; Fiorini 2010 and Axelsson et al. 1995 (~22%); Di Stadio et al. 2018 (pop/rock greater risk; tinnitus most reported). ⚠️ As reported; primaries not independently verified.</li>
+            <li id="src-5" data-src="dom-msk">Musculoskeletal/neurological, as reported: Azar 2020 (n=831 drummers; 68% lifetime PRMD; wrist 25%, lumbar 24%); Rigg et al. 2003 (n=261 guitarists; ~61% past-year pain); Lee &amp; Altenmüller 2014 (focal dystonia, metal drummer); Patton &amp; McIntosh 2008, <em>BMJ</em> (injury predicted &gt;75° neck movement at ~146 BPM); Meiling et al. 2022 (headbanging TBI — all case reports). ⚠️ As reported.</li>
+            <li id="src-6" data-src="dom-vocal">Vocal, as reported: extreme effects not shown to cause structural laryngeal damage cross-sectionally; supraglottic phonation may protect (Guzman 2014/2019; Caffier 2018; Aaen 2024); Unterhofer et al. 2025 (n=74 metal singers; 12.2% dysphonia, none among full-time professionals or formally-trained singers). ⚠️ As reported.</li>
+            <li id="src-7" data-src="dom-mental">Mental health, as reported: Newman et al. 2022 (depressive predisposition 50% vs 4%; suicidality 40% vs 8%); Butkovic &amp; Rancic Dopudj 2017 (higher alcohol vs classical/general, p&lt;0.05); Stormer et al. 2017 (tinnitus 19.8% vs 0%; anxiety 35.1% vs 17.5%); biographical case studies (Sanches et al. 2022 — Per "Dead" Ohlin / Cotard's; Werther-effect discussion of Cobain). Authors caution against simplistic genre↔psychopathology links. ⚠️ As reported.</li>
+            <li id="src-8" data-src="dom-mortality">Mortality, as reported: Bellis et al. 2007 (n=1,064 album-list stars, ~90% rock; cancer 20%, overdose 19%, CVD 14%); Kenny &amp; Asher 2016/2017 (deaths before 65 above expected — accidents/overdose 259 vs 167, suicide 137 vs 68, all p&lt;0.001; gender differences); Orchard et al. 2024 (Australian rock/pop, Wikipedia-derived n=655; SMR 1.35, 95% CI 1.07–1.71, vs 0.77 footballers; elevated in women and from cancer). ⚠️ As reported; fame-based sampling frames.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+  (function() {
+    'use strict';
+    // Close mobile menu on link tap
+    document.querySelectorAll('.nav-links a').forEach(function(a){
+      a.addEventListener('click', function(){
+        var nav = document.querySelector('.nav');
+        var links = document.querySelector('.nav-links');
+        var toggle = document.querySelector('.nav-toggle');
+        if (links.classList.contains('show')) {
+          links.classList.remove('show'); nav.classList.remove('open');
+          toggle.classList.remove('open'); toggle.setAttribute('aria-expanded','false');
+        }
+      });
+    });
+    // Scroll reveal (respects reduced motion)
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduce && 'IntersectionObserver' in window) {
+      document.querySelectorAll('.section .text-col, .stat-strip, .domain-card, .comment-list > li, .callout, .conf-item, .refs').forEach(function(el){
+        el.classList.add('reveal');
+      });
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: 0.08 });
+      document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+    }
+  })();
+  </script>
+</body>
+</html>
