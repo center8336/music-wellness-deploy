@@ -104,12 +104,12 @@
     .nav-links a.current { color: var(--signal); }
     .nav-topbar { display:none; }
     .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; z-index:101; -webkit-tap-highlight-color:transparent; }
-    .nav-toggle span { display:block; width:22px; height:2px; background:var(--snow); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
     .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
     .nav-toggle.open span:nth-child(2) { opacity:0; }
     .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
-    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--snow); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
-    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:0.5rem; font-weight:400; color:var(--purple-light); text-transform:uppercase; letter-spacing:0.2em; }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:0.5rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:0.2em; }
 
     @media (max-width: 768px) {
       nav.nav {
@@ -118,9 +118,9 @@
         right: 0; background: none;
       }
       nav.nav.open {
-        background: rgba(9, 9, 11, 0.92);
+        background: rgba(244, 244, 245, 0.92);
         -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-        border-bottom: 1px solid var(--border-dark);
+        border-bottom: 1px solid var(--border-light);
       }
       .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
       .nav-toggle { display:block; }
@@ -130,47 +130,47 @@
       .nav-mobile-brand { display:block; }
     }
 
-    /* ===== COVER ===== */
+    /* ===== COVER — standard MH&W research cover (pattern ref: detari-2020-critical.html, codified in PROJECT_RULES §10) ===== */
     .cover {
       position: relative; min-height: 100vh;
-      background: var(--bg-dark); color: var(--snow);
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 7rem 2.5rem 4rem;
-      overflow: hidden;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center;
+      padding: 6rem 1.5rem 4rem;
     }
-    .cover::before {
-      content: ""; position: absolute; inset: 0;
-      background:
-        radial-gradient(circle at 18% 28%, rgba(102,103,171,0.22), transparent 42%),
-        radial-gradient(circle at 82% 78%, rgba(212,121,156,0.14), transparent 46%);
-      pointer-events: none;
-    }
-    .cover-inner { position: relative; max-width: var(--max-w); margin: 0 auto; width: 100%; }
-    .spectrum-dots { display: flex; gap: 0.5rem; margin-bottom: 2.5rem; }
-    .spectrum-dots span { width: 12px; height: 12px; border-radius: 50%; }
-    .sd1 { background: var(--spectrum-1); } .sd2 { background: var(--spectrum-2); }
-    .sd3 { background: var(--spectrum-3); } .sd4 { background: var(--spectrum-4); }
-    .sd5 { background: var(--spectrum-5); } .sd6 { background: var(--spectrum-6); }
+    .cover-inner { max-width: 800px; margin: 0 auto; width: 100%; }
     .cover-eyebrow {
-      font-family: var(--font-mono); font-size: var(--text-sm); color: var(--purple-light);
-      text-transform: uppercase; letter-spacing: 0.22em; margin-bottom: 1.5rem;
+      font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey);
+      text-transform: uppercase; letter-spacing: 0.5em; margin-bottom: 2.5rem;
     }
     .cover-title {
-      font-family: var(--font-display); font-size: var(--text-hero); font-weight: 800;
-      line-height: 0.98; letter-spacing: -0.01em; margin-bottom: 1.75rem;
+      font-family: var(--font-display); font-size: clamp(4.5rem, 11vw, 9rem); font-weight: 800;
+      line-height: 0.85; letter-spacing: -0.03em; text-transform: uppercase;
+      color: var(--black); margin-bottom: 0.25rem;
     }
-    .cover-title .accent { color: var(--purple-light); }
-    .cover-sub {
-      font-family: var(--font-body); font-size: clamp(1.05rem, 2.2vw, 1.4rem); font-weight: 300;
-      color: var(--silver); max-width: 46ch; line-height: 1.5; margin-bottom: 2.5rem;
+    .cover-title .accent { color: var(--purple-deep); }
+    .cover-year {
+      font-family: var(--font-mono); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 400;
+      color: var(--purple-light); letter-spacing: 0.35em; margin-bottom: 2rem;
+    }
+    .cover-subtitle {
+      font-family: var(--font-body); font-size: clamp(1rem, 2vw, 1.25rem); font-weight: 300;
+      font-style: italic; color: var(--graphite); letter-spacing: 0.08em;
+      text-transform: uppercase; line-height: 1.5; margin-bottom: 3rem;
     }
     .cover-meta {
       font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey-light);
-      text-transform: uppercase; letter-spacing: 0.1em; line-height: 1.9;
-      border-top: 1px solid var(--border-dark); padding-top: 1.5rem; max-width: 60ch;
+      line-height: 2; letter-spacing: 0.02em;
     }
-    .cover-meta a { color: var(--purple-light); text-decoration: none; }
-    .cover-meta a:hover { text-decoration: underline; }
+    .cover-meta p { margin: 0; }
+    .cover-meta a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+    .cover-meta a:hover { color: var(--signal); }
+    .cover-hint {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      font-family: var(--font-mono); font-size: var(--text-xs); color: var(--silver);
+      letter-spacing: 0.1em; animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) { .cover-hint { animation: none; } }
 
     /* ===== SECTIONS ===== */
     main { display: block; }
@@ -290,8 +290,10 @@
     /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       .section { padding: 3rem 1.5rem; }
-      .cover { padding: 6rem 1.5rem 3rem; }
-      .cover-title { font-size: clamp(2rem, 8.5vw, 2.3rem); letter-spacing: -0.02em; } /* absolute ceiling so the long word "Musicians" always fits the column */
+      /* Détári-pattern mobile cover values */
+      .cover-title { font-size: clamp(3rem, 14vw, 5rem); }
+      .cover-year { font-size: clamp(1.5rem, 6vw, 2rem); letter-spacing: 0.25em; }
+      .cover-subtitle { font-size: 0.85rem; }
       .stat-strip { grid-template-columns: repeat(2, 1fr); }
       .stat-item:nth-child(2) { border-right: none; }
       .stat-item:nth-child(1), .stat-item:nth-child(2) { border-bottom: 1px solid var(--border-dark); }
@@ -327,19 +329,20 @@
     </div>
   </nav>
 
-  <!-- COVER -->
+  <!-- COVER — standard MH&W research cover (pattern: detari-2020-critical.html) -->
   <header class="cover">
     <div class="cover-inner">
-      <div class="spectrum-dots"><span class="sd1"></span><span class="sd2"></span><span class="sd3"></span><span class="sd4"></span><span class="sd5"></span><span class="sd6"></span></div>
-      <div class="cover-eyebrow">Critical Reading · Research</div>
-      <h1 class="cover-title">Health in<br><span class="accent">Metal Musicians</span></h1>
-      <p class="cover-sub">The first attempt to map the physical and mental health of metal — and rock — musicians. A genre-specific catalogue of risk, built on a thin evidence base. Here is what it found, and how to read it.</p>
+      <p class="cover-eyebrow">MH&amp;W Research</p>
+      <h1 class="cover-title">ROUSSEAU<br><span class="accent">ET AL.</span></h1>
+      <p class="cover-year">2026</p>
+      <p class="cover-subtitle">Health and Well-being in Metal Musicians<br>A Scoping Review</p>
       <div class="cover-meta">
-        Rousseau, Möller, Vincent &amp; Charbonnier · <em>Frontiers in Psychology</em> 2026;17:1737492 · Scoping review<br>
-        Published 13 Apr 2026 (open access) · <a href="https://doi.org/10.3389/fpsyg.2026.1737492" target="_blank" rel="noopener">doi.org/10.3389/fpsyg.2026.1737492</a><br>
-        Reading prepared 2026-06-12 — for readers who have not read the paper, or are about to present it.
+        <p>Frontiers in Psychology, 17, 1737492 · Open access</p>
+        <p><a href="https://doi.org/10.3389/fpsyg.2026.1737492" target="_blank" rel="noopener">DOI: 10.3389/fpsyg.2026.1737492</a></p>
+        <p>Reviewed by 陳棉 · 2026-06-12</p>
       </div>
     </div>
+    <span class="cover-hint">↓ scroll</span>
   </header>
 
   <main id="main">
