@@ -424,7 +424,7 @@
     }
 
 
-    /* Citations (prototype — Financial Model section) */
+    /* Citations (§6.11 standard — report-wide) */
     .cite {
       font-size: 0.72em;
       line-height: 0;
@@ -687,7 +687,7 @@
   <main>
     <!-- Hero Section -->
     <section class="hero">
-      <div class="eyebrow">WEEK 2 · CASE STUDY · V2</div>
+      <div class="eyebrow">WEEK 2 · CASE STUDY · V2.1</div>
       <h1>Backline</h1>
       <p class="subtitle">Operations, finances, and growth trajectory of the US music industry's leading mental health nonprofit</p>
       <div class="confidence-badge">✓ Re-verified 2026-06-11 — IRS 990 via ProPublica API, Charity Navigator, backline.care, independent press</div>
@@ -696,13 +696,13 @@
     <!-- Revision banner -->
     <section style="margin-bottom: 3rem;">
       <div style="background: var(--signal-bg); border: 1px solid var(--signal-glow); border-radius: var(--radius-lg); padding: 1.25rem; font-size: var(--text-sm); color: var(--graphite); max-width: none;">
-        <strong style="color: var(--signal); font-weight: 600;">v2 (2026-06-11) — external fact-check.</strong> Team table now lists the real staff from backline.care/team (placeholders removed). The previous "revenue by source" and "expense breakdown" tables could not be traced to any 990 filing and were replaced with verified 990 composition data. Charity Navigator score updated to the current 97%. Milestones added: We Got You! campaign (Feb 2025), Pollstar award (Apr 2025), Spotify Heart &amp; Soul (Jun 2025).
+        <strong style="color: var(--signal); font-weight: 600;">v2 (2026-06-11) — external fact-check.</strong> Team table now lists the real staff from backline.care/team (placeholders removed). The previous "revenue by source" and "expense breakdown" tables could not be traced to any 990 filing and were replaced with verified 990 composition data. Charity Navigator score updated to the current 97%. Milestones added: We Got You! campaign (Feb 2025), Pollstar award (Apr 2025), Spotify Heart &amp; Soul (Jun 2025). <strong style="color: var(--signal); font-weight: 600;">v2.1 — citation retrofit:</strong> §6.11 inline citations extended from the Financial Model prototype to every section, with per-section References blocks.
       </div>
     </section>
 
     <!-- Section 1: Organization Profile -->
     <section>
-      <h2>Organization Profile</h2>
+      <h2>Organization Profile<sup class="cite"><a href="#prof-src-1" data-src="org-registration" data-tip="Registration data (legal name, EIN, NTEE, addresses): Form 990 filings — ProPublica API, accessed 2026-06-11; mission &amp; ED from backline.care; rating from Charity Navigator (97% Four-Star), accessed 2026-06-11.">1</a></sup></h2>
 
       <div class="table-wrap"><table>
         <tr>
@@ -747,16 +747,25 @@
         </tr>
       </table></div>
 
-      <h3>Founding Story</h3>
+      <h3>Founding Story<sup class="cite"><a href="#prof-src-2" data-src="relix-gleason" data-tip="Relix, &quot;Behind The Scene: Backline's Hilary Gleason&quot;; backline.care (About). Method: press + official site.">2</a></sup></h3>
       <p>Backline was born after the high-profile suicides of musicians Jeff Austin and Neal Casal in 2019. Hilary Gleason assembled eight co-founders — an agent, lawyer, marketing specialist, website builder, branding expert, and others personally affected by mental health crises — and spearheaded a task force of 100+ music industry professionals. They launched mere months before COVID-19, which immediately quadrupled demand for their case management services.</p>
-      <p>Co-founders identified from public records: Hilary Gleason (ED), Hallie Lincoln (Director of Case Management), Joshua Knight (The Team), Matthew Wilson (Arnall, Golden, Gregory LLP), and Stephen Grybowski (Dayglo Presents) — the latter three now serve on the board.</p>
+      <p>Co-founders identified from public records: Hilary Gleason (ED), Hallie Lincoln (Director of Case Management), Joshua Knight (The Team), Matthew Wilson (Arnall, Golden, Gregory LLP), and Stephen Grybowski (Dayglo Presents) — the latter three now serve on the board.<sup class="cite"><a href="#prof-src-3" data-src="backline-team" data-tip="Backline, &quot;Meet Our Team&quot; — backline.care/team, fetched 2026-06-11.">3</a></sup></p>
+
+      <div class="refs" id="refs-profile" data-citation-registry="w2-profile">
+        <div class="refs-title">References — Organization Profile</div>
+        <ol>
+          <li id="prof-src-1" data-src="org-registration">Registration data: Form 990 filings, Backline Care Inc. (EIN 84-3338712) — <a href="https://projects.propublica.org/nonprofits/organizations/843338712" target="_blank" rel="noopener">ProPublica Nonprofit Explorer API</a>, accessed 2026-06-11 (API pull). Mission &amp; leadership: <a href="https://backline.care" target="_blank" rel="noopener">backline.care</a>, accessed 2026-06-11. Rating: <a href="https://www.charitynavigator.org/ein/843338712" target="_blank" rel="noopener">Charity Navigator</a>, 97% Four-Star, accessed 2026-06-11.</li>
+          <li id="prof-src-2" data-src="relix-gleason">Relix, <a href="https://relix.com/articles/detail/behind-the-scene-backlines-hilary-gleason/" target="_blank" rel="noopener">"Behind The Scene: Backline's Hilary Gleason"</a>; backline.care (About). Method: press + official site.</li>
+          <li id="prof-src-3" data-src="backline-team">Backline, <a href="https://backline.care/team/" target="_blank" rel="noopener">"Meet Our Team"</a> — staff, board, and advisor listings. Fetched 2026-06-11.</li>
+        </ol>
+      </div>
     </section>
 
     <!-- Section 2: Operational Model -->
     <section>
       <h2>Operational Model</h2>
 
-      <h3>Key Impact Stats</h3>
+      <h3>Key Impact Stats<sup class="cite"><a href="#ops-src-4" data-src="backline-impact" data-tip="Cumulative impact figures: backline.care, accessed 2026-06-11; also cited in the B-LINE launch press (Spotify Newsroom, Jan 27, 2026).">4</a></sup></h3>
       <div class="stat-strip">
         <div class="stat-item">
           <div class="stat-num">84K+</div>
@@ -776,18 +785,18 @@
         </div>
       </div>
 
-      <h3>Service Lines</h3>
+      <h3>Service Lines<sup class="cite"><a href="#ops-src-5" data-src="backline-services" data-tip="Service descriptions: backline.care/case-management and backline.care service pages, accessed 2026-06-11.">5</a></sup></h3>
 
       <h3 style="margin-top: 1.5rem;">1. Case Management (Core Service)</h3>
       <p>The flagship offering: individuals contact Backline, complete a phone intake assessment, and receive a personalized care plan with curated referrals to therapists, psychiatrists, recovery coaches, and life coaches in Backline's vetted provider network.</p>
 
-      <h3>2. B-LINE 24/7 Crisis Line (Launched January 27, 2026)</h3>
+      <h3>2. B-LINE 24/7 Crisis Line (Launched January 27, 2026)<sup class="cite"><a href="#ops-src-6" data-src="bline-launch" data-tip="Spotify Newsroom, Jan 27, 2026; Pollstar launch coverage; Vibrant Emotional Health press release.">6</a></sup></h3>
       <p>A 24/7 hotline staffed by trained Vibrant Emotional Health counselors, bridging immediate crisis support with seamless handoff to case management. This expansion dramatically lowers the barrier to entry for musicians in acute distress and positions Backline as the comprehensive mental health touchpoint for the music industry.</p>
 
       <h3>3. Support Groups &amp; Community</h3>
       <p>Green Room (peer support monthly meetings for musicians with lived mental health experience) and Real Talks (educational panels and conversations with artists). These foster peer connection and reduce stigma.</p>
 
-      <h3>4. Global Resource Hub (Launched June 2025)</h3>
+      <h3>4. Global Resource Hub (Launched June 2025)<sup class="cite"><a href="#ops-src-7" data-src="heart-soul" data-tip="Spotify Newsroom (Heart &amp; Soul), Jun 12, 2025; Billboard Pro, Jun 2025; backline.care/global-resources.">7</a></sup></h3>
       <p>An international directory of 111+ music-focused mental health organizations, created with Spotify's Heart &amp; Soul initiative — Backline's first international expansion, establishing it as a knowledge broker. Contact: global@backline.care</p>
 
       <h3>5. Care on Tour &amp; Wellness Resources</h3>
@@ -815,7 +824,7 @@
                     (Green Room,               ($129K+ grants)
                      Real Talks)</pre>
 
-      <h3>Team &amp; Organizational Structure</h3>
+      <h3>Team &amp; Organizational Structure<sup class="cite"><a href="#ops-src-8" data-src="backline-team" data-tip="backline.care/team — fetched 2026-06-11. Headcounts (8 staff / 12 board / 3 advisors / 8 clinical advisory) counted from the page.">8</a></sup></h3>
       <p class="note">Source: backline.care/team — fetched 2026-06-11. Operations and clinical staff (8):</p>
       <div class="table-wrap"><table>
         <tr>
@@ -867,7 +876,7 @@
 
       <p class="note">Board: 12 members — incl. Charlie Hellman (Spotify), Chris Keogh (Goldman Sachs), Michael McDonald (Mick Management), Shira E. Saville Psy.D., and co-founders Joshua Knight, Matthew Wilson, Stephen Grybowski. Advisors: 3 (Dr. Charlie Kautz, Dr. Stacy Cohen, Peter Shapiro). Clinical Advisory Board: 8 licensed professionals — incl. Dr. George Musgrave FRSPH (Goldsmiths) and Dr. Dorian A. Lamis. Total organizational footprint: ~31 people. Half the staff hold clinical licenses (LCPC, LCSW, LPC, MSW) — the clinical-to-operations ratio is itself a design choice worth copying.</p>
 
-      <h3>Key Partnerships</h3>
+      <h3>Key Partnerships<sup class="cite"><a href="#ops-src-9" data-src="partnerships" data-tip="Spotify Newsroom B-LINE announcement (partner list), Jan 27, 2026; Pollstar We Got You! coverage, Feb 10, 2025; backline.care.">9</a></sup></h3>
       <div class="table-wrap"><table>
         <tr>
           <th>Partner</th>
@@ -898,15 +907,27 @@
           <td>Complementary financial aid network</td>
         </tr>
       </table></div>
+
+      <div class="refs" id="refs-operational" data-citation-registry="w2-operational">
+        <div class="refs-title">References — Operational Model</div>
+        <ol>
+          <li id="ops-src-4" data-src="backline-impact">Cumulative impact figures (84K+ served, 2,035+ care plans, 1,257+ providers, $129K+ grants): <a href="https://backline.care" target="_blank" rel="noopener">backline.care</a>, accessed 2026-06-11; also cited in the B-LINE launch press (Spotify Newsroom, Jan 27, 2026).</li>
+          <li id="ops-src-5" data-src="backline-services">Service line descriptions: <a href="https://backline.care/case-management/" target="_blank" rel="noopener">backline.care/case-management</a> and backline.care service pages (Green Room, Real Talks, Care on Tour). Accessed 2026-06-11.</li>
+          <li id="ops-src-6" data-src="bline-launch">B-LINE launch: Spotify Newsroom, <a href="https://newsroom.spotify.com/2026-01-27/b-line-mental-health-hotline/" target="_blank" rel="noopener">"B-LINE Is Here to Help"</a>, Jan 27, 2026; <a href="https://news.pollstar.com/2026/01/27/backline-launches-music-industry-specific-24-7-crisis-hotline/" target="_blank" rel="noopener">Pollstar launch coverage</a>; <a href="https://www.vibrant.org/backline-launches-b-line/" target="_blank" rel="noopener">Vibrant Emotional Health press release</a>.</li>
+          <li id="ops-src-7" data-src="heart-soul">Global Resource Hub: Spotify Newsroom, <a href="https://newsroom.spotify.com/2025-06-12/spotifys-heart-soul-initiative/" target="_blank" rel="noopener">"Heart &amp; Soul initiative"</a>, Jun 12, 2025; <a href="https://www.billboard.com/pro/spotify-partners-backline-global-mental-health-resource-hub/" target="_blank" rel="noopener">Billboard Pro</a>, Jun 2025; <a href="https://backline.care/global-resources/" target="_blank" rel="noopener">backline.care/global-resources</a>.</li>
+          <li id="ops-src-8" data-src="backline-team">Backline, <a href="https://backline.care/team/" target="_blank" rel="noopener">"Meet Our Team"</a> — fetched 2026-06-11. Headcounts counted from the page.</li>
+          <li id="ops-src-9" data-src="partnerships">Partnership roles: Spotify Newsroom B-LINE announcement (partner list), Jan 27, 2026; <a href="https://news.pollstar.com/2025/02/10/backline-launches-we-got-you-campaign-to-support-artists-mental-health-with-donations-from-chappell-roan-noah-kahan-charli-xcx/" target="_blank" rel="noopener">Pollstar We Got You! coverage</a>, Feb 10, 2025 (artist donors); backline.care.</li>
+        </ol>
+      </div>
     </section>
 
     <!-- Section 3: Financial Model -->
     <section>
       <h2>Financial Model</h2>
 
-      <p class="note">Every figure in this section carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source without leaving the text; click to jump to the full reference. <em>Citation prototype, 2026-06-11.</em></p>
+      <p class="note">Every figure in this report carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source without leaving the text; click to jump to the full reference. <em>§6.11 citation standard — prototyped here 2026-06-11, extended report-wide in v2.1.</em></p>
 
-      <h3>Revenue &amp; Expenses Summary<sup class="cite"><a href="#fin-src-1" data-src="propublica-990" data-tip="Form 990 filings FY2020–2023 — ProPublica Nonprofit Explorer API, pulled 2026-06-11. Figures quoted directly from filed returns.">1</a></sup></h3>
+      <h3>Revenue &amp; Expenses Summary<sup class="cite"><a href="#fin-src-10" data-src="propublica-990" data-tip="Form 990 filings FY2020–2023 — ProPublica Nonprofit Explorer API, pulled 2026-06-11. Figures quoted directly from filed returns.">10</a></sup></h3>
       <div class="table-wrap"><table>
         <tr>
           <th>Fiscal Year</th>
@@ -952,9 +973,9 @@
         </tr>
       </table></div>
 
-      <p class="note">*2024 from IRS Business Master File extract (revenue $979,361; gross receipts $986,650); full 990 not yet available.<sup class="cite"><a href="#fin-src-2" data-src="irs-bmf-2024" data-tip="IRS Business Master File extract, 2024 tax period, via ProPublica API — pre-filing estimate; full 990 pending.">2</a></sup> CAGR 2020–2023: ~58%. Re-pulled from the ProPublica API on 2026-06-11 — 2020–2023 figures match the filed 990s exactly.</p>
+      <p class="note">*2024 from IRS Business Master File extract (revenue $979,361; gross receipts $986,650); full 990 not yet available.<sup class="cite"><a href="#fin-src-11" data-src="irs-bmf-2024" data-tip="IRS Business Master File extract, 2024 tax period, via ProPublica API — pre-filing estimate; full 990 pending.">11</a></sup> CAGR 2020–2023: ~58%. Re-pulled from the ProPublica API on 2026-06-11 — 2020–2023 figures match the filed 990s exactly.</p>
 
-      <h3>Revenue Growth<sup class="cite"><a href="#fin-src-1" data-src="propublica-990" data-tip="Form 990 filings FY2020–2023 — ProPublica Nonprofit Explorer API, pulled 2026-06-11.">1</a></sup><sup class="cite"><a href="#fin-src-2" data-src="irs-bmf-2024" data-tip="2024 bar: IRS BMF extract — pre-filing estimate.">2</a></sup></h3>
+      <h3>Revenue Growth<sup class="cite"><a href="#fin-src-10" data-src="propublica-990" data-tip="Form 990 filings FY2020–2023 — ProPublica Nonprofit Explorer API, pulled 2026-06-11.">10</a></sup><sup class="cite"><a href="#fin-src-11" data-src="irs-bmf-2024" data-tip="2024 bar: IRS BMF extract — pre-filing estimate.">11</a></sup></h3>
       <div class="bar-chart">
         <div class="bar-item">
           <div class="bar-label">
@@ -993,7 +1014,7 @@
         </div>
       </div>
 
-      <h3>Revenue Composition (Form 990)<sup class="cite"><a href="#fin-src-1" data-src="propublica-990" data-tip="Form 990 filings FY2020–2023 — ProPublica Nonprofit Explorer API, pulled 2026-06-11. Line items quoted directly.">1</a></sup></h3>
+      <h3>Revenue Composition (Form 990)<sup class="cite"><a href="#fin-src-10" data-src="propublica-990" data-tip="Form 990 filings FY2020–2023 — ProPublica Nonprofit Explorer API, pulled 2026-06-11. Line items quoted directly.">10</a></sup></h3>
       <p class="note">The 990 shows Backline is essentially 100% contribution-funded: $0 program service revenue in every filed year. Donor-type splits (individual vs. foundation vs. corporate) are not disclosed in 990 filings — a previous version of this report presented an invented breakdown, removed in v2.</p>
       <div class="table-wrap"><table>
         <tr>
@@ -1032,9 +1053,9 @@
           <td>$10</td>
         </tr>
       </table></div>
-      <p class="note">Known funding drivers (press-verified): Spotify (B-LINE lead sponsor),<sup class="cite"><a href="#fin-src-5" data-src="spotify-bline-2026" data-tip="Spotify Newsroom, Jan 27 2026 — B-LINE launch announcement naming Spotify as lead sponsor.">5</a></sup> Live Nation, AEG Presents; the artist-led We Got You! campaign (Feb 2025) netted $353K within a month of Chappell Roan's Grammy speech,<sup class="cite"><a href="#fin-src-4" data-src="billboard-wgy-2025" data-tip="Billboard Pro, Mar 2025 — $353,000 netted as of the Mar 10, 2025 report.">4</a></sup> with $25K seed gifts from Chappell Roan, Noah Kahan, and Charli XCX.<sup class="cite"><a href="#fin-src-3" data-src="pollstar-wgy-2025" data-tip="Pollstar, Feb 10 2025 — campaign launch; $25K seed donations from Chappell Roan, Noah Kahan, Charli XCX, with industry matching.">3</a></sup></p>
+      <p class="note">Known funding drivers (press-verified): Spotify (B-LINE lead sponsor),<sup class="cite"><a href="#fin-src-14" data-src="spotify-bline-2026" data-tip="Spotify Newsroom, Jan 27 2026 — B-LINE launch announcement naming Spotify as lead sponsor.">14</a></sup> Live Nation, AEG Presents; the artist-led We Got You! campaign (Feb 2025) netted $353K within a month of Chappell Roan's Grammy speech,<sup class="cite"><a href="#fin-src-13" data-src="billboard-wgy-2025" data-tip="Billboard Pro, Mar 2025 — $353,000 netted as of the Mar 10, 2025 report.">13</a></sup> with $25K seed gifts from Chappell Roan, Noah Kahan, and Charli XCX.<sup class="cite"><a href="#fin-src-12" data-src="pollstar-wgy-2025" data-tip="Pollstar, Feb 10 2025 — campaign launch; $25K seed donations from Chappell Roan, Noah Kahan, Charli XCX, with industry matching.">12</a></sup></p>
 
-      <h3>Compensation &amp; Staffing (Form 990)<sup class="cite"><a href="#fin-src-1" data-src="propublica-990" data-tip="Form 990 filings FY2020–2023 — ProPublica Nonprofit Explorer API, pulled 2026-06-11. Compensation lines quoted directly.">1</a></sup></h3>
+      <h3>Compensation &amp; Staffing (Form 990)<sup class="cite"><a href="#fin-src-10" data-src="propublica-990" data-tip="Form 990 filings FY2020–2023 — ProPublica Nonprofit Explorer API, pulled 2026-06-11. Compensation lines quoted directly.">10</a></sup></h3>
       <div class="table-wrap"><table>
         <tr>
           <th>Item</th>
@@ -1074,7 +1095,7 @@
       </table></div>
       <p class="note">The organization ran fully volunteer through 2021 — two years of service delivery before the first paid salary. Detailed program/admin functional splits are not available in the e-filed extracts; they will be added when the full 2024 990 PDF is published.</p>
 
-      <h3>Financial Health Metrics<sup class="cite"><a href="#fin-src-1" data-src="propublica-990" data-tip="Ratios computed from Form 990 figures (FY2020–2023) — derived values, not quoted from any source.">1</a></sup></h3>
+      <h3>Financial Health Metrics<sup class="cite"><a href="#fin-src-10" data-src="propublica-990" data-tip="Ratios computed from Form 990 figures (FY2020–2023) — derived values, not quoted from any source.">10</a></sup></h3>
       <div class="table-wrap"><table>
         <tr>
           <th>Metric</th>
@@ -1117,13 +1138,13 @@
       <div class="refs" id="refs-financial" data-citation-registry="w2-financial">
         <div class="refs-title">References — Financial Model</div>
         <ol>
-          <li id="fin-src-1" data-src="propublica-990">Form 990 filings, Backline Care Inc. (EIN 84-3338712), FY2020–2023 — <a href="https://projects.propublica.org/nonprofits/organizations/843338712" target="_blank" rel="noopener">ProPublica Nonprofit Explorer API</a>. Accessed 2026-06-11. Method: API pull; figures quoted directly from filed returns.</li>
-          <li id="fin-src-2" data-src="irs-bmf-2024">IRS Business Master File extract, 2024 tax period, via the same API. Accessed 2026-06-11. Revenue $979,361; gross receipts $986,650. Pre-filing estimate — full 990 pending.</li>
-          <li id="fin-src-3" data-src="pollstar-wgy-2025">Pollstar, <a href="https://news.pollstar.com/2025/02/10/backline-launches-we-got-you-campaign-to-support-artists-mental-health-with-donations-from-chappell-roan-noah-kahan-charli-xcx/" target="_blank" rel="noopener">"Chappell Roan's Grammys Speech Inspires Donations to Backline's 'We Got You' Campaign"</a>, Feb 10, 2025.</li>
-          <li id="fin-src-4" data-src="billboard-wgy-2025">Billboard Pro, <a href="https://www.billboard.com/pro/chappell-roan-support-mental-health-charity-backline/" target="_blank" rel="noopener">"How Chappell Roan's Support Gave One Music Mental Health Charity a Major Boost"</a>, Mar 2025 — $353K netted as of Mar 10, 2025.</li>
-          <li id="fin-src-5" data-src="spotify-bline-2026">Spotify Newsroom, <a href="https://newsroom.spotify.com/2026-01-27/b-line-mental-health-hotline/" target="_blank" rel="noopener">"B-LINE Is Here to Help"</a>, Jan 27, 2026.</li>
+          <li id="fin-src-10" data-src="propublica-990">Form 990 filings, Backline Care Inc. (EIN 84-3338712), FY2020–2023 — <a href="https://projects.propublica.org/nonprofits/organizations/843338712" target="_blank" rel="noopener">ProPublica Nonprofit Explorer API</a>. Accessed 2026-06-11. Method: API pull; figures quoted directly from filed returns.</li>
+          <li id="fin-src-11" data-src="irs-bmf-2024">IRS Business Master File extract, 2024 tax period, via the same API. Accessed 2026-06-11. Revenue $979,361; gross receipts $986,650. Pre-filing estimate — full 990 pending.</li>
+          <li id="fin-src-12" data-src="pollstar-wgy-2025">Pollstar, <a href="https://news.pollstar.com/2025/02/10/backline-launches-we-got-you-campaign-to-support-artists-mental-health-with-donations-from-chappell-roan-noah-kahan-charli-xcx/" target="_blank" rel="noopener">"Chappell Roan's Grammys Speech Inspires Donations to Backline's 'We Got You' Campaign"</a>, Feb 10, 2025.</li>
+          <li id="fin-src-13" data-src="billboard-wgy-2025">Billboard Pro, <a href="https://www.billboard.com/pro/chappell-roan-support-mental-health-charity-backline/" target="_blank" rel="noopener">"How Chappell Roan's Support Gave One Music Mental Health Charity a Major Boost"</a>, Mar 2025 — $353K netted as of Mar 10, 2025.</li>
+          <li id="fin-src-14" data-src="spotify-bline-2026">Spotify Newsroom, <a href="https://newsroom.spotify.com/2026-01-27/b-line-mental-health-hotline/" target="_blank" rel="noopener">"B-LINE Is Here to Help"</a>, Jan 27, 2026.</li>
         </ol>
-        <p class="refs-note">Prototype convention: every claim-bearing element in this section carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above — machine-checkable before each deploy. Derived ratios are marked as computed, not quoted.</p>
+        <p class="refs-note">Convention: every claim-bearing element in this report carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above — machine-checkable before each deploy. Derived ratios are marked as computed, not quoted.</p>
       </div>
     </section>
 
@@ -1131,7 +1152,7 @@
     <section>
       <h2>Growth Trajectory</h2>
 
-      <h3>Timeline of Milestones</h3>
+      <h3>Timeline of Milestones<sup class="cite"><a href="#growth-src-15" data-src="growth-timeline" data-tip="Revenue figures: Form 990 / IRS BMF via ProPublica API, accessed 2026-06-11. Milestones: Pollstar (Feb 2025), Billboard Pro (Mar 2025), Grateful Web (Apr 2025), Spotify Newsroom (Jun 2025; Jan 2026).">15</a></sup></h3>
       <div class="table-wrap"><table>
         <tr>
           <th>Date</th>
@@ -1187,7 +1208,7 @@
         </tr>
       </table></div>
 
-      <h3>Growth Phases</h3>
+      <h3>Growth Phases<sup class="cite"><a href="#growth-src-16" data-src="propublica-990" data-tip="Phase figures from Form 990 filings (ProPublica API, accessed 2026-06-11); the three-phase framing is analytical — computed, not quoted.">16</a></sup></h3>
       <div class="phases-grid">
         <div class="phase-card">
           <div class="phase-title">Phase 1</div>
@@ -1205,11 +1226,19 @@
           <div class="phase-text">Service expansion (Global Hub, B-LINE crisis line, tour support) and artist-led fundraising (We Got You!). Established as US music industry standard for mental health — first nonprofit to win a Pollstar tour services award. Revenue: $874K → ~$980K (~13% YoY, BMF). Focus shifts from rapid growth to depth and sustainability.</div>
         </div>
       </div>
+
+      <div class="refs" id="refs-growth" data-citation-registry="w2-growth">
+        <div class="refs-title">References — Growth Trajectory</div>
+        <ol>
+          <li id="growth-src-15" data-src="growth-timeline">Timeline: revenue figures from Form 990 filings / IRS BMF via <a href="https://projects.propublica.org/nonprofits/organizations/843338712" target="_blank" rel="noopener">ProPublica API</a>, accessed 2026-06-11; milestones from <a href="https://news.pollstar.com/2025/02/10/backline-launches-we-got-you-campaign-to-support-artists-mental-health-with-donations-from-chappell-roan-noah-kahan-charli-xcx/" target="_blank" rel="noopener">Pollstar (We Got You!, Feb 10, 2025)</a>, <a href="https://www.billboard.com/pro/chappell-roan-support-mental-health-charity-backline/" target="_blank" rel="noopener">Billboard Pro (Mar 2025)</a>, <a href="https://www.gratefulweb.com/articles/backline-wins-tour-services-company-year-36th-annual-pollstar-awards" target="_blank" rel="noopener">Grateful Web (Pollstar Award, Apr 2025)</a>, <a href="https://newsroom.spotify.com/2025-06-12/spotifys-heart-soul-initiative/" target="_blank" rel="noopener">Spotify Newsroom (Heart &amp; Soul, Jun 12, 2025)</a>, <a href="https://newsroom.spotify.com/2026-01-27/b-line-mental-health-hotline/" target="_blank" rel="noopener">Spotify Newsroom (B-LINE, Jan 27, 2026)</a>.</li>
+          <li id="growth-src-16" data-src="propublica-990">Phase figures from Form 990 filings (ProPublica API, accessed 2026-06-11); the three-phase framing is analytical — computed/interpreted, not quoted from any source.</li>
+        </ol>
+      </div>
     </section>
 
     <!-- Section 5: Key Metrics Summary -->
     <section>
-      <h2>Key Metrics Summary</h2>
+      <h2>Key Metrics Summary<sup class="cite"><a href="#metrics-src-18" data-src="metrics-summary" data-tip="Financial rows: Form 990 / IRS BMF via ProPublica API, accessed 2026-06-11. Staffing &amp; services: backline.care, fetched 2026-06-11. Rating: Charity Navigator. Derived rows (CAGR ~58%, footprint ~31) are computed, not quoted.">18</a></sup></h2>
       <div class="stat-strip">
         <div class="stat-item">
           <div class="stat-num">$874K</div>
@@ -1243,6 +1272,13 @@
           <div class="stat-num">0%</div>
           <div class="stat-label">Fundraising Cost</div>
         </div>
+      </div>
+
+      <div class="refs" id="refs-metrics" data-citation-registry="w2-metrics">
+        <div class="refs-title">References — Key Metrics Summary</div>
+        <ol>
+          <li id="metrics-src-18" data-src="metrics-summary">Financial rows: Form 990 / IRS BMF via <a href="https://projects.propublica.org/nonprofits/organizations/843338712" target="_blank" rel="noopener">ProPublica API</a>, accessed 2026-06-11. Staffing &amp; services: <a href="https://backline.care/team/" target="_blank" rel="noopener">backline.care/team</a> and service pages, fetched 2026-06-11. Rating: <a href="https://www.charitynavigator.org/ein/843338712" target="_blank" rel="noopener">Charity Navigator</a>, accessed 2026-06-11. Derived rows (CAGR ~58%, total footprint ~31) are computed, not quoted.</li>
+        </ol>
       </div>
     </section>
 
