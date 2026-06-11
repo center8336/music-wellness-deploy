@@ -1115,12 +1115,35 @@
             });
         });
 
-        // Expandable cards
+        // Expandable cards — mouse + keyboard accessible
         document.querySelectorAll('[data-expandable]').forEach(card => {
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('role', 'button');
+            card.setAttribute('aria-expanded', 'false');
+            const toggle = () => {
+                card.classList.toggle('expanded');
+                card.setAttribute('aria-expanded', card.classList.contains('expanded') ? 'true' : 'false');
+            };
             card.addEventListener('click', (e) => {
                 if (e.target.closest('a')) return; // don't toggle when following links
-                card.classList.toggle('expanded');
+                toggle();
             });
+            card.addEventListener('keydown', (e) => {
+                if ((e.key === 'Enter' || e.key === ' ') && !e.target.closest('a')) {
+                    e.preventDefault();
+                    toggle();
+                }
+            });
+        });
+
+        // Confidence badge tooltips (legend lives in Sources & Method tab)
+        const confTitles = {
+            'conf-verified': 'Verified — cross-checked with 2+ methods or primary source',
+            'conf-single': 'Single-source — one method only, not cross-verified',
+            'conf-uncertain': 'Uncertain — tool may not have captured complete content'
+        };
+        Object.entries(confTitles).forEach(([cls, title]) => {
+            document.querySelectorAll('.' + cls).forEach(el => el.setAttribute('title', title));
         });
 
         // Checklist persistence (wrapped in try-catch for file:// protocol compatibility)
