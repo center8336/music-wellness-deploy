@@ -98,8 +98,9 @@
       color: var(--grey); text-decoration: none; text-transform: uppercase;
       letter-spacing: 0.08em; transition: color var(--dur) var(--ease);
     }
-    .nav-links a:hover { color: var(--white); }
-    .nav-links a.current { color: var(--white); }
+    /* --signal reads on both the dark cover and the light body (white would vanish on light sections) */
+    .nav-links a:hover { color: var(--signal); }
+    .nav-links a.current { color: var(--signal); }
     .nav-topbar { display:none; }
     .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; z-index:101; -webkit-tap-highlight-color:transparent; }
     .nav-toggle span { display:block; width:22px; height:2px; background:var(--snow); margin:5px 0; transition:all 0.3s var(--ease); }
