@@ -68,6 +68,7 @@
       color: var(--black);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden; /* guard: no horizontal scroll on mobile */
     }
     ::selection { background: var(--signal); color: var(--white); }
 
@@ -209,6 +210,7 @@
       background: var(--bg-card); border: 1px solid var(--border-light);
       border-left: 3px solid var(--signal); border-radius: var(--radius-lg);
       padding: 1.4rem 1.5rem;
+      min-width: 0; /* allow grid item to shrink below content min-content */
     }
     .domain-card .dc-head { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.6rem; }
     .domain-card h3 { font-family: var(--font-display); font-size: var(--text-h3); font-weight: 700; color: var(--charcoal); }
@@ -229,7 +231,7 @@
       position: relative; counter-increment: crit;
       background: var(--bg-card); border: 1px solid var(--border-light);
       border-radius: var(--radius-lg); padding: 1.5rem 1.6rem 1.5rem 4.2rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1rem; min-width: 0;
     }
     .comment-list > li::before {
       content: counter(crit); position: absolute; left: 1.25rem; top: 1.4rem;
@@ -289,6 +291,7 @@
     @media (max-width: 768px) {
       .section { padding: 3rem 1.5rem; }
       .cover { padding: 6rem 1.5rem 3rem; }
+      .cover-title { font-size: clamp(2.5rem, 11vw, 3.6rem); } /* keep "Musicians" inside 390px */
       .stat-strip { grid-template-columns: repeat(2, 1fr); }
       .stat-item:nth-child(2) { border-right: none; }
       .stat-item:nth-child(1), .stat-item:nth-child(2) { border-bottom: 1px solid var(--border-dark); }
