@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Design System v6.1 · MH&W</title>
+<title>Design System v6.2 · MH&W</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
 
@@ -15,6 +15,10 @@
      v5.1: type scale bump (body→1rem) + stat-meta + 560px breakpoint
      v6: paper-link v2 (lighter, no duplication) + PERIMETRON-style logo
      v6.1: logo removed from design system (not needed in report pages)
+     v6.2: Research Cover component added (2026-06-12) — standard cover for paper-reading
+           reports (PROJECT_RULES §10): eyebrow / AUTHOR + ET AL. accent / year / italic title /
+           meta / scroll hint, with surname-length title sizing rule. Canonical home of the
+           cover spec (critical-review-format.md §6.1 points here).
      ════════════════════════════════════════ */
   :root {
     /* — Neutral Scale — */
@@ -981,8 +985,7 @@
 
     /* Fixed nav — mobile hamburger */
     .nav-toggle-demo { display: block; }
-    .nav-fixed { padding: 1rem 1.25rem; background: none; border-bottom: none; }
-    .nav-fixed.open { background: rgba(244,244,245,0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    .nav-fixed { padding: 1rem 1.25rem; background: rgba(244,244,245,0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
     .nav-fixed .nav-links-fixed { display: none; flex-direction: column; gap: 0.6rem; margin-top: 0.75rem; }
     .nav-fixed .nav-links-fixed.show { display: flex; }
     .nav-fixed .nav-links-fixed a { font-size: 0.85rem; }
@@ -1036,6 +1039,26 @@
     .demo-nav { gap: 1.5rem; }
     .demo-nav a { font-size: 0.85rem; }
   }
+/* ── Research cover (standard) — demo + spec ── */
+.cover-demo {
+  position: relative;
+  background: var(--snow);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  padding: 3.5rem 1.5rem 3rem;
+  overflow: hidden;
+}
+.rc-eyebrow { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.5em; text-transform: uppercase; color: var(--grey); margin-bottom: 1.5rem; }
+.rc-title { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; line-height: 0.85; letter-spacing: -0.03em; text-transform: uppercase; color: var(--black); margin-bottom: 0.25rem; }
+.rc-accent { color: var(--purple-deep); }
+.rc-year { font-family: var(--font-mono); font-size: clamp(1.2rem, 2.5vw, 1.8rem); color: var(--purple-light); letter-spacing: 0.35em; margin-bottom: 1.25rem; }
+.rc-subtitle { font-family: var(--font-body); font-size: 0.8rem; font-weight: 300; font-style: italic; text-transform: uppercase; letter-spacing: 0.08em; color: var(--graphite); line-height: 1.5; margin-bottom: 1.5rem; }
+.rc-meta { font-family: var(--font-mono); font-size: 0.65rem; color: var(--grey-light); line-height: 1.9; }
+.rc-meta p { margin: 0; }
+.rc-hint { position: absolute; bottom: 0.9rem; left: 50%; transform: translateX(-50%); font-family: var(--font-mono); font-size: 0.65rem; color: var(--silver); letter-spacing: 0.1em; }
+.rc-spec { margin-top: 1rem; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); line-height: 1.9; }
+.rc-spec strong { color: var(--graphite); font-weight: 700; }
 </style>
 </head>
 <body>
@@ -1159,7 +1182,7 @@
 
   <div class="nav-fixed-demo">
     <nav class="nav-fixed">
-      <button class="nav-toggle-demo" aria-label="Menu" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show');this.closest('.nav-fixed').classList.toggle('open')">
+      <button class="nav-toggle-demo" aria-label="Menu" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show')">
         <span></span><span></span><span></span>
       </button>
       <div class="nav-links-fixed">
@@ -1168,7 +1191,6 @@
         <a href="#">Orgs Map</a>
         <a href="#">Case Study</a>
         <a href="#" class="current">Research</a>
-        <a href="#">Insight</a>
       </div>
     </nav>
     <div class="nav-fixed-content" style="padding-top:6rem;">
@@ -1205,6 +1227,31 @@
       Numbered pages track scroll-snap position<br>
       Arrow buttons + keyboard arrows for navigation
     </div>
+  </div>
+</section>
+
+
+<!-- ══ RESEARCH COVER (standard — PROJECT_RULES §10) ══ -->
+<section class="ds-section">
+  <div class="ds-label">Research Cover — standard for paper-reading reports (mandatory · PROJECT_RULES §10)</div>
+
+  <div class="cover-demo">
+    <p class="rc-eyebrow">MH&amp;W Research</p>
+    <div class="rc-title">ROUSSEAU<br><span class="rc-accent">ET AL.</span></div>
+    <p class="rc-year">2026</p>
+    <p class="rc-subtitle">Health and Well-being in Metal Musicians<br>A Scoping Review</p>
+    <div class="rc-meta">
+      <p>Frontiers in Psychology, 17, 1737492</p>
+      <p>DOI: 10.3389/fpsyg.2026.1737492</p>
+      <p>Reviewed by 陳棉 · 2026-06-12</p>
+    </div>
+    <span class="rc-hint">↓ scroll</span>
+  </div>
+
+  <div class="rc-spec">
+    <strong>Anatomy (top → bottom):</strong> eyebrow "MH&amp;W Research" (mono, 0.5em tracking) · AUTHOR surname + "ET AL." accent in <strong>--purple-deep</strong> (Syne 800, uppercase, line-height 0.85) · year (mono, <strong>--purple-light</strong>, 0.35em tracking) · paper title (italic uppercase, --graphite) · meta: journal · DOI · "Reviewed by 陳棉 · date" (mono, --grey-light) · pulsing "↓ scroll" hint (reduced-motion safe). Light --snow page, centered both axes, inner column 800px.<br><br>
+    <strong>Title sizing:</strong> base clamp(4.5rem, 11vw, 9rem) fits ≈6-char surnames (Syne 800 ≈ 1.05em/char — budget n × 1.05 × font ≤ column). Longer names scale ×6/n: ROUSSEAU (8) → desktop clamp(3.5rem, 8.5vw, 6.5rem), mobile min(9.5vw, 2.3rem) — use a rem ceiling on mobile (vw mis-resolves in the §6.9 preview iframe).<br><br>
+    <strong>Reference implementations:</strong> research-detari-2020.html · research-rousseau-2026.html. Cover is the mandatory layer; everything after it is creative freedom (§6.3).
   </div>
 </section>
 
@@ -1404,7 +1451,7 @@
 <!-- ══ FOOTER ══ -->
 <section class="ds-section" style="text-align: center; padding-top: 2rem; border-top: 1px solid var(--border-light);">
   <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); letter-spacing: 0.35em; text-transform: uppercase;">
-    Design System v6.1 · MH&W · 陳棉 · April 2026
+    Design System v6.2 · MH&W · 陳棉 · June 2026
   </p>
   <p style="font-family: var(--font-body); font-size: var(--text-xs); color: var(--grey-light); margin-top: 0.6rem; font-weight: 300; letter-spacing: 0.06em;">
     Purple Duo: #CBB9D6 + #6667AB · Spectrum: 6 accent colors · Ref: PERIMETRON
