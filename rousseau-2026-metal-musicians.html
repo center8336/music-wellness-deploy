@@ -292,8 +292,9 @@
     /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       .section { padding: 3rem 1.5rem; }
-      /* Détári-pattern mobile cover values (title scaled for 8-char ROUSSEAU) */
-      .cover-title { font-size: clamp(2.4rem, 11vw, 4rem); }
+      /* Détári-pattern mobile cover values (title scaled for 8-char ROUSSEAU).
+         min() with a rem ceiling: vw inflates inside the §6.9 preview iframe, rem doesn't */
+      .cover-title { font-size: min(11vw, 2.6rem); }
       .cover-year { font-size: clamp(1.5rem, 6vw, 2rem); letter-spacing: 0.25em; }
       .cover-subtitle { font-size: 0.85rem; }
       .stat-strip { grid-template-columns: repeat(2, 1fr); }
