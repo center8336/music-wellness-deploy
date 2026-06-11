@@ -424,6 +424,95 @@
     }
 
 
+    /* Citations (prototype — Financial Model section) */
+    .cite {
+      font-size: 0.72em;
+      line-height: 0;
+      vertical-align: super;
+      letter-spacing: 0;
+    }
+
+    .cite a {
+      font-family: var(--font-mono);
+      color: var(--signal);
+      padding: 0.1em 0.25em;
+      position: relative;
+      text-transform: none;
+      font-weight: 400;
+    }
+
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+
+    .cite a[data-tip]:hover::after,
+    .cite a[data-tip]:focus::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: 150%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--off-black);
+      color: var(--snow);
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 300;
+      line-height: 1.5;
+      letter-spacing: 0.01em;
+      text-transform: none;
+      text-align: left;
+      padding: 0.6rem 0.85rem;
+      border-radius: var(--radius);
+      width: max-content;
+      max-width: min(320px, 78vw);
+      white-space: normal;
+      z-index: 60;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      pointer-events: none;
+    }
+
+    /* References block */
+    .refs {
+      background-color: var(--white);
+      border: 1px solid var(--border-light);
+      border-left: 3px solid var(--signal);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .refs-title {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--grey);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 0.75rem;
+    }
+
+    .refs ol {
+      margin: 0 0 0.75rem 1.25rem;
+      padding: 0;
+    }
+
+    .refs li {
+      font-size: var(--text-sm);
+      color: var(--graphite);
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+
+    .refs li:target {
+      background: var(--signal-bg);
+      border-radius: var(--radius);
+      outline: 2px solid var(--signal-glow);
+    }
+
+    .refs-note {
+      font-size: var(--text-xs);
+      color: var(--grey);
+      margin-bottom: 0;
+      max-width: none;
+    }
+
     /* Hamburger toggle */
     .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; z-index:101; -webkit-tap-highlight-color:transparent; }
     .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
@@ -815,9 +904,9 @@
     <section>
       <h2>Financial Model</h2>
 
-      <p class="note">Source: ProPublica Nonprofit Explorer API — verified IRS 990 filings</p>
+      <p class="note">Every figure in this section carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source without leaving the text; click to jump to the full reference. <em>Citation prototype, 2026-06-11.</em></p>
 
-      <h3>Revenue &amp; Expenses Summary</h3>
+      <h3>Revenue &amp; Expenses Summary<sup class="cite"><a href="#fin-src-1" data-src="propublica-990" data-tip="Form 990 filings FY2020–2023 — ProPublica Nonprofit Explorer API, pulled 2026-06-11. Figures quoted directly from filed returns.">1</a></sup></h3>
       <div class="table-wrap"><table>
         <tr>
           <th>Fiscal Year</th>
@@ -863,9 +952,9 @@
         </tr>
       </table></div>
 
-      <p class="note">*2024 from IRS Business Master File extract (revenue $979,361; gross receipts $986,650); full 990 not yet available. CAGR 2020–2023: ~58%. Re-pulled from the ProPublica API on 2026-06-11 — 2020–2023 figures match the filed 990s exactly.</p>
+      <p class="note">*2024 from IRS Business Master File extract (revenue $979,361; gross receipts $986,650); full 990 not yet available.<sup class="cite"><a href="#fin-src-2" data-src="irs-bmf-2024" data-tip="IRS Business Master File extract, 2024 tax period, via ProPublica API — pre-filing estimate; full 990 pending.">2</a></sup> CAGR 2020–2023: ~58%. Re-pulled from the ProPublica API on 2026-06-11 — 2020–2023 figures match the filed 990s exactly.</p>
 
-      <h3>Revenue Growth</h3>
+      <h3>Revenue Growth<sup class="cite"><a href="#fin-src-1" data-src="propublica-990" data-tip="Form 990 filings FY2020–2023 — ProPublica Nonprofit Explorer API, pulled 2026-06-11.">1</a></sup><sup class="cite"><a href="#fin-src-2" data-src="irs-bmf-2024" data-tip="2024 bar: IRS BMF extract — pre-filing estimate.">2</a></sup></h3>
       <div class="bar-chart">
         <div class="bar-item">
           <div class="bar-label">
@@ -904,7 +993,7 @@
         </div>
       </div>
 
-      <h3>Revenue Composition (Form 990)</h3>
+      <h3>Revenue Composition (Form 990)<sup class="cite"><a href="#fin-src-1" data-src="propublica-990" data-tip="Form 990 filings FY2020–2023 — ProPublica Nonprofit Explorer API, pulled 2026-06-11. Line items quoted directly.">1</a></sup></h3>
       <p class="note">The 990 shows Backline is essentially 100% contribution-funded: $0 program service revenue in every filed year. Donor-type splits (individual vs. foundation vs. corporate) are not disclosed in 990 filings — a previous version of this report presented an invented breakdown, removed in v2.</p>
       <div class="table-wrap"><table>
         <tr>
@@ -943,9 +1032,9 @@
           <td>$10</td>
         </tr>
       </table></div>
-      <p class="note">Known funding drivers (press-verified): Spotify (B-LINE lead sponsor), Live Nation, AEG Presents; the artist-led We Got You! campaign (Feb 2025) netted $353K within a month of Chappell Roan's Grammy speech, with $25K seed gifts from Chappell Roan, Noah Kahan, and Charli XCX.</p>
+      <p class="note">Known funding drivers (press-verified): Spotify (B-LINE lead sponsor),<sup class="cite"><a href="#fin-src-5" data-src="spotify-bline-2026" data-tip="Spotify Newsroom, Jan 27 2026 — B-LINE launch announcement naming Spotify as lead sponsor.">5</a></sup> Live Nation, AEG Presents; the artist-led We Got You! campaign (Feb 2025) netted $353K within a month of Chappell Roan's Grammy speech,<sup class="cite"><a href="#fin-src-4" data-src="billboard-wgy-2025" data-tip="Billboard Pro, Mar 2025 — $353,000 netted as of the Mar 10, 2025 report.">4</a></sup> with $25K seed gifts from Chappell Roan, Noah Kahan, and Charli XCX.<sup class="cite"><a href="#fin-src-3" data-src="pollstar-wgy-2025" data-tip="Pollstar, Feb 10 2025 — campaign launch; $25K seed donations from Chappell Roan, Noah Kahan, Charli XCX, with industry matching.">3</a></sup></p>
 
-      <h3>Compensation &amp; Staffing (Form 990)</h3>
+      <h3>Compensation &amp; Staffing (Form 990)<sup class="cite"><a href="#fin-src-1" data-src="propublica-990" data-tip="Form 990 filings FY2020–2023 — ProPublica Nonprofit Explorer API, pulled 2026-06-11. Compensation lines quoted directly.">1</a></sup></h3>
       <div class="table-wrap"><table>
         <tr>
           <th>Item</th>
@@ -985,7 +1074,7 @@
       </table></div>
       <p class="note">The organization ran fully volunteer through 2021 — two years of service delivery before the first paid salary. Detailed program/admin functional splits are not available in the e-filed extracts; they will be added when the full 2024 990 PDF is published.</p>
 
-      <h3>Financial Health Metrics</h3>
+      <h3>Financial Health Metrics<sup class="cite"><a href="#fin-src-1" data-src="propublica-990" data-tip="Ratios computed from Form 990 figures (FY2020–2023) — derived values, not quoted from any source.">1</a></sup></h3>
       <div class="table-wrap"><table>
         <tr>
           <th>Metric</th>
@@ -1024,6 +1113,18 @@
           <td>Revenue growth far outpaced expense growth in the latest filed year</td>
         </tr>
       </table></div>
+
+      <div class="refs" id="refs-financial" data-citation-registry="w2-financial">
+        <div class="refs-title">References — Financial Model</div>
+        <ol>
+          <li id="fin-src-1" data-src="propublica-990">Form 990 filings, Backline Care Inc. (EIN 84-3338712), FY2020–2023 — <a href="https://projects.propublica.org/nonprofits/organizations/843338712" target="_blank" rel="noopener">ProPublica Nonprofit Explorer API</a>. Accessed 2026-06-11. Method: API pull; figures quoted directly from filed returns.</li>
+          <li id="fin-src-2" data-src="irs-bmf-2024">IRS Business Master File extract, 2024 tax period, via the same API. Accessed 2026-06-11. Revenue $979,361; gross receipts $986,650. Pre-filing estimate — full 990 pending.</li>
+          <li id="fin-src-3" data-src="pollstar-wgy-2025">Pollstar, <a href="https://news.pollstar.com/2025/02/10/backline-launches-we-got-you-campaign-to-support-artists-mental-health-with-donations-from-chappell-roan-noah-kahan-charli-xcx/" target="_blank" rel="noopener">"Chappell Roan's Grammys Speech Inspires Donations to Backline's 'We Got You' Campaign"</a>, Feb 10, 2025.</li>
+          <li id="fin-src-4" data-src="billboard-wgy-2025">Billboard Pro, <a href="https://www.billboard.com/pro/chappell-roan-support-mental-health-charity-backline/" target="_blank" rel="noopener">"How Chappell Roan's Support Gave One Music Mental Health Charity a Major Boost"</a>, Mar 2025 — $353K netted as of Mar 10, 2025.</li>
+          <li id="fin-src-5" data-src="spotify-bline-2026">Spotify Newsroom, <a href="https://newsroom.spotify.com/2026-01-27/b-line-mental-health-hotline/" target="_blank" rel="noopener">"B-LINE Is Here to Help"</a>, Jan 27, 2026.</li>
+        </ol>
+        <p class="refs-note">Prototype convention: every claim-bearing element in this section carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above — machine-checkable before each deploy. Derived ratios are marked as computed, not quoted.</p>
+      </div>
     </section>
 
     <!-- Section 4: Growth Trajectory -->
