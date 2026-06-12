@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>News &amp; Trends — June 2026 | MH&amp;W</title>
+<meta name="description" content="Monthly scan of the music mental health field: global developments, new data, Asia-Pacific & Taiwan, emerging trends. June 12, 2026.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+:root {
+  /* — Neutral Scale — */
+  --black: #09090b;
+  --off-black: #141416;
+  --charcoal: #27272a;
+  --graphite: #3f3f46;
+  --grey: #71717a;
+  --grey-light: #a1a1aa;
+  --silver: #d4d4d8;
+  --snow: #f4f4f5;
+  --white: #fafafa;
+
+  /* — Purple Duo — */
+  --purple-light: #CBB9D6;
+  --purple-deep: #6667AB;
+  --signal: var(--purple-deep);
+  --signal-dim: #565799;
+  --signal-bg: rgba(102, 103, 171, 0.08);
+  --signal-glow: rgba(102, 103, 171, 0.2);
+
+  /* — Spectrum (PERIMETRON-inspired accents) — */
+  --spectrum-1: #d4799c;  /* rose */
+  --spectrum-2: #e8a87c;  /* peach */
+  --spectrum-3: #d4c97a;  /* sand */
+  --spectrum-4: #85c9a3;  /* sage */
+  --spectrum-5: #7aaed4;  /* sky */
+  --spectrum-6: #b8a9d4;  /* lilac */
+
+  /* — Surfaces — */
+  --bg-light: var(--snow);
+  --bg-dark: var(--black);
+  --bg-card: var(--white);
+  --bg-card-dark: var(--off-black);
+  --border-light: rgba(0,0,0,0.07);
+  --border-dark: rgba(255,255,255,0.1);
+
+  /* — Typography: 3 font stacks — */
+  --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+  --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --font: var(--font-body);
+
+  /* — Sizing — */
+  --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+  --text-h1: clamp(2rem, 4.5vw, 3rem);
+  --text-h2: clamp(1.5rem, 3vw, 2rem);
+  --text-h3: clamp(1rem, 2vw, 1.3rem);
+  --text-body: 1rem;
+  --text-sm: 0.875rem;
+  --text-xs: 0.75rem;
+
+  /* — Motion — */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur: 0.3s;
+  --dur-slow: 0.6s;
+
+  /* — Layout — */
+  --radius: 4px;
+  --radius-lg: 6px;
+  --max-w: 1100px;
+  --max-w-text: 660px;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:var(--font);
+  background:var(--snow);
+  color:var(--graphite);
+  line-height:1.65;
+  overflow-x:hidden;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+}
+::selection { background:var(--signal); color:white; }
+
+.skip-nav {
+  position:absolute; top:-40px; left:0;
+  background:var(--signal); color:white;
+  padding:8px 16px; text-decoration:none;
+  z-index:999; border-radius:var(--radius);
+  font-size:var(--text-sm); font-weight:600;
+}
+.skip-nav:focus { top:0; }
+
+/* ── Nav ───────────────────────────── */
+nav.nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:grid; grid-template-columns:auto 1fr;
+  align-items:center; padding:1.25rem 2rem;
+  background:rgba(244,244,245,0.85); backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border-light);
+}
+.brand-mark {
+  font-family:var(--font-display); font-weight:800;
+  font-size:0.85rem; color:var(--black); letter-spacing:0.08em;
+  text-transform:uppercase;
+}
+.nav-links { display:flex; gap:2.5rem; justify-content:flex-end; }
+.nav-links a {
+  font-family:var(--font-mono); font-size:0.75rem;
+  text-transform:uppercase; letter-spacing:0.08em;
+  color:var(--graphite); text-decoration:none; transition:color var(--dur) var(--ease);
+}
+.nav-links a:hover { color:var(--black); }
+.nav-links a.current { color:var(--black); }
+.nav-links a:focus-visible { outline:2px solid var(--signal); outline-offset:2px; border-radius:var(--radius); }
+.nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+.nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:0.5rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:0.2em; }
+.nav-toggle {
+  display:none; background:none; border:none; cursor:pointer;
+  padding:0.5rem; z-index:101; -webkit-tap-highlight-color:transparent;
+}
+.nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
+.nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+.nav-toggle.open span:nth-child(2) { opacity:0; }
+.nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+
+/* ── Masthead (wire-bulletin style, not full-viewport) ── */
+.masthead {
+  padding:9rem 2rem 0; max-width:var(--max-w); margin:0 auto;
+}
+.masthead-rule { border-top:2px solid var(--black); }
+.masthead-top {
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;
+  font-family:var(--font-mono); font-size:var(--text-xs);
+  text-transform:uppercase; letter-spacing:0.14em; color:var(--grey);
+  padding:0.6rem 0 2rem;
+}
+.masthead-top .live-dot { color:var(--signal); }
+.masthead h1 {
+  font-family:var(--font-display); font-weight:800; color:var(--black);
+  font-size:var(--text-h1); line-height:1.02; text-transform:uppercase;
+  letter-spacing:-0.01em; max-width:900px;
+}
+.masthead h1 em { font-style:normal; color:var(--signal); }
+.masthead-dek {
+  max-width:var(--max-w-text); margin:1.5rem 0 0;
+  font-size:1.05rem; color:var(--charcoal);
+}
+.stat-strip {
+  display:grid; grid-template-columns:repeat(4, 1fr); gap:1px;
+  background:var(--border-light); border:1px solid var(--border-light);
+  border-radius:var(--radius-lg); overflow:hidden; margin:2.5rem 0 0;
+}
+.stat-item { background:var(--bg-card); padding:1.2rem 1.4rem; }
+.stat-num {
+  font-family:var(--font-display); font-weight:800; font-size:1.9rem;
+  color:var(--black); line-height:1.1;
+}
+.stat-num .accent { color:var(--signal); }
+.stat-label {
+  font-family:var(--font-mono); font-size:0.68rem; text-transform:uppercase;
+  letter-spacing:0.12em; color:var(--grey); margin-top:0.35rem;
+}
+
+/* ── Sections ───────────────────────── */
+.section { max-width:var(--max-w); margin:0 auto; padding:4.5rem 2rem 1rem; }
+.section-head { display:flex; align-items:baseline; gap:1rem; border-bottom:2px solid var(--black); padding-bottom:0.6rem; margin-bottom:2rem; }
+.section-no {
+  font-family:var(--font-mono); font-size:var(--text-xs); color:white;
+  background:var(--purple-deep); border-radius:999px; padding:0.15rem 0.7rem;
+  letter-spacing:0.1em;
+}
+.section-head h2 {
+  font-family:var(--font-display); font-weight:800; text-transform:uppercase;
+  font-size:var(--text-h2); color:var(--black); letter-spacing:-0.01em;
+}
+.section-head .section-sub { margin-left:auto; font-family:var(--font-mono); font-size:var(--text-xs); color:var(--grey); text-transform:uppercase; letter-spacing:0.12em; }
+
+.exec { max-width:var(--max-w); margin:0 auto; padding:3.5rem 2rem 0; }
+.exec-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:2.5rem; }
+.exec p { margin-bottom:1rem; }
+.exec p strong { color:var(--black); }
+.exec .correction {
+  border-left:3px solid var(--spectrum-1); background:var(--bg-card);
+  padding:1rem 1.25rem; border-radius:0 var(--radius-lg) var(--radius-lg) 0;
+  font-size:var(--text-sm);
+}
+.exec .correction .tag { font-family:var(--font-mono); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--spectrum-1); display:block; margin-bottom:0.3rem; }
+
+/* News items */
+.item { border-bottom:1px solid var(--border-light); padding:1.8rem 0; max-width:860px; }
+.item:last-of-type { border-bottom:none; }
+.item-head { display:flex; align-items:baseline; flex-wrap:wrap; gap:0.6rem 1rem; margin-bottom:0.7rem; }
+.item-date { font-family:var(--font-mono); font-size:var(--text-xs); color:var(--signal); letter-spacing:0.08em; white-space:nowrap; }
+.item h3 { font-family:var(--font-display); font-weight:700; font-size:var(--text-h3); color:var(--black); }
+.item p { margin-bottom:0.8rem; max-width:78ch; }
+.item p strong { color:var(--black); }
+.conf {
+  font-family:var(--font-mono); font-size:0.66rem; letter-spacing:0.06em;
+  text-transform:uppercase; padding:0.18rem 0.55rem; border-radius:999px;
+  border:1px solid var(--border-light); background:var(--bg-card); color:var(--grey);
+  white-space:nowrap;
+}
+.conf.ok { color:var(--graphite); border-color:var(--spectrum-4); }
+.conf.warn { color:var(--graphite); border-color:var(--spectrum-2); }
+.conf.unk { color:var(--graphite); border-color:var(--spectrum-1); }
+
+/* Citations (§6.11 inline tier) */
+sup.cite { line-height:0; }
+sup.cite a {
+  font-family:var(--font-mono); font-size:0.72em; color:var(--signal);
+  text-decoration:none; position:relative; text-transform:none;
+  padding:0 0.1em;
+}
+sup.cite a:hover { color:var(--signal-dim); }
+sup.cite a:focus-visible { outline:2px solid var(--signal); outline-offset:2px; border-radius:var(--radius); }
+@media (hover:hover) {
+  sup.cite a[data-tip]:hover::after {
+    content:attr(data-tip);
+    position:absolute; bottom:1.6em; left:50%; transform:translateX(-50%);
+    background:var(--off-black); color:var(--snow);
+    font-family:var(--font-mono); font-size:0.62rem; line-height:1.5;
+    letter-spacing:0.02em; text-transform:none; white-space:normal;
+    width:max-content; max-width:min(320px, 78vw);
+    padding:0.55rem 0.7rem; border-radius:var(--radius-lg);
+    box-shadow:0 6px 24px rgba(0,0,0,0.25); z-index:50; pointer-events:none;
+  }
+}
+.refs { max-width:860px; margin-top:1.2rem; border-top:1px dashed var(--silver); padding-top:0.9rem; }
+.refs summary {
+  font-family:var(--font-mono); font-size:var(--text-xs); color:var(--grey);
+  text-transform:uppercase; letter-spacing:0.14em; cursor:pointer; list-style:none;
+}
+.refs summary::-webkit-details-marker { display:none; }
+.refs summary::before { content:'+ '; color:var(--signal); }
+.refs[open] summary::before { content:'− '; }
+.refs summary:focus-visible { outline:2px solid var(--signal); outline-offset:2px; border-radius:var(--radius); }
+.refs ol { margin:0.8rem 0 0 1.2rem; }
+.refs li {
+  font-family:var(--font-mono); font-size:0.7rem; color:var(--grey);
+  margin-bottom:0.55rem; line-height:1.6; overflow-wrap:anywhere;
+}
+.refs li a { color:var(--signal-dim); text-decoration:none; }
+.refs li a:hover { text-decoration:underline; }
+.refs li a:focus-visible { outline:2px solid var(--signal); outline-offset:2px; border-radius:var(--radius); }
+.refs li:target { background:var(--signal-bg); border-radius:var(--radius); padding:0.2rem 0.35rem; }
+
+/* APAC section accent */
+.section.apac .section-no { background:var(--charcoal); }
+.apac-callout {
+  background:var(--off-black); color:var(--silver); border-radius:var(--radius-lg);
+  padding:1.6rem 1.8rem; margin:0.6rem 0 1.6rem; max-width:860px;
+}
+.apac-callout .big {
+  font-family:var(--font-display); font-weight:800; font-size:1.5rem; color:var(--white);
+  margin-bottom:0.4rem;
+}
+.apac-callout .big .zero { color:var(--purple-light); }
+.apac-callout p { font-size:var(--text-sm); color:var(--grey-light); max-width:72ch; }
+
+/* Trends */
+.trend { display:grid; grid-template-columns:64px minmax(0,1fr); gap:1.4rem; padding:1.8rem 0; border-bottom:1px solid var(--border-light); max-width:920px; }
+.trend:last-of-type { border-bottom:none; }
+.trend-no {
+  font-family:var(--font-display); font-weight:800; font-size:2.2rem; line-height:1;
+  color:var(--black);
+}
+.trend:nth-of-type(1) .trend-no { color:var(--spectrum-1); }
+.trend:nth-of-type(2) .trend-no { color:var(--spectrum-2); }
+.trend:nth-of-type(3) .trend-no { color:var(--spectrum-3); }
+.trend:nth-of-type(4) .trend-no { color:var(--spectrum-4); }
+.trend:nth-of-type(5) .trend-no { color:var(--spectrum-5); }
+.trend h3 { font-family:var(--font-display); font-weight:700; font-size:var(--text-h3); color:var(--black); margin-bottom:0.5rem; }
+.trend p { margin-bottom:0.8rem; max-width:76ch; }
+.tw-imp {
+  border-left:3px solid var(--signal); background:var(--signal-bg);
+  padding:0.8rem 1.1rem; border-radius:0 var(--radius-lg) var(--radius-lg) 0;
+  font-size:var(--text-sm); max-width:70ch;
+}
+.tw-imp .tag {
+  font-family:var(--font-mono); font-size:0.66rem; letter-spacing:0.14em;
+  text-transform:uppercase; color:var(--signal); display:block; margin-bottom:0.25rem;
+}
+
+/* Implications */
+.imp-list { counter-reset:imp; max-width:860px; list-style:none; }
+.imp-list li { counter-increment:imp; display:grid; grid-template-columns:44px minmax(0,1fr); gap:1rem; padding:1.1rem 0; border-bottom:1px dashed var(--silver); }
+.imp-list li:last-child { border-bottom:none; }
+.imp-list li::before {
+  content:counter(imp, decimal-leading-zero);
+  font-family:var(--font-mono); color:var(--signal); font-size:var(--text-sm); padding-top:0.15rem;
+}
+.imp-list strong { color:var(--black); }
+
+/* Watch list */
+.watch {
+  background:var(--bg-card); border:1px solid var(--border-light); border-radius:var(--radius-lg);
+  padding:1.5rem 1.8rem; margin-top:2rem; max-width:860px;
+}
+.watch .tag { font-family:var(--font-mono); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.16em; color:var(--signal); display:block; margin-bottom:0.7rem; }
+.watch ul { list-style:none; }
+.watch li { padding:0.35rem 0; font-size:var(--text-sm); display:flex; gap:0.7rem; align-items:baseline; }
+.watch li::before { content:'▸'; color:var(--signal); font-size:0.7rem; }
+
+/* Methodology */
+.method { max-width:var(--max-w); margin:0 auto; padding:3rem 2rem 5rem; }
+.method-box {
+  border:1px dashed var(--silver); border-radius:var(--radius-lg);
+  padding:1.5rem 1.8rem; max-width:860px;
+}
+.method-box h2 { font-family:var(--font-mono); font-size:var(--text-xs); text-transform:uppercase; letter-spacing:0.16em; color:var(--grey); margin-bottom:0.8rem; font-weight:400; }
+.method-box p { font-size:var(--text-sm); color:var(--grey); margin-bottom:0.6rem; max-width:80ch; }
+.method-box p strong { color:var(--graphite); }
+
+/* Reveal */
+.reveal { opacity:0; transform:translateY(14px); transition:opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease); }
+.reveal.in { opacity:1; transform:none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior:auto; }
+  .reveal { opacity:1; transform:none; transition:none; }
+  * { animation:none !important; transition:none !important; }
+}
+
+/* ── Responsive ─────────────────────── */
+@media (max-width:768px) {
+  nav.nav { grid-template-columns:auto 1fr auto; padding:0.9rem 1.25rem; }
+  .brand-mark { display:none; }
+  .nav-mobile-brand { display:block; }
+  .nav-toggle { display:block; justify-self:end; }
+  .nav-links {
+    display:none; flex-direction:column; gap:0.75rem;
+    position:absolute; top:100%; left:0; right:0;
+    background:rgba(244,244,245,0.95); backdrop-filter:blur(12px);
+    padding:1.25rem; border-bottom:1px solid var(--border-light);
+  }
+  .nav-links.show { display:flex; }
+  .nav-links a { font-size:0.85rem; }
+  .masthead { padding:7rem 1.25rem 0; }
+  .exec { padding:2.5rem 1.25rem 0; }
+  .exec-grid { grid-template-columns:1fr; gap:1rem; }
+  .section { padding:3.2rem 1.25rem 0.5rem; }
+  .method { padding:2.5rem 1.25rem 4rem; }
+  .stat-strip { grid-template-columns:repeat(2, 1fr); }
+  .section-head { flex-wrap:wrap; }
+  .section-head .section-sub { margin-left:0; width:100%; }
+  .trend { grid-template-columns:44px minmax(0,1fr); gap:1rem; }
+  .trend-no { font-size:1.7rem; }
+}
+@media (max-width:560px) {
+  .stat-strip { grid-template-columns:1fr; }
+  .stat-item { padding:1rem 1.2rem; }
+  .imp-list li { grid-template-columns:36px minmax(0,1fr); }
+}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-nav">Skip to content</a>
+
+<nav class="nav" aria-label="Site navigation">
+  <div class="brand-mark">MH&amp;W</div>
+  <div class="nav-mobile-brand">
+    MH&amp;W<br><span class="mobile-sub">Music Health &amp; Wellness</span>
+  </div>
+  <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links">
+    <a href="index.html">HOME</a>
+    <a href="plan.html">PLAN</a>
+    <a href="report-global-npo-landscape.html">ORGS MAP</a>
+    <a href="case-study-backline.html">CASE STUDY</a>
+    <a href="research.html">RESEARCH</a>
+    <a href="insight-2026-06-01.html">INSIGHT</a>
+    <a href="news-trends-2026-06-12.html" class="current">NEWS</a>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- ═══ Masthead ═══ -->
+  <header class="masthead">
+    <div class="masthead-rule"></div>
+    <div class="masthead-top">
+      <span>MH&amp;W — Monthly Report · News &amp; Trends</span>
+      <span class="live-dot">● June 12, 2026 · Cycle: May–June</span>
+    </div>
+    <h1>The field stops announcing and starts <em>consolidating</em></h1>
+    <p class="masthead-dek">Monthly scan of the music mental health space — global developments, new data, Asia-Pacific &amp; Taiwan, and what it means for an NPO that doesn't exist yet.</p>
+    <div class="stat-strip" role="list" aria-label="Key numbers this cycle">
+      <div class="stat-item" role="listitem">
+        <div class="stat-num">110</div>
+        <div class="stat-label">Orgs in Backline directory (Apr: 111)</div>
+      </div>
+      <div class="stat-item" role="listitem">
+        <div class="stat-num"><span class="accent">0</span></div>
+        <div class="stat-label">Taiwan listings — 3rd consecutive snapshot</div>
+      </div>
+      <div class="stat-item" role="listitem">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Industry MH surveys in the field at once</div>
+      </div>
+      <div class="stat-item" role="listitem">
+        <div class="stat-num">86<span class="accent">%</span></div>
+        <div class="stat-label">Indie artists reporting mental strain (Ditto, n&gt;2,000)</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ Executive Summary ═══ -->
+  <section class="exec reveal" aria-label="Executive summary">
+    <div class="exec-grid">
+      <div>
+        <p>After Q1's institutional bang — B-LINE, the CMA/Belmont center, MusiCares×JED — this cycle is quieter but structurally telling. The field is <strong>consolidating, not announcing</strong>: Spotify and Backline went vertical with a songwriter summit and guide, MusiCares ran its third Mindful May, and the awareness-month campaign layer ran on rails. The real action is in data: four separate evidence efforts are now in the field simultaneously, and the one already published puts independent-artist mental strain at 86%.</p>
+      </div>
+      <div>
+        <p>In Asia-Pacific, the most consequential development is structural: Korea's <strong>Idol Labor Union committee</strong> — whose core demands are mental-health protocols — confirms East Asia's pathway runs through labor law, not philanthropy. Taiwan still has no organization and no data; Backline's directory shows zero Taiwan listings for the third straight snapshot, even as its pages begin shipping in Japanese.</p>
+        <div class="correction">
+          <span class="tag">Correction to April report</span>
+          The Headlining Mental Health tour study is run by <strong>Amber Health × MusiCares only</strong> — Backline is not a partner. Verified against Amber Health's own study page (the April item relied on a single secondary source).
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 1. Global Developments ═══ -->
+  <section class="section reveal" aria-labelledby="h-global">
+    <div class="section-head">
+      <span class="section-no">01</span>
+      <h2 id="h-global">Major Developments</h2>
+      <span class="section-sub">Global</span>
+    </div>
+
+    <article class="item">
+      <div class="item-head">
+        <span class="item-date">MAY 14</span>
+        <h3>Spotify × Backline go vertical: Nashville songwriter summit + “Between the Lines”</h3>
+        <span class="conf ok">✅ verified</span>
+      </div>
+      <p>Spotify's Heart &amp; Soul initiative convened Nashville's songwriting community for a mental health summit and launched <strong>Between the Lines</strong>, a songwriter-specific guide built by Backline's clinical team.<sup class="cite"><a href="#g-src-1" data-src="spotify-nashville-2026" data-tip="Spotify Newsroom, 2026-05-14 + MusicRow same day · WebSearch">1</a></sup> It is the clearest example yet of the field's shift from generic “music industry” support to segment-specific playbooks — songwriters now, touring personnel via the tour study, live-event staff via trade-press guides.</p>
+    </article>
+
+    <article class="item">
+      <div class="item-head">
+        <span class="item-date">MAY 19</span>
+        <h3>MusiCares: third annual Mindful May lands in New Orleans</h3>
+        <span class="conf ok">✅ verified</span>
+      </div>
+      <p>Held at the New Orleans Jazz &amp; Heritage Foundation with Sweetwater: sound bath, yoga, massage, custom ear molds, and a PJ Morton panel on music and post-Katrina collective healing.<sup class="cite"><a href="#g-src-2" data-src="musicares-mindfulmay-2026" data-tip="MusiCares news + Business Wire, 2026-05-14 · WebSearch">2</a></sup> LA → Nashville → New Orleans: the program is now a recurring institutional fixture in the industry's Mental Health Awareness Month calendar.<sup class="cite"><a href="#g-src-3" data-src="musicconnection-mindfulmay" data-tip="Music Connection coverage · WebSearch">3</a></sup></p>
+    </article>
+
+    <article class="item">
+      <div class="item-head">
+        <span class="item-date">MAY</span>
+        <h3>Awareness month: a mature campaign layer, no new infrastructure</h3>
+        <span class="conf warn">⚠️ totals unpublished</span>
+      </div>
+      <p>Sweet Relief ran artist auctions (Black Sabbath, Chappell Roan, Brandi Carlile memorabilia) for its Mental Health Fund, and jam band moe. dedicated tour proceeds to <strong>Music's Mental Health Fund</strong> — the Sweet Relief × Backline therapy-grant partnership. One catch: that fund dates to <strong>May 2022</strong>, not 2026 — search surfaces presented it as new, but the primary announcement page is dated 5/18/2022.<sup class="cite"><a href="#g-src-4" data-src="sweetrelief-fund-2022" data-tip="Sweet Relief primary page (dated 5/18/2022) + moe. tour page + CelebrityAccess 2026-05-14 · WebFetch">4</a></sup> Pollstar published a live-industry resource guide — another marker of awareness-month institutionalization.<sup class="cite"><a href="#g-src-5" data-src="pollstar-mhm-guide" data-tip="Pollstar, 2026-05-22 · WebSearch">5</a></sup></p>
+    </article>
+
+    <article class="item">
+      <div class="item-head">
+        <span class="item-date">JAN 27</span>
+        <h3>We Got You: $353K press-verified → “$500K+” as-reported</h3>
+        <span class="conf warn">⚠️ $500K+ as-reported</span>
+      </div>
+      <p>At the Resonator Awards, where Chappell Roan received the Harmonizer Award, presenter Nancy Wilson credited the We Got You fund with raising over $500K for Backline.<sup class="cite"><a href="#g-src-6" data-src="rollingstone-resonator" data-tip="Rolling Stone, Jan 2026 — figure from award speech, as-reported · WebSearch">6</a></sup> The press-verified anchor remains <strong>$353K net in the first month</strong> (Billboard, March 2025); treat the larger figure as a growth signal, not accounting.<sup class="cite"><a href="#g-src-7" data-src="billboard-wegotyou" data-tip="Billboard Pro, Mar 2025 — $353K, the figure used in the Backline case study · WebSearch">7</a></sup></p>
+    </article>
+
+    <article class="item">
+      <div class="item-head">
+        <span class="item-date">CORRECTION</span>
+        <h3>Headlining Mental Health: Amber Health × MusiCares — not Backline</h3>
+        <span class="conf ok">✅ primary source</span>
+      </div>
+      <p>April's report described the tour study as Backline × MusiCares × Amber Health (single-source, labeled ⚠️ at the time). Amber Health's own study page names <strong>Amber Health and MusiCares only</strong>.<sup class="cite"><a href="#g-src-8" data-src="amber-study-page" data-tip="Amber Health study page (primary) · WebFetch 2026-06-12">8</a></sup> The study is IRB-approved, recruited tours launching in 2025 (≥50-person party, ≥3 weeks, free to tours), and provides all touring personnel on-demand care during the study. No results published as of June 12 — when they land, this becomes the field's first real-time touring MH dataset.</p>
+    </article>
+
+    <article class="item">
+      <div class="item-head">
+        <span class="item-date">WATCH</span>
+        <h3>2026 Wellness in Music Survey: fielded, results pending</h3>
+        <span class="conf ok">✅ verified</span>
+      </div>
+      <p>MusiCares fielded the 2026 WMS April 6–17 (mental health, financial wellness, addiction, insurance, D&amp;I; English + Spanish).<sup class="cite"><a href="#g-src-9" data-src="wms-2026-fielding" data-tip="MusicRow + Pollstar 2026-04-07 + MusiCares survey page · WebSearch">9</a></sup> Last year's edition (~3,200 respondents) produced the field's most-cited statistic — 11.4% suicidal ideation. The trendline (8% → 11.4% → ?) is the single number to watch this year.</p>
+    </article>
+
+    <details class="refs">
+      <summary>References — Section 01 (9)</summary>
+      <ol>
+        <li id="g-src-1" data-src="spotify-nashville-2026" value="1"><a href="https://newsroom.spotify.com/2026-05-14/nashville-songwriting-mental-health-summit/" target="_blank" rel="noopener">Spotify Newsroom — Nashville Songwriting Mental Health Summit</a>, 2026-05-14; corroborated by <a href="https://musicrow.com/2026/05/spotify-brings-together-nashville-songwriting-community-for-mental-health-summit/" target="_blank" rel="noopener">MusicRow</a>. Accessed 2026-06-12 · WebSearch.</li>
+        <li id="g-src-2" data-src="musicares-mindfulmay-2026" value="2"><a href="https://www.musicares.org/news/mindful-may-2026-announcement-sweetwater" target="_blank" rel="noopener">MusiCares — Third Annual Mindful May, New Orleans</a>; <a href="https://www.businesswire.com/news/home/20260514025988/en/" target="_blank" rel="noopener">Business Wire</a>, 2026-05-14. Accessed 2026-06-12 · WebSearch.</li>
+        <li id="g-src-3" data-src="musicconnection-mindfulmay" value="3"><a href="https://www.musicconnection.com/musicares-brings-mindful-may-to-new-orleans-with-pj-morton-wellness-activations-mental-health-support/" target="_blank" rel="noopener">Music Connection — Mindful May with PJ Morton</a>. Accessed 2026-06-12 · WebSearch.</li>
+        <li id="g-src-4" data-src="sweetrelief-fund-2022" value="4"><a href="https://www.sweetrelief.org/news/sweet-relief-musicians-fund-and-backline-announce-musics-mental-health-fund-and-fundraising-campaign-to-provide-mental-health-resources-to-music-industry-professionals" target="_blank" rel="noopener">Sweet Relief × Backline — Music's Mental Health Fund announcement (page dated 5/18/2022)</a>; <a href="https://www.sweetrelief.org/news/moe-supports-sweet-relief-backlines-musics-mental-health-fund-with-new-tour" target="_blank" rel="noopener">moe. tour support</a>; <a href="https://celebrityaccess.com/2026/05/14/sweet-relief-musicians-fund-brings-artists-together-for-mental-health-awareness-month" target="_blank" rel="noopener">CelebrityAccess</a>, 2026-05-14. Accessed 2026-06-12 · WebFetch + WebSearch.</li>
+        <li id="g-src-5" data-src="pollstar-mhm-guide" value="5"><a href="https://news.pollstar.com/2026/05/22/mental-health-awareness-month-a-resource-guide-for-the-live-industry/" target="_blank" rel="noopener">Pollstar — MH Awareness Month: A Resource Guide for the Live Industry</a>, 2026-05-22. Accessed 2026-06-12 · WebSearch.</li>
+        <li id="g-src-6" data-src="rollingstone-resonator" value="6"><a href="https://www.rollingstone.com/music/music-features/chaka-khan-chappell-roan-2026-resonator-awards-1235506727/" target="_blank" rel="noopener">Rolling Stone — 2026 Resonator Awards</a>, Jan 2026. $500K+ from award-presentation speech — as-reported. Accessed 2026-06-12 · WebSearch.</li>
+        <li id="g-src-7" data-src="billboard-wegotyou" value="7"><a href="https://www.billboard.com/pro/chappell-roan-support-mental-health-charity-backline/" target="_blank" rel="noopener">Billboard Pro — How Chappell Roan's Support Gave Backline a Major Boost</a>, Mar 2025. $353K = press-verified anchor (used in the Backline case study). Accessed 2026-06-12 · WebSearch.</li>
+        <li id="g-src-8" data-src="amber-study-page" value="8"><a href="https://www.amber.health/headliningmentalhealth" target="_blank" rel="noopener">Amber Health — Headlining Mental Health: A Tour Study (primary study page)</a>. Partners shown: Amber Health, MusiCares. Accessed 2026-06-12 · WebFetch.</li>
+        <li id="g-src-9" data-src="wms-2026-fielding" value="9"><a href="https://musicrow.com/2026/04/musicares-opens-annual-wellness-in-music-survey/" target="_blank" rel="noopener">MusicRow — MusiCares Opens Annual WMS</a>, Apr 2026; <a href="http://news.pollstar.com/2026/04/07/musicares-launches-2026-wellness-in-music-survey/" target="_blank" rel="noopener">Pollstar</a>, 2026-04-07; <a href="https://www.musicares.org/news/wellness-in-music-survey-link-how-to-participate-impact" target="_blank" rel="noopener">MusiCares survey page</a>. Accessed 2026-06-12 · WebSearch.</li>
+      </ol>
+    </details>
+  </section>
+
+  <!-- ═══ 2. Research & Data ═══ -->
+  <section class="section reveal" aria-labelledby="h-research">
+    <div class="section-head">
+      <span class="section-no">02</span>
+      <h2 id="h-research">New Research &amp; Data</h2>
+      <span class="section-sub">The evidence race</span>
+    </div>
+
+    <article class="item">
+      <div class="item-head">
+        <span class="item-date">MAR 2</span>
+        <h3>Ditto Music: 86% of independent artists report mental strain</h3>
+        <span class="conf ok">✅ primary release</span>
+      </div>
+      <p>Survey of <strong>2,000+ independent artists and professionals</strong>: 86% have experienced significant mental strain or creative burnout at some point; 68% cite long hours and financial insecurity; 67% say social media harms their wellbeing; over half have stepped back from releasing; <strong>38% have considered leaving the industry</strong>.<sup class="cite"><a href="#r-src-10" data-src="ditto-burnout-2026" data-tip="Ditto Music press release (primary), 2026-03-02, n>2,000, self-selected community sample · WebFetch">10</a></sup> First large-N dataset on <em>independent</em> artists — the population closest to Taiwan's indie-dominated scene. Caveat: lifetime framing, not comparable to point-prevalence figures like WMS's 11.4%.</p>
+    </article>
+
+    <article class="item">
+      <div class="item-head">
+        <span class="item-date">FEB</span>
+        <h3>Music Minds Matter launches “largest ever” UK industry survey</h3>
+        <span class="conf ok">✅ verified</span>
+      </div>
+      <p>MMM (Help Musicians' sister charity) opened what it calls the largest-ever mental health survey of the UK music industry, with Point One Project and Habit Partners.<sup class="cite"><a href="#r-src-11" data-src="mmm-uk-survey" data-tip="MMM study page + Classical Music coverage · WebSearch">11</a></sup> Help Musicians/MMM also published their 2025 annual report in April and plan to remodel their entire programme across both charities by mid-2026.<sup class="cite"><a href="#r-src-12" data-src="helpmusicians-ar-2025" data-tip="Help Musicians news — own comms, single source ⚠️ · WebSearch">12</a></sup></p>
+    </article>
+
+    <article class="item">
+      <div class="item-head">
+        <span class="item-date">APR 16</span>
+        <h3>External validation: GWI names musician MH a 2026 wellness trend</h3>
+        <span class="conf ok">✅ primary publication</span>
+      </div>
+      <p>The Global Wellness Institute's Music for Health &amp; Wellbeing initiative published its 2026 trends: music-based <strong>social prescribing</strong> scaling into healthcare infrastructure (NHS 5.5M referrals; Massachusetts' first statewide US ecosystem; insurer Horizon BCBS × NJPAC), the <strong>“festivalization of wellness”</strong>, and — as Trend 4 — the rise of musician mental-health resources, citing B-LINE, Amber Health's contract growth, and MusiCares×JED.<sup class="cite"><a href="#r-src-13" data-src="gwi-trends-2026" data-tip="Global Wellness Institute, 2026-04-16 (primary) — note: GWI mis-dates B-LINE to Feb; primary Spotify announcement is Jan 27 · WebFetch">13</a></sup> An external wellness-economy body independently describing this field as a top trend is itself a datapoint — as are guest columns in Variety and Billboard Pro arguing the ROI and quality-of-care cases.<sup class="cite"><a href="#r-src-14" data-src="discourse-columns" data-tip="Variety + Billboard Pro guest columns — cited as discourse markers only (paywalled) · WebSearch">14</a></sup></p>
+    </article>
+
+    <details class="refs">
+      <summary>References — Section 02 (5)</summary>
+      <ol>
+        <li id="r-src-10" data-src="ditto-burnout-2026" value="10"><a href="https://press.dittomusic.com/creative-burnout-at-all-time-high-86-of-artists-report-mental-strain" target="_blank" rel="noopener">Ditto Music press release — Creative Burnout at All-Time High</a>, 2026-03-02 (primary; full data sheet linked from release). n&gt;2,000, self-selected community sample. Accessed 2026-06-12 · WebFetch.</li>
+        <li id="r-src-11" data-src="mmm-uk-survey" value="11"><a href="https://www.classical-music.uk/news/article/music-minds-matter-launches-largest-ever-mental-health-survey-for-uk-music-industry" target="_blank" rel="noopener">Classical Music — MMM launches largest-ever UK survey</a>; <a href="https://www.musicmindsmatter.org.uk/the-study" target="_blank" rel="noopener">MMM study page</a>. Accessed 2026-06-12 · WebSearch.</li>
+        <li id="r-src-12" data-src="helpmusicians-ar-2025" value="12"><a href="https://www.helpmusicians.org.uk/about-us/news/help-musicians-and-music-minds-matter-release-2025-annual-report" target="_blank" rel="noopener">Help Musicians — 2025 Annual Report release</a> (own communications — ⚠️ single source for the programme-remodel claim). Accessed 2026-06-12 · WebSearch.</li>
+        <li id="r-src-13" data-src="gwi-trends-2026" value="13"><a href="https://globalwellnessinstitute.org/global-wellness-institute-blog/2026/04/16/music-for-health-and-wellbeing-initiative-trends-for-2026/" target="_blank" rel="noopener">Global Wellness Institute — Music for Health and Wellbeing Initiative Trends for 2026</a>, 2026-04-16 (primary). Accessed 2026-06-12 · WebFetch.</li>
+        <li id="r-src-14" data-src="discourse-columns" value="14"><a href="https://variety.com/2026/music/opinion/mental-health-lmusic-industry-1236766140/" target="_blank" rel="noopener">Variety guest column — Investing in Mental Health…</a>; <a href="https://www.billboard.com/pro/music-industry-next-mental-health-frontier-quality-care/" target="_blank" rel="noopener">Billboard Pro — Ensuring Quality Care</a>. Paywalled — cited as discourse markers only, not for specific claims. Accessed 2026-06-12 · WebSearch.</li>
+      </ol>
+    </details>
+  </section>
+
+  <!-- ═══ 3. Asia-Pacific & Taiwan ═══ -->
+  <section class="section apac reveal" aria-labelledby="h-apac">
+    <div class="section-head">
+      <span class="section-no">03</span>
+      <h2 id="h-apac">Asia-Pacific &amp; Taiwan</h2>
+      <span class="section-sub">The gap, re-measured</span>
+    </div>
+
+    <div class="apac-callout">
+      <div class="big"><span class="zero">0</span> Taiwan · <span class="zero">0</span> Korea · <span class="zero">0</span> China</div>
+      <p>Backline Global Resource Hub, re-scraped in full on June 12, 2026 — 110 organizations across 13 pages, 8 Asia-related listings unchanged since April. East Asia's gap holds for the third consecutive snapshot.</p>
+    </div>
+
+    <article class="item">
+      <div class="item-head">
+        <span class="item-date">KOREA</span>
+        <h3>The Idol Union: mental health via labor law</h3>
+        <span class="conf unk">❓ status unresolved</span>
+      </div>
+      <p>The <strong>Idol Labor Union Preparatory Committee</strong> (chair: Bang Min-su / C.A.P of Teen Top; supported publicly by Ailee) filed for recognition with the Ministry of Employment and Labor (Sep–Oct 2025), expecting approval by end-2025.<sup class="cite"><a href="#a-src-15" data-src="koreatimes-union" data-tip="Korea Times 2025-11-08 + allkpop — filing, leadership, demands · WebSearch">15</a></sup> Its demands are MH-centric: an enforceable agency care manual, crisis protocols (guardian notification, medical referral, counseling-record continuity), cyberbullying legal support, and an MCST investigation into agency practices. Korean press frames the movement against the Jonghyun/Sulli losses and idols halting careers while agencies post record revenues (HYBE Q2 2025: ₩705.6B).<sup class="cite"><a href="#a-src-16" data-src="koreaherald-idols" data-tip="Korea Herald, 2025-08-26 — careers halted amid record revenues; KOCCA counseling; in-house counseling at HYBE/JYP/SM · WebFetch">16</a></sup> As of June 2026 approval status is unconfirmed; Bang's former agency publicly cut ties in May, signaling a contested effort.<sup class="cite"><a href="#a-src-17" data-src="khan-bang-cutoff" data-tip="Sports Kyunghyang (EN), 2026-05-22 · WebSearch">17</a></sup> With January's trainee-contract MH reforms, Korea now has a two-track <strong>regulatory/labor pathway</strong> — and still zero music MH NPOs.</p>
+    </article>
+
+    <article class="item">
+      <div class="item-head">
+        <span class="item-date">DIRECTORY</span>
+        <h3>Backline re-scrape: 110 orgs, Taiwan still zero — and a Japanese signal</h3>
+        <span class="conf ok">✅ 13/13 pages</span>
+      </div>
+      <p>Full re-scrape: <strong>110 unique organizations</strong> (April: 111, net −1), Asia composition unchanged (India 3 standalone + 2 multi-country; Japan 2; Thailand 1).<sup class="cite"><a href="#a-src-18" data-src="backline-directory-scrape" data-tip="Chrome javascript_tool scrape, all 13 ?_page=N pages, 2026-06-12 — full roster archived in wiki/snapshots · two extraction passes consistent">18</a></sup> Notable presences tied to 2026 developments: EcchoLive (a CMA 2026 grantee) and the Tim Bergling Foundation; Australia lists Hey Mate alongside Support Act and Music Victoria. The directory now carries a language switcher including <strong>Japanese</strong> (<code>/ja/</code>), and AFEM's guide ships in English and Japanese — the US/UK field is beginning to localize toward Asian-language audiences. This snapshot archives the full 110-name roster, so future scans can diff adds/removals exactly (the April baseline stored only counts).</p>
+    </article>
+
+    <article class="item">
+      <div class="item-head">
+        <span class="item-date">TAIWAN</span>
+        <h3>GMA week is industry infrastructure — mental health remains absent</h3>
+        <span class="conf warn">⚠️ absence finding</span>
+      </div>
+      <p>The 37th Golden Melody Awards ceremony is June 27 (Taipei Nangang), with the GMA International Music Festival June 24–26 — forums, business matching, industry analysis.<sup class="cite"><a href="#a-src-19" data-src="gma37-bamid" data-tip="BAMID (Ministry of Culture) + Business Weekly TW · WebSearch ZH">19</a></sup> No mental-health programming appears in announced agendas; this year's headline rule change concerns generative AI in submissions. The MTAT international music therapy conference (June 28, NTU, keynote Michael Thaut) remains Taiwan's only adjacent event — clinical music therapy, not industry occupational health.<sup class="cite"><a href="#a-src-20" data-src="mtat-2026" data-tip="MTAT 2026 conference site — first verified in April scan; event upcoming">20</a></sup> Chinese-language searches again returned no Taiwan music-industry MH organization or program — per Rule 4, absence of results is not proof of absence, but it is consistent across every scan since April.</p>
+    </article>
+
+    <article class="item">
+      <div class="item-head">
+        <span class="item-date">CHINA · JAPAN</span>
+        <h3>Adjacent activity only</h3>
+        <span class="conf warn">⚠️ single-pass</span>
+      </div>
+      <p>China: a Beijing forum on evidence-based music therapy (May 25) and a 2026 “healing economy” blue book reflect wellness-market growth — nothing music-<em>industry</em>-facing.<sup class="cite"><a href="#a-src-21" data-src="china-adjacent" data-tip="China Daily CN, 2026-05-25 + Sohu healing-economy blue book · WebSearch ZH">21</a></sup> Japan: no new organization; B-Side Project (Sony, corporate) and Music Way Project (career development) remain the only listings, with Music Cross Aid operating as financial relief outside the MH lane.</p>
+    </article>
+
+    <details class="refs">
+      <summary>References — Section 03 (7)</summary>
+      <ol>
+        <li id="a-src-15" data-src="koreatimes-union" value="15"><a href="https://www.koreatimes.co.kr/entertainment/others/20251108/k-pop-idols-to-form-koreas-first-labor-union-could-launch-by-end-of-year" target="_blank" rel="noopener">Korea Times — K-pop idols to form Korea's first labor union</a>, 2025-11-08; <a href="https://www.allkpop.com/article/2025/11/k-pop-idol-union-set-to-launch-this-year-aiming-to-protect-artists-labor-rights-and-mental-health" target="_blank" rel="noopener">allkpop</a>, Nov 2025. Accessed 2026-06-12 · WebSearch.</li>
+        <li id="a-src-16" data-src="koreaherald-idols" value="16"><a href="https://www.koreaherald.com/article/10562247" target="_blank" rel="noopener">Korea Herald — K-pop idols halt, quit careers over health concerns while agencies post record revenues</a>, 2025-08-26. Accessed 2026-06-12 · WebFetch.</li>
+        <li id="a-src-17" data-src="khan-bang-cutoff" value="17"><a href="https://sports.khan.co.kr/en/article/202605221216007/" target="_blank" rel="noopener">Sports Kyunghyang (EN) — Bang Min-soo 'cut off' by former agency</a>, 2026-05-22. Accessed 2026-06-12 · WebSearch.</li>
+        <li id="a-src-18" data-src="backline-directory-scrape" value="18"><a href="https://backline.care/global-resources/" target="_blank" rel="noopener">Backline Global Resources directory</a> — Chrome <code>javascript_tool</code> scrape of all 13 <code>?_page=N</code> pages, 2026-06-12; two extraction passes consistent. Full roster: <code>wiki/snapshots/Backline_Directory_2026-06-12.md</code>; baseline <code>wiki/snapshots/Backline_Directory_2026-04-04.md</code>.</li>
+        <li id="a-src-19" data-src="gma37-bamid" value="19"><a href="https://www.bamid.gov.tw/News_Content.aspx?n=3483&amp;s=246716" target="_blank" rel="noopener">BAMID (Ministry of Culture) — 37th GMA notice</a>; <a href="https://www.businessweekly.com.tw/style/blog/3021360" target="_blank" rel="noopener">Business Weekly (TW) — GMA 37 ceremony &amp; nominations</a>. Accessed 2026-06-12 · WebSearch (ZH).</li>
+        <li id="a-src-20" data-src="mtat-2026" value="20"><a href="https://www.mtat2026conference.com/" target="_blank" rel="noopener">MTAT 2026 International Conference</a> — first verified 2026-04-24 scan; event upcoming June 28, 2026.</li>
+        <li id="a-src-21" data-src="china-adjacent" value="21"><a href="https://cn.chinadaily.com.cn/a/202605/25/WS6a13f88ca310942cc49ae21d.html" target="_blank" rel="noopener">China Daily (CN) — 2026 音乐治疗循证体系与跨学科发展论坛</a>, 2026-05-25; <a href="https://www.sohu.com/a/978811621_121834073" target="_blank" rel="noopener">Sohu — 2026 疗愈经济蓝皮书</a>. Accessed 2026-06-12 · WebSearch (ZH).</li>
+      </ol>
+    </details>
+  </section>
+
+  <!-- ═══ 4. Emerging Trends ═══ -->
+  <section class="section reveal" aria-labelledby="h-trends">
+    <div class="section-head">
+      <span class="section-no">04</span>
+      <h2 id="h-trends">Emerging Trends</h2>
+      <span class="section-sub">Synthesis of §01–03</span>
+    </div>
+
+    <div class="trend">
+      <div class="trend-no">1</div>
+      <div>
+        <h3>From announcements to verticals</h3>
+        <p>Q1 built generic infrastructure (crisis line, academic center, training); Q2 is slicing it by segment: songwriters (Between the Lines), touring personnel (the tour study), live-event staff (Pollstar's guide), independent artists (Ditto's data). “Music industry mental health” is no longer one audience.</p>
+        <div class="tw-imp"><span class="tag">Taiwan implication</span>A new org can skip the generic phase and launch segment-first — session musicians and live crew, the populations Taiwan's festival economy most depends on, are the strongest candidates.</div>
+      </div>
+    </div>
+
+    <div class="trend">
+      <div class="trend-no">2</div>
+      <div>
+        <h3>The evidence race</h3>
+        <p>Four datasets in motion at once (WMS 2026, the tour study, MMM's UK survey, Ditto's published release). Every major org now treats proprietary data as its advocacy moat — and GWI's external report shows data travels farther than programming.</p>
+        <div class="tw-imp"><span class="tag">Taiwan implication</span>A 200-person Taiwan pilot survey would still be the first APAC dataset — but survey templates (Soundcheck, WMS, MMM) are now free to replicate for anyone, including a future competitor. The window is real and perishable.</div>
+      </div>
+    </div>
+
+    <div class="trend">
+      <div class="trend-no">3</div>
+      <div>
+        <h3>Awareness-month institutionalization</h3>
+        <p>Mental Health Awareness Month now has a standing industry liturgy: Mindful May (year three), Sweet Relief auctions, artist tour tie-ins, trade-press resource guides. The campaign layer is mature; the money it moves is modest.</p>
+        <div class="tw-imp"><span class="tag">Taiwan implication</span>A Mandopop-facing May 2027 awareness campaign could borrow the entire playbook at low cost — campaign mechanics are the most copyable asset in the field.</div>
+      </div>
+    </div>
+
+    <div class="trend">
+      <div class="trend-no">4</div>
+      <div>
+        <h3>East Asia's labor-law pathway</h3>
+        <p>Korea's idol union (MH-care manual as a core demand) plus January's trainee-contract reforms confirm April's hypothesis: in East Asia, musician welfare advances through regulation and collective bargaining, not charity — and no Korean NPO has emerged to deliver the services the union is demanding.</p>
+        <div class="tw-imp"><span class="tag">Taiwan implication</span>Taiwan's existing 職業工會 structures (with health-insurance enrollment functions) suggest positioning the NPO as the <em>clinical service partner</em> to labor structures — training, counseling networks, crisis protocols — rather than a pure US-style donor model.</div>
+      </div>
+    </div>
+
+    <div class="trend">
+      <div class="trend-no">5</div>
+      <div>
+        <h3>US field localizing toward Asia — slowly</h3>
+        <p>Backline's Japanese-language directory, AFEM's bilingual guide, Spotify's multilingual hub: the US/UK field is starting to ship Asian-language <em>content</em>, but still has zero Asian <em>presence</em> — no Taiwan/Korea/China listings, and Heart &amp; Soul therapy access is limited to US/UK ambassadors.</p>
+        <div class="tw-imp"><span class="tag">Taiwan implication</span>The “East Asia node” position is still open, but incumbents will eventually arrive with translated resources. A local org's defensible advantage is service delivery and clinical networks — not information.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 5. Implications ═══ -->
+  <section class="section reveal" aria-labelledby="h-imp">
+    <div class="section-head">
+      <span class="section-no">05</span>
+      <h2 id="h-imp">Implications for Taiwan NPO Strategy</h2>
+      <span class="section-sub">What to do with this</span>
+    </div>
+
+    <ol class="imp-list">
+      <li><div><strong>The data window is real but perishable.</strong> Soundcheck (Canada), WMS (US), and MMM (UK) provide three replicable national-survey templates; Ditto adds an indie-artist instrument that matches Taiwan's scene structure. A Taiwan survey remains the single highest-leverage first move.</div></li>
+      <li><div><strong>Position relative to labor structures, not against them.</strong> Korea shows East Asian musician welfare moving through unions and ministries. Map Taiwan's 演藝/音樂 occupational unions, 文化部 programs, and 勞動部 occupational-safety frameworks before service design — the niche is clinical partner to existing structures.</div></li>
+      <li><div><strong>Segment-first beats generic.</strong> The field's verticalization suggests launching with one well-served segment. Taiwan's festival/live sector — large, precarious, union-thin — is the strongest candidate.</div></li>
+      <li><div><strong>GMA week is the network moment.</strong> The GMA International Music Festival (June 24–26) and MTAT conference (June 28) put industry decision-makers and music-therapy clinicians in Taipei in the same week — an annual field-scan and relationship target even before an org exists.</div></li>
+    </ol>
+
+    <div class="watch">
+      <span class="tag">Watch list — next cycle</span>
+      <ul>
+        <li>WMS 2026 results: the suicidal-ideation trendline (8% → 11.4% → ?)</li>
+        <li>Headlining Mental Health study outputs (first real-time touring MH dataset)</li>
+        <li>Korea idol union: approval or rejection by the Ministry of Employment and Labor</li>
+        <li>Help Musicians / Music Minds Matter programme remodel (due mid-2026)</li>
+        <li>Whether Backline's Asia localization extends beyond language to actual listings</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══ Methodology ═══ -->
+  <section class="method reveal" aria-label="Methodology">
+    <div class="method-box">
+      <h2>Methodology · Source · Confidence</h2>
+      <p><strong>Search scope:</strong> 14 WebSearch queries (EN, 繁/簡中文, JP/KR topics), 8 primary-page fetches (Spotify Newsroom, Amber Health, Sweet Relief, Ditto, GWI, Korea Herald, KPOPPOST, LBB), and one full Chrome scrape of the Backline directory (13/13 pages, two consistent extraction passes).</p>
+      <p><strong>Window:</strong> developments since the April 24, 2026 report. <strong>Verification:</strong> critical claims cross-checked against 2+ independent sources or primary pages; single-source and as-reported items labeled inline. One April claim corrected (§01) after a primary-source check — primary documents outrank press (Rule 12).</p>
+      <p><strong>Limitations:</strong> Korea union status unresolved in available coverage (❓); Variety/Billboard columns paywalled — cited as discourse markers only; Chinese-language results remain dominated by music-therapy/wellness-market content, so Taiwan/China absence findings carry Rule 4 caveats; the April directory baseline lacked a full roster, so the −1 net change cannot be itemized (fixed: the June snapshot archives all 110 names).</p>
+      <p>Draft: <code>output/reports/2026-06-12_Report_News_Trends.md</code> (citation source of truth) · Snapshot: <code>wiki/snapshots/Backline_Directory_2026-06-12.md</code></p>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // Mobile nav toggle
+  (function() {
+    var toggle = document.querySelector('.nav-toggle');
+    var links = document.querySelector('.nav-links');
+    if (!toggle || !links) return;
+    toggle.addEventListener('click', function() {
+      var open = toggle.classList.toggle('open');
+      links.classList.toggle('show', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    links.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        toggle.classList.remove('open');
+        links.classList.remove('show');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
+
+  // Reveal on scroll (respects prefers-reduced-motion via CSS)
+  (function() {
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function(el){ el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 });
+    els.forEach(function(el){ io.observe(el); });
+  })();
+
+  // Open the parent References block when a citation is clicked, so :target lands correctly
+  (function() {
+    document.querySelectorAll('sup.cite a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        var id = a.getAttribute('href').slice(1);
+        var li = document.getElementById(id);
+        if (li) {
+          var details = li.closest('details');
+          if (details && !details.open) details.open = true;
+        }
+      });
+    });
+  })();
+</script>
+</body>
+</html>
