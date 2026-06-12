@@ -631,7 +631,7 @@
                         <li>All Trends items replaced with linked, verifiable news; unverifiable items removed.</li>
                         <li>Database count updated: the retired spreadsheet count (27) is replaced by 9 source-traced wiki deep profiles.</li>
                     </ul>
-                    <div style="margin-top:0.6rem;"><strong>v3.2 (2026-06-12)</strong> — "Recent Changes" tab added (Rule 13): standalone News &amp; Trends reports are discontinued; the monthly scan now appends confirmed structural changes to that feed, and a quarterly refresh (next: September 2026) promotes them into these body tabs. Body figures still reflect the April 4, 2026 directory baseline — the June re-scrape (110 orgs) lives in Recent Changes until promotion.</div>
+                    <div style="margin-top:0.6rem;"><strong>v3.2 (2026-06-12)</strong> — "Recent Changes" tab added (Rule 13): standalone News &amp; Trends reports are discontinued; the monthly scan now appends confirmed structural changes to that feed, and a quarterly refresh (next: September 2026) promotes them into these body tabs. Body figures (incl. the 111-org count) still reflect the April 4, 2026 directory baseline — the latest June re-scrape (<strong>110 orgs</strong>) and other developments live in <a href="#changelog" data-tab-link="changelog" style="color:var(--signal);">Recent Changes</a> until promotion.</div>
                     <div style="margin-top:0.6rem;"><strong>v3.1 (2026-06-11)</strong> — §6.11 citation retrofit: source chips are now linked block-level citations; each tab ends with a References registry carrying full sources, access dates, and methods.</div>
                     <div style="margin-top:0.6rem;"><strong>v2 (2026-04-09)</strong> — Soundcheck reclassified from organization to research study.</div>
                 </div>
@@ -1321,10 +1321,18 @@
 
         // Open tab from URL hash — e.g. #changelog (redirect target for legacy
         // news URLs) or a citation id inside a non-active tab (#cl-src-3).
-        function openFromHash() {
+        function openFromHash(scrollToTabs) {
             const hash = decodeURIComponent(location.hash.replace('#', ''));
             if (!hash) return;
-            if (activateTab(hash)) return;
+            if (activateTab(hash)) {
+                // Readers arriving from the news 301 (#changelog) land at the hero;
+                // bring the tab section into view so the feed is what they see.
+                if (scrollToTabs) {
+                    const tabs = document.querySelector('.tabs-wrapper');
+                    if (tabs) tabs.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                return;
+            }
             const target = document.getElementById(hash);
             if (target) {
                 const pane = target.closest('.tab-content');
@@ -1334,8 +1342,10 @@
                 }
             }
         }
-        openFromHash();
-        window.addEventListener('hashchange', openFromHash);
+        // Defer the initial pass one frame so layout/fonts settle and our scroll
+        // wins over the browser's native hash jump.
+        requestAnimationFrame(() => openFromHash(true));
+        window.addEventListener('hashchange', () => openFromHash(true));
 
         // Expandable cards — mouse + keyboard accessible
         document.querySelectorAll('[data-expandable]').forEach(card => {

@@ -199,6 +199,15 @@
       color: var(--black);
     }
 
+    .page-dek {
+      font-family: var(--font-body);
+      font-size: var(--text-body);
+      color: var(--graphite);
+      line-height: 1.6;
+      max-width: var(--max-w-text);
+      margin-top: 1.25rem;
+    }
+
     /* ===== WORKS GRID ===== */
     .works-list {
       display: grid;
@@ -258,7 +267,7 @@
     .work-card .card-meta {
       font-family: var(--font-mono);
       font-size: var(--text-xs);
-      color: var(--grey);
+      color: var(--graphite); /* AA on the light card wash (--grey fails at ~3.9:1) */
       text-transform: uppercase;
       letter-spacing: 0.08em;
       margin-top: 0.5rem;
@@ -395,11 +404,12 @@
 
   <!-- Forest Page: canvas background + content -->
   <section class="forest-page">
-    <canvas id="forest"></canvas>
+    <canvas id="forest" aria-hidden="true" role="presentation"></canvas>
 
     <div class="page-content" id="main">
       <div class="page-header">
         <h1>Case Studies</h1>
+        <p class="page-dek">Deep dives into model organizations — how they operate, how they're funded, and what's transferable to a Taiwan music mental health NPO. Longer-form than the nine snapshot profiles in the <a href="report-global-npo-landscape.html" style="color:var(--signal);">Orgs Map</a>.</p>
       </div>
 
       <!-- Works Grid -->
@@ -411,7 +421,7 @@
             <div class="card-visual">
               <div>
                 <div class="card-title">Backline: Operations, Finances &amp; Growth</div>
-                <div class="card-meta">US nonprofit · est. 2019 · v2.1</div>
+                <div class="card-meta">US nonprofit · est. 2019</div>
               </div>
             </div>
           </div>
