@@ -3,3 +3,10 @@
 /rousseau-2026-metal-musicians.html /research-rousseau-2026.html 301
 /w1-report-global-npo-landscape.html /report-global-npo-landscape.html 301
 /w2-report-backline-case-study.html  /case-study-backline.html        301
+
+# News demoted to landscape changelog 2026-06-12 (PROJECT_RULES Rule 13).
+# Standalone News & Trends reports discontinued; news now lives as the
+# "Recent Changes" feed on the Orgs Map. Forced (301!) so the redirect fires
+# even though the legacy file is kept on disk as a self-contained archive.
+/news-trends-2026-06-12.html /report-global-npo-landscape.html#changelog 301!
+/news-trends-2026-04-24.html /report-global-npo-landscape.html#changelog 301!
