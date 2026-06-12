@@ -282,6 +282,20 @@
         .correction-banner ul { margin: 0.5rem 0 0 1.25rem; }
         .correction-banner li { margin-bottom: 0.3rem; }
 
+        /* Redirect notice — surfaced for readers arriving from the legacy news 301 */
+        .redirect-note {
+            background: var(--signal-bg);
+            border: 1px solid var(--signal-glow);
+            border-left: 3px solid var(--signal);
+            border-radius: var(--radius);
+            padding: 0.85rem 1.1rem; margin-bottom: 1.5rem;
+            font-family: var(--font-mono);
+            font-size: var(--text-xs); color: var(--graphite);
+            line-height: 1.6; letter-spacing: 0.01em;
+        }
+        .redirect-note strong { color: var(--signal); font-weight: 700; }
+        .redirect-note[hidden] { display: none; }
+
         /* Section title */
         .section-title {
             font-family: var(--font-display);
@@ -569,6 +583,11 @@
             <p class="subtitle">A verified scan of the global music-industry mental health field: 111 organizations listed in Backline's Global Resource Hub, nine profiled in depth in our research wiki — and zero serving Taiwan. This report maps who exists, what the evidence says, and where the entry point is.</p>
         </section>
 
+        <!-- Shown only for readers arriving from the legacy News & Trends 301 (#changelog) -->
+        <div id="redirect-note" class="redirect-note" role="status" hidden>
+            You followed a <strong>News &amp; Trends</strong> link. Standalone news reports were folded into this page — they're now the <strong>Recent Changes</strong> tab below (already selected). Scroll down to the tabs to read the latest scan.
+        </div>
+
         <!-- Primary stats -->
         <div class="stat-strip">
             <div class="stat-item">
@@ -631,7 +650,7 @@
                         <li>All Trends items replaced with linked, verifiable news; unverifiable items removed.</li>
                         <li>Database count updated: the retired spreadsheet count (27) is replaced by 9 source-traced wiki deep profiles.</li>
                     </ul>
-                    <div style="margin-top:0.6rem;"><strong>v3.2 (2026-06-12)</strong> — "Recent Changes" tab added (Rule 13): standalone News &amp; Trends reports are discontinued; the monthly scan now appends confirmed structural changes to that feed, and a quarterly refresh (next: September 2026) promotes them into these body tabs. Body figures (incl. the 111-org count) still reflect the April 4, 2026 directory baseline — the latest June re-scrape (<strong>110 orgs</strong>) and other developments live in <a href="#changelog" data-tab-link="changelog" style="color:var(--signal);">Recent Changes</a> until promotion.</div>
+                    <div style="margin-top:0.6rem;"><strong>v3.2 (2026-06-12)</strong> — "Recent Changes" tab added (Rule 13): standalone News &amp; Trends reports are discontinued; the monthly scan now appends confirmed structural changes to that feed, and a quarterly refresh (next: September 2026) promotes them into these body tabs. Body figures (incl. the 111-org count) still reflect the April 4, 2026 directory baseline — the latest June re-scrape (<strong>110 orgs</strong>) and other developments live in <a href="#changelog" style="color:var(--signal);">Recent Changes</a> until promotion.</div>
                     <div style="margin-top:0.6rem;"><strong>v3.1 (2026-06-11)</strong> — §6.11 citation retrofit: source chips are now linked block-level citations; each tab ends with a References registry carrying full sources, access dates, and methods.</div>
                     <div style="margin-top:0.6rem;"><strong>v2 (2026-04-09)</strong> — Soundcheck reclassified from organization to research study.</div>
                 </div>
@@ -1319,17 +1338,25 @@
             });
         });
 
-        // Open tab from URL hash — e.g. #changelog (redirect target for legacy
+        // Open tab from URL hash — e.g. #changelog (the redirect target for legacy
         // news URLs) or a citation id inside a non-active tab (#cl-src-3).
-        function openFromHash(scrollToTabs) {
+        // NOTE: this page's html/body scroll model (overflow-x clipping makes the
+        // root the scroll container) does not accept programmatic scroll — only the
+        // compositor scrolls. So we don't *rely* on scrollIntoView to land readers
+        // on the feed; the reliable affordance is the #redirect-note banner below,
+        // shown for news-301 arrivals so the pre-selected Recent Changes tab is found.
+        function applyHash(isInitial) {
             const hash = decodeURIComponent(location.hash.replace('#', ''));
             if (!hash) return;
             if (activateTab(hash)) {
-                // Readers arriving from the news 301 (#changelog) land at the hero;
-                // bring the tab section into view so the feed is what they see.
-                if (scrollToTabs) {
-                    const tabs = document.querySelector('.tabs-wrapper');
-                    if (tabs) tabs.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Best-effort scroll (no-op on this page's scroll model, harmless
+                // elsewhere / if the quirk is ever fixed).
+                const tabs = document.querySelector('.tabs-wrapper');
+                if (tabs) tabs.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Reliable affordance: surface the redirect notice on first load only.
+                if (isInitial && hash === 'changelog') {
+                    const note = document.getElementById('redirect-note');
+                    if (note) note.hidden = false;
                 }
                 return;
             }
@@ -1342,16 +1369,8 @@
                 }
             }
         }
-        // Stop the browser from restoring/jumping scroll and fighting our tab scroll.
-        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-        // Initial pass after load (+ a tick) so fonts/layout settle and our scroll
-        // to the tab section wins over the browser's native hash jump-to-top.
-        function initFromHash() { setTimeout(() => openFromHash(true), 80); }
-        if (document.readyState === 'complete') initFromHash();
-        else window.addEventListener('load', initFromHash);
-        // In-page hash changes (e.g. the Overview → Recent Changes link) — layout
-        // is already settled, so handle immediately.
-        window.addEventListener('hashchange', () => openFromHash(true));
+        applyHash(true);
+        window.addEventListener('hashchange', () => applyHash(false));
 
         // Expandable cards — mouse + keyboard accessible
         document.querySelectorAll('[data-expandable]').forEach(card => {
