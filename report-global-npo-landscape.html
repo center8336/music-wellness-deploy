@@ -1342,9 +1342,15 @@
                 }
             }
         }
-        // Defer the initial pass one frame so layout/fonts settle and our scroll
-        // wins over the browser's native hash jump.
-        requestAnimationFrame(() => openFromHash(true));
+        // Stop the browser from restoring/jumping scroll and fighting our tab scroll.
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+        // Initial pass after load (+ a tick) so fonts/layout settle and our scroll
+        // to the tab section wins over the browser's native hash jump-to-top.
+        function initFromHash() { setTimeout(() => openFromHash(true), 80); }
+        if (document.readyState === 'complete') initFromHash();
+        else window.addEventListener('load', initFromHash);
+        // In-page hash changes (e.g. the Overview → Recent Changes link) — layout
+        // is already settled, so handle immediately.
         window.addEventListener('hashchange', () => openFromHash(true));
 
         // Expandable cards — mouse + keyboard accessible
