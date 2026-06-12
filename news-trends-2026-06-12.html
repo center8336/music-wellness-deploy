@@ -313,12 +313,12 @@ sup.cite a:focus-visible { outline:2px solid var(--signal); outline-offset:2px; 
 .method-box p { font-size:var(--text-sm); color:var(--grey); margin-bottom:0.6rem; max-width:80ch; }
 .method-box p strong { color:var(--graphite); }
 
-/* Reveal */
-.reveal { opacity:0; transform:translateY(14px); transition:opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease); }
-.reveal.in { opacity:1; transform:none; }
+/* Reveal — hidden state only when JS is running (html.js), so no-JS readers see everything */
+html.js .reveal { opacity:0; transform:translateY(14px); transition:opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease); }
+html.js .reveal.in { opacity:1; transform:none; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior:auto; }
-  .reveal { opacity:1; transform:none; transition:none; }
+  html.js .reveal { opacity:1; transform:none; transition:none; }
   * { animation:none !important; transition:none !important; }
 }
 
@@ -337,6 +337,7 @@ sup.cite a:focus-visible { outline:2px solid var(--signal); outline-offset:2px; 
   .nav-links.show { display:flex; }
   .nav-links a { font-size:0.85rem; }
   .masthead { padding:7rem 1.25rem 0; }
+  .masthead h1 { font-size:clamp(1.7rem, 8vw, 2.6rem); }
   .exec { padding:2.5rem 1.25rem 0; }
   .exec-grid { grid-template-columns:1fr; gap:1rem; }
   .section { padding:3.2rem 1.25rem 0.5rem; }
@@ -385,7 +386,7 @@ sup.cite a:focus-visible { outline:2px solid var(--signal); outline-offset:2px; 
       <span>MH&amp;W — Monthly Report · News &amp; Trends</span>
       <span class="live-dot">● June 12, 2026 · Cycle: May–June</span>
     </div>
-    <h1>The field stops announcing and starts <em>consolidating</em></h1>
+    <h1>A quiet quarter. A <em>deeper</em> field.</h1>
     <p class="masthead-dek">Monthly scan of the music mental health space — global developments, new data, Asia-Pacific &amp; Taiwan, and what it means for an NPO that doesn't exist yet.</p>
     <div class="stat-strip" role="list" aria-label="Key numbers this cycle">
       <div class="stat-item" role="listitem">
@@ -725,13 +726,12 @@ sup.cite a:focus-visible { outline:2px solid var(--signal); outline-offset:2px; 
     });
   })();
 
-  // Reveal on scroll (respects prefers-reduced-motion via CSS)
+  // Reveal on scroll (respects prefers-reduced-motion via CSS).
+  // html.js gates the hidden state: without JS, content is fully visible.
   (function() {
     var els = document.querySelectorAll('.reveal');
-    if (!('IntersectionObserver' in window)) {
-      els.forEach(function(el){ el.classList.add('in'); });
-      return;
-    }
+    if (!('IntersectionObserver' in window)) return;
+    document.documentElement.classList.add('js');
     var io = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {
         if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
