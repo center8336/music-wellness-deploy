@@ -164,26 +164,22 @@
 
         .stat-meta { font-family: var(--font-body); font-size: var(--text-xs); color: var(--grey); margin-top: 0.25rem; }
 
-        /* Confidence badges */
+        /* Inline citation markers — purple superscript numbers (block tier, §5.1) */
         .conf {
-            display: inline-block;
             font-family: var(--font-mono);
-            font-size: 0.68rem;
-            padding: 0.15rem 0.6rem;
-            border-radius: 50px;
-            letter-spacing: 0.06em;
-            vertical-align: middle;
-            white-space: nowrap;
+            font-size: 0.6rem; font-weight: 700;
+            color: var(--signal);
+            vertical-align: super; line-height: 0;
+            margin-left: 0.12em; white-space: nowrap;
         }
-        .conf-verified { background: rgba(133,201,163,0.18); color: #2e7d54; border: 1px solid rgba(133,201,163,0.4); }
-        .conf-single { background: rgba(232,168,124,0.18); color: #a05f2c; border: 1px solid rgba(232,168,124,0.45); }
-        .conf-uncertain { background: rgba(212,121,156,0.15); color: #9c4368; border: 1px solid rgba(212,121,156,0.4); }
-
         a.conf { text-decoration: none; }
-        a.conf:hover, a.conf:focus { text-decoration: underline; }
-        a.conf-verified, a.conf-verified:hover, a.conf-verified:focus { color: #2e7d54; }
-        a.conf-single, a.conf-single:hover, a.conf-single:focus { color: #a05f2c; }
-        a.conf-uncertain, a.conf-uncertain:hover, a.conf-uncertain:focus { color: #9c4368; }
+        a.conf:hover, a.conf:focus { color: var(--signal-dim); text-decoration: underline; }
+        /* legacy confidence classes neutralised to the design-system purple (markup + audit stay stable) */
+        .conf-verified, .conf-single, .conf-uncertain,
+        a.conf-verified, a.conf-single, a.conf-uncertain { color: var(--signal); }
+        /* Confidence key (Sources tab) + reference-list symbols — the emoji carry the colour, no hex needed */
+        .conf-key { display: inline-block; font-family: var(--font-mono); font-size: 0.68rem; padding: 0.15rem 0.6rem; border-radius: 50px; letter-spacing: 0.06em; white-space: nowrap; color: var(--graphite); border: 1px solid var(--border-light); background: var(--snow); }
+        .refs li .conf-sym { font-style: normal; margin-right: 0.4em; }
 
         /* Per-tab citation registries (§6.11 block tier) */
         .refs { background: var(--white); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2.5rem; }
@@ -578,7 +574,7 @@
     <div class="container" id="main">
         <!-- Hero -->
         <section class="hero">
-            <div class="eyebrow">Orgs Map · Quarterly Refresh · v3.3</div>
+            <div class="eyebrow">Orgs Map · Quarterly Refresh · v3.4</div>
             <h1>Mapping the global music mental health ecosystem</h1>
             <p class="subtitle">A verified scan of the global music-industry mental health field: 111 organizations listed in Backline's Global Resource Hub, nine profiled in depth in our research wiki — and zero serving Taiwan. This report maps who exists, what the evidence says, and where the entry point is.</p>
         </section>
@@ -627,34 +623,38 @@
 
                 <div class="card">
                     <h3>Key Findings</h3>
-                    <p style="font-size: var(--text-body); line-height: 1.7; margin-bottom: 1rem;">Backline's Global Resource Hub lists 111 unique organizations working in music-industry mental health and wellness (all 13 directory pages scraped and deduplicated, April 2026). Findings:</p>
+                    <p style="font-size: var(--text-body); line-height: 1.7; margin-bottom: 1rem;">Backline's Global Resource Hub lists 111 unique organizations working in music-industry mental health and wellness (April 2026 baseline; June re-scrape: 110). Nine are profiled in depth <a class="conf" href="#ov-src-2" data-src="wiki-profiles">2</a> — but service types and funding models below are classified across <strong>all 110</strong> (June full roster), not generalized from the nine. Findings:</p>
                     <ul style="margin-left: 1.5rem; font-size: var(--text-body); line-height: 1.7;">
-                        <li style="margin-bottom:0.5rem;"><strong>Two geographic poles, not one.</strong> The US leads (~21 standalone orgs plus most multi-country networks), but continental Europe is the second pole — Germany (~8), UK (~7), France (~6), with Austria, Iceland, Switzerland and Romania at 3 each. Australia has 3. <a class="conf conf-verified" href="#ov-src-1" data-src="directory-snapshot">✅ directory snapshot</a></li>
-                        <li style="margin-bottom:0.5rem;"><strong>Zero organizations serve Taiwan</strong> — and zero independent, music-specific MH organizations exist anywhere in East or Southeast Asia. Japan's B-Side Project is corporate (Sony-contracted artists only); India's TATVA is the region's only independent music-specific org. <a class="conf conf-verified" href="#ov-src-1" data-src="directory-snapshot">✅ 2 scrapes, 2 dates</a></li>
-                        <li style="margin-bottom:0.5rem;"><strong>Service models cluster into five types:</strong> crisis support, case management / healthcare navigation, peer support communities, financial aid, and education/research. Successful organizations combine two or three rather than attempting all five. <a class="conf conf-verified" href="#ov-src-2" data-src="wiki-profiles">✅ 9 wiki profiles</a></li>
-                        <li style="margin-bottom:0.5rem;"><strong>Funding follows four models — donation-dominance is a US/UK artifact, not a universal law.</strong> Drawn from the ≈5 deep-profiled orgs with verified financials (not the 110-org directory, which holds no funding data): <em>(a) philanthropy</em> — Backline ~100% donations ($874K FY2023, 990); Help Musicians/MMM on major donors, legacies, corporate partners <a class="conf conf-verified" href="#ov-src-5" data-src="helpmusicians-funding">✅ 2024 report</a>; <em>(b) industry-institution anchored</em> — MusiCares via the Recording Academy ($14M FY2024); MHA via label partnerships; <em>(c) artist-led campaigns</em> — Busyhead $6.6M (⚠️ single-source); <em>(d) government-funded</em> — Support Act (Australia) draws significant Australian Government funding via the Office for the Arts. <a class="conf conf-verified" href="#ov-src-3" data-src="org-financials">✅ 990s / reports</a> <a class="conf conf-verified" href="#ov-src-6" data-src="support-act-funding">✅ gov + press</a> <span class="conf conf-single">⚠️ not classified across all 110</span></li>
-                        <li><strong>Taiwan mental-health policy baseline.</strong> The 全民心理健康韌性計畫 commits NT$5.63B over 2025–2030, including free counseling for ages 15–45. <a class="conf conf-verified" href="#ov-src-4" data-src="tw-policy">✅ 行政院 / 衛福部</a></li>
+                        <li style="margin-bottom:0.5rem;"><strong>Two geographic poles — plus a borderless fifth.</strong> Among place-bound orgs the US leads (~21 standalone) and continental Europe is the second pole — Germany (~8), UK (~7), France (~6), Austria/Iceland/Switzerland/Romania 3 each, Australia 3. But <strong>~20% of the directory (22 of 110) has no single home country</strong> — global helplines, 12-step fellowships and multi-country therapist networks. These are defined by <em>service model</em>, not geography; the place-bound majority cluster by <em>national funding system</em>. So for a fifth of the field, "what model" matters more than "where." <a class="conf" href="#ov-src-1" data-src="directory-snapshot">1</a></li>
+                        <li style="margin-bottom:0.5rem;"><strong>Zero organizations serve Taiwan</strong> — and zero independent, music-specific MH organizations exist anywhere in East or Southeast Asia. Japan's B-Side Project is corporate (Sony-contracted artists only); India's TATVA is the region's only independent music-specific org. <a class="conf" href="#ov-src-1" data-src="directory-snapshot">1</a></li>
+                        <li style="margin-bottom:0.5rem;"><strong>Service types are broader than clinical MH, and most orgs are narrow.</strong> Counted across all 110: Mental Health Support 44%, but Financial Resources (29%) and Career Development (28%) nearly rival it, then Counseling 21%, Substance Use 12%. Orgs are mostly single-purpose — mean 1.9 services each, 44% offer just one, only 25% combine three or more. The "successful orgs combine 2–3 services" pattern holds for the marquee names, not the long tail. <a class="conf" href="#ov-src-7" data-src="directory-service-tags">7</a></li>
+                        <li style="margin-bottom:0.5rem;"><strong>Funding is diverse — and for half the directory, there is no public information.</strong> Classified across all 110 by organizational type: <strong>no public funding info ≈50%</strong> (shown as a fact, not guessed); government/public-sector ~15%; philanthropy/charity ~14% (Backline; Help Musicians/MMM <a class="conf" href="#ov-src-5" data-src="helpmusicians-funding">5</a>); private-pay / therapist directory ~10%; trade body ~7%; peer fellowship ~5%. <strong>Donation-dominance was a US/UK-sampling artifact</strong> — a real government cluster (European arts councils, ANZ, public health: CNM, Pro Helvetia, Creative NZ, Support Act <a class="conf" href="#ov-src-6" data-src="support-act-funding">6</a>, SAMHSA) was missed by the nine profiles. <a class="conf" href="#ov-src-8" data-src="directory-funding-class">8</a> <a class="conf" href="#ov-src-9" data-src="gov-funding-anchors">9</a> <a class="conf" href="#ov-src-3" data-src="org-financials">3</a></li>
+                        <li><strong>Taiwan mental-health policy baseline.</strong> The 全民心理健康韌性計畫 commits NT$5.63B over 2025–2030, including free counseling for ages 15–45. <a class="conf" href="#ov-src-4" data-src="tw-policy">4</a></li>
                     </ul>
                 </div>
 
                 <div class="chart-container">
-                    <div class="chart-title">Where the organizations are — two poles, then a steep drop</div>
-                    <div class="chart-note">Standalone orgs by country (multi-country networks excluded). The US leads, continental Europe is the clear second pole, and there is a long tail of single-country efforts — then nothing in East/Southeast Asia beyond India. <a class="conf conf-verified" href="#ov-src-1" data-src="directory-snapshot">✅ directory snapshot</a></div>
+                    <div class="chart-title">Where the organizations are — and the borderless fifth</div>
+                    <div class="chart-note"><strong>Reach lens.</strong> The single largest bucket isn't a country: 22 orgs (20%, June roster) operate <em>worldwide or across multiple countries</em> — global helplines, 12-step fellowships, multi-country therapist networks — and are defined by service model rather than a national base. The rest are place-bound, with two poles (US, then continental Europe) and a long tail, then nothing in East/SE Asia beyond India. <a class="conf" href="#ov-src-1" data-src="directory-snapshot">1</a></div>
                     <div class="chart-bar">
-                        <div class="chart-label">United States</div>
-                        <div class="chart-visual"><div class="bar" style="width: 100%;">~21</div></div>
+                        <div class="chart-label">Worldwide / multi-country</div>
+                        <div class="chart-visual"><div class="bar" style="width: 100%; background: var(--signal);">22</div></div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">United States (place-bound)</div>
+                        <div class="chart-visual"><div class="bar alt" style="width: 95%;">~21</div></div>
                     </div>
                     <div class="chart-bar">
                         <div class="chart-label">Germany</div>
-                        <div class="chart-visual"><div class="bar alt" style="width: 38%;">~8</div></div>
+                        <div class="chart-visual"><div class="bar alt" style="width: 36%;">~8</div></div>
                     </div>
                     <div class="chart-bar">
                         <div class="chart-label">United Kingdom</div>
-                        <div class="chart-visual"><div class="bar alt" style="width: 33%;">~7</div></div>
+                        <div class="chart-visual"><div class="bar alt" style="width: 32%;">~7</div></div>
                     </div>
                     <div class="chart-bar">
                         <div class="chart-label">France</div>
-                        <div class="chart-visual"><div class="bar alt" style="width: 29%;">~6</div></div>
+                        <div class="chart-visual"><div class="bar alt" style="width: 27%;">~6</div></div>
                     </div>
                     <div class="chart-bar">
                         <div class="chart-label">AT · IS · CH · RO (3 each)</div>
@@ -666,19 +666,84 @@
                     </div>
                     <div class="chart-bar">
                         <div class="chart-label">Taiwan / East &amp; SE Asia (ex-India)</div>
-                        <div class="chart-visual"><div class="bar" style="width: 4%; background: var(--signal); min-width: 28px;">0</div></div>
+                        <div class="chart-visual"><div class="bar" style="width: 4%; background: var(--graphite); min-width: 28px;">0</div></div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-title">What they do — service types across all 110</div>
+                    <div class="chart-note">Counted from the directory's own service tags (complete for all 110, June roster), not generalized from the nine profiles. The field is broader than clinical mental health — financial aid and career development nearly match it. Mean 1.9 services per org; 44% offer just one. <a class="conf" href="#ov-src-7" data-src="directory-service-tags">7</a></div>
+                    <div class="chart-bar">
+                        <div class="chart-label">Mental Health Support</div>
+                        <div class="chart-visual"><div class="bar" style="width: 100%;">48 · 44%</div></div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">Financial Resources</div>
+                        <div class="chart-visual"><div class="bar alt" style="width: 66%;">32 · 29%</div></div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">Career Development</div>
+                        <div class="chart-visual"><div class="bar alt" style="width: 64%;">31 · 28%</div></div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">Counseling Services</div>
+                        <div class="chart-visual"><div class="bar alt" style="width: 48%;">23 · 21%</div></div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">Substance Use</div>
+                        <div class="chart-visual"><div class="bar neutral" style="width: 27%;">13 · 12%</div></div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">Therapist Directory</div>
+                        <div class="chart-visual"><div class="bar neutral" style="width: 25%;">12 · 11%</div></div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">Emergency Aid</div>
+                        <div class="chart-visual"><div class="bar neutral" style="width: 25%;">12 · 11%</div></div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-title">How they're funded — and what we can't see</div>
+                    <div class="chart-note">Structural classification across all 110 by organizational type. <strong>For ~half the directory there is no public funding information — shown as a fact, not guessed.</strong> Among the rest, a real government/public-sector cluster (European arts councils, ANZ, public health) appears that the nine profiles missed. Confidence: ✅ 11 verified · ⚠️ 44 inferred from org type · ❓ 55 no public info. <a class="conf" href="#ov-src-8" data-src="directory-funding-class">8</a> <a class="conf" href="#ov-src-9" data-src="gov-funding-anchors">9</a></div>
+                    <div class="chart-bar">
+                        <div class="chart-label">❓ No public funding info</div>
+                        <div class="chart-visual"><div class="bar" style="width: 100%; background: var(--graphite);">55 · 50%</div></div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">Government / public-sector</div>
+                        <div class="chart-visual"><div class="bar" style="width: 30%; background: var(--signal);">16 · 15%</div></div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">Philanthropy / charity</div>
+                        <div class="chart-visual"><div class="bar alt" style="width: 28%;">15 · 14%</div></div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">Private-pay / therapist directory</div>
+                        <div class="chart-visual"><div class="bar neutral" style="width: 20%;">11 · 10%</div></div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">Industry-institution / trade body</div>
+                        <div class="chart-visual"><div class="bar neutral" style="width: 14%;">8 · 7%</div></div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">Peer fellowship (self-supporting)</div>
+                        <div class="chart-visual"><div class="bar neutral" style="width: 10%;">5 · 5%</div></div>
                     </div>
                 </div>
 
                 <div class="refs" id="refs-overview" data-citation-registry="w1-overview">
                     <div class="refs-title">References — Overview</div>
                     <ol>
-                        <li id="ov-src-1" data-src="directory-snapshot">Backline <a href="https://backline.care/global-resources/" target="_blank" rel="noopener">Global Resource Hub</a> directory — Chrome-automated scrape of all 13 pages, deduplicated to 111 unique organizations; run twice (Apr 3 &amp; 4, 2026). Snapshots: <span style="font-family:var(--font-mono); font-size:0.8rem;">wiki/snapshots/Backline_Directory_*.md</span>. Method: browser scrape ×2.</li>
-                        <li id="ov-src-2" data-src="wiki-profiles">Nine source-traced wiki deep profiles (orgs/: backline · musicares · music_health_alliance · music_minds_matter · busyhead_project · project_healthy_minds · tatva · sangath · b_side_project), each compiled from primary sources — full source list in the Sources &amp; Method tab.</li>
-                        <li id="ov-src-3" data-src="org-financials">Backline Form 990s FY2020–2023 — <a href="https://projects.propublica.org/nonprofits/organizations/843338712" target="_blank" rel="noopener">ProPublica Nonprofit Explorer API</a>, accessed 2026-06-11; MusiCares FY2024 990 — <a href="https://projects.propublica.org/nonprofits/organizations/954470909" target="_blank" rel="noopener">ProPublica</a>; Busyhead figures — <a href="https://www.busyheadproject.org/" target="_blank" rel="noopener">busyheadproject.org</a> (single-source); MHA $1→$30 leverage — <a href="https://www.musichealthalliance.com" target="_blank" rel="noopener">musichealthalliance.com</a>.</li>
-                        <li id="ov-src-4" data-src="tw-policy">行政院 — <a href="https://www.ey.gov.tw/Page/5A8A0CB5B41DA11E/8e8835ef-5b07-4e02-8b19-906b6964a10c" target="_blank" rel="noopener">全民心理健康韌性計畫</a>; 衛福部心理健康司 — <a href="https://dep.mohw.gov.tw/DOMHAOH/lp-329-107.html" target="_blank" rel="noopener">計畫專區</a>. Method: official policy pages.</li>
-                        <li id="ov-src-5" data-src="helpmusicians-funding">Help Musicians / Music Minds Matter income — major donors, legacies, corporate partners (not government): <a href="https://www.helpmusicians.org.uk/about-us/news/help-musicians-release-2024-annual-report" target="_blank" rel="noopener">Help Musicians 2024 Annual Report</a> (<a href="https://www.helpmusicians.org.uk/assets/downloads/The%20HMUK%202024%20(Digital%20Final%20Version)-compressed.pdf" target="_blank" rel="noopener">financial statements PDF</a>). Accessed 2026-06-15.</li>
-                        <li id="ov-src-6" data-src="support-act-funding">Support Act (Australia) — Australian Government funding via the Office for the Arts: $20M relief round (2021) <a href="https://artsreview.com.au/support-act-welcomes-additional-funding-from-the-australian-government/" target="_blank" rel="noopener">Australian Arts Review</a> (press); arts-sector core funding under Revive <a href="https://www.arts.gov.au/news/2023-24-federal-budget-revitalise-arts-sector" target="_blank" rel="noopener">Office for the Arts</a> (government). Two independent methods. Accessed 2026-06-15.</li>
+                        <li id="ov-src-1" data-src="directory-snapshot"><span class="conf-sym">✅</span>Backline <a href="https://backline.care/global-resources/" target="_blank" rel="noopener">Global Resource Hub</a> directory — Chrome-automated scrape of all 13 pages, deduplicated to 111 unique organizations; run twice (Apr 3 &amp; 4, 2026). Snapshots: <span style="font-family:var(--font-mono); font-size:0.8rem;">wiki/snapshots/Backline_Directory_*.md</span>. Method: browser scrape ×2.</li>
+                        <li id="ov-src-2" data-src="wiki-profiles"><span class="conf-sym">✅</span>Nine source-traced wiki deep profiles (orgs/: backline · musicares · music_health_alliance · music_minds_matter · busyhead_project · project_healthy_minds · tatva · sangath · b_side_project), each compiled from primary sources — full source list in the Sources &amp; Method tab.</li>
+                        <li id="ov-src-3" data-src="org-financials"><span class="conf-sym">✅</span>Backline Form 990s FY2020–2023 — <a href="https://projects.propublica.org/nonprofits/organizations/843338712" target="_blank" rel="noopener">ProPublica Nonprofit Explorer API</a>, accessed 2026-06-11; MusiCares FY2024 990 — <a href="https://projects.propublica.org/nonprofits/organizations/954470909" target="_blank" rel="noopener">ProPublica</a>; Busyhead figures — <a href="https://www.busyheadproject.org/" target="_blank" rel="noopener">busyheadproject.org</a> (single-source); MHA $1→$30 leverage — <a href="https://www.musichealthalliance.com" target="_blank" rel="noopener">musichealthalliance.com</a>.</li>
+                        <li id="ov-src-4" data-src="tw-policy"><span class="conf-sym">✅</span>行政院 — <a href="https://www.ey.gov.tw/Page/5A8A0CB5B41DA11E/8e8835ef-5b07-4e02-8b19-906b6964a10c" target="_blank" rel="noopener">全民心理健康韌性計畫</a>; 衛福部心理健康司 — <a href="https://dep.mohw.gov.tw/DOMHAOH/lp-329-107.html" target="_blank" rel="noopener">計畫專區</a>. Method: official policy pages.</li>
+                        <li id="ov-src-5" data-src="helpmusicians-funding"><span class="conf-sym">✅</span>Help Musicians / Music Minds Matter income — major donors, legacies, corporate partners (not government): <a href="https://www.helpmusicians.org.uk/about-us/news/help-musicians-release-2024-annual-report" target="_blank" rel="noopener">Help Musicians 2024 Annual Report</a> (<a href="https://www.helpmusicians.org.uk/assets/downloads/The%20HMUK%202024%20(Digital%20Final%20Version)-compressed.pdf" target="_blank" rel="noopener">financial statements PDF</a>). Accessed 2026-06-15.</li>
+                        <li id="ov-src-6" data-src="support-act-funding"><span class="conf-sym">✅</span>Support Act (Australia) — Australian Government funding via the Office for the Arts: $20M relief round (2021) <a href="https://artsreview.com.au/support-act-welcomes-additional-funding-from-the-australian-government/" target="_blank" rel="noopener">Australian Arts Review</a> (press); arts-sector core funding under Revive <a href="https://www.arts.gov.au/news/2023-24-federal-budget-revitalise-arts-sector" target="_blank" rel="noopener">Office for the Arts</a> (government). Two independent methods. Accessed 2026-06-15.</li>
+                        <li id="ov-src-7" data-src="directory-service-tags"><span class="conf-sym">✅</span>Service-type counts across all 110 orgs, from the directory's own service tags. Full roster: <span style="font-family:var(--font-mono); font-size:0.8rem;">wiki/snapshots/Backline_Directory_2026-06-12.md</span>; derived counts: <span style="font-family:var(--font-mono); font-size:0.8rem;">wiki/snapshots/Directory_Analysis_Service_Funding_2026-06-15.md</span>. Method: counted from the June full roster (complete for all 110).</li>
+                        <li id="ov-src-8" data-src="directory-funding-class"><span class="conf-sym">⚠️</span>Funding-model structural classification across all 110 orgs (government/public · institution · philanthropy · fellowship · private-pay · <strong>no public info</strong>), with per-org confidence — derived dataset <span style="font-family:var(--font-mono); font-size:0.8rem;">wiki/snapshots/Directory_Analysis_Service_Funding_2026-06-15.md</span>. A computed classification by organizational type plus verified anchors — <strong>not</strong> a 110-org financials census; ≈50% labeled "no public funding info" rather than guessed.</li>
+                        <li id="ov-src-9" data-src="gov-funding-anchors"><span class="conf-sym">✅</span>Government/public-sector cluster anchors (web-verified): <a href="https://cnm.fr/en/uncategorized/about-us/" target="_blank" rel="noopener">Centre national de la musique</a> — French public establishment under the Ministry of Culture; <a href="https://prohelvetia.ch/en/our-mission/" target="_blank" rel="noopener">Pro Helvetia</a> — Swiss Arts Council, foundation under public law, federally funded; <a href="https://creativenz.govt.nz/about-creative-nz/what-we-do/arts-funding" target="_blank" rel="noopener">Creative New Zealand</a> — national government arts agency; <a href="https://www.samhsa.gov/" target="_blank" rel="noopener">SAMHSA</a> (US federal agency); plus Support Act (see 6). Method: WebSearch + official pages, 2026-06-15.</li>
                     </ol>
                 </div>
             </div>
@@ -691,7 +756,7 @@
                     <div class="expandable-header">
                         <div>
                             <h3>Backline</h3>
-                            <div class="card-meta">US · 501(c)(3) nonprofit · founded late 2019 <a class="conf conf-verified" href="#org-src-1" data-src="backline-card">✅ 990 + official site</a></div>
+                            <div class="card-meta">US · 501(c)(3) nonprofit · founded late 2019 <a class="conf" href="#org-src-1" data-src="backline-card">1</a></div>
                         </div>
                         <span class="expand-icon" aria-hidden="true">▼</span>
                     </div>
@@ -709,7 +774,7 @@
                     <div class="expandable-header">
                         <div>
                             <h3>MusiCares</h3>
-                            <div class="card-meta">US · Recording Academy affiliate · founded 1989 <a class="conf conf-verified" href="#org-src-2" data-src="musicares-card">✅ 990 + official site</a></div>
+                            <div class="card-meta">US · Recording Academy affiliate · founded 1989 <a class="conf" href="#org-src-2" data-src="musicares-card">2</a></div>
                         </div>
                         <span class="expand-icon" aria-hidden="true">▼</span>
                     </div>
@@ -727,7 +792,7 @@
                     <div class="expandable-header">
                         <div>
                             <h3>Music Health Alliance</h3>
-                            <div class="card-meta">US · nonprofit · founded 2013, Nashville <a class="conf conf-verified" href="#org-src-3" data-src="mha-card">✅ official reports</a></div>
+                            <div class="card-meta">US · nonprofit · founded 2013, Nashville <a class="conf" href="#org-src-3" data-src="mha-card">3</a></div>
                         </div>
                         <span class="expand-icon" aria-hidden="true">▼</span>
                     </div>
@@ -745,7 +810,7 @@
                     <div class="expandable-header">
                         <div>
                             <h3>Music Minds Matter / Help Musicians</h3>
-                            <div class="card-meta">UK · charity · parent est. 1921 <a class="conf conf-verified" href="#org-src-4" data-src="mmm-card">✅ 2024 annual report</a></div>
+                            <div class="card-meta">UK · charity · parent est. 1921 <a class="conf" href="#org-src-4" data-src="mmm-card">4</a></div>
                         </div>
                         <span class="expand-icon" aria-hidden="true">▼</span>
                     </div>
@@ -763,7 +828,7 @@
                     <div class="expandable-header">
                         <div>
                             <h3>The Busyhead Project</h3>
-                            <div class="card-meta">US · nonprofit · founded 2023 by Noah Kahan <a class="conf conf-single" href="#org-src-5" data-src="busyhead-card">⚠️ single-source</a></div>
+                            <div class="card-meta">US · nonprofit · founded 2023 by Noah Kahan <a class="conf" href="#org-src-5" data-src="busyhead-card">5</a></div>
                         </div>
                         <span class="expand-icon" aria-hidden="true">▼</span>
                     </div>
@@ -781,7 +846,7 @@
                     <div class="expandable-header">
                         <div>
                             <h3>Project Healthy Minds</h3>
-                            <div class="card-meta">US · MH tech nonprofit <a class="conf conf-verified" href="#org-src-6" data-src="phm-card">✅ official site</a></div>
+                            <div class="card-meta">US · MH tech nonprofit <a class="conf" href="#org-src-6" data-src="phm-card">6</a></div>
                         </div>
                         <span class="expand-icon" aria-hidden="true">▼</span>
                     </div>
@@ -799,7 +864,7 @@
                     <div class="expandable-header">
                         <div>
                             <h3>TATVA</h3>
-                            <div class="card-meta">India · wellness organization <a class="conf conf-verified" href="#org-src-7" data-src="tatva-card">✅ directory + press</a></div>
+                            <div class="card-meta">India · wellness organization <a class="conf" href="#org-src-7" data-src="tatva-card">7</a></div>
                         </div>
                         <span class="expand-icon" aria-hidden="true">▼</span>
                     </div>
@@ -816,7 +881,7 @@
                     <div class="expandable-header">
                         <div>
                             <h3>Sangath</h3>
-                            <div class="card-meta">India · mental health organization <a class="conf conf-verified" href="#org-src-8" data-src="sangath-card">✅ directory</a></div>
+                            <div class="card-meta">India · mental health organization <a class="conf" href="#org-src-8" data-src="sangath-card">8</a></div>
                         </div>
                         <span class="expand-icon" aria-hidden="true">▼</span>
                     </div>
@@ -833,7 +898,7 @@
                     <div class="expandable-header">
                         <div>
                             <h3>The B-Side Project</h3>
-                            <div class="card-meta">Japan · Sony Music corporate initiative · 2021 <a class="conf conf-verified" href="#org-src-9" data-src="bside-card">✅ directory</a></div>
+                            <div class="card-meta">Japan · Sony Music corporate initiative · 2021 <a class="conf" href="#org-src-9" data-src="bside-card">9</a></div>
                         </div>
                         <span class="expand-icon" aria-hidden="true">▼</span>
                     </div>
@@ -849,15 +914,15 @@
                 <div class="refs" id="refs-organizations" data-citation-registry="w1-organizations">
                     <div class="refs-title">References — Organizations</div>
                     <ol>
-                        <li id="org-src-1" data-src="backline-card">Backline: Form 990s — <a href="https://projects.propublica.org/nonprofits/organizations/843338712" target="_blank" rel="noopener">ProPublica API</a>, accessed 2026-06-11; <a href="https://backline.care" target="_blank" rel="noopener">backline.care</a>; <a href="https://www.charitynavigator.org/ein/843338712" target="_blank" rel="noopener">Charity Navigator</a> (97%, accessed 2026-06-11).</li>
-                        <li id="org-src-2" data-src="musicares-card">MusiCares: FY2024 Form 990 — <a href="https://projects.propublica.org/nonprofits/organizations/954470909" target="_blank" rel="noopener">ProPublica (EIN 95-4470909)</a>; <a href="https://www.musicares.org" target="_blank" rel="noopener">musicares.org</a>.</li>
-                        <li id="org-src-3" data-src="mha-card">Music Health Alliance: <a href="https://www.musichealthalliance.com" target="_blank" rel="noopener">official reports</a>; UMG fund — <a href="https://www.prnewswire.com/news-releases/universal-music-group-and-music-health-alliance-launch-music-industry-mental-health-fund-302376062.html" target="_blank" rel="noopener">PR Newswire</a>; PHM partnership — <a href="https://musicrow.com/2025/10/project-healthy-minds-partners-with-music-health-alliance1/" target="_blank" rel="noopener">MusicRow (Oct 2025)</a>.</li>
-                        <li id="org-src-4" data-src="mmm-card">Music Minds Matter: <a href="https://www.musicmindsmatter.org.uk/news/2025/4/25/music-minds-matter-release-2024-annual-report" target="_blank" rel="noopener">2024 annual report (Apr 2025)</a>; <a href="https://www.helpmusicians.org.uk/" target="_blank" rel="noopener">helpmusicians.org.uk</a>.</li>
-                        <li id="org-src-5" data-src="busyhead-card">The Busyhead Project: <a href="https://www.busyheadproject.org/" target="_blank" rel="noopener">busyheadproject.org</a> — single source; $6.6M raised / 170+ orgs not independently verified.</li>
-                        <li id="org-src-6" data-src="phm-card">Project Healthy Minds: <a href="https://www.projecthealthyminds.com" target="_blank" rel="noopener">projecthealthyminds.com</a>; PHM × MHA — <a href="https://www.prnewswire.com/news-releases/project-healthy-minds-and-music-health-alliance-announce-strategic-partnership-to-expand-access-to-mental-health-support-for-music-industry-professionals-302580921.html" target="_blank" rel="noopener">PR Newswire (Oct 2025)</a>; UMG initiative — <a href="https://www.billboard.com/pro/universal-music-group-mental-health-initiatives/" target="_blank" rel="noopener">Billboard (May 2026)</a>.</li>
-                        <li id="org-src-7" data-src="tatva-card">TATVA: directory snapshot (Apr 2026); <a href="https://www.tatva.org.in/" target="_blank" rel="noopener">tatva.org.in</a>; It's Time to Talk — <a href="https://musically.com/2025/11/13/new-survey-its-time-to-talk-will-examine-indian-musicians-mental-health-challenges/" target="_blank" rel="noopener">Music Ally (Nov 13, 2025)</a>, <a href="https://www.gold.ac.uk/news/2025/its-time-to-talk/" target="_blank" rel="noopener">Goldsmiths</a>.</li>
-                        <li id="org-src-8" data-src="sangath-card">Sangath: directory snapshot (Apr 2026); <a href="https://www.sangath.in/" target="_blank" rel="noopener">sangath.in</a>.</li>
-                        <li id="org-src-9" data-src="bside-card">The B-Side Project: directory snapshot (Apr 2026); <a href="https://www.sonymusic.co.jp/bside/" target="_blank" rel="noopener">Sony Music Japan — B-Side</a>.</li>
+                        <li id="org-src-1" data-src="backline-card"><span class="conf-sym">✅</span>Backline: Form 990s — <a href="https://projects.propublica.org/nonprofits/organizations/843338712" target="_blank" rel="noopener">ProPublica API</a>, accessed 2026-06-11; <a href="https://backline.care" target="_blank" rel="noopener">backline.care</a>; <a href="https://www.charitynavigator.org/ein/843338712" target="_blank" rel="noopener">Charity Navigator</a> (97%, accessed 2026-06-11).</li>
+                        <li id="org-src-2" data-src="musicares-card"><span class="conf-sym">✅</span>MusiCares: FY2024 Form 990 — <a href="https://projects.propublica.org/nonprofits/organizations/954470909" target="_blank" rel="noopener">ProPublica (EIN 95-4470909)</a>; <a href="https://www.musicares.org" target="_blank" rel="noopener">musicares.org</a>.</li>
+                        <li id="org-src-3" data-src="mha-card"><span class="conf-sym">✅</span>Music Health Alliance: <a href="https://www.musichealthalliance.com" target="_blank" rel="noopener">official reports</a>; UMG fund — <a href="https://www.prnewswire.com/news-releases/universal-music-group-and-music-health-alliance-launch-music-industry-mental-health-fund-302376062.html" target="_blank" rel="noopener">PR Newswire</a>; PHM partnership — <a href="https://musicrow.com/2025/10/project-healthy-minds-partners-with-music-health-alliance1/" target="_blank" rel="noopener">MusicRow (Oct 2025)</a>.</li>
+                        <li id="org-src-4" data-src="mmm-card"><span class="conf-sym">✅</span>Music Minds Matter: <a href="https://www.musicmindsmatter.org.uk/news/2025/4/25/music-minds-matter-release-2024-annual-report" target="_blank" rel="noopener">2024 annual report (Apr 2025)</a>; <a href="https://www.helpmusicians.org.uk/" target="_blank" rel="noopener">helpmusicians.org.uk</a>.</li>
+                        <li id="org-src-5" data-src="busyhead-card"><span class="conf-sym">⚠️</span>The Busyhead Project: <a href="https://www.busyheadproject.org/" target="_blank" rel="noopener">busyheadproject.org</a> — single source; $6.6M raised / 170+ orgs not independently verified.</li>
+                        <li id="org-src-6" data-src="phm-card"><span class="conf-sym">✅</span>Project Healthy Minds: <a href="https://www.projecthealthyminds.com" target="_blank" rel="noopener">projecthealthyminds.com</a>; PHM × MHA — <a href="https://www.prnewswire.com/news-releases/project-healthy-minds-and-music-health-alliance-announce-strategic-partnership-to-expand-access-to-mental-health-support-for-music-industry-professionals-302580921.html" target="_blank" rel="noopener">PR Newswire (Oct 2025)</a>; UMG initiative — <a href="https://www.billboard.com/pro/universal-music-group-mental-health-initiatives/" target="_blank" rel="noopener">Billboard (May 2026)</a>.</li>
+                        <li id="org-src-7" data-src="tatva-card"><span class="conf-sym">✅</span>TATVA: directory snapshot (Apr 2026); <a href="https://www.tatva.org.in/" target="_blank" rel="noopener">tatva.org.in</a>; It's Time to Talk — <a href="https://musically.com/2025/11/13/new-survey-its-time-to-talk-will-examine-indian-musicians-mental-health-challenges/" target="_blank" rel="noopener">Music Ally (Nov 13, 2025)</a>, <a href="https://www.gold.ac.uk/news/2025/its-time-to-talk/" target="_blank" rel="noopener">Goldsmiths</a>.</li>
+                        <li id="org-src-8" data-src="sangath-card"><span class="conf-sym">✅</span>Sangath: directory snapshot (Apr 2026); <a href="https://www.sangath.in/" target="_blank" rel="noopener">sangath.in</a>.</li>
+                        <li id="org-src-9" data-src="bside-card"><span class="conf-sym">✅</span>The B-Side Project: directory snapshot (Apr 2026); <a href="https://www.sonymusic.co.jp/bside/" target="_blank" rel="noopener">Sony Music Japan — B-Side</a>.</li>
                     </ol>
                 </div>
             </div>
@@ -865,7 +930,7 @@
             <!-- Evidence Tab -->
             <div id="evidence" class="tab-content">
                 <div class="section-title">Soundcheck (Revelios / Harrison, 2026)</div>
-                <p class="section-subtitle">Canada's first national music-industry MH study · n=1,216 · final report Feb 2026 <a class="conf conf-verified" href="#ev-src-1" data-src="soundcheck-pdf">✅ verified — report PDF in raw/</a></p>
+                <p class="section-subtitle">Canada's first national music-industry MH study · n=1,216 · final report Feb 2026 <a class="conf" href="#ev-src-1" data-src="soundcheck-pdf">1</a></p>
 
                 <div class="chart-container">
                     <div class="chart-title">Mental health challenges: music professionals vs. general workforce</div>
@@ -898,7 +963,7 @@
                 </div>
 
                 <div class="section-title">Cross-Study Evidence</div>
-                <p class="section-subtitle">From the wiki evidence base · each row traced to its paper <a class="conf conf-verified" href="#ev-src-2" data-src="cross-study">✅ papers</a></p>
+                <p class="section-subtitle">From the wiki evidence base · each row traced to its paper <a class="conf" href="#ev-src-2" data-src="cross-study">2</a></p>
 
                 <div class="table-wrap">
                 <table>
@@ -921,7 +986,7 @@
                 <p class="section-subtitle">Corrected · verified against 990 filings and annual reports</p>
 
                 <div class="card">
-                    <div class="card-label">Backline (US) <a class="conf conf-verified" href="#ev-src-3" data-src="propublica-990">✅ 990 / ProPublica API</a></div>
+                    <div class="card-label">Backline (US) <a class="conf" href="#ev-src-3" data-src="propublica-990">3</a></div>
                     <h3>Case Management + Crisis Line</h3>
                     <div class="detail-row"><div class="detail-label">Founded</div><div class="detail-value">Late 2019 (IRS ruling Apr 2020)</div></div>
                     <div class="detail-row"><div class="detail-label">Model</div><div class="detail-value">Nonprofit; intake → care plan → vetted referral network; B-LINE 24/7 line since Jan 2026</div></div>
@@ -929,7 +994,7 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-label">Music Minds Matter / Help Musicians (UK) <a class="conf conf-verified" href="#ev-src-4" data-src="mmm-2024">✅ 2024 annual report</a></div>
+                    <div class="card-label">Music Minds Matter / Help Musicians (UK) <a class="conf" href="#ev-src-4" data-src="mmm-2024">4</a></div>
                     <h3>24/7 Support Line + Allies Network</h3>
                     <div class="detail-row"><div class="detail-label">Founded</div><div class="detail-value">Parent charity 1921; MMM is its mental health service</div></div>
                     <div class="detail-row"><div class="detail-label">Model</div><div class="detail-value">Charity; helpline + peer support + Allies partnerships with six industry institutions</div></div>
@@ -937,7 +1002,7 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-label">MusiCares (US) <a class="conf conf-verified" href="#ev-src-5" data-src="musicares-990">✅ 990</a></div>
+                    <div class="card-label">MusiCares (US) <a class="conf" href="#ev-src-5" data-src="musicares-990">5</a></div>
                     <h3>Institutional Anchor Benchmark</h3>
                     <div class="detail-row"><div class="detail-label">Founded</div><div class="detail-value">1989 (Recording Academy)</div></div>
                     <div class="detail-row"><div class="detail-label">Model</div><div class="detail-value">Affiliate charity: MH + addiction recovery + financial assistance</div></div>
@@ -947,11 +1012,11 @@
                 <div class="refs" id="refs-evidence" data-citation-registry="w1-evidence">
                     <div class="refs-title">References — Evidence</div>
                     <ol>
-                        <li id="ev-src-1" data-src="soundcheck-pdf">Soundcheck final report (Revelios / Harrison, Feb 2026; n=1,216) — primary PDF held in <span style="font-family:var(--font-mono); font-size:0.8rem;">raw/papers/Soundcheck-Final-Report-1.pdf</span>; <a href="https://www.revelios.com/soundcheck/" target="_blank" rel="noopener">revelios.com/soundcheck</a>. Method: figures quoted as published.</li>
-                        <li id="ev-src-2" data-src="cross-study">Cross-study rows: Musgrave &amp; Lamis 2025 — <a href="https://www.frontiersin.org/journals/public-health/articles/10.3389/fpubh.2025.1507772/full" target="_blank" rel="noopener">Frontiers in Public Health</a>; Détari et al. 2020 — <a href="https://doi.org/10.3389/fpsyg.2020.01315" target="_blank" rel="noopener">Frontiers in Psychology</a>; Vaag et al. 2016; Kenny et al. 2014; UK Musicians' Census — compiled in <span style="font-family:var(--font-mono); font-size:0.8rem;">wiki/concepts/evidence_base.md</span>.</li>
-                        <li id="ev-src-3" data-src="propublica-990">Backline Form 990s FY2020–2023 — <a href="https://projects.propublica.org/nonprofits/organizations/843338712" target="_blank" rel="noopener">ProPublica API</a>, accessed 2026-06-11.</li>
-                        <li id="ev-src-4" data-src="mmm-2024">Music Minds Matter — <a href="https://www.musicmindsmatter.org.uk/news/2025/4/25/music-minds-matter-release-2024-annual-report" target="_blank" rel="noopener">2024 annual report (Apr 2025)</a>.</li>
-                        <li id="ev-src-5" data-src="musicares-990">MusiCares FY2024 Form 990 — <a href="https://projects.propublica.org/nonprofits/organizations/954470909" target="_blank" rel="noopener">ProPublica (EIN 95-4470909)</a>.</li>
+                        <li id="ev-src-1" data-src="soundcheck-pdf"><span class="conf-sym">✅</span>Soundcheck final report (Revelios / Harrison, Feb 2026; n=1,216) — primary PDF held in <span style="font-family:var(--font-mono); font-size:0.8rem;">raw/papers/Soundcheck-Final-Report-1.pdf</span>; <a href="https://www.revelios.com/soundcheck/" target="_blank" rel="noopener">revelios.com/soundcheck</a>. Method: figures quoted as published.</li>
+                        <li id="ev-src-2" data-src="cross-study"><span class="conf-sym">✅</span>Cross-study rows: Musgrave &amp; Lamis 2025 — <a href="https://www.frontiersin.org/journals/public-health/articles/10.3389/fpubh.2025.1507772/full" target="_blank" rel="noopener">Frontiers in Public Health</a>; Détari et al. 2020 — <a href="https://doi.org/10.3389/fpsyg.2020.01315" target="_blank" rel="noopener">Frontiers in Psychology</a>; Vaag et al. 2016; Kenny et al. 2014; UK Musicians' Census — compiled in <span style="font-family:var(--font-mono); font-size:0.8rem;">wiki/concepts/evidence_base.md</span>.</li>
+                        <li id="ev-src-3" data-src="propublica-990"><span class="conf-sym">✅</span>Backline Form 990s FY2020–2023 — <a href="https://projects.propublica.org/nonprofits/organizations/843338712" target="_blank" rel="noopener">ProPublica API</a>, accessed 2026-06-11.</li>
+                        <li id="ev-src-4" data-src="mmm-2024"><span class="conf-sym">✅</span>Music Minds Matter — <a href="https://www.musicmindsmatter.org.uk/news/2025/4/25/music-minds-matter-release-2024-annual-report" target="_blank" rel="noopener">2024 annual report (Apr 2025)</a>.</li>
+                        <li id="ev-src-5" data-src="musicares-990"><span class="conf-sym">✅</span>MusiCares FY2024 Form 990 — <a href="https://projects.propublica.org/nonprofits/organizations/954470909" target="_blank" rel="noopener">ProPublica (EIN 95-4470909)</a>.</li>
                     </ol>
                 </div>
             </div>
@@ -964,7 +1029,7 @@
                     <div class="news-title">Backline launches B-LINE — 24/7 crisis line for the US music industry</div>
                     <div class="news-meta">
                         <span class="news-source">Jan 27, 2026</span>
-                        <a class="conf conf-verified" href="#tr-src-1" data-src="bline-launch">✅ verified</a>
+                        <a class="conf" href="#tr-src-1" data-src="bline-launch">1</a>
                         <span class="news-links"><a href="https://newsroom.spotify.com/2026-01-27/b-line-mental-health-hotline/" target="_blank" rel="noopener">Spotify Newsroom</a><a href="https://news.pollstar.com/2026/01/27/backline-launches-music-industry-specific-24-7-crisis-hotline/" target="_blank" rel="noopener">Pollstar</a></span>
                     </div>
                     <div class="news-relevance">Spotify as lead sponsor with Noah Kahan and Live Nation; $3.5M invested to date. Crisis support is converging with case management into full-stack care.</div>
@@ -974,7 +1039,7 @@
                     <div class="news-title">Soundcheck final report published — Canada's first national music MH study</div>
                     <div class="news-meta">
                         <span class="news-source">Feb 2026</span>
-                        <a class="conf conf-verified" href="#tr-src-2" data-src="soundcheck-report">✅ verified</a>
+                        <a class="conf" href="#tr-src-2" data-src="soundcheck-report">2</a>
                         <span class="news-links"><a href="https://www.revelios.com/soundcheck/" target="_blank" rel="noopener">Revelios</a></span>
                     </div>
                     <div class="news-relevance">n=1,216 with policy recommendations (industry code of conduct, minimum fees, portable benefits). The clearest methodology template for a Taiwan study.</div>
@@ -984,7 +1049,7 @@
                     <div class="news-title">UMG partners with Amber Health and Project Healthy Minds on artist mental health</div>
                     <div class="news-meta">
                         <span class="news-source">May 2026</span>
-                        <a class="conf conf-verified" href="#tr-src-3" data-src="umg-partnerships">✅ verified</a>
+                        <a class="conf" href="#tr-src-3" data-src="umg-partnerships">3</a>
                         <span class="news-links"><a href="https://www.billboard.com/pro/universal-music-group-mental-health-initiatives/" target="_blank" rel="noopener">Billboard</a><a href="https://musically.com/2026/05/14/two-umg-partnerships-focus-on-mental-health-for-musicians/" target="_blank" rel="noopener">Music Ally</a></span>
                     </div>
                     <div class="news-relevance">Major labels are now buying MH capability through partnerships — corporate budgets entering the field create service-provider opportunities.</div>
@@ -994,7 +1059,7 @@
                     <div class="news-title">"It's Time to Talk" — India's first national music-industry MH survey launches</div>
                     <div class="news-meta">
                         <span class="news-source">Nov 2025</span>
-                        <a class="conf conf-verified" href="#tr-src-4" data-src="itttt-survey">✅ verified</a>
+                        <a class="conf" href="#tr-src-4" data-src="itttt-survey">4</a>
                         <span class="news-links"><a href="https://musically.com/2025/11/13/new-survey-its-time-to-talk-will-examine-indian-musicians-mental-health-challenges/" target="_blank" rel="noopener">Music Ally</a><a href="https://www.gold.ac.uk/news/2025/its-time-to-talk/" target="_blank" rel="noopener">Goldsmiths</a></span>
                     </div>
                     <div class="news-relevance">GMI × TATVA × Goldsmiths (Dr. George Musgrave) × IPRS. The Soundcheck playbook is being replicated in Asia — Taiwan could be next.</div>
@@ -1004,7 +1069,7 @@
                     <div class="news-title">"Headlining Mental Health: A Tour Study" — IRB-approved research on touring professionals</div>
                     <div class="news-meta">
                         <span class="news-source">2025– · ongoing</span>
-                        <a class="conf conf-verified" href="#tr-src-5" data-src="tour-study">✅ verified</a>
+                        <a class="conf" href="#tr-src-5" data-src="tour-study">5</a>
                         <span class="news-links"><a href="https://www.musicares.org/news/headlining-mental-health-tour-study-amber-health-sign-up" target="_blank" rel="noopener">MusiCares</a><a href="https://www.billboard.com/pro/musicares-amber-health-mental-health-study/" target="_blank" rel="noopener">Billboard</a></span>
                     </div>
                     <div class="news-relevance">MusiCares × Amber Health studying MH risk factors and on-demand care efficacy on live tours — evidence for the touring-support service line.</div>
@@ -1014,7 +1079,7 @@
                     <div class="news-title">Taiwan's 全民心理健康韌性計畫 in implementation — NT$5.63B over 2025–2030</div>
                     <div class="news-meta">
                         <span class="news-source">2025–2030 · policy</span>
-                        <a class="conf conf-verified" href="#tr-src-6" data-src="tw-policy">✅ verified</a>
+                        <a class="conf" href="#tr-src-6" data-src="tw-policy">6</a>
                         <span class="news-links"><a href="https://www.ey.gov.tw/Page/5A8A0CB5B41DA11E/8e8835ef-5b07-4e02-8b19-906b6964a10c" target="_blank" rel="noopener">行政院</a><a href="https://dep.mohw.gov.tw/DOMHAOH/lp-329-107.html" target="_blank" rel="noopener">衛福部心理健康司</a></span>
                     </div>
                     <div class="news-relevance">Six strategies across 13 ministries, including free counseling for ages 15–45 — the policy window a Taiwan music MH NPO would align with.</div>
@@ -1024,7 +1089,7 @@
                     <div class="news-title">Chappell Roan's Grammy speech triggers Backline's "We Got You!" campaign</div>
                     <div class="news-meta">
                         <span class="news-source">Feb 2025</span>
-                        <a class="conf conf-verified" href="#tr-src-7" data-src="wgy-campaign">✅ verified</a>
+                        <a class="conf" href="#tr-src-7" data-src="wgy-campaign">7</a>
                         <span class="news-links"><a href="https://news.pollstar.com/2025/02/10/backline-launches-we-got-you-campaign-to-support-artists-mental-health-with-donations-from-chappell-roan-noah-kahan-charli-xcx/" target="_blank" rel="noopener">Pollstar</a><a href="https://www.billboard.com/pro/chappell-roan-support-mental-health-charity-backline/" target="_blank" rel="noopener">Billboard</a></span>
                     </div>
                     <div class="news-relevance">$25K seed donations from Chappell Roan, Noah Kahan, Charli XCX — matched by Sabrina Carpenter, Live Nation, AEG and others; $353K netted within a month. Artist advocacy converts to funding at speed.</div>
@@ -1034,7 +1099,7 @@
                     <div class="news-title">Help Musicians &amp; Music Minds Matter release 2025 annual report</div>
                     <div class="news-meta">
                         <span class="news-source">2026</span>
-                        <a class="conf conf-verified" href="#tr-src-8" data-src="mmm-2025-report">✅ verified</a>
+                        <a class="conf" href="#tr-src-8" data-src="mmm-2025-report">8</a>
                         <span class="news-links"><a href="https://www.helpmusicians.org.uk/about-us/news/help-musicians-and-music-minds-matter-release-2025-annual-report" target="_blank" rel="noopener">Help Musicians</a></span>
                     </div>
                     <div class="news-relevance">Fresh UK benchmark data for the upcoming Music Minds Matter deep-dive case study.</div>
@@ -1043,14 +1108,14 @@
                 <div class="refs" id="refs-trends" data-citation-registry="w1-trends">
                     <div class="refs-title">References — Trends</div>
                     <ol>
-                        <li id="tr-src-1" data-src="bline-launch"><a href="https://newsroom.spotify.com/2026-01-27/b-line-mental-health-hotline/" target="_blank" rel="noopener">Spotify Newsroom</a> (Jan 27, 2026); <a href="https://news.pollstar.com/2026/01/27/backline-launches-music-industry-specific-24-7-crisis-hotline/" target="_blank" rel="noopener">Pollstar</a> (Jan 27, 2026). Method: press, two independent outlets.</li>
-                        <li id="tr-src-2" data-src="soundcheck-report"><a href="https://www.revelios.com/soundcheck/" target="_blank" rel="noopener">Revelios — Soundcheck</a> (final report, Feb 2026); primary PDF in raw/papers/.</li>
-                        <li id="tr-src-3" data-src="umg-partnerships"><a href="https://www.billboard.com/pro/universal-music-group-mental-health-initiatives/" target="_blank" rel="noopener">Billboard Pro</a> (May 2026); <a href="https://musically.com/2026/05/14/two-umg-partnerships-focus-on-mental-health-for-musicians/" target="_blank" rel="noopener">Music Ally</a> (May 14, 2026).</li>
-                        <li id="tr-src-4" data-src="itttt-survey"><a href="https://musically.com/2025/11/13/new-survey-its-time-to-talk-will-examine-indian-musicians-mental-health-challenges/" target="_blank" rel="noopener">Music Ally</a> (Nov 13, 2025); <a href="https://www.gold.ac.uk/news/2025/its-time-to-talk/" target="_blank" rel="noopener">Goldsmiths</a>.</li>
-                        <li id="tr-src-5" data-src="tour-study"><a href="https://www.musicares.org/news/headlining-mental-health-tour-study-amber-health-sign-up" target="_blank" rel="noopener">MusiCares</a>; <a href="https://www.billboard.com/pro/musicares-amber-health-mental-health-study/" target="_blank" rel="noopener">Billboard Pro</a>.</li>
-                        <li id="tr-src-6" data-src="tw-policy"><a href="https://www.ey.gov.tw/Page/5A8A0CB5B41DA11E/8e8835ef-5b07-4e02-8b19-906b6964a10c" target="_blank" rel="noopener">行政院</a>; <a href="https://dep.mohw.gov.tw/DOMHAOH/lp-329-107.html" target="_blank" rel="noopener">衛福部心理健康司</a>. Method: official policy pages.</li>
-                        <li id="tr-src-7" data-src="wgy-campaign"><a href="https://news.pollstar.com/2025/02/10/backline-launches-we-got-you-campaign-to-support-artists-mental-health-with-donations-from-chappell-roan-noah-kahan-charli-xcx/" target="_blank" rel="noopener">Pollstar</a> (Feb 10, 2025); <a href="https://www.billboard.com/pro/chappell-roan-support-mental-health-charity-backline/" target="_blank" rel="noopener">Billboard Pro</a> (Mar 2025 — $353K netted).</li>
-                        <li id="tr-src-8" data-src="mmm-2025-report"><a href="https://www.helpmusicians.org.uk/about-us/news/help-musicians-and-music-minds-matter-release-2025-annual-report" target="_blank" rel="noopener">Help Musicians</a> (2026).</li>
+                        <li id="tr-src-1" data-src="bline-launch"><span class="conf-sym">✅</span><a href="https://newsroom.spotify.com/2026-01-27/b-line-mental-health-hotline/" target="_blank" rel="noopener">Spotify Newsroom</a> (Jan 27, 2026); <a href="https://news.pollstar.com/2026/01/27/backline-launches-music-industry-specific-24-7-crisis-hotline/" target="_blank" rel="noopener">Pollstar</a> (Jan 27, 2026). Method: press, two independent outlets.</li>
+                        <li id="tr-src-2" data-src="soundcheck-report"><span class="conf-sym">✅</span><a href="https://www.revelios.com/soundcheck/" target="_blank" rel="noopener">Revelios — Soundcheck</a> (final report, Feb 2026); primary PDF in raw/papers/.</li>
+                        <li id="tr-src-3" data-src="umg-partnerships"><span class="conf-sym">✅</span><a href="https://www.billboard.com/pro/universal-music-group-mental-health-initiatives/" target="_blank" rel="noopener">Billboard Pro</a> (May 2026); <a href="https://musically.com/2026/05/14/two-umg-partnerships-focus-on-mental-health-for-musicians/" target="_blank" rel="noopener">Music Ally</a> (May 14, 2026).</li>
+                        <li id="tr-src-4" data-src="itttt-survey"><span class="conf-sym">✅</span><a href="https://musically.com/2025/11/13/new-survey-its-time-to-talk-will-examine-indian-musicians-mental-health-challenges/" target="_blank" rel="noopener">Music Ally</a> (Nov 13, 2025); <a href="https://www.gold.ac.uk/news/2025/its-time-to-talk/" target="_blank" rel="noopener">Goldsmiths</a>.</li>
+                        <li id="tr-src-5" data-src="tour-study"><span class="conf-sym">✅</span><a href="https://www.musicares.org/news/headlining-mental-health-tour-study-amber-health-sign-up" target="_blank" rel="noopener">MusiCares</a>; <a href="https://www.billboard.com/pro/musicares-amber-health-mental-health-study/" target="_blank" rel="noopener">Billboard Pro</a>.</li>
+                        <li id="tr-src-6" data-src="tw-policy"><span class="conf-sym">✅</span><a href="https://www.ey.gov.tw/Page/5A8A0CB5B41DA11E/8e8835ef-5b07-4e02-8b19-906b6964a10c" target="_blank" rel="noopener">行政院</a>; <a href="https://dep.mohw.gov.tw/DOMHAOH/lp-329-107.html" target="_blank" rel="noopener">衛福部心理健康司</a>. Method: official policy pages.</li>
+                        <li id="tr-src-7" data-src="wgy-campaign"><span class="conf-sym">✅</span><a href="https://news.pollstar.com/2025/02/10/backline-launches-we-got-you-campaign-to-support-artists-mental-health-with-donations-from-chappell-roan-noah-kahan-charli-xcx/" target="_blank" rel="noopener">Pollstar</a> (Feb 10, 2025); <a href="https://www.billboard.com/pro/chappell-roan-support-mental-health-charity-backline/" target="_blank" rel="noopener">Billboard Pro</a> (Mar 2025 — $353K netted).</li>
+                        <li id="tr-src-8" data-src="mmm-2025-report"><span class="conf-sym">✅</span><a href="https://www.helpmusicians.org.uk/about-us/news/help-musicians-and-music-minds-matter-release-2025-annual-report" target="_blank" rel="noopener">Help Musicians</a> (2026).</li>
                     </ol>
                 </div>
             </div>
@@ -1071,7 +1136,7 @@
                     <div class="news-title">Directory re-scrape: 110 organizations — Taiwan, Korea, China still zero for the third consecutive snapshot</div>
                     <div class="news-meta">
                         <span class="news-source">Jun 12, 2026 · Directory</span>
-                        <a class="conf conf-verified" href="#cl-src-1" data-src="directory-rescrape-jun">✅ verified</a>
+                        <a class="conf" href="#cl-src-1" data-src="directory-rescrape-jun">1</a>
                         <span class="news-links"><a href="https://backline.care/global-resources/" target="_blank" rel="noopener">Backline directory</a></span>
                     </div>
                     <div class="news-relevance">Full 13-page re-scrape: 110 unique orgs (April 4: 111, net −1); 8 Asia-related listings unchanged. The April baseline stored counts only, so the −1 can't be itemized — the June snapshot archives the full 110-name roster, enabling name-level diffs from now on. New: the directory ships a Japanese-language switcher (/ja/) — the US field localizing toward Asia in language, not presence.</div>
@@ -1081,7 +1146,7 @@
                     <div class="news-title">Correction: the Headlining Mental Health tour study is Amber Health × MusiCares only</div>
                     <div class="news-meta">
                         <span class="news-source">Jun 12, 2026 · Correction</span>
-                        <a class="conf conf-verified" href="#cl-src-2" data-src="tour-study-correction">✅ verified</a>
+                        <a class="conf" href="#cl-src-2" data-src="tour-study-correction">2</a>
                         <span class="news-links"><a href="https://www.amber.health/headliningmentalhealth" target="_blank" rel="noopener">Amber Health (primary)</a></span>
                     </div>
                     <div class="news-relevance">The April news report's "joint with Backline" claim (⚠️ single-source at the time) is superseded by the primary study page — this page's Trends card was already correct. No results published as of June 12, 2026; watch item: the field's first real-time touring MH dataset.</div>
@@ -1091,7 +1156,7 @@
                     <div class="news-title">Spotify × Backline go segment-specific: Nashville songwriter summit + "Between the Lines" guide</div>
                     <div class="news-meta">
                         <span class="news-source">May 14, 2026 · Programs</span>
-                        <a class="conf conf-verified" href="#cl-src-3" data-src="btl-summit">✅ verified</a>
+                        <a class="conf" href="#cl-src-3" data-src="btl-summit">3</a>
                         <span class="news-links"><a href="https://newsroom.spotify.com/2026-05-14/nashville-songwriting-mental-health-summit/" target="_blank" rel="noopener">Spotify Newsroom</a><a href="https://musicrow.com/2026/05/spotify-brings-together-nashville-songwriting-community-for-mental-health-summit/" target="_blank" rel="noopener">MusicRow</a></span>
                     </div>
                     <div class="news-relevance">A songwriter-specific mental health guide developed by Backline's clinical team under Spotify's Heart &amp; Soul — the clearest marker yet of the field's shift from generic "music industry" support to per-segment playbooks (songwriters; touring personnel; live-event staff).</div>
@@ -1101,7 +1166,7 @@
                     <div class="news-title">Awareness-month layer matures — campaigns, no new infrastructure</div>
                     <div class="news-meta">
                         <span class="news-source">May 2026 · Campaigns</span>
-                        <a class="conf conf-verified" href="#cl-src-4" data-src="mindful-may">✅ verified</a>
+                        <a class="conf" href="#cl-src-4" data-src="mindful-may">4</a>
                         <span class="news-links"><a href="https://www.musicares.org/news/mindful-may-2026-announcement-sweetwater" target="_blank" rel="noopener">MusiCares</a><a href="https://news.pollstar.com/2026/05/22/mental-health-awareness-month-a-resource-guide-for-the-live-industry/" target="_blank" rel="noopener">Pollstar guide</a></span>
                     </div>
                     <div class="news-relevance">Mindful May #3 (New Orleans, with Sweetwater), Sweet Relief artist auctions, moe. tour proceeds to the Sweet Relief × Backline fund, and a Pollstar live-industry resource guide. Date check: that fund launched May 2022 — circulating coverage misframed it as new.</div>
@@ -1111,7 +1176,7 @@
                     <div class="news-title">Korea: Idol Labor Union preparatory committee — mental-health protocols as core demands</div>
                     <div class="news-meta">
                         <span class="news-source">Sep 2025 – May 2026 · Asia-Pacific</span>
-                        <a class="conf conf-uncertain" href="#cl-src-5" data-src="idol-union">✅ demands · ❓ status</a>
+                        <a class="conf" href="#cl-src-5" data-src="idol-union">5</a>
                         <span class="news-links"><a href="https://www.koreatimes.co.kr/entertainment/others/20251108/k-pop-idols-to-form-koreas-first-labor-union-could-launch-by-end-of-year" target="_blank" rel="noopener">Korea Times</a><a href="https://sports.khan.co.kr/en/article/202605221216007/" target="_blank" rel="noopener">Sports Kyunghyang</a></span>
                     </div>
                     <div class="news-relevance">Union recognition filed Sep–Oct 2025 with demands for an enforceable agency MH-care manual, crisis protocols, and cyberbullying legal support; status contested — the chair's former agency cut ties in May 2026, approval unresolved. With January's trainee-contract reforms, Korea now runs a two-track labor/regulatory pathway — and still has zero music-MH NPOs. East Asia's pathway runs through labor law, not philanthropy.</div>
@@ -1121,7 +1186,7 @@
                     <div class="news-title">GWI names musician mental-health resources a top-4 wellness trend for 2026</div>
                     <div class="news-meta">
                         <span class="news-source">Apr 16, 2026 · Field recognition</span>
-                        <a class="conf conf-verified" href="#cl-src-6" data-src="gwi-trends">✅ verified</a>
+                        <a class="conf" href="#cl-src-6" data-src="gwi-trends">6</a>
                         <span class="news-links"><a href="https://globalwellnessinstitute.org/global-wellness-institute-blog/2026/04/16/music-for-health-and-wellbeing-initiative-trends-for-2026/" target="_blank" rel="noopener">Global Wellness Institute</a></span>
                     </div>
                     <div class="news-relevance">The Global Wellness Institute's "Music for Health &amp; Wellbeing" 2026 trends cite B-LINE, Amber Health's growth, and MusiCares×JED. An external wellness-economy body independently describing this field as a top trend is itself a datapoint: musician MH has entered mainstream wellness discourse.</div>
@@ -1131,7 +1196,7 @@
                     <div class="news-title">The evidence race: four datasets in motion at once</div>
                     <div class="news-meta">
                         <span class="news-source">Apr 2026 · Research &amp; data</span>
-                        <a class="conf conf-verified" href="#cl-src-7" data-src="wms-2026">✅ verified</a>
+                        <a class="conf" href="#cl-src-7" data-src="wms-2026">7</a>
                         <span class="news-links"><a href="https://www.musicares.org/news/wellness-in-music-survey-link-how-to-participate-impact" target="_blank" rel="noopener">WMS 2026</a><a href="https://www.musicmindsmatter.org.uk/the-study" target="_blank" rel="noopener">MMM UK study</a></span>
                     </div>
                     <div class="news-relevance">Wellness in Music Survey 2026 fielded April 6–17 (results pending — the suicidal-ideation trendline 8% → 11.4% → ? is the number to watch); Music Minds Matter's "largest ever" UK industry survey in the field; the Headlining tour study ongoing; Ditto published. Proprietary data is becoming the field's advocacy moat.</div>
@@ -1141,7 +1206,7 @@
                     <div class="news-title">Ditto Music: 86% of 2,000+ independent artists report significant mental strain</div>
                     <div class="news-meta">
                         <span class="news-source">Mar 2, 2026 · Research &amp; data</span>
-                        <a class="conf conf-verified" href="#cl-src-8" data-src="ditto-survey">✅ verified</a>
+                        <a class="conf" href="#cl-src-8" data-src="ditto-survey">8</a>
                         <span class="news-links"><a href="https://press.dittomusic.com/creative-burnout-at-all-time-high-86-of-artists-report-mental-strain" target="_blank" rel="noopener">Ditto (primary)</a></span>
                     </div>
                     <div class="news-relevance">68% cite long hours and financial insecurity; 38% have considered leaving the industry. First large-N dataset on independent artists — the population closest to Taiwan's indie-dominated scene. Caveat: lifetime framing ("at some point"), not comparable to point-prevalence figures like WMS's 11.4%.</div>
@@ -1151,7 +1216,7 @@
                     <div class="news-title">We Got You credited with "$500K+ raised" at the Resonator Awards</div>
                     <div class="news-meta">
                         <span class="news-source">Jan 27, 2026 · Funding</span>
-                        <a class="conf conf-single" href="#cl-src-9" data-src="resonator-wgy">⚠️ as-reported</a>
+                        <a class="conf" href="#cl-src-9" data-src="resonator-wgy">9</a>
                         <span class="news-links"><a href="https://www.rollingstone.com/music/music-features/chaka-khan-chappell-roan-2026-resonator-awards-1235506727/" target="_blank" rel="noopener">Rolling Stone</a></span>
                     </div>
                     <div class="news-relevance">Credited by Nancy Wilson while presenting Chappell Roan's Harmonizer Award. As-reported from a speech — $353K net (Billboard, Mar 2025) remains the press-verified anchor. Growth signal, not accounting.</div>
@@ -1160,15 +1225,15 @@
                 <div class="refs" id="refs-changelog" data-citation-registry="w1-changelog">
                     <div class="refs-title">References — Recent Changes</div>
                     <ol>
-                        <li id="cl-src-1" data-src="directory-rescrape-jun"><a href="https://backline.care/global-resources/" target="_blank" rel="noopener">Backline Global Resource Hub</a> — full 13-page Chrome scrape, two extraction passes consistent, 2026-06-12; full 110-name roster archived in <span style="font-family:var(--font-mono); font-size:0.8rem;">wiki/snapshots/Backline_Directory_2026-06-12.md</span> (April baseline: counts only). Japanese switcher observed at /ja/global-resources/. Method: browser scrape ×2.</li>
-                        <li id="cl-src-2" data-src="tour-study-correction"><a href="https://www.amber.health/headliningmentalhealth" target="_blank" rel="noopener">Amber Health — Headlining Mental Health study page</a> (primary; partners shown: Amber Health, MusiCares), accessed 2026-06-12. Method: primary page fetch; supersedes the April news report's ⚠️ single-source item.</li>
-                        <li id="cl-src-3" data-src="btl-summit"><a href="https://newsroom.spotify.com/2026-05-14/nashville-songwriting-mental-health-summit/" target="_blank" rel="noopener">Spotify Newsroom</a> (2026-05-14); <a href="https://musicrow.com/2026/05/spotify-brings-together-nashville-songwriting-community-for-mental-health-summit/" target="_blank" rel="noopener">MusicRow</a> (same day). Accessed 2026-06-12. Method: press, two independent outlets.</li>
-                        <li id="cl-src-4" data-src="mindful-may"><a href="https://www.musicares.org/news/mindful-may-2026-announcement-sweetwater" target="_blank" rel="noopener">MusiCares news</a>; <a href="https://www.businesswire.com/news/home/20260514025988/en/" target="_blank" rel="noopener">Business Wire</a> (2026-05-14); <a href="https://www.sweetrelief.org/news/sweet-relief-musicians-fund-and-backline-announce-musics-mental-health-fund-and-fundraising-campaign-to-provide-mental-health-resources-to-music-industry-professionals" target="_blank" rel="noopener">Sweet Relief fund page</a> (dated 5/18/2022 — primary, fund-date check); <a href="https://news.pollstar.com/2026/05/22/mental-health-awareness-month-a-resource-guide-for-the-live-industry/" target="_blank" rel="noopener">Pollstar</a> (2026-05-22). Accessed 2026-06-12.</li>
-                        <li id="cl-src-5" data-src="idol-union"><a href="https://www.koreatimes.co.kr/entertainment/others/20251108/k-pop-idols-to-form-koreas-first-labor-union-could-launch-by-end-of-year" target="_blank" rel="noopener">Korea Times</a> (2025-11-08); <a href="https://www.allkpop.com/article/2025/11/k-pop-idol-union-set-to-launch-this-year-aiming-to-protect-artists-labor-rights-and-mental-health" target="_blank" rel="noopener">allkpop</a>; context: <a href="https://www.koreaherald.com/article/10562247" target="_blank" rel="noopener">Korea Herald</a> (2025-08-26); status: <a href="https://sports.khan.co.kr/en/article/202605221216007/" target="_blank" rel="noopener">Sports Kyunghyang</a> (2026-05-22). Accessed 2026-06-12. Filing + demands ✅ (multiple independent outlets); approval status ❓ unresolved.</li>
-                        <li id="cl-src-6" data-src="gwi-trends"><a href="https://globalwellnessinstitute.org/global-wellness-institute-blog/2026/04/16/music-for-health-and-wellbeing-initiative-trends-for-2026/" target="_blank" rel="noopener">Global Wellness Institute</a> (2026-04-16), accessed 2026-06-12 via primary publication. Note: GWI dates B-LINE to February; the primary Spotify announcement is Jan 27.</li>
-                        <li id="cl-src-7" data-src="wms-2026">WMS 2026: <a href="https://musicrow.com/2026/04/musicares-opens-annual-wellness-in-music-survey/" target="_blank" rel="noopener">MusicRow</a> + <a href="http://news.pollstar.com/2026/04/07/musicares-launches-2026-wellness-in-music-survey/" target="_blank" rel="noopener">Pollstar</a> (2026-04-07) + <a href="https://www.musicares.org/news/wellness-in-music-survey-link-how-to-participate-impact" target="_blank" rel="noopener">MusiCares survey page</a>. MMM UK survey: <a href="https://www.musicmindsmatter.org.uk/the-study" target="_blank" rel="noopener">MMM study page</a> + <a href="https://www.classical-music.uk/news/article/music-minds-matter-launches-largest-ever-mental-health-survey-for-uk-music-industry" target="_blank" rel="noopener">Classical Music (UK)</a>. Accessed 2026-06-12.</li>
-                        <li id="cl-src-8" data-src="ditto-survey"><a href="https://press.dittomusic.com/creative-burnout-at-all-time-high-86-of-artists-report-mental-strain" target="_blank" rel="noopener">Ditto Music press release</a> (primary, 2026-03-02), accessed 2026-06-12. n&gt;2,000, self-selected from Ditto's global artist community. Method: primary page fetch.</li>
-                        <li id="cl-src-9" data-src="resonator-wgy"><a href="https://www.rollingstone.com/music/music-features/chaka-khan-chappell-roan-2026-resonator-awards-1235506727/" target="_blank" rel="noopener">Rolling Stone</a> (2026-01) — $500K+ from an award-presentation speech, as-reported ⚠️, not in filings. Press-verified anchor: <a href="https://www.billboard.com/pro/chappell-roan-support-mental-health-charity-backline/" target="_blank" rel="noopener">Billboard Pro</a> (Mar 2025, $353K net). Accessed 2026-06-12.</li>
+                        <li id="cl-src-1" data-src="directory-rescrape-jun"><span class="conf-sym">✅</span><a href="https://backline.care/global-resources/" target="_blank" rel="noopener">Backline Global Resource Hub</a> — full 13-page Chrome scrape, two extraction passes consistent, 2026-06-12; full 110-name roster archived in <span style="font-family:var(--font-mono); font-size:0.8rem;">wiki/snapshots/Backline_Directory_2026-06-12.md</span> (April baseline: counts only). Japanese switcher observed at /ja/global-resources/. Method: browser scrape ×2.</li>
+                        <li id="cl-src-2" data-src="tour-study-correction"><span class="conf-sym">✅</span><a href="https://www.amber.health/headliningmentalhealth" target="_blank" rel="noopener">Amber Health — Headlining Mental Health study page</a> (primary; partners shown: Amber Health, MusiCares), accessed 2026-06-12. Method: primary page fetch; supersedes the April news report's ⚠️ single-source item.</li>
+                        <li id="cl-src-3" data-src="btl-summit"><span class="conf-sym">✅</span><a href="https://newsroom.spotify.com/2026-05-14/nashville-songwriting-mental-health-summit/" target="_blank" rel="noopener">Spotify Newsroom</a> (2026-05-14); <a href="https://musicrow.com/2026/05/spotify-brings-together-nashville-songwriting-community-for-mental-health-summit/" target="_blank" rel="noopener">MusicRow</a> (same day). Accessed 2026-06-12. Method: press, two independent outlets.</li>
+                        <li id="cl-src-4" data-src="mindful-may"><span class="conf-sym">✅</span><a href="https://www.musicares.org/news/mindful-may-2026-announcement-sweetwater" target="_blank" rel="noopener">MusiCares news</a>; <a href="https://www.businesswire.com/news/home/20260514025988/en/" target="_blank" rel="noopener">Business Wire</a> (2026-05-14); <a href="https://www.sweetrelief.org/news/sweet-relief-musicians-fund-and-backline-announce-musics-mental-health-fund-and-fundraising-campaign-to-provide-mental-health-resources-to-music-industry-professionals" target="_blank" rel="noopener">Sweet Relief fund page</a> (dated 5/18/2022 — primary, fund-date check); <a href="https://news.pollstar.com/2026/05/22/mental-health-awareness-month-a-resource-guide-for-the-live-industry/" target="_blank" rel="noopener">Pollstar</a> (2026-05-22). Accessed 2026-06-12.</li>
+                        <li id="cl-src-5" data-src="idol-union"><span class="conf-sym">✅/❓</span><a href="https://www.koreatimes.co.kr/entertainment/others/20251108/k-pop-idols-to-form-koreas-first-labor-union-could-launch-by-end-of-year" target="_blank" rel="noopener">Korea Times</a> (2025-11-08); <a href="https://www.allkpop.com/article/2025/11/k-pop-idol-union-set-to-launch-this-year-aiming-to-protect-artists-labor-rights-and-mental-health" target="_blank" rel="noopener">allkpop</a>; context: <a href="https://www.koreaherald.com/article/10562247" target="_blank" rel="noopener">Korea Herald</a> (2025-08-26); status: <a href="https://sports.khan.co.kr/en/article/202605221216007/" target="_blank" rel="noopener">Sports Kyunghyang</a> (2026-05-22). Accessed 2026-06-12. Filing + demands ✅ (multiple independent outlets); approval status ❓ unresolved.</li>
+                        <li id="cl-src-6" data-src="gwi-trends"><span class="conf-sym">✅</span><a href="https://globalwellnessinstitute.org/global-wellness-institute-blog/2026/04/16/music-for-health-and-wellbeing-initiative-trends-for-2026/" target="_blank" rel="noopener">Global Wellness Institute</a> (2026-04-16), accessed 2026-06-12 via primary publication. Note: GWI dates B-LINE to February; the primary Spotify announcement is Jan 27.</li>
+                        <li id="cl-src-7" data-src="wms-2026"><span class="conf-sym">✅</span>WMS 2026: <a href="https://musicrow.com/2026/04/musicares-opens-annual-wellness-in-music-survey/" target="_blank" rel="noopener">MusicRow</a> + <a href="http://news.pollstar.com/2026/04/07/musicares-launches-2026-wellness-in-music-survey/" target="_blank" rel="noopener">Pollstar</a> (2026-04-07) + <a href="https://www.musicares.org/news/wellness-in-music-survey-link-how-to-participate-impact" target="_blank" rel="noopener">MusiCares survey page</a>. MMM UK survey: <a href="https://www.musicmindsmatter.org.uk/the-study" target="_blank" rel="noopener">MMM study page</a> + <a href="https://www.classical-music.uk/news/article/music-minds-matter-launches-largest-ever-mental-health-survey-for-uk-music-industry" target="_blank" rel="noopener">Classical Music (UK)</a>. Accessed 2026-06-12.</li>
+                        <li id="cl-src-8" data-src="ditto-survey"><span class="conf-sym">✅</span><a href="https://press.dittomusic.com/creative-burnout-at-all-time-high-86-of-artists-report-mental-strain" target="_blank" rel="noopener">Ditto Music press release</a> (primary, 2026-03-02), accessed 2026-06-12. n&gt;2,000, self-selected from Ditto's global artist community. Method: primary page fetch.</li>
+                        <li id="cl-src-9" data-src="resonator-wgy"><span class="conf-sym">⚠️</span><a href="https://www.rollingstone.com/music/music-features/chaka-khan-chappell-roan-2026-resonator-awards-1235506727/" target="_blank" rel="noopener">Rolling Stone</a> (2026-01) — $500K+ from an award-presentation speech, as-reported ⚠️, not in filings. Press-verified anchor: <a href="https://www.billboard.com/pro/chappell-roan-support-mental-health-charity-backline/" target="_blank" rel="noopener">Billboard Pro</a> (Mar 2025, $353K net). Accessed 2026-06-12.</li>
                     </ol>
                     <p class="refs-note">Full scan methodology and footnotes: <span style="font-family:var(--font-mono); font-size:0.8rem;">output/reports/2026-06-12_Report_News_Trends.md</span> (the final standalone news report). MD source of truth for these identifiers: Section 8–9 of the landscape report MD.</p>
                 </div>
@@ -1180,9 +1245,9 @@
                 <p class="method-note">This report's claims trace to four method classes. <strong>Directory data:</strong> Backline Global Resource Hub scraped page-by-page via browser automation (13 pages, deduplicated to 111 unique organizations), twice on consecutive days (Apr 3–4, 2026) to confirm counts; snapshots stored in <span style="font-family:var(--font-mono); font-size:0.8rem;">wiki/snapshots/</span>. <strong>Financial data:</strong> IRS Form 990 figures pulled from the ProPublica Nonprofit Explorer API (re-verified Jun 11, 2026). <strong>Study data:</strong> quoted directly from primary report PDFs held in <span style="font-family:var(--font-mono); font-size:0.8rem;">raw/papers/</span>. <strong>News &amp; organization facts:</strong> cross-checked against official organization sites and at least one independent press source. Anything not verifiable by two methods is labeled.</p>
 
                 <div class="card" style="padding: 1.25rem;">
-                    <span class="conf conf-verified">✅ Verified</span>&nbsp; cross-checked with 2+ methods or primary source&nbsp;&nbsp;
-                    <span class="conf conf-single">⚠️ Single-source</span>&nbsp; one method only&nbsp;&nbsp;
-                    <span class="conf conf-uncertain">❓ Uncertain</span>&nbsp; tool may not have captured complete content
+                    <span class="conf-key">✅ Verified</span>&nbsp; cross-checked with 2+ methods or primary source&nbsp;&nbsp;
+                    <span class="conf-key">⚠️ Single-source</span>&nbsp; one method only&nbsp;&nbsp;
+                    <span class="conf-key">❓ Uncertain</span>&nbsp; tool may not have captured complete content
                 </div>
 
                 <div class="sources-card">
