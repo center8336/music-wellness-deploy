@@ -146,7 +146,7 @@
             border-radius: var(--radius-lg); overflow: hidden;
         }
 
-        .stat-strip.four { grid-template-columns: repeat(4, 1fr); }
+        .stat-strip.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 
         .stat-item { text-align: center; padding: 2rem 1.5rem; border-right: 1px solid var(--border-dark); }
         .stat-item:last-child { border-right: none; }
@@ -512,8 +512,8 @@
                 padding-top: calc(5.5rem + env(safe-area-inset-top, 0px));
             }
 
-            .stat-strip,
-            .stat-strip.four { grid-template-columns: repeat(2, 1fr); }
+            .stat-strip { grid-template-columns: repeat(2, 1fr); }
+            .stat-strip.four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .stat-item:nth-child(2) { border-right: none; }
             .stat-item:nth-child(1),
             .stat-item:nth-child(2) { border-bottom: 1px solid var(--border-dark); }
