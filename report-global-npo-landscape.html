@@ -146,8 +146,6 @@
             border-radius: var(--radius-lg); overflow: hidden;
         }
 
-        .stat-strip.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-
         .stat-item { text-align: center; padding: 2rem 1.5rem; border-right: 1px solid var(--border-dark); }
         .stat-item:last-child { border-right: none; }
 
@@ -513,12 +511,9 @@
             }
 
             .stat-strip { grid-template-columns: repeat(2, 1fr); }
-            .stat-strip.four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .stat-item:nth-child(2) { border-right: none; }
             .stat-item:nth-child(1),
             .stat-item:nth-child(2) { border-bottom: 1px solid var(--border-dark); }
-            /* 4-tile strip: also border-bottom row 1 (items 1–2 handled above); item 3 keeps right border, item 4 last-child clears it */
-            .stat-strip.four .stat-item:nth-child(3) { border-bottom: none; }
 
             .hero h1 { font-size: 1.8rem; }
 
@@ -533,10 +528,8 @@
         }
 
         @media (max-width: 560px) {
-            .stat-strip,
-            .stat-strip.four { grid-template-columns: 1fr; }
+            .stat-strip { grid-template-columns: 1fr; }
             .stat-item { border-right: none; border-bottom: 1px solid var(--border-dark); }
-            .stat-strip.four .stat-item:nth-child(3) { border-bottom: 1px solid var(--border-dark); }
             .stat-item:last-child { border-bottom: none; }
         }
 
@@ -595,8 +588,8 @@
             You followed a <strong>News &amp; Trends</strong> link. Standalone news reports were folded into this page — they're now the <strong>Recent Changes</strong> tab below (already selected). Scroll down to the tabs to read the latest scan.
         </div>
 
-        <!-- Stats — external-reference figures only (self-defined scope counts removed v3.3) -->
-        <div class="stat-strip four">
+        <!-- Stats — external-reference figures only (self-defined scope counts + redundant policy tile removed v3.3) -->
+        <div class="stat-strip">
             <div class="stat-item">
                 <div class="stat-num">111</div>
                 <div class="stat-label">Global Organizations</div>
@@ -611,11 +604,6 @@
                 <div class="stat-num" style="color: var(--signal);">0</div>
                 <div class="stat-label">Taiwan Music MH Orgs</div>
                 <div class="stat-meta">Market opportunity</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-num">NT$5.63B</div>
-                <div class="stat-label">Taiwan MH Policy Plan</div>
-                <div class="stat-meta">全民心理健康韌性計畫 2025–2030</div>
             </div>
         </div>
 
