@@ -206,6 +206,12 @@
       position: relative;
       overflow: hidden;
       aspect-ratio: 16 / 10;
+      /* Strict 16:10 — aspect-ratio alone is a default that content can override.
+         The padding-bottom hack pins height to width × 0.625, and the inner
+         .card-visual is absolutely positioned so long titles can't grow the box
+         (Détári vs Rousseau size mismatch). */
+      height: 0;
+      padding-bottom: 62.5%;
       background: rgba(244, 244, 245, 0.55);
       -webkit-backdrop-filter: blur(8px);
       backdrop-filter: blur(8px);
@@ -220,13 +226,17 @@
     }
 
     .work-card .card-visual {
-      width: 100%;
-      height: 100%;
+      position: absolute;
+      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 2rem;
+      padding: 1.5rem 1.25rem;
       transition: transform var(--dur-slow) var(--ease), opacity var(--dur-slow) var(--ease);
+    }
+
+    .work-card .card-visual > div {
+      max-width: 100%;
     }
 
     .work-item:hover .card-visual {
@@ -235,7 +245,7 @@
 
     .work-card .card-title {
       font-family: var(--font-display);
-      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      font-size: clamp(1rem, 1.6vw, 1.25rem);
       font-weight: 700;
       color: var(--charcoal);
       line-height: 1.2;
@@ -327,6 +337,7 @@
 
       .work-card {
         aspect-ratio: 16 / 9;
+        padding-bottom: 56.25%;
       }
 
       .work-item .caption {
