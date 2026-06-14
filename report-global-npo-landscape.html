@@ -146,6 +146,8 @@
             border-radius: var(--radius-lg); overflow: hidden;
         }
 
+        .stat-strip.four { grid-template-columns: repeat(4, 1fr); }
+
         .stat-item { text-align: center; padding: 2rem 1.5rem; border-right: 1px solid var(--border-dark); }
         .stat-item:last-child { border-right: none; }
 
@@ -510,10 +512,13 @@
                 padding-top: calc(5.5rem + env(safe-area-inset-top, 0px));
             }
 
-            .stat-strip { grid-template-columns: repeat(2, 1fr); }
+            .stat-strip,
+            .stat-strip.four { grid-template-columns: repeat(2, 1fr); }
             .stat-item:nth-child(2) { border-right: none; }
             .stat-item:nth-child(1),
             .stat-item:nth-child(2) { border-bottom: 1px solid var(--border-dark); }
+            /* 4-tile strip: also border-bottom row 1 (items 1–2 handled above); item 3 keeps right border, item 4 last-child clears it */
+            .stat-strip.four .stat-item:nth-child(3) { border-bottom: none; }
 
             .hero h1 { font-size: 1.8rem; }
 
@@ -528,8 +533,10 @@
         }
 
         @media (max-width: 560px) {
-            .stat-strip { grid-template-columns: 1fr; }
+            .stat-strip,
+            .stat-strip.four { grid-template-columns: 1fr; }
             .stat-item { border-right: none; border-bottom: 1px solid var(--border-dark); }
+            .stat-strip.four .stat-item:nth-child(3) { border-bottom: 1px solid var(--border-dark); }
             .stat-item:last-child { border-bottom: none; }
         }
 
@@ -578,7 +585,7 @@
     <div class="container" id="main">
         <!-- Hero -->
         <section class="hero">
-            <div class="eyebrow">Orgs Map · Quarterly Refresh · v3.2</div>
+            <div class="eyebrow">Orgs Map · Quarterly Refresh · v3.3</div>
             <h1>Mapping the global music mental health ecosystem</h1>
             <p class="subtitle">A verified scan of the global music-industry mental health field: 111 organizations listed in Backline's Global Resource Hub, nine profiled in depth in our research wiki — and zero serving Taiwan. This report maps who exists, what the evidence says, and where the entry point is.</p>
         </section>
@@ -588,36 +595,22 @@
             You followed a <strong>News &amp; Trends</strong> link. Standalone news reports were folded into this page — they're now the <strong>Recent Changes</strong> tab below (already selected). Scroll down to the tabs to read the latest scan.
         </div>
 
-        <!-- Primary stats -->
-        <div class="stat-strip">
+        <!-- Stats — external-reference figures only (self-defined scope counts removed v3.3) -->
+        <div class="stat-strip four">
             <div class="stat-item">
                 <div class="stat-num">111</div>
                 <div class="stat-label">Global Organizations</div>
                 <div class="stat-meta">Backline directory · verified scrape</div>
             </div>
             <div class="stat-item">
-                <div class="stat-num">9</div>
-                <div class="stat-label">Deep Profiles</div>
-                <div class="stat-meta">Research wiki, source-traced</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-num" style="color: var(--signal);">0</div>
-                <div class="stat-label">Taiwan Music MH Orgs</div>
-                <div class="stat-meta">Market opportunity</div>
-            </div>
-        </div>
-
-        <!-- Secondary stats -->
-        <div class="stat-strip" style="margin-top: 1rem;">
-            <div class="stat-item">
                 <div class="stat-num">8</div>
                 <div class="stat-label">Asia-Related Listings</div>
                 <div class="stat-meta">Only India has an independent music MH org</div>
             </div>
             <div class="stat-item">
-                <div class="stat-num">6</div>
-                <div class="stat-label">Studies in Evidence Base</div>
-                <div class="stat-meta">Canada · Norway · UK · US · Australia</div>
+                <div class="stat-num" style="color: var(--signal);">0</div>
+                <div class="stat-label">Taiwan Music MH Orgs</div>
+                <div class="stat-meta">Market opportunity</div>
             </div>
             <div class="stat-item">
                 <div class="stat-num">NT$5.63B</div>
@@ -640,19 +633,9 @@
 
             <!-- Overview Tab -->
             <div id="overview" class="tab-content active">
-                <div class="correction-banner">
-                    <strong>v3 (2026-06-11) — full fact-check against primary sources.</strong> Corrections in this revision:
-                    <ul>
-                        <li>Organization profiles rebuilt from verified sources. The previous Amber Health and Jeremy Wilson Foundation cards contained factual errors and were removed (Amber Health is a for-profit clinical service founded 2020, not a Canadian nonprofit; JWF is an Oregon healthcare-access fund founded 2010, not a suicide-prevention org).</li>
-                        <li>Backline benchmark corrected: founded late 2019 (not 2007); 84K+ people served cumulatively (not "200K annually").</li>
-                        <li>Soundcheck figures now quoted as published from the report PDF (ranges and exact items), not invented point values.</li>
-                        <li>Geographic distribution recomputed from the directory snapshot — the field has two poles (US and Europe), not "70% NA/UK/AU".</li>
-                        <li>All Trends items replaced with linked, verifiable news; unverifiable items removed.</li>
-                        <li>Database count updated: the retired spreadsheet count (27) is replaced by 9 source-traced wiki deep profiles.</li>
-                    </ul>
-                    <div style="margin-top:0.6rem;"><strong>v3.2 (2026-06-12)</strong> — "Recent Changes" tab added (Rule 13): standalone News &amp; Trends reports are discontinued; the monthly scan now appends confirmed structural changes to that feed, and a quarterly refresh (next: September 2026) promotes them into these body tabs. Body figures (incl. the 111-org count) still reflect the April 4, 2026 directory baseline — the latest June re-scrape (<strong>110 orgs</strong>) and other developments live in <a href="#changelog" style="color:var(--signal);">Recent Changes</a> until promotion.</div>
-                    <div style="margin-top:0.6rem;"><strong>v3.1 (2026-06-11)</strong> — §6.11 citation retrofit: source chips are now linked block-level citations; each tab ends with a References registry carrying full sources, access dates, and methods.</div>
-                    <div style="margin-top:0.6rem;"><strong>v2 (2026-04-09)</strong> — Soundcheck reclassified from organization to research study.</div>
+                <!-- Version-correction history moved to the MD revision record (output/reports/2026-04-04_Report_Global_NPO_Landscape.md) v3.3 — not surfaced on the deploy. -->
+                <div class="note-baseline" style="font-family:var(--font-mono); font-size:var(--text-xs); color:var(--grey); letter-spacing:0.04em; margin-bottom:1.5rem;">
+                    Body figures reflect the April 4, 2026 directory baseline (111 orgs). The June re-scrape (110 orgs) and later developments live in <a href="#changelog" style="color:var(--signal);">Recent Changes</a> until the September 2026 quarterly refresh promotes them.
                 </div>
 
                 <div class="card">
@@ -662,9 +645,42 @@
                         <li style="margin-bottom:0.5rem;"><strong>Two geographic poles, not one.</strong> The US leads (~21 standalone orgs plus most multi-country networks), but continental Europe is the second pole — Germany (~8), UK (~7), France (~6), with Austria, Iceland, Switzerland and Romania at 3 each. Australia has 3. <a class="conf conf-verified" href="#ov-src-1" data-src="directory-snapshot">✅ directory snapshot</a></li>
                         <li style="margin-bottom:0.5rem;"><strong>Zero organizations serve Taiwan</strong> — and zero independent, music-specific MH organizations exist anywhere in East or Southeast Asia. Japan's B-Side Project is corporate (Sony-contracted artists only); India's TATVA is the region's only independent music-specific org. <a class="conf conf-verified" href="#ov-src-1" data-src="directory-snapshot">✅ 2 scrapes, 2 dates</a></li>
                         <li style="margin-bottom:0.5rem;"><strong>Service models cluster into five types:</strong> crisis support, case management / healthcare navigation, peer support communities, financial aid, and education/research. Successful organizations combine two or three rather than attempting all five. <a class="conf conf-verified" href="#ov-src-2" data-src="wiki-profiles">✅ 9 wiki profiles</a></li>
-                        <li style="margin-bottom:0.5rem;"><strong>Funding is donation- and partnership-driven.</strong> Verified examples: Backline runs on ~100% donations ($874K FY2023, 990); MusiCares is anchored by the Recording Academy ($14M FY2024); Busyhead raised $6.6M through artist-led campaigns; Music Health Alliance reports $1 → $30 leverage on healthcare savings. <a class="conf conf-verified" href="#ov-src-3" data-src="org-financials">✅ 990s / official reports</a></li>
-                        <li><strong>Taiwan has a policy tailwind:</strong> the 全民心理健康韌性計畫 commits NT$5.63B over 2025–2030, including free counseling for ages 15–45 — a national framework a music-industry MH NPO can align with. <a class="conf conf-verified" href="#ov-src-4" data-src="tw-policy">✅ 行政院 / 衛福部</a></li>
+                        <li style="margin-bottom:0.5rem;"><strong>Funding follows four models — donation-dominance is a US/UK artifact, not a universal law.</strong> Drawn from the ≈5 deep-profiled orgs with verified financials (not the 110-org directory, which holds no funding data): <em>(a) philanthropy</em> — Backline ~100% donations ($874K FY2023, 990); Help Musicians/MMM on major donors, legacies, corporate partners <a class="conf conf-verified" href="#ov-src-5" data-src="helpmusicians-funding">✅ 2024 report</a>; <em>(b) industry-institution anchored</em> — MusiCares via the Recording Academy ($14M FY2024); MHA via label partnerships; <em>(c) artist-led campaigns</em> — Busyhead $6.6M (⚠️ single-source); <em>(d) government-funded</em> — Support Act (Australia) draws significant Australian Government funding via the Office for the Arts. <a class="conf conf-verified" href="#ov-src-3" data-src="org-financials">✅ 990s / reports</a> <a class="conf conf-verified" href="#ov-src-6" data-src="support-act-funding">✅ gov + press</a> <span class="conf conf-single">⚠️ not classified across all 110</span></li>
+                        <li><strong>Taiwan has a policy tailwind — and it points to a non-US funding path.</strong> The 全民心理健康韌性計畫 commits NT$5.63B over 2025–2030, including free counseling for ages 15–45 <a class="conf conf-verified" href="#ov-src-4" data-src="tw-policy">✅ 行政院 / 衛福部</a>. Read with the funding models above: a public mental-health budget plus an arts-funding state (文化部) make a government-funded or commissioned (政府委託/標案) path plausible — closer to Support Act than to Backline's donation model.</li>
                     </ul>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-title">Where the organizations are — two poles, then a steep drop</div>
+                    <div class="chart-note">Standalone orgs by country (multi-country networks excluded). The US leads, continental Europe is the clear second pole, and there is a long tail of single-country efforts — then nothing in East/Southeast Asia beyond India. <a class="conf conf-verified" href="#ov-src-1" data-src="directory-snapshot">✅ directory snapshot</a></div>
+                    <div class="chart-bar">
+                        <div class="chart-label">United States</div>
+                        <div class="chart-visual"><div class="bar" style="width: 100%;">~21</div></div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">Germany</div>
+                        <div class="chart-visual"><div class="bar alt" style="width: 38%;">~8</div></div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">United Kingdom</div>
+                        <div class="chart-visual"><div class="bar alt" style="width: 33%;">~7</div></div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">France</div>
+                        <div class="chart-visual"><div class="bar alt" style="width: 29%;">~6</div></div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">AT · IS · CH · RO (3 each)</div>
+                        <div class="chart-visual"><div class="bar neutral" style="width: 14%;">3</div></div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">Australia</div>
+                        <div class="chart-visual"><div class="bar neutral" style="width: 14%;">3</div></div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">Taiwan / East &amp; SE Asia (ex-India)</div>
+                        <div class="chart-visual"><div class="bar" style="width: 4%; background: var(--signal); min-width: 28px;">0</div></div>
+                    </div>
                 </div>
 
                 <div class="card">
@@ -679,6 +695,8 @@
                         <li id="ov-src-2" data-src="wiki-profiles">Nine source-traced wiki deep profiles (orgs/: backline · musicares · music_health_alliance · music_minds_matter · busyhead_project · project_healthy_minds · tatva · sangath · b_side_project), each compiled from primary sources — full source list in the Sources &amp; Method tab.</li>
                         <li id="ov-src-3" data-src="org-financials">Backline Form 990s FY2020–2023 — <a href="https://projects.propublica.org/nonprofits/organizations/843338712" target="_blank" rel="noopener">ProPublica Nonprofit Explorer API</a>, accessed 2026-06-11; MusiCares FY2024 990 — <a href="https://projects.propublica.org/nonprofits/organizations/954470909" target="_blank" rel="noopener">ProPublica</a>; Busyhead figures — <a href="https://www.busyheadproject.org/" target="_blank" rel="noopener">busyheadproject.org</a> (single-source); MHA $1→$30 leverage — <a href="https://www.musichealthalliance.com" target="_blank" rel="noopener">musichealthalliance.com</a>.</li>
                         <li id="ov-src-4" data-src="tw-policy">行政院 — <a href="https://www.ey.gov.tw/Page/5A8A0CB5B41DA11E/8e8835ef-5b07-4e02-8b19-906b6964a10c" target="_blank" rel="noopener">全民心理健康韌性計畫</a>; 衛福部心理健康司 — <a href="https://dep.mohw.gov.tw/DOMHAOH/lp-329-107.html" target="_blank" rel="noopener">計畫專區</a>. Method: official policy pages.</li>
+                        <li id="ov-src-5" data-src="helpmusicians-funding">Help Musicians / Music Minds Matter income — major donors, legacies, corporate partners (not government): <a href="https://www.helpmusicians.org.uk/about-us/news/help-musicians-release-2024-annual-report" target="_blank" rel="noopener">Help Musicians 2024 Annual Report</a> (<a href="https://www.helpmusicians.org.uk/assets/downloads/The%20HMUK%202024%20(Digital%20Final%20Version)-compressed.pdf" target="_blank" rel="noopener">financial statements PDF</a>). Accessed 2026-06-15.</li>
+                        <li id="ov-src-6" data-src="support-act-funding">Support Act (Australia) — Australian Government funding via the Office for the Arts: $20M relief round (2021) <a href="https://artsreview.com.au/support-act-welcomes-additional-funding-from-the-australian-government/" target="_blank" rel="noopener">Australian Arts Review</a> (press); arts-sector core funding under Revive <a href="https://www.arts.gov.au/news/2023-24-federal-budget-revitalise-arts-sector" target="_blank" rel="noopener">Office for the Arts</a> (government). Two independent methods. Accessed 2026-06-15.</li>
                     </ol>
                 </div>
             </div>
