@@ -1252,7 +1252,7 @@
     var nav = document.querySelector('nav.nav, .nav'); if (!nav) return;
     var THRESH = 24;
     function setS(on){ nav.classList.toggle('scrolled', !!on); }
-    var c = document.querySelector('.pages');
+    var c = document.querySelector('.pages-container, .pages');
     if (c && getComputedStyle(c).overflowY !== 'visible') {
       var ticking = false;
       c.addEventListener('scroll', function(){ if (ticking) return; ticking = true; requestAnimationFrame(function(){ ticking = false; setS(c.scrollTop > THRESH); }); }, { passive: true });

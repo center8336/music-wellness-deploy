@@ -117,6 +117,7 @@
 </style>
 </head>
 <body>
+  <a href="#main" class="skip-nav">Skip to content</a>
 
 <nav class="nav">
   <div class="nav-topbar">
@@ -137,7 +138,7 @@
   <div class="nav-sub">FOR MUSICIANS</div>
 </nav>
 
-<section class="hero">
+<section class="hero" id="main">
   <canvas id="three-canvas"></canvas>
   <div id="ascii-overlay">
     <canvas id="ascii-canvas"></canvas>
@@ -483,13 +484,15 @@
       border-bottom: 1px solid var(--border-light);
     }
     @media (prefers-reduced-motion: reduce){ nav.nav, .nav { transition: none; } }
+    .skip-nav { position: absolute; left: -9999px; top: 0; z-index: 200; background: var(--signal); color: var(--white); padding: 0.5rem 1rem; font-family: var(--font-mono); }
+    .skip-nav:focus { left: 0; }
   </style>
   <script>
   (function(){
     var nav = document.querySelector('nav.nav, .nav'); if (!nav) return;
     var THRESH = 24;
     function setS(on){ nav.classList.toggle('scrolled', !!on); }
-    var c = document.querySelector('.pages');
+    var c = document.querySelector('.pages-container, .pages');
     if (c && getComputedStyle(c).overflowY !== 'visible') {
       var ticking = false;
       c.addEventListener('scroll', function(){ if (ticking) return; ticking = true; requestAnimationFrame(function(){ ticking = false; setS(c.scrollTop > THRESH); }); }, { passive: true });
