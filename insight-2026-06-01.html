@@ -732,7 +732,7 @@
   </script>
   <!-- nav scroll-state fix: transparent over hero, blurred bar once scrolled -->
   <style>
-    nav.nav, .nav { transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease); border-bottom: 1px solid transparent; }
+    nav.nav, .nav { transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease); border-bottom: 1px solid transparent; }
     nav.nav.scrolled, .nav.scrolled {
       right: 0;
       background: rgba(244, 244, 245, 0.85);
@@ -740,6 +740,7 @@
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-light);
     }
+    @media (prefers-reduced-motion: reduce){ nav.nav, .nav { transition: none; } }
   </style>
   <script>
   (function(){
