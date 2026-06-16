@@ -177,7 +177,7 @@
         /* legacy confidence classes neutralised to the design-system purple (markup + audit stay stable) */
         .conf-verified, .conf-single, .conf-uncertain,
         a.conf-verified, a.conf-single, a.conf-uncertain { color: var(--signal); }
-        /* Confidence key (Sources tab) + reference-list symbols — the emoji carry the colour, no hex needed */
+        /* Basis key (Sources tab) + reference-list symbols — the emoji carry the colour, no hex needed */
         .conf-key { display: inline-block; font-family: var(--font-mono); font-size: 0.68rem; padding: 0.15rem 0.6rem; border-radius: 50px; letter-spacing: 0.06em; white-space: nowrap; color: var(--graphite); border: 1px solid var(--border-light); background: var(--snow); }
         .refs li .conf-sym { font-style: normal; margin-right: 0.4em; }
 
@@ -747,7 +747,7 @@
                         <li id="ov-src-4" data-src="helpmusicians-funding"><span class="conf-sym">✅</span>Help Musicians / Music Minds Matter income — major donors, legacies, corporate partners (not government): <a href="https://www.helpmusicians.org.uk/about-us/news/help-musicians-release-2024-annual-report" target="_blank" rel="noopener">Help Musicians 2024 Annual Report</a> (<a href="https://www.helpmusicians.org.uk/assets/downloads/The%20HMUK%202024%20(Digital%20Final%20Version)-compressed.pdf" target="_blank" rel="noopener">financial statements PDF</a>). Accessed 2026-06-15.</li>
                         <li id="ov-src-5" data-src="support-act-funding"><span class="conf-sym">✅</span>Support Act (Australia) — Australian Government funding via the Office for the Arts: $20M relief round (2021) <a href="https://artsreview.com.au/support-act-welcomes-additional-funding-from-the-australian-government/" target="_blank" rel="noopener">Australian Arts Review</a> (press); arts-sector core funding under Revive <a href="https://www.arts.gov.au/news/2023-24-federal-budget-revitalise-arts-sector" target="_blank" rel="noopener">Office for the Arts</a> (government). Two independent methods. Accessed 2026-06-15.</li>
                         <li id="ov-src-6" data-src="directory-service-tags"><span class="conf-sym">✅</span>Service-type counts across all 110 orgs — author's tally of the service tags published in the <a href="https://backline.care/global-resources/" target="_blank" rel="noopener">Backline Global Resource Hub</a> (public directory; full roster scraped 2026-06-12). Per-org tags listed in the <a href="orgs-funding-classification.html">supplementary data table</a>.</li>
-                        <li id="ov-src-7" data-src="directory-funding-class"><span class="conf-sym">⚠️</span>Funding model — author's classification of the 110 <a href="https://backline.care/global-resources/" target="_blank" rel="noopener">Backline directory</a> organizations by organisational type (the directory carries no funding field). Per-org confidence: ✅ verified from financials / official sources · ⚠️ inferred from organisational type · ❓ no public info. The method and the basis for every organization are in the <a href="orgs-funding-classification.html">supplementary data table</a>. Not a 110-org financials census.</li>
+                        <li id="ov-src-7" data-src="directory-funding-class"><span class="conf-sym">⚠️</span>Funding model — author's classification of the 110 <a href="https://backline.care/global-resources/" target="_blank" rel="noopener">Backline directory</a> organizations by organisational type (the directory carries no funding field). Per-org basis: ✅ verified from financials / official sources · ⚠️ inferred from organisational type · ❓ no public info. The method and the basis for every organization are in the <a href="orgs-funding-classification.html">supplementary data table</a>. Not a 110-org financials census.</li>
                         <li id="ov-src-8" data-src="gov-funding-anchors"><span class="conf-sym">✅</span>Government/public-sector cluster anchors (web-verified): <a href="https://cnm.fr/en/uncategorized/about-us/" target="_blank" rel="noopener">Centre national de la musique</a> — French public establishment under the Ministry of Culture; <a href="https://prohelvetia.ch/en/our-mission/" target="_blank" rel="noopener">Pro Helvetia</a> — Swiss Arts Council, foundation under public law, federally funded; <a href="https://creativenz.govt.nz/about-creative-nz/what-we-do/arts-funding" target="_blank" rel="noopener">Creative New Zealand</a> — national government arts agency; <a href="https://www.samhsa.gov/" target="_blank" rel="noopener">SAMHSA</a> (US federal agency); plus Support Act (see 6). Method: WebSearch + official pages, 2026-06-15.</li>
                         <li id="ov-src-9" data-src="tw-creators-union"><span class="conf-sym">✅</span>藝創工會 — 臺北市藝術創作者職業工會 — covers art creators including musicians; member benefits are labour/health-insurance (勞健保) access, occupational-injury cover, occupational-safety guidance, legal/contract support and advocacy — no mental-health service. <a href="https://artcreator.tw/?page_id=1194" target="_blank" rel="noopener">工會簡介</a>; <a href="https://artcreator.tw/?p=2175" target="_blank" rel="noopener">會員福利權益</a>. Method: WebSearch + union site, 2026-06-16.</li>
                     </ol>
@@ -1251,6 +1251,7 @@
                 <p class="method-note">This report's claims trace to four method classes. <strong>Directory data:</strong> Backline Global Resource Hub scraped page-by-page via browser automation (13 pages); the April 2026 scrape deduplicated to 111 and the June 2026 full re-scrape updated the roster to 110 (the count used throughout); dated snapshots archived on file. <strong>Financial data:</strong> IRS Form 990 figures pulled from the ProPublica Nonprofit Explorer API (re-verified Jun 11, 2026). <strong>Study data:</strong> quoted directly from primary report PDFs (on file). <strong>News &amp; organization facts:</strong> cross-checked against official organization sites and at least one independent press source. Anything not verifiable by two methods is labeled.</p>
 
                 <div class="card" style="padding: 1.25rem;">
+                    <strong>Basis</strong> &mdash; 
                     <span class="conf-key">✅ Verified</span>&nbsp; cross-checked with 2+ methods or primary source&nbsp;&nbsp;
                     <span class="conf-key">⚠️ Single-source</span>&nbsp; one method only&nbsp;&nbsp;
                     <span class="conf-key">❓ Uncertain</span>&nbsp; tool may not have captured complete content
@@ -1389,7 +1390,7 @@
             });
         });
 
-        // Confidence badge tooltips (legend lives in Sources & Method tab)
+        // Basis badge tooltips (legend lives in Sources & Method tab)
         const confTitles = {
             'conf-verified': 'Verified — cross-checked with 2+ methods or primary source',
             'conf-single': 'Single-source — one method only, not cross-verified',
