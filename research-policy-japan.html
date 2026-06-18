@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Policy scan: Japan — protecting music workers by labor law, not a safety net · MH&W Research">
+  <title>Policy: Japan · MH&W</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+      --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 660px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--charcoal);
+      line-height: 1.7;
+      font-size: var(--text-body);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    /* ===== SITE NAVIGATION ===== */
+    nav.nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem 2.5rem;
+      padding-top: calc(1.5rem + env(safe-area-inset-top));
+      background: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--grey);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      transition: color var(--dur) var(--ease);
+    }
+
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      z-index: 101;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--charcoal);
+      margin: 5px 0;
+      transition: all 0.3s var(--ease);
+    }
+    .nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(4px,-5px); }
+
+    /* Mobile nav brand */
+    .nav-topbar { display: none; }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:0.5rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:0.2em; }
+
+    /* ===== PAGE SIDEBAR ===== */
+    .page-sidebar {
+      position: fixed;
+      left: 2.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+    }
+
+    .page-nums {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+    }
+
+    .page-num {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      cursor: pointer;
+      padding: 0.2rem 0;
+      transition: color var(--dur) var(--ease);
+      letter-spacing: 0.05em;
+      user-select: none;
+    }
+
+    .page-num:hover { color: var(--grey); }
+    .page-num.active { color: var(--black); font-weight: 700; }
+
+    .page-arrows {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+    }
+
+    .arrow-btn {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--silver);
+      border-radius: 50%;
+      background: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--grey-light);
+      font-size: 0.7rem;
+      transition: all var(--dur) var(--ease);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .arrow-btn:hover {
+      border-color: var(--signal);
+      color: var(--signal);
+    }
+
+    .arrow-btn:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+
+    .arrow-btn svg {
+      width: 12px;
+      height: 12px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ===== PAGES CONTAINER (scroll-snap) ===== */
+    .pages-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow-y: auto;
+      scroll-snap-type: y proximity;
+      scroll-behavior: smooth;
+      overscroll-behavior-y: contain;
+    }
+
+    .page {
+      min-height: 100vh;
+      scroll-snap-align: start;
+      padding: 5rem 2.5rem 3rem 6.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page-inner {
+      max-width: var(--max-w-text);
+      width: 100%;
+      margin: 0 auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== COVER PAGE ===== */
+    .cover {
+      height: 100vh;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding-top: 0;
+    }
+
+    .cover .page-inner {
+      max-width: 800px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cover-eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 2.5rem;
+    }
+
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(4.5rem, 11vw, 9rem);
+      font-weight: 800;
+      line-height: 0.85;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 0.25rem;
+    }
+
+    .cover-accent {
+      color: var(--purple-deep);
+    }
+
+    .cover-year {
+      font-family: var(--font-mono);
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 400;
+      color: var(--purple-light);
+      letter-spacing: 0.35em;
+      margin-bottom: 2rem;
+    }
+
+    .cover-subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--graphite);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.5;
+      margin-bottom: 3rem;
+    }
+
+    .cover-meta {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--grey-light);
+      line-height: 2;
+      letter-spacing: 0.02em;
+    }
+
+    .cover-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cover-hint { animation: none; }
+    }
+
+    /* ===== CONTENT PAGES ===== */
+    .page-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--purple-deep);
+      margin-bottom: 1rem;
+    }
+
+    .page-title {
+      font-family: var(--font-display);
+      font-size: var(--text-h1);
+      font-weight: 700;
+      line-height: 1.1;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 2rem;
+      letter-spacing: 0.01em;
+    }
+
+    .content-block {
+      margin-bottom: 1.75rem;
+    }
+
+    .content-block h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-h3);
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+
+    .content-block p {
+      margin-bottom: 0.75rem;
+      line-height: 1.75;
+      color: var(--graphite);
+    }
+
+    .content-block strong {
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    .content-block em {
+      font-style: italic;
+      color: var(--graphite);
+    }
+
+    .content-block ul, .content-block ol {
+      margin-left: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .content-block li {
+      margin-bottom: 0.4rem;
+      line-height: 1.65;
+      color: var(--graphite);
+    }
+
+    /* ===== LEAD / FRAMING QUOTE ===== */
+    .lead-quote {
+      border-left: 3px solid var(--signal);
+      background: var(--signal-bg);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 1rem 0 0;
+    }
+    .lead-quote p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--charcoal);
+      margin-bottom: 0.75rem;
+    }
+    .lead-quote p:last-child { margin-bottom: 0; }
+
+    /* ===== REFORM ITEMS ===== */
+    .reform-item {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .reform-item:last-child { border-bottom: none; }
+    .reform-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .reform-num {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--purple-deep);
+      flex-shrink: 0;
+    }
+    .reform-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+    .reform-year {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--grey-light);
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+    .reform-body {
+      padding-left: 2.25rem;
+      line-height: 1.75;
+      color: var(--graphite);
+    }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin: 1rem 0 1.25rem;
+      background: var(--bg-card);
+    }
+    .stat-item {
+      padding: 1.1rem 1rem;
+      border-right: 1px solid var(--border-light);
+      text-align: center;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.6rem;
+      color: var(--purple-deep);
+      line-height: 1.1;
+    }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--grey);
+      margin-top: 0.35rem;
+    }
+
+    /* ===== APPRAISAL / VERDICT ===== */
+    .appraise-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .appraise-item:last-child { border-bottom: none; }
+    .appraise-item h3 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 0.35rem;
+    }
+    .appraise-item p { line-height: 1.75; color: var(--graphite); }
+
+    .verdict {
+      background: var(--off-black);
+      color: var(--snow);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .verdict .verdict-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--purple-light);
+      margin-bottom: 0.5rem;
+    }
+    .verdict p { color: var(--snow); line-height: 1.7; margin: 0; }
+    .verdict strong { color: var(--white); font-weight: 600; }
+
+    /* ===== LESSON ITEMS ===== */
+    .lesson-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .lesson-item:last-child { border-bottom: none; }
+    .lesson-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      margin-bottom: 0.35rem;
+    }
+    .lesson-num {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--purple-deep);
+      flex-shrink: 0;
+    }
+    .lesson-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+    .lesson-body {
+      padding-left: 2.25rem;
+      line-height: 1.7;
+      color: var(--graphite);
+    }
+
+    /* ===== METHOD TABLE ===== */
+    .method-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--text-sm);
+      margin: 1rem 0;
+    }
+    .method-table thead {
+      background: var(--purple-deep);
+      color: var(--white);
+    }
+    .method-table th {
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .method-table td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid var(--border-light);
+      vertical-align: top;
+    }
+    .method-table tbody tr:nth-child(odd) { background: var(--white); }
+    .method-table tbody tr:nth-child(even) { background: var(--snow); }
+
+    /* ===== SOURCE FOOTER ===== */
+    .source-info {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-light);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--grey-light);
+      line-height: 1.8;
+    }
+
+    .source-info code {
+      font-family: var(--font-mono);
+      background: var(--white);
+      padding: 0.1rem 0.3rem;
+      border-radius: var(--radius);
+      font-size: inherit;
+      color: var(--grey);
+    }
+
+    /* ===== SECTION DIVIDER ===== */
+    .part-divider {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--purple-light);
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--purple-light);
+      margin-bottom: 1.5rem;
+      display: inline-block;
+    }
+
+    /* ===== CITATIONS (§5 inline tier) — pattern: case-study-music-minds-matter.html ===== */
+    .cite { font-size: 0.72em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a:focus-visible { outline: 2px solid var(--signal); outline-offset: 1px; border-radius: 2px; }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 1.5rem; }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-sm); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; }
+    .refs li a { color: var(--signal); }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs-note { font-size: var(--text-xs); color: var(--grey); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-sm); color: var(--grey); font-style: italic; margin-bottom: 0.5rem; }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 768px) {
+      nav.nav {
+        padding: 1rem 1.25rem;
+        padding-top: calc(1rem + env(safe-area-inset-top));
+        right: 0;
+        background: none;
+        border-bottom: none;
+      }
+      nav.nav.open {
+        background: rgba(244, 244, 245, 0.9);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+      .nav-toggle { display: block; }
+      .nav-topbar { display: flex; align-items: center; gap: 0.75rem; }
+      .nav-mobile-brand { display:block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 0.6rem;
+        margin-top: 0.75rem;
+      }
+      .nav-links.show { display: flex; }
+      .nav-links a { font-size: 0.85rem; }
+
+      .page-sidebar {
+        left: auto;
+        right: 1.25rem;
+        top: auto;
+        bottom: 1.5rem;
+        transform: none;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(244, 244, 245, 0.9);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        padding: 0.5rem 0.75rem;
+        border-radius: 20px;
+        border: 1px solid var(--border-light);
+      }
+
+      .page-nums {
+        flex-direction: row;
+        gap: 0.3rem;
+      }
+
+      .page-num {
+        font-size: 0.6rem;
+        padding: 0.15rem 0.2rem;
+      }
+
+      .page-arrows {
+        flex-direction: row;
+        margin-top: 0;
+        margin-left: 0.25rem;
+      }
+
+      .arrow-btn {
+        width: 24px;
+        height: 24px;
+      }
+
+      .arrow-btn svg {
+        width: 10px;
+        height: 10px;
+      }
+
+      .page {
+        padding: 4.5rem 1.25rem 5rem 1.25rem;
+      }
+
+      .cover-title {
+        font-size: clamp(3rem, 16vw, 5rem);
+      }
+
+      .cover-year {
+        font-size: clamp(1.2rem, 6vw, 1.8rem);
+        letter-spacing: 0.25em;
+      }
+
+      .cover-subtitle {
+        font-size: 0.85rem;
+      }
+
+      .page-title {
+        font-size: var(--text-h2);
+      }
+
+      .reform-body, .lesson-body {
+        padding-left: 0;
+      }
+
+      .reform-header {
+        flex-wrap: wrap;
+      }
+
+      .reform-year {
+        margin-left: 0;
+        margin-top: 0.15rem;
+      }
+
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+      .stat-item:last-child { border-bottom: none; }
+
+      .method-table { font-size: 0.7rem; }
+      .method-table th, .method-table td { padding: 0.4rem 0.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
+    }
+
+    /* Scrollbar styling */
+    .pages-container::-webkit-scrollbar { width: 3px; }
+    .pages-container::-webkit-scrollbar-track { background: transparent; }
+    .pages-container::-webkit-scrollbar-thumb { background: var(--silver); border-radius: 3px; }
+    .pages-container::-webkit-scrollbar-thumb:hover { background: var(--grey-light); }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <!-- Site Navigation -->
+  <nav class="nav">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH & WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="plan.html">PLAN</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="case-study.html">CASE STUDY</a>
+      <a href="research.html" class="current">RESEARCH</a>
+      <a href="insight-2026-06-18.html">INSIGHT</a>
+    </div>
+  </nav>
+
+  <!-- Page Sidebar Navigation -->
+  <div class="page-sidebar">
+    <div class="page-nums">
+      <span class="page-num active" data-page="0">01</span>
+      <span class="page-num" data-page="1">02</span>
+      <span class="page-num" data-page="2">03</span>
+      <span class="page-num" data-page="3">04</span>
+      <span class="page-num" data-page="4">05</span>
+      <span class="page-num" data-page="5">06</span>
+      <span class="page-num" data-page="6">07</span>
+      <span class="page-num" data-page="7">08</span>
+    </div>
+    <div class="page-arrows">
+      <button class="arrow-btn" aria-label="Previous page" onclick="prevPage()">
+        <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+      </button>
+      <button class="arrow-btn" aria-label="Next page" onclick="nextPage()">
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Pages -->
+  <div class="pages-container" id="main">
+
+    <!-- PAGE 01: COVER (standard research cover — copied from research-detari-2020.html) -->
+    <div class="page cover" id="page-0">
+      <div class="page-inner">
+        <p class="cover-eyebrow">MH&amp;W Research</p>
+        <h1 class="cover-title">JAPAN</h1>
+        <p class="cover-year">POLICY</p>
+        <p class="cover-subtitle">Protecting Music Workers<br>by Labor Law, Not a Safety Net</p>
+        <div class="cover-meta">
+          <p>Regional Policy Scan — Region 1 of 6</p>
+          <p>Japan &rarr; Thailand &rarr; Taiwan &rarr; U.S. &rarr; U.K. &rarr; EU</p>
+          <p>Compiled by &#38515;&#26825; &middot; 2026-06-18</p>
+        </div>
+      </div>
+      <span class="cover-hint">&darr; scroll or arrow keys</span>
+    </div>
+
+    <!-- PAGE 02: WHY THIS REGION -->
+    <div class="page" id="page-1">
+      <div class="page-inner">
+        <span class="part-divider">Framing</span>
+        <p class="page-label">Why Japan, Why Policy</p>
+        <h2 class="page-title">A Natural Experiment</h2>
+
+        <div class="content-block">
+          <p>This is the first of a six-region policy cycle. The aim is not to profile an organization but to read how a <em>jurisdiction</em> protects the mental health and welfare of music and performing-arts workers &mdash; through law, public funding, and worker bodies.</p>
+        </div>
+
+        <div class="lead-quote">
+          <p>Japan is a useful first case because it took a route opposite to the U.S.: instead of building a charitable safety net (MusiCares), Japan has reached for <strong>labor and transaction law</strong> &mdash; extending workers' accident insurance to performers (2021) and enacting a Freelance Protection Act (2024).</p>
+          <p>It is a natural experiment in whether <em>rights</em> can do the work that <em>charity</em> does elsewhere.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 03: THE THREE REFORMS -->
+    <div class="page" id="page-2">
+      <div class="page-inner">
+        <span class="part-divider">Part A — The Landscape</span>
+        <p class="page-label">Section 01 · Protections</p>
+        <h2 class="page-title">Three Recent Moves</h2>
+
+        <div class="content-block">
+          <p>Japan's music and performing-arts workforce is large and overwhelmingly freelance &mdash; roughly <strong>218,250 performing-arts workers</strong>, within a 2019 government count of about <strong>4.6 million freelancers</strong> overall, 6.3% of them artists.<sup class="cite"><a href="#jp-src-1" data-src="morisaki" data-tip="Workforce size (218,250 performing-arts workers; 4.6M freelancers, 6.3% artists): Morisaki M, Industrial Health 2023;61(6):393–394 (PubMed-indexed editorial).">1</a></sup> For most of the postwar era this workforce sat outside the protections employees take for granted. Three recent moves have begun to change that &mdash; none of them a mental-health program.</p>
+        </div>
+
+        <div class="reform-item">
+          <div class="reform-header">
+            <span class="reform-num">01</span>
+            <span class="reform-title">Accident insurance reaches performers</span>
+            <span class="reform-year">2021</span>
+          </div>
+          <div class="reform-body">
+            <p>In 2021, "performing arts workers" were, for the first time, named eligible for <strong>special enrollment in Japan's workers' accident compensation insurance (&#21172;&#28797;&#20445;&#38522;)</strong> &mdash; a structural milestone driven by Arts Workers Japan, whose president also chairs a nationwide centre for performers' accident-compensation enrollment. Before this, the editorial states plainly, "no legal protection is in place for performers and staff working in the arts and entertainment industry."<sup class="cite"><a href="#jp-src-1" data-src="morisaki" data-tip="2021 accident-insurance eligibility for performers, and the prior absence of legal protection: Morisaki M, Industrial Health 2023;61(6):393–394.">1</a></sup></p>
+          </div>
+        </div>
+
+        <div class="reform-item">
+          <div class="reform-header">
+            <span class="reform-num">02</span>
+            <span class="reform-title">The Freelance Protection Act (&#12501;&#12522;&#12540;&#12521;&#12531;&#12473;&#26032;&#27861;)</span>
+            <span class="reform-year">in force 2024-11-01</span>
+          </div>
+          <div class="reform-body">
+            <p>Japan's "Act on Ensuring Proper Transactions Involving Specified Entrusted Business Operators" took effect <strong>November 1, 2024</strong>. It covers solo business operators with no employees &mdash; explicitly including creative freelancers &mdash; and applies to all B2B commissioning regardless of the client's size, closing a gap in the older Subcontract Act. Its duties: <strong>written contracts, on-time payment, 30 days' notice before terminating or non-renewing a continuing contract, accommodation of caregiving/parenting, and &mdash; critically for wellbeing &mdash; a duty to prevent and respond to harassment</strong> (sexual, power, and other). It is enforced by the Japan Fair Trade Commission, with fines up to &yen;500,000.<sup class="cite"><a href="#jp-src-2" data-src="freelance-act" data-tip="Freelance Act provisions, 2024-11-01 effect date, JFTC enforcement, ¥500,000 fines: 政府広報オンライン + JFTC Freelance Law 2024 site + Legal500 briefing. ✅ Three independent sources.">2</a></sup></p>
+          </div>
+        </div>
+
+        <div class="reform-item">
+          <div class="reform-header">
+            <span class="reform-num">03</span>
+            <span class="reform-title">Pandemic economic support (&#25991;&#21270;&#24193;)</span>
+            <span class="reform-year">2020–2022</span>
+          </div>
+          <div class="reform-body">
+            <p>During COVID-19 the Agency for Cultural Affairs ran a sequence of economic-continuity programs &mdash; &#25991;&#21270;&#33464;&#34899;&#27963;&#21205;&#12398;&#32153;&#32154;&#25903;&#25588;&#20107;&#26989; and the two "ARTS for the future!" rounds &mdash; funding professional arts groups and individual performers to keep working through the crisis.<sup class="cite"><a href="#jp-src-3" data-src="bunka" data-tip="文化庁 COVID arts support (継続支援事業; ARTS for the future! 1 & 2), 2020–2022: bunka.go.jp primary pages. ✅ Verified.">3</a></sup> This was income protection, not care, and it was time-limited.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 04: THE MENTAL-HEALTH PICTURE -->
+    <div class="page" id="page-3">
+      <div class="page-inner">
+        <p class="page-label">Section 01 · The Gap</p>
+        <h2 class="page-title">Protection Without Care</h2>
+
+        <div class="content-block">
+          <p>Against these protections sits the mental-health picture, which is severe. The same editorial reports survey findings that <strong>83% of arts and entertainment workers had experienced psychological attacks and 42.7% reported suicidal thoughts</strong>, with harassment widespread (93% abuse-of-position, 73% sexual).<sup class="cite"><a href="#jp-src-1" data-src="morisaki" data-tip="Mental-health prevalence (83% psychological attacks; 42.7% suicidal thoughts; harassment 93%/73%): survey figures reported within Morisaki M, Industrial Health 2023;61(6):393–394. ⚠️ As-reported, not a peer-reviewed probability sample.">1</a></sup></p>
+        </div>
+
+        <div class="stat-strip">
+          <div class="stat-item">
+            <div class="stat-num">83%</div>
+            <div class="stat-label">Psychological<br>attacks</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">42.7%</div>
+            <div class="stat-label">Reported<br>suicidal thoughts</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">73%</div>
+            <div class="stat-label">Sexual<br>harassment</div>
+          </div>
+        </div>
+        <p class="cite-help">Prevalence figures are &#9888; as-reported from advocacy-linked surveys within a PubMed-indexed editorial &mdash; directional, not precise.</p>
+
+        <div class="content-block">
+          <p>Overwork is structural: a sector survey conducted October&ndash;December 2023 found <strong>over 40% of technical staff and stage directors working 60+ hours a week, and 60% of directors and producers taking one day off a week or fewer.</strong><sup class="cite"><a href="#jp-src-4" data-src="overwork" data-tip="Overwork (40%+ technical/stage staff at 60+ hrs/week; 60% of directors/producers ≤1 day off/week), Oct–Dec 2023 survey: The Japan Times, 2024-10-11. ⚠️ Single-outlet report.">4</a></sup></p>
+          <p>Yet there is no dedicated public mental-health service for this workforce. The most targeted provision is a <strong>mental-care consultation service with a clinical psychologist, run by Arts Workers Japan itself</strong> &mdash; a worker body, not the state.<sup class="cite"><a href="#jp-src-1" data-src="morisaki" data-tip="Clinical-psychologist consultation service run by Arts Workers Japan: Morisaki M, Industrial Health 2023;61(6):393–394.">1</a></sup></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 05: APPRAISAL -->
+    <div class="page" id="page-4">
+      <div class="page-inner">
+        <span class="part-divider">Part B — Appraisal</span>
+        <p class="page-label">Section 02 · Reading the Model</p>
+        <h2 class="page-title">Rights, Not Rooms</h2>
+
+        <div class="appraise-item">
+          <h3>What Japan gets right is the diagnosis</h3>
+          <p>Its reforms treat the <em>roots</em> of poor mental health in this workforce &mdash; precarity, non-payment, abrupt contract termination, and harassment &mdash; as enforceable legal wrongs rather than private misfortunes. The harassment-prevention duty in the Freelance Act is the clearest example: it converts a leading driver of distress (the editorial's 73% sexual-harassment figure) into a compliance obligation backed by a regulator.<sup class="cite"><a href="#jp-src-2" data-src="freelance-act" data-tip="Harassment-prevention duty as an enforceable obligation under the Freelance Act: JFTC Freelance Law 2024 site + Legal500 briefing.">2</a></sup> Extending accident insurance to performers does the same for physical risk. This is, in principle, more durable than charity: it does not depend on annual fundraising, and it binds the counterparties who create the harm.</p>
+        </div>
+
+        <div class="appraise-item">
+          <h3>However, it is protection without care</h3>
+          <p>Nothing in this architecture funds or delivers mental-health support. The Freelance Act governs only B2B <em>transactions</em> &mdash; it does not reach platform or audience income, employment-status disputes, or the isolation and identity pressures the wider literature ties to musicians' distress. The COVID money was economic, group-oriented, and has ended.<sup class="cite"><a href="#jp-src-3" data-src="bunka" data-tip="文化庁 pandemic support was economic, group-oriented, and time-limited (2020–2022): bunka.go.jp.">3</a></sup> Mental health itself is left to Japan's general systems &mdash; and to a single clinical-psychologist consultation desk run by a volunteer association. For a workforce reporting 42.7% suicidal ideation, that is a safety net with one thread. Japan has built the floor (rights) but not the room (services).</p>
+        </div>
+
+        <div class="appraise-item">
+          <h3>Read the evidence with care</h3>
+          <p>The headline prevalence figures are the weakest link. They come from surveys reported in a two-page editorial whose author leads the advocacy body campaigning for these reforms &mdash; credible and PubMed-indexed, and consistent with national reporting on overwork, but not a peer-reviewed probability sample with published methodology. They should be cited as &#9888; as-reported and treated as directional. The legal and policy facts (the Act's provisions and dates, the 2021 insurance change) are firm and government-sourced.<sup class="cite"><a href="#jp-src-2" data-src="freelance-act" data-tip="Legal/policy facts are firm and government-sourced: 政府広報オンライン + JFTC + Legal500.">2</a></sup></p>
+        </div>
+
+        <div class="verdict">
+          <div class="verdict-label">Verdict</div>
+          <p><strong>Japan is the strongest current example of the labor-law route to music-worker wellbeing &mdash; and the clearest demonstration that the labor-law route, on its own, leaves the mental-health gap open.</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 06: LESSONS FOR TAIWAN -->
+    <div class="page" id="page-5">
+      <div class="page-inner">
+        <span class="part-divider">Part C — For This Project</span>
+        <p class="page-label">Section 03 · Translation</p>
+        <h2 class="page-title">Lessons for a Taiwan NPO</h2>
+
+        <div class="lesson-item">
+          <div class="lesson-header">
+            <span class="lesson-num">3.1</span>
+            <span class="lesson-title">Borrow the labor-law lever, not just the charity model</span>
+          </div>
+          <div class="lesson-body">
+            <p>Japan shows that a Freelance-Act-style instrument &mdash; enforceable rules on contracts, payment, termination notice, and especially harassment &mdash; attacks mental-health drivers at the root. Taiwan's &#34269;&#21109;&#24037;&#26371; and &#21214;&#21205;&#37096; already debate freelance-creator protections; Japan's Act (and its JFTC enforcement) is a concrete, recent template to point to.</p>
+          </div>
+        </div>
+
+        <div class="lesson-item">
+          <div class="lesson-header">
+            <span class="lesson-num">3.2</span>
+            <span class="lesson-title">Extend occupational insurance to freelance performers</span>
+          </div>
+          <div class="lesson-body">
+            <p>Japan's 2021 move to let performing-arts workers into accident-compensation insurance is directly translatable: Taiwan could add a performing-arts category to &#32887;&#26989;&#28797;&#23475;&#20445;&#38522;, giving freelance musicians a floor that currently doesn't exist.</p>
+          </div>
+        </div>
+
+        <div class="lesson-item">
+          <div class="lesson-header">
+            <span class="lesson-num">3.3</span>
+            <span class="lesson-title">Position the NPO to fill the gap Japan left open</span>
+          </div>
+          <div class="lesson-body">
+            <p>The strategic takeaway. Even a jurisdiction that does the labor-law work well still lacks a dedicated mental-health service for music workers. A Taiwan organization should aim to be exactly that &mdash; the <em>care</em> layer that complements, rather than duplicates, whatever labor protections the state provides. Don't compete with policy; supply what policy doesn't.</p>
+          </div>
+        </div>
+
+        <div class="lesson-item">
+          <div class="lesson-header">
+            <span class="lesson-num">3.4</span>
+            <span class="lesson-title">Union-run counseling is a viable, low-cost first service</span>
+          </div>
+          <div class="lesson-body">
+            <p>Arts Workers Japan stood up a clinical-psychologist consultation desk without state funding. A Taiwanese equivalent (e.g., via &#34269;&#21109;&#24037;&#26371;) is a realistic early MH offering &mdash; small, partnership-based, and credible because it sits inside a worker body the community already trusts.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 07: METHODOLOGY & BASIS -->
+    <div class="page" id="page-6">
+      <div class="page-inner">
+        <span class="part-divider">Part D — Method</span>
+        <p class="page-label">Section 04 · Methodology &amp; Basis</p>
+        <h2 class="page-title">Sources &amp; Limits</h2>
+
+        <div class="content-block">
+          <div style="overflow-x:auto;">
+            <table class="method-table">
+              <caption class="cite-help" style="text-align:left;caption-side:top;margin-bottom:0.5rem;">Source &middot; Method &middot; Basis (PROJECT_RULES §2 Rule 3). Full references on the next page.</caption>
+              <thead>
+                <tr><th>Source</th><th>Method</th><th>Basis</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Morisaki M, "Health and safety situation of arts and entertainment workers in Japan," <em>Industrial Health</em> 2023;61(6):393&ndash;394 (PubMed)</td>
+                  <td>PubMed metadata + PMC editorial</td>
+                  <td>&#10003; Verified (PubMed-indexed) for policy/insurance facts; &#9888; as-reported for survey prevalence figures</td>
+                </tr>
+                <tr>
+                  <td>Japan Freelance Act &mdash; &#25919;&#24220;&#24195;&#22577;&#12458;&#12531;&#12521;&#12452;&#12531;; JFTC special site; Legal500 briefing</td>
+                  <td>WebSearch (government + legal primary)</td>
+                  <td>&#10003; Verified (provisions, scope, 2024-11-01 effect date, penalties) &mdash; three independent sources</td>
+                </tr>
+                <tr>
+                  <td>&#25991;&#21270;&#24193; COVID arts support (&#32153;&#32154;&#25903;&#25588;&#20107;&#26989;; ARTS for the future! 1 &amp; 2)</td>
+                  <td>WebSearch (bunka.go.jp primary)</td>
+                  <td>&#10003; Verified (program existence/scope)</td>
+                </tr>
+                <tr>
+                  <td>Overwork survey (Oct&ndash;Dec 2023) via <em>The Japan Times</em>, 2024-10-11</td>
+                  <td>WebSearch</td>
+                  <td>&#9888; Single-outlet report of a sector survey</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <h3>Limitations</h3>
+          <ol>
+            <li>The mental-health prevalence figures rest on advocacy-linked surveys reported in an editorial, not a peer-reviewed methods paper; treated as &#9888; directional.</li>
+            <li>Japanese-language primary sources (the Freelance Act text; &#25991;&#21270;&#24193; program reports) were read via government summary pages and secondary legal briefings, not the full statute.</li>
+            <li>This is a policy <em>scan</em>, not an exhaustive review &mdash; Japan's general suicide-prevention framework (&#33258;&#27578;&#23550;&#31574;&#22522;&#26412;&#27861;) and prefecture-level arts support were noted but not deep-read.</li>
+            <li>No direct contact with Arts Workers Japan or &#25991;&#21270;&#24193;.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 08: REFERENCES -->
+    <div class="page" id="page-7">
+      <div class="page-inner">
+        <span class="part-divider">References</span>
+        <p class="page-label">Citation Registry</p>
+        <h2 class="page-title">References</h2>
+
+        <p class="cite-help">Every claim-bearing figure and provision above carries a numbered citation &mdash; hover (desktop) or tap (mobile) a number to see the source; click to jump here. Legal and policy facts are &#10003; verified across independent government and legal sources; survey prevalence figures are &#9888; as-reported from a PubMed-indexed editorial.</p>
+
+        <div class="refs" id="refs-all" data-citation-registry="japan-all">
+          <div class="refs-title">References</div>
+          <ol>
+            <li id="jp-src-1" data-src="morisaki">Workforce size, the 2021 accident-insurance reform, the prior absence of legal protection, the mental-health prevalence figures (83% psychological attacks; 42.7% suicidal thoughts; harassment 93%/73%), and Arts Workers Japan's clinical-psychologist consultation service: Morisaki M, "Health and safety situation of arts and entertainment workers in Japan," <em>Industrial Health</em> 2023;61(6):393&ndash;394, <a href="https://doi.org/10.2486/indhealth.61_600" target="_blank" rel="noopener">DOI 10.2486/indhealth.61_600</a> (author: President, General Incorporated Association Arts Workers Japan; Chairperson, Nationwide Centre of Arts Workers' Accident Compensation Insurance). &#9888; The prevalence figures are as-reported survey data within the editorial, not a peer-reviewed probability sample.</li>
+            <li id="jp-src-2" data-src="freelance-act">Freelance Protection Act (&#12501;&#12522;&#12540;&#12521;&#12531;&#12473;&#26032;&#27861;): <a href="https://www.gov-online.go.jp/article/202408/entry-6301.html" target="_blank" rel="noopener">&#25919;&#24220;&#24195;&#22577;&#12458;&#12531;&#12521;&#12452;&#12531; (Government Public Relations Online)</a>; <a href="https://www.jftc.go.jp/freelancelaw_2024/" target="_blank" rel="noopener">Japan Fair Trade Commission &mdash; Freelance Law 2024 site</a>; <a href="https://www.legal500.com/developments/thought-leadership/new-freelance-law-to-take-effect-in-november-2024/" target="_blank" rel="noopener">Legal500, "New Freelance Law to Take Effect in November 2024"</a>. Effective 2024-11-01; covers no-employee business operators incl. creative freelancers; duties incl. written terms, on-time payment, 30-day termination notice, caregiving accommodation, harassment-prevention; enforced by the JFTC; fines up to &yen;500,000. &#10003; Verified across three independent sources.</li>
+            <li id="jp-src-3" data-src="bunka">Agency for Cultural Affairs (&#25991;&#21270;&#24193;) pandemic support &mdash; &#25991;&#21270;&#33464;&#34899;&#27963;&#21205;&#12398;&#32153;&#32154;&#25903;&#25588;&#20107;&#26989; and ARTS for the future! 1 &amp; 2: <a href="https://keizokushien.ntj.jac.go.jp/" target="_blank" rel="noopener">&#25991;&#21270;&#24193; / &#32153;&#32154;&#25903;&#25588;&#20107;&#26989; portal</a> and <a href="https://www.bunka.go.jp/shinsei_boshu/kobo/20210326_01.html" target="_blank" rel="noopener">&#25991;&#21270;&#24193; ARTS for the future!</a>. Economic continuity funding for professional arts groups and individual performers, 2020&ndash;2022. &#10003; Verified (program existence/scope).</li>
+            <li id="jp-src-4" data-src="overwork">Overwork in the arts/entertainment sector (Oct&ndash;Dec 2023 survey; 40%+ of technical/stage staff at 60+ hrs/week; 60% of directors/producers &le;1 day off/week): <a href="https://www.japantimes.co.jp/news/2024/10/11/japan/society/karoshi-entertainment-health-care-report/" target="_blank" rel="noopener"><em>The Japan Times</em>, "Widespread overwork and stress found in Japan's arts and health sectors," 2024-10-11</a>. &#9888; Single-outlet report.</li>
+          </ol>
+          <p class="refs-note">Convention: every claim-bearing marker carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above &mdash; machine-checkable before each deploy (§5.2 / §6 gate 1). The MD draft (<code>2026-06-18_Research_Policy_Japan.md</code>) carries the same citations as <code>[^1]</code>&ndash;<code>[^4]</code> footnotes and is the citation source of truth.</p>
+        </div>
+
+        <div class="source-info">
+          <p><strong>Report:</strong> Research track &mdash; Policy cycle (region 1 of 6: Japan) &middot; Music &amp; Mental Health NPO Research Project</p>
+          <p><strong>As of:</strong> 2026-06-18 &middot; Next region: Thailand</p>
+          <p><strong>Basis:</strong> &#10003; Verified for legal/policy facts; &#9888; as-reported for survey prevalence figures</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /pages-container -->
+
+  <script>
+    var container = document.querySelector('.pages-container');
+    var pages = document.querySelectorAll('.page');
+    var nums = document.querySelectorAll('.page-num');
+    var current = 0;
+
+    function goTo(index) {
+      if (index < 0 || index >= pages.length) return;
+      pages[index].scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function nextPage() { goTo(current + 1); }
+    function prevPage() { goTo(current - 1); }
+
+    var scrollRaf = null;
+    container.addEventListener('scroll', function() {
+      if (scrollRaf) return;
+      scrollRaf = requestAnimationFrame(function() {
+        scrollRaf = null;
+        var scrollPos = container.scrollTop;
+        var best = 0;
+        var bestDist = Infinity;
+        for (var i = 0; i < pages.length; i++) {
+          var dist = Math.abs(pages[i].offsetTop - scrollPos);
+          if (dist < bestDist) { bestDist = dist; best = i; }
+        }
+        if (best !== current) {
+          nums[current].classList.remove('active');
+          current = best;
+          nums[current].classList.add('active');
+        }
+      });
+    }, { passive: true });
+
+    nums.forEach(function(num) {
+      num.addEventListener('click', function() {
+        goTo(parseInt(this.getAttribute('data-page')));
+      });
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { nextPage(); e.preventDefault(); }
+      if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { prevPage(); e.preventDefault(); }
+    });
+  </script>
+
+  <!-- nav scroll-state fix: transparent over hero, blurred bar once scrolled -->
+  <style>
+    nav.nav, .nav { transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease); border-bottom: 1px solid transparent; }
+    nav.nav.scrolled, .nav.scrolled {
+      right: 0;
+      background: rgba(244, 244, 245, 0.85);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    @media (prefers-reduced-motion: reduce){ nav.nav, .nav { transition: none; } }
+    .skip-nav { position: absolute; left: -9999px; top: 0; z-index: 200; background: var(--signal); color: var(--white); padding: 0.5rem 1rem; font-family: var(--font-mono); }
+    .skip-nav:focus { left: 0; }
+  </style>
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav, .nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var c = document.querySelector('.pages-container, .pages');
+    if (c && getComputedStyle(c).overflowY !== 'visible') {
+      var ticking = false;
+      c.addEventListener('scroll', function(){ if (ticking) return; ticking = true; requestAnimationFrame(function(){ ticking = false; setS(c.scrollTop > THRESH); }); }, { passive: true });
+      setS(c.scrollTop > THRESH); return;
+    }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden', 'true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>
