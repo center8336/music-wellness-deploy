@@ -1102,6 +1102,21 @@
       });
     });
 
+    // --- Citation click → jump to registry entry ---
+    // The page scrolls inside .pages-container (a fixed element), not the document,
+    // so a native #hash jump is a no-op (§10.6 #5). scrollIntoView on the target
+    // works because it scrolls the nearest scrollable ancestor (the container).
+    document.querySelectorAll('.cite a[href^="#"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        var id = this.getAttribute('href');
+        var el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        location.hash = id; // updates URL + fires :target highlight
+      });
+    });
+
     document.addEventListener('keydown', function(e) {
       if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { nextPage(); e.preventDefault(); }
       if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { prevPage(); e.preventDefault(); }
