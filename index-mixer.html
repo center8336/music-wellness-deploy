@@ -115,7 +115,7 @@
   .mxtg.on .led { background:#ff3b30; box-shadow:0 0 6px rgba(255,59,48,.85); }
   .mxjack { width:24px; height:24px; border-radius:50%; background:radial-gradient(#26262a,#0d0d0f 60%,#26262a 62%); border:2px solid #b9b9bf; }
   /* faint 棉 watermark near the bottom (desktop only — phone already shows the corner mark) */
-  .mxwatermark { position:fixed; left:50%; bottom:9%; transform:translateX(-50%); width:270px; height:236px; max-width:46vw; background:center/contain no-repeat; opacity:0.20; pointer-events:none; z-index:1; }
+  .mxwatermark { position:fixed; left:50%; bottom:9%; transform:translateX(-50%); width:270px; height:236px; max-width:46vw; background-color:#3f3f46; -webkit-mask:center/contain no-repeat; mask:center/contain no-repeat; opacity:0.13; pointer-events:none; z-index:1; }
   @media (max-width:768px){ .mxwatermark { display:none; } }
   @media (max-width:680px){ #mxdesk { gap:6px; padding:10px 6px; padding-bottom:calc(10px + env(safe-area-inset-bottom)); max-height:46vh; overflow-y:auto; -webkit-overflow-scrolling:touch; } .mxch { width:72px; } .mxmaster { width:150px; } .mxk { width:38px; height:38px; } .mxkl { font-size:7px; } }
 
@@ -361,7 +361,7 @@
     function tog(){ panel.classList.toggle('open'); }
     if(handle&&panel){ handle.addEventListener('click',tog); handle.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); tog(); } }); }
   })();
-  (function(){ var w=document.querySelector('.mxwatermark'), l=document.querySelector('.bottom-logo'); if (w && l) w.style.backgroundImage = 'url(' + l.src + ')'; })();
+  (function(){ var w=document.querySelector('.mxwatermark'), l=document.querySelector('.bottom-logo'); if (w && l) { w.style.webkitMaskImage = 'url(' + l.src + ')'; w.style.maskImage = 'url(' + l.src + ')'; } })();
 
   function fieldAngle(x, y, t, breath){
     var vx = 0.25 + Math.cos(t*0.05)*0.20, vy = Math.sin(t*0.045)*0.30, R = MIN*0.55;
