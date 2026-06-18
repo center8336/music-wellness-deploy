@@ -255,7 +255,7 @@
   }
 
   /* ── streams (typed-array ring buffers; no per-frame object allocation) ── */
-  var streams = [], order = [], TIME = 0, nextUnravel = 5;
+  var streams = [], order = [], TIME = 0, nextUnravel = 5, you = null;
   function byZ(a, b){ return streams[a].z - streams[b].z; }
 
   function pushSample(s){ s.rx[s.wr] = s.hx; s.ry[s.wr] = s.hy; s.wr = (s.wr+1) % CAP; if (s.count < CAP) s.count++; }
@@ -302,6 +302,17 @@
   function build(){
     streams = []; MINSTEP = SPD * 0.45;
     for (var i=0;i<STREAMS;i++){ var s = spawn(false); preWalk(s, GLYPHS*CH*1.4); s.life = 1; streams.push(s); }
+    makeYou();
+  }
+  /* ── the reader's own line: 不是一個人 — a guitar-paced lead that flows + grooves like the rest ── */
+  function makeYouSeq(){ var seq = [], ph = '不是一個人'; for (var r=0;r<24;r++){ for (var i=0;i<ph.length;i++) seq.push({k:2,c:ph.charAt(i)}); seq.push({k:3}); } return seq; }
+  function makeYou(){
+    var inst = 1, z = 0.95;
+    you = { hx:W*0.5, hy:H*0.5, rx:new Float32Array(CAP), ry:new Float32Array(CAP), wr:0, count:0, dist:0,
+      seq:makeYouSeq(), off:0, z:z, zspd:0.55 + 0.80*z, jitter:1.0,
+      inst:inst, spd:INST.spd[inst], mult:INST.mult[inst], surgeAmp:INST.surgeAmp[inst], mfreq:INST.mfreq[inst], mamp:INST.mamp[inst],
+      mphase:rand(0,6.28), beatPhase:rand(0,6.28), groovePhase:rand(0,6.28) };
+    pushSample(you); preWalk(you, GLYPHS*CH*1.2);
   }
 
   function step(dt){
@@ -327,6 +338,15 @@
       if ((out && !s.dying) || s.life <= 0){ respawnInPlace(s); }
     }
     if (!REDUCE && TIME > nextUnravel && streams.length){ streams[(Math.random()*streams.length)|0].dying = true; nextUnravel = TIME + rand(5,9); }
+    if (you){                                            // reader's line flows + grooves like the rest, and springs toward the pointer (correspondence)
+      var ay = fieldAngle(you.hx, you.hy, TIME, breath) + Math.sin(TIME*you.mfreq + you.mphase)*you.mamp;
+      var sty = SPD * bf * you.jitter * you.zspd * you.spd * instSurge(you, TIME);
+      if (sty < MINSTEP) sty = MINSTEP;
+      you.hx += Math.cos(ay)*sty; you.hy += Math.sin(ay)*sty;
+      if (pointer.has){ var ks = autoActive ? 0.02 : 0.10; you.hx += (pointer.x - you.hx)*ks; you.hy += (pointer.y - you.hy)*ks; }
+      if (you.hx<-W*0.3||you.hx>W*1.3||you.hy<-H*0.3||you.hy>H*1.3){ you.hx=W*0.5; you.hy=H*0.5; you.wr=0; you.count=0; }
+      you.dist += sty; pushSample(you);
+    }
     return breath;
   }
 
@@ -412,21 +432,30 @@
     }
     ctx.globalAlpha = 1;
 
-    if (pointer.has && !autoActive && !REDUCE){
-      var pstr = '不是一個人', PLn = pstr.length;
-      ctx.font = '700 ' + (FS+2) + 'px ' + CJK;
-      var ox = 1, oy = 0;                              // lay direction = recent pointer motion (default → trails left)
-      if (ptrail.length > 1){
-        var p0 = ptrail[0], mdx = pointer.x - p0.x, mdy = pointer.y - p0.y, ml = Math.sqrt(mdx*mdx + mdy*mdy);
-        if (ml > 4){ ox = mdx/ml; oy = mdy/ml; }
-      }
-      var SP = CH * 1.2, pang = Math.atan2(oy, ox), pflip = (pang > HPI || pang < -HPI);
-      for (var gi = 0; gi < PLn; gi++){
-        var gx = pointer.x - ox*SP*gi, gy = pointer.y - oy*SP*gi;   // 人 at the cursor … 不 furthest back
-        ctx.save(); ctx.translate(gx, gy); ctx.rotate(pflip ? pang + PI : pang);
-        ctx.globalAlpha = (0.9 - gi*0.08) * (0.6 + pointer.energy*0.4);
-        ctx.fillStyle = rgba(mix(COL.warm, COL.cool, 0.3), 1);
-        ctx.fillText(pstr.charAt(PLn - 1 - gi), 0, 0); ctx.restore();   // reads 不→是→一→個→人 toward the cursor
+    if (you && you.count > 1 && !REDUCE){             // the reader's line — warm deep-red, foreground, flowing 不是一個人
+      var sizeY = FS * (0.66 + 0.70*you.z);
+      ctx.font = '700 ' + (sizeY|0) + 'px ' + CJK;
+      var CHy = CH * 1.02 * bScale, Ly = you.seq.length;
+      var pX = you.hx, pY = you.hy, accY = CHy, placedY = 0;
+      for (var yi=0; yi<you.count && placedY<GLYPHS; yi++){
+        var iy = sIdx(you, yi), cxY = you.rx[iy], cyY = you.ry[iy];
+        var dXy = pX - cxY, dYy = pY - cyY, segY = Math.sqrt(dXy*dXy + dYy*dYy);
+        accY += (segY || 0.0001);
+        if (accY >= CHy){
+          accY = 0; var slotY = placedY; placedY++;
+          if (!(pX < -34 || pX > W+34 || pY < -34 || pY > H+34)){
+            var eY = you.seq[((you.off + (GLYPHS - 1 - slotY)) % Ly + Ly) % Ly];
+            if (eY.k !== 3){
+              var tnY = slotY / GLYPHS;
+              var angY = Math.atan2(pY - cyY, pX - cxY), flipY = (angY > HPI || angY < -HPI);
+              ctx.save(); ctx.translate(pX, pY); ctx.rotate(flipY ? angY + PI : angY);
+              ctx.globalAlpha = 0.9 - tnY*0.5;
+              ctx.fillStyle = rgba(mix(COL.warm, COL.cool, tnY), 1);
+              ctx.fillText(eY.c, 0, 0); ctx.restore();
+            }
+          }
+        }
+        pX = cxY; pY = cyY;
       }
       ctx.globalAlpha = 1;
     }
