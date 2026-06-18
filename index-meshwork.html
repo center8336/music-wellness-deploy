@@ -405,22 +405,21 @@
     }
     ctx.globalAlpha = 1;
 
-    if (pointer.has && ptrail.length > 2 && !REDUCE){
+    if (pointer.has && !REDUCE){
       var pstr = '不是一個人', PLn = pstr.length;
       ctx.font = '700 ' + (FS+2) + 'px ' + CJK;
-      var n = ptrail.length, pacc = CH, idx2 = 0;
-      for (var m=1; m<n && idx2<8; m++){
-        var pa = ptrail[m-1], pb = ptrail[m];
-        var ex = pb.x - pa.x, ey = pb.y - pa.y, es = Math.sqrt(ex*ex + ey*ey) || 0.0001;
-        pacc += es;
-        if (pacc < CH) continue;
-        pacc = 0;
-        var pc = pstr.charAt(idx2 % PLn); idx2++;
-        var pang = Math.atan2(ey, ex), pflip = (pang > HPI || pang < -HPI);
-        ctx.save(); ctx.translate(pb.x, pb.y); ctx.rotate(pflip ? pang + PI : pang);
-        ctx.globalAlpha = Math.max(0, (m/n) * (0.55 + pointer.energy*0.45));
+      var ox = 1, oy = 0;                              // lay direction = recent pointer motion (default → trails left)
+      if (ptrail.length > 1){
+        var p0 = ptrail[0], mdx = pointer.x - p0.x, mdy = pointer.y - p0.y, ml = Math.sqrt(mdx*mdx + mdy*mdy);
+        if (ml > 4){ ox = mdx/ml; oy = mdy/ml; }
+      }
+      var SP = CH * 1.2, pang = Math.atan2(oy, ox), pflip = (pang > HPI || pang < -HPI);
+      for (var gi = 0; gi < PLn; gi++){
+        var gx = pointer.x - ox*SP*gi, gy = pointer.y - oy*SP*gi;   // 人 at the cursor … 不 furthest back
+        ctx.save(); ctx.translate(gx, gy); ctx.rotate(pflip ? pang + PI : pang);
+        ctx.globalAlpha = (0.9 - gi*0.08) * (0.6 + pointer.energy*0.4);
         ctx.fillStyle = rgba(mix(COL.warm, COL.cool, 0.3), 1);
-        ctx.fillText(pc, 0, 0); ctx.restore();
+        ctx.fillText(pstr.charAt(PLn - 1 - gi), 0, 0); ctx.restore();   // reads 不→是→一→個→人 toward the cursor
       }
       ctx.globalAlpha = 1;
     }
