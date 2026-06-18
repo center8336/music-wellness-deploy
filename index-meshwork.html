@@ -7,7 +7,6 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
   :root {
-    /* — Neutral Scale — */
     --black: #09090b;
     --off-black: #141416;
     --charcoal: #27272a;
@@ -17,40 +16,28 @@
     --silver: #d4d4d8;
     --snow: #f4f4f5;
     --white: #fafafa;
-
-    /* — Purple Duo — */
     --purple-light: #CBB9D6;
     --purple-deep: #6667AB;
     --signal: var(--purple-deep);
     --signal-dim: #565799;
     --signal-bg: rgba(102,103,171,0.08);
     --signal-glow: rgba(102,103,171,0.2);
-
-    /* — Spectrum (PERIMETRON-inspired) — */
     --spectrum-1: #d4799c;
     --spectrum-2: #e8a87c;
     --spectrum-3: #d4c97a;
     --spectrum-4: #85c9a3;
     --spectrum-5: #7aaed4;
     --spectrum-6: #b8a9d4;
-
-    /* — Surfaces — */
     --bg-light: var(--snow);
     --bg-dark: var(--black);
     --bg-card: var(--white);
     --bg-card-dark: var(--off-black);
     --border-light: rgba(0,0,0,0.07);
     --border-dark: rgba(255,255,255,0.1);
-
-    /* — Typography: 3 font stacks — */
     --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
     --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
     --font-mono: 'Space Mono', 'Courier New', monospace;
-
-    /* legacy alias */
     --font: var(--font-body);
-
-    /* — Sizing — */
     --text-hero: clamp(3.5rem, 8vw, 6.5rem);
     --text-h1: clamp(2rem, 4.5vw, 3rem);
     --text-h2: clamp(1.5rem, 3vw, 2rem);
@@ -58,13 +45,9 @@
     --text-body: 1rem;
     --text-sm: 0.875rem;
     --text-xs: 0.75rem;
-
-    /* — Motion — */
     --ease: cubic-bezier(0.4, 0, 0.2, 1);
     --dur: 0.3s;
     --dur-slow: 0.6s;
-
-    /* — Layout — */
     --radius: 4px;
     --radius-lg: 6px;
     --max-w: 1100px;
@@ -94,7 +77,6 @@
   .bottom-logo { width:48px; height:auto; opacity:0.55; transition:opacity var(--dur) var(--ease); pointer-events:auto; }
   .bottom-logo:hover { opacity:0.85; }
 
-  /* Hamburger toggle */
   .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; z-index:101; -webkit-tap-highlight-color:transparent; }
   .nav-toggle span { display:block; width:22px; height:2px; background:var(--grey); margin:5px 0; transition:all 0.3s var(--ease); }
   .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
@@ -125,9 +107,7 @@
     .nav-mobile-brand { font-size:0.58rem; }
     .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
   }
-  @media (prefers-reduced-motion: reduce) {
-    #mesh { cursor:default; }
-  }
+  @media (prefers-reduced-motion: reduce) { #mesh { cursor:default; } }
 </style>
 </head>
 <body>
@@ -170,21 +150,12 @@
   if (!canvas || !canvas.getContext) return;
   var ctx = canvas.getContext('2d');
 
-  /* ── tokens → rgb (all colour comes from :root; no hardcoded hex in JS) ── */
   function tok(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
   function toRgb(h){
-    h = h.replace('#','');
-    if (h.length === 3) h = h.split('').map(function(c){return c+c;}).join('');
-    var n = parseInt(h, 16);
-    return { r:(n>>16)&255, g:(n>>8)&255, b:n&255 };
+    h = h.replace('#',''); if (h.length === 3) h = h.split('').map(function(c){return c+c;}).join('');
+    var n = parseInt(h, 16); return { r:(n>>16)&255, g:(n>>8)&255, b:n&255 };
   }
-  var COL = {
-    ink:    toRgb(tok('--charcoal')),
-    ink2:   toRgb(tok('--graphite')),
-    grey:   toRgb(tok('--grey')),
-    warm:   toRgb(tok('--spectrum-1')),
-    cool:   toRgb(tok('--spectrum-5'))
-  };
+  var COL = { ink:toRgb(tok('--charcoal')), ink2:toRgb(tok('--graphite')), grey:toRgb(tok('--grey')), warm:toRgb(tok('--spectrum-1')), cool:toRgb(tok('--spectrum-5')) };
   function rgba(c, a){ return 'rgba(' + (c.r|0) + ',' + (c.g|0) + ',' + (c.b|0) + ',' + a + ')'; }
   function mix(a, b, t){ return { r:a.r+(b.r-a.r)*t, g:a.g+(b.g-a.g)*t, b:a.b+(b.b-a.b)*t }; }
 
@@ -192,168 +163,117 @@
   var CJK = tok('--font-body');
 
   var WORDS = ['身心','創傷','休息','喘氣','呼吸','感受','痛','惡夢','不是一個人','復元'];
-  var WAVE = ['▁','▂','▃','▄','▅','▆','▇'];
 
   function rand(a, b){ return a + Math.random() * (b - a); }
 
-  /* ── the ensemble: bass · guitar · drums on one shared tempo ──
-     mult = beat subdivision · spd = flow pace · surge = rhythm depth · mfreq/mamp = sway */
+  /* ── ensemble: bass · guitar · drums on one shared tempo ── */
   var TEMPO = 0.6;
-  var INST = {
-    spd:      [0.80, 1.00, 1.30],
-    mult:     [0.5,  1.0,  2.0],
-    surgeAmp: [0.34, 0.20, 0.22],
-    mfreq:    [0.16, 0.38, 0.72],
-    mamp:     [0.24, 0.15, 0.09]
-  };
-  // ensemble weighting: bass ~42% · guitar ~28% · drums ~30%
-  function pickInst(){ var r = Math.random(); return r < 0.42 ? 0 : (r < 0.70 ? 1 : 2); }
-
+  var INST = { spd:[0.80,1.00,1.30], mult:[0.5,1.0,2.0], surgeAmp:[0.34,0.20,0.22], mfreq:[0.16,0.38,0.72], mamp:[0.24,0.15,0.09] };
+  function pickInst(){ var r = Math.random(); return r < 0.42 ? 0 : (r < 0.70 ? 1 : 2); }   // bass42 guitar28 drums30
   function instSurge(s, t){
-    var bp = t * TEMPO * s.mult * 6.2832 + s.beatPhase;
-    var sr;
-    if (s.inst === 2){
-      // J Dilla "drunk" groove — off-grid, behind the beat, never quantized
+    var bp = t * TEMPO * s.mult * 6.2832 + s.beatPhase, sr;
+    if (s.inst === 2){                                  // J Dilla off-grid swing
       var drift = Math.sin(t*0.33 + s.groovePhase)*0.55 + Math.sin(t*0.17 + s.groovePhase*1.7)*0.30;
-      var swung = bp + 0.38*Math.sin(bp) + drift;
-      sr = Math.sin(swung);
-      sr = (sr < 0 ? -1 : 1) * Math.pow(Math.abs(sr), 0.7);
-    } else {
-      sr = Math.sin(bp);
-    }
+      var sw = bp + 0.38*Math.sin(bp) + drift;
+      sr = Math.sin(sw); sr = (sr < 0 ? -1 : 1) * Math.pow(Math.abs(sr), 0.7);
+    } else { sr = Math.sin(bp); }
     return 1 + s.surgeAmp * sr;
   }
 
-  /* ── sizing / density (mobile mirrors the desktop treatment) ── */
+  /* ── sizing / density ── */
   var DPR = Math.min(window.devicePixelRatio || 1, 2);
   var W = 0, H = 0, MIN = 0, MOBILE = false, glowGrad = null;
-  var FS = 17, CH = 18, STREAMS = 25, GLYPHS = 36, SPD = 2.0, BREATH_AMP = 1;
+  var FS = 17, CH = 18, STREAMS = 25, GLYPHS = 36, SPD = 2.0, BREATH_AMP = 1, MINSTEP = 0;
+  var SAMPLE = 5, CAP = 220;                            // arc-length sampling: 1 point per ~5px
   function resize(){
     var r = canvas.getBoundingClientRect();
     W = Math.max(1, r.width); H = Math.max(1, r.height);
     MIN = Math.min(W, H); MOBILE = W < 768;
-    canvas.width = Math.round(W * DPR);
-    canvas.height = Math.round(H * DPR);
+    canvas.width = Math.round(W * DPR); canvas.height = Math.round(H * DPR);
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    FS      = MOBILE ? 14 : 17;
-    CH      = MOBILE ? 15 : 18;
-    GLYPHS  = MOBILE ? 28 : 36;
-    STREAMS = MOBILE ? 18 : 25;
-    SPD     = MOBILE ? 1.8 : 2.0;
+    FS = MOBILE ? 14 : 17; CH = MOBILE ? 15 : 18;
+    GLYPHS = MOBILE ? 26 : 36; STREAMS = MOBILE ? 16 : 25; SPD = MOBILE ? 1.8 : 2.0;
+    MINSTEP = SPD * 0.45;
+    CAP = Math.ceil(GLYPHS * CH * 1.7 / SAMPLE) + 8;
     glowGrad = ctx.createRadialGradient(W*0.5, H*0.46, 0, W*0.5, H*0.46, MIN*0.9);
     glowGrad.addColorStop(0, rgba(COL.grey, 0));
     glowGrad.addColorStop(1, rgba(COL.grey, 0.05));
   }
 
-  /* ── glyph script: ~89% wave-marks, ~3% 游, ~8% real words ── */
+  /* ── glyph script: ~89% wave-marks (drawn as bars), ~3% 游, ~8% words ── */
   function makeSeq(){
     var seq = [];
     while (seq.length < 200){
       var r = Math.random();
-      if (r < 0.155){
-        var w = WORDS[(Math.random()*WORDS.length)|0];
-        for (var i = 0; i < w.length; i++) seq.push({ k:2, c:w.charAt(i) });
-        seq.push({ k:3 });
-      } else if (r < 0.240){
-        var n = Math.random() < 0.5 ? 1 : 2;
-        for (var j = 0; j < n; j++) seq.push({ k:1, c:'游' });
-        seq.push({ k:3 });
-      } else {
-        var m = 4 + (Math.random()*3|0);
-        for (var p = 0; p < m; p++) seq.push({ k:0, wp:rand(0,6.28) });
-      }
+      if (r < 0.155){ var w = WORDS[(Math.random()*WORDS.length)|0]; for (var i=0;i<w.length;i++) seq.push({k:2,c:w.charAt(i)}); seq.push({k:3}); }
+      else if (r < 0.240){ var n = Math.random()<0.5?1:2; for (var j=0;j<n;j++) seq.push({k:1,c:'游'}); seq.push({k:3}); }
+      else { var m = 4+(Math.random()*3|0); for (var p=0;p<m;p++) seq.push({k:0,wp:rand(0,6.28)}); }
     }
     return seq;
   }
 
-  /* ── flow field: drifting vortices + turbulence + pointer vortex ── */
+  /* ── flow field ── */
   var vortices = [];
   function seedVortices(){
-    vortices = [];
-    var n = MOBILE ? 2 : 3;
-    for (var i = 0; i < n; i++){
-      vortices.push({
-        bx: rand(0.2,0.8)*W, by: rand(0.2,0.8)*H,
-        ax: rand(0.1,0.22)*W, ay: rand(0.1,0.22)*H,
-        fx: rand(0.03,0.06), fy: rand(0.03,0.06),
-        px: rand(0,6.28), py: rand(0,6.28),
-        sign: i%2===0 ? 1 : -1, str: rand(0.8,1.3)
-      });
-    }
+    vortices = []; var n = MOBILE ? 2 : 3;
+    for (var i=0;i<n;i++) vortices.push({ bx:rand(0.2,0.8)*W, by:rand(0.2,0.8)*H, ax:rand(0.1,0.22)*W, ay:rand(0.1,0.22)*H, fx:rand(0.03,0.06), fy:rand(0.03,0.06), px:rand(0,6.28), py:rand(0,6.28), sign:i%2===0?1:-1, str:rand(0.8,1.3) });
   }
   function vp(v, t){ return { x:v.bx + Math.cos(t*v.fx+v.px)*v.ax, y:v.by + Math.sin(t*v.fy+v.py)*v.ay }; }
 
   var pointer = { x:-999, y:-999, has:false, energy:0 };
 
   function fieldAngle(x, y, t, breath){
-    var vx = 0.25 + Math.cos(t*0.05)*0.20;
-    var vy = Math.sin(t*0.045)*0.30;
-    var R = MIN * 0.55;
-    for (var i = 0; i < vortices.length; i++){
-      var p = vp(vortices[i], t);
-      var dx = x - p.x, dy = y - p.y;
-      var d2 = dx*dx + dy*dy;
+    var vx = 0.25 + Math.cos(t*0.05)*0.20, vy = Math.sin(t*0.045)*0.30, R = MIN*0.55;
+    for (var i=0;i<vortices.length;i++){
+      var p = vp(vortices[i], t), dx = x-p.x, dy = y-p.y, d2 = dx*dx+dy*dy;
       var fall = vortices[i].str / (1 + d2/(R*R));
-      vx += (-dy) * vortices[i].sign * fall * 0.9 / R * 60;
-      vy += ( dx) * vortices[i].sign * fall * 0.9 / R * 60;
+      vx += (-dy)*vortices[i].sign*fall*0.9/R*60; vy += (dx)*vortices[i].sign*fall*0.9/R*60;
     }
     if (pointer.has){
-      var qx = x - pointer.x, qy = y - pointer.y;
-      var q2 = qx*qx + qy*qy;
-      var pr = MIN * 0.34;
-      var pf = Math.min(2.2, (1.0 + pointer.energy) / (1 + q2/(pr*pr)));   // clamp → no singularity
-      vx += ((-qy) * 1.40 - qx * 0.70) * pf / pr * 60;   // strong swirl, gentle pull (won't trap)
-      vy += (( qx) * 1.40 - qy * 0.70) * pf / pr * 60;
+      var qx = x-pointer.x, qy = y-pointer.y, q2 = qx*qx+qy*qy, pr = MIN*0.34;
+      var pf = Math.min(2.2, (1.0+pointer.energy)/(1 + q2/(pr*pr)));
+      vx += ((-qy)*1.40 - qx*0.70)*pf/pr*60; vy += ((qx)*1.40 - qy*0.70)*pf/pr*60;
     }
     var tb = Math.sin(x*0.008 + t*0.16)*0.22 + Math.sin(y*0.009 - t*0.13)*0.22;
-    return Math.atan2(vy, vx) + breath * 0.18 * BREATH_AMP + tb;
+    return Math.atan2(vy, vx) + breath*0.18*BREATH_AMP + tb;
   }
 
-  /* ── streams ── */
+  /* ── streams (typed-array ring buffers; no per-frame object allocation) ── */
   var streams = [], order = [], TIME = 0, nextUnravel = 5;
+  function byZ(a, b){ return streams[a].z - streams[b].z; }
+
+  function pushSample(s){ s.rx[s.wr] = s.hx; s.ry[s.wr] = s.hy; s.wr = (s.wr+1) % CAP; if (s.count < CAP) s.count++; }
+  function sIdx(s, i){ var k = (s.wr - 1 - i) % CAP; if (k < 0) k += CAP; return k; }
+
   function spawn(edge){
     var x, y;
     if (edge){
       var e = (Math.random()*4)|0;
-      if (e===0){ x=rand(0,W); y=-H*0.12; }
-      else if (e===1){ x=W*1.12; y=rand(0,H); }
-      else if (e===2){ x=rand(0,W); y=H*1.12; }
-      else { x=-W*0.12; y=rand(0,H); }
+      if (e===0){ x=rand(0,W); y=-H*0.12; } else if (e===1){ x=W*1.12; y=rand(0,H); }
+      else if (e===2){ x=rand(0,W); y=H*1.12; } else { x=-W*0.12; y=rand(0,H); }
     } else { x=rand(0,W); y=rand(0,H); }
-    var z = rand(0.30, 1.0);
-    var inst = pickInst();
-    return {
-      raw:[{x:x,y:y}], seq:makeSeq(), off:(Math.random()*180)|0, dist:0,
-      life:0, dying:false, jitter:rand(0.92,1.08), z:z, zspd:0.55 + 0.80*z,
-      inst:inst, spd:INST.spd[inst], mult:INST.mult[inst],
-      surgeAmp:INST.surgeAmp[inst], mfreq:INST.mfreq[inst], mamp:INST.mamp[inst],
+    var z = rand(0.30, 1.0), inst = pickInst();
+    var s = {
+      hx:x, hy:y, rx:new Float32Array(CAP), ry:new Float32Array(CAP), wr:0, count:0, sampAcc:0, dist:0,
+      seq:makeSeq(), off:(Math.random()*180)|0, life:0, dying:false, jitter:rand(0.92,1.08), z:z, zspd:0.55 + 0.80*z,
+      inst:inst, spd:INST.spd[inst], mult:INST.mult[inst], surgeAmp:INST.surgeAmp[inst], mfreq:INST.mfreq[inst], mamp:INST.mamp[inst],
       mphase:rand(0,6.28), beatPhase:rand(0,6.28), groovePhase:rand(0,6.28)
     };
+    pushSample(s);
+    return s;
   }
-  var MINSTEP = 0;
   function advance(s, t, useBeat){
-    var head = s.raw[s.raw.length-1];
-    var a = fieldAngle(head.x, head.y, t, 0) + Math.sin(t*s.mfreq + s.mphase) * s.mamp;
+    var a = fieldAngle(s.hx, s.hy, t, 0) + Math.sin(t*s.mfreq + s.mphase)*s.mamp;
     var st = SPD * s.jitter * s.zspd * s.spd * (useBeat ? instSurge(s, t) : 1);
     if (st < MINSTEP) st = MINSTEP;
-    s.raw.push({ x:head.x + Math.cos(a)*st, y:head.y + Math.sin(a)*st });
-    s.dist += st;
-    if (s.raw.length > 360) s.raw.shift();
+    s.hx += Math.cos(a)*st; s.hy += Math.sin(a)*st; s.dist += st; s.sampAcc += st;
+    while (s.sampAcc >= SAMPLE){ pushSample(s); s.sampAcc -= SAMPLE; }
     return st;
   }
-  function preWalk(s, dist){
-    var walked = 0, guard = 0;
-    while (walked < dist && guard++ < 700){ walked += advance(s, TIME, false); }
-  }
+  function preWalk(s, dist){ var walked = 0, g = 0; while (walked < dist && g++ < 1200){ walked += advance(s, TIME, false); } }
   function build(){
-    streams = [];
-    MINSTEP = SPD * 0.45;
-    for (var i = 0; i < STREAMS; i++){
-      var s = spawn(false);
-      preWalk(s, GLYPHS * CH);
-      s.life = 1;
-      streams.push(s);
-    }
+    streams = []; MINSTEP = SPD * 0.45;
+    for (var i=0;i<STREAMS;i++){ var s = spawn(false); preWalk(s, GLYPHS*CH*1.4); s.life = 1; streams.push(s); }
   }
 
   function step(dt){
@@ -361,32 +281,18 @@
     var breath = Math.sin(TIME * 0.5);
     var bf = 0.80 + 0.20*(breath*0.5+0.5)*BREATH_AMP;
     pointer.energy *= 0.95;
-
-    for (var i = 0; i < streams.length; i++){
+    for (var i=0;i<streams.length;i++){
       var s = streams[i];
-      var head0 = s.raw[s.raw.length-1];
-      var a = fieldAngle(head0.x, head0.y, TIME, breath) + Math.sin(TIME*s.mfreq + s.mphase)*s.mamp;
+      var a = fieldAngle(s.hx, s.hy, TIME, breath) + Math.sin(TIME*s.mfreq + s.mphase)*s.mamp;
       var st = SPD * bf * s.jitter * s.zspd * s.spd * instSurge(s, TIME);
-      if (st < MINSTEP) st = MINSTEP;                 // never freeze → no "stuck" glyphs
-      s.raw.push({ x:head0.x + Math.cos(a)*st, y:head0.y + Math.sin(a)*st });
-      s.dist += st;
-      if (s.raw.length > 380) s.raw.shift();
-
-      if (s.dying){ s.life -= dt*0.6; }
-      else if (s.life < 1){ s.life = Math.min(1, s.life + dt*0.8); }
-
-      var hd = s.raw[s.raw.length-1];
-      var out = hd.x<-W*0.22 || hd.x>W*1.22 || hd.y<-H*0.22 || hd.y>H*1.22;
-      if ((out && !s.dying) || s.life <= 0){
-        streams[i] = spawn(true);
-        preWalk(streams[i], GLYPHS*CH*0.35);          // lighter respawn → no frame spike
-      }
+      if (st < MINSTEP) st = MINSTEP;
+      s.hx += Math.cos(a)*st; s.hy += Math.sin(a)*st; s.dist += st; s.sampAcc += st;
+      while (s.sampAcc >= SAMPLE){ pushSample(s); s.sampAcc -= SAMPLE; }
+      if (s.dying){ s.life -= dt*0.6; } else if (s.life < 1){ s.life = Math.min(1, s.life + dt*0.8); }
+      var out = s.hx<-W*0.22 || s.hx>W*1.22 || s.hy<-H*0.22 || s.hy>H*1.22;
+      if ((out && !s.dying) || s.life <= 0){ streams[i] = spawn(true); preWalk(streams[i], GLYPHS*CH*0.45); }
     }
-
-    if (!REDUCE && TIME > nextUnravel && streams.length){
-      streams[(Math.random()*streams.length)|0].dying = true;
-      nextUnravel = TIME + rand(5, 9);
-    }
+    if (!REDUCE && TIME > nextUnravel && streams.length){ streams[(Math.random()*streams.length)|0].dying = true; nextUnravel = TIME + rand(5,9); }
     return breath;
   }
 
@@ -396,120 +302,97 @@
     ctx.fillStyle = glowGrad; ctx.fillRect(0, 0, W, H);
 
     if (pointer.has && !REDUCE){
-      var wr = MIN * 0.30;
-      var well = ctx.createRadialGradient(pointer.x, pointer.y, 0, pointer.x, pointer.y, wr);
+      var wr = MIN*0.30, well = ctx.createRadialGradient(pointer.x, pointer.y, 0, pointer.x, pointer.y, wr);
       var wa = 0.16 * Math.min(1, pointer.energy + 0.45);
-      well.addColorStop(0, rgba(COL.ink, wa));
-      well.addColorStop(0.45, rgba(COL.ink, wa*0.35));
-      well.addColorStop(1, rgba(COL.ink, 0));
-      ctx.fillStyle = well;
-      ctx.beginPath(); ctx.arc(pointer.x, pointer.y, wr, 0, 6.2832); ctx.fill();
+      well.addColorStop(0, rgba(COL.ink, wa)); well.addColorStop(0.45, rgba(COL.ink, wa*0.35)); well.addColorStop(1, rgba(COL.ink, 0));
+      ctx.fillStyle = well; ctx.beginPath(); ctx.arc(pointer.x, pointer.y, wr, 0, 6.2832); ctx.fill();
     }
 
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    if (order.length !== streams.length){ order.length = 0; for (var qi=0;qi<streams.length;qi++) order.push(qi); }
+    order.sort(byZ);
+    var bScale = 1 + breath*0.05*BREATH_AMP;
+    var PI = Math.PI, HPI = PI/2;
 
-    if (order.length !== streams.length){ order.length = 0; for (var qi = 0; qi < streams.length; qi++) order.push(qi); }
-    order.sort(function(a,b){ return streams[a].z - streams[b].z; });
-    var bScale = 1 + breath * 0.05 * BREATH_AMP;
-
-    for (var oi = 0; oi < order.length; oi++){
+    for (var oi=0; oi<order.length; oi++){
       var s = streams[order[oi]];
-      var raw = s.raw;
-      if (raw.length < 3) continue;
+      if (s.count < 2) continue;
+      var size = FS * (0.58 + 0.85*s.z);
+      ctx.font = '500 ' + (size|0) + 'px ' + CJK;
+      var nomCH = CH * (0.82 + 0.5*s.z), CHs = nomCH * bScale;
+      var L = s.seq.length, baseI = Math.floor(s.dist / nomCH);
+      var depthA = 0.34 + 0.66*s.z;
 
-      var size = FS * (0.58 + 0.85 * s.z);
-      ctx.font = '500 ' + size + 'px ' + CJK;
-      var nomCH = CH * (0.82 + 0.5 * s.z);
-      var CHs = nomCH * bScale;
-      var L = s.seq.length;
-      var baseI = Math.floor(s.dist / nomCH) + s.off;
-      var depthA = 0.34 + 0.66 * s.z;
-
-      var placed = 0, acc = CHs;
-      for (var k = raw.length - 1; k > 0 && placed < GLYPHS; k--){
-        var p = raw[k], qq = raw[k-1];
-        var dx = p.x - qq.x, dy = p.y - qq.y;
-        var seg = Math.sqrt(dx*dx + dy*dy) || 0.0001;
-        acc += seg;
-        if (acc < CHs) continue;
-        acc = 0;
-        var slot = placed; placed++;
-        if (p.x < -34 || p.x > W+34 || p.y < -34 || p.y > H+34) continue;   // cull off-screen
-        var entry = s.seq[((baseI - slot) % L + L) % L];
-        if (entry.k === 3) continue;
-
-        var ch, gscale, baseCol, baseA;
-        if (entry.k === 0){
-          var wv = Math.sin(TIME*1.8 - slot*0.55 + entry.wp);
-          ch = WAVE[Math.max(0, Math.min(WAVE.length-1, ((wv*0.5+0.5)*(WAVE.length-1))|0))];
-          gscale = 0.85; baseCol = COL.grey; baseA = 0.30;
-        } else if (entry.k === 1){
-          ch = '游'; gscale = 1.0; baseCol = COL.ink2; baseA = 0.58;
-        } else {
-          ch = entry.c; gscale = 1.0; baseCol = COL.ink; baseA = 0.72;
-        }
-
-        var tn = slot / GLYPHS;
-        var a = baseA * (1 - tn*0.55) * s.life * depthA;
-        var col = baseCol;
-        var funnel = 1;
-
-        if (pointer.has){
-          var ddx = p.x - pointer.x, ddy = p.y - pointer.y;
-          var pd = Math.sqrt(ddx*ddx + ddy*ddy);
-          var prox = Math.max(0, 1 - pd/(MIN*0.36));
-          if (prox > 0){
-            a = Math.min(0.98, a + prox*0.55);
-            col = mix(col, mix(COL.warm, COL.cool, tn), Math.min(1, prox*1.1));
-            var thr = 0.45;
-            if (prox > thr){
-              var inner = (prox - thr) / (1 - thr);
-              funnel = 1 - inner * 0.8;
-              a *= (1 - inner * 0.6);
+      var prevX = s.hx, prevY = s.hy, acc = CHs, placed = 0;
+      for (var ii=0; ii<s.count && placed<GLYPHS; ii++){
+        var idx = sIdx(s, ii), cx = s.rx[idx], cy = s.ry[idx];
+        var dx = prevX - cx, dy = prevY - cy, seg = Math.sqrt(dx*dx + dy*dy);
+        acc += (seg || 0.0001);
+        if (acc >= CHs){
+          acc = 0; var slot = placed; placed++;
+          var px = prevX, py = prevY;
+          if (!(px < -34 || px > W+34 || py < -34 || py > H+34)){
+            var entry = s.seq[((baseI - slot) % L + L) % L];
+            if (entry.k !== 3){
+              var ang = Math.atan2(prevY - cy, prevX - cx);
+              var baseCol, baseA;
+              if (entry.k === 0){ baseCol = COL.grey; baseA = 0.30; }
+              else if (entry.k === 1){ baseCol = COL.ink2; baseA = 0.58; }
+              else { baseCol = COL.ink; baseA = 0.72; }
+              var tn = slot / GLYPHS;
+              var a = baseA * (1 - tn*0.55) * s.life * depthA;
+              var col = baseCol, funnel = 1;
+              if (pointer.has){
+                var ddx = px - pointer.x, ddy = py - pointer.y, pd = Math.sqrt(ddx*ddx + ddy*ddy);
+                var prox = Math.max(0, 1 - pd/(MIN*0.36));
+                if (prox > 0){
+                  a = Math.min(0.98, a + prox*0.55);
+                  col = mix(col, mix(COL.warm, COL.cool, tn), Math.min(1, prox*1.1));
+                  if (prox > 0.45){ var inner = (prox - 0.45)/0.55; funnel = 1 - inner*0.8; a *= (1 - inner*0.6); }
+                }
+              }
+              if (a > 0.05){
+                var flip = (ang > HPI || ang < -HPI);
+                ctx.save();
+                ctx.translate(px, py);
+                ctx.rotate(flip ? ang + PI : ang);
+                ctx.scale(funnel, funnel);
+                ctx.globalAlpha = a;
+                ctx.fillStyle = rgba(col, 1);
+                if (entry.k === 0){
+                  // waveform bar (cheap fillRect — the 89% majority, no text raster)
+                  var lvl = Math.sin(TIME*1.8 - slot*0.55 + entry.wp)*0.5 + 0.5;
+                  var bw = Math.max(1.3, size*0.15), bh = size*(0.22 + 0.62*lvl);
+                  ctx.fillRect(-bw*0.5, -bh*0.5, bw, bh);
+                } else {
+                  ctx.fillText(entry.c, 0, 0);
+                }
+                ctx.restore();
+              }
             }
           }
         }
-
-        if (a > 0.02){
-          var ang = Math.atan2(dy, dx);
-          var flip = (ang > Math.PI/2 || ang < -Math.PI/2);
-          ctx.save();
-          ctx.translate(p.x, p.y);
-          ctx.rotate(flip ? ang + Math.PI : ang);
-          var sc = gscale * funnel;
-          ctx.scale(sc, sc);
-          ctx.globalAlpha = a;
-          ctx.fillStyle = rgba(col, 1);
-          ctx.fillText(ch, 0, 0);
-          ctx.restore();
-        }
+        prevX = cx; prevY = cy;
       }
     }
     ctx.globalAlpha = 1;
 
     if (pointer.has && ptrail.length > 2 && !REDUCE){
-      var pstr = '不是一個人', PL = pstr.length;
+      var pstr = '不是一個人', PLn = pstr.length;
       ctx.font = '700 ' + (FS+2) + 'px ' + CJK;
-      var pts = ptrail.slice(-14), n = pts.length;
-      var pacc = CH, idx = 0;
-      for (var m = 1; m < n && idx < 8; m++){
-        var pa = pts[m-1], pb = pts[m];
-        var ex = pb.x - pa.x, ey = pb.y - pa.y;
-        var es = Math.sqrt(ex*ex + ey*ey) || 0.0001;
+      var n = ptrail.length, pacc = CH, idx2 = 0;
+      for (var m=1; m<n && idx2<8; m++){
+        var pa = ptrail[m-1], pb = ptrail[m];
+        var ex = pb.x - pa.x, ey = pb.y - pa.y, es = Math.sqrt(ex*ex + ey*ey) || 0.0001;
         pacc += es;
         if (pacc < CH) continue;
         pacc = 0;
-        var pc = pstr.charAt(idx % PL); idx++;
-        var pang = Math.atan2(ey, ex);
-        var pflip = (pang > Math.PI/2 || pang < -Math.PI/2);
-        ctx.save();
-        ctx.translate(pb.x, pb.y);
-        ctx.rotate(pflip ? pang + Math.PI : pang);
-        ctx.globalAlpha = Math.max(0, (m / n) * (0.55 + pointer.energy*0.45));
+        var pc = pstr.charAt(idx2 % PLn); idx2++;
+        var pang = Math.atan2(ey, ex), pflip = (pang > HPI || pang < -HPI);
+        ctx.save(); ctx.translate(pb.x, pb.y); ctx.rotate(pflip ? pang + PI : pang);
+        ctx.globalAlpha = Math.max(0, (m/n) * (0.55 + pointer.energy*0.45));
         ctx.fillStyle = rgba(mix(COL.warm, COL.cool, 0.3), 1);
-        ctx.fillText(pc, 0, 0);
-        ctx.restore();
+        ctx.fillText(pc, 0, 0); ctx.restore();
       }
       ctx.globalAlpha = 1;
     }
@@ -517,36 +400,20 @@
 
   /* ── pointer ── */
   var ptrail = [];
-  function setPointer(px, py){
-    pointer.x = px; pointer.y = py; pointer.has = true; pointer.energy = 1;
-    ptrail.push({ x:px, y:py }); if (ptrail.length > 26) ptrail.shift();
-  }
-  canvas.addEventListener('pointermove', function(e){
-    var r = canvas.getBoundingClientRect(); setPointer(e.clientX - r.left, e.clientY - r.top);
-  }, { passive:true });
-  canvas.addEventListener('pointerdown', function(e){
-    var r = canvas.getBoundingClientRect(); setPointer(e.clientX - r.left, e.clientY - r.top);
-  }, { passive:true });
+  function setPointer(px, py){ pointer.x = px; pointer.y = py; pointer.has = true; pointer.energy = 1; ptrail.push({x:px,y:py}); if (ptrail.length > 16) ptrail.shift(); }
+  canvas.addEventListener('pointermove', function(e){ var r = canvas.getBoundingClientRect(); setPointer(e.clientX-r.left, e.clientY-r.top); }, { passive:true });
+  canvas.addEventListener('pointerdown', function(e){ var r = canvas.getBoundingClientRect(); setPointer(e.clientX-r.left, e.clientY-r.top); }, { passive:true });
   canvas.addEventListener('pointerleave', function(){ pointer.has = false; });
 
   /* ── loop ── */
   var last = 0;
-  function frame(ts){
-    var dt = last ? Math.min(0.05, (ts - last)/1000) : 0.016; last = ts;
-    var b = step(dt);
-    draw(b);
-    requestAnimationFrame(frame);
-  }
+  function frame(ts){ var dt = last ? Math.min(0.05, (ts-last)/1000) : 0.016; last = ts; var b = step(dt); draw(b); requestAnimationFrame(frame); }
   function init(){
     resize(); seedVortices(); build();
-    if (REDUCE){ pointer.has = false; draw(0); }
-    else requestAnimationFrame(frame);
+    if (REDUCE){ pointer.has = false; draw(0); } else requestAnimationFrame(frame);
   }
   var rt;
-  window.addEventListener('resize', function(){
-    clearTimeout(rt);
-    rt = setTimeout(function(){ resize(); seedVortices(); build(); ptrail.length = 0; if (REDUCE) draw(0); }, 180);
-  });
+  window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(function(){ resize(); seedVortices(); build(); ptrail.length = 0; if (REDUCE) draw(0); }, 180); });
   init();
 })();
 </script>
@@ -555,10 +422,8 @@
   <style>
     nav.nav, .nav { transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease); border-bottom: 1px solid transparent; }
     nav.nav.scrolled, .nav.scrolled {
-      right: 0;
-      background: rgba(244, 244, 245, 0.85);
-      -webkit-backdrop-filter: blur(12px);
-      backdrop-filter: blur(12px);
+      right: 0; background: rgba(244, 244, 245, 0.85);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-light);
     }
     @media (prefers-reduced-motion: reduce){ nav.nav, .nav { transition: none; } }
