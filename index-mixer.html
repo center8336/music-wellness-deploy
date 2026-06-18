@@ -310,9 +310,8 @@
   function seedVortices(){
     vortices = []; var n = MOBILE ? 2 : 3;
     for (var i=0;i<n;i++) vortices.push({ bx:rand(0.2,0.8)*W, by:rand(0.2,0.8)*H, ax:rand(0.1,0.22)*W, ay:rand(0.1,0.22)*H, fx:rand(0.03,0.06), fy:rand(0.03,0.06), px:rand(0,6.28), py:rand(0,6.28), sign:i%2===0?1:-1, str:rand(0.8,1.3) });
-    // two counter-rotating convergence knots low under the 棉 — streams spiral in and pile into a wide colour-noise interference band
-    vortices.push({ bx:0.45*W, by:0.88*H, ax:0.025*W, ay:0.012*H, fx:0.045, fy:0.05, px:0,   py:1.2, sign:1,  str:1.8, r:MIN*0.22, sink:0.42 });
-    vortices.push({ bx:0.55*W, by:0.87*H, ax:0.025*W, ay:0.012*H, fx:0.05,  fy:0.045, px:2.0, py:0.6, sign:-1, str:1.8, r:MIN*0.22, sink:0.42 });
+    // gentle local knot under the 棉 — gathers some streams toward the interference band without funnelling the whole field
+    vortices.push({ bx:0.5*W, by:0.80*H, ax:0.03*W, ay:0.015*H, fx:0.045, fy:0.05, px:0, py:1.2, sign:1, str:0.9, r:MIN*0.17, sink:0.16 });
   }
   function vp(v, t){ return { x:v.bx + Math.cos(t*v.fx+v.px)*v.ax, y:v.by + Math.sin(t*v.fy+v.py)*v.ay }; }
 
@@ -462,6 +461,9 @@
       s.ang = a;
       var st = SPD * bf * s.jitter * s.zspd * s.spd * eg.tempo * instSurge(s, TIME, eg.tempo);
       if (st < MINSTEP) st = MINSTEP;
+      // local interference band under the 棉: slow + scramble heading → marks pack into a dense colour-noise band
+      var bdx=(s.hx-0.5*W)/(0.22*W), bdy=(s.hy-0.80*H)/(0.11*H), bd=bdx*bdx+bdy*bdy;
+      if (bd < 1){ var bw=1-bd; a += (Math.sin(TIME*3.0 + s.mphase)*0.8 + (Math.random()-0.5)*1.7)*bw; st *= (1 - 0.62*bw); s.ang=a; }
       s.hx += Math.cos(a)*st; s.hy += Math.sin(a)*st;
       if (pointer.has && eg.spring > 0){ s.hx += (pointer.x - s.hx)*eg.spring*0.5; s.hy += (pointer.y - s.hy)*eg.spring*0.5; }
       s.dist += st;
