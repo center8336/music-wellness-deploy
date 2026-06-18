@@ -605,18 +605,18 @@
     }
 
     // ── colour-noise interference band under the 棉 (fine warm/cool/grey static) ──
-    if (!REDUCE && phantomOn()){
-      var BX = 0.5*W, BY = 0.815*H, BRX = Math.min(0.215*W, 250), BRY = 0.090*H;
-      var N = Math.round(260 * Math.min(1.5, W/1000)) * (MOBILE ? 0 : 1);
-      var npal = [COL.grey, COL.grey, COL.ink2, COL.warm, COL.warm, COL.cool, COL.cool];
+    if (!REDUCE && phantomOn() && !MOBILE){
+      var BX = 0.5*W, BY = 0.815*H, BRX = Math.min(0.24*W, 270), BRY = 0.085*H;
+      var N = Math.round(1500 * Math.min(1.5, W/1000));
+      var npal = [COL.grey, COL.ink2, COL.warm, COL.warm, COL.warm, COL.cool, COL.cool, COL.cool];
       var bpk = 0.85 + 0.15*Math.sin(TIME*0.7);          // gentle breathing of the band's intensity
       for (var ni=0; ni<N; ni++){
         var nang = Math.random()*6.2832, nrr = Math.sqrt(Math.random());
         var nx = BX + Math.cos(nang)*nrr*BRX, ny = BY + Math.sin(nang)*nrr*BRY;
-        var nfall = 1 - nrr;
+        var nfall = 1 - nrr*0.85;
         var nc = npal[(Math.random()*npal.length)|0];
-        ctx.fillStyle = rgba(nc, (0.10 + Math.random()*0.42)*nfall*bpk);
-        var nsz = 1 + (Math.random()*Math.random())*3;
+        ctx.fillStyle = rgba(nc, (0.07 + Math.random()*0.30)*nfall*bpk);
+        var nsz = 1 + (Math.random()*Math.random())*2;
         ctx.fillRect(nx, ny, nsz, nsz);
       }
     }
