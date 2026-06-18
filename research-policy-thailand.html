@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Policy scan: Thailand — building the stage before the safety net · MH&W Research">
+  <title>Policy: Thailand · MH&W</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+      --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 660px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--charcoal);
+      line-height: 1.7;
+      font-size: var(--text-body);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    /* ===== SITE NAVIGATION ===== */
+    nav.nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem 2.5rem;
+      padding-top: calc(1.5rem + env(safe-area-inset-top));
+      background: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--grey);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      transition: color var(--dur) var(--ease);
+    }
+
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      z-index: 101;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--charcoal);
+      margin: 5px 0;
+      transition: all 0.3s var(--ease);
+    }
+    .nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(4px,-5px); }
+
+    /* Mobile nav brand */
+    .nav-topbar { display: none; }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:0.5rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:0.2em; }
+
+    /* ===== PAGE SIDEBAR ===== */
+    .page-sidebar {
+      position: fixed;
+      left: 2.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+    }
+
+    .page-nums {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+    }
+
+    .page-num {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      cursor: pointer;
+      padding: 0.2rem 0;
+      transition: color var(--dur) var(--ease);
+      letter-spacing: 0.05em;
+      user-select: none;
+    }
+
+    .page-num:hover { color: var(--grey); }
+    .page-num.active { color: var(--black); font-weight: 700; }
+
+    .page-arrows {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+    }
+
+    .arrow-btn {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--silver);
+      border-radius: 50%;
+      background: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--grey-light);
+      font-size: 0.7rem;
+      transition: all var(--dur) var(--ease);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .arrow-btn:hover {
+      border-color: var(--signal);
+      color: var(--signal);
+    }
+
+    .arrow-btn:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+
+    .arrow-btn svg {
+      width: 12px;
+      height: 12px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ===== PAGES CONTAINER (scroll-snap) ===== */
+    .pages-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow-y: auto;
+      scroll-snap-type: y proximity;
+      scroll-behavior: smooth;
+      overscroll-behavior-y: contain;
+    }
+
+    .page {
+      min-height: 100vh;
+      scroll-snap-align: start;
+      padding: 5rem 2.5rem 3rem 6.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page-inner {
+      max-width: var(--max-w-text);
+      width: 100%;
+      margin: 0 auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== COVER PAGE ===== */
+    .cover {
+      height: 100vh;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding-top: 0;
+    }
+
+    .cover .page-inner {
+      max-width: 800px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cover-eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 2.5rem;
+    }
+
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(3.2rem, 9vw, 7.5rem);
+      font-weight: 800;
+      line-height: 0.85;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 0.25rem;
+    }
+
+    .cover-accent {
+      color: var(--purple-deep);
+    }
+
+    .cover-year {
+      font-family: var(--font-mono);
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 400;
+      color: var(--purple-light);
+      letter-spacing: 0.35em;
+      margin-bottom: 2rem;
+    }
+
+    .cover-subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--graphite);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.5;
+      margin-bottom: 3rem;
+    }
+
+    .cover-meta {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--grey-light);
+      line-height: 2;
+      letter-spacing: 0.02em;
+    }
+
+    .cover-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cover-hint { animation: none; }
+    }
+
+    /* ===== CONTENT PAGES ===== */
+    .page-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--purple-deep);
+      margin-bottom: 1rem;
+    }
+
+    .page-title {
+      font-family: var(--font-display);
+      font-size: var(--text-h1);
+      font-weight: 700;
+      line-height: 1.1;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 2rem;
+      letter-spacing: 0.01em;
+    }
+
+    .content-block {
+      margin-bottom: 1.75rem;
+    }
+
+    .content-block h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-h3);
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+
+    .content-block p {
+      margin-bottom: 0.75rem;
+      line-height: 1.75;
+      color: var(--graphite);
+    }
+
+    .content-block strong {
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    .content-block em {
+      font-style: italic;
+      color: var(--graphite);
+    }
+
+    .content-block ul, .content-block ol {
+      margin-left: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .content-block li {
+      margin-bottom: 0.4rem;
+      line-height: 1.65;
+      color: var(--graphite);
+    }
+
+    /* ===== LEAD / FRAMING QUOTE ===== */
+    .lead-quote {
+      border-left: 3px solid var(--signal);
+      background: var(--signal-bg);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 1rem 0 0;
+    }
+    .lead-quote p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--charcoal);
+      margin-bottom: 0.75rem;
+    }
+    .lead-quote p:last-child { margin-bottom: 0; }
+
+    /* ===== REFORM ITEMS ===== */
+    .reform-item {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .reform-item:last-child { border-bottom: none; }
+    .reform-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .reform-num {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--purple-deep);
+      flex-shrink: 0;
+    }
+    .reform-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+    .reform-year {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--grey-light);
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+    .reform-body {
+      padding-left: 2.25rem;
+      line-height: 1.75;
+      color: var(--graphite);
+    }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin: 1rem 0 1.25rem;
+      background: var(--bg-card);
+    }
+    .stat-item {
+      padding: 1.1rem 1rem;
+      border-right: 1px solid var(--border-light);
+      text-align: center;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.6rem;
+      color: var(--purple-deep);
+      line-height: 1.1;
+    }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--grey);
+      margin-top: 0.35rem;
+    }
+
+    /* ===== APPRAISAL / VERDICT ===== */
+    .appraise-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .appraise-item:last-child { border-bottom: none; }
+    .appraise-item h3 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 0.35rem;
+    }
+    .appraise-item p { line-height: 1.75; color: var(--graphite); }
+
+    .verdict {
+      background: var(--off-black);
+      color: var(--snow);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .verdict .verdict-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--purple-light);
+      margin-bottom: 0.5rem;
+    }
+    .verdict p { color: var(--snow); line-height: 1.7; margin: 0; }
+    .verdict strong { color: var(--white); font-weight: 600; }
+
+    /* ===== LESSON ITEMS ===== */
+    .lesson-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .lesson-item:last-child { border-bottom: none; }
+    .lesson-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      margin-bottom: 0.35rem;
+    }
+    .lesson-num {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--purple-deep);
+      flex-shrink: 0;
+    }
+    .lesson-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+    .lesson-body {
+      padding-left: 2.25rem;
+      line-height: 1.7;
+      color: var(--graphite);
+    }
+
+    /* ===== METHOD TABLE ===== */
+    .method-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--text-sm);
+      margin: 1rem 0;
+    }
+    .method-table thead {
+      background: var(--purple-deep);
+      color: var(--white);
+    }
+    .method-table th {
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .method-table td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid var(--border-light);
+      vertical-align: top;
+    }
+    .method-table tbody tr:nth-child(odd) { background: var(--white); }
+    .method-table tbody tr:nth-child(even) { background: var(--snow); }
+
+    /* ===== SOURCE FOOTER ===== */
+    .source-info {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-light);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--grey-light);
+      line-height: 1.8;
+    }
+
+    .source-info code {
+      font-family: var(--font-mono);
+      background: var(--white);
+      padding: 0.1rem 0.3rem;
+      border-radius: var(--radius);
+      font-size: inherit;
+      color: var(--grey);
+    }
+
+    /* ===== SECTION DIVIDER ===== */
+    .part-divider {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--purple-light);
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--purple-light);
+      margin-bottom: 1.5rem;
+      display: inline-block;
+    }
+
+    /* ===== CITATIONS (§5 inline tier) — pattern: research-policy-japan.html ===== */
+    .cite { font-size: 0.72em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a:focus-visible { outline: 2px solid var(--signal); outline-offset: 1px; border-radius: 2px; }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 1.5rem; }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-sm); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; }
+    .refs li a { color: var(--signal); }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs-note { font-size: var(--text-xs); color: var(--grey); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-sm); color: var(--grey); font-style: italic; margin-bottom: 0.5rem; }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 768px) {
+      nav.nav {
+        padding: 1rem 1.25rem;
+        padding-top: calc(1rem + env(safe-area-inset-top));
+        right: 0;
+        background: none;
+        border-bottom: none;
+      }
+      nav.nav.open {
+        background: rgba(244, 244, 245, 0.9);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+      .nav-toggle { display: block; }
+      .nav-topbar { display: flex; align-items: center; gap: 0.75rem; }
+      .nav-mobile-brand { display:block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 0.6rem;
+        margin-top: 0.75rem;
+      }
+      .nav-links.show { display: flex; }
+      .nav-links a { font-size: 0.85rem; }
+
+      .page-sidebar {
+        left: auto;
+        right: 1.25rem;
+        top: auto;
+        bottom: 1.5rem;
+        transform: none;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(244, 244, 245, 0.9);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        padding: 0.5rem 0.75rem;
+        border-radius: 20px;
+        border: 1px solid var(--border-light);
+      }
+
+      .page-nums {
+        flex-direction: row;
+        gap: 0.3rem;
+      }
+
+      .page-num {
+        font-size: 0.6rem;
+        padding: 0.15rem 0.2rem;
+      }
+
+      .page-arrows {
+        flex-direction: row;
+        margin-top: 0;
+        margin-left: 0.25rem;
+      }
+
+      .arrow-btn {
+        width: 24px;
+        height: 24px;
+      }
+
+      .arrow-btn svg {
+        width: 10px;
+        height: 10px;
+      }
+
+      .page {
+        padding: 4.5rem 1.25rem 5rem 1.25rem;
+      }
+
+      .cover-title {
+        font-size: clamp(2.6rem, 13vw, 4.5rem);
+      }
+
+      .cover-year {
+        font-size: clamp(1.2rem, 6vw, 1.8rem);
+        letter-spacing: 0.25em;
+      }
+
+      .cover-subtitle {
+        font-size: 0.85rem;
+      }
+
+      .page-title {
+        font-size: var(--text-h2);
+      }
+
+      .reform-body, .lesson-body {
+        padding-left: 0;
+      }
+
+      .reform-header {
+        flex-wrap: wrap;
+      }
+
+      .reform-year {
+        margin-left: 0;
+        margin-top: 0.15rem;
+      }
+
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+      .stat-item:last-child { border-bottom: none; }
+
+      .method-table { font-size: 0.7rem; }
+      .method-table th, .method-table td { padding: 0.4rem 0.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
+    }
+
+    /* Scrollbar styling */
+    .pages-container::-webkit-scrollbar { width: 3px; }
+    .pages-container::-webkit-scrollbar-track { background: transparent; }
+    .pages-container::-webkit-scrollbar-thumb { background: var(--silver); border-radius: 3px; }
+    .pages-container::-webkit-scrollbar-thumb:hover { background: var(--grey-light); }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <!-- Site Navigation -->
+  <nav class="nav">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="plan.html">PLAN</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="case-study.html">CASE STUDY</a>
+      <a href="research.html" class="current">RESEARCH</a>
+      <a href="insight-2026-06-18.html">INSIGHT</a>
+    </div>
+  </nav>
+
+  <!-- Page Sidebar Navigation -->
+  <div class="page-sidebar">
+    <div class="page-nums">
+      <span class="page-num active" data-page="0">01</span>
+      <span class="page-num" data-page="1">02</span>
+      <span class="page-num" data-page="2">03</span>
+      <span class="page-num" data-page="3">04</span>
+      <span class="page-num" data-page="4">05</span>
+      <span class="page-num" data-page="5">06</span>
+      <span class="page-num" data-page="6">07</span>
+      <span class="page-num" data-page="7">08</span>
+    </div>
+    <div class="page-arrows">
+      <button class="arrow-btn" aria-label="Previous page" onclick="prevPage()">
+        <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+      </button>
+      <button class="arrow-btn" aria-label="Next page" onclick="nextPage()">
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Pages -->
+  <div class="pages-container" id="main">
+
+    <!-- PAGE 01: COVER (standard research cover — copied from research-policy-japan.html) -->
+    <div class="page cover" id="page-0">
+      <div class="page-inner">
+        <p class="cover-eyebrow">MH&amp;W Research</p>
+        <h1 class="cover-title">THAILAND</h1>
+        <p class="cover-year">POLICY</p>
+        <p class="cover-subtitle">Building the Stage<br>Before the Safety Net</p>
+        <div class="cover-meta">
+          <p>Regional Policy Scan — Region 2 of 6</p>
+          <p>Japan &rarr; Thailand &rarr; Taiwan &rarr; U.S. &rarr; U.K. &rarr; EU</p>
+          <p>Compiled by &#38515;&#26825; &middot; 2026-06-18</p>
+        </div>
+      </div>
+      <span class="cover-hint">&darr; scroll or arrow keys</span>
+    </div>
+
+    <!-- PAGE 02: WHY THIS REGION -->
+    <div class="page" id="page-1">
+      <div class="page-inner">
+        <span class="part-divider">Framing</span>
+        <p class="page-label">Why Thailand, Why Policy</p>
+        <h2 class="page-title">A Third Lever</h2>
+
+        <div class="content-block">
+          <p>Second of a six-region policy cycle. The aim is not to profile an organization but to read how a <em>jurisdiction</em> protects the mental health and welfare of music and performing-arts workers &mdash; through law, public funding, and worker bodies.</p>
+        </div>
+
+        <div class="lead-quote">
+          <p>If Japan reached for <strong>labor law</strong> and the U.S. for <strong>charity</strong>, Thailand has reached for a third lever: <strong>industrial policy</strong>. It is building the creative economy as a national export engine &mdash; a "soft power" super-agency modeled on South Korea's KOCCA &mdash; while the workers who power that economy remain overwhelmingly informal, outside the Social Security Fund's full protections, and with no dedicated mental-health provision.</p>
+          <p>Thailand is a natural experiment in whether <em>growing the industry</em> protects the people inside it.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 03: THE SOFT-POWER BET -->
+    <div class="page" id="page-2">
+      <div class="page-inner">
+        <span class="part-divider">Part A — The Landscape</span>
+        <p class="page-label">Section 01 · The Bet</p>
+        <h2 class="page-title">The Soft-Power Bet</h2>
+
+        <div class="content-block">
+          <p>Since 2023 the Thai state has made the creative economy a headline national priority. The vehicle is <strong>THACCA &mdash; the Thailand Creative Culture Agency</strong> &mdash; informally stood up in early 2024 and explicitly modeled on South Korea's Korea Creative Content Agency (KOCCA), the body credited with engineering the "Korean Wave."<sup class="cite"><a href="#th-src-2" data-src="thacca" data-tip="THACCA, the KOCCA model, and the 11 soft-power industries: Thailand Creative Culture Agency (Wikipedia) + Bangkok Post + Deadline/TCCF + ISEAS Perspective + thacca.go.th. ✅ Verified across independent sources.">2</a></sup></p>
+        </div>
+
+        <div class="reform-item">
+          <div class="reform-header">
+            <span class="reform-num">01</span>
+            <span class="reform-title">A soft-power "super agency"</span>
+            <span class="reform-year">2024&ndash;2026</span>
+          </div>
+          <div class="reform-body">
+            <p>THACCA is mandated to develop <strong>11 soft-power industries</strong> &mdash; food, sports, festivals, tourism, music, books, film, games, art, design, and fashion &mdash; and is expected to become a statutory super agency in 2026, once Thailand's first <strong>Creative Culture Promotion Act</strong> clears the Cabinet and Council of State. The bill is drafted but <em>not yet enacted</em>. The program is framed in jobs: a target of roughly <strong>20 million creative-industry jobs</strong> via training, hiring subsidies, and tax incentives.<sup class="cite"><a href="#th-src-2" data-src="thacca" data-tip="Creative Culture Promotion Act (still draft), 2026 super-agency timeline, and the ~20M-jobs goal: Wikipedia + Bangkok Post + ISEAS Perspective. ✅ Verified; Act not yet enacted.">2</a></sup></p>
+          </div>
+        </div>
+
+        <div class="reform-item">
+          <div class="reform-header">
+            <span class="reform-num">02</span>
+            <span class="reform-title">Music Exchange</span>
+            <span class="reform-year">2024&ndash;</span>
+          </div>
+          <div class="reform-body">
+            <p>THACCA's flagship for musicians part-funds at least <strong>30 Thai artists and bands</strong> to perform at international festivals across Asia, Europe, and North America &mdash; an export-and-exposure subsidy, not a welfare program.<sup class="cite"><a href="#th-src-2" data-src="thacca" data-tip="Music Exchange (≥30 Thai artists part-funded to play international festivals, launched 2024): Creative Economy Agency / THACCA. ✅ Verified.">2</a></sup></p>
+          </div>
+        </div>
+
+        <div class="reform-item">
+          <div class="reform-header">
+            <span class="reform-num">03</span>
+            <span class="reform-title">Fiscal support for creative livelihoods</span>
+            <span class="reform-year">2025</span>
+          </div>
+          <div class="reform-body">
+            <p>The 2025 budget approved roughly <strong>200 million baht</strong> for screen content, and from the <strong>2025 tax year individual artists may deduct 60% of income as expenses (up from 30%)</strong> under Section 40(6) of the Revenue Code &mdash; a direct subsidy to creative incomes.<sup class="cite"><a href="#th-src-5" data-src="taxincentive" data-tip="60% expense deduction under Section 40(6) from the 2025 tax year (up from 30%) and the ~200M-baht 2025 screen-content budget: Forvis Mazars tax briefing. ⚠️ Single-source (professional-services advisory).">5</a></sup> Real money &mdash; but investment in <em>output</em> and <em>export</em>, not in welfare or mental health.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 04: THE PROTECTION & CARE GAP -->
+    <div class="page" id="page-3">
+      <div class="page-inner">
+        <p class="page-label">Section 01 · The Gap</p>
+        <h2 class="page-title">Protection Lags the Ambition</h2>
+
+        <div class="content-block">
+          <p>Underneath the ambition, the workforce that produces the content is largely unprotected. Most Thai creative workers are <strong>freelance or informal</strong> &mdash; outside the employee protections of Sections 33/39 of the Social Security Act, unable to use the labour-protection complaint machinery, left to pursue unpaid fees through civil court themselves.<sup class="cite"><a href="#th-src-4" data-src="section40" data-tip="Most creative workers are informal/freelance and outside Sections 33/39 protections: Bangkok Post + Ministry of Labour. ✅ Verified.">4</a></sup> A 2024 survey by the <strong>Creative Workers Union Thailand (CUT)</strong> &mdash; a young union founded to make creative labor legible as labor &mdash; put numbers on it.<sup class="cite"><a href="#th-src-3" data-src="cut" data-tip="CUT survey of 380 illustrators: ≈80% commission-based/underpaid; 54.4% under 1,000 baht/project; 47.7% below the ~3,000-baht poverty line. Bangkok Post + cutunion.org. ⚠️ As-reported, single union survey of one occupation.">3</a></sup></p>
+        </div>
+
+        <div class="stat-strip">
+          <div class="stat-item">
+            <div class="stat-num">~80%</div>
+            <div class="stat-label">Commission-based,<br>underpaid</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">54.4%</div>
+            <div class="stat-label">Under 1,000 baht<br>per project</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">47.7%</div>
+            <div class="stat-label">Below the<br>poverty line</div>
+          </div>
+        </div>
+        <p class="cite-help">Figures are &#9888; as-reported from one CUT survey of 380 illustrators &mdash; directional, one occupation, self-selected.</p>
+
+        <div class="content-block">
+          <p>The state's answer is <strong>opt-in and thin.</strong> Self-employed people can enroll under <strong>Section 40</strong> for <strong>70, 100, or 300 baht a month</strong>, buying benefits well short of an employee's; the Labour Ministry targets pulling <strong>20 million independent workers</strong> into the scheme. A structural fix &mdash; a <strong>draft bill on the promotion and protection of independent / informal workers</strong>, Cabinet-endorsed in principle and revised through 2024, guaranteeing basic occupational rights, social-security access, and <em>the right to form unions</em> &mdash; is not yet law.<sup class="cite"><a href="#th-src-4" data-src="section40" data-tip="Section 40 packages (70/100/300 baht), the 20M-worker coverage target, and the still-draft independent/informal-worker protection bill (right to unionize): Ministry of Labour + Bangkok Post + Khaosod + thailand-business-news. ✅ Verified; bill still draft.">4</a></sup></p>
+          <p>On mental health there is <strong>nothing targeted.</strong> The peer-reviewed evidence is structural: a matched case-control study of Thai informal workers found occupation-linked health disparities, with unskilled informal workers at elevated risk, and called for government budget for informal-worker health.<sup class="cite"><a href="#th-src-1" data-src="infworker" data-tip="Informal-worker health disparities and the call for government budget: Tipayamongkholgul et al., J Occup Health 2021;63(1):e12249 (PubMed, DOI 10.1002/1348-9585.12249). ✅ PubMed-indexed; about informal workers/NCDs, not musicians' mental health.">1</a></sup> Thailand's general mental-health burden is rising, concentrated among 20&ndash;29-year-olds &mdash; the same cohort that fills the creative workforce.<sup class="cite"><a href="#th-src-3" data-src="cut" data-tip="Rising national mental-health burden concentrated at ages 20–29: WHO Thailand feature. ✅ Verified (org source).">3</a></sup> The drivers are documented; the services are not.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 05: APPRAISAL -->
+    <div class="page" id="page-4">
+      <div class="page-inner">
+        <span class="part-divider">Part B — Appraisal</span>
+        <p class="page-label">Section 02 · Reading the Model</p>
+        <h2 class="page-title">Industry First, Worker Later</h2>
+
+        <div class="appraise-item">
+          <h3>What Thailand gets right is the bet on leverage</h3>
+          <p>Treating the creative sector as a strategic growth engine, not a charity case, is not na&iuml;ve: it builds political constituency, public budget, and institutional infrastructure &mdash; THACCA, a statute, sub-committees with sector representatives &mdash; that a purely welfare framing rarely commands. The 60% tax deduction and Music Exchange grants put money directly into creative livelihoods.<sup class="cite"><a href="#th-src-5" data-src="taxincentive" data-tip="Tax deduction and grants as direct subsidy to creative incomes: Forvis Mazars + THACCA. ⚠️/✅ mixed.">5</a></sup> And the formalization drive &mdash; Section 40 plus the independent-worker bill &mdash; is, in principle, the mechanism that could eventually pull freelance musicians into a protective net.</p>
+        </div>
+
+        <div class="appraise-item">
+          <h3>However, it builds the stage before the safety net</h3>
+          <p>The soft-power spending flows to <em>projects, exports, festivals, and reskilling</em> &mdash; to the industry's output, not to the welfare or mental health of the people producing it. The protections that would matter are opt-in (Section 40, which a worker earning under 3,000 baht a month is unlikely to prioritize), thin in benefit, and &mdash; for the structural bill &mdash; still draft.<sup class="cite"><a href="#th-src-4" data-src="section40" data-tip="Protections are opt-in, thin, and (for the structural bill) still draft: Ministry of Labour + Bangkok Post + Khaosod. ✅ Verified.">4</a></sup> KOCCA's model, which THACCA copies, was an export engine, not a worker-welfare body; importing it imports that silence. For mental health specifically there is nothing: no service, no line item, no agency mandate.</p>
+        </div>
+
+        <div class="appraise-item">
+          <h3>Read the evidence with care</h3>
+          <p>Three caveats. (1) The headline precarity figures come from a <strong>single CUT survey of 380 illustrators</strong> &mdash; credible and directionally consistent with the informal-economy literature, but one union, one occupation, self-selected; &#9888; as-reported.<sup class="cite"><a href="#th-src-3" data-src="cut" data-tip="Precarity figures are one CUT survey of 380 illustrators, self-selected: Bangkok Post + cutunion.org. ⚠️ As-reported.">3</a></sup> (2) <strong>THACCA is still pre-statute</strong> &mdash; announced and budgeted but not yet enacted, so this reads an <em>intended</em> architecture as much as an operating one.<sup class="cite"><a href="#th-src-2" data-src="thacca" data-tip="THACCA's statutory form (Creative Culture Promotion Act) is not yet enacted: Wikipedia + Bangkok Post + ISEAS. ✅ Verified the Act is still draft.">2</a></sup> (3) The <strong>peer-reviewed anchor</strong> concerns informal workers broadly and non-communicable disease, not musicians' mental health &mdash; a problem-size citation, not a what-works one.<sup class="cite"><a href="#th-src-1" data-src="infworker" data-tip="Peer-reviewed anchor is about informal workers/NCDs, not musicians' mental health: Tipayamongkholgul et al. 2021. ✅ PubMed-indexed; scope caveat.">1</a></sup></p>
+        </div>
+
+        <div class="verdict">
+          <div class="verdict-label">Verdict</div>
+          <p><strong>Thailand is the clearest current example of the industrial-policy route to the creative sector &mdash; and the clearest demonstration that growing the industry does not, by itself, protect or heal the workers inside it.</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 06: LESSONS FOR TAIWAN -->
+    <div class="page" id="page-5">
+      <div class="page-inner">
+        <span class="part-divider">Part C — For This Project</span>
+        <p class="page-label">Section 03 · Translation</p>
+        <h2 class="page-title">Lessons for a Taiwan NPO</h2>
+
+        <div class="lesson-item">
+          <div class="lesson-header">
+            <span class="lesson-num">3.1</span>
+            <span class="lesson-title">Don't mistake creative-economy investment for worker welfare</span>
+          </div>
+          <div class="lesson-body">
+            <p>Taiwan already has its own KOCCA-style body &mdash; &#25991;&#21270;&#20839;&#23481;&#31574;&#36914;&#38498; (TAICCA) &mdash; pursuing the same content-and-export logic THACCA copies. Thailand warns that this apparatus, however well-funded, leaves the worker-welfare and mental-health gap untouched. Position the NPO <em>against that gap</em>, not in the assumption the creative-economy agency will close it.</p>
+          </div>
+        </div>
+
+        <div class="lesson-item">
+          <div class="lesson-header">
+            <span class="lesson-num">3.2</span>
+            <span class="lesson-title">The union is the engine of worker protection &mdash; back it</span>
+          </div>
+          <div class="lesson-body">
+            <p>The most concrete pressure for creative-worker rights in Thailand comes not from the state but from CUT, a young union that made precarity legible by surveying its own members. Taiwan's analog is &#34269;&#21109;&#24037;&#26371;; partnering with it (data, a counseling pilot, joint advocacy) is a faster route to legitimacy and reach than building from zero.</p>
+          </div>
+        </div>
+
+        <div class="lesson-item">
+          <div class="lesson-header">
+            <span class="lesson-num">3.3</span>
+            <span class="lesson-title">Opt-in social security won't reach freelance musicians alone</span>
+          </div>
+          <div class="lesson-body">
+            <p>Section 40 shows a voluntary, low-benefit scheme barely touches workers below the poverty line. Taiwan's &#32887;&#26989;&#28797;&#23475;&#20445;&#38522; and labor-insurance debates face the same adverse-selection problem. The NPO's role is to <em>bridge</em> &mdash; enrollment help, subsidized premiums, or a complementary benefit &mdash; not to assume the state scheme suffices.</p>
+          </div>
+        </div>
+
+        <div class="lesson-item">
+          <div class="lesson-header">
+            <span class="lesson-num">3.4</span>
+            <span class="lesson-title">Mental health is the open lane</span>
+          </div>
+          <div class="lesson-body">
+            <p>Across Thailand's entire soft-power and welfare apparatus, mental health for creative workers appears nowhere. That absence is the strategic opening: an NPO that owns the <em>care</em> layer &mdash; counseling, peer support, crisis referral built for music workers &mdash; complements rather than duplicates whatever industrial policy and labor protection the state eventually provides. As in Japan, supply what policy doesn't.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 07: METHODOLOGY & BASIS -->
+    <div class="page" id="page-6">
+      <div class="page-inner">
+        <span class="part-divider">Part D — Method</span>
+        <p class="page-label">Section 04 · Methodology &amp; Basis</p>
+        <h2 class="page-title">Sources &amp; Limits</h2>
+
+        <div class="content-block">
+          <div style="overflow-x:auto;">
+            <table class="method-table">
+              <caption class="cite-help" style="text-align:left;caption-side:top;margin-bottom:0.5rem;">Source &middot; Method &middot; Basis (PROJECT_RULES §2 Rule 3). Full references on the next page.</caption>
+              <thead>
+                <tr><th>Source</th><th>Method</th><th>Basis</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Tipayamongkholgul M, Kongtip P, Woskie S, "Association between occupations and selected noncommunicable diseases: A matched case-control among Thai informal workers," <em>J Occup Health</em> 2021;63(1):e12249 (PubMed)</td>
+                  <td>PubMed metadata</td>
+                  <td>&#10003; Verified (PubMed-indexed) for informal-worker health disparities; &#9888; not music-specific, NCD- not MH-focused</td>
+                </tr>
+                <tr>
+                  <td>THACCA / National Soft Power Strategy; Creative Culture Promotion Act (draft); Music Exchange; 20M-jobs goal</td>
+                  <td>WebSearch (Wikipedia + <em>Bangkok Post</em> + <em>Deadline</em>/TCCF + ISEAS + thacca.go.th)</td>
+                  <td>&#10003; Verified across 3+ independent sources; &#9888; the Act is drafted, not yet enacted</td>
+                </tr>
+                <tr>
+                  <td>CUT survey of 380 illustrators (&#8776;80% commission-based; 54.4% &lt;1,000 baht/project; 47.7% below poverty line)</td>
+                  <td>WebSearch (<em>Bangkok Post</em> + cutunion.org)</td>
+                  <td>&#9888; As-reported &mdash; single union survey of one occupation, self-selected</td>
+                </tr>
+                <tr>
+                  <td>Section 40 social security (70/100/300 baht; 20M-worker target); draft independent/informal-worker protection bill (right to unionize)</td>
+                  <td>WebSearch (Ministry of Labour primary + <em>Bangkok Post</em> + Khaosod)</td>
+                  <td>&#10003; Verified across independent sources; bill still draft</td>
+                </tr>
+                <tr>
+                  <td>Art tax incentive &mdash; 60% expense deduction under Section 40(6), 2025 tax year (up from 30%)</td>
+                  <td>WebSearch (Forvis Mazars tax briefing)</td>
+                  <td>&#9888; Single-source (reputable professional-services advisory)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <h3>Limitations</h3>
+          <ol>
+            <li>The creative-worker precarity figures rest on one CUT survey of illustrators, not a representative sample of music/performing-arts workers; treated as &#9888; directional.</li>
+            <li>THACCA's statutory form is not yet enacted &mdash; the report reads an intended architecture as much as a settled one.</li>
+            <li>The peer-reviewed anchor concerns informal workers and NCDs generally, not musicians' mental health; no Thailand-specific peer-reviewed study of musician mental health was located via PubMed (absence &ne; non-existence &mdash; Rule 4).</li>
+            <li>Thai-language primary sources (the draft Act; Ministry of Labour notices) were read via English government summaries, national press, and policy-analysis secondary sources, not the full statutes.</li>
+            <li>No direct contact with THACCA, CUT, or the Social Security Office.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 08: REFERENCES -->
+    <div class="page" id="page-7">
+      <div class="page-inner">
+        <span class="part-divider">References</span>
+        <p class="page-label">Citation Registry</p>
+        <h2 class="page-title">References</h2>
+
+        <p class="cite-help">Every claim-bearing figure and provision above carries a numbered citation &mdash; hover (desktop) or tap (mobile) a number to see the source; click to jump here. Policy/industrial facts are &#10003; verified across independent sources; the precarity figures are &#9888; as-reported from a single union survey.</p>
+
+        <div class="refs" id="refs-all" data-citation-registry="thailand-all">
+          <div class="refs-title">References</div>
+          <ol>
+            <li id="th-src-1" data-src="infworker">Informal-worker health disparities and the call for government budget for informal-worker health: Tipayamongkholgul M, Kongtip P, Woskie S, "Association between occupations and selected noncommunicable diseases: A matched case-control among Thai informal workers," <em>Journal of Occupational Health</em> 2021;63(1):e12249, <a href="https://doi.org/10.1002/1348-9585.12249" target="_blank" rel="noopener">DOI 10.1002/1348-9585.12249</a> (PubMed, PMID 34263504). &#10003; PubMed-indexed. Note: about Thai informal workers broadly and non-communicable disease, not musicians' mental health.</li>
+            <li id="th-src-2" data-src="thacca">THACCA / National Soft Power Strategy, the KOCCA model, the 11 soft-power industries, the draft Creative Culture Promotion Act and 2026 "super agency" timeline, the ~20M-jobs goal, and Music Exchange: <a href="https://en.wikipedia.org/wiki/Thailand_Creative_Culture_Agency" target="_blank" rel="noopener">Thailand Creative Culture Agency (Wikipedia)</a>; <a href="https://www.bangkokpost.com/thailand/general/2686594/soft-power-act-creative-agency-in-the-works" target="_blank" rel="noopener"><em>Bangkok Post</em>, "Soft Power Act, creative agency 'in the works'"</a>; <a href="https://deadline.com/2024/11/thailand-creative-culture-agency-chalermchatri-yukol-1236167476/" target="_blank" rel="noopener"><em>Deadline</em>, "Thailand Unveils Plans For THACCA Content Agency" (TCCF, 2024-11)</a>; <a href="https://www.iseas.edu.sg/articles-commentaries/iseas-perspective/2025-44-the-thai-governments-national-soft-power-strategy-impact-on-cultural-groups-in-chiang-mai-by-kittiya-moonsarn/" target="_blank" rel="noopener">ISEAS Perspective 2025/44</a>; <a href="https://thacca.go.th/about/" target="_blank" rel="noopener">thacca.go.th</a>. &#10003; Verified across independent sources; the Act is drafted, not yet enacted.</li>
+            <li id="th-src-3" data-src="cut">Creative-worker precarity figures (&#8776;80% commission-based/underpaid; 54.4% &lt;1,000 baht/project; 47.7% below the ~3,000-baht poverty line; n=380 illustrators) and CUT's purpose: <a href="https://www.bangkokpost.com/life/arts-and-entertainment/2453995/freelance-artists-need-rights-protections-union-says" target="_blank" rel="noopener"><em>Bangkok Post</em>, "Freelance artists need rights protections, union says"</a>; <a href="https://cutunion.org/" target="_blank" rel="noopener">Creative Workers Union Thailand (CUT)</a>. Rising national mental-health burden concentrated at ages 20&ndash;29: <a href="https://www.who.int/thailand/news/feature-stories/detail/mental-health-and-social-connection-in-thailand" target="_blank" rel="noopener">WHO Thailand, "Mental Health and Social Connection in Thailand"</a>. &#9888; The precarity figures are as-reported from a single union survey of one creative occupation.</li>
+            <li id="th-src-4" data-src="section40">Most creative workers are informal/freelance and outside Sections 33/39 protections; Section 40 packages (70/100/300 baht) and the 20-million-worker coverage target; the draft independent/informal-worker protection bill (basic occupational rights, social-security access, right to unionize), Cabinet-endorsed and revised through 2024: <a href="https://www.mol.go.th/en/news/labour-minister-aiming-to-cover-20-million-independent-workers-under-social-security-section-40-to-take-care-of-quality-of-life-in-the-long-term" target="_blank" rel="noopener">Ministry of Labour</a>; <a href="https://www.bangkokpost.com/thailand/general/2870681/thailand-mulls-welfare-coverage-for-freelance-workers" target="_blank" rel="noopener"><em>Bangkok Post</em>, "Thailand mulls welfare coverage for freelance workers"</a>; <a href="https://www.khaosodenglish.com/news/2024/09/23/thai-government-plans-welfare-expansion-for-freelancers-including-sex-workers/" target="_blank" rel="noopener">Khaosod English</a>; <a href="https://www.thailand-business-news.com/law/87410-thai-government-introduces-financial-security-packages-for-freelancers" target="_blank" rel="noopener">thailand-business-news</a>. &#10003; Verified across independent sources; bill still draft.</li>
+            <li id="th-src-5" data-src="taxincentive">Art tax incentive &mdash; 60% expense deduction under Section 40(6) of the Revenue Code from the 2025 tax year (up from 30%), and the ~200M-baht 2025 screen-content budget: <a href="https://www.forvismazars.com/th/en/insights/doing-business-in-thailand/tax/thailand-art-tax-incentives-boost-creative-economy" target="_blank" rel="noopener">Forvis Mazars, "Thailand's art tax incentives"</a>. &#9888; Single-source (reputable professional-services advisory).</li>
+          </ol>
+          <p class="refs-note">Convention: every claim-bearing marker carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above &mdash; machine-checkable before each deploy (§5.2 / §6 gate 1). The MD draft (<code>2026-06-18_Research_Policy_Thailand.md</code>) carries the same citations as <code>[^1]</code>&ndash;<code>[^5]</code> footnotes and is the citation source of truth.</p>
+        </div>
+
+        <div class="source-info">
+          <p><strong>Report:</strong> Research track &mdash; Policy cycle (region 2 of 6: Thailand) &middot; Music &amp; Mental Health NPO Research Project</p>
+          <p><strong>As of:</strong> 2026-06-18 &middot; Next region: Taiwan</p>
+          <p><strong>Basis:</strong> &#10003; Verified for policy/industrial facts; &#9888; as-reported for creative-worker precarity figures</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /pages-container -->
+
+  <script>
+    var container = document.querySelector('.pages-container');
+    var pages = document.querySelectorAll('.page');
+    var nums = document.querySelectorAll('.page-num');
+    var current = 0;
+
+    function goTo(index) {
+      if (index < 0 || index >= pages.length) return;
+      pages[index].scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function nextPage() { goTo(current + 1); }
+    function prevPage() { goTo(current - 1); }
+
+    var scrollRaf = null;
+    container.addEventListener('scroll', function() {
+      if (scrollRaf) return;
+      scrollRaf = requestAnimationFrame(function() {
+        scrollRaf = null;
+        var scrollPos = container.scrollTop;
+        var best = 0;
+        var bestDist = Infinity;
+        for (var i = 0; i < pages.length; i++) {
+          var dist = Math.abs(pages[i].offsetTop - scrollPos);
+          if (dist < bestDist) { bestDist = dist; best = i; }
+        }
+        if (best !== current) {
+          nums[current].classList.remove('active');
+          current = best;
+          nums[current].classList.add('active');
+        }
+      });
+    }, { passive: true });
+
+    nums.forEach(function(num) {
+      num.addEventListener('click', function() {
+        goTo(parseInt(this.getAttribute('data-page')));
+      });
+    });
+
+    // --- Citation click → jump to registry entry ---
+    document.querySelectorAll('.cite a[href^="#"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        var id = this.getAttribute('href');
+        var el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        location.hash = id;
+      });
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { nextPage(); e.preventDefault(); }
+      if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { prevPage(); e.preventDefault(); }
+    });
+  </script>
+
+  <!-- nav scroll-state fix: transparent over hero, blurred bar once scrolled -->
+  <style>
+    nav.nav, .nav { transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease); border-bottom: 1px solid transparent; }
+    nav.nav.scrolled, .nav.scrolled {
+      right: 0;
+      background: rgba(244, 244, 245, 0.85);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    @media (prefers-reduced-motion: reduce){ nav.nav, .nav { transition: none; } }
+    .skip-nav { position: absolute; left: -9999px; top: 0; z-index: 200; background: var(--signal); color: var(--white); padding: 0.5rem 1rem; font-family: var(--font-mono); }
+    .skip-nav:focus { left: 0; }
+  </style>
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav, .nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var c = document.querySelector('.pages-container, .pages');
+    if (c && getComputedStyle(c).overflowY !== 'visible') {
+      var ticking = false;
+      c.addEventListener('scroll', function(){ if (ticking) return; ticking = true; requestAnimationFrame(function(){ ticking = false; setS(c.scrollTop > THRESH); }); }, { passive: true });
+      setS(c.scrollTop > THRESH); return;
+    }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden', 'true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>
