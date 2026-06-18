@@ -789,6 +789,53 @@
       <p>June 14 was answered by silence —<br>and the silence was loud with other work.<br>The capacity is proven.<br>The next insight should not have to ask this again.</p>
     </section>
 
+    <!-- PAST ISSUES (Dia-style log footer) -->
+    <style>
+      .past-issues { max-width:var(--max-w-text); margin:0 auto; padding:1rem 2rem 5rem; }
+      .pi-head { display:flex; align-items:baseline; justify-content:space-between; gap:1rem; flex-wrap:wrap; margin-bottom:1rem; padding-bottom:0.75rem; border-bottom:1px solid var(--border-light); }
+      .pi-label { font-family:var(--font-mono); font-size:var(--text-xs); text-transform:uppercase; letter-spacing:0.16em; color:var(--grey); }
+      .pi-viewall { font-family:var(--font-mono); font-size:var(--text-xs); text-transform:uppercase; letter-spacing:0.08em; color:var(--signal); text-decoration:none; white-space:nowrap; }
+      .pi-viewall:hover { color:var(--signal-dim); }
+      .pi-viewall:focus-visible { outline:2px solid var(--signal); outline-offset:2px; border-radius:var(--radius); }
+      .pi-list { list-style:none; margin:0; padding:0; }
+      .pi-row { display:grid; grid-template-columns:130px 1fr; gap:1rem; align-items:baseline; text-decoration:none; padding:0.85rem 0.5rem; border-radius:var(--radius); border-bottom:1px solid var(--border-light); transition:background var(--dur) var(--ease); }
+      .pi-row:last-child { border-bottom:none; }
+      .pi-row:hover { background:var(--signal-bg); }
+      .pi-row:focus-visible { outline:2px solid var(--signal); outline-offset:2px; }
+      .pi-date { font-family:var(--font-mono); font-size:var(--text-xs); color:var(--grey); text-transform:uppercase; letter-spacing:0.04em; }
+      .pi-title { font-family:var(--font-display); font-size:var(--text-h3); font-weight:600; color:var(--black); line-height:1.2; }
+      .pi-sub { display:block; font-family:var(--font-body); font-size:var(--text-sm); color:var(--graphite); margin-top:0.2rem; line-height:1.5; }
+      @media (max-width:560px){ .pi-row { grid-template-columns:1fr; gap:0.2rem; } .past-issues { padding:1rem 1.25rem 4rem; } }
+    </style>
+    <section class="past-issues" aria-labelledby="pi-label">
+      <div class="pi-head">
+        <span class="pi-label" id="pi-label">Past issues</span>
+        <a class="pi-viewall" href="insight.html">View all insights &rarr;</a>
+      </div>
+      <nav aria-label="Past insight issues">
+        <ul class="pi-list">
+          <li>
+            <a class="pi-row" href="insight-2026-06-01.html">
+              <span class="pi-date">June 1, 2026</span>
+              <span><span class="pi-title">The Silent Month</span><span class="pi-sub">When the schedule keeps running and the work stops — three options, one decision gate.</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="pi-row" href="insight-2026-05-01.html">
+              <span class="pi-date">May 1, 2026</span>
+              <span><span class="pi-title">The Validation Imperative</span><span class="pi-sub">From evidence to action — the shift from secondary research toward primary Taiwan data.</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="pi-row" href="insight-2026-04-13.html">
+              <span class="pi-date">April 13, 2026</span>
+              <span><span class="pi-title">23 Personas, 6 Questions</span><span class="pi-sub">The first synthesis — a multi-persona debate that set the project's questions.</span></span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </section>
+
   </main>
 
   <script>
