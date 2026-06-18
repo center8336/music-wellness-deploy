@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>MusiCares · Case Study · MH&amp;W</title>
+  <meta name="description" content="MusiCares is the music industry's incumbent charity — founded inside the Recording Academy and funded by a self-renewing GRAMMY-week flywheel of money, data, and legitimacy. What its ceiling shows, and what a Taiwan music mental health NPO can actually copy.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+      --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 720px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--black);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    a { color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    a:hover { color: var(--signal-dim); }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--signal); outline-offset: 3px; border-radius: var(--radius);
+    }
+
+    .skip-nav {
+      position: absolute; left: -9999px; top: 0; z-index: 200;
+      background: var(--signal); color: var(--white);
+      padding: 0.5rem 1rem; font-family: var(--font-mono);
+    }
+    .skip-nav:focus { left: 0; }
+
+    /* ===== NAVIGATION ===== */
+    nav.nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; flex-direction: column;
+      padding: 2rem 2.5rem;
+      padding-top: calc(2rem + env(safe-area-inset-top));
+      background: transparent;
+      transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    nav.nav.scrolled {
+      background: rgba(244, 244, 245, 0.85);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: var(--font-mono); font-size: 1.1rem; font-weight: 400;
+      color: var(--grey); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-topbar { display:none; }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; z-index:101; -webkit-tap-highlight-color:transparent; }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity:0; }
+    .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:0.5rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:0.2em; }
+
+    /* ===== LAYOUT ===== */
+    main { max-width: var(--max-w); margin: 0 auto; padding: 0 2.5rem 5rem 2.5rem; }
+    section { margin-bottom: 4rem; }
+    .narrow { max-width: var(--max-w-text); }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding-top: calc(9rem + env(safe-area-inset-top));
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-light);
+      margin-bottom: 3rem;
+    }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--grey); text-transform: uppercase; letter-spacing: 0.18em;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: var(--font-display); font-size: var(--text-hero);
+      font-weight: 800; line-height: 0.96; color: var(--black); letter-spacing: -0.01em;
+    }
+    .hero h1 .tail { display:block; font-size: clamp(1.15rem, 2.6vw, 1.9rem); font-weight: 600; color: var(--signal); letter-spacing: 0; margin-top: 0.9rem; }
+    .hero .subtitle {
+      font-family: var(--font-body); font-size: clamp(1.05rem, 2vw, 1.35rem);
+      color: var(--graphite); line-height: 1.5; margin-top: 1.5rem; max-width: var(--max-w-text);
+    }
+    .basis-badge {
+      display: inline-block; margin-top: 1.75rem;
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--graphite); background: var(--signal-bg);
+      border: 1px solid var(--signal-glow); border-radius: var(--radius);
+      padding: 0.5rem 0.85rem; line-height: 1.5;
+    }
+
+    /* ===== TYPE ===== */
+    h2 {
+      font-family: var(--font-display); font-size: var(--text-h2);
+      font-weight: 700; line-height: 1.1; color: var(--black);
+      margin-bottom: 1.25rem; letter-spacing: -0.01em;
+    }
+    h3 { font-family: var(--font-display); font-size: var(--text-h3); font-weight: 600; color: var(--charcoal); margin: 1.75rem 0 0.75rem; }
+    .section-label {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem;
+    }
+    p { font-size: var(--text-body); color: var(--graphite); max-width: var(--max-w-text); margin-bottom: 1rem; }
+    p.lead { font-size: 1.1rem; color: var(--charcoal); }
+    strong { color: var(--charcoal); font-weight: 600; }
+    em { color: var(--graphite); }
+
+    /* ===== MODEL CALLOUT ===== */
+    .model-callout { background: var(--bg-card-dark); color: var(--snow); border-radius: var(--radius-lg); padding: 2.25rem 2.5rem; margin-bottom: 3rem; }
+    .model-callout h2 { color: var(--white); margin-bottom: 1rem; }
+    .model-callout p { color: var(--silver); max-width: none; }
+    .model-callout strong { color: var(--white); }
+    .model-callout a { color: var(--spectrum-3); text-decoration: underline; text-underline-offset: 2px; }
+    .model-callout a:hover { color: var(--white); }
+
+    /* ===== THE FLYWHEEL (signature visual) ===== */
+    .flywheel-panel {
+      background: var(--bg-card-dark);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem 2rem 1.5rem;
+      margin: 1.5rem 0 1.75rem;
+      border: 1px solid var(--border-dark);
+    }
+    .flywheel-panel .fw-cap {
+      font-family: var(--font-mono); font-size: var(--text-xs); color: var(--spectrum-3);
+      text-transform: uppercase; letter-spacing: 0.16em; text-align: center; margin-bottom: 0.5rem;
+    }
+    .flywheel-panel svg { display: block; width: 100%; height: auto; max-width: 460px; margin: 0 auto; }
+    .fw-ring { fill: none; stroke: var(--border-dark); stroke-width: 1.5; stroke-dasharray: 3 6; }
+    .fw-arc { fill: none; stroke: var(--spectrum-3); stroke-width: 2.5; opacity: 0.85; stroke-dasharray: 4 7; animation: fw-flow 2.2s linear infinite; }
+    @keyframes fw-flow { to { stroke-dashoffset: -22; } }
+    .fw-node { fill: var(--charcoal); stroke: var(--spectrum-2); stroke-width: 2; }
+    .fw-hub { fill: var(--black); stroke: var(--spectrum-3); stroke-width: 1.5; }
+    .fw-num { fill: var(--spectrum-3); font-family: var(--font-mono); font-size: 13px; font-weight: 700; }
+    .fw-label { fill: var(--snow); font-family: var(--font-display); font-size: 15px; font-weight: 700; letter-spacing: 0.02em; }
+    .fw-sub { fill: var(--grey-light); font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.04em; }
+    .fw-hub-label { fill: var(--spectrum-3); font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.14em; }
+    .fw-hub-sub { fill: var(--grey-light); font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; }
+
+    .gear-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .gear {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-left: 3px solid var(--spectrum-2); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem;
+    }
+    .gear .gn { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); letter-spacing: 0.1em; }
+    .gear h3 { margin: 0.35rem 0 0.5rem; font-size: 1.08rem; }
+    .gear p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-card); margin: 1.5rem 0 0.75rem; }
+    .stat-item { padding: 1.75rem 1.25rem; border-right: 1px solid var(--border-light); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--signal); line-height: 1; }
+    .stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.6rem; line-height: 1.4; }
+
+    /* ===== COLUMN CHART (revenue trajectory) ===== */
+    figure.chart { margin: 1.5rem 0; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 2rem 1.75rem 1.25rem; }
+    figure.chart figcaption { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
+    .col-chart { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.6rem; align-items: end; }
+    .col { display: flex; flex-direction: column; align-items: center; }
+    .ctrack { position: relative; width: 100%; height: 190px; display: flex; align-items: flex-end; }
+    .cbar { width: 100%; max-width: 54px; margin: 0 auto; background: var(--signal); border-radius: var(--radius) var(--radius) 0 0; position: relative; transition: height var(--dur-slow) var(--ease); }
+    .cbar.peak { background: var(--spectrum-2); }
+    .cbar .cval { position: absolute; top: -1.35rem; left: -50%; right: -50%; text-align: center; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--charcoal); font-variant-numeric: tabular-nums; }
+    .cyr { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); margin-top: 0.55rem; letter-spacing: 0.02em; }
+    .chart-note { font-size: var(--text-xs); color: var(--grey); margin-top: 1rem; max-width: none; }
+    .chart-key { display: flex; gap: 1.25rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .chart-key span { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); display: inline-flex; align-items: center; gap: 0.4rem; }
+    .swatch { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+    .swatch.s-rev { background: var(--signal); }
+    .swatch.s-covid { background: var(--spectrum-2); }
+
+    /* ===== TABLES ===== */
+    .table-wrap { overflow-x: auto; margin: 1.25rem 0; border-radius: var(--radius-lg); border: 1px solid var(--border-light); }
+    table { width: 100%; border-collapse: collapse; background: var(--bg-card); font-size: var(--text-sm); }
+    caption { text-align: left; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); padding: 0.75rem 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border-light); vertical-align: top; }
+    thead th { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--graphite); background: var(--snow); }
+    tbody tr:last-child td { border-bottom: none; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .row-emph td { background: var(--signal-bg); font-weight: 600; color: var(--charcoal); }
+    .row-covid td { background: rgba(232, 168, 124, 0.12); }
+
+    /* ===== CRISIS CARDS ===== */
+    .crisis-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .crisis { background: var(--bg-card); border: 1px solid var(--border-light); border-top: 3px solid var(--spectrum-1); border-radius: var(--radius-lg); padding: 1.5rem 1.6rem; }
+    .crisis .cyrtag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--graphite); letter-spacing: 0.08em; }
+    .crisis h3 { margin: 0.3rem 0 0.6rem; font-size: 1.08rem; }
+    .crisis .big { font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; color: var(--charcoal); line-height: 1; margin-bottom: 0.5rem; }
+    .crisis p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== PROGRAM LIST ===== */
+    .prog { list-style: none; margin: 1.25rem 0 0; padding: 0; }
+    .prog li { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 0.85rem; }
+    .prog h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .prog p { font-size: var(--text-sm); margin-bottom: 0; }
+    .prog .ptag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ===== SW CARDS ===== */
+    .sw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.25rem; }
+    .sw-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem; }
+    .sw-card.weak { border-left: 3px solid var(--spectrum-2); }
+    .sw-card.strong { border-left: 3px solid var(--spectrum-4); }
+    .sw-card h3 { margin: 0 0 0.4rem; font-size: 1rem; }
+    .sw-card p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== LESSONS ===== */
+    .lessons { counter-reset: lesson; list-style: none; margin: 1.5rem 0 0; padding: 0; }
+    .lessons li { position: relative; padding: 1.25rem 1.5rem 1.25rem 3.5rem; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); margin-bottom: 0.85rem; }
+    .lessons li::before { counter-increment: lesson; content: counter(lesson); position: absolute; left: 1.25rem; top: 1.25rem; font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--signal); }
+    .lessons h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .lessons p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== CITATIONS (§5 inline tier) ===== */
+    .cite { font-size: 0.72em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem; }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-sm); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs-note { font-size: var(--text-xs); color: var(--grey); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-sm); color: var(--grey); font-style: italic; max-width: var(--max-w-text); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .gear-cards { grid-template-columns: 1fr; }
+      .crisis-grid { grid-template-columns: 1fr; }
+      .sw-grid { grid-template-columns: 1fr; }
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2n) { border-right: none; }
+      .stat-item:nth-child(-n+2) { border-bottom: 1px solid var(--border-light); }
+    }
+    @media (max-width: 768px) {
+      nav.nav { padding: 1.2rem 1.5rem; padding-top: calc(1.2rem + env(safe-area-inset-top)); }
+      nav.nav.open { background: rgba(244,244,245,0.95); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-light); }
+      .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
+      .nav-toggle { display:block; }
+      .nav-mobile-brand { display:block; }
+      .nav-links { display:none; flex-direction:column; gap:0.75rem; margin-top:1rem; }
+      .nav-links.show { display:flex; }
+      .nav-links a { font-size: 0.85rem; }
+      main { padding: 0 1.5rem 3rem 1.5rem; }
+      .hero { padding-top: calc(7rem + env(safe-area-inset-top)); }
+      .model-callout, .flywheel-panel { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .col-chart { gap: 0.3rem; }
+      .ctrack { height: 150px; }
+      .cbar .cval { font-size: 0.62rem; }
+    }
+    @media (max-width: 480px) {
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+      .stat-item:last-child { border-bottom: none; }
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
+      .cyr { font-size: 0.6rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } nav.nav, .cbar { transition: none; } .fw-arc { animation: none; } }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open');this.setAttribute('aria-expanded',o)">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="plan.html">PLAN</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="case-study.html" class="current">CASE STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight-2026-06-18.html">INSIGHT</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="eyebrow">2026-06-18 · CASE STUDY · v1</div>
+      <h1>MusiCares<span class="tail">The incumbent's flywheel</span></h1>
+      <p class="subtitle">The official charity of the GRAMMYs turns the music industry's biggest media moment into a self-renewing engine of money, data, and legitimacy. What its ceiling shows — and the one piece a Taiwan NPO can actually copy.</p>
+      <div class="basis-badge">✓ Financials direct from IRS Form 990 (FY2019–FY2024, via ProPublica) · leadership &amp; programs cross-checked across org releases and independent press · accessed 2026-06-18</div>
+    </section>
+
+    <!-- MODEL CALLOUT -->
+    <div class="model-callout">
+      <h2>One model, in one line</h2>
+      <p><a href="case-study-backline.html">Backline</a> was founded cold in a 2019 crisis and bootstrapped from nothing. <a href="case-study-music-minds-matter.html">Music Minds Matter</a> was incubated inside a century-old benevolent fund and spun out to live off an inherited reserve. <strong>MusiCares is neither starting nor inheriting — it is the permanent incumbent</strong>, founded inside the Recording Academy in 1989 and never separated from it, running a self-renewing GRAMMY-week flywheel. The other two answer "how do you start?" MusiCares answers "what does the ceiling look like, and what is actually transferable?" The honest answer inverts the obvious one: copy the cheapest piece, not the famous one.</p>
+    </div>
+
+    <!-- 1. PROFILE -->
+    <section>
+      <div class="section-label">01 — Profile</div>
+      <h2>The official charity of the GRAMMYs<sup class="cite"><a href="#mc-src-2" data-src="academy-1989" data-tip="Recording Academy affiliation &amp; 1989 founding: MusiCares / The Jed Foundation release (BusinessWire, 2026-04-14); MusiCares About.">2</a></sup></h2>
+      <p>MusiCares is the United States' largest and most established music-specific human-services charity. It was created by the Recording Academy — the organization behind the GRAMMY Awards — in 1989, and has operated as the Academy's affiliated charity ever since. That single fact explains everything else on this page.</p>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Organization profile — MusiCares (sources cited inline)</caption>
+          <tbody>
+            <tr><th scope="row">Parent / founder</th><td>The Recording Academy (the GRAMMY Awards organization)</td></tr>
+            <tr><th scope="row">Legal status</th><td>U.S. 501(c)(3) public charity; affiliated charity of the Recording Academy</td></tr>
+            <tr><th scope="row">Founded</th><td>1989 (incorporated 1993) · EIN 95-4470909</td></tr>
+            <tr><th scope="row">Fiscal year end</th><td>July 31 · HQ Santa Monica, California</td></tr>
+            <tr><th scope="row">Executive Director</th><td>Theresa Wolters (interim May 2025; permanent August 2025)</td></tr>
+            <tr><th scope="row">CEO</th><td>Harvey Mason Jr. (CEO of the Recording Academy; $0 from MusiCares)</td></tr>
+            <tr><th scope="row">Board Chair</th><td>Steve Boom</td></tr>
+            <tr><th scope="row">Scope</th><td>United States only</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>A note for anyone reading older profiles: the Executive Director is <strong>Theresa Wolters</strong>, not Laura Segura. Segura left in May 2025 (covered in §7); Wolters, previously Vice President of Health &amp; Human Services, was named interim director that month and confirmed permanently in August 2025.<sup class="cite"><a href="#mc-src-1" data-src="form990-officers" data-tip="Identity, board, current leadership: MusiCares Form 990 (FY2024), Part VII, via ProPublica; current ED Theresa Wolters per MusiCares. Accessed 2026-06-18.">1</a></sup><sup class="cite"><a href="#mc-src-13" data-src="leadership-change" data-tip="Segura departed May 2025 (sudden); Wolters ED — interim May, permanent Aug 2025. Variety; Billboard; CelebrityAccess; MusiCares.">13</a></sup></p>
+    </section>
+
+    <!-- 2. THE FLYWHEEL -->
+    <section>
+      <div class="section-label">02 — The flywheel</div>
+      <h2>How the incumbent funds itself</h2>
+      <p>The structural distinction of MusiCares is not any one program. It is a self-reinforcing loop with four gears, none of which a new organization can build quickly, and which together make MusiCares effectively impossible to displace in the U.S. market.</p>
+
+      <div class="flywheel-panel">
+        <div class="fw-cap">The GRAMMY-week flywheel</div>
+        <svg viewBox="0 0 460 380" role="img" aria-label="A circular flywheel diagram with four gears that feed one another: Affiliation with the Recording Academy, the awards-night Gala, the Reserve it builds, and the Evidence engine — all turning around a self-renewing GRAMMY-week engine.">
+          <circle class="fw-ring" cx="230" cy="190" r="130"/>
+          <!-- clockwise flow arcs -->
+          <defs>
+            <marker id="fwarrow" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M1,1 L8,4.5 L1,8" fill="none" stroke="var(--spectrum-3)" stroke-width="2"/></marker>
+          </defs>
+          <path class="fw-arc" marker-end="url(#fwarrow)" d="M 305 100 A 130 130 0 0 1 318 168"/>
+          <path class="fw-arc" marker-end="url(#fwarrow)" d="M 318 212 A 130 130 0 0 1 305 280"/>
+          <path class="fw-arc" marker-end="url(#fwarrow)" d="M 155 280 A 130 130 0 0 1 142 212"/>
+          <path class="fw-arc" marker-end="url(#fwarrow)" d="M 142 168 A 130 130 0 0 1 155 100"/>
+          <!-- hub -->
+          <circle class="fw-hub" cx="230" cy="190" r="52"/>
+          <text class="fw-hub-label" x="230" y="186" text-anchor="middle">SELF-</text>
+          <text class="fw-hub-label" x="230" y="199" text-anchor="middle">RENEWING</text>
+          <text class="fw-hub-sub" x="230" y="214" text-anchor="middle">every GRAMMY week</text>
+          <!-- node: top -->
+          <circle class="fw-node" cx="230" cy="60" r="44"/>
+          <text class="fw-num" x="230" y="48" text-anchor="middle">1</text>
+          <text class="fw-label" x="230" y="64" text-anchor="middle">AFFILIATION</text>
+          <text class="fw-sub" x="230" y="78" text-anchor="middle">Recording Academy</text>
+          <!-- node: right -->
+          <circle class="fw-node" cx="360" cy="190" r="44"/>
+          <text class="fw-num" x="360" y="178" text-anchor="middle">2</text>
+          <text class="fw-label" x="360" y="194" text-anchor="middle">GALA</text>
+          <text class="fw-sub" x="360" y="208" text-anchor="middle">$10M in one night</text>
+          <!-- node: bottom -->
+          <circle class="fw-node" cx="230" cy="320" r="44"/>
+          <text class="fw-num" x="230" y="308" text-anchor="middle">3</text>
+          <text class="fw-label" x="230" y="324" text-anchor="middle">RESERVE</text>
+          <text class="fw-sub" x="230" y="338" text-anchor="middle">$33.8M, banked</text>
+          <!-- node: left -->
+          <circle class="fw-node" cx="100" cy="190" r="44"/>
+          <text class="fw-num" x="100" y="178" text-anchor="middle">4</text>
+          <text class="fw-label" x="100" y="194" text-anchor="middle">EVIDENCE</text>
+          <text class="fw-sub" x="100" y="208" text-anchor="middle">Wellness Survey</text>
+        </svg>
+      </div>
+
+      <div class="gear-cards">
+        <div class="gear">
+          <div class="gn">GEAR 01</div>
+          <h3>Affiliation</h3>
+          <p>"The official GRAMMY charity" is a credential no marketing budget can buy. It routes every Recording Academy member toward MusiCares as both a potential donor and a potential recipient.<sup class="cite"><a href="#mc-src-2" data-src="academy-1989" data-tip="Founded by the Recording Academy in 1989; affiliated charity. BusinessWire (2026-04-14); MusiCares About.">2</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">GEAR 02</div>
+          <h3>The awards-night gala</h3>
+          <p>The Person of the Year gala, two nights before the GRAMMYs since 1991, turns the year's densest concentration of music wealth into one event. The 2025 Grateful Dead gala raised <strong>$10M in a night</strong>; ~$26M across the weekend. The 2026 honoree was Mariah Carey.<sup class="cite"><a href="#mc-src-3" data-src="gala-2025" data-tip="2025 Person of the Year gala: $10M raised; ~$26M across GRAMMY weekend incl. fire relief. GRAMMY.com; Rolling Stone; Billboard.">3</a></sup><sup class="cite"><a href="#mc-src-4" data-src="gala-2026" data-tip="2026 gala (35th annual, Jan 30 2026) honoring Mariah Carey; performers via BusinessWire. Total not yet public.">4</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">GEAR 03</div>
+          <h3>The reserve it builds</h3>
+          <p>Unlike Music Minds Matter, which spends down an inherited endowment, MusiCares banks its surplus — <strong>$32.7M net assets</strong> at FY2024 year-end. The same posture as Backline, at roughly fifteen times the scale and on a different engine.<sup class="cite"><a href="#mc-src-5" data-src="form990-financials" data-tip="Net assets $32.69M; total assets $33.77M (FY2024). MusiCares Form 990 via ProPublica (IRS digitized).">5</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">GEAR 04</div>
+          <h3>The evidence engine</h3>
+          <p>The annual Wellness in Music Survey makes MusiCares the producer of the field's benchmark data. That authority generates the headlines and urgency that justify the next gala and the next partnership — feeding back into Gears 1 and 2.<sup class="cite"><a href="#mc-src-7" data-src="survey-2025" data-tip="Wellness in Music Survey (annual since 2021); the field's benchmark dataset. MusiCares 2025 results.">7</a></sup></p>
+        </div>
+      </div>
+
+      <p style="margin-top:1.75rem;">The cleanest way to see the difference between an incumbent and a challenger is GRAMMY week itself. Backline reached its largest-ever audience by capturing a GRAMMY moment <em>from the outside</em> — the viral campaign that followed Chappell Roan's 2025 acceptance-speech call for industry health coverage. MusiCares does not have to capture GRAMMY week. It owns it.</p>
+    </section>
+
+    <!-- 3. FINANCIAL -->
+    <section>
+      <div class="section-label">03 — Financial profile</div>
+      <h2>A reserve it builds, not spends<sup class="cite"><a href="#mc-src-5" data-src="form990-financials" data-tip="All financial figures from MusiCares Form 990 (FY2019–FY2024) via ProPublica (IRS digitized). FY ends July 31; latest filed FY2024. Year-over-year deltas computed, not quoted.">5</a></sup></h2>
+      <p>All figures below come directly from MusiCares' Form 990 filings. The fiscal year ends July 31, and the latest filed return is FY2024 — the FY2025 return was not yet available at the time of writing.</p>
+
+      <figure class="chart">
+        <figcaption>Total revenue by fiscal year ($M) — the COVID step-change and a higher new baseline</figcaption>
+        <div class="col-chart" role="img" aria-label="Revenue columns: FY2019 $9.0M, FY2020 $32.4M (COVID spike), FY2021 $14.1M, FY2022 $12.4M, FY2023 $15.3M, FY2024 $14.0M.">
+          <div class="col"><div class="ctrack"><div class="cbar" style="height:26%"><span class="cval">$9.0M</span></div></div><span class="cyr">FY19</span></div>
+          <div class="col"><div class="ctrack"><div class="cbar peak" style="height:92%"><span class="cval">$32.4M</span></div></div><span class="cyr">FY20</span></div>
+          <div class="col"><div class="ctrack"><div class="cbar" style="height:40%"><span class="cval">$14.1M</span></div></div><span class="cyr">FY21</span></div>
+          <div class="col"><div class="ctrack"><div class="cbar" style="height:35%"><span class="cval">$12.4M</span></div></div><span class="cyr">FY22</span></div>
+          <div class="col"><div class="ctrack"><div class="cbar" style="height:43%"><span class="cval">$15.3M</span></div></div><span class="cyr">FY23</span></div>
+          <div class="col"><div class="ctrack"><div class="cbar" style="height:40%"><span class="cval">$14.0M</span></div></div><span class="cyr">FY24</span></div>
+        </div>
+        <div class="chart-key">
+          <span><span class="swatch s-rev"></span> Normal year</span>
+          <span><span class="swatch s-covid"></span> COVID surge (FY2020)</span>
+        </div>
+        <p class="chart-note">Revenue tripled to $32.4M in FY2020 and has settled near $14M since — well above the pre-pandemic $9M baseline. The crisis permanently enlarged the donor base.</p>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <caption>MusiCares financials, FY2019–FY2024 — IRS Form 990 via ProPublica</caption>
+          <thead><tr><th scope="col">FY (end Jul)</th><th scope="col" class="num">Revenue</th><th scope="col" class="num">Expenses</th><th scope="col" class="num">Net income</th><th scope="col" class="num">Total assets</th><th scope="col" class="num">Net assets</th></tr></thead>
+          <tbody>
+            <tr><td>2019</td><td class="num">$9.02M</td><td class="num">$9.58M</td><td class="num">−$0.56M</td><td class="num">—</td><td class="num">$21.71M</td></tr>
+            <tr class="row-covid"><td>2020</td><td class="num">$32.36M</td><td class="num">$26.86M</td><td class="num">+$5.50M</td><td class="num">$28.83M</td><td class="num">$27.47M</td></tr>
+            <tr><td>2021</td><td class="num">$14.05M</td><td class="num">$15.35M</td><td class="num">−$1.30M</td><td class="num">$30.95M</td><td class="num">$29.67M</td></tr>
+            <tr><td>2022</td><td class="num">$12.36M</td><td class="num">$11.77M</td><td class="num">+$0.60M</td><td class="num">$27.30M</td><td class="num">$25.85M</td></tr>
+            <tr><td>2023</td><td class="num">$15.26M</td><td class="num">$12.75M</td><td class="num">+$2.51M</td><td class="num">$30.05M</td><td class="num">$29.16M</td></tr>
+            <tr class="row-emph"><td>2024</td><td class="num">$14.04M</td><td class="num">$11.82M</td><td class="num">+$2.22M</td><td class="num">$33.77M</td><td class="num">$32.69M</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Two patterns the table makes plain. The <strong>reserve is investment-linked, not cash in a drawer</strong>: net assets fell from $29.7M (FY2021) to $25.9M (FY2022) even though that year posted positive net income, because the investment portfolio lost value in the 2022 market — the cushion carries market risk. And in normal years MusiCares <strong>runs a surplus</strong> and adds it to reserves, the opposite of Music Minds Matter's planned deficit.</p>
+
+      <h3>The gala line that looks like a loss<sup class="cite"><a href="#mc-src-5" data-src="form990-financials" data-tip="FY2024: contributions $14,504,897; net fundraising −$2,826,700. Form 990 via ProPublica.">5</a></sup></h3>
+      <p>FY2024 contributions were <strong>$14.5M</strong>; the "net fundraising" line was <strong>−$2.83M</strong>. Read naively, the gala looks like it loses money. It does not. The −$2.83M is the direct cost of staging the gala minus the ticket revenue booked against it; the gala's real product is the $14.5M of contributions it cultivates, recorded on a separate line. Standard accounting for a high-end benefit — but also the concentration risk made visible (§9).</p>
+
+      <h3>Management cost is visible — a correction<sup class="cite"><a href="#mc-src-6" data-src="form990-comp" data-tip="FY2024 Part VII/Sch J: ED $362,132 (+$55,952); VP $206,466; four managing directors $141,798–$174,245; salaries $3,797,984 (32.1%). The $0 summary line = the CEO drawing pay from the Recording Academy.">6</a></sup></h3>
+      <p>A common misreading — repeated in this project's own earlier draft — is that executive compensation is "$0" and therefore hidden inside the Recording Academy. The $0 appears only on the summary line, and only because the CEO draws his pay from the Academy, not from MusiCares. The detailed schedule discloses operational leadership plainly: in FY2024 the Executive Director was paid <strong>$362,132</strong>, a Vice President $206,466, and four managing directors $142,000–$174,000. Salaries were <strong>$3.8M</strong>, about 32% of expenses. MusiCares employs and pays its own staff; the management cost is not concealed.</p>
+    </section>
+
+    <!-- 4. EVIDENCE ENGINE -->
+    <section>
+      <div class="section-label">04 — The evidence engine</div>
+      <h2>MusiCares measures the field<sup class="cite"><a href="#mc-src-7" data-src="survey-2025" data-tip="Wellness in Music Survey 2025 (5th ed., ~3,200 respondents): 11.4% suicidal ideation (up from 8.3% in 2024); 1 in 6 lost a colleague. MusiCares; BusinessWire/JED.">7</a></sup></h2>
+      <p>MusiCares is the only organization in this case-study series that <em>produces</em> the field's benchmark data rather than consuming it. The Wellness in Music Survey, run annually since 2021, is the closest thing the U.S. music industry has to a standing mental-health surveillance instrument — and the source of the figures everyone else cites, including this project.</p>
+
+      <div class="stat-strip">
+        <div class="stat-item"><div class="stat-num">11.4%</div><div class="stat-label">reported suicidal ideation, 2025 (up from 8.3% in 2024)</div></div>
+        <div class="stat-item"><div class="stat-num">2×</div><div class="stat-label">the U.S. general-population rate</div></div>
+        <div class="stat-item"><div class="stat-num">1 in 6</div><div class="stat-label">lost a colleague to suicide in the past year</div></div>
+        <div class="stat-item"><div class="stat-num">~3,200</div><div class="stat-label">respondents, 5th annual edition</div></div>
+      </div>
+
+      <p>The sixth edition was fielded in April 2026; results were not yet published as of June 2026.<sup class="cite"><a href="#mc-src-8" data-src="survey-2026" data-tip="2026 (6th) survey fielded April 2026; results unpublished as of 2026-06-18. Recording Academy.">8</a></sup> The strategic point is that the survey is a <strong>compounding asset</strong>: each year of data makes the longitudinal series more valuable, and producing the evidence base positions MusiCares as the category's definitional authority. For a startup the lesson is disproportionate to the cost — this is the highest-leverage thing MusiCares does, and also the cheapest (§10).</p>
+    </section>
+
+    <!-- 5. PROGRAMS -->
+    <section>
+      <div class="section-label">05 — Programs</div>
+      <h2>A crisis-to-prevention stack<sup class="cite"><a href="#mc-src-14" data-src="programs" data-tip="Programs &amp; eligibility (MAP Fund acquired 2004; 5-year/6-release gate; Safe Harbor Rooms since 1997): MusiCares Get Help / About. Cumulative $135M+ / 200,000+ served are ⚠️ org-reported.">14</a></sup></h2>
+      <p>MusiCares grew the way most durable safety nets grow — from acute crisis outward into prevention.</p>
+      <ul class="prog">
+        <li><div class="ptag">Core</div><h3>Emergency financial assistance</h3><p>Need-based grants for rent, utilities, insurance, and other basics during hardship. Eligibility requires roughly five years in the industry (three for disaster relief) or six commercial releases — a gate that, by design, excludes the newest and most precarious workers (§9).</p></li>
+        <li><div class="ptag">Since 2004</div><h3>The MAP Fund — addiction &amp; mental health</h3><p>The Musicians Assistance Program, acquired in 2004, funds treatment, intensive outpatient aftercare, sober-living placement, and clinician-led virtual support groups. Staffed "Safe Harbor Rooms" have offered on-site recovery support at the GRAMMYs since 1997.</p></li>
+        <li><div class="ptag">Prevention</div><h3>Health, touring &amp; Mindful May</h3><p>Hearing clinics and medical consultations for the uninsured; the "Resilience on the Road" touring toolkit; and the third annual "Mindful May" wellness day in New Orleans on May 19, 2026 with Sweetwater.<sup class="cite"><a href="#mc-src-12" data-src="mindful-may" data-tip="Mindful May (3rd annual): New Orleans, May 19 2026, with Sweetwater. BusinessWire.">12</a></sup></p></li>
+        <li><div class="ptag">New · 2026</div><h3>The JED Foundation partnership</h3><p>Launched April 14, 2026 and sponsored by Spotify, the musicares.org/JED microsite offers a self-paced, certificate-bearing suicide-prevention course for artists, crews, and managers — built explicitly in response to the 2025 survey finding. The evidence engine driving a program.<sup class="cite"><a href="#mc-src-9" data-src="jed" data-tip="JED Foundation partnership launched 2026-04-14; musicares.org/JED; Spotify-sponsored. BusinessWire. The release quotes Theresa Wolters as ED.">9</a></sup></p></li>
+      </ul>
+    </section>
+
+    <!-- 6. CRISIS ELASTICITY -->
+    <section>
+      <div class="section-label">06 — Crisis elasticity</div>
+      <h2>Built to surge</h2>
+      <p>The strongest operational claim MusiCares can make is that its infrastructure scales for a shock and then settles back. It has now demonstrated this twice — and that elasticity is the practical payoff of the reserve in §3, exactly what a thinly capitalized startup cannot offer.</p>
+      <div class="crisis-grid">
+        <div class="crisis">
+          <div class="cyrtag">2020–2022</div>
+          <h3>COVID-19 Relief Fund</h3>
+          <div class="big">$35.7M</div>
+          <p>Distributed in emergency aid March 2020–July 2022, with 140,000+ services. The single-year 990 captures the surge: FY2020 revenue $32.4M against $26.9M of expenses — roughly triple and quadruple the prior year.<sup class="cite"><a href="#mc-src-10" data-src="covid" data-tip="COVID-19 Relief Fund: $35.7M distributed 2020–2022; 140,000+ services (⚠️ org-reported). FY2020 990 surge ✅ via ProPublica.">10</a></sup></p>
+        </div>
+        <div class="crisis">
+          <div class="cyrtag">2025–2026</div>
+          <h3>Los Angeles wildfire relief</h3>
+          <div class="big">$15M+</div>
+          <p>Directed toward fire relief one year after the January 2025 LA wildfires — $7M in the immediate aftermath plus ongoing recovery — reaching 3,200+ music professionals. A multi-million-dollar disaster response standing up inside a normal operating year.<sup class="cite"><a href="#mc-src-11" data-src="fire-relief" data-tip="LA wildfire relief: $15M+ directed; $7M immediate; 3,200+ reached. BusinessWire, 2026-01-07.">11</a></sup></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. GOVERNANCE -->
+    <section>
+      <div class="section-label">07 — Governance</div>
+      <h2>Affiliation's other edge<sup class="cite"><a href="#mc-src-13" data-src="leadership-change" data-tip="Leadership change: Laura Segura departed May 2025 in a sudden, unexplained exit announced by Harvey Mason Jr.; Wolters named interim then permanent ED. Variety; Billboard; CelebrityAccess; MusiCares.">13</a></sup></h2>
+      <p>The Recording Academy affiliation is MusiCares' greatest asset and its sharpest governance risk, because the two are not at arm's length. The Academy's CEO is MusiCares' CEO; an Executive Director runs operations beneath him. When the Academy has reputational trouble — and it has had recurring controversy over voting, diversity, and executive conduct — that exposure flows directly to MusiCares.</p>
+      <p>The clearest recent illustration is the leadership transition itself. Executive Director Laura Segura departed in May 2025 in a <strong>sudden, unexplained exit</strong>: the news was delivered to staff by the Academy's CEO over the Memorial Day weekend, with no reason given and no response to press inquiries. The organization is large, durable, and professionally run — but its top operational seat turned over opaquely, decided above the charity rather than within it. For a body holding a $33M reserve and the field's most trusted brand, that governance opacity is a recurring weakness, not a one-off.</p>
+    </section>
+
+    <!-- 8. STRENGTHS -->
+    <section>
+      <div class="section-label">08 — Strengths</div>
+      <h2>What works</h2>
+      <div class="sw-grid">
+        <div class="sw-card strong"><h3>Institutional embeddedness</h3><p>The Recording Academy affiliation supplies credibility, GRAMMY-week fundraising, and a built-in constituency no independent organization can replicate. The flywheel's foundation.</p></div>
+        <div class="sw-card strong"><h3>Scale and financial depth</h3><p>~$14M annual revenue, $33.8M in assets, 35 years of continuous operation — a cushion smaller organizations cannot match, and the capacity to absorb shocks.</p></div>
+        <div class="sw-card strong"><h3>Category-defining data</h3><p>The Wellness in Music Survey is the field's benchmark dataset and a compounding strategic asset, not just a research output.</p></div>
+        <div class="sw-card strong"><h3>Proven crisis elasticity</h3><p>COVID and the LA wildfires both show the infrastructure scaling several-fold and settling back without instability.</p></div>
+        <div class="sw-card strong"><h3>Comprehensive model</h3><p>Financial aid, addiction recovery, mental health, hearing and medical services, touring resources, and prevention form one integrated stack.</p></div>
+      </div>
+    </section>
+
+    <!-- 9. WEAKNESSES -->
+    <section>
+      <div class="section-label">09 — Weaknesses &amp; risks</div>
+      <h2>What to watch</h2>
+      <div class="sw-grid">
+        <div class="sw-card weak"><h3>U.S.-only</h3><p>No Asia-Pacific presence — the field-wide gap this project tracks, and an opening rather than a competitor for a Taiwan organization.</p></div>
+        <div class="sw-card weak"><h3>Eligibility gatekeeping</h3><p>The five-year / six-release threshold excludes emerging, part-time, and non-recording workers — often the most vulnerable, and precisely whom a new Taiwan org would most want to serve.</p></div>
+        <div class="sw-card weak"><h3>Gala concentration</h3><p>A single event two nights before the GRAMMYs carries a disproportionate share of fundraising. Highly effective ($10M in a night), but concentration risk dependent on celebrity participation and the GRAMMY calendar.</p></div>
+        <div class="sw-card weak"><h3>Academy entanglement</h3><p>Affiliation ties MusiCares to the Academy's reputation and to decisions made above the charity — as the opaque 2025 leadership change showed (§7).</p></div>
+        <div class="sw-card weak"><h3>Reactive by default</h3><p>Most services are still crisis-triggered. Prevention (the survey, JED, Mindful May) is growing but remains the smaller share of the portfolio.</p></div>
+      </div>
+    </section>
+
+    <!-- 10. LESSONS -->
+    <section>
+      <div class="section-label">10 — Lessons for Taiwan</div>
+      <h2>What a Taiwan music mental health NPO should take</h2>
+      <ol class="lessons">
+        <li><h3>Do not try to copy the engine</h3><p>The flywheel rests on assets a Taiwan startup cannot acquire: a Recording-Academy-equivalent parent, a GRAMMY-scale annual event, celebrity donor density, and a $33M reserve. Treating MusiCares as a build template is a category error — read it as a picture of the ceiling, not a blueprint.</p></li>
+        <li><h3>Copy the cheapest piece, because it is the highest-leverage one</h3><p>The single most transferable element is the <strong>annual wellbeing survey</strong>, and it transfers precisely because it needs no scale. A Taiwan-specific musician survey would establish baseline data where none exists, generate media and funder attention, justify grant applications with local evidence, and create a recurring moment that keeps a young org visible. The famous part (the gala) is the non-transferable part; the measurement habit is what to import first.<sup class="cite"><a href="#mc-src-7" data-src="survey-2025" data-tip="The Wellness in Music Survey is the model's most transferable, lowest-cost element. MusiCares 2025 results.">7</a></sup></p></li>
+        <li><h3>Seek affiliation, but keep governance independent</h3><p>Institutional backing is a genuine force multiplier — pursue a tie to an established body (a Golden Melody Awards entity, the music copyright/union bodies, a major foundation). But MusiCares' opaque 2025 leadership change is the cautionary half: structure the relationship so the parent supplies reach and credibility without controlling the charity's top seat from above.<sup class="cite"><a href="#mc-src-13" data-src="leadership-change" data-tip="The 2025 ED change — decided above the charity — is the governance caution. Variety; Billboard; MusiCares.">13</a></sup></p></li>
+        <li><h3>Set inclusive eligibility from day one</h3><p>MusiCares' release-count gate suits a large market with an established commercial tier. Taiwan's smaller ecosystem, where people work across performing, producing, teaching, and event roles, calls for criteria based on any recent music-related income — not commercial releases.<sup class="cite"><a href="#mc-src-14" data-src="programs" data-tip="Eligibility: 5 years in industry (3 for disaster) or 6 commercial releases. MusiCares Get Help.">14</a></sup></p></li>
+        <li><h3>Start with crisis response, then layer prevention</h3><p>MusiCares' arc — financial aid, then addiction and mental health, then prevention — is the natural growth path. Begin with visible crisis help and referral, and add preventive programming as credibility and funding accumulate.</p></li>
+        <li><h3>Do not lead with a gala</h3><p>High-value benefit galas work in the U.S. because of wealth concentration and the GRAMMY brand. Plan around Ministry of Culture grants, corporate sponsorship, and industry-body support as primary revenue, with events as a supplement rather than the engine.<sup class="cite"><a href="#mc-src-3" data-src="gala-2025" data-tip="The gala raises $10M/night on GRAMMY-week celebrity density — a non-transferable revenue model. GRAMMY.com.">3</a></sup></p></li>
+      </ol>
+    </section>
+
+    <!-- 11. METHOD + REFERENCES -->
+    <section>
+      <div class="section-label">11 — Methodology &amp; references</div>
+      <h2>Basis</h2>
+      <p class="cite-help">Every figure carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source; click to jump to the full reference. Financial figures come directly from MusiCares' IRS Form 990 filings as digitized by ProPublica (the authoritative primary source). The latest filed return is FY2024 (fiscal year ending July 31, 2024); the FY2025 return was not yet available at the time of writing — verified absent, not assumed. Cumulative lifetime totals and the COVID relief total are organization-reported and labeled ⚠️.</p>
+
+      <div class="refs" id="refs-all" data-citation-registry="mc-all">
+        <div class="refs-title">References</div>
+        <ol>
+          <li id="mc-src-1" data-src="form990-officers">Identity, board, and current leadership: MusiCares Form 990 (FY2024), Part VII officer/compensation table, via <a href="https://projects.propublica.org/nonprofits/organizations/954470909" target="_blank" rel="noopener">ProPublica Nonprofit Explorer</a> (EIN 95-4470909; Steve Boom, Chair; Harvey Mason Jr., CEO at $0 from MusiCares); current Executive Director Theresa Wolters per <a href="https://www.musicares.org/news/theresa-wolters-executive-director" target="_blank" rel="noopener">MusiCares, "Names Theresa Wolters as Executive Director"</a>. Accessed 2026-06-18.</li>
+          <li id="mc-src-2" data-src="academy-1989">Recording Academy affiliation and 1989 founding: <a href="https://www.businesswire.com/news/home/20260414340415/en/" target="_blank" rel="noopener">MusiCares / The Jed Foundation partnership release (BusinessWire, 2026-04-14)</a> ("founded by the Recording Academy in 1989 as a U.S.-based 501(c)(3) charity"); <a href="https://www.musicares.org/about" target="_blank" rel="noopener">MusiCares, About</a>.</li>
+          <li id="mc-src-3" data-src="gala-2025">Person of the Year gala model and 2025 results ($10M at the gala; ~$26M across GRAMMY weekend incl. fire relief; 34th annual; two nights before the GRAMMYs since 1991): <a href="https://www.grammy.com/news/person-of-the-year-2025-honoree-the-grateful-dead-gala-grammys" target="_blank" rel="noopener">GRAMMY.com</a>, corroborated by <a href="https://www.rollingstone.com/music/music-news/grateful-dead-musicares-2025-persons-of-the-year-1235141084/" target="_blank" rel="noopener">Rolling Stone</a> and <a href="https://www.billboard.com/music/awards/grateful-dead-2025-musicares-persons-of-the-year-1235808485/" target="_blank" rel="noopener">Billboard</a>.</li>
+          <li id="mc-src-4" data-src="gala-2026">2026 gala (35th annual, January 30, 2026, Los Angeles Convention Center) honoring Mariah Carey; performers: <a href="https://www.musicares.org/news/person-of-the-year-2026-honoree-mariah-carey-grammys-gala" target="_blank" rel="noopener">MusiCares</a>; <a href="https://www.businesswire.com/news/home/20260120360130/en/" target="_blank" rel="noopener">BusinessWire performers release</a>. The 2026 fundraising total was not public as of 2026-06-18.</li>
+          <li id="mc-src-5" data-src="form990-financials">All financial figures (revenue, expenses, net income, total and net assets, FY2019–FY2024; FY2024 contributions $14,504,897; net fundraising −$2,826,700): MusiCares Form 990 filings, <a href="https://projects.propublica.org/nonprofits/organizations/954470909" target="_blank" rel="noopener">ProPublica Nonprofit Explorer</a> (IRS digitized data; FY ends July 31; latest filed FY2024, filed 2025-06-16). Year-over-year deltas and the reserve/market-loss observation are computed from these totals, not quoted.</li>
+          <li id="mc-src-6" data-src="form990-comp">Compensation detail (ED $362,132 + $55,952; VP $206,466; four managing directors $141,798–$174,245; salaries &amp; wages $3,797,984 = 32.1% of expenses; the "$0" summary line reflects the CEO drawing pay from the Recording Academy): MusiCares Form 990 (FY2024), Part VII / Schedule J, via <a href="https://projects.propublica.org/nonprofits/organizations/954470909" target="_blank" rel="noopener">ProPublica</a>.</li>
+          <li id="mc-src-7" data-src="survey-2025">Wellness in Music Survey (annual since 2021) and 2025 results (5th edition, ~3,200 respondents; 11.4% suicidal ideation, up from 8.3% in 2024, ~2× U.S. rate; one in six lost a colleague to suicide): <a href="https://www.musicares.org/news/2025-wellness-in-music-survey-results-insights" target="_blank" rel="noopener">MusiCares, "2025 Wellness In Music Survey Results"</a>, corroborated by the <a href="https://www.businesswire.com/news/home/20260414340415/en/" target="_blank" rel="noopener">BusinessWire/JED release (2026-04-14)</a>.</li>
+          <li id="mc-src-8" data-src="survey-2026">2026 (6th edition) survey fielded April 2026, results not yet published: <a href="https://www.recordingacademy.com/press-releases/musicares-wellness-in-music-survey-2026-announcement" target="_blank" rel="noopener">Recording Academy, "MusiCares Opens the 2026 Wellness in Music Survey"</a>. Confirmed unpublished via web search as of 2026-06-18.</li>
+          <li id="mc-src-9" data-src="jed">JED Foundation partnership (launched 2026-04-14; musicares.org/JED; self-paced suicide-prevention training with certificate; sponsored by Spotify; launched in response to the 2025 survey finding; release quotes Theresa Wolters as Executive Director): <a href="https://www.businesswire.com/news/home/20260414340415/en/" target="_blank" rel="noopener">BusinessWire</a>.</li>
+          <li id="mc-src-10" data-src="covid">COVID-19 Relief Fund ($35.7M distributed March 2020–July 2022; 140,000+ services): <a href="https://en.wikipedia.org/wiki/MusiCares_COVID-19_Relief_Fund" target="_blank" rel="noopener">Wikipedia, "MusiCares COVID-19 Relief Fund"</a> and MusiCares releases — ⚠️ organization-reported totals. The single-year surge (FY2020 revenue $32.36M; expenses $26.86M) is ✅ verified from the Form 990 <a href="https://projects.propublica.org/nonprofits/organizations/954470909" target="_blank" rel="noopener">via ProPublica</a>.</li>
+          <li id="mc-src-11" data-src="fire-relief">Los Angeles wildfire relief (more than $15M directed one year on; $7M immediate; 3,200+ reached): <a href="https://www.businesswire.com/news/home/20260107947155/en/" target="_blank" rel="noopener">BusinessWire, "More Than $15 Million Directed Toward Fire Relief One Year After Los Angeles Wildfires" (2026-01-07)</a>.</li>
+          <li id="mc-src-12" data-src="mindful-may">Mindful May (3rd annual; New Orleans, May 19, 2026; New Orleans Jazz &amp; Heritage Festival and Foundation; with Sweetwater): <a href="https://www.businesswire.com/news/home/20260514025988/en/" target="_blank" rel="noopener">BusinessWire, "MusiCares to Host Third Annual Mindful May in New Orleans"</a>.</li>
+          <li id="mc-src-13" data-src="leadership-change">Leadership transition: Laura Segura departed May 2025 in a sudden, unexplained exit — <a href="https://variety.com/2025/music/news/musicares-executive-director-laura-segura-leaves-post-1236410403/" target="_blank" rel="noopener">Variety, "MusiCares Executive Director Laura Segura Leaves Post in Sudden Departure"</a>; <a href="https://www.billboard.com/pro/laura-segura-departs-musicares-executive-director/" target="_blank" rel="noopener">Billboard</a>. Theresa Wolters named interim (May 2025) then permanent Executive Director (August 2025) — <a href="https://celebrityaccess.com/2025/08/28/theresa-wolters-named-executive-director-at-musicares/" target="_blank" rel="noopener">CelebrityAccess</a>; <a href="https://www.musicares.org/news/theresa-wolters-executive-director" target="_blank" rel="noopener">MusiCares</a>.</li>
+          <li id="mc-src-14" data-src="programs">Programs and eligibility (emergency financial assistance; five-year / six-release eligibility, three years for disaster relief; MAP Fund acquired 2004; Safe Harbor Rooms since 1997; health/touring services): <a href="https://www.musicares.org/get-help" target="_blank" rel="noopener">MusiCares, Get Help</a> and <a href="https://www.musicares.org/about" target="_blank" rel="noopener">About</a>. Cumulative lifetime totals ($135M+ in assistance; 200,000+ served) are ⚠️ organization-reported, corroborated by <a href="https://en.wikipedia.org/wiki/MusiCares" target="_blank" rel="noopener">Wikipedia, "MusiCares"</a>.</li>
+        </ol>
+        <p class="refs-note">Convention: every claim-bearing element carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above — machine-checkable before each deploy (§5.2 / §6 gate 1). Derived ratios are marked computed, not quoted.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- nav scroll-state: transparent over hero, blurred bar once scrolled -->
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden','true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>
