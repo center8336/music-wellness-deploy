@@ -74,61 +74,18 @@
 
   .bottom { position:fixed; bottom:0; left:0; right:0; z-index:100; display:flex; justify-content:flex-end; align-items:center; gap:0.75rem; padding:1.5rem 2.5rem; padding-bottom:calc(1.5rem + env(safe-area-inset-bottom)); padding-right:calc(2.5rem + env(safe-area-inset-right)); pointer-events:none; }
   .bottom-year { font-family:var(--font-mono); font-size:var(--text-xs); font-weight:400; color:var(--grey); opacity:0.7; letter-spacing:0.12em; text-transform:uppercase; }
-  .bottom-logo { display:none; }
+  .bottom-logo { width:48px; height:auto; display:block; opacity:0.92; transition:opacity var(--dur) var(--ease); pointer-events:auto; }
+  .bottom-logo:hover { opacity:1; }
   .credit { font-family:var(--font-mono); font-size:var(--text-xs); font-weight:400; color:var(--grey); opacity:0.65; letter-spacing:0.08em; white-space:nowrap; }
   @media (max-width:480px){ .credit { font-size:0.6rem; letter-spacing:0.04em; } }
 
-  /* ── reader mixer desk (TX-6 × Soyuz Lakeside), slides up on a handle ── */
-  #mxpanel { position:fixed; left:0; right:0; bottom:0; z-index:120; transform:translateY(calc(100% - 26px)); transition:transform .42s var(--ease); will-change:transform; }
-  #mxpanel.open { transform:translateY(0); }
-  #mxhandle { height:26px; width:170px; margin:0 auto; display:flex; align-items:center; justify-content:center; gap:8px; background:linear-gradient(#e7e7ea,#d6d6db); border:1px solid #c4c4c9; border-bottom:none; border-radius:12px 12px 0 0; cursor:pointer; font-family:var(--font-mono); font-size:9px; letter-spacing:.22em; color:#52525a; -webkit-tap-highlight-color:transparent; }
-  #mxhandle:focus-visible { outline:2px solid var(--signal); outline-offset:2px; }
-  #mxhandle .arw { transition:transform .42s var(--ease); }
-  #mxpanel.open #mxhandle .arw { transform:rotate(180deg); }
-  #mxdesk { display:flex; gap:8px; justify-content:center; align-items:stretch; flex-wrap:wrap; background:transparent; padding:12px; padding-bottom:calc(12px + env(safe-area-inset-bottom)); font-family:var(--font-mono); }
-  #mxdesk.byp { filter:saturate(.25) brightness(.98); }
-  .mxch { width:92px; display:flex; flex-direction:column; align-items:center; gap:9px; padding:8px 5px; background:rgba(244,244,245,0.78); -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px); border:1px solid rgba(215,215,219,0.8); border-top:3px solid var(--c); border-radius:9px; box-shadow:0 2px 12px rgba(0,0,0,0.06); }
-  .mxch.mute { opacity:.4; }
-  .mxch .l { font-size:10px; font-weight:700; letter-spacing:.1em; color:#27272a; }
-  .mxm { width:26px; height:26px; border-radius:50%; border:2px solid var(--c); background:#fafafa; cursor:pointer; display:flex; align-items:center; justify-content:center; -webkit-tap-highlight-color:transparent; }
-  .mxm b { width:8px; height:8px; border-radius:50%; background:var(--c); }
-  .mxch.mute .mxm { background:var(--c); } .mxch.mute .mxm b { background:#fafafa; }
-  .mxk { position:relative; width:44px; height:44px; touch-action:none; cursor:ns-resize; }
-  .mxk .ring { position:absolute; inset:0; border-radius:50%; background:conic-gradient(from 215deg, var(--c) calc(var(--pct,0.5)*270deg), rgba(0,0,0,.10) 0 270deg, transparent 270deg); }
-  .mxk .face { position:absolute; inset:6px; border-radius:50%; background:radial-gradient(#3a3a3e,#202022); }
-  .mxk .ind { position:absolute; left:50%; top:6px; width:3px; height:14px; background:#f0f0f2; border-radius:2px; transform-origin:50% 16px; transform:translateX(-50%) rotate(calc(-135deg + var(--pct,0.5)*270deg)); }
-  .mxkl { font-size:7px; letter-spacing:.08em; color:#71717a; margin-top:-4px; }
-  .mxmaster { width:140px; display:flex; flex-direction:column; align-items:center; justify-content:space-between; gap:9px; padding:8px; background:rgba(244,244,245,0.78); -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px); border:1px solid rgba(215,215,219,0.8); border-radius:9px; box-shadow:0 2px 12px rgba(0,0,0,0.06); }
-  .mxscreen { width:100%; height:46px; border-radius:5px; background:#1a1407; display:flex; flex-direction:column; align-items:center; justify-content:center; box-shadow:0 0 0 2px #c9c9cd inset; padding:3px 14px; box-sizing:border-box; overflow:hidden; }
-  .mxscreen .big { font-size:16px; font-weight:700; color:#ffd591; letter-spacing:.04em; line-height:1; }
-  .mxscreen .sub { font-size:7.5px; color:#a8772e; letter-spacing:.07em; margin-top:3px; white-space:nowrap; }
-  .mxsws { display:flex; flex-direction:column; gap:13px; align-items:flex-start; }
-  .mxtg { display:flex; flex-direction:row; align-items:center; gap:9px; cursor:pointer; -webkit-tap-highlight-color:transparent; }
-  .mxtg:focus-visible { outline:2px solid var(--signal); outline-offset:3px; }
-  .mxtg .sw { position:relative; width:26px; height:30px; flex:none; }
-  .mxtg .sw .base { position:absolute; left:50%; bottom:0; transform:translateX(-50%); width:22px; height:13px; border-radius:50%/42%; background:radial-gradient(circle at 50% 32%, #fcfcfe, #b4b4ba 72%, #9a9aa0); border:1px solid #9a9aa0; }
-  .mxtg .sw .lev { position:absolute; left:50%; bottom:8px; width:9px; height:20px; border-radius:5px; background:linear-gradient(#f6f6f8,#aeaeb4); box-shadow:0 1px 2px rgba(0,0,0,.45); transform-origin:50% 100%; transform:translateX(-50%) rotate(20deg); transition:transform .15s var(--ease); }
-  .mxtg.on .sw .lev { transform:translateX(-50%) rotate(-20deg); }
-  .mxtg .tt { font-size:9px; letter-spacing:.12em; color:#27272a; font-weight:700; }
-  .mxtg .led { width:7px; height:7px; border-radius:50%; background:#5a1414; box-shadow:inset 0 0 1px rgba(0,0,0,.6); transition:all .15s; }
-  .mxtg.on .led { background:#ff3b30; box-shadow:0 0 6px rgba(255,59,48,.85); }
-  .mxjack { width:24px; height:24px; border-radius:50%; background:radial-gradient(#26262a,#0d0d0f 60%,#26262a 62%); border:2px solid #b9b9bf; }
-  /* faint 棉 watermark near the bottom (desktop only — phone already shows the corner mark) */
-  .mxwatermark { position:fixed; left:50%; bottom:9%; transform:translateX(-50%); width:270px; height:236px; max-width:46vw; background-color:#3f3f46; -webkit-mask:center/contain no-repeat; mask:center/contain no-repeat; opacity:0.22; pointer-events:none; z-index:1; }
-  @media (max-width:768px){ .mxwatermark { display:none; } }
-  @media (max-width:680px){
-    /* master (POWER/48V/screen) becomes a full-width bar pinned at the top of the panel; the 4 channels sit in one row below — everything visible, no scrolling */
-    #mxdesk { flex-wrap:wrap; gap:6px; padding:10px 8px; padding-bottom:calc(10px + env(safe-area-inset-bottom)); max-height:80vh; overflow-y:auto; -webkit-overflow-scrolling:touch; align-items:flex-start; }
-    .mxmaster { order:-1; width:100%; flex-direction:row; align-items:center; justify-content:space-around; gap:10px; padding:8px 12px; }
-    .mxmaster .mxscreen { width:auto; flex:1 1 auto; max-width:168px; height:40px; }
-    .mxsws { flex-direction:row; gap:20px; align-items:center; }
-    .mxch { width:calc((100% - 18px)/4); min-width:0; padding:8px 3px; gap:7px; }
-    .mxk { width:40px; height:40px; }
-    .mxkl { font-size:7px; }
-    /* more transparent on phone so the field shows through while adjusting */
-    .mxch, .mxmaster { background:rgba(244,244,245,0.55); box-shadow:0 2px 10px rgba(0,0,0,0.05); }
-    #mxhandle { background:linear-gradient(rgba(231,231,234,0.82),rgba(214,214,219,0.82)); -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px); }
-  }
+  /* reader control — tune how closely your line follows you (鬆 loose ↔ 緊 tight) */
+  .tuner { position:fixed; left:calc(2.5rem + env(safe-area-inset-left)); bottom:calc(1.5rem + env(safe-area-inset-bottom)); z-index:100; display:flex; align-items:center; gap:0.5rem; opacity:0.4; transition:opacity var(--dur) var(--ease); }
+  .tuner:hover, .tuner:focus-within { opacity:0.95; }
+  .tuner .t-end { font-family:var(--font-body); font-size:0.72rem; color:var(--grey); line-height:1; }
+  .tuner input[type=range] { width:96px; accent-color:var(--signal); cursor:pointer; background:transparent; }
+  .tuner input[type=range]:focus-visible { outline:2px solid var(--signal); outline-offset:3px; }
+  @media (max-width:480px){ .tuner { left:1rem; bottom:1.1rem; } .tuner input[type=range]{ width:72px; } }
 
   .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; z-index:101; -webkit-tap-highlight-color:transparent; }
   .nav-toggle span { display:block; width:22px; height:2px; background:var(--grey); margin:5px 0; transition:all 0.3s var(--ease); }
@@ -192,43 +149,14 @@
 
 <div class="bottom">
   <span class="credit">Inspired by Tim Ingold</span>
+  <span class="bottom-year">2026</span>
   <img src="data:image/png;base64,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" alt="棉" class="bottom-logo">
 </div>
 
-<div class="mxwatermark" aria-hidden="true"></div>
-
-<div id="mxpanel">
-  <div id="mxhandle" role="button" tabindex="0" aria-label="Open or close the mixer"><span class="arw">▲</span> MIXER</div>
-  <div id="mxdesk">
-    <div class="mxch" style="--c:#6667AB"><span class="l">BASS</span><button class="mxm" data-ch="0" aria-label="mute bass"><b></b></button>
-      <div class="mxk" data-ch="0" data-p="TEMPO" data-min="40" data-max="160" role="slider" aria-label="bass tempo"><div class="ring"></div><div class="face"></div><div class="ind"></div></div><span class="mxkl">TEMPO</span>
-      <div class="mxk" data-ch="0" data-p="SPRING" data-min="0" data-max="100" role="slider" aria-label="bass spring"><div class="ring"></div><div class="face"></div><div class="ind"></div></div><span class="mxkl">SPRING</span>
-      <div class="mxk" data-ch="0" data-p="COLOUR" data-min="-100" data-max="100" role="slider" aria-label="bass colour"><div class="ring"></div><div class="face"></div><div class="ind"></div></div><span class="mxkl">COLOUR</span>
-    </div>
-    <div class="mxch" style="--c:#5fae86"><span class="l">GUITAR</span><button class="mxm" data-ch="1" aria-label="mute guitar"><b></b></button>
-      <div class="mxk" data-ch="1" data-p="TEMPO" data-min="40" data-max="160" role="slider" aria-label="guitar tempo"><div class="ring"></div><div class="face"></div><div class="ind"></div></div><span class="mxkl">TEMPO</span>
-      <div class="mxk" data-ch="1" data-p="SPRING" data-min="0" data-max="100" role="slider" aria-label="guitar spring"><div class="ring"></div><div class="face"></div><div class="ind"></div></div><span class="mxkl">SPRING</span>
-      <div class="mxk" data-ch="1" data-p="COLOUR" data-min="-100" data-max="100" role="slider" aria-label="guitar colour"><div class="ring"></div><div class="face"></div><div class="ind"></div></div><span class="mxkl">COLOUR</span>
-    </div>
-    <div class="mxch" style="--c:#e8a87c"><span class="l">DRUMS</span><button class="mxm" data-ch="2" aria-label="mute drums"><b></b></button>
-      <div class="mxk" data-ch="2" data-p="TEMPO" data-min="40" data-max="160" role="slider" aria-label="drums tempo"><div class="ring"></div><div class="face"></div><div class="ind"></div></div><span class="mxkl">TEMPO</span>
-      <div class="mxk" data-ch="2" data-p="SPRING" data-min="0" data-max="100" role="slider" aria-label="drums spring"><div class="ring"></div><div class="face"></div><div class="ind"></div></div><span class="mxkl">SPRING</span>
-      <div class="mxk" data-ch="2" data-p="COLOUR" data-min="-100" data-max="100" role="slider" aria-label="drums colour"><div class="ring"></div><div class="face"></div><div class="ind"></div></div><span class="mxkl">COLOUR</span>
-    </div>
-    <div class="mxch" style="--c:#d4799c"><span class="l">VOCAL</span><button class="mxm" data-ch="voc" aria-label="mute vocal"><b></b></button>
-      <div class="mxk" data-ch="voc" data-p="GAIN" data-min="10" data-max="60" role="slider" aria-label="vocal gain"><div class="ring"></div><div class="face"></div><div class="ind"></div></div><span class="mxkl">GAIN</span>
-      <div class="mxk" data-ch="voc" data-p="SPRING" data-min="0" data-max="100" role="slider" aria-label="vocal spring"><div class="ring"></div><div class="face"></div><div class="ind"></div></div><span class="mxkl">SPRING</span>
-      <div class="mxk" data-ch="voc" data-p="COLOUR" data-min="-100" data-max="100" role="slider" aria-label="vocal colour"><div class="ring"></div><div class="face"></div><div class="ind"></div></div><span class="mxkl">COLOUR</span>
-    </div>
-    <div class="mxmaster">
-      <div class="mxscreen"><div class="big" id="mxscv">READY</div><div class="sub" id="mxscl">MESHWORK</div></div>
-      <div class="mxsws">
-        <div class="mxtg" id="mxpw" role="switch" tabindex="0" aria-label="power / bypass"><span class="sw"><span class="base"></span><span class="lev"></span></span><span class="tt">POWER</span></div>
-        <div class="mxtg" id="mx48" role="switch" tabindex="0" aria-label="48V phantom warmth"><span class="sw"><span class="base"></span><span class="lev"></span></span><span class="tt">48V</span><span class="led"></span></div>
-      </div>
-      <div class="mxjack" title="phones"></div>
-    </div>
-  </div>
+<div class="tuner" title="你的線：鬆 ↔ 緊">
+  <span class="t-end" aria-hidden="true">鬆</span>
+  <input type="range" id="tuneSpring" min="3" max="14" value="10" aria-label="Adjust how closely your line follows you — loose to tight">
+  <span class="t-end" aria-hidden="true">緊</span>
 </div>
 
 <script>
@@ -261,8 +189,8 @@
   var TEMPO = 0.6;
   var INST = { spd:[0.80,1.00,1.30], mult:[0.5,1.0,2.0], surgeAmp:[0.34,0.20,0.22], mfreq:[0.16,0.38,0.72], mamp:[0.24,0.15,0.09] };
   function pickInst(){ var r = Math.random(); return r < 0.42 ? 0 : (r < 0.70 ? 1 : 2); }   // bass42 guitar28 drums30
-  function instSurge(s, t, tf){
-    var bp = t * TEMPO * s.mult * (tf||1) * 6.2832 + s.beatPhase, sr;
+  function instSurge(s, t){
+    var bp = t * TEMPO * s.mult * 6.2832 + s.beatPhase, sr;
     if (s.inst === 2){                                  // J Dilla off-grid swing
       var drift = Math.sin(t*0.33 + s.groovePhase)*0.55 + Math.sin(t*0.17 + s.groovePhase*1.7)*0.30;
       var sw = bp + 0.38*Math.sin(bp) + drift;
@@ -307,14 +235,13 @@
   /* ── pre-render the 7 waveform block glyphs once → drawImage them (cheap, exact ▁▂▃ look) ── */
   function buildAtlas(){
     atlas = document.createElement('canvas');
-    atlas.width = ATLAS_CELL * ATLAS_N * DPR; atlas.height = ATLAS_CELL * 3 * DPR;
+    atlas.width = ATLAS_CELL * ATLAS_N * DPR; atlas.height = ATLAS_CELL * DPR;
     var a = atlas.getContext('2d');
     a.setTransform(DPR, 0, 0, DPR, 0, 0);
     a.textAlign = 'center'; a.textBaseline = 'middle';
     a.font = '500 ' + Math.round(ATLAS_CELL*0.78) + 'px ' + CJK;
-    var rows = [COL.grey, COL.warm, COL.cool];
-    for (var r = 0; r < 3; r++){ a.fillStyle = rgba(rows[r], 1);
-      for (var i = 0; i < ATLAS_N; i++) a.fillText(WAVE[i], ATLAS_CELL*(i+0.5), ATLAS_CELL*(r+0.52)); }
+    a.fillStyle = rgba(COL.grey, 1);
+    for (var i = 0; i < ATLAS_N; i++) a.fillText(WAVE[i], ATLAS_CELL*(i+0.5), ATLAS_CELL*0.52);
   }
 
   /* ── flow field ── */
@@ -322,67 +249,23 @@
   function seedVortices(){
     vortices = []; var n = MOBILE ? 2 : 3;
     for (var i=0;i<n;i++) vortices.push({ bx:rand(0.2,0.8)*W, by:rand(0.2,0.8)*H, ax:rand(0.1,0.22)*W, ay:rand(0.1,0.22)*H, fx:rand(0.03,0.06), fy:rand(0.03,0.06), px:rand(0,6.28), py:rand(0,6.28), sign:i%2===0?1:-1, str:rand(0.8,1.3) });
-    // gentle local knot under the 棉 — gathers some streams toward the interference band without funnelling the whole field
-    vortices.push({ bx:0.5*W, by:0.80*H, ax:0.03*W, ay:0.015*H, fx:0.045, fy:0.05, px:0, py:1.2, sign:1, str:0.9, r:MIN*0.17, sink:0.16 });
   }
   function vp(v, t){ return { x:v.bx + Math.cos(t*v.fx+v.px)*v.ax, y:v.by + Math.sin(t*v.fy+v.py)*v.ay }; }
 
   var pointer = { x:-999, y:-999, has:false, energy:0 };
   var lastInteract = -999, autoActive = false;
-  /* ── reader mixer state (the desk writes here; engine reads it live) ── */
-  var DEFG = [{tempo:1,spring:0,colour:0,mute:false},{tempo:1,spring:0,colour:0,mute:false},{tempo:1,spring:0,colour:0,mute:false}];
-  var DEFV = { gain:35, spring:0.10, colour:0.55, mute:false };
-  var MIX = { g:[{tempo:1,spring:0,colour:0,mute:false},{tempo:1,spring:0,colour:0,mute:false},{tempo:1,spring:0,colour:0,mute:false}], voc:{gain:35,spring:0.10,colour:0.55,mute:false}, power:true, phantom:true };
-  try { var _sv = localStorage.getItem('mw_mix'); if (_sv){ var _o = JSON.parse(_sv); if (_o && _o.g && _o.g.length===3 && _o.voc){ MIX=_o; if(typeof MIX.power!=='boolean')MIX.power=true; if(typeof MIX.phantom!=='boolean')MIX.phantom=true; } } } catch(e){}
-  function saveMix(){ try { localStorage.setItem('mw_mix', JSON.stringify(MIX)); } catch(e){} }
-  function effG(i){ return MIX.power ? MIX.g[i] : DEFG[i]; }
-  function effVoc(){ return MIX.power ? MIX.voc : DEFV; }
-  function phantomOn(){ return MIX.power ? MIX.phantom : true; }
-  (function wireDesk(){
-    var desk = document.getElementById('mxdesk'); if (!desk) return;
-    var scv = document.getElementById('mxscv'), scl = document.getElementById('mxscl');
-    var NAMES = ['BASS','GUITAR','DRUMS'];
-    function show(label,val){ if(scv)scv.textContent=val; if(scl)scl.textContent=label; }
-    function k2mix(ch,p,v){ if(ch==='voc'){ if(p==='GAIN')MIX.voc.gain=v; else if(p==='SPRING')MIX.voc.spring=v/100*0.14; else MIX.voc.colour=v/100; } else { var g=MIX.g[+ch]; if(p==='TEMPO')g.tempo=v/100; else if(p==='SPRING')g.spring=v/100*0.14; else g.colour=v/100; } }
-    function mix2k(ch,p){ if(ch==='voc'){ if(p==='GAIN')return MIX.voc.gain; if(p==='SPRING')return MIX.voc.spring/0.14*100; return MIX.voc.colour*100; } var g=MIX.g[+ch]; if(p==='TEMPO')return g.tempo*100; if(p==='SPRING')return g.spring/0.14*100; return g.colour*100; }
-    function disp(p,v){ if(p==='COLOUR')return v>4?('WARM +'+Math.round(v)):(v<-4?('COOL '+Math.round(v)):'NEUTRAL'); return Math.round(v)+(p==='TEMPO'?' bpm':''); }
-    Array.prototype.forEach.call(desk.querySelectorAll('.mxk'), function(k){
-      var ch=k.dataset.ch, p=k.dataset.p, mn=+k.dataset.min, mx=+k.dataset.max;
-      var v=Math.max(mn,Math.min(mx, mix2k(ch,p)));
-      function paint(){ k.style.setProperty('--pct',(v-mn)/(mx-mn)); }
-      paint();
-      k.addEventListener('pointerdown',function(e){ k.setPointerCapture(e.pointerId); var sy=e.clientY, sv=v;
-        function mv(ev){ v=Math.max(mn,Math.min(mx, sv+(sy-ev.clientY)/120*(mx-mn))); paint(); k2mix(ch,p,v); show((ch==='voc'?'VOCAL':NAMES[+ch])+' · '+p, disp(p,v)); }
-        function up(){ try{k.releasePointerCapture(e.pointerId);}catch(_){} k.removeEventListener('pointermove',mv); k.removeEventListener('pointerup',up); saveMix(); }
-        k.addEventListener('pointermove',mv); k.addEventListener('pointerup',up); });
-    });
-    Array.prototype.forEach.call(desk.querySelectorAll('.mxm'), function(b){
-      var ch=b.dataset.ch;
-      function paint(){ var m = ch==='voc'?MIX.voc.mute:MIX.g[+ch].mute; b.closest('.mxch').classList.toggle('mute',m); b.setAttribute('aria-pressed',m); }
-      paint();
-      b.addEventListener('click',function(){ if(ch==='voc')MIX.voc.mute=!MIX.voc.mute; else MIX.g[+ch].mute=!MIX.g[+ch].mute; paint(); saveMix(); });
-    });
-    var t48=document.getElementById('mx48'), tpw=document.getElementById('mxpw');
-    function paintSw(){ if(t48){t48.classList.toggle('on',MIX.phantom); t48.setAttribute('aria-checked',MIX.phantom);} if(tpw){tpw.classList.toggle('on',MIX.power); tpw.setAttribute('aria-checked',MIX.power);} desk.classList.toggle('byp',!MIX.power); }
-    paintSw();
-    function tog48(){ MIX.phantom=!MIX.phantom; paintSw(); show('48V PHANTOM',MIX.phantom?'ON':'OFF'); saveMix(); }
-    function togPw(){ MIX.power=!MIX.power; paintSw(); show('POWER',MIX.power?'ON':'OFF'); saveMix(); }
-    if(t48){ t48.addEventListener('click',tog48); t48.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); tog48(); } }); }
-    if(tpw){ tpw.addEventListener('click',togPw); tpw.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); togPw(); } }); }
-    var handle=document.getElementById('mxhandle'), panel=document.getElementById('mxpanel');
-    function tog(){ panel.classList.toggle('open'); }
-    if(handle&&panel){ handle.addEventListener('click',tog); handle.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); tog(); } }); }
+  var SPRING = 0.10;                                    // reader-tunable: how tightly the lyric-line follows the cursor
+  (function(){ var sl = document.getElementById('tuneSpring'); if (!sl) return;
+    try { var sv = localStorage.getItem('mw_spring'); if (sv){ SPRING = Math.min(0.14, Math.max(0.03, parseFloat(sv))); sl.value = Math.round(SPRING*100); } } catch(e){}
+    sl.addEventListener('input', function(){ SPRING = (+sl.value)/100; try { localStorage.setItem('mw_spring', String(SPRING)); } catch(e){} });
   })();
-  (function(){ var w=document.querySelector('.mxwatermark'), l=document.querySelector('.bottom-logo'); if (w && l) { w.style.webkitMaskImage = 'url(' + l.src + ')'; w.style.maskImage = 'url(' + l.src + ')'; } })();
 
   function fieldAngle(x, y, t, breath){
-    var vx = 0.25 + Math.cos(t*0.05)*0.20, vy = Math.sin(t*0.045)*0.30;
+    var vx = 0.25 + Math.cos(t*0.05)*0.20, vy = Math.sin(t*0.045)*0.30, R = MIN*0.55;
     for (var i=0;i<vortices.length;i++){
-      var v = vortices[i], R = v.r || (MIN*0.55);
-      var p = vp(v, t), dx = x-p.x, dy = y-p.y, d2 = dx*dx+dy*dy;
-      var fall = v.str / (1 + d2/(R*R));
-      vx += (-dy)*v.sign*fall*0.9/R*60; vy += (dx)*v.sign*fall*0.9/R*60;
-      if (v.sink){ vx += (-dx)*fall*v.sink/R*60; vy += (-dy)*fall*v.sink/R*60; }
+      var p = vp(vortices[i], t), dx = x-p.x, dy = y-p.y, d2 = dx*dx+dy*dy;
+      var fall = vortices[i].str / (1 + d2/(R*R));
+      vx += (-dy)*vortices[i].sign*fall*0.9/R*60; vy += (dx)*vortices[i].sign*fall*0.9/R*60;
     }
     if (pointer.has){
       var qx = x-pointer.x, qy = y-pointer.y, q2 = qx*qx+qy*qy, pr = MIN*0.34;
@@ -459,23 +342,18 @@
     var breath = Math.sin(TIME * 0.5);
     var bf = 0.80 + 0.20*(breath*0.5+0.5)*BREATH_AMP;
     pointer.energy *= 0.95;
-    var idle = TIME - lastInteract > 3;
-    if (idle && phantomOn()){                            // ambient vortex when idle (48V phantom warmth)
+    if (TIME - lastInteract > 3){                       // ambient vortex when idle / touchless (phones) → the warm colour shows everywhere
       autoActive = true;
       pointer.x = W * (0.5 + 0.30*Math.cos(TIME*0.13) + 0.06*Math.cos(TIME*0.40));
       pointer.y = H * (0.5 + 0.26*Math.sin(TIME*0.17) + 0.06*Math.sin(TIME*0.33));
       pointer.has = true; pointer.energy = 0.5;
-    } else { autoActive = false; if (idle) pointer.has = false; }
+    } else { autoActive = false; }
     for (var i=0;i<streams.length;i++){
       var s = streams[i];
-      var eg = effG(s.inst);
       var a = fieldAngle(s.hx, s.hy, TIME, breath) + Math.sin(TIME*s.mfreq + s.mphase)*s.mamp;
-      s.ang = a;
-      var st = SPD * bf * s.jitter * s.zspd * s.spd * eg.tempo * instSurge(s, TIME, eg.tempo);
+      var st = SPD * bf * s.jitter * s.zspd * s.spd * instSurge(s, TIME);
       if (st < MINSTEP) st = MINSTEP;
-      s.hx += Math.cos(a)*st; s.hy += Math.sin(a)*st;
-      if (pointer.has && eg.spring > 0){ s.hx += (pointer.x - s.hx)*eg.spring*0.5; s.hy += (pointer.y - s.hy)*eg.spring*0.5; }
-      s.dist += st;
+      s.hx += Math.cos(a)*st; s.hy += Math.sin(a)*st; s.dist += st;
       pushSample(s);
       if (s.dying){ s.life -= dt*0.6; } else if (s.life < 1){ s.life = Math.min(1, s.life + dt*0.8); }
       var out = s.hx<-W*0.22 || s.hx>W*1.22 || s.hy<-H*0.22 || s.hy>H*1.22;
@@ -484,13 +362,10 @@
     if (!REDUCE && TIME > nextUnravel && streams.length){ streams[(Math.random()*streams.length)|0].dying = true; nextUnravel = TIME + rand(5,9); }
     if (you){                                            // reader's line flows + grooves like the rest, and springs toward the pointer (correspondence)
       var ay = fieldAngle(you.hx, you.hy, TIME, breath) + Math.sin(TIME*you.mfreq + you.mphase)*you.mamp;
-      you.ang = ay;
-      var dpx = pointer.x - you.hx, dpy = pointer.y - you.hy, dpp = Math.sqrt(dpx*dpx + dpy*dpy);
-      var nearC = pointer.has ? Math.max(0, 1 - dpp/(MIN*0.22)) : 0;   // calm the flow as it nears the cursor → head settles (no spin)
-      var sty = SPD * bf * you.jitter * you.zspd * you.spd * instSurge(you, TIME) * (1 - 0.8*nearC);
-      if (!pointer.has && sty < MINSTEP) sty = MINSTEP;
+      var sty = SPD * bf * you.jitter * you.zspd * you.spd * instSurge(you, TIME);
+      if (sty < MINSTEP) sty = MINSTEP;
       you.hx += Math.cos(ay)*sty; you.hy += Math.sin(ay)*sty;
-      if (pointer.has){ var ks = autoActive ? 0.02 : effVoc().spring; you.hx += (pointer.x - you.hx)*ks; you.hy += (pointer.y - you.hy)*ks; }
+      if (pointer.has){ var ks = autoActive ? 0.02 : SPRING; you.hx += (pointer.x - you.hx)*ks; you.hy += (pointer.y - you.hy)*ks; }
       if (you.hx<-W*0.3||you.hx>W*1.3||you.hy<-H*0.3||you.hy>H*1.3){ you.hx=W*0.5; you.hy=H*0.5; you.wr=0; you.count=0; }
       you.dist += sty; pushSample(you);
     }
@@ -518,8 +393,6 @@
     for (var oi=0; oi<order.length; oi++){
       var s = streams[order[oi]];
       if (s.count < 2) continue;
-      var eg = effG(s.inst);
-      if (eg.mute) continue;
       var size = FS * (0.58 + 0.85*s.z);
       ctx.font = '500 ' + (size|0) + 'px ' + CJK;
       var nomCH = CH * (0.82 + 0.5*s.z), CHs = nomCH * bScale;
@@ -537,12 +410,11 @@
           if (!(px < -34 || px > W+34 || py < -34 || py > H+34)){
             var entry = s.seq[((s.off + (GLYPHS - 1 - slot)) % L + L) % L];   // fixed window rides the head → words flow (not pinned), read L→R
             if (entry.k !== 3){
-              var ang = (slot === 0) ? (s.ang||0) : Math.atan2(prevY - cy, prevX - cx);
+              var ang = Math.atan2(prevY - cy, prevX - cx);
               var baseCol, baseA;
               if (entry.k === 0){ baseCol = COL.grey; baseA = 0.30; }
               else if (entry.k === 1){ baseCol = COL.ink2; baseA = 0.58; }
               else { baseCol = COL.ink; baseA = 0.72; }
-              if (eg.colour > 0) baseCol = mix(baseCol, COL.warm, eg.colour*0.8); else if (eg.colour < 0) baseCol = mix(baseCol, COL.cool, -eg.colour*0.8);
               var tn = slot / GLYPHS;
               var a = baseA * (1 - tn*0.55) * s.life * depthA;
               var col = baseCol, funnel = 1;
@@ -564,13 +436,11 @@
                 ctx.globalAlpha = a;
                 ctx.fillStyle = rgba(col, 1);
                 if (entry.k === 0){
-                  // waveform block glyph: grey base + warm/cool tint row from the atlas
+                  // waveform block glyph via pre-rendered atlas (drawImage ≈ cheap, keeps the ▁▂▃ look)
                   var lvl = Math.sin(TIME*1.8 - slot*0.55 + entry.wp)*0.5 + 0.5;
                   var li = (lvl*(ATLAS_N-1) + 0.5)|0; if (li < 0) li = 0; else if (li > ATLAS_N-1) li = ATLAS_N-1;
-                  var src = ATLAS_CELL*DPR, rh = ATLAS_CELL*DPR;
-                  ctx.drawImage(atlas, li*src, 0, src, rh, -size*0.5, -size*0.5, size, size);
-                  if (eg.colour > 0){ ctx.globalAlpha = a*Math.min(1,eg.colour); ctx.drawImage(atlas, li*src, rh, src, rh, -size*0.5, -size*0.5, size, size); }
-                  else if (eg.colour < 0){ ctx.globalAlpha = a*Math.min(1,-eg.colour); ctx.drawImage(atlas, li*src, rh*2, src, rh, -size*0.5, -size*0.5, size, size); }
+                  var src = ATLAS_CELL*DPR;
+                  ctx.drawImage(atlas, li*src, 0, src, src, -size*0.5, -size*0.5, size, size);
                 } else {
                   ctx.fillText(entry.c, 0, 0);
                 }
@@ -584,11 +454,8 @@
     }
     ctx.globalAlpha = 1;
 
-    var EV = effVoc();
-    if (you && you.count > 1 && !REDUCE && !EV.mute){  // reader's lyric line — gain/colour from the VOCAL channel
-      var gf = 0.5 + (EV.gain - 10)/50;                 // 10→0.5, 35→1.0, 60→1.5
-      var vhue = EV.colour >= 0 ? mix(COL.ink, COL.warm, EV.colour) : mix(COL.ink, COL.cool, -EV.colour);
-      var sizeY = FS * (0.66 + 0.70*you.z) * (0.85 + 0.3*gf);
+    if (you && you.count > 1 && !REDUCE){             // the reader's line — warm deep-red, foreground, flowing 不是一個人
+      var sizeY = FS * (0.66 + 0.70*you.z);
       ctx.font = '700 ' + (sizeY|0) + 'px ' + CJK;
       var CHy = CH * 1.02 * bScale, Ly = you.seq.length;
       var pX = you.hx, pY = you.hy, accY = CHy, placedY = 0;
@@ -602,11 +469,10 @@
             var eY = you.seq[((you.off + (Ly - 1 - slotY)) % Ly + Ly) % Ly];
             if (eY.k !== 3){
               var tnY = slotY / Ly;
-              var angY = (slotY === 0) ? (you.ang||0) : Math.atan2(pY - cyY, pX - cxY);
-              var flipY = (angY > HPI || angY < -HPI);
+              var angY = Math.atan2(pY - cyY, pX - cxY), flipY = (angY > HPI || angY < -HPI);
               ctx.save(); ctx.translate(pX, pY); ctx.rotate(flipY ? angY + PI : angY);
-              ctx.globalAlpha = Math.min(1, (0.9 - tnY*0.5) * gf);
-              ctx.fillStyle = rgba(vhue, 1);
+              ctx.globalAlpha = 0.9 - tnY*0.5;
+              ctx.fillStyle = rgba(mix(COL.warm, COL.cool, tnY), 1);
               ctx.fillText(eY.c, 0, 0); ctx.restore();
             }
           }
@@ -614,23 +480,6 @@
         pX = cxY; pY = cyY;
       }
       ctx.globalAlpha = 1;
-    }
-
-    // ── colour-noise interference band under the 棉 (fine warm/cool/grey static) ──
-    if (!REDUCE && phantomOn() && !MOBILE){
-      var BX = 0.5*W, BY = 0.815*H, BRX = Math.min(0.24*W, 270), BRY = 0.085*H;
-      var N = Math.round(2600 * Math.min(1.5, W/1000));
-      var npal = [COL.grey, COL.ink2, COL.warm, COL.warm, COL.warm, COL.cool, COL.cool, COL.cool];
-      var bpk = 0.85 + 0.15*Math.sin(TIME*0.7);          // gentle breathing of the band's intensity
-      for (var ni=0; ni<N; ni++){
-        var nang = Math.random()*6.2832, nrr = Math.sqrt(Math.random());
-        var nx = BX + Math.cos(nang)*nrr*BRX, ny = BY + Math.sin(nang)*nrr*BRY;
-        var nfall = 1 - nrr*0.82;
-        var nc = npal[(Math.random()*npal.length)|0];
-        ctx.fillStyle = rgba(nc, (0.16 + Math.random()*0.46)*nfall*bpk);
-        var nsz = 1 + (Math.random()*Math.random())*2.4;
-        ctx.fillRect(nx, ny, nsz, nsz);
-      }
     }
   }
 
