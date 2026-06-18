@@ -103,16 +103,18 @@
   .mxscreen { width:100%; height:46px; border-radius:5px; background:#1a1407; display:flex; flex-direction:column; align-items:center; justify-content:center; box-shadow:0 0 0 2px #c9c9cd inset; }
   .mxscreen .big { font-size:17px; font-weight:700; color:#ffd591; }
   .mxscreen .sub { font-size:8px; color:#a8772e; letter-spacing:.16em; margin-top:2px; }
-  .mxsws { display:flex; gap:20px; }
-  .mxtg { display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; -webkit-tap-highlight-color:transparent; }
-  .mxtg .tt { font-size:8px; letter-spacing:.12em; color:#27272a; font-weight:700; }
-  .mxtg .slot { width:24px; height:42px; border-radius:12px; background:#c8c8cd; border:1px solid #b0b0b6; position:relative; box-shadow:inset 0 1px 3px rgba(0,0,0,.25); }
-  .mxtg .b { position:absolute; left:50%; transform:translateX(-50%); bottom:3px; width:15px; height:22px; border-radius:7px; background:linear-gradient(#fbfbfd,#cfcfd4); box-shadow:0 1px 2px rgba(0,0,0,.35); transition:bottom .14s; }
-  .mxtg.on .b { bottom:17px; }
-  .mxtg .st { font-size:7px; letter-spacing:.1em; color:#71717a; }
-  .mxtg.on .st { color:#d4799c; font-weight:700; }
+  .mxsws { display:flex; flex-direction:column; gap:13px; align-items:flex-start; }
+  .mxtg { display:flex; flex-direction:row; align-items:center; gap:9px; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  .mxtg:focus-visible { outline:2px solid var(--signal); outline-offset:3px; }
+  .mxtg .sw { position:relative; width:26px; height:30px; flex:none; }
+  .mxtg .sw .base { position:absolute; left:50%; bottom:0; transform:translateX(-50%); width:22px; height:13px; border-radius:50%/42%; background:radial-gradient(circle at 50% 32%, #fcfcfe, #b4b4ba 72%, #9a9aa0); border:1px solid #9a9aa0; }
+  .mxtg .sw .lev { position:absolute; left:50%; bottom:8px; width:9px; height:20px; border-radius:5px; background:linear-gradient(#f6f6f8,#aeaeb4); box-shadow:0 1px 2px rgba(0,0,0,.45); transform-origin:50% 100%; transform:translateX(-50%) rotate(20deg); transition:transform .15s var(--ease); }
+  .mxtg.on .sw .lev { transform:translateX(-50%) rotate(-20deg); }
+  .mxtg .tt { font-size:9px; letter-spacing:.12em; color:#27272a; font-weight:700; }
+  .mxtg .led { width:7px; height:7px; border-radius:50%; background:#5a1414; box-shadow:inset 0 0 1px rgba(0,0,0,.6); transition:all .15s; }
+  .mxtg.on .led { background:#ff3b30; box-shadow:0 0 6px rgba(255,59,48,.85); }
   .mxjack { width:24px; height:24px; border-radius:50%; background:radial-gradient(#26262a,#0d0d0f 60%,#26262a 62%); border:2px solid #b9b9bf; }
-  @media (max-width:680px){ #mxdesk { gap:6px; padding:10px 6px; } .mxch { width:74px; } .mxmaster { width:118px; } .mxk { width:40px; height:40px; } }
+  @media (max-width:680px){ #mxdesk { gap:6px; padding:10px 6px; padding-bottom:calc(10px + env(safe-area-inset-bottom)); max-height:46vh; overflow-y:auto; -webkit-overflow-scrolling:touch; } .mxch { width:72px; } .mxmaster { width:150px; } .mxk { width:38px; height:38px; } .mxkl { font-size:7px; } }
 
   .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; z-index:101; -webkit-tap-highlight-color:transparent; }
   .nav-toggle span { display:block; width:22px; height:2px; background:var(--grey); margin:5px 0; transition:all 0.3s var(--ease); }
@@ -206,8 +208,8 @@
     <div class="mxmaster">
       <div class="mxscreen"><div class="big" id="mxscv">READY</div><div class="sub" id="mxscl">MESHWORK</div></div>
       <div class="mxsws">
-        <div class="mxtg" id="mx48" role="switch" tabindex="0" aria-label="48V phantom warmth"><span class="tt">48V</span><div class="slot"><div class="b"></div></div><span class="st">OFF</span></div>
-        <div class="mxtg" id="mxpw" role="switch" tabindex="0" aria-label="power / bypass"><span class="tt">POWER</span><div class="slot"><div class="b"></div></div><span class="st">ON</span></div>
+        <div class="mxtg" id="mxpw" role="switch" tabindex="0" aria-label="power / bypass"><span class="sw"><span class="base"></span><span class="lev"></span></span><span class="tt">POWER</span></div>
+        <div class="mxtg" id="mx48" role="switch" tabindex="0" aria-label="48V phantom warmth"><span class="sw"><span class="base"></span><span class="lev"></span></span><span class="tt">48V</span><span class="led"></span></div>
       </div>
       <div class="mxjack" title="phones"></div>
     </div>
@@ -344,10 +346,12 @@
       b.addEventListener('click',function(){ if(ch==='voc')MIX.voc.mute=!MIX.voc.mute; else MIX.g[+ch].mute=!MIX.g[+ch].mute; paint(); saveMix(); });
     });
     var t48=document.getElementById('mx48'), tpw=document.getElementById('mxpw');
-    function paintSw(){ if(t48){t48.classList.toggle('on',MIX.phantom); t48.querySelector('.st').textContent=MIX.phantom?'ON':'OFF';} if(tpw){tpw.classList.toggle('on',MIX.power); tpw.querySelector('.st').textContent=MIX.power?'ON':'OFF';} desk.classList.toggle('byp',!MIX.power); }
+    function paintSw(){ if(t48){t48.classList.toggle('on',MIX.phantom); t48.setAttribute('aria-checked',MIX.phantom);} if(tpw){tpw.classList.toggle('on',MIX.power); tpw.setAttribute('aria-checked',MIX.power);} desk.classList.toggle('byp',!MIX.power); }
     paintSw();
-    if(t48)t48.addEventListener('click',function(){ MIX.phantom=!MIX.phantom; paintSw(); show('48V PHANTOM',MIX.phantom?'ON':'OFF'); saveMix(); });
-    if(tpw)tpw.addEventListener('click',function(){ MIX.power=!MIX.power; paintSw(); show('POWER',MIX.power?'ON':'OFF'); saveMix(); });
+    function tog48(){ MIX.phantom=!MIX.phantom; paintSw(); show('48V PHANTOM',MIX.phantom?'ON':'OFF'); saveMix(); }
+    function togPw(){ MIX.power=!MIX.power; paintSw(); show('POWER',MIX.power?'ON':'OFF'); saveMix(); }
+    if(t48){ t48.addEventListener('click',tog48); t48.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); tog48(); } }); }
+    if(tpw){ tpw.addEventListener('click',togPw); tpw.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); togPw(); } }); }
     var handle=document.getElementById('mxhandle'), panel=document.getElementById('mxpanel');
     function tog(){ panel.classList.toggle('open'); }
     if(handle&&panel){ handle.addEventListener('click',tog); handle.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); tog(); } }); }
@@ -446,6 +450,7 @@
       var s = streams[i];
       var eg = effG(s.inst);
       var a = fieldAngle(s.hx, s.hy, TIME, breath) + Math.sin(TIME*s.mfreq + s.mphase)*s.mamp;
+      s.ang = a;
       var st = SPD * bf * s.jitter * s.zspd * s.spd * eg.tempo * instSurge(s, TIME, eg.tempo);
       if (st < MINSTEP) st = MINSTEP;
       s.hx += Math.cos(a)*st; s.hy += Math.sin(a)*st;
@@ -459,8 +464,11 @@
     if (!REDUCE && TIME > nextUnravel && streams.length){ streams[(Math.random()*streams.length)|0].dying = true; nextUnravel = TIME + rand(5,9); }
     if (you){                                            // reader's line flows + grooves like the rest, and springs toward the pointer (correspondence)
       var ay = fieldAngle(you.hx, you.hy, TIME, breath) + Math.sin(TIME*you.mfreq + you.mphase)*you.mamp;
-      var sty = SPD * bf * you.jitter * you.zspd * you.spd * instSurge(you, TIME);
-      if (sty < MINSTEP) sty = MINSTEP;
+      you.ang = ay;
+      var dpx = pointer.x - you.hx, dpy = pointer.y - you.hy, dpp = Math.sqrt(dpx*dpx + dpy*dpy);
+      var nearC = pointer.has ? Math.max(0, 1 - dpp/(MIN*0.22)) : 0;   // calm the flow as it nears the cursor → head settles (no spin)
+      var sty = SPD * bf * you.jitter * you.zspd * you.spd * instSurge(you, TIME) * (1 - 0.8*nearC);
+      if (!pointer.has && sty < MINSTEP) sty = MINSTEP;
       you.hx += Math.cos(ay)*sty; you.hy += Math.sin(ay)*sty;
       if (pointer.has){ var ks = autoActive ? 0.02 : effVoc().spring; you.hx += (pointer.x - you.hx)*ks; you.hy += (pointer.y - you.hy)*ks; }
       if (you.hx<-W*0.3||you.hx>W*1.3||you.hy<-H*0.3||you.hy>H*1.3){ you.hx=W*0.5; you.hy=H*0.5; you.wr=0; you.count=0; }
@@ -509,7 +517,7 @@
           if (!(px < -34 || px > W+34 || py < -34 || py > H+34)){
             var entry = s.seq[((s.off + (GLYPHS - 1 - slot)) % L + L) % L];   // fixed window rides the head → words flow (not pinned), read L→R
             if (entry.k !== 3){
-              var ang = Math.atan2(prevY - cy, prevX - cx);
+              var ang = (slot === 0) ? (s.ang||0) : Math.atan2(prevY - cy, prevX - cx);
               var baseCol, baseA;
               if (entry.k === 0){ baseCol = COL.grey; baseA = 0.30; }
               else if (entry.k === 1){ baseCol = COL.ink2; baseA = 0.58; }
@@ -574,7 +582,8 @@
             var eY = you.seq[((you.off + (Ly - 1 - slotY)) % Ly + Ly) % Ly];
             if (eY.k !== 3){
               var tnY = slotY / Ly;
-              var angY = Math.atan2(pY - cyY, pX - cxY), flipY = (angY > HPI || angY < -HPI);
+              var angY = (slotY === 0) ? (you.ang||0) : Math.atan2(pY - cyY, pX - cxY);
+              var flipY = (angY > HPI || angY < -HPI);
               ctx.save(); ctx.translate(pX, pY); ctx.rotate(flipY ? angY + PI : angY);
               ctx.globalAlpha = Math.min(1, (0.9 - tnY*0.5) * gf);
               ctx.fillStyle = rgba(vhue, 1);
