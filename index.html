@@ -305,7 +305,7 @@
     makeYou();
   }
   /* ── the reader's own line: 不是一個人 — a guitar-paced lead that flows + grooves like the rest ── */
-  function makeYouSeq(){ var seq = [], ph = '不是一個人'; for (var r=0;r<24;r++){ for (var i=0;i<ph.length;i++) seq.push({k:2,c:ph.charAt(i)}); seq.push({k:3}); } return seq; }
+  function makeYouSeq(){ var seq = [], ph = '也會亂了節奏也會痛 游著游著我又做惡夢 但我不是一人 希望你也不是 我們慢慢游出復原的可能'; for (var i=0;i<ph.length;i++){ var ch = ph.charAt(i); if (ch === ' ' || ch === '　') seq.push({k:3}); else seq.push({k:2,c:ch}); } return seq; }
   function makeYou(){
     var inst = 1, z = 0.95;
     you = { hx:W*0.5, hy:H*0.5, rx:new Float32Array(CAP), ry:new Float32Array(CAP), wr:0, count:0, dist:0,
@@ -437,16 +437,16 @@
       ctx.font = '700 ' + (sizeY|0) + 'px ' + CJK;
       var CHy = CH * 1.02 * bScale, Ly = you.seq.length;
       var pX = you.hx, pY = you.hy, accY = CHy, placedY = 0;
-      for (var yi=0; yi<you.count && placedY<GLYPHS; yi++){
+      for (var yi=0; yi<you.count && placedY<Ly; yi++){
         var iy = sIdx(you, yi), cxY = you.rx[iy], cyY = you.ry[iy];
         var dXy = pX - cxY, dYy = pY - cyY, segY = Math.sqrt(dXy*dXy + dYy*dYy);
         accY += (segY || 0.0001);
         if (accY >= CHy){
           accY = 0; var slotY = placedY; placedY++;
           if (!(pX < -34 || pX > W+34 || pY < -34 || pY > H+34)){
-            var eY = you.seq[((you.off + (GLYPHS - 1 - slotY)) % Ly + Ly) % Ly];
+            var eY = you.seq[((you.off + (Ly - 1 - slotY)) % Ly + Ly) % Ly];
             if (eY.k !== 3){
-              var tnY = slotY / GLYPHS;
+              var tnY = slotY / Ly;
               var angY = Math.atan2(pY - cyY, pX - cxY), flipY = (angY > HPI || angY < -HPI);
               ctx.save(); ctx.translate(pX, pY); ctx.rotate(flipY ? angY + PI : angY);
               ctx.globalAlpha = 0.9 - tnY*0.5;
