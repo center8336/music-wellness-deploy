@@ -758,7 +758,7 @@
                     <p class="gapmap-sub">88 place-bound orgs · dot size = org count</p>
                     <figure class="gapmap-figure">
                         <svg class="gapmap-svg" viewBox="0 0 1000 480" role="img"
-                             aria-label="World map of music mental-health organizations. Support clusters densely in the United States (Backline, MusiCares) and Europe (Music Minds Matter in the United Kingdom); India has one independent organization. Taiwan and the rest of East and Southeast Asia have zero music-specific mental-health organizations — but Taiwan already has 藝創工會, a creators' union providing adjacent infrastructure (labour and health insurance, occupational health, contracts) since 2011, marked here as an outlined ring rather than a solid dot. The gap is the music-specific mental-health layer on top of it. The four named, ringed nodes are clickable links to their Org Study pages.">
+                             aria-label="World map of music mental-health organizations. Support clusters densely in the United States (Backline, MusiCares) and Europe (Music Minds Matter in the United Kingdom); India has one independent organization. East Asia is drawn with mainland China, the Korean peninsula and Japan as their own separate landmasses, and Taiwan as a distinct small island off the southeast coast of mainland China, separated from it by open water. Taiwan and the rest of East and Southeast Asia have zero music-specific mental-health organizations — but Taiwan already has 藝創工會, a creators' union providing adjacent infrastructure (labour and health insurance, occupational health, contracts) since 2011, marked here as an outlined ring sitting on the island of Taiwan rather than a solid dot. The gap is the music-specific mental-health layer on top of it. The four named, ringed nodes are clickable links to their Org Study pages.">
                             <!-- barely-there world hint: faint graticule + softest landmass blobs, no outlines, no labels -->
                             <g class="gm-grid" aria-hidden="true">
                                 <line x1="0" y1="80"  x2="1000" y2="80"/>
@@ -781,8 +781,20 @@
                                 <path d="M470 120 Q540 110 545 160 Q520 200 480 195 Q455 165 470 120 Z"/>
                                 <!-- Africa -->
                                 <path d="M480 220 Q560 215 565 290 Q535 370 505 360 Q470 290 480 220 Z"/>
-                                <!-- Asia -->
-                                <path d="M560 110 Q760 95 830 160 Q820 230 740 250 Q640 240 560 180 Q545 140 560 110 Z"/>
+                                <!-- ===== EAST ASIA, corrected topology: mainland China, then separate islands ===== -->
+                                <!-- Mainland China — one continuous coastline; the SE coast indents toward the Taiwan Strait -->
+                                <path d="M575 135 Q650 112 720 128 Q765 145 760 185
+                                         Q748 222 745 240 Q720 250 700 245
+                                         Q655 258 615 250 Q578 232 572 195
+                                         Q560 160 575 135 Z"/>
+                                <!-- Korean peninsula — a distinct finger hanging south off NE China, water-gapped from the mainland -->
+                                <path d="M779 168 Q792 166 793 188 Q790 210 783 214 Q775 200 776 182 Q776 172 779 168 Z"/>
+                                <!-- Japan — its own island arc, clear open water to the west (Sea of Japan) -->
+                                <path d="M832 150 Q852 140 862 158 Q872 178 888 200 Q882 214 868 206 Q850 188 838 168 Q828 156 832 150 Z"/>
+                                <!-- India — subcontinent peninsula to the southwest of China -->
+                                <path d="M600 252 Q650 248 655 280 Q640 318 618 322 Q600 296 600 252 Z"/>
+                                <!-- Taiwan — a SEPARATE small island off the SE coast, open water (Taiwan Strait) between it and the mainland -->
+                                <path d="M790 250 Q800 248 802 262 Q800 278 793 280 Q785 268 786 256 Q786 252 790 250 Z"/>
                                 <!-- Australia -->
                                 <path d="M790 350 Q860 345 870 385 Q840 415 800 405 Q775 380 790 350 Z"/>
                             </g>
@@ -797,7 +809,7 @@
                                 <circle cx="505" cy="195" r="5.5"/><circle cx="525" cy="170" r="5"/>
                                 <circle cx="465" cy="178" r="4.5"/><circle cx="500" cy="135" r="5"/>
                                 <circle cx="515" cy="255" r="5"/><circle cx="540" cy="300" r="4.5"/>
-                                <circle cx="595" cy="150" r="5.5"/><circle cx="620" cy="185" r="5"/>
+                                <circle cx="560" cy="120" r="5.5"/><circle cx="548" cy="202" r="5"/>
                                 <circle cx="830" cy="360" r="6.5"/>
                             </g>
 
@@ -809,9 +821,9 @@
                             <circle class="gm-dot" cx="486" cy="146" r="10.5" aria-hidden="true"/>
                             <circle class="gm-dot" cx="495" cy="172" r="9.8" aria-hidden="true"/>
 
-                            <!-- India — the lone independent Asia-Pacific org -->
-                            <circle class="gm-india" cx="690" cy="248" r="4.5" aria-hidden="true"/>
-                            <text class="gm-india-label" x="700" y="252" aria-hidden="true">India · 1</text>
+                            <!-- India — the lone independent Asia-Pacific org (on the subcontinent, SW of China) -->
+                            <circle class="gm-india" cx="626" cy="286" r="4.5" aria-hidden="true"/>
+                            <text class="gm-india-label" x="636" y="290" aria-hidden="true">India · 1</text>
 
                             <!-- ===== STUDIED ORGS = clickable navigation nodes (real <a href>, keyboard-focusable, aria-label = org name) ===== -->
 
@@ -850,23 +862,22 @@
                             <a class="gm-node gm-ring" href="org-study-arts-creators-union.html"
                                role="link" tabindex="0"
                                aria-label="藝創工會 (Arts Creators' Union) — Taiwan, est. 2011. Adjacent infrastructure: a creators' union (labour and health insurance, occupational health, contracts) — not yet music-specific mental-health support. Open Org Study.">
-                                <circle class="gm-node-hit"        cx="788" cy="222" r="22"/>
-                                <circle class="gm-node-focus"      cx="788" cy="222" r="20"/>
-                                <circle class="gm-node-ring-outer" cx="788" cy="222" r="13"/>
-                                <circle class="gm-node-ring-inner" cx="788" cy="222" r="8"/>
-                                <circle class="gm-node-ring-core"  cx="788" cy="222" r="2.6"/>
-                                <text class="gm-node-name gm-name-tw" x="788" y="180" text-anchor="middle">Taiwan · 藝創工會</text>
-                                <text class="gm-node-cue"  x="788" y="192" text-anchor="middle">adjacent · Org Study →</text>
-                                <text class="gm-tw-label" x="788" y="258" text-anchor="middle" style="font-size:10px; fill:var(--grey); font-weight:400;">adjacent — not yet music-specific MH</text>
+                                <circle class="gm-node-hit"        cx="794" cy="264" r="22"/>
+                                <circle class="gm-node-focus"      cx="794" cy="264" r="20"/>
+                                <circle class="gm-node-ring-outer" cx="794" cy="264" r="13"/>
+                                <circle class="gm-node-ring-inner" cx="794" cy="264" r="8"/>
+                                <circle class="gm-node-ring-core"  cx="794" cy="264" r="2.6"/>
+                                <text class="gm-node-name gm-name-tw" x="794" y="222" text-anchor="middle">Taiwan · 藝創工會</text>
+                                <text class="gm-node-cue"  x="794" y="234" text-anchor="middle">adjacent · Org Study →</text>
+                                <text class="gm-tw-label" x="794" y="296" text-anchor="middle" style="font-size:10px; fill:var(--grey); font-weight:400;">adjacent — not yet music-specific MH</text>
                             </a>
 
-                            <!-- off-map tally: the 22 borderless orgs, no home country -->
-                            <g transform="translate(40, 372)">
-                                <rect class="gm-tally" x="0" y="0" width="240" height="64" rx="6"/>
-                                <text class="gm-tally-num" x="16" y="30">22</text>
-                                <text class="gm-tally-txt" x="66" y="24">of 110 · borderless</text>
-                                <text class="gm-tally-txt" x="66" y="40">no home country</text>
-                                <text class="gm-tally-txt" x="16" y="56">helplines · fellowships · networks</text>
+                            <!-- off-map tally: the 22 borderless orgs, no home country — minimal: numeral + two short lines -->
+                            <g transform="translate(40, 376)">
+                                <rect class="gm-tally" x="0" y="0" width="172" height="48" rx="6"/>
+                                <text class="gm-tally-num" x="16" y="33">22</text>
+                                <text class="gm-tally-txt" x="54" y="21">borderless</text>
+                                <text class="gm-tally-txt" x="54" y="37">no home country</text>
                             </g>
                         </svg>
                         <figcaption class="gapmap-caption">
