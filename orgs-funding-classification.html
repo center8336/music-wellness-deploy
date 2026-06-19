@@ -62,6 +62,11 @@ body{font-family:var(--font-body);background:var(--bg-light);color:var(--charcoa
 .eyebrow{font-family:var(--font-mono);font-size:var(--text-xs);letter-spacing:.16em;text-transform:uppercase;color:var(--signal)}
 h1{font-family:var(--font-display);font-size:var(--text-h1);margin:.4rem 0 1rem;color:var(--black)}
 a{color:var(--signal);text-decoration:none}a:hover{text-decoration:underline}
+.study-note{font-size:var(--text-sm);color:var(--graphite);margin:.75rem 0 0}
+.study-note strong{color:var(--black);font-weight:600}
+td.org a{color:var(--signal);border-bottom:1px solid var(--signal-glow)}
+td.org a:hover,td.org a:focus-visible{color:var(--signal-dim)}
+a:focus-visible{outline:2px solid var(--signal);outline-offset:2px;border-radius:var(--radius)}
 .method{background:var(--white);border:1px solid var(--border-light);border-left:3px solid var(--signal);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;margin:1.5rem 0;font-size:var(--text-sm)}
 .method h2{font-family:var(--font-mono);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.16em;color:var(--grey);margin-bottom:.6rem}
 .method ul{margin:.5rem 0 .5rem 1.2rem}.method li{margin-bottom:.35rem}
@@ -83,6 +88,7 @@ td:first-child{color:var(--grey-light);font-family:var(--font-mono)}
 <div class="eyebrow">2026-06-15 · ORGS MAP · SUPPLEMENTARY DATA</div>
 <h1>Funding-model &amp; service-type classification — all 110 organizations</h1>
 <p>Supplementary data for the <a href="report-global-npo-landscape.html#overview">Global NPO Landscape</a> report. Primary source: the <a href="https://backline.care/global-resources/" target="_blank" rel="noopener">Backline Global Resource Hub</a> directory (public; full 13-page roster, scraped 2026-06-12). Service types are the directory's own tags. Funding models are the author's classification — this table is the audit trail so every call can be checked.</p>
+<p class="study-note">Organization names shown as <a href="report-global-npo-landscape.html#organizations">links</a> have an in-depth <strong>Org Study</strong> — Backline, MusiCares, and Music Minds Matter. All other names are listed for completeness.</p>
 <div class="method">
 <h2>Method — how each funding model was assigned</h2>
 <p>The directory carries <strong>no funding field</strong>, so funding model is not in the source data. Each organization was classified by one of three routes, with the basis stated:</p>
@@ -101,9 +107,9 @@ td:first-child{color:var(--grey-light);font-family:var(--font-mono)}
 <tr><td>1</td><td>Mind the Music: A Mental Health Guide for the Music Industry</td><td>Worldwide</td><td>Mental Health Support</td><td>No public funding info</td><td class="c-U">❓ No info</td><td>No public funding information located</td></tr>
 <tr><td>2</td><td>Backline Tour Support Resources</td><td>Worldwide</td><td>Mental Health Support; Tour Health Support</td><td>No public funding info</td><td class="c-U">❓ No info</td><td>No public funding information located</td></tr>
 <tr><td>3</td><td>The Green Room</td><td>Worldwide</td><td>Support Groups</td><td>No public funding info</td><td class="c-U">❓ No info</td><td>No public funding information located</td></tr>
-<tr><td>4</td><td>Backline Case Management</td><td>United States</td><td>Mental Health Support; Financial Resources; Therapist Directory; Case Management</td><td>Philanthropy / charity</td><td class="c-V">✅ Verified</td><td>IRS Form 990 — ~100% donations, $874K FY2023 (ProPublica)</td></tr>
-<tr><td>5</td><td>MusiCares</td><td>United States</td><td>Support Groups; Financial Resources; Substance Use</td><td>Industry-institution / trade body</td><td class="c-V">✅ Verified</td><td>IRS Form 990 — $14M FY2024; affiliate of the Recording Academy (ProPublica)</td></tr>
-<tr><td>6</td><td>Music Minds Matter</td><td>United Kingdom</td><td>Mental Health Support; Counseling Services</td><td>Philanthropy / charity</td><td class="c-V">✅ Verified</td><td>Help Musicians/MMM 2024 annual report — major donors, legacies, corporate partners (not government)</td></tr>
+<tr><td>4</td><td class="org"><a href="org-study-backline.html">Backline Case Management</a></td><td>United States</td><td>Mental Health Support; Financial Resources; Therapist Directory; Case Management</td><td>Philanthropy / charity</td><td class="c-V">✅ Verified</td><td>IRS Form 990 — ~100% donations, $874K FY2023 (ProPublica)</td></tr>
+<tr><td>5</td><td class="org"><a href="org-study-musicares.html">MusiCares</a></td><td>United States</td><td>Support Groups; Financial Resources; Substance Use</td><td>Industry-institution / trade body</td><td class="c-V">✅ Verified</td><td>IRS Form 990 — $14M FY2024; affiliate of the Recording Academy (ProPublica)</td></tr>
+<tr><td>6</td><td class="org"><a href="org-study-music-minds-matter.html">Music Minds Matter</a></td><td>United Kingdom</td><td>Mental Health Support; Counseling Services</td><td>Philanthropy / charity</td><td class="c-V">✅ Verified</td><td>Help Musicians/MMM 2024 annual report — major donors, legacies, corporate partners (not government)</td></tr>
 <tr><td>7</td><td>The Blues Foundation – HART Fund</td><td>United States</td><td>Financial Resources</td><td>Philanthropy / charity</td><td class="c-I">⚠️ Inferred</td><td>Organisational type — named charitable fund / foundation / nonprofit (Blues Foundation HART Fund)</td></tr>
 <tr><td>8</td><td>Entertainment Community Fund</td><td>United States</td><td>Financial Resources; Healthcare; Career Development</td><td>Philanthropy / charity</td><td class="c-I">⚠️ Inferred</td><td>Organisational type — named charitable fund / foundation / nonprofit (Entertainment Community Fund)</td></tr>
 <tr><td>9</td><td>Jazz Association of America</td><td>United States</td><td>Financial Resources; Healthcare</td><td>Industry-institution / trade body</td><td class="c-I">⚠️ Inferred</td><td>Organisational type — trade body / union / collecting society (Jazz Association of America)</td></tr>

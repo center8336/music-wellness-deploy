@@ -401,6 +401,23 @@
             background: var(--signal); vertical-align: baseline; margin: 0 0.15em;
         }
         .gapmap-caption strong { color: var(--purple-deep); font-weight: 700; }
+        /* full-list gateway — the map is a visual summary of the complete 110-org table */
+        .gapmap-gateway {
+            display: flex; align-items: center; gap: 0.85rem;
+            margin: 1.5rem 0 0;
+            padding: 0.95rem 1.25rem;
+            background: var(--signal-bg);
+            border: 1px solid var(--signal-glow);
+            border-left: 4px solid var(--signal);
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            transition: background var(--dur) var(--ease), transform var(--dur) var(--ease);
+        }
+        .gapmap-gateway:hover, .gapmap-gateway:focus-visible { background: rgba(102,103,171,0.14); transform: translateY(-2px); }
+        .gapmap-gateway-icon { font-size: 1.3rem; line-height: 1; color: var(--signal); flex-shrink: 0; }
+        .gapmap-gateway-text { font-family: var(--font-body); font-size: var(--text-sm); color: var(--graphite); line-height: 1.5; }
+        .gapmap-gateway-text strong { color: var(--black); font-weight: 600; }
+        .gapmap-gateway-arrow { color: var(--signal); font-weight: 700; white-space: nowrap; }
         /* one-time settle on the focal ring; fully reduced-motion-gated */
         @keyframes gmRingSettle {
             0%   { opacity: 0; transform: scale(0.6); }
@@ -853,10 +870,14 @@
                             </g>
                         </svg>
                         <figcaption class="gapmap-caption">
-                            <span class="gm-key-dot"></span> = music mental-health orgs (dot size = number of orgs, not size or funding). Four <strong>ringed, named nodes</strong> are clickable — they link to their Org Study. The West is a dense cluster; <strong>Taiwan and East / SE Asia outside India have zero music-specific MH orgs.</strong> Taiwan is not blank: <strong>藝創工會</strong> — a creators' union (labour &amp; health insurance, occupational health, contracts, since 2011) — sits there as an <strong>outlined ring</strong>: adjacent infrastructure that does part of the job, but not music-specific mental health. The gap is the music-specific MH layer on top of it — the entry point.<br>
-                            88 of 110 place-bound shown · 22 borderless tallied separately · 藝創工會 is a union, correctly not counted among the 110 music-MH orgs · Backline directory, 2026-06.
+                            <span class="gm-key-dot"></span> dot size = org count. The four ringed names link to their <strong>Org Study</strong>. Taiwan's <strong>藝創工會</strong> is adjacent — a union, not music-specific MH — so the gap is the music-specific MH layer.<br>
+                            88 of 110 place-bound · 22 borderless · Backline directory, 2026-06.
                         </figcaption>
                     </figure>
+                    <a class="gapmap-gateway" href="orgs-funding-classification.html">
+                        <span class="gapmap-gateway-icon" aria-hidden="true">▦</span>
+                        <span class="gapmap-gateway-text">The full landscape — all <strong>110 organizations</strong> by name, the list this map summarizes <span class="gapmap-gateway-arrow" aria-hidden="true">→</span></span>
+                    </a>
                 </div>
 
                 <div class="chart-container">
@@ -1017,7 +1038,7 @@
                             <div class="detail-row"><div class="detail-label">Focus</div><div class="detail-value">Mental health, addiction recovery (acquired MAP 2004), and financial assistance; annual Wellness in Music survey</div></div>
                             <div class="detail-row"><div class="detail-label">Scale</div><div class="detail-value">$14.0M revenue (FY2024) · $33.8M assets · 200,000+ served since founding · $100M+ total assistance</div></div>
                             <div class="detail-row"><div class="detail-label">Key Insight</div><div class="detail-value">Industry-institution anchoring (GRAMMYs) gives durable funding and brand reach — the ceiling of what institutional backing can build.</div></div>
-                            <div class="detail-row"><div class="detail-label">For Taiwan</div><div class="detail-value">US-only scope. A Taiwan analogue would anchor to 金曲獎 / major industry bodies rather than stand alone. Deep dive completed 2026-04-18.</div></div>
+                            <div class="detail-row"><div class="detail-label">For Taiwan</div><div class="detail-value">US-only scope. A Taiwan analogue would anchor to 金曲獎 / major industry bodies rather than stand alone. Deep dive completed 2026-04-18 — read the <a href="org-study-musicares.html">MusiCares org study</a>.</div></div>
                         </div>
                     </div>
                 </div>
@@ -1053,7 +1074,7 @@
                             <div class="detail-row"><div class="detail-label">Focus</div><div class="detail-value">24/7 mental health support line (0808 802 8008), peer support groups, self-care sessions, MH education</div></div>
                             <div class="detail-row"><div class="detail-label">Scale</div><div class="detail-value">2024: 3,300+ people supported · 1,572 helpline calls · 602 self-care session attendees · £1.0M direct service expenditure</div></div>
                             <div class="detail-row"><div class="detail-label">Key Insight</div><div class="detail-value">The Allies program embeds MH support into six existing institutions (BIMM, BPI, FAC, MMF, Musicians' Union, WATU) — industry-wide reach without owning every channel.</div></div>
-                            <div class="detail-row"><div class="detail-label">For Taiwan</div><div class="detail-value">The single most relevant partnership model: ally with unions, labels, festivals, and schools instead of operating alone. Deep dive scheduled (June case study).</div></div>
+                            <div class="detail-row"><div class="detail-label">For Taiwan</div><div class="detail-value">The single most relevant partnership model: ally with unions, labels, festivals, and schools instead of operating alone. Full analysis in the <a href="org-study-music-minds-matter.html">Music Minds Matter org study</a>.</div></div>
                         </div>
                     </div>
                 </div>
