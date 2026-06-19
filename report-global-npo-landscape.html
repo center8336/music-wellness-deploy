@@ -341,7 +341,8 @@
         /* the East void must feel deliberate — no fill, just air */
         .gm-grid { stroke: var(--silver); stroke-width: 0.6; fill: none; opacity: 0.4; }
         .gm-land { fill: var(--silver); opacity: 0.28; }
-        .gm-land .gm-tw { stroke: var(--graphite); stroke-width: 1.4; }   /* Taiwan island: outlined so it reads as a distinct island */
+        .gm-land .gm-tw { stroke: var(--graphite); stroke-width: 1.4; }
+        .gm-tw-solid { fill: var(--silver); opacity: 0.78; stroke: var(--graphite); stroke-width: 1.1; }   /* Taiwan island, rendered clearly above the faint backdrop, under the ring */
         .gm-dot { fill: var(--signal); }
         .gm-dot-faint { fill: var(--signal); opacity: 0.4; }
         .gm-india { fill: var(--signal); }
@@ -872,6 +873,7 @@
 
                             <!-- ===== TAIWAN is NOT empty: 藝創工會 is really there — adjacent infrastructure, not music-specific MH ===== -->
                             <!-- Outlined RING marker on Taiwan island (120.96,23.7 → 880.6,198.2): does PART of the job (a creators' union since 2011). -->
+                            <path class="gm-tw-solid" d="M877 189 L885 190 L887 198 L884 207 L878 208 L875 199 Z"/>
                             <a class="gm-node gm-ring" href="org-study-arts-creators-union.html"
                                role="link" tabindex="0"
                                aria-label="藝創工會 (Arts Creators' Union) — Taiwan, est. 2011, on the island of Taiwan east of the China coast and south-west of Japan. Adjacent infrastructure: a creators' union (labour and health insurance, occupational health, contracts) — not yet music-specific mental-health support. Open Org Study.">
