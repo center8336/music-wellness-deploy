@@ -156,14 +156,6 @@
       padding-top: calc(5.5rem + env(safe-area-inset-top, 0px));
       padding-bottom: 1.5rem;
     }
-    .eyebrow {
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--signal);
-      margin-bottom: 1rem;
-    }
     .page-header h1 {
       font-family: var(--font-display);
       font-size: var(--text-hero);
@@ -172,30 +164,6 @@
       color: var(--black);
       letter-spacing: -0.01em;
     }
-    .page-dek {
-      font-family: var(--font-body);
-      font-size: 1.05rem;
-      color: var(--graphite);
-      line-height: 1.7;
-      max-width: var(--max-w-text);
-      margin-top: 1.25rem;
-    }
-    .page-dek a { color: var(--signal); }
-    .page-dek strong { color: var(--charcoal); font-weight: 600; }
-
-    .scope-strip {
-      display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1.1rem;
-      margin-top: 1.5rem;
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--graphite);
-    }
-    .scope-strip strong { color: var(--charcoal); font-weight: 700; }
-    .scope-strip .cyc { color: var(--graphite); }
-    .scope-strip .cyc b { color: var(--signal); font-weight: 700; }
-
     /* ===== SCAN MAP (desktop/tablet enhancement) ===== */
     .scan-map {
       position: relative;
@@ -361,28 +329,8 @@
       margin-top: 0.45rem;
       max-width: 52ch;
     }
-    .region-go {
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--signal);
-      white-space: nowrap;
-      padding-top: 0.35rem;
-      transition: transform var(--dur) var(--ease);
-    }
-    a.region:hover .region-go { transform: translateX(4px); }
-
     /* pending group */
     .pending-wrap { margin-top: 2.25rem; }
-    .pending-head {
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--graphite);
-      margin-bottom: 0.5rem;
-    }
     .pending-list { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
     .pending {
       display: flex; flex-direction: column; gap: 0.3rem;
@@ -408,65 +356,6 @@
     }
     .pending.dest .p-status { color: var(--signal-dim); }
 
-    .closing {
-      margin: 3rem 0 6rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border-light);
-      max-width: var(--max-w-text);
-      font-family: var(--font-body);
-      font-size: 0.96rem;
-      color: var(--graphite);
-      line-height: 1.7;
-    }
-    .closing a { color: var(--signal); }
-
-    /* ===== LEVERS COMPARED ===== */
-    .levers { margin-top: 3rem; }
-    .lever-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.25rem; }
-    .lever-card {
-      border: 1px solid var(--border-light);
-      border-radius: var(--radius-lg);
-      padding: 1.1rem 1.15rem 1.25rem;
-      background: var(--white);
-    }
-    .lever-card.law      { border-top: 2px solid rgba(122,174,212,0.6); }
-    .lever-card.industry { border-top: 2px solid rgba(232,168,124,0.65); }
-    .lever-card.eu       { border-top: 2px solid rgba(184,169,212,0.7); }
-    .lever-card h3 {
-      font-family: var(--font-display);
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--charcoal);
-      display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
-      margin-bottom: 0.55rem;
-    }
-    .lever-card p {
-      font-family: var(--font-body);
-      font-size: 0.9rem;
-      color: var(--graphite);
-      line-height: 1.55;
-      margin-top: 0.55rem;
-    }
-    .lever-card p span {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--signal);
-      display: block;
-      margin-bottom: 0.15rem;
-    }
-    .lever-card .miss span { color: var(--grey); }
-    .lever-q {
-      margin-top: 1.4rem;
-      font-family: var(--font-body);
-      font-size: 0.96rem;
-      color: var(--graphite);
-      line-height: 1.7;
-      max-width: var(--max-w-text);
-    }
-    .lever-q strong { color: var(--charcoal); }
-
     /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       .page-header { padding-top: calc(4.25rem + env(safe-area-inset-top, 0px)); }
@@ -474,9 +363,7 @@
       .scan-map { display: none; }          /* map is a desktop enhancement; list is canonical */
       .map-fallback-note { display: block; }
       .region { grid-template-columns: auto 1fr; gap: 0.85rem; }
-      .region-go { grid-column: 2; padding-top: 0.6rem; }
       .pending-list { grid-template-columns: 1fr; gap: 0.5rem; }
-      .lever-grid { grid-template-columns: 1fr; }
     }
     @media (min-width: 769px) and (max-width: 1024px) {
       .node-label { font-size: 14px; }
@@ -489,7 +376,7 @@
       html { scroll-behavior: auto; }
       a.node .pulse { animation: none; opacity: 0; }
       .thread { animation: none; }
-      a.region, .region-go, a.node .dot { transition: none; }
+      a.region, a.node .dot { transition: none; }
     }
   </style>
 
@@ -520,14 +407,7 @@
 
   <div class="page-content" id="main">
     <div class="page-header">
-      <p class="eyebrow">POLICY STUDY · Six-Region Scan</p>
       <h1>Policy Study</h1>
-      <p class="page-dek">One question, asked of one jurisdiction at a time: <strong>how does a country actually protect the mental health and welfare of its music workers</strong> — through law, public funding, and worker bodies? Each scan reads a different <strong>lever</strong>. Japan reached for labour law; Thailand for industrial policy; the EU for supranational coordination. The point of comparison is a working blueprint for a Taiwan music mental-health NPO.</p>
-
-      <div class="scope-strip">
-        <span><strong>3 of 6</strong> regions scanned</span>
-        <span class="cyc">Cycle · <b>Japan</b> · <b>Thailand</b> · Taiwan · U.S. · U.K. · <b>EU</b></span>
-      </div>
     </div>
 
     <!-- ===== SCAN MAP (visual enhancement; the list below is canonical) ===== -->
@@ -605,7 +485,6 @@
     <!-- ===== CANONICAL LIST (source of truth + accessible fallback) ===== -->
     <div class="list-head">
       <h2>The scans</h2>
-      <span class="count">Region · lever · takeaway</span>
     </div>
 
     <ol class="region-list">
@@ -616,7 +495,6 @@
             <span class="region-name">Japan <span class="lever lever-law">Labour law</span></span>
             <span class="region-take">Rights over charity. Japan extends workers' accident insurance to performers (2021) and enacts a Freelance Protection Act (2024, now enforced) — a natural experiment in whether labour law can do what a charitable safety net does elsewhere.</span>
           </span>
-          <span class="region-go">Read the scan →</span>
         </a>
       </li>
       <li>
@@ -626,7 +504,6 @@
             <span class="region-name">Thailand <span class="lever lever-industry">Industrial policy</span></span>
             <span class="region-take">Industry before safety net. Thailand builds a KOCCA-style soft-power export engine while the workers powering it remain overwhelmingly informal and outside full social security — a test of whether growing the industry protects the people inside it.</span>
           </span>
-          <span class="region-go">Read the scan →</span>
         </a>
       </li>
       <li>
@@ -636,17 +513,15 @@
             <span class="region-name">European Union <span class="lever lever-coord">Coordination</span></span>
             <span class="region-take">Coordination without competence. Reports, a Parliament resolution, a €1.23bn mental-health communication, and a proposed Artists' Charter — a thick layer of problem-definition and soft law, but no treaty power to mandate the fix in any member state.</span>
           </span>
-          <span class="region-go">Read the scan →</span>
         </a>
       </li>
     </ol>
 
     <div class="pending-wrap">
-      <p class="pending-head">On the map, not yet scanned — three regions remain in the cycle</p>
       <ul class="pending-list">
         <li class="pending dest">
           <span class="p-name">Taiwan</span>
-          <span class="p-status">The destination · scan pending</span>
+          <span class="p-status">The destination</span>
         </li>
         <li class="pending">
           <span class="p-name">United States</span>
@@ -658,34 +533,6 @@
         </li>
       </ul>
     </div>
-
-    <!-- ===== LEVERS COMPARED (analytical synthesis across the three scans) ===== -->
-    <section class="levers" aria-labelledby="levers-h">
-      <div class="list-head">
-        <h2 id="levers-h">The levers, compared</h2>
-        <span class="count">What each buys · what it misses</span>
-      </div>
-      <div class="lever-grid">
-        <article class="lever-card law">
-          <h3>Labour law <span class="lever lever-law">Japan</span></h3>
-          <p class="buys"><span>Buys</span>Enforceable rights — workers' accident insurance extended to performers (2021) and a Freelance Act (2024) now backed by real enforcement (first JFTC action, 2025).</p>
-          <p class="miss"><span>Misses</span>No mental-health programme of its own; a right on paper still needs a worker able to invoke it, and the prevalence evidence stays thin.</p>
-        </article>
-        <article class="lever-card industry">
-          <h3>Industrial policy <span class="lever lever-industry">Thailand</span></h3>
-          <p class="buys"><span>Buys</span>Scale and momentum — a KOCCA-style soft-power apparatus growing the creative economy as a national export engine.</p>
-          <p class="miss"><span>Misses</span>Leaves the workforce informal — largely outside the Social Security Fund's full protection, with no dedicated mental-health provision.</p>
-        </article>
-        <article class="lever-card eu">
-          <h3>Coordination <span class="lever lever-coord">EU</span></h3>
-          <p class="buys"><span>Buys</span>Problem-definition and money — expert reports, a Parliament resolution, a €1.23bn mental-health communication, a proposed Artists' Charter.</p>
-          <p class="miss"><span>Misses</span>No competence to mandate the fix — culture and health stay national, so Brussels can name a problem it cannot compel a member state to solve.</p>
-        </article>
-      </div>
-      <p class="lever-q"><strong>For Taiwan, the open question:</strong> which lever — or which blend — fits a market that already has a creators' union (<a href="org-study-arts-creators-union.html">藝創工會</a>) but no music-specific mental-health layer?</p>
-    </section>
-
-    <p class="closing">Each scan is a self-contained reading of one jurisdiction's system — what it does, what it leaves uncovered, and what a Taiwan music mental-health NPO could borrow. The throughline is the <strong>lever</strong>: law, charity, industrial policy, or coordination are different answers to the same question, and Taiwan will have to choose its own. Organizations studied in depth live under <a href="org-study.html">Org Study</a>; the wider field is mapped in the <a href="report-global-npo-landscape.html">Orgs Map</a>.</p>
   </div>
 
   <!-- nav scroll-state fix: transparent over hero, blurred bar once scrolled -->

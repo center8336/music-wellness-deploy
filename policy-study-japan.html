@@ -241,7 +241,7 @@
       flex-direction: column;
     }
 
-    /* ===== COVER PAGE ===== */
+    /* ===== COVER PAGE — MERGED COVER (research bones + dia air, decided 2026-06-20) ===== */
     .cover {
       height: 100vh;
       min-height: 100vh;
@@ -249,6 +249,26 @@
       align-items: center;
       text-align: center;
       padding-top: 0;
+      position: relative;
+      overflow: hidden;            /* clips the wash */
+    }
+
+    /* one soft radial purple wash — the single dia accent */
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -58%);
+      background:
+        radial-gradient(circle at 50% 45%,
+          var(--signal-glow) 0%,
+          rgba(102,103,171,0.06) 38%,
+          rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      will-change: transform;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
     }
 
     .cover .page-inner {
@@ -257,13 +277,23 @@
       align-items: center;
     }
 
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 820px;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
     .cover-eyebrow {
       font-family: var(--font-mono);
       font-size: var(--text-xs);
       letter-spacing: 0.5em;
       text-transform: uppercase;
-      color: var(--grey);
-      margin-bottom: 2.5rem;
+      color: var(--grey);                 /* 4.63:1 AA */
+      margin: 0 0 3rem;                    /* dia air */
+      padding-left: 0.5em;
     }
 
     .cover-title {
@@ -274,20 +304,21 @@
       letter-spacing: -0.03em;
       text-transform: uppercase;
       color: var(--black);
-      margin-bottom: 0.25rem;
+      margin: 0;
     }
 
     .cover-accent {
-      color: var(--purple-deep);
+      color: var(--purple-deep);            /* 4.92:1 AA — only if hero is split */
     }
 
-    .cover-year {
+    .cover-serial {
       font-family: var(--font-mono);
-      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-size: clamp(2rem, 5vw, 3.5rem);  /* ≥2rem: large-text exception for --purple-light */
       font-weight: 400;
-      color: var(--purple-light);
-      letter-spacing: 0.35em;
-      margin-bottom: 2rem;
+      color: var(--purple-light);           /* decorative; real value repeats in meta */
+      letter-spacing: 0.4em;
+      margin: 1.5rem 0 0;
+      padding-left: 0.4em;
     }
 
     .cover-subtitle {
@@ -295,19 +326,21 @@
       font-size: clamp(1rem, 2vw, 1.25rem);
       font-weight: 300;
       font-style: italic;
-      color: var(--graphite);
-      letter-spacing: 0.08em;
       text-transform: uppercase;
-      line-height: 1.5;
-      margin-bottom: 3rem;
+      color: var(--graphite);               /* 10.01:1 AAA */
+      letter-spacing: 0.08em;
+      line-height: 1.55;
+      max-width: 30ch;
+      margin: 3rem auto 0;
     }
 
     .cover-meta {
       font-family: var(--font-mono);
       font-size: var(--text-xs);
-      color: var(--grey-light);
-      line-height: 2;
-      letter-spacing: 0.02em;
+      color: var(--grey);                   /* 4.63:1 AA — NOT grey-light */
+      letter-spacing: 0.08em;
+      line-height: 1.9;
+      margin: 2.5rem 0 0;
     }
 
     .cover-hint {
@@ -319,16 +352,35 @@
       font-size: var(--text-xs);
       color: var(--silver);
       letter-spacing: 0.1em;
-      animation: pulse 2s ease-in-out infinite;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; }
+    /* entrance — soft fade + rise, one time */
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
     }
+    .cover-inner > .cover-eyebrow  { animation-delay: 0.05s; }
+    .cover-inner > .cover-title    { animation-delay: 0.14s; }
+    .cover-inner > .cover-serial   { animation-delay: 0.26s; }
+    .cover-inner > .cover-subtitle { animation-delay: 0.36s; }
+    .cover-inner > .cover-meta     { animation-delay: 0.46s; }
 
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -58%) scale(1); }
+      100% { transform: translate(-50%, -52%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+    /* reduced-motion: no entrance, no drift, no pulse — everything static & visible */
     @media (prefers-reduced-motion: reduce) {
-      .cover-hint { animation: none; }
+      .cover-inner > *,
+      .cover-wash,
+      .cover-hint { animation: none; opacity: 1; transform: none; }
+      .cover-wash { transform: translate(-50%, -55%); }
     }
 
     /* ===== CONTENT PAGES ===== */
@@ -694,16 +746,26 @@
       }
 
       .cover-title {
-        font-size: clamp(3rem, 16vw, 5rem);
+        font-size: clamp(3rem, 14vw, 5rem);
       }
 
-      .cover-year {
+      .cover-serial {
         font-size: clamp(1.5rem, 6vw, 2rem);
-        letter-spacing: 0.25em;
+        letter-spacing: 0.3em;
       }
 
       .cover-subtitle {
         font-size: 0.85rem;
+        margin-top: 2.25rem;
+      }
+
+      .cover-eyebrow {
+        margin-bottom: 2.25rem;
+      }
+
+      .cover-wash {
+        width: 150vw;
+        height: 150vw;
       }
 
       .page-title {
@@ -834,19 +896,16 @@
 
     <!-- PAGE 01: COVER (standard research cover — copied from research-detari-2020.html) -->
     <div class="page cover" id="page-0">
-      <div class="page-inner">
-        <p class="cover-eyebrow">MH&amp;W Policy Study</p>
-        <p class="cover-backlink"><a href="policy-study.html">&larr; Policy Study</a></p>
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="page-inner cover-inner">
+        <p class="cover-eyebrow">Policy Study</p>
         <h1 class="cover-title">JAPAN</h1>
-        <p class="cover-year">No.001</p>
-        <p class="cover-subtitle">Protecting Music Workers<br>by Labor Law, Not a Safety Net</p>
-        <div class="cover-meta">
-          <p>Policy Case Series · 2026.6</p>
-          <p>Japan &rarr; Thailand &rarr; Taiwan &rarr; U.S. &rarr; U.K. &rarr; EU</p>
-          <p>Compiled by &#38515;&#26825; &middot; 2026-06-18 (rev. 2026-06-19)</p>
-        </div>
+        <p class="cover-serial">001</p>
+        <p class="cover-subtitle">Protecting Music Workers by Labour Law, Not a Safety Net</p>
+        <p class="cover-meta">Policy Study No.001 · 2026.6</p>
       </div>
-      <span class="cover-hint">&darr; scroll or arrow keys</span>
+      <p class="cover-backlink"><a href="policy-study.html">&larr; Policy Study</a></p>
+      <span class="cover-hint" aria-hidden="true">&darr; scroll or arrow keys</span>
     </div>
 
     <!-- PAGE 02: WHY THIS REGION -->
