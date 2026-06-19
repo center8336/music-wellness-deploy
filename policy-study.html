@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Policy Study · MH&amp;W</title>
-  <meta name="description" content="How different jurisdictions protect the mental health and welfare of music workers — a six-region policy scan. Three of six regions scanned: Japan, Thailand, EU.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -90,7 +89,8 @@
     /* ===== NAVIGATION ===== */
     nav.nav {
       position: fixed;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
       z-index: 100;
       display: flex;
       flex-direction: column;
@@ -98,10 +98,15 @@
       padding-top: calc(2rem + env(safe-area-inset-top));
       background: transparent;
     }
-    .nav-links { display: flex; gap: 2.1rem; flex-wrap: wrap; }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
     .nav-links a {
       font-family: var(--font-mono);
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       font-weight: 400;
       color: var(--grey);
       text-decoration: none;
@@ -109,16 +114,19 @@
       letter-spacing: 0.08em;
       transition: color var(--dur) var(--ease);
     }
+
     .nav-links a:hover { color: var(--black); }
     .nav-links a.current { color: var(--black); }
 
     .nav-topbar { display:none; }
+
     .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; z-index:101; -webkit-tap-highlight-color:transparent; }
     .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
     .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
     .nav-toggle.open span:nth-child(2) { opacity:0; }
     .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
 
+    .nav-compact { display:none; }
     .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
     .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:0.5rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:0.2em; }
 
@@ -138,13 +146,38 @@
       }
       .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
       .nav-toggle { display:block; }
-      .nav-links { display: none; flex-direction: column; gap: 0.75rem; margin-top: 1rem; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
       .nav-links.show { display:flex; }
       .nav-links a { font-size: 0.85rem; }
       .nav-mobile-brand { display:block; }
     }
 
-    /* ===== PAGE SHELL ===== */
+    /* ===== FOREST PAGE (canvas + content as one unit) ===== */
+    .forest-page {
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;  /* prevent horizontal scroll */
+      overflow-y: visible; /* let tree branches extend upward naturally */
+      /* Extra top padding so canvas and content clear the fixed nav */
+      padding-top: calc(3rem + env(safe-area-inset-top, 0px));
+    }
+
+    .forest-page canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ===== PAGE CONTENT (floats above canvas) ===== */
     .page-content {
       position: relative;
       z-index: 1;
@@ -152,231 +185,198 @@
       margin: 0 auto;
       padding: 0 1.5rem;
     }
+
     .page-header {
-      padding-top: calc(5.5rem + env(safe-area-inset-top, 0px));
-      padding-bottom: 1.5rem;
+      padding-top: calc(5rem + env(safe-area-inset-top, 0px));
+      padding-bottom: 2rem;
     }
+
     .page-header h1 {
       font-family: var(--font-display);
       font-size: var(--text-hero);
       font-weight: 800;
-      line-height: 0.98;
-      color: var(--black);
-      letter-spacing: -0.01em;
-    }
-    /* ===== SCAN MAP (desktop/tablet enhancement) ===== */
-    .scan-map {
-      position: relative;
-      margin: 1.5rem 0 0.5rem;
-      border: 1px solid var(--border-light);
-      border-radius: var(--radius-lg);
-      background:
-        radial-gradient(120% 90% at 80% 30%, rgba(102,103,171,0.05), transparent 60%),
-        var(--white);
-      padding: 0.5rem 0.5rem 0;
-      overflow: hidden;
-    }
-    .scan-map svg { display: block; width: 100%; height: auto; }
-
-    .graticule line { stroke: var(--silver); stroke-width: 0.5; opacity: 0.5; }
-    .thread {
-      fill: none;
-      stroke: var(--signal);
-      stroke-width: 1.1;
-      opacity: 0.28;
-      stroke-dasharray: 3 4;
-      animation: threadDrift 5.5s linear infinite;
-    }
-    .thread:nth-of-type(2) { animation-duration: 6.5s; }
-    .thread:nth-of-type(3) { animation-duration: 7.5s; }
-    .node-label {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-anchor: middle;
-      fill: var(--charcoal);
-    }
-    .node-sub {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.06em;
-      text-anchor: middle;
-      fill: var(--grey);
-    }
-    a.node { cursor: pointer; }
-    a.node .dot { fill: var(--signal); transition: r var(--dur) var(--ease); }
-    a.node .ring-static { fill: none; stroke: var(--signal); stroke-width: 1.5; opacity: 0.45; }
-    a.node:hover .dot { r: 8; }
-    a.node:hover .node-label { fill: var(--signal); }
-    a.node .pulse { fill: var(--signal); opacity: 0.3; animation: scanPulse 2.8s var(--ease) infinite; }
-    a.node:nth-of-type(2) .pulse { animation-delay: 0.9s; }
-    a.node:nth-of-type(3) .pulse { animation-delay: 1.8s; }
-    @keyframes scanPulse {
-      0%   { r: 7;  opacity: 0.32; }
-      70%  { r: 20; opacity: 0; }
-      100% { r: 20; opacity: 0; }
-    }
-    /* threads visibly flow toward Taiwan — the scan converging on the destination */
-    @keyframes threadDrift { to { stroke-dashoffset: -28; } }
-
-    .node-pending .dot-hollow { fill: var(--white); stroke: var(--grey-light); stroke-width: 1.5; }
-    .node-pending .node-label { fill: var(--grey); font-weight: 400; }
-    .node-pending .node-sub { fill: var(--grey-light); }
-    /* Taiwan — the destination */
-    .node-dest .diamond { fill: var(--white); stroke: var(--purple-deep); stroke-width: 2; }
-    .node-dest .diamond-core { fill: var(--purple-deep); }
-    .node-dest .node-label { fill: var(--purple-deep); font-weight: 700; }
-    .node-dest .node-sub { fill: var(--signal-dim); }
-    .map-caption {
-      display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 1.1rem;
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      color: var(--graphite);
-      letter-spacing: 0.04em;
-      padding: 0.6rem 0.75rem 0.85rem;
-      margin-top: 0.25rem;
-      border-top: 1px solid var(--border-light);
-    }
-    .map-caption .key { display:inline-flex; align-items:center; gap:0.4rem; white-space:nowrap; }
-    .map-caption .swatch { width:9px; height:9px; border-radius:50%; display:inline-block; }
-    .map-caption .sw-covered { background: var(--signal); }
-    .map-caption .sw-pending { background: var(--white); border:1.5px solid var(--grey-light); }
-    .map-caption .sw-dest { width:9px; height:9px; background: var(--purple-deep); transform: rotate(45deg); border-radius:1px; }
-
-    .map-fallback-note {
-      display: none;
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--graphite);
-      margin: 1.25rem 0 0.25rem;
-    }
-
-    /* ===== CANONICAL LIST ===== */
-    .list-head {
-      display: flex; align-items: baseline; justify-content: space-between;
-      gap: 1rem; flex-wrap: wrap;
-      margin: 2.75rem 0 0.25rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid var(--border-light);
-    }
-    .list-head h2 {
-      font-family: var(--font-display);
-      font-size: var(--text-h2);
-      font-weight: 700;
+      line-height: 1.0;
       color: var(--black);
     }
-    .list-head .count {
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
+
+    .page-dek {
+      font-family: var(--font-body);
+      font-size: var(--text-body);
       color: var(--graphite);
+      line-height: 1.6;
+      max-width: var(--max-w-text);
+      margin-top: 1.25rem;
     }
 
-    .region-list { list-style: none; }
-    .region {
+    /* ===== WORKS GRID ===== */
+    .works-list {
       display: grid;
-      grid-template-columns: auto 1fr auto;
-      align-items: start;
-      gap: 1.25rem;
-      padding: 1.5rem 0.25rem;
-      border-bottom: 1px solid var(--border-light);
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      padding-bottom: 6rem;
+    }
+
+    .work-item {
+      display: flex;
+      flex-direction: column;
       text-decoration: none;
       color: inherit;
-      transition: background var(--dur) var(--ease), padding-left var(--dur) var(--ease);
     }
-    a.region:hover {
-      background: var(--signal-bg);
-      padding-left: 0.9rem;
+
+    .work-card {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16 / 10;
+      background: rgba(244, 244, 245, 0.55);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: var(--radius-lg);
+      transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
     }
-    .region-no {
-      font-family: var(--font-mono);
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--signal);
-      padding-top: 0.2rem;
+
+    .work-item:hover .work-card {
+      background: rgba(244, 244, 245, 0.72);
+      border-color: rgba(102, 103, 171, 0.25);
     }
-    .region-name {
+
+    .work-card .card-visual {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      transition: transform var(--dur-slow) var(--ease), opacity var(--dur-slow) var(--ease);
+    }
+
+    .work-item:hover .card-visual {
+      transform: scale(1.02);
+    }
+
+    .work-card .card-title {
       font-family: var(--font-display);
-      font-size: 1.4rem;
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
       font-weight: 700;
       color: var(--charcoal);
       line-height: 1.2;
-      display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap;
+      text-align: center;
     }
-    .lever {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      padding: 0.18rem 0.5rem;
-      border-radius: 999px;
-      color: var(--off-black);
-      white-space: nowrap;
-    }
-    .lever-law      { background: rgba(122,174,212,0.28); box-shadow: inset 0 0 0 1px rgba(122,174,212,0.5); }
-    .lever-industry { background: rgba(232,168,124,0.30); box-shadow: inset 0 0 0 1px rgba(232,168,124,0.55); }
-    .lever-coord    { background: rgba(184,169,212,0.34); box-shadow: inset 0 0 0 1px rgba(184,169,212,0.6); }
-    .region-take {
-      font-family: var(--font-body);
-      font-size: 0.96rem;
-      color: var(--graphite);
-      line-height: 1.6;
-      margin-top: 0.45rem;
-      max-width: 52ch;
-    }
-    /* pending group */
-    .pending-wrap { margin-top: 2.25rem; }
-    .pending-list { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
-    .pending {
-      display: flex; flex-direction: column; gap: 0.3rem;
-      padding: 1.1rem 1rem;
-      border: 1px dashed var(--silver);
-      border-radius: var(--radius-lg);
-      background: rgba(244,244,245,0.4);
-    }
-    .pending.dest { grid-column: 1 / -1; border-style: solid; border-color: rgba(102,103,171,0.3); background: var(--signal-bg); }
-    .pending .p-name {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--grey);
-    }
-    .pending.dest .p-name { color: var(--purple-deep); }
-    .pending .p-status {
+
+    .work-card .card-meta {
       font-family: var(--font-mono);
       font-size: var(--text-xs);
+      color: var(--graphite); /* AA on the light card wash (--grey fails at ~3.9:1) */
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--graphite);
+      margin-top: 0.5rem;
+      text-align: center;
     }
-    .pending.dest .p-status { color: var(--signal-dim); }
+
+    /* accent-1: stage light — warm rose-to-peach wash for the study cards
+       (research.html hub uses the cool accent-3 forest pool; same component,
+       sibling palette.) */
+    .work-card.accent-1 {
+      background: linear-gradient(
+        168deg,
+        rgba(212, 121, 156, 0.12) 0%,
+        rgba(232, 168, 124, 0.16) 45%,
+        rgba(232, 168, 124, 0.22) 100%
+      );
+      border-color: rgba(212, 121, 156, 0.12);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.3),
+                  0 2px 12px rgba(212, 121, 156, 0.06);
+    }
+    .work-item:hover .work-card.accent-1 {
+      background: linear-gradient(
+        168deg,
+        rgba(212, 121, 156, 0.16) 0%,
+        rgba(232, 168, 124, 0.22) 45%,
+        rgba(232, 168, 124, 0.28) 100%
+      );
+      border-color: rgba(212, 121, 156, 0.22);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.35),
+                  0 3px 16px rgba(212, 121, 156, 0.1);
+    }
+
+    .work-item .caption {
+      padding: 0.75rem 0.25rem 0;
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--charcoal);
+      line-height: 1.4;
+    }
+
+    .work-item .caption .author { font-weight: 600; }
+
+    .work-item .caption .type {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--grey);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 0.25rem;
+    }
+
+    .work-card.placeholder {
+      background: rgba(244, 244, 245, 0.15);
+      border: 1.5px dashed var(--silver);
+      border-radius: var(--radius-lg);
+    }
+
+    .work-card.placeholder .card-title {
+      color: var(--grey-light);
+      font-size: var(--text-sm);
+      font-weight: 400;
+    }
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
-      .page-header { padding-top: calc(4.25rem + env(safe-area-inset-top, 0px)); }
-      .page-header h1 { font-size: clamp(2.5rem, 13vw, 3.6rem); }
-      .scan-map { display: none; }          /* map is a desktop enhancement; list is canonical */
-      .map-fallback-note { display: block; }
-      .region { grid-template-columns: auto 1fr; gap: 0.85rem; }
-      .pending-list { grid-template-columns: 1fr; gap: 0.5rem; }
+      .works-list {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .forest-page { padding-top: calc(2rem + env(safe-area-inset-top, 0px)); }
+
+      .page-header {
+        padding-top: calc(4rem + env(safe-area-inset-top, 0px));
+        padding-bottom: 1.2rem;
+      }
+
+      .page-header h1 {
+        font-size: clamp(2.5rem, 12vw, 3.5rem);
+      }
+
+      .work-card {
+        aspect-ratio: 16 / 9;
+      }
+
+      .work-item .caption {
+        padding: 0.75rem 0 1.5rem;
+      }
+
+      .work-card.placeholder {
+        background: transparent;
+        /* keep dashed border visible on mobile */
+      }
+
+      .work-card.placeholder .card-title {
+        color: var(--grey-light);
+        opacity: 0.6;
+      }
     }
+
     @media (min-width: 769px) and (max-width: 1024px) {
-      .node-label { font-size: 14px; }
+      .works-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
+
     @media (max-width: 480px) {
       .nav-mobile-brand { font-size:0.58rem; }
       .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      a.node .pulse { animation: none; opacity: 0; }
-      .thread { animation: none; }
-      a.region, a.node .dot { transition: none; }
     }
   </style>
 
@@ -392,7 +392,7 @@
       <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="this.classList.toggle('open');var x=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',!x);document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
         <span></span><span></span><span></span>
       </button>
-      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+      <div class="nav-mobile-brand">MENTAL HEALTH & WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
     </div>
         <div class="nav-links">
       <a href="index.html">HOME</a>
@@ -405,142 +405,378 @@
     </div>
   </nav>
 
-  <div class="page-content" id="main">
-    <div class="page-header">
-      <h1>Policy Study</h1>
-    </div>
+  <!-- Forest Page: canvas background + content -->
+  <section class="forest-page">
+    <canvas id="forest" aria-hidden="true" role="presentation"></canvas>
 
-    <!-- ===== SCAN MAP (visual enhancement; the list below is canonical) ===== -->
-    <figure class="scan-map" aria-hidden="true">
-      <svg viewBox="0 0 1000 380" role="presentation" focusable="false">
-        <!-- graticule: an abstract world field, not a literal map -->
-        <g class="graticule">
-          <line x1="0" y1="63" x2="1000" y2="63"/>
-          <line x1="0" y1="127" x2="1000" y2="127"/>
-          <line x1="0" y1="190" x2="1000" y2="190"/>
-          <line x1="0" y1="253" x2="1000" y2="253"/>
-          <line x1="0" y1="317" x2="1000" y2="317"/>
-          <line x1="143" y1="0" x2="143" y2="380"/>
-          <line x1="286" y1="0" x2="286" y2="380"/>
-          <line x1="429" y1="0" x2="429" y2="380"/>
-          <line x1="572" y1="0" x2="572" y2="380"/>
-          <line x1="715" y1="0" x2="715" y2="380"/>
-          <line x1="858" y1="0" x2="858" y2="380"/>
-        </g>
-
-        <!-- threads: the scanned jurisdictions converging on Taiwan (animated drift toward the destination) -->
-        <path class="thread" d="M886,140 Q884,200 850,246"/>
-        <path class="thread" d="M758,285 Q802,266 842,252"/>
-        <path class="thread" d="M572,144 Q712,176 840,247"/>
-
-        <!-- COVERED nodes (clickable, mouse-only; list is the accessible path) -->
-        <a class="node" href="policy-study-japan.html" tabindex="-1">
-          <circle class="pulse" cx="888" cy="135" r="7"/>
-          <circle class="dot" cx="888" cy="135" r="6"/>
-          <text class="node-label" x="888" y="117">JAPAN</text>
-          <text class="node-sub" x="888" y="157">Labour law</text>
-        </a>
-        <a class="node" href="policy-study-thailand.html" tabindex="-1">
-          <circle class="pulse" cx="752" cy="290" r="7"/>
-          <circle class="dot" cx="752" cy="290" r="6"/>
-          <text class="node-label" x="752" y="314">THAILAND</text>
-          <text class="node-sub" x="752" y="272">Industrial policy</text>
-        </a>
-        <a class="node" href="policy-study-eu.html" tabindex="-1">
-          <circle class="pulse" cx="560" cy="140" r="7"/>
-          <circle class="dot" cx="560" cy="140" r="6"/>
-          <text class="node-label" x="560" y="122">EU</text>
-          <text class="node-sub" x="560" y="160">Coordination</text>
-        </a>
-
-        <!-- TAIWAN — the destination (labels to the right so they clear Thailand) -->
-        <g class="node-dest">
-          <rect class="diamond" x="838" y="240" width="20" height="20" rx="2" transform="rotate(45 848 250)"/>
-          <rect class="diamond-core" x="843.5" y="245.5" width="9" height="9" rx="1" transform="rotate(45 848 250)"/>
-          <text class="node-label" x="848" y="221">TAIWAN</text>
-          <text class="node-sub" x="848" y="283">The destination</text>
-        </g>
-
-        <!-- PENDING nodes -->
-        <g class="node-pending">
-          <circle class="dot-hollow" cx="220" cy="150" r="6"/>
-          <text class="node-label" x="220" y="132">U.S.</text>
-          <text class="node-sub" x="220" y="170">Not yet scanned</text>
-        </g>
-        <g class="node-pending">
-          <circle class="dot-hollow" cx="495" cy="68" r="6"/>
-          <text class="node-label" x="495" y="50">U.K.</text>
-          <text class="node-sub" x="495" y="86">Not yet scanned</text>
-        </g>
-      </svg>
-      <div class="map-caption">
-        <span class="key"><span class="swatch sw-covered"></span> Scanned</span>
-        <span class="key"><span class="swatch sw-dest"></span> Taiwan — the destination</span>
-        <span class="key"><span class="swatch sw-pending"></span> Not yet scanned</span>
+    <div class="page-content" id="main">
+      <div class="page-header">
+        <h1>Policy Study</h1>
       </div>
-    </figure>
 
-    <p class="map-fallback-note">↓ The six regions, as a list</p>
+      <!-- Works Grid -->
+      <div class="works-list">
 
-    <!-- ===== CANONICAL LIST (source of truth + accessible fallback) ===== -->
-    <div class="list-head">
-      <h2>The scans</h2>
+        <!-- Japan -->
+        <a class="work-item" href="policy-study-japan.html" data-tree>
+          <div class="work-card accent-1">
+            <div class="card-visual">
+              <div>
+                <div class="card-title">Japan — Labour Law, Not a Safety Net</div>
+                <div class="card-meta">Policy Study 001 · 2026.6</div>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Thailand -->
+        <a class="work-item" href="policy-study-thailand.html" data-tree>
+          <div class="work-card accent-1">
+            <div class="card-visual">
+              <div>
+                <div class="card-title">Thailand — Building the Stage Before the Safety Net</div>
+                <div class="card-meta">Policy Study 002 · 2026.6</div>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <!-- European Union -->
+        <a class="work-item" href="policy-study-eu.html" data-tree>
+          <div class="work-card accent-1">
+            <div class="card-visual">
+              <div>
+                <div class="card-title">European Union — Coordination Without the Competence</div>
+                <div class="card-meta">Policy Study 003 · 2026.6</div>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Placeholder (next policy study card slots in above this block) -->
+        <div class="work-item" data-ghost>
+          <div class="work-card placeholder">
+            <div class="card-visual">
+              <div>
+                <div class="card-title">More coming</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
+  </section>
 
-    <ol class="region-list">
-      <li>
-        <a class="region" id="japan" href="policy-study-japan.html">
-          <span class="region-no">01</span>
-          <span class="region-body">
-            <span class="region-name">Japan <span class="lever lever-law">Labour law</span></span>
-            <span class="region-take">Rights over charity. Japan extends workers' accident insurance to performers (2021) and enacts a Freelance Protection Act (2024, now enforced) — a natural experiment in whether labour law can do what a charitable safety net does elsewhere.</span>
-          </span>
-        </a>
-      </li>
-      <li>
-        <a class="region" id="thailand" href="policy-study-thailand.html">
-          <span class="region-no">02</span>
-          <span class="region-body">
-            <span class="region-name">Thailand <span class="lever lever-industry">Industrial policy</span></span>
-            <span class="region-take">Industry before safety net. Thailand builds a KOCCA-style soft-power export engine while the workers powering it remain overwhelmingly informal and outside full social security — a test of whether growing the industry protects the people inside it.</span>
-          </span>
-        </a>
-      </li>
-      <li>
-        <a class="region" id="eu" href="policy-study-eu.html">
-          <span class="region-no">03</span>
-          <span class="region-body">
-            <span class="region-name">European Union <span class="lever lever-coord">Coordination</span></span>
-            <span class="region-take">Coordination without competence. Reports, a Parliament resolution, a €1.23bn mental-health communication, and a proposed Artists' Charter — a thick layer of problem-definition and soft law, but no treaty power to mandate the fix in any member state.</span>
-          </span>
-        </a>
-      </li>
-    </ol>
+  <script>
+  (function() {
+    'use strict';
 
-    <div class="pending-wrap">
-      <ul class="pending-list">
-        <li class="pending dest">
-          <span class="p-name">Taiwan</span>
-          <span class="p-status">The destination</span>
-        </li>
-        <li class="pending">
-          <span class="p-name">United States</span>
-          <span class="p-status">Not yet scanned</span>
-        </li>
-        <li class="pending">
-          <span class="p-name">United Kingdom</span>
-          <span class="p-status">Not yet scanned</span>
-        </li>
-      </ul>
-    </div>
-  </div>
+    var canvas = document.getElementById('forest');
+    var ctx = canvas.getContext('2d');
+    var forestEl = document.querySelector('.forest-page');
+    var W, H, dpr;
+    var SEED = 211; /* sibling forest — org-study.html uses 137, research.html uses 71 */
+    var time = 0;
 
+    var prefersReducedMotion = window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var segments = [];
+    var particles = [];
+    var treeSway = [];
+    var treeGhost = [];
+
+    // --- Seeded PRNG (mulberry32) ---
+    function mulberry32(a) {
+      return function() {
+        a |= 0; a = a + 0x6D2B79F5 | 0;
+        var t = Math.imul(a ^ a >>> 15, 1 | a);
+        t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+      };
+    }
+
+    var rng;
+    function rand(min, max) {
+      if (max === undefined) { max = min; min = 0; }
+      return min + rng() * (max - min);
+    }
+
+    // ===== BUILD: recursive branch segments =====
+    function buildBranch(x, y, angle, length, depth, maxDepth, treeIdx, scale, ghost) {
+      if (depth > maxDepth || length < 1.5) return;
+
+      var endX = x + Math.cos(angle) * length;
+      var endY = y + Math.sin(angle) * length;
+      var depthRatio = depth / maxDepth;
+
+      // Ghost trees are fainter — but bump alpha on mobile so they're still visible
+      var mobileBoost = (W <= 768) ? 2.8 : 1.0;
+      var alphaBase = ghost ? 0.15 * mobileBoost : 0.55;
+      var alphaFade = ghost ? 0.08 : 0.4;
+
+      segments.push({
+        x1: x, y1: y, x2: endX, y2: endY,
+        angle: angle,
+        length: length,
+        depth: depth,
+        maxDepth: maxDepth,
+        treeIdx: treeIdx,
+        ghost: ghost,
+        weight: Math.max(0.3, ((ghost ? (W <= 768 ? 1.6 : 1.2) : 2.0) - depthRatio * (ghost ? 0.8 : 1.7)) * scale),
+        alpha: Math.max(0.04, alphaBase - depthRatio * alphaFade),
+        swayPhase: rand(0, Math.PI * 2),
+        swayAmp: rand(0.003, 0.012) * (depthRatio + 0.1),
+        hasDot: depth >= maxDepth - 2 && rng() < (ghost ? 0.3 : 0.5),
+        dotSize: rand(0.5, 1.4) * scale
+      });
+
+      var branches = depth < 2 ? 2 : (rng() < 0.25 ? 3 : 2);
+      var spread = rand(0.22, 0.50);
+      var shrink = rand(0.60, 0.76);
+      if (depth > 3 && rng() < 0.15) return;
+
+      for (var b = 0; b < branches; b++) {
+        var bAngle;
+        if (branches === 2) {
+          bAngle = angle + (b === 0 ? -spread : spread) + rand(-0.12, 0.12);
+        } else {
+          bAngle = angle + (b - 1) * spread + rand(-0.08, 0.08);
+        }
+        buildBranch(endX, endY, bAngle, length * shrink + rand(-2, 2), depth + 1, maxDepth, treeIdx, scale, ghost);
+      }
+    }
+
+    // ===== BUILD FOREST: pre-existing landscape + policy-study trees =====
+    // 見樹又見林 — the field already exists; each policy study is a tree
+    // we've walked up to and examined closely. Ambient trees fill the
+    // landscape regardless of how many studies are done.
+    function buildForest() {
+      rng = mulberry32(SEED);
+      segments = [];
+      particles = [];
+      treeSway = [];
+      treeGhost = [];
+
+      var isMobile = W <= 768;
+      var scale = isMobile ? 0.7 : 1.0;
+      // On mobile, cards stack → H grows large. Cap the reference height
+      // so trees stay proportional to screen width, not page length.
+      var refH = isMobile ? Math.min(H, W * 2.2) : H;
+      var treeIdx = 0;
+
+      // --- 1. Ambient forest: trees that exist independent of policy studies ---
+      // Stratified Y bands so every vertical zone gets guaranteed trees.
+      var ambientCount = isMobile ? 18 : 12;
+      var bandH = (H * 0.83) / ambientCount; // divide usable height into bands
+      for (var a = 0; a < ambientCount; a++) {
+        var tx = isMobile ? rand(W * 0.06, W * 0.94) : rand(W * 0.03, W * 0.97);
+        // Stratified: each tree gets a vertical band, with jitter within band
+        var bandTop = H * 0.12 + a * bandH;
+        var ty = rand(bandTop, bandTop + bandH);
+
+        var angle = -Math.PI / 2 + rand(-0.2, 0.2);
+        var trunkLen = rand(refH * 0.05, refH * 0.13) * scale;
+        var maxD = Math.floor(rand(4, 7));
+
+        treeGhost.push(true);
+        treeSway.push({
+          phase: rand(0, Math.PI * 2),
+          speed: rand(0.0003, 0.0008),
+          amp: rand(0.006, 0.014)
+        });
+
+        buildBranch(tx, ty, angle, trunkLen, 0, maxD, treeIdx, scale * 0.85, true);
+        treeIdx++;
+      }
+
+      // --- 2. Card-linked trees: positioned behind their cards ---
+      var cards = document.querySelectorAll('.works-list .work-item');
+      var forestRect = forestEl.getBoundingClientRect();
+
+      for (var i = 0; i < cards.length; i++) {
+        var card = cards[i];
+        var ghost = card.hasAttribute('data-ghost');
+        var cardRect = card.getBoundingClientRect();
+
+        // Tree grows upward from below the card's center.
+        // On mobile, start lower so branches don't clip past the container top.
+        var cx = cardRect.left + cardRect.width / 2 - forestRect.left;
+        var cyRatio = isMobile ? 0.95 : 0.8;
+        var cy = cardRect.top + cardRect.height * cyRatio - forestRect.top;
+
+        // Slight random offset so it doesn't look mechanical
+        var jitter = isMobile ? 10 : 20;
+        cx += rand(-jitter, jitter);
+
+        var angle = -Math.PI / 2 + rand(-0.15, 0.15);
+        // Ghost trees are smaller but still proper trees, not twigs.
+        // On mobile, bump ghost size so the "More coming" card has a visible tree.
+        var ghostTrunkMin = isMobile ? refH * 0.10 : refH * 0.06;
+        var ghostTrunkMax = isMobile ? refH * 0.18 : refH * 0.10;
+        var trunkLen = ghost
+          ? rand(ghostTrunkMin, ghostTrunkMax)
+          : rand(refH * 0.12, refH * 0.22);
+        var maxD = ghost
+          ? Math.floor(rand(isMobile ? 5 : 3, isMobile ? 7 : 5))
+          : Math.floor(rand(isMobile ? 5 : 6, isMobile ? 7 : 9));
+
+        treeGhost.push(ghost);
+        treeSway.push({
+          phase: rand(0, Math.PI * 2),
+          speed: rand(0.0004, 0.001),
+          amp: rand(0.008, 0.018)
+        });
+
+        buildBranch(cx, cy, angle, trunkLen, 0, maxD, treeIdx, scale, ghost);
+        treeIdx++;
+      }
+
+      // --- 3. Particles: spores / connections in the field ecosystem ---
+      var basePCount = W > 768 ? 30 : 16;
+      var pCount = Math.min(basePCount, 90);
+      for (var p = 0; p < pCount; p++) {
+        particles.push({
+          x: rand(0, W),
+          y: rand(H * 0.05, H * 0.98),
+          baseX: 0,
+          size: rand(0.5, 2.2),
+          speed: rand(0.04, 0.18),
+          drift: rand(-0.1, 0.1),
+          opacity: rand(0.03, 0.15),
+          phase: rand(0, Math.PI * 2)
+        });
+        particles[particles.length - 1].baseX = particles[particles.length - 1].x;
+      }
+    }
+
+    // ===== DRAW FRAME =====
+    function drawFrame() {
+      ctx.clearRect(0, 0, W, H);
+      time++;
+
+      // -- Trees --
+      for (var s = 0; s < segments.length; s++) {
+        var seg = segments[s];
+        var ts = treeSway[seg.treeIdx];
+
+        var sway = Math.sin(time * ts.speed + ts.phase + seg.swayPhase) * (ts.amp + seg.swayAmp);
+        var depthFactor = seg.depth / seg.maxDepth;
+        var swayAngle = sway * depthFactor;
+
+        var newAngle = seg.angle + swayAngle;
+        var sx2 = seg.x1 + Math.cos(newAngle) * seg.length;
+        var sy2 = seg.y1 + Math.sin(newAngle) * seg.length;
+
+        var parentSway = swayAngle * 0.4 * depthFactor;
+        var sx1 = seg.x1 + Math.sin(time * ts.speed * 0.7 + seg.swayPhase) * parentSway * seg.length * 0.2;
+        var sy1 = seg.y1;
+
+        ctx.beginPath();
+        ctx.moveTo(sx1, sy1);
+        ctx.lineTo(sx2, sy2);
+        ctx.strokeStyle = 'rgba(39, 39, 42, ' + seg.alpha + ')';
+        ctx.lineWidth = seg.weight;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+
+        if (seg.hasDot) {
+          ctx.beginPath();
+          ctx.arc(sx2, sy2, seg.dotSize, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(39, 39, 42, ' + (seg.alpha * 0.4) + ')';
+          ctx.fill();
+        }
+      }
+
+      // -- Particles --
+      for (var p = 0; p < particles.length; p++) {
+        var pt = particles[p];
+        pt.y -= pt.speed;
+        pt.x = pt.baseX + Math.sin(time * 0.003 + pt.phase) * 12;
+        pt.baseX += pt.drift * 0.08;
+
+        if (pt.y < -5) {
+          pt.y = H + 5;
+          pt.baseX = rand(0, W);
+          pt.x = pt.baseX;
+        }
+        if (pt.baseX < -20) pt.baseX = W + 10;
+        if (pt.baseX > W + 20) pt.baseX = -10;
+
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, pt.size, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(39, 39, 42, ' + pt.opacity + ')';
+        ctx.fill();
+      }
+
+      // -- Mycelium connections --
+      for (var i = 0; i < particles.length; i++) {
+        for (var j = i + 1; j < particles.length; j++) {
+          var dx = particles[i].x - particles[j].x;
+          var dy = particles[i].y - particles[j].y;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          var maxDist = W > 768 ? 80 : 55;
+          if (dist < maxDist) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = 'rgba(39, 39, 42, ' + ((1 - dist / maxDist) * 0.04) + ')';
+            ctx.lineWidth = 0.4;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Respect prefers-reduced-motion: render one static forest frame, no loop
+      if (!prefersReducedMotion) {
+        requestAnimationFrame(drawFrame);
+      }
+    }
+
+    // ===== SIZING =====
+    function resize() {
+      W = forestEl.offsetWidth;
+      H = forestEl.offsetHeight;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      canvas.style.width = W + 'px';
+      canvas.style.height = H + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      buildForest();
+    }
+
+    // ===== INIT =====
+    // Wait for layout to settle so card positions are correct
+    window.addEventListener('load', function() {
+      resize();
+      drawFrame();
+    });
+
+    // Fallback if load already fired
+    if (document.readyState === 'complete') {
+      resize();
+      drawFrame();
+    }
+
+    var resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resize, 200);
+      if (prefersReducedMotion) {
+        // re-render the static frame after resize rebuilds the forest
+        setTimeout(drawFrame, 220);
+      }
+    });
+  })();
+  </script>
   <!-- nav scroll-state fix: transparent over hero, blurred bar once scrolled -->
   <style>
     nav.nav, .nav { transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease); border-bottom: 1px solid transparent; }
     nav.nav.scrolled, .nav.scrolled {
       right: 0;
-      background: rgba(244, 244, 245, 0.85);
+      background: rgba(244, 244, 245, 0.45);
       -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-light);
@@ -552,6 +788,12 @@
     var nav = document.querySelector('nav.nav, .nav'); if (!nav) return;
     var THRESH = 24;
     function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var c = document.querySelector('.pages-container, .pages');
+    if (c && getComputedStyle(c).overflowY !== 'visible') {
+      var ticking = false;
+      c.addEventListener('scroll', function(){ if (ticking) return; ticking = true; requestAnimationFrame(function(){ ticking = false; setS(c.scrollTop > THRESH); }); }, { passive: true });
+      setS(c.scrollTop > THRESH); return;
+    }
     var s = document.createElement('div'); s.setAttribute('aria-hidden', 'true');
     s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
     document.body.insertBefore(s, document.body.firstChild);

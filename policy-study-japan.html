@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Policy scan: Japan — protecting music workers by labor law, not a safety net · MH&W Policy Study">
+  <meta name="description" content="Policy study: Japan — protecting music workers by labor law, not a safety net · MH&W Policy Study">
   <title>Policy: Japan · MH&W</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -241,16 +241,17 @@
       flex-direction: column;
     }
 
-    /* ===== COVER PAGE — MERGED COVER (research bones + dia air, decided 2026-06-20) ===== */
+    /* ===== COVER PAGE — TWO-LINE MINIMAL (R2.1, decided 2026-06-20) ===== */
     .cover {
-      height: 100vh;
       min-height: 100vh;
-      justify-content: center;
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       text-align: center;
-      padding-top: 0;
       position: relative;
       overflow: hidden;            /* clips the wash */
+      padding: 0 2rem;
     }
 
     /* one soft radial purple wash — the single dia accent */
@@ -259,88 +260,39 @@
       top: 50%; left: 50%;
       width: min(115vw, 1100px);
       height: min(115vw, 1100px);
-      transform: translate(-50%, -58%);
-      background:
-        radial-gradient(circle at 50% 45%,
-          var(--signal-glow) 0%,
-          rgba(102,103,171,0.06) 38%,
-          rgba(102,103,171,0) 68%);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%, var(--signal-glow) 0%, rgba(102,103,171,0.06) 38%, rgba(102,103,171,0) 68%);
       pointer-events: none;
       z-index: 0;
-      will-change: transform;
       animation: coverWashDrift 18s ease-in-out infinite alternate;
-    }
-
-    .cover .page-inner {
-      max-width: 800px;
-      justify-content: center;
-      align-items: center;
     }
 
     .cover-inner {
       position: relative;
       z-index: 1;
-      max-width: 820px;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    .cover-eyebrow {
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      letter-spacing: 0.5em;
-      text-transform: uppercase;
-      color: var(--grey);                 /* 4.63:1 AA */
-      margin: 0 0 3rem;                    /* dia air */
-      padding-left: 0.5em;
+      max-width: 1000px;
     }
 
     .cover-title {
       font-family: var(--font-display);
-      font-size: clamp(4.5rem, 11vw, 9rem);
+      font-size: clamp(2.8rem, 9vw, 7rem);
       font-weight: 800;
-      line-height: 0.85;
+      line-height: 0.9;
       letter-spacing: -0.03em;
       text-transform: uppercase;
       color: var(--black);
       margin: 0;
     }
 
-    .cover-accent {
-      color: var(--purple-deep);            /* 4.92:1 AA — only if hero is split */
-    }
-
-    .cover-serial {
+    .cover-line {
       font-family: var(--font-mono);
-      font-size: clamp(2rem, 5vw, 3.5rem);  /* ≥2rem: large-text exception for --purple-light */
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
       font-weight: 400;
-      color: var(--purple-light);           /* decorative; real value repeats in meta */
-      letter-spacing: 0.4em;
-      margin: 1.5rem 0 0;
-      padding-left: 0.4em;
-    }
-
-    .cover-subtitle {
-      font-family: var(--font-body);
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      font-weight: 300;
-      font-style: italic;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--graphite);               /* 10.01:1 AAA */
-      letter-spacing: 0.08em;
-      line-height: 1.55;
-      max-width: 30ch;
-      margin: 3rem auto 0;
-    }
-
-    .cover-meta {
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      color: var(--grey);                   /* 4.63:1 AA — NOT grey-light */
-      letter-spacing: 0.08em;
-      line-height: 1.9;
-      margin: 2.5rem 0 0;
+      color: var(--purple-deep);            /* 4.92:1 AA */
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
     }
 
     .cover-hint {
@@ -362,16 +314,13 @@
       transform: translateY(14px);
       animation: coverRise 0.7s var(--ease) forwards;
     }
-    .cover-inner > .cover-eyebrow  { animation-delay: 0.05s; }
-    .cover-inner > .cover-title    { animation-delay: 0.14s; }
-    .cover-inner > .cover-serial   { animation-delay: 0.26s; }
-    .cover-inner > .cover-subtitle { animation-delay: 0.36s; }
-    .cover-inner > .cover-meta     { animation-delay: 0.46s; }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-line  { animation-delay: 0.22s; }
 
     @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
     @keyframes coverWashDrift {
-      0%   { transform: translate(-50%, -58%) scale(1); }
-      100% { transform: translate(-50%, -52%) scale(1.06); }
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
     }
     @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
 
@@ -380,7 +329,6 @@
       .cover-inner > *,
       .cover-wash,
       .cover-hint { animation: none; opacity: 1; transform: none; }
-      .cover-wash { transform: translate(-50%, -55%); }
     }
 
     /* ===== CONTENT PAGES ===== */
@@ -746,21 +694,12 @@
       }
 
       .cover-title {
-        font-size: clamp(1.8rem, 8.7vw, 2.5rem);
+        font-size: clamp(1.9rem, 8.5vw, 2.6rem);
       }
 
-      .cover-serial {
-        font-size: clamp(1.5rem, 6vw, 2rem);
-        letter-spacing: 0.3em;
-      }
-
-      .cover-subtitle {
-        font-size: 0.85rem;
-        margin-top: 2.25rem;
-      }
-
-      .cover-eyebrow {
-        margin-bottom: 2.25rem;
+      .cover-line {
+        font-size: clamp(0.72rem, 3.2vw, 0.95rem);
+        letter-spacing: 0.18em;
       }
 
       .cover-wash {
@@ -804,21 +743,7 @@
     .pages-container::-webkit-scrollbar-thumb { background: var(--silver); border-radius: 3px; }
     .pages-container::-webkit-scrollbar-thumb:hover { background: var(--grey-light); }
 
-    /* ===== DISCOVERABILITY: hub backlink (cover) + related block (closing page) ===== */
-    .cover-backlink {
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-    }
-    .cover-backlink a {
-      color: var(--signal);
-      text-decoration: none;
-      transition: color var(--dur) var(--ease);
-    }
-    .cover-backlink a:hover, .cover-backlink a:focus { color: var(--signal-dim); }
-
+    /* ===== DISCOVERABILITY: related block (closing page) ===== */
     .related-block {
       margin-top: 1.5rem;
       padding-top: 1.5rem;
@@ -897,15 +822,11 @@
     <!-- PAGE 01: COVER (standard research cover — copied from research-detari-2020.html) -->
     <div class="page cover" id="page-0">
       <div class="cover-wash" aria-hidden="true"></div>
-      <div class="page-inner cover-inner">
-        <p class="cover-eyebrow">Policy Study</p>
+      <div class="cover-inner">
         <h1 class="cover-title">JAPAN</h1>
-        <p class="cover-serial">001</p>
-        <p class="cover-subtitle">Protecting Music Workers by Labour Law, Not a Safety Net</p>
-        <p class="cover-meta">Policy Study No.001 · 2026.6</p>
+        <p class="cover-line">Policy Study 001 &middot; 2026.6</p>
       </div>
-      <p class="cover-backlink"><a href="policy-study.html">&larr; Policy Study</a></p>
-      <span class="cover-hint" aria-hidden="true">&darr; scroll or arrow keys</span>
+      <span class="cover-hint" aria-hidden="true">&darr; scroll</span>
     </div>
 
     <!-- PAGE 02: WHY THIS REGION -->
@@ -1159,7 +1080,7 @@
           <ol>
             <li>The mental-health prevalence figures rest on an advocacy-body survey relayed in an editorial with no published sample size or method; treated as &#9888; directional.</li>
             <li>Japanese-language primary sources (the Freelance Act text; &#25991;&#21270;&#24193; program reports) were read via government summary pages, statute explainers, and secondary legal briefings, not the full statute in every case.</li>
-            <li>This is a policy <em>scan</em>, not an exhaustive review &mdash; Japan's general suicide-prevention framework (&#33258;&#27578;&#23550;&#31574;&#22522;&#26412;&#27861;, amended 2025, child/school-focused) and prefecture-level arts support were noted but not deep-read.</li>
+            <li>This is a policy <em>study</em>, not an exhaustive review &mdash; Japan's general suicide-prevention framework (&#33258;&#27578;&#23550;&#31574;&#22522;&#26412;&#27861;, amended 2025, child/school-focused) and prefecture-level arts support were noted but not deep-read.</li>
             <li>The harassment duty is framed here as an extension of the employee-side Power Harassment Prevention Act; the precise boundary between the two regimes for freelancers was not litigated in primary case law.</li>
             <li>The "6.3% artists" share and the 218,250 headcount are editorial/census figures inherited via the editorial, not independently reconciled to the underlying government tables.</li>
             <li>The &#25991;&#21270;&#24193; FY2026 lines are budget requests, not enacted.</li>

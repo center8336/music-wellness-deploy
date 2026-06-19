@@ -170,16 +170,6 @@
       line-height: 1.0;
       color: var(--black);
     }
-    .page-dek {
-      font-family: var(--font-body);
-      font-size: var(--text-body);
-      color: var(--graphite);
-      max-width: var(--max-w-text);
-      margin-top: 1rem;
-      line-height: 1.7;
-    }
-    .page-dek a { color: var(--signal); }
-
     /* eyebrow / hero meta (§13 grammar) */
     .eyebrow {
       font-family: var(--font-mono);
@@ -189,21 +179,6 @@
       color: var(--signal);
       margin-bottom: 1rem;
     }
-
-    /* the two-register frame: one short note explaining what INSIGHT holds */
-    .register-note {
-      max-width: var(--max-w-text);
-      margin-top: 1.25rem;
-      padding: 1rem 1.25rem;
-      background: var(--signal-bg);
-      border-left: 3px solid var(--signal);
-      border-radius: var(--radius);
-      font-family: var(--font-body);
-      font-size: var(--text-sm);
-      color: var(--graphite);
-      line-height: 1.6;
-    }
-    .register-note strong { color: var(--charcoal); font-weight: 600; }
 
     /* ===== REGISTER LANE (a labelled band inside the one section) ===== */
     .register-lane { padding-bottom: 3.5rem; }
@@ -470,15 +445,13 @@
       <div class="page-header">
         <p class="eyebrow">INSIGHT · Personal Examination Home</p>
         <h1>Insight</h1>
-        <p class="page-dek">Where the project examines itself. INSIGHT carries two registers of equal weight, interwoven but kept distinct: <strong>synthesis</strong> — what the works collectively show, read at the field level — and <strong>personal examination</strong> — what 陳棉 makes of it: where the position stands, and what is still unresolved. You synthesise in order to examine, so the two sit in one section rather than apart. Pieces are filed here by <strong>maturity</strong> — a position 陳棉 will stand behind, published and dated; rawer thinking stays in the off-nav working layer.</p>
-        <p class="register-note"><strong>Reading the two registers.</strong> The <strong>Synthesis</strong> lane holds the bi-monthly issues — the relatively defensible, field-level read of each cycle. The <strong>Personal Examination</strong> lane is where 陳棉's own position is set down and argued. A card's register tag tells you which you are reading.</p>
       </div>
 
       <!-- ============ LANE 1 · SYNTHESIS ============ -->
       <section class="register-lane synthesis" aria-labelledby="lane-synthesis">
         <div class="lane-head">
           <h2 class="lane-label" id="lane-synthesis">Synthesis</h2>
-          <p class="lane-dek">What the cycle adds up to — the bi-monthly issues, each reading the period through the project's analytical and workflow personas. Field-level and relatively defensible. Newest first.</p>
+          <p class="lane-dek">Bi-monthly issues — newest first.</p>
         </div>
 
         <!-- Issues Grid (newest first) -->
@@ -555,13 +528,13 @@
       <section class="register-lane examination" aria-labelledby="lane-examination">
         <div class="lane-head">
           <h2 class="lane-label" id="lane-examination">Personal Examination</h2>
-          <p class="lane-dek">Where 陳棉's own position is set down: what the synthesis means for the Taiwan track, where the argument currently stands, and what is still unresolved. Each piece lands here dated, once it is a position worth standing behind.</p>
+          <p class="lane-dek">陳棉's own position — dated, once worth standing behind.</p>
         </div>
 
         <div class="seed-card">
           <p class="seed-status">In progress · lands as a dated piece</p>
           <p class="seed-title">The first examination is being written.</p>
-          <p class="seed-body">No personal-examination piece is published yet. This lane is its home — distinct from the synthesis issues above, in the same section. When the first position is mature enough to stand behind, it appears here as a dated entry, with its own register tag (<span class="register-tag">Personal Examination</span>), the same way each synthesis issue carries (<span class="register-tag">Synthesis</span>).</p>
+          <p class="seed-body">The first position will land here as a dated entry, tagged <span class="register-tag">Personal Examination</span>.</p>
         </div>
       </section>
     </div>
