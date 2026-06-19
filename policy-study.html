@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Policy Study · MH&amp;W</title>
+  <meta name="description" content="How different jurisdictions protect the mental health and welfare of music workers — a six-region policy scan. Three of six regions scanned: Japan, Thailand, EU.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+      --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 660px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--black);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--signal);
+      outline-offset: 3px;
+      border-radius: var(--radius);
+    }
+
+    .skip-nav {
+      position: absolute; left: -9999px; top: 0; z-index: 200;
+      background: var(--signal); color: var(--white);
+      padding: 0.5rem 1rem; font-family: var(--font-mono);
+    }
+    .skip-nav:focus { left: 0; }
+
+    /* ===== NAVIGATION ===== */
+    nav.nav {
+      position: fixed;
+      top: 0; left: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 2.5rem;
+      padding-top: calc(2rem + env(safe-area-inset-top));
+      background: transparent;
+    }
+    .nav-links { display: flex; gap: 2.1rem; flex-wrap: wrap; }
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--grey);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: color var(--dur) var(--ease);
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-topbar { display:none; }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; z-index:101; -webkit-tap-highlight-color:transparent; }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity:0; }
+    .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:0.5rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:0.2em; }
+
+    @media (max-width: 768px) {
+      nav.nav {
+        padding: 1.2rem 1.5rem;
+        padding-top: calc(1.2rem + env(safe-area-inset-top));
+        right: 0;
+        background: none;
+        border-bottom: none;
+      }
+      nav.nav.open {
+        background: rgba(244, 244, 245, 0.9);
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--border-light);
+      }
+      .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
+      .nav-toggle { display:block; }
+      .nav-links { display: none; flex-direction: column; gap: 0.75rem; margin-top: 1rem; }
+      .nav-links.show { display:flex; }
+      .nav-links a { font-size: 0.85rem; }
+      .nav-mobile-brand { display:block; }
+    }
+
+    /* ===== PAGE SHELL ===== */
+    .page-content {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .page-header {
+      padding-top: calc(5.5rem + env(safe-area-inset-top, 0px));
+      padding-bottom: 1.5rem;
+    }
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--signal);
+      margin-bottom: 1rem;
+    }
+    .page-header h1 {
+      font-family: var(--font-display);
+      font-size: var(--text-hero);
+      font-weight: 800;
+      line-height: 0.98;
+      color: var(--black);
+      letter-spacing: -0.01em;
+    }
+    .page-dek {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      color: var(--graphite);
+      line-height: 1.7;
+      max-width: var(--max-w-text);
+      margin-top: 1.25rem;
+    }
+    .page-dek a { color: var(--signal); }
+    .page-dek strong { color: var(--charcoal); font-weight: 600; }
+
+    .scope-strip {
+      display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1.1rem;
+      margin-top: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--graphite);
+    }
+    .scope-strip strong { color: var(--charcoal); font-weight: 700; }
+    .scope-strip .cyc { color: var(--graphite); }
+    .scope-strip .cyc b { color: var(--signal); font-weight: 700; }
+
+    /* ===== SCAN MAP (desktop/tablet enhancement) ===== */
+    .scan-map {
+      position: relative;
+      margin: 1.5rem 0 0.5rem;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(120% 90% at 80% 30%, rgba(102,103,171,0.05), transparent 60%),
+        var(--white);
+      padding: 0.5rem 0.5rem 0;
+      overflow: hidden;
+    }
+    .scan-map svg { display: block; width: 100%; height: auto; }
+
+    .graticule line { stroke: var(--silver); stroke-width: 0.5; opacity: 0.5; }
+    .thread {
+      fill: none;
+      stroke: var(--signal);
+      stroke-width: 1.1;
+      opacity: 0.28;
+      stroke-dasharray: 3 4;
+      animation: threadDrift 5.5s linear infinite;
+    }
+    .thread:nth-of-type(2) { animation-duration: 6.5s; }
+    .thread:nth-of-type(3) { animation-duration: 7.5s; }
+    .node-label {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-anchor: middle;
+      fill: var(--charcoal);
+    }
+    .node-sub {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-anchor: middle;
+      fill: var(--grey);
+    }
+    a.node { cursor: pointer; }
+    a.node .dot { fill: var(--signal); transition: r var(--dur) var(--ease); }
+    a.node .ring-static { fill: none; stroke: var(--signal); stroke-width: 1.5; opacity: 0.45; }
+    a.node:hover .dot { r: 8; }
+    a.node:hover .node-label { fill: var(--signal); }
+    a.node .pulse { fill: var(--signal); opacity: 0.3; animation: scanPulse 2.8s var(--ease) infinite; }
+    a.node:nth-of-type(2) .pulse { animation-delay: 0.9s; }
+    a.node:nth-of-type(3) .pulse { animation-delay: 1.8s; }
+    @keyframes scanPulse {
+      0%   { r: 7;  opacity: 0.32; }
+      70%  { r: 20; opacity: 0; }
+      100% { r: 20; opacity: 0; }
+    }
+    /* threads visibly flow toward Taiwan — the scan converging on the destination */
+    @keyframes threadDrift { to { stroke-dashoffset: -28; } }
+
+    .node-pending .dot-hollow { fill: var(--white); stroke: var(--grey-light); stroke-width: 1.5; }
+    .node-pending .node-label { fill: var(--grey); font-weight: 400; }
+    .node-pending .node-sub { fill: var(--grey-light); }
+    /* Taiwan — the destination */
+    .node-dest .diamond { fill: var(--white); stroke: var(--purple-deep); stroke-width: 2; }
+    .node-dest .diamond-core { fill: var(--purple-deep); }
+    .node-dest .node-label { fill: var(--purple-deep); font-weight: 700; }
+    .node-dest .node-sub { fill: var(--signal-dim); }
+    .map-caption {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 1.1rem;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--graphite);
+      letter-spacing: 0.04em;
+      padding: 0.6rem 0.75rem 0.85rem;
+      margin-top: 0.25rem;
+      border-top: 1px solid var(--border-light);
+    }
+    .map-caption .key { display:inline-flex; align-items:center; gap:0.4rem; white-space:nowrap; }
+    .map-caption .swatch { width:9px; height:9px; border-radius:50%; display:inline-block; }
+    .map-caption .sw-covered { background: var(--signal); }
+    .map-caption .sw-pending { background: var(--white); border:1.5px solid var(--grey-light); }
+    .map-caption .sw-dest { width:9px; height:9px; background: var(--purple-deep); transform: rotate(45deg); border-radius:1px; }
+
+    .map-fallback-note {
+      display: none;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--graphite);
+      margin: 1.25rem 0 0.25rem;
+    }
+
+    /* ===== CANONICAL LIST ===== */
+    .list-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 1rem; flex-wrap: wrap;
+      margin: 2.75rem 0 0.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .list-head h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-h2);
+      font-weight: 700;
+      color: var(--black);
+    }
+    .list-head .count {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--graphite);
+    }
+
+    .region-list { list-style: none; }
+    .region {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: start;
+      gap: 1.25rem;
+      padding: 1.5rem 0.25rem;
+      border-bottom: 1px solid var(--border-light);
+      text-decoration: none;
+      color: inherit;
+      transition: background var(--dur) var(--ease), padding-left var(--dur) var(--ease);
+    }
+    a.region:hover {
+      background: var(--signal-bg);
+      padding-left: 0.9rem;
+    }
+    .region-no {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--signal);
+      padding-top: 0.2rem;
+    }
+    .region-name {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--charcoal);
+      line-height: 1.2;
+      display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap;
+    }
+    .lever {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.18rem 0.5rem;
+      border-radius: 999px;
+      color: var(--off-black);
+      white-space: nowrap;
+    }
+    .lever-law      { background: rgba(122,174,212,0.28); box-shadow: inset 0 0 0 1px rgba(122,174,212,0.5); }
+    .lever-industry { background: rgba(232,168,124,0.30); box-shadow: inset 0 0 0 1px rgba(232,168,124,0.55); }
+    .lever-coord    { background: rgba(184,169,212,0.34); box-shadow: inset 0 0 0 1px rgba(184,169,212,0.6); }
+    .region-take {
+      font-family: var(--font-body);
+      font-size: 0.96rem;
+      color: var(--graphite);
+      line-height: 1.6;
+      margin-top: 0.45rem;
+      max-width: 52ch;
+    }
+    .region-go {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--signal);
+      white-space: nowrap;
+      padding-top: 0.35rem;
+      transition: transform var(--dur) var(--ease);
+    }
+    a.region:hover .region-go { transform: translateX(4px); }
+
+    /* pending group */
+    .pending-wrap { margin-top: 2.25rem; }
+    .pending-head {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--graphite);
+      margin-bottom: 0.5rem;
+    }
+    .pending-list { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+    .pending {
+      display: flex; flex-direction: column; gap: 0.3rem;
+      padding: 1.1rem 1rem;
+      border: 1px dashed var(--silver);
+      border-radius: var(--radius-lg);
+      background: rgba(244,244,245,0.4);
+    }
+    .pending.dest { grid-column: 1 / -1; border-style: solid; border-color: rgba(102,103,171,0.3); background: var(--signal-bg); }
+    .pending .p-name {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--grey);
+    }
+    .pending.dest .p-name { color: var(--purple-deep); }
+    .pending .p-status {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--graphite);
+    }
+    .pending.dest .p-status { color: var(--signal-dim); }
+
+    .closing {
+      margin: 3rem 0 6rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-light);
+      max-width: var(--max-w-text);
+      font-family: var(--font-body);
+      font-size: 0.96rem;
+      color: var(--graphite);
+      line-height: 1.7;
+    }
+    .closing a { color: var(--signal); }
+
+    /* ===== LEVERS COMPARED ===== */
+    .levers { margin-top: 3rem; }
+    .lever-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.25rem; }
+    .lever-card {
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 1.1rem 1.15rem 1.25rem;
+      background: var(--white);
+    }
+    .lever-card.law      { border-top: 2px solid rgba(122,174,212,0.6); }
+    .lever-card.industry { border-top: 2px solid rgba(232,168,124,0.65); }
+    .lever-card.eu       { border-top: 2px solid rgba(184,169,212,0.7); }
+    .lever-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--charcoal);
+      display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
+      margin-bottom: 0.55rem;
+    }
+    .lever-card p {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--graphite);
+      line-height: 1.55;
+      margin-top: 0.55rem;
+    }
+    .lever-card p span {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--signal);
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+    .lever-card .miss span { color: var(--grey); }
+    .lever-q {
+      margin-top: 1.4rem;
+      font-family: var(--font-body);
+      font-size: 0.96rem;
+      color: var(--graphite);
+      line-height: 1.7;
+      max-width: var(--max-w-text);
+    }
+    .lever-q strong { color: var(--charcoal); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .page-header { padding-top: calc(4.25rem + env(safe-area-inset-top, 0px)); }
+      .page-header h1 { font-size: clamp(2.5rem, 13vw, 3.6rem); }
+      .scan-map { display: none; }          /* map is a desktop enhancement; list is canonical */
+      .map-fallback-note { display: block; }
+      .region { grid-template-columns: auto 1fr; gap: 0.85rem; }
+      .region-go { grid-column: 2; padding-top: 0.6rem; }
+      .pending-list { grid-template-columns: 1fr; gap: 0.5rem; }
+      .lever-grid { grid-template-columns: 1fr; }
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .node-label { font-size: 14px; }
+    }
+    @media (max-width: 480px) {
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      a.node .pulse { animation: none; opacity: 0; }
+      .thread { animation: none; }
+      a.region, .region-go, a.node .dot { transition: none; }
+    }
+  </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
+</head>
+<body>
+
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <!-- Navigation -->
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="this.classList.toggle('open');var x=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',!x);document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+        <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="org-study.html">ORG STUDY</a>
+      <a href="policy-study.html" class="current" aria-current="page">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
+    </div>
+  </nav>
+
+  <div class="page-content" id="main">
+    <div class="page-header">
+      <p class="eyebrow">POLICY STUDY · Six-Region Scan</p>
+      <h1>Policy Study</h1>
+      <p class="page-dek">One question, asked of one jurisdiction at a time: <strong>how does a country actually protect the mental health and welfare of its music workers</strong> — through law, public funding, and worker bodies? Each scan reads a different <strong>lever</strong>. Japan reached for labour law; Thailand for industrial policy; the EU for supranational coordination. The point of comparison is a working blueprint for a Taiwan music mental-health NPO.</p>
+
+      <div class="scope-strip">
+        <span><strong>3 of 6</strong> regions scanned</span>
+        <span class="cyc">Cycle · <b>Japan</b> · <b>Thailand</b> · Taiwan · U.S. · U.K. · <b>EU</b></span>
+      </div>
+    </div>
+
+    <!-- ===== SCAN MAP (visual enhancement; the list below is canonical) ===== -->
+    <figure class="scan-map" aria-hidden="true">
+      <svg viewBox="0 0 1000 380" role="presentation" focusable="false">
+        <!-- graticule: an abstract world field, not a literal map -->
+        <g class="graticule">
+          <line x1="0" y1="63" x2="1000" y2="63"/>
+          <line x1="0" y1="127" x2="1000" y2="127"/>
+          <line x1="0" y1="190" x2="1000" y2="190"/>
+          <line x1="0" y1="253" x2="1000" y2="253"/>
+          <line x1="0" y1="317" x2="1000" y2="317"/>
+          <line x1="143" y1="0" x2="143" y2="380"/>
+          <line x1="286" y1="0" x2="286" y2="380"/>
+          <line x1="429" y1="0" x2="429" y2="380"/>
+          <line x1="572" y1="0" x2="572" y2="380"/>
+          <line x1="715" y1="0" x2="715" y2="380"/>
+          <line x1="858" y1="0" x2="858" y2="380"/>
+        </g>
+
+        <!-- threads: the scanned jurisdictions converging on Taiwan -->
+        <path class="thread" d="M883,150 Q865,195 836,228"/>
+        <path class="thread" d="M781,271 Q812,252 836,228"/>
+        <path class="thread" d="M528,104 Q690,150 836,228"/>
+
+        <!-- COVERED nodes (clickable, mouse-only; list is the accessible path) -->
+        <a class="node" href="policy-study-japan.html" tabindex="-1">
+          <circle class="pulse" cx="883" cy="150" r="7"/>
+          <circle class="dot" cx="883" cy="150" r="6"/>
+          <text class="node-label" x="883" y="132">JAPAN</text>
+          <text class="node-sub" x="883" y="172">Labour law</text>
+        </a>
+        <a class="node" href="policy-study-thailand.html" tabindex="-1">
+          <circle class="pulse" cx="781" cy="271" r="7"/>
+          <circle class="dot" cx="781" cy="271" r="6"/>
+          <text class="node-label" x="781" y="295">THAILAND</text>
+          <text class="node-sub" x="781" y="253">Industrial policy</text>
+        </a>
+        <a class="node" href="policy-study-eu.html" tabindex="-1">
+          <circle class="pulse" cx="528" cy="104" r="7"/>
+          <circle class="dot" cx="528" cy="104" r="6"/>
+          <text class="node-label" x="528" y="86">EU</text>
+          <text class="node-sub" x="528" y="126">Coordination</text>
+        </a>
+
+        <!-- TAIWAN — the destination -->
+        <g class="node-dest">
+          <rect class="diamond" x="826" y="218" width="20" height="20" rx="2" transform="rotate(45 836 228)"/>
+          <rect class="diamond-core" x="831.5" y="223.5" width="9" height="9" rx="1" transform="rotate(45 836 228)"/>
+          <text class="node-label" x="836" y="262">TAIWAN</text>
+          <text class="node-sub" x="836" y="276">The destination</text>
+        </g>
+
+        <!-- PENDING nodes -->
+        <g class="node-pending">
+          <circle class="dot-hollow" cx="228" cy="157" r="6"/>
+          <text class="node-label" x="228" y="139">U.S.</text>
+          <text class="node-sub" x="228" y="179">Not yet scanned</text>
+        </g>
+        <g class="node-pending">
+          <circle class="dot-hollow" cx="494" cy="74" r="6"/>
+          <text class="node-label" x="494" y="56">U.K.</text>
+          <text class="node-sub" x="494" y="96">Not yet scanned</text>
+        </g>
+      </svg>
+      <div class="map-caption">
+        <span class="key"><span class="swatch sw-covered"></span> Scanned</span>
+        <span class="key"><span class="swatch sw-dest"></span> Taiwan — the destination</span>
+        <span class="key"><span class="swatch sw-pending"></span> Not yet scanned</span>
+      </div>
+    </figure>
+
+    <p class="map-fallback-note">↓ The six regions, as a list</p>
+
+    <!-- ===== CANONICAL LIST (source of truth + accessible fallback) ===== -->
+    <div class="list-head">
+      <h2>The scans</h2>
+      <span class="count">Region · lever · takeaway</span>
+    </div>
+
+    <ol class="region-list">
+      <li>
+        <a class="region" id="japan" href="policy-study-japan.html">
+          <span class="region-no">01</span>
+          <span class="region-body">
+            <span class="region-name">Japan <span class="lever lever-law">Labour law</span></span>
+            <span class="region-take">Rights over charity. Japan extends workers' accident insurance to performers (2021) and enacts a Freelance Protection Act (2024, now enforced) — a natural experiment in whether labour law can do what a charitable safety net does elsewhere.</span>
+          </span>
+          <span class="region-go">Read the scan →</span>
+        </a>
+      </li>
+      <li>
+        <a class="region" id="thailand" href="policy-study-thailand.html">
+          <span class="region-no">02</span>
+          <span class="region-body">
+            <span class="region-name">Thailand <span class="lever lever-industry">Industrial policy</span></span>
+            <span class="region-take">Industry before safety net. Thailand builds a KOCCA-style soft-power export engine while the workers powering it remain overwhelmingly informal and outside full social security — a test of whether growing the industry protects the people inside it.</span>
+          </span>
+          <span class="region-go">Read the scan →</span>
+        </a>
+      </li>
+      <li>
+        <a class="region" id="eu" href="policy-study-eu.html">
+          <span class="region-no">03</span>
+          <span class="region-body">
+            <span class="region-name">European Union <span class="lever lever-coord">Coordination</span></span>
+            <span class="region-take">Coordination without competence. Reports, a Parliament resolution, a €1.23bn mental-health communication, and a proposed Artists' Charter — a thick layer of problem-definition and soft law, but no treaty power to mandate the fix in any member state.</span>
+          </span>
+          <span class="region-go">Read the scan →</span>
+        </a>
+      </li>
+    </ol>
+
+    <div class="pending-wrap">
+      <p class="pending-head">On the map, not yet scanned — three regions remain in the cycle</p>
+      <ul class="pending-list">
+        <li class="pending dest">
+          <span class="p-name">Taiwan</span>
+          <span class="p-status">The destination · scan pending</span>
+        </li>
+        <li class="pending">
+          <span class="p-name">United States</span>
+          <span class="p-status">Not yet scanned</span>
+        </li>
+        <li class="pending">
+          <span class="p-name">United Kingdom</span>
+          <span class="p-status">Not yet scanned</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ===== LEVERS COMPARED (analytical synthesis across the three scans) ===== -->
+    <section class="levers" aria-labelledby="levers-h">
+      <div class="list-head">
+        <h2 id="levers-h">The levers, compared</h2>
+        <span class="count">What each buys · what it misses</span>
+      </div>
+      <div class="lever-grid">
+        <article class="lever-card law">
+          <h3>Labour law <span class="lever lever-law">Japan</span></h3>
+          <p class="buys"><span>Buys</span>Enforceable rights — workers' accident insurance extended to performers (2021) and a Freelance Act (2024) now backed by real enforcement (first JFTC action, 2025).</p>
+          <p class="miss"><span>Misses</span>No mental-health programme of its own; a right on paper still needs a worker able to invoke it, and the prevalence evidence stays thin.</p>
+        </article>
+        <article class="lever-card industry">
+          <h3>Industrial policy <span class="lever lever-industry">Thailand</span></h3>
+          <p class="buys"><span>Buys</span>Scale and momentum — a KOCCA-style soft-power apparatus growing the creative economy as a national export engine.</p>
+          <p class="miss"><span>Misses</span>Leaves the workforce informal — largely outside the Social Security Fund's full protection, with no dedicated mental-health provision.</p>
+        </article>
+        <article class="lever-card eu">
+          <h3>Coordination <span class="lever lever-coord">EU</span></h3>
+          <p class="buys"><span>Buys</span>Problem-definition and money — expert reports, a Parliament resolution, a €1.23bn mental-health communication, a proposed Artists' Charter.</p>
+          <p class="miss"><span>Misses</span>No competence to mandate the fix — culture and health stay national, so Brussels can name a problem it cannot compel a member state to solve.</p>
+        </article>
+      </div>
+      <p class="lever-q"><strong>For Taiwan, the open question:</strong> which lever — or which blend — fits a market that already has a creators' union (<a href="org-study-arts-creators-union.html">藝創工會</a>) but no music-specific mental-health layer?</p>
+    </section>
+
+    <p class="closing">Each scan is a self-contained reading of one jurisdiction's system — what it does, what it leaves uncovered, and what a Taiwan music mental-health NPO could borrow. The throughline is the <strong>lever</strong>: law, charity, industrial policy, or coordination are different answers to the same question, and Taiwan will have to choose its own. Organizations studied in depth live under <a href="org-study.html">Org Study</a>; the wider field is mapped in the <a href="report-global-npo-landscape.html">Orgs Map</a>.</p>
+  </div>
+
+  <!-- nav scroll-state fix: transparent over hero, blurred bar once scrolled -->
+  <style>
+    nav.nav, .nav { transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease); border-bottom: 1px solid transparent; }
+    nav.nav.scrolled, .nav.scrolled {
+      right: 0;
+      background: rgba(244, 244, 245, 0.85);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    @media (prefers-reduced-motion: reduce){ nav.nav, .nav { transition: none; } }
+  </style>
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav, .nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden', 'true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>

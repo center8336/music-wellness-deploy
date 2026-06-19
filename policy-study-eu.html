@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Policy scan: European Union — coordination without the competence · MH&W Research">
+  <meta name="description" content="Policy scan: European Union — coordination without the competence · MH&W Policy Study">
   <title>Policy: European Union · MH&W</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -599,7 +599,7 @@
       display: inline-block;
     }
 
-    /* ===== CITATIONS (§5 inline tier) — pattern: research-policy-japan.html ===== */
+    /* ===== CITATIONS (§5 inline tier) — pattern: policy-study-japan.html ===== */
     .cite { font-size: 0.72em; line-height: 0; vertical-align: super; letter-spacing: 0; }
     .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
     .cite a:hover, .cite a:focus { color: var(--signal-dim); }
@@ -741,26 +741,69 @@
     .pages-container::-webkit-scrollbar-track { background: transparent; }
     .pages-container::-webkit-scrollbar-thumb { background: var(--silver); border-radius: 3px; }
     .pages-container::-webkit-scrollbar-thumb:hover { background: var(--grey-light); }
+
+    /* ===== DISCOVERABILITY: hub backlink (cover) + related block (closing page) ===== */
+    .cover-backlink {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+    .cover-backlink a {
+      color: var(--signal);
+      text-decoration: none;
+      transition: color var(--dur) var(--ease);
+    }
+    .cover-backlink a:hover, .cover-backlink a:focus { color: var(--signal-dim); }
+
+    .related-block {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-light);
+    }
+    .related-title {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--grey);
+      margin-bottom: 0.6rem;
+    }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--signal);
+      text-decoration: none;
+      transition: color var(--dur) var(--ease);
+    }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+    .related-block .related-note { color: var(--graphite); }
   </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
 </head>
 <body>
   <a href="#main" class="skip-nav">Skip to content</a>
 
   <!-- Site Navigation -->
-  <nav class="nav">
+  <nav class="nav" aria-label="Site navigation">
     <div class="nav-topbar">
-      <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="this.classList.toggle('open');var x=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',!x);document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
         <span></span><span></span><span></span>
       </button>
       <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
     </div>
-    <div class="nav-links">
+        <div class="nav-links">
       <a href="index.html">HOME</a>
-      <a href="plan.html">PLAN</a>
       <a href="report-global-npo-landscape.html">ORGS MAP</a>
-      <a href="case-study.html">CASE STUDY</a>
-      <a href="research.html" class="current">RESEARCH</a>
-      <a href="insight-2026-06-18.html">INSIGHT</a>
+      <a href="org-study.html">ORG STUDY</a>
+      <a href="policy-study.html" class="current" aria-current="page">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
     </div>
   </nav>
 
@@ -789,10 +832,11 @@
   <!-- Pages -->
   <div class="pages-container" id="main">
 
-    <!-- PAGE 01: COVER (standard research cover — copied from research-policy-thailand.html) -->
+    <!-- PAGE 01: COVER (standard research cover — copied from policy-study-thailand.html) -->
     <div class="page cover" id="page-0">
       <div class="page-inner">
-        <p class="cover-eyebrow">MH&amp;W Research</p>
+        <p class="cover-eyebrow">MH&amp;W Policy Study</p>
+        <p class="cover-backlink"><a href="policy-study.html">&larr; Policy Study</a></p>
         <h1 class="cover-title">EUROPEAN<br>UNION</h1>
         <p class="cover-year">No.003</p>
         <p class="cover-subtitle">Coordination Without<br>the Competence</p>
@@ -1112,6 +1156,15 @@
           </ol>
           <p class="refs-note">Convention: every claim-bearing marker carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above &mdash; machine-checkable before each deploy (§5.2 / §6 gate 1). The MD draft (<code>2026-06-19_Research_Policy_EU.md</code>) carries the same citations as <code>[^1]</code>&ndash;<code>[^11]</code> footnotes and is the citation source of truth.</p>
         </div>
+
+        <nav class="related-block" aria-label="Related on this site">
+          <p class="related-title">Related</p>
+          <ul>
+            <li><a href="policy-study.html">&larr; Policy Study (hub &middot; all regions)</a></li>
+            <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+            <li><a href="org-study-arts-creators-union.html">Taiwan's nearest existing infrastructure &mdash; &#34269;&#21109;&#24037;&#26371; org study</a></li>
+          </ul>
+        </nav>
 
         <div class="source-info">
           <p><strong>Report:</strong> Research track &mdash; Policy Case Series No.003 (European Union) &middot; Music &amp; Mental Health NPO Research Project</p>

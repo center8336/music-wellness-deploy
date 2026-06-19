@@ -366,25 +366,28 @@
       .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
     }
   </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
 </head>
 <body>
   <a href="#main" class="skip-nav">Skip to content</a>
 
   <!-- Navigation -->
-  <nav class="nav">
+  <nav class="nav" aria-label="Site navigation">
     <div class="nav-topbar">
-      <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="this.classList.toggle('open');var x=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',!x);document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
         <span></span><span></span><span></span>
       </button>
       <div class="nav-mobile-brand">MENTAL HEALTH & WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
     </div>
-    <div class="nav-links">
+        <div class="nav-links">
       <a href="index.html">HOME</a>
-      <a href="plan.html">PLAN</a>
       <a href="report-global-npo-landscape.html">ORGS MAP</a>
-      <a href="case-study.html">CASE STUDY</a>
-      <a href="research.html" class="current">RESEARCH</a>
-      <a href="insight-2026-06-18.html">INSIGHT</a>
+      <a href="org-study.html">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
+      <a href="research.html" class="current" aria-current="page">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
     </div>
   </nav>
 
@@ -419,42 +422,6 @@
               <div>
                 <div class="card-title">Health &amp; Well-being in Metal Musicians</div>
                 <div class="card-meta">Rousseau et al. · 2026 · Frontiers in Psychology</div>
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <!-- Policy: Japan 2026 -->
-        <a class="work-item" href="research-policy-japan.html" data-tree>
-          <div class="work-card accent-3">
-            <div class="card-visual">
-              <div>
-                <div class="card-title">Policy: Japan — Labor Law, Not a Safety Net</div>
-                <div class="card-meta">Policy Case Series No.001 · 2026.6</div>
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <!-- Policy: Thailand 2026 -->
-        <a class="work-item" href="research-policy-thailand.html" data-tree>
-          <div class="work-card accent-3">
-            <div class="card-visual">
-              <div>
-                <div class="card-title">Policy: Thailand — Building the Stage Before the Safety Net</div>
-                <div class="card-meta">Policy Case Series No.002 · 2026.6</div>
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <!-- Policy: EU 2026 -->
-        <a class="work-item" href="research-policy-eu.html" data-tree>
-          <div class="work-card accent-3">
-            <div class="card-visual">
-              <div>
-                <div class="card-title">Policy: European Union — Coordination Without the Competence</div>
-                <div class="card-meta">Policy Case Series No.003 · 2026.6</div>
               </div>
             </div>
           </div>

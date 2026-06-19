@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Insight Log · MH&amp;W</title>
+  <title>Insight · MH&amp;W</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -180,6 +180,121 @@
     }
     .page-dek a { color: var(--signal); }
 
+    /* eyebrow / hero meta (§13 grammar) */
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--signal);
+      margin-bottom: 1rem;
+    }
+
+    /* the two-register frame: one short note explaining what INSIGHT holds */
+    .register-note {
+      max-width: var(--max-w-text);
+      margin-top: 1.25rem;
+      padding: 1rem 1.25rem;
+      background: var(--signal-bg);
+      border-left: 3px solid var(--signal);
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--graphite);
+      line-height: 1.6;
+    }
+    .register-note strong { color: var(--charcoal); font-weight: 600; }
+
+    /* ===== REGISTER LANE (a labelled band inside the one section) ===== */
+    .register-lane { padding-bottom: 3.5rem; }
+    .register-lane:last-of-type { padding-bottom: 6rem; }
+    .lane-head {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.75rem 1rem;
+      padding: 1.75rem 0 1.25rem;
+      border-top: 1px solid var(--border-light);
+    }
+    .lane-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--signal);
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .lane-label::before {
+      content: "";
+      width: 0.5rem; height: 0.5rem;
+      border-radius: 999px;
+      background: var(--signal);
+      flex: 0 0 auto;
+    }
+    .register-lane.examination .lane-label { color: var(--graphite); }
+    .register-lane.examination .lane-label::before {
+      background: transparent;
+      border: 1.5px solid var(--graphite);
+    }
+    .lane-dek {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--graphite);
+      line-height: 1.6;
+      flex: 1 1 18rem;
+      min-width: 14rem;
+    }
+
+    /* register tag on cards (so field-fact reads distinct from personal take) */
+    .register-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--signal);
+      padding: 0.12rem 0.45rem;
+      border-radius: 999px;
+      background: var(--signal-bg);
+      box-shadow: inset 0 0 0 1px rgba(102,103,171,0.4);
+      white-space: nowrap;
+    }
+
+    /* seed / empty state for the personal-examination lane */
+    .seed-card {
+      max-width: var(--max-w-text);
+      padding: 1.5rem 1.5rem;
+      background: rgba(244, 244, 245, 0.4);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      border: 1.5px dashed var(--silver);
+      border-radius: var(--radius-lg);
+    }
+    .seed-card .seed-status {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--grey);
+    }
+    .seed-card .seed-title {
+      font-family: var(--font-display);
+      font-size: var(--text-h3);
+      font-weight: 700;
+      color: var(--charcoal);
+      margin: 0.5rem 0 0.6rem;
+      line-height: 1.25;
+    }
+    .seed-card .seed-body {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--graphite);
+      line-height: 1.65;
+    }
+
     /* ===== ISSUES GRID ===== */
     .works-list {
       display: grid;
@@ -309,6 +424,9 @@
       .work-item .caption { padding: 0.75rem 0 1.5rem; }
       .work-card.placeholder { background: transparent; }
       .work-card.placeholder .card-title { color: var(--grey-light); opacity: 0.6; }
+      .lane-head { padding: 1.5rem 0 1rem; }
+      .lane-dek { flex-basis: 100%; }
+      .register-lane:last-of-type { padding-bottom: 4rem; }
     }
     @media (min-width: 769px) and (max-width: 1024px) {
       .works-list { grid-template-columns: repeat(2, 1fr); }
@@ -319,6 +437,8 @@
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
 </head>
 <body>
   <a href="#main" class="skip-nav">Skip to content</a>
@@ -331,13 +451,14 @@
       </button>
       <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
     </div>
-    <div class="nav-links">
+        <div class="nav-links">
       <a href="index.html">HOME</a>
-      <a href="plan.html">PLAN</a>
       <a href="report-global-npo-landscape.html">ORGS MAP</a>
-      <a href="case-study.html">CASE STUDY</a>
+      <a href="org-study.html">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
       <a href="research.html">RESEARCH</a>
-      <a href="insight-2026-06-18.html" class="current" aria-current="page">INSIGHT</a>
+      <a href="insight.html" class="current" aria-current="page">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
     </div>
   </nav>
 
@@ -347,78 +468,102 @@
 
     <div class="page-content" id="main">
       <div class="page-header">
-        <h1>Insight Log</h1>
-        <p class="page-dek">The monthly research synthesis archive — each issue reads the cycle through the project's analytical and workflow personas. Newest first. The latest issue is also linked from <a href="insight-2026-06-18.html">INSIGHT</a> in the nav; this page is the full back-catalogue.</p>
+        <p class="eyebrow">INSIGHT · Personal Examination Home</p>
+        <h1>Insight</h1>
+        <p class="page-dek">Where the project examines itself. INSIGHT carries two registers of equal weight, interwoven but kept distinct: <strong>synthesis</strong> — what the works collectively show, read at the field level — and <strong>personal examination</strong> — what 陳棉 makes of it: where the position stands, and what is still unresolved. You synthesise in order to examine, so the two sit in one section rather than apart. Pieces are filed here by <strong>maturity</strong> — a position 陳棉 will stand behind, published and dated; rawer thinking stays in the off-nav working layer.</p>
+        <p class="register-note"><strong>Reading the two registers.</strong> The <strong>Synthesis</strong> lane holds the bi-monthly issues — the relatively defensible, field-level read of each cycle. The <strong>Personal Examination</strong> lane is where 陳棉's own position is set down and argued. A card's register tag tells you which you are reading.</p>
       </div>
 
-      <!-- Issues Grid (newest first) -->
-      <div class="works-list">
-
-        <!-- June 18, 2026 — latest -->
-        <a class="work-item" href="insight-2026-06-18.html" aria-label="Insight, June 18 2026 — The Loud Month">
-          <div class="work-card accent-insight is-latest">
-            <span class="card-latest">Latest</span>
-            <div class="card-visual">
-              <div>
-                <div class="card-title">The Loud Month</div>
-                <div class="card-meta">June 18, 2026 · Synthesis</div>
-              </div>
-            </div>
-          </div>
-          <div class="caption">Output resumed — but allocated to infrastructure and academic reading, not the Taiwan track.<div class="type">Monthly Research Synthesis</div></div>
-        </a>
-
-        <!-- June 1, 2026 -->
-        <a class="work-item" href="insight-2026-06-01.html" aria-label="Insight, June 1 2026 — The Silent Month">
-          <div class="work-card accent-insight">
-            <div class="card-visual">
-              <div>
-                <div class="card-title">The Silent Month</div>
-                <div class="card-meta">June 1, 2026 · Synthesis</div>
-              </div>
-            </div>
-          </div>
-          <div class="caption">When the schedule keeps running and the work stops — three options, one decision gate.<div class="type">Monthly Research Synthesis</div></div>
-        </a>
-
-        <!-- May 1, 2026 -->
-        <a class="work-item" href="insight-2026-05-01.html" aria-label="Insight, May 1 2026 — The Validation Imperative">
-          <div class="work-card accent-insight">
-            <div class="card-visual">
-              <div>
-                <div class="card-title">The Validation Imperative</div>
-                <div class="card-meta">May 1, 2026 · Synthesis</div>
-              </div>
-            </div>
-          </div>
-          <div class="caption">From evidence to action — the shift from secondary research toward primary Taiwan data.<div class="type">Monthly Research Synthesis</div></div>
-        </a>
-
-        <!-- April 13, 2026 -->
-        <a class="work-item" href="insight-2026-04-13.html" aria-label="Insight, April 13 2026 — 23 personas, 6 questions">
-          <div class="work-card accent-insight">
-            <div class="card-visual">
-              <div>
-                <div class="card-title">23 Personas, 6 Questions</div>
-                <div class="card-meta">April 13, 2026 · Synthesis</div>
-              </div>
-            </div>
-          </div>
-          <div class="caption">The first synthesis — a multi-persona debate that set the project's questions.<div class="type">Monthly Research Synthesis</div></div>
-        </a>
-
-        <!-- Placeholder -->
-        <div class="work-item" aria-hidden="true">
-          <div class="work-card placeholder">
-            <div class="card-visual">
-              <div>
-                <div class="card-title">Next issue · Aug 2026</div>
-              </div>
-            </div>
-          </div>
+      <!-- ============ LANE 1 · SYNTHESIS ============ -->
+      <section class="register-lane synthesis" aria-labelledby="lane-synthesis">
+        <div class="lane-head">
+          <h2 class="lane-label" id="lane-synthesis">Synthesis</h2>
+          <p class="lane-dek">What the cycle adds up to — the bi-monthly issues, each reading the period through the project's analytical and workflow personas. Field-level and relatively defensible. Newest first.</p>
         </div>
 
-      </div>
+        <!-- Issues Grid (newest first) -->
+        <div class="works-list">
+
+          <!-- June 18, 2026 — latest -->
+          <a class="work-item" href="insight-2026-06-18.html" aria-label="Insight, June 18 2026 — The Loud Month (Synthesis)">
+            <div class="work-card accent-insight is-latest">
+              <span class="card-latest">Latest</span>
+              <div class="card-visual">
+                <div>
+                  <div class="card-title">The Loud Month</div>
+                  <div class="card-meta">June 18, 2026 · Synthesis</div>
+                </div>
+              </div>
+            </div>
+            <div class="caption">Output resumed — but allocated to infrastructure and academic reading, not the Taiwan track.<div class="type">Bi-monthly Research Synthesis</div></div>
+          </a>
+
+          <!-- June 1, 2026 -->
+          <a class="work-item" href="insight-2026-06-01.html" aria-label="Insight, June 1 2026 — The Silent Month (Synthesis)">
+            <div class="work-card accent-insight">
+              <div class="card-visual">
+                <div>
+                  <div class="card-title">The Silent Month</div>
+                  <div class="card-meta">June 1, 2026 · Synthesis</div>
+                </div>
+              </div>
+            </div>
+            <div class="caption">When the schedule keeps running and the work stops — three options, one decision gate.<div class="type">Bi-monthly Research Synthesis</div></div>
+          </a>
+
+          <!-- May 1, 2026 -->
+          <a class="work-item" href="insight-2026-05-01.html" aria-label="Insight, May 1 2026 — The Validation Imperative (Synthesis)">
+            <div class="work-card accent-insight">
+              <div class="card-visual">
+                <div>
+                  <div class="card-title">The Validation Imperative</div>
+                  <div class="card-meta">May 1, 2026 · Synthesis</div>
+                </div>
+              </div>
+            </div>
+            <div class="caption">From evidence to action — the shift from secondary research toward primary Taiwan data.<div class="type">Bi-monthly Research Synthesis</div></div>
+          </a>
+
+          <!-- April 13, 2026 -->
+          <a class="work-item" href="insight-2026-04-13.html" aria-label="Insight, April 13 2026 — 23 personas, 6 questions (Synthesis)">
+            <div class="work-card accent-insight">
+              <div class="card-visual">
+                <div>
+                  <div class="card-title">23 Personas, 6 Questions</div>
+                  <div class="card-meta">April 13, 2026 · Synthesis</div>
+                </div>
+              </div>
+            </div>
+            <div class="caption">The first synthesis — a multi-persona debate that set the project's questions.<div class="type">Bi-monthly Research Synthesis</div></div>
+          </a>
+
+          <!-- Placeholder -->
+          <div class="work-item" aria-hidden="true">
+            <div class="work-card placeholder">
+              <div class="card-visual">
+                <div>
+                  <div class="card-title">Next issue · Aug 2026</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ============ LANE 2 · PERSONAL EXAMINATION ============ -->
+      <section class="register-lane examination" aria-labelledby="lane-examination">
+        <div class="lane-head">
+          <h2 class="lane-label" id="lane-examination">Personal Examination</h2>
+          <p class="lane-dek">Where 陳棉's own position is set down: what the synthesis means for the Taiwan track, where the argument currently stands, and what is still unresolved. Each piece lands here dated, once it is a position worth standing behind.</p>
+        </div>
+
+        <div class="seed-card">
+          <p class="seed-status">In progress · lands as a dated piece</p>
+          <p class="seed-title">The first examination is being written.</p>
+          <p class="seed-body">No personal-examination piece is published yet. This lane is its home — distinct from the synthesis issues above, in the same section. When the first position is mature enough to stand behind, it appears here as a dated entry, with its own register tag (<span class="register-tag">Personal Examination</span>), the same way each synthesis issue carries (<span class="register-tag">Synthesis</span>).</p>
+        </div>
+      </section>
     </div>
   </section>
 

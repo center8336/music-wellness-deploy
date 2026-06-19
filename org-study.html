@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Case Studies · MH&amp;W</title>
+  <title>Org Studies · MH&amp;W</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -379,6 +379,8 @@
       .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
     }
   </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
 </head>
 <body>
 
@@ -387,18 +389,19 @@
   <!-- Navigation -->
   <nav class="nav" aria-label="Site navigation">
     <div class="nav-topbar">
-      <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="this.classList.toggle('open');var x=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',!x);document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
         <span></span><span></span><span></span>
       </button>
       <div class="nav-mobile-brand">MENTAL HEALTH & WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
     </div>
-    <div class="nav-links">
+        <div class="nav-links">
       <a href="index.html">HOME</a>
-      <a href="plan.html">PLAN</a>
       <a href="report-global-npo-landscape.html">ORGS MAP</a>
-      <a href="case-study.html" class="current">CASE STUDY</a>
+      <a href="org-study.html" class="current" aria-current="page">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
       <a href="research.html">RESEARCH</a>
-      <a href="insight-2026-06-18.html">INSIGHT</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
     </div>
   </nav>
 
@@ -408,7 +411,7 @@
 
     <div class="page-content" id="main">
       <div class="page-header">
-        <h1>Case Studies</h1>
+        <h1>Org Studies</h1>
         <p class="page-dek">Deep dives into model organizations — how they operate, how they're funded, and what's transferable to a Taiwan music mental health NPO. Longer-form than the nine snapshot profiles in the <a href="report-global-npo-landscape.html" style="color:var(--signal);">Orgs Map</a>.</p>
       </div>
 
@@ -416,7 +419,7 @@
       <div class="works-list">
 
         <!-- Backline -->
-        <a class="work-item" href="case-study-backline.html" data-tree>
+        <a class="work-item" href="org-study-backline.html" data-tree>
           <div class="work-card accent-1">
             <div class="card-visual">
               <div>
@@ -428,7 +431,7 @@
         </a>
 
         <!-- Music Minds Matter -->
-        <a class="work-item" href="case-study-music-minds-matter.html" data-tree>
+        <a class="work-item" href="org-study-music-minds-matter.html" data-tree>
           <div class="work-card accent-1">
             <div class="card-visual">
               <div>
@@ -440,7 +443,7 @@
         </a>
 
         <!-- MusiCares -->
-        <a class="work-item" href="case-study-musicares.html" data-tree>
+        <a class="work-item" href="org-study-musicares.html" data-tree>
           <div class="work-card accent-1">
             <div class="card-visual">
               <div>
@@ -452,7 +455,7 @@
         </a>
 
         <!-- 藝創工會 / Arts Creators' Union -->
-        <a class="work-item" href="case-study-arts-creators-union.html" data-tree>
+        <a class="work-item" href="org-study-arts-creators-union.html" data-tree>
           <div class="work-card accent-1">
             <div class="card-visual">
               <div>
@@ -558,7 +561,7 @@
       }
     }
 
-    // ===== BUILD FOREST: pre-existing landscape + case-study trees =====
+    // ===== BUILD FOREST: pre-existing landscape + org-study trees =====
     // 見樹又見林 — the field already exists; each case study is a tree
     // we've walked up to and examined closely. Ambient trees fill the
     // landscape regardless of how many studies are done.

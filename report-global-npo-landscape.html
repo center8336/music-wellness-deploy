@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>W1 Org Overview — Global NPO Landscape</title>
+    <title>Org Overview — Global NPO Landscape</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -559,24 +559,27 @@
             .tab-pills { display: none; }
         }
     </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
 </head>
 <body>
     <a href="#main" class="skip-nav">Skip to content</a>
     <nav class="nav" aria-label="Site navigation">
         <div class="nav-topbar">
-            <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
+            <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="this.classList.toggle('open');var x=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',!x);document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
                 <span></span><span></span><span></span>
             </button>
             <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
         </div>
-        <div class="nav-links">
-            <a href="index.html">HOME</a>
-            <a href="plan.html">PLAN</a>
-            <a href="report-global-npo-landscape.html" class="current">ORGS MAP</a>
-            <a href="case-study.html">CASE STUDY</a>
-            <a href="research.html">RESEARCH</a>
-            <a href="insight-2026-06-18.html">INSIGHT</a>
-        </div>
+            <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="report-global-npo-landscape.html" class="current" aria-current="page">ORGS MAP</a>
+      <a href="org-study.html">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
+    </div>
     </nav>
 
     <div class="container" id="main">
@@ -771,7 +774,7 @@
                             <div class="detail-row"><div class="detail-label">Focus</div><div class="detail-value">Case management with vetted provider network (1,257+); B-LINE 24/7 crisis line (Jan 2026); peer support groups; Global Resource Hub (110+ orgs)</div></div>
                             <div class="detail-row"><div class="detail-label">Scale</div><div class="detail-value">84,000+ people served cumulatively · FY2023 revenue $874K · Charity Navigator 97% Four-Star</div></div>
                             <div class="detail-row"><div class="detail-label">Key Insight</div><div class="detail-value">8 staff, ~100% donation-funded, first two years all-volunteer. A referral model scales without building clinical services in-house.</div></div>
-                            <div class="detail-row"><div class="detail-label">For Taiwan</div><div class="detail-value">The most transferable startup blueprint. Its Global Hub has zero Taiwan listings — partnership potential as an East Asia node. Full analysis in the <a href="case-study-backline.html">W2 case study</a>.</div></div>
+                            <div class="detail-row"><div class="detail-label">For Taiwan</div><div class="detail-value">The most transferable startup blueprint. Its Global Hub has zero Taiwan listings — partnership potential as an East Asia node. Full analysis in the <a href="org-study-backline.html">Backline org study</a>.</div></div>
                         </div>
                     </div>
                 </div>
