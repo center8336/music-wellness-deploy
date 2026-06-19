@@ -340,7 +340,8 @@
         .gapmap-svg { display: block; width: 100%; height: auto; }
         /* the East void must feel deliberate — no fill, just air */
         .gm-grid { stroke: var(--silver); stroke-width: 0.6; fill: none; opacity: 0.4; }
-        .gm-land { fill: var(--silver); opacity: 0.16; }
+        .gm-land { fill: var(--silver); opacity: 0.28; }
+        .gm-land .gm-tw { stroke: var(--graphite); stroke-width: 1.4; }   /* Taiwan island: outlined so it reads as a distinct island */
         .gm-dot { fill: var(--signal); }
         .gm-dot-faint { fill: var(--signal); opacity: 0.4; }
         .gm-india { fill: var(--signal); }
@@ -794,7 +795,7 @@
                                 <!-- India — subcontinent peninsula to the southwest of China -->
                                 <path d="M600 252 Q650 248 655 280 Q640 318 618 322 Q600 296 600 252 Z"/>
                                 <!-- Taiwan — a SEPARATE small island off the SE coast, open water (Taiwan Strait) between it and the mainland -->
-                                <path d="M790 250 Q800 248 802 262 Q800 278 793 280 Q785 268 786 256 Q786 252 790 250 Z"/>
+                                <path class="gm-tw" d="M786 246 Q802 243 806 264 Q803 286 791 288 Q780 272 781 255 Q782 249 786 246 Z"/>
                                 <!-- Australia -->
                                 <path d="M790 350 Q860 345 870 385 Q840 415 800 405 Q775 380 790 350 Z"/>
                             </g>
@@ -876,8 +877,8 @@
                             <g transform="translate(40, 376)">
                                 <rect class="gm-tally" x="0" y="0" width="172" height="48" rx="6"/>
                                 <text class="gm-tally-num" x="16" y="33">22</text>
-                                <text class="gm-tally-txt" x="54" y="21">borderless</text>
-                                <text class="gm-tally-txt" x="54" y="37">no home country</text>
+                                <text class="gm-tally-txt" x="64" y="21">borderless</text>
+                                <text class="gm-tally-txt" x="64" y="37">no home country</text>
                             </g>
                         </svg>
                         <figcaption class="gapmap-caption">
