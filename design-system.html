@@ -75,8 +75,10 @@
 
     /* — Motion — */
     --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     --dur: 0.3s;
     --dur-slow: 0.6s;
+    --dur-slower: 1.1s;
 
     /* — Layout — */
     --radius: 4px;
@@ -1246,11 +1248,11 @@
       <p>DOI: 10.3389/fpsyg.2026.1737492</p>
       <p>Reviewed by 陳棉 · 2026-06-12</p>
     </div>
-    <span class="rc-hint">↓ scroll</span>
+    <span class="rc-hint">↓ Scroll</span>
   </div>
 
   <div class="rc-spec">
-    <strong>Anatomy (top → bottom):</strong> eyebrow "MH&amp;W Research" (mono, 0.5em tracking) · AUTHOR surname + "ET AL." accent in <strong>--purple-deep</strong> (Syne 800, uppercase, line-height 0.85) · year (mono, <strong>--purple-light</strong>, 0.35em tracking) · paper title (italic uppercase, --graphite) · meta: journal · DOI · "Reviewed by 陳棉 · date" (mono, --grey-light) · pulsing "↓ scroll" hint (reduced-motion safe). Light --snow page, centered both axes, inner column 800px.<br><br>
+    <strong>Anatomy (top → bottom):</strong> eyebrow "MH&amp;W Research" (mono, 0.5em tracking) · AUTHOR surname + "ET AL." accent in <strong>--purple-deep</strong> (Syne 800, uppercase, line-height 0.85) · year (mono, <strong>--purple-light</strong>, 0.35em tracking) · paper title (italic uppercase, --graphite) · meta: journal · DOI · "Reviewed by 陳棉 · date" (mono, --grey-light) · pulsing "↓ Scroll" hint (reduced-motion safe). Light --snow page, centered both axes, inner column 800px.<br><br>
     <strong>Title sizing:</strong> base clamp(4.5rem, 11vw, 9rem) fits ≈6-char surnames (Syne 800 ≈ 1.05em/char — budget n × 1.05 × font ≤ column). Longer names scale ×6/n: ROUSSEAU (8) → desktop clamp(3.5rem, 8.5vw, 6.5rem), mobile min(9.5vw, 2.3rem) — use a rem ceiling on mobile (vw mis-resolves in the §6.9 preview iframe).<br><br>
     <strong>Reference implementations:</strong> research-detari-2020.html · research-rousseau-2026.html. Cover is the mandatory layer; everything after it is creative freedom (§6.3).
   </div>
