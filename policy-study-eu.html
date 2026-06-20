@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Policy scan: European Union — coordination without the competence · MH&W Research">
+  <meta name="description" content="Policy study: European Union — coordination without the competence · MH&W Policy Study">
   <title>Policy: European Union · MH&W</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -39,8 +39,8 @@
       --bg-card-dark: var(--off-black);
       --border-light: rgba(0,0,0,0.07);
       --border-dark: rgba(255,255,255,0.1);
-      --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
-      --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
       --font-mono: 'Space Mono', 'Courier New', monospace;
       --font: var(--font-body);
       --text-hero: clamp(3.5rem, 8vw, 6.5rem);
@@ -53,10 +53,13 @@
       --ease: cubic-bezier(0.4, 0, 0.2, 1);
       --dur: 0.3s;
       --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
       --radius: 4px;
       --radius-lg: 6px;
       --max-w: 1100px;
-      --max-w-text: 660px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -73,6 +76,8 @@
       color: var(--charcoal);
       line-height: 1.7;
       font-size: var(--text-body);
+      font-weight: 400;
+      font-optical-sizing: auto;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -135,7 +140,7 @@
     /* Mobile nav brand */
     .nav-topbar { display: none; }
     .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
-    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:0.5rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:0.2em; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
 
     /* ===== PAGE SIDEBAR ===== */
     .page-sidebar {
@@ -241,73 +246,58 @@
       flex-direction: column;
     }
 
-    /* ===== COVER PAGE ===== */
+    /* ===== COVER PAGE — TWO-LINE MINIMAL (R2.1, decided 2026-06-20) ===== */
     .cover {
-      height: 100vh;
       min-height: 100vh;
-      justify-content: center;
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       text-align: center;
-      padding-top: 0;
+      position: relative;
+      overflow: hidden;            /* clips the wash */
+      padding: 0 2rem;
     }
 
-    .cover .page-inner {
-      max-width: 800px;
-      justify-content: center;
-      align-items: center;
+    /* one soft radial purple wash — the single dia accent */
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%, var(--signal-glow) 0%, rgba(102,103,171,0.06) 38%, rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
     }
 
-    .cover-eyebrow {
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      letter-spacing: 0.5em;
-      text-transform: uppercase;
-      color: var(--grey);
-      margin-bottom: 2.5rem;
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 1280px);
     }
 
     .cover-title {
       font-family: var(--font-display);
-      font-size: clamp(2.8rem, 8vw, 6.5rem);
-      font-weight: 800;
-      line-height: 0.85;
-      letter-spacing: -0.03em;
-      text-transform: uppercase;
+      font-size: clamp(2.6rem, 7.4vw, 6rem);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
       color: var(--black);
-      margin-bottom: 0.25rem;
+      margin: 0;
+      text-wrap: balance;
     }
 
-    .cover-accent {
-      color: var(--purple-deep);
-    }
-
-    .cover-year {
+    .cover-line {
       font-family: var(--font-mono);
-      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
       font-weight: 400;
-      color: var(--purple-light);
-      letter-spacing: 0.35em;
-      margin-bottom: 2rem;
-    }
-
-    .cover-subtitle {
-      font-family: var(--font-body);
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      font-weight: 300;
-      font-style: italic;
-      color: var(--graphite);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      line-height: 1.5;
-      margin-bottom: 3rem;
-    }
-
-    .cover-meta {
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      color: var(--grey-light);
-      line-height: 2;
-      letter-spacing: 0.02em;
+      color: var(--purple-deep);            /* 4.92:1 AA */
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
     }
 
     .cover-hint {
@@ -319,16 +309,31 @@
       font-size: var(--text-xs);
       color: var(--silver);
       letter-spacing: 0.1em;
-      animation: pulse 2s ease-in-out infinite;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; }
+    /* entrance — soft fade + rise, one time */
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
     }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-line  { animation-delay: 0.22s; }
 
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+    /* reduced-motion: no entrance, no drift, no pulse — everything static & visible */
     @media (prefers-reduced-motion: reduce) {
-      .cover-hint { animation: none; }
+      .cover-inner > *,
+      .cover-wash,
+      .cover-hint { animation: none; opacity: 1; transform: none; }
     }
 
     /* ===== CONTENT PAGES ===== */
@@ -350,6 +355,7 @@
       color: var(--black);
       margin-bottom: 2rem;
       letter-spacing: 0.01em;
+      text-wrap: balance;
     }
 
     .content-block {
@@ -366,7 +372,6 @@
 
     .content-block p {
       margin-bottom: 0.75rem;
-      line-height: 1.75;
       color: var(--graphite);
     }
 
@@ -440,7 +445,6 @@
     }
     .reform-body {
       padding-left: 2.25rem;
-      line-height: 1.75;
       color: var(--graphite);
     }
 
@@ -466,6 +470,7 @@
       font-size: 1.6rem;
       color: var(--purple-deep);
       line-height: 1.1;
+      font-variant-numeric: tabular-nums;
     }
     .stat-label {
       font-family: var(--font-mono);
@@ -489,7 +494,7 @@
       color: var(--charcoal);
       margin-bottom: 0.35rem;
     }
-    .appraise-item p { line-height: 1.75; color: var(--graphite); }
+    .appraise-item p { color: var(--graphite); }
 
     .verdict {
       background: var(--off-black);
@@ -562,6 +567,7 @@
       padding: 0.6rem 0.75rem;
       border-bottom: 1px solid var(--border-light);
       vertical-align: top;
+      font-variant-numeric: tabular-nums;
     }
     .method-table tbody tr:nth-child(odd) { background: var(--white); }
     .method-table tbody tr:nth-child(even) { background: var(--snow); }
@@ -599,7 +605,7 @@
       display: inline-block;
     }
 
-    /* ===== CITATIONS (§5 inline tier) — pattern: research-policy-japan.html ===== */
+    /* ===== CITATIONS (§5 inline tier) — pattern: policy-study-japan.html ===== */
     .cite { font-size: 0.72em; line-height: 0; vertical-align: super; letter-spacing: 0; }
     .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
     .cite a:hover, .cite a:focus { color: var(--signal-dim); }
@@ -694,16 +700,17 @@
       }
 
       .cover-title {
-        font-size: clamp(2.4rem, 12vw, 4.2rem);
+        font-size: clamp(1.9rem, 8.5vw, 2.6rem);
       }
 
-      .cover-year {
-        font-size: clamp(1.5rem, 6vw, 2rem);
-        letter-spacing: 0.25em;
+      .cover-line {
+        font-size: clamp(0.72rem, 3.2vw, 0.95rem);
+        letter-spacing: 0.18em;
       }
 
-      .cover-subtitle {
-        font-size: 0.85rem;
+      .cover-wash {
+        width: 150vw;
+        height: 150vw;
       }
 
       .page-title {
@@ -741,26 +748,62 @@
     .pages-container::-webkit-scrollbar-track { background: transparent; }
     .pages-container::-webkit-scrollbar-thumb { background: var(--silver); border-radius: 3px; }
     .pages-container::-webkit-scrollbar-thumb:hover { background: var(--grey-light); }
+
+    /* ===== DISCOVERABILITY: related block (closing page) ===== */
+    .related-block {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-light);
+    }
+    .related-title {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--grey);
+      margin-bottom: 0.6rem;
+    }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--signal);
+      text-decoration: none;
+      transition: color var(--dur) var(--ease);
+    }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+    .related-block .related-note { color: var(--graphite); }
+
+    /* ===== Scroll-reveal (R3.2, paged-safe) ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
   </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
 </head>
 <body>
   <a href="#main" class="skip-nav">Skip to content</a>
 
   <!-- Site Navigation -->
-  <nav class="nav">
+  <nav class="nav" aria-label="Site navigation">
     <div class="nav-topbar">
-      <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="this.classList.toggle('open');var x=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',!x);document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
         <span></span><span></span><span></span>
       </button>
       <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
     </div>
-    <div class="nav-links">
+        <div class="nav-links">
       <a href="index.html">HOME</a>
-      <a href="plan.html">PLAN</a>
       <a href="report-global-npo-landscape.html">ORGS MAP</a>
-      <a href="case-study.html">CASE STUDY</a>
-      <a href="research.html" class="current">RESEARCH</a>
-      <a href="insight-2026-06-18.html">INSIGHT</a>
+      <a href="org-study.html">ORG STUDY</a>
+      <a href="policy-study.html" class="current" aria-current="page">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
     </div>
   </nav>
 
@@ -789,20 +832,14 @@
   <!-- Pages -->
   <div class="pages-container" id="main">
 
-    <!-- PAGE 01: COVER (standard research cover — copied from research-policy-thailand.html) -->
+    <!-- PAGE 01: COVER (standard research cover — copied from policy-study-thailand.html) -->
     <div class="page cover" id="page-0">
-      <div class="page-inner">
-        <p class="cover-eyebrow">MH&amp;W Research</p>
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="cover-inner">
         <h1 class="cover-title">EUROPEAN<br>UNION</h1>
-        <p class="cover-year">No.003</p>
-        <p class="cover-subtitle">Coordination Without<br>the Competence</p>
-        <div class="cover-meta">
-          <p>Policy Case Series · 2026.6</p>
-          <p>Japan &rarr; Thailand &rarr; EU &rarr; Taiwan &rarr; U.S. &rarr; U.K.</p>
-          <p>Compiled by &#38515;&#26825; &middot; 2026-06-19</p>
-        </div>
+        <p class="cover-line">Policy Study 003 &middot; 2026.6</p>
       </div>
-      <span class="cover-hint">&darr; scroll or arrow keys</span>
+      <span class="cover-hint" aria-hidden="true">&darr; Scroll</span>
     </div>
 
     <!-- PAGE 02: WHY THIS REGION -->
@@ -841,7 +878,7 @@
             <span class="reform-year">2023</span>
           </div>
           <div class="reform-body">
-            <p>The anchor document, <em>The status and working conditions of artists and cultural and creative professionals</em> (4 July 2023), is the work of an expert group from all 27 member states' culture and employment ministries. It names the problem plainly &mdash; artists face "precarious working conditions, low, irregular and unpredictable incomes, high levels of self-employment, project-based careers and a lack of legal structures" &mdash; and its headline recommendation is an EU framework of guidelines and minimum standards via a Council Recommendation or Conclusions: <strong>non-binding</strong> by design.<sup class="cite"><a href="#eu-src-2" data-src="omc" data-tip="OMC report (4 Jul 2023; 27-MS expert group; precarity framing; recommendation for a non-binding EU framework): EC Culture and Creativity (full text read this session) + Publications Office of the EU. ✅ Verified (primary EC source).">2</a></sup></p>
+            <p>The anchor document, <em>The status and working conditions of artists and cultural and creative professionals</em> (4 July 2023), is the work of an expert group from all 27 member states' culture and employment ministries. It names the problem plainly &mdash; artists face "precarious working conditions, low, irregular and unpredictable incomes, high levels of self-employment, project-based careers and a lack of legal structures" &mdash; and its headline recommendation is an EU framework of guidelines and minimum standards via a Council Recommendation or Conclusions: <strong>non-binding</strong> by design.<sup class="cite"><a href="#eu-src-2" data-src="omc" data-tip="OMC report (4 Jul 2023; 27-MS expert group; precarity framing; recommendation for a non-binding EU framework): EC Culture and Creativity (full text read this session) + Publications Office of the EU. ✅ Sourced (primary EC source).">2</a></sup></p>
           </div>
         </div>
 
@@ -852,7 +889,7 @@
             <span class="reform-year">Nov 2023</span>
           </div>
           <div class="reform-body">
-            <p>On 21 November 2023 the European Parliament adopted, by <strong>433 to 100 with 99 abstentions</strong>, a resolution on an EU framework for the social and professional situation of artists. It went further than the OMC group: it called for new legislation &mdash; a binding <strong>directive</strong> on decent working conditions and accurate employment-status determination &mdash; a European platform, and social conditionality on EU culture funding.<sup class="cite"><a href="#eu-src-3" data-src="epres" data-tip="EP resolution of 21 Nov 2023 (vote 433–100–99; co-rapporteurs Ruiz Devesa & Manders; call for a binding directive + employment-status determination + platform + social conditionality): EP press room + EP TA-9-2023-0405 + FERA. ✅ Verified.">3</a></sup></p>
+            <p>On 21 November 2023 the European Parliament adopted, by <strong>433 to 100 with 99 abstentions</strong>, a resolution on an EU framework for the social and professional situation of artists. It went further than the OMC group: it called for new legislation &mdash; a binding <strong>directive</strong> on decent working conditions and accurate employment-status determination &mdash; a European platform, and social conditionality on EU culture funding.<sup class="cite"><a href="#eu-src-3" data-src="epres" data-tip="EP resolution of 21 Nov 2023 (vote 433–100–99; co-rapporteurs Ruiz Devesa & Manders; call for a binding directive + employment-status determination + platform + social conditionality): EP press room + EP TA-9-2023-0405 + FERA. ✅ Sourced.">3</a></sup></p>
           </div>
         </div>
 
@@ -878,12 +915,12 @@
             <span class="reform-year">2024</span>
           </div>
           <div class="reform-body">
-            <p>The Commission's response offered <strong>13 non-legislative initiatives</strong> &mdash; a high-level round table, yearly thematic workshops with member states, a promise to "consider reinforcing social conditionality in the next cycle of Union programmes," and analytical tasks for labour bodies. No directive.<sup class="cite"><a href="#eu-src-4" data-src="ecresp" data-tip="Commission 2024 policy-statement response (13 initiatives; round table; thematic workshops; 'consider reinforcing social conditionality'; no directive) + the 2019 Council Recommendation on social protection for the self-employed as the nearest binding-adjacent lever: IETM/Circostrada + Social Europe + Creatives Unite. ✅ Verified across independent sources.">4</a></sup> The most recent move continues the pattern: the <strong>Culture Compass for Europe</strong> (adopted 12 November 2025) announces a forthcoming <strong>EU Artists' Charter</strong> setting out "common principles of protection and equity, while leaving Member States free to define their own models," first tabled at a High-Level Round Table on Working Conditions on 8 December 2025, with a structured stakeholder dialogue through 2026 and the Charter itself slated for Q2 2027.<sup class="cite"><a href="#eu-src-5" data-src="compass" data-tip="Culture Compass for Europe (COM(2025) 785, adopted 12 Nov 2025); EU Artists' Charter ('common principles… Member States free to define their own models'); first tabled at the High-Level Round Table 8 Dec 2025; dialogue through 2026; Charter Q2 2027: EC press + EC Culture Compass page + COM PDF. ✅ Verified adoption/date/Charter; ⚠️ Charter announced not adopted.">5</a></sup></p>
+            <p>The Commission's response offered <strong>13 non-legislative initiatives</strong> &mdash; a high-level round table, yearly thematic workshops with member states, a promise to "consider reinforcing social conditionality in the next cycle of Union programmes," and analytical tasks for labour bodies. No directive.<sup class="cite"><a href="#eu-src-4" data-src="ecresp" data-tip="Commission 2024 policy-statement response (13 initiatives; round table; thematic workshops; 'consider reinforcing social conditionality'; no directive) + the 2019 Council Recommendation on social protection for the self-employed as the nearest binding-adjacent lever: IETM/Circostrada + Social Europe + Creatives Unite. ✅ Sourced across independent sources.">4</a></sup> The most recent move continues the pattern: the <strong>Culture Compass for Europe</strong> (adopted 12 November 2025) announces a forthcoming <strong>EU Artists' Charter</strong> setting out "common principles of protection and equity, while leaving Member States free to define their own models," first tabled at a High-Level Round Table on Working Conditions on 8 December 2025, with a structured stakeholder dialogue through 2026 and the Charter itself slated for Q2 2027.<sup class="cite"><a href="#eu-src-5" data-src="compass" data-tip="Culture Compass for Europe (COM(2025) 785, adopted 12 Nov 2025); EU Artists' Charter ('common principles… Member States free to define their own models'); first tabled at the High-Level Round Table 8 Dec 2025; dialogue through 2026; Charter Q2 2027: EC press + EC Culture Compass page + COM PDF. ✅ Sourced adoption/date/Charter; the Charter is announced, not yet adopted (status).">5</a></sup></p>
           </div>
         </div>
 
         <div class="content-block">
-          <p>The EU does spend real money on culture &mdash; but on <em>output</em>, not welfare. <strong>Creative Europe</strong> runs on a <strong>&euro;2.44&nbsp;billion</strong> budget for 2021&ndash;2027, funding projects, cooperation, mobility, and market access; none of it is a social-protection or mental-health line.<sup class="cite"><a href="#eu-src-6" data-src="creative" data-tip="Creative Europe 2021–27 = €2.44bn (precise EC figure) — funds projects/cooperation/mobility/market access, not social protection or mental health: EC Culture and Creativity. ✅ Verified.">6</a></sup> The structural welfare instruments &mdash; unemployment insurance, sickness pay, the "artist status" the OMC report wants defined &mdash; sit in <strong>national</strong> budgets and national law, where the EU can recommend but not require.<sup class="cite"><a href="#eu-src-4" data-src="ecresp" data-tip="Structural social protection sits in national law; the 2019 Council Recommendation only encourages (not requires) coverage of the self-employed: IETM + Social Europe. ✅ Verified.">4</a></sup></p>
+          <p>The EU does spend real money on culture &mdash; but on <em>output</em>, not welfare. <strong>Creative Europe</strong> runs on a <strong>&euro;2.44&nbsp;billion</strong> budget for 2021&ndash;2027, funding projects, cooperation, mobility, and market access; none of it is a social-protection or mental-health line.<sup class="cite"><a href="#eu-src-6" data-src="creative" data-tip="Creative Europe 2021–27 = €2.44bn (precise EC figure) — funds projects/cooperation/mobility/market access, not social protection or mental health: EC Culture and Creativity. ✅ Sourced.">6</a></sup> The structural welfare instruments &mdash; unemployment insurance, sickness pay, the "artist status" the OMC report wants defined &mdash; sit in <strong>national</strong> budgets and national law, where the EU can recommend but not require.<sup class="cite"><a href="#eu-src-4" data-src="ecresp" data-tip="Structural social protection sits in national law; the 2019 Council Recommendation only encourages (not requires) coverage of the self-employed: IETM + Social Europe. ✅ Sourced.">4</a></sup></p>
         </div>
       </div>
     </div>
@@ -895,7 +932,7 @@
         <h2 class="page-title">Where the EU Is Ahead</h2>
 
         <div class="content-block">
-          <p>On the specific question this project cares about, the EU has done something none of the prior regions had: it has <strong>formally connected precarious work to mental health at the policy level.</strong> On 9 October 2023 the Council adopted Conclusions on <strong>"Mental Health and Precarious Work"</strong> &mdash; the <strong>first-ever</strong> EU conclusions on the interconnection between mental health and employment &mdash; warning that people in precarious work are "particularly at risk of developing negative stress that can lead to anxiety and depression."<sup class="cite"><a href="#eu-src-1" data-src="mhprecwork" data-tip="Council Conclusions on Mental Health and Precarious Work (9 Oct 2023, first-ever EU conclusions linking mental health and employment); separate Council Conclusions on Mental Health (30 Nov 2023): Consilium press + Eurodiaconia + FAFCE. ✅ Verified across independent sources.">1</a></sup> That is the precise causal chain the musician-mental-health literature relies on, written into an EU policy instrument.</p>
+          <p>On the specific question this project cares about, the EU has done something none of the prior regions had: it has <strong>formally connected precarious work to mental health at the policy level.</strong> On 9 October 2023 the Council adopted Conclusions on <strong>"Mental Health and Precarious Work"</strong> &mdash; the <strong>first-ever</strong> EU conclusions on the interconnection between mental health and employment &mdash; warning that people in precarious work are "particularly at risk of developing negative stress that can lead to anxiety and depression."<sup class="cite"><a href="#eu-src-1" data-src="mhprecwork" data-tip="Council Conclusions on Mental Health and Precarious Work (9 Oct 2023, first-ever EU conclusions linking mental health and employment); separate Council Conclusions on Mental Health (30 Nov 2023): Consilium press + Eurodiaconia + FAFCE. ✅ Sourced across independent sources.">1</a></sup> That is the precise causal chain the musician-mental-health literature relies on, written into an EU policy instrument.</p>
         </div>
 
         <div class="stat-strip">
@@ -914,12 +951,12 @@
         </div>
 
         <div class="content-block">
-          <p>It sits inside a broader push: the Commission's 7 June 2023 Communication, <em>A comprehensive approach to mental health</em>, the EU's first <em>comprehensive approach</em> to mental health (a Communication, not a formal "strategy"), bundling <strong>20 flagship initiatives</strong> and <strong>&euro;1.23 billion</strong> in financing opportunities pooled across existing instruments, around prevention, access to care, and reintegration &mdash; and explicitly naming "good mental health at work" and recognising <strong>culture</strong> as a relevant policy domain.<sup class="cite"><a href="#eu-src-7" data-src="mhapproach" data-tip="Commission Communication 'A comprehensive approach to mental health' (COM(2023) 298, 7 Jun 2023; 20 flagship initiatives; €1.23bn; prevention/access/reintegration; 'good mental health at work'; culture named): EC primary topic page + EC Employment & Social Affairs. ✅ Verified.">7</a></sup> None of these is artist-specific, and none is binding &mdash; but the EU is the only region in the cycle whose apparatus has, on the record, joined the two halves of this project's thesis. On the workplace front specifically, EU-OSHA's 2026&ndash;2028 Healthy Workplaces Campaign &mdash; <em>Together for Mental Health at Work</em>, launching October 2026 &mdash; makes psychosocial-risk assessment its cornerstone, the nearest the EU comes to operational follow-through on "mental health at work."<sup class="cite"><a href="#eu-src-10" data-src="euosha" data-tip="EU-OSHA Healthy Workplaces Campaign 2026–2028, 'Together for Mental Health at Work' (launches Oct 2026; psychosocial-risk assessment cornerstone): EU-OSHA. ✅ Verified; ⚠️ campaign forthcoming.">10</a></sup></p>
+          <p>It sits inside a broader push: the Commission's 7 June 2023 Communication, <em>A comprehensive approach to mental health</em>, the EU's first <em>comprehensive approach</em> to mental health (a Communication, not a formal "strategy"), bundling <strong>20 flagship initiatives</strong> and <strong>&euro;1.23 billion</strong> in financing opportunities pooled across existing instruments, around prevention, access to care, and reintegration &mdash; and explicitly naming "good mental health at work" and recognising <strong>culture</strong> as a relevant policy domain.<sup class="cite"><a href="#eu-src-7" data-src="mhapproach" data-tip="Commission Communication 'A comprehensive approach to mental health' (COM(2023) 298, 7 Jun 2023; 20 flagship initiatives; €1.23bn; prevention/access/reintegration; 'good mental health at work'; culture named): EC primary topic page + EC Employment & Social Affairs. ✅ Sourced.">7</a></sup> None of these is artist-specific, and none is binding &mdash; but the EU is the only region in the cycle whose apparatus has, on the record, joined the two halves of this project's thesis. On the workplace front specifically, EU-OSHA's 2026&ndash;2028 Healthy Workplaces Campaign &mdash; <em>Together for Mental Health at Work</em>, launching October 2026 &mdash; makes psychosocial-risk assessment its cornerstone, the nearest the EU comes to operational follow-through on "mental health at work."<sup class="cite"><a href="#eu-src-10" data-src="euosha" data-tip="EU-OSHA Healthy Workplaces Campaign 2026–2028, 'Together for Mental Health at Work' (launches Oct 2026; psychosocial-risk assessment cornerstone): EU-OSHA. ✅ Sourced; the campaign is forthcoming (status).">10</a></sup></p>
         </div>
 
         <div class="content-block">
           <h3>What the peer-reviewed evidence shows</h3>
-          <p>According to PubMed, the EU-based study that most directly touches musicians and mental health is <strong>Kuusi, Tervo-Niemel&auml; and Vierti&ouml; (2024)</strong> in <em>BMC Public Health</em>. Surveying four church professions &mdash; pastors, <strong>church musicians (n=92)</strong>, diaconal and youth workers &mdash; it found <strong>severe distress more common in all groups than in the general population</strong>, and identified <strong>loneliness</strong> as the single strongest correlate (for church musicians an odds ratio of 24.36, though with a very wide 95% CI of 2.78&ndash;213.72), while good work satisfaction was strongly protective.<sup class="cite"><a href="#eu-src-8" data-src="kuusi" data-tip="According to PubMed: Kuusi, Tervo-Niemelä & Viertiö 2024, BMC Public Health 24(1):875, DOI 10.1186/s12889-024-18165-x (PMID 38515089). Church musicians n=92; severe distress > general population; loneliness strongest correlate (OR 24.36, CI 2.78–213.72); satisfaction protective. ✅ PubMed-indexed; ⚠️ salaried not freelance, small subgroup, wide CI.">8</a></sup> The finding is suggestive precisely because these musicians are <em>not</em> precarious freelancers: they are salaried, and still distressed, with loneliness &mdash; a relational feature of music work &mdash; doing more than income insecurity. A targeted search returned <strong>no pan-EU probability study specifically of freelance musicians' mental health</strong>; the closest evidence is national &mdash; a near-complete survey of the Norwegian Musicians' Union (Vaag et al., 2016) and the Danish "When Music Speaks" project &mdash; not an EU-wide probability sample (absence &ne; non-existence &mdash; Rule 4).<sup class="cite"><a href="#eu-src-11" data-src="prevalence" data-tip="Nearest national studies: Vaag et al. 2016 (Norway); Musgrave et al. 2025 'When Music Speaks' (Denmark); Kegelaers & Gibney 2025 scoping review. ❓ No pan-EU probability sample of freelancers (Rule 4).">11</a></sup></p>
+          <p>According to PubMed, the EU-based study that most directly touches musicians and mental health is <strong>Kuusi, Tervo-Niemel&auml; and Vierti&ouml; (2024)</strong> in <em>BMC Public Health</em>. Surveying four church professions &mdash; pastors, <strong>church musicians (n=92)</strong>, diaconal and youth workers &mdash; it found <strong>severe distress more common in all groups than in the general population</strong>, and identified <strong>loneliness</strong> as the single strongest correlate (for church musicians an odds ratio of 24.36, though with a very wide 95% CI of 2.78&ndash;213.72), while good work satisfaction was strongly protective.<sup class="cite"><a href="#eu-src-8" data-src="kuusi" data-tip="According to PubMed: Kuusi, Tervo-Niemelä & Viertiö 2024, BMC Public Health 24(1):875, DOI 10.1186/s12889-024-18165-x (PMID 38515089). Church musicians n=92; severe distress > general population; loneliness strongest correlate (OR 24.36, CI 2.78–213.72); satisfaction protective. ✅ Sourced (PubMed-indexed); data-quality note: salaried church musicians not freelance, small n=92 subgroup, very wide CI.">8</a></sup> The finding is suggestive precisely because these musicians are <em>not</em> precarious freelancers: they are salaried, and still distressed, with loneliness &mdash; a relational feature of music work &mdash; doing more than income insecurity. A targeted search returned <strong>no pan-EU probability study specifically of freelance musicians' mental health</strong>; the closest evidence is national &mdash; a near-complete survey of the Norwegian Musicians' Union (Vaag et al., 2016) and the Danish "When Music Speaks" project &mdash; not an EU-wide probability sample (absence &ne; non-existence &mdash; Rule 4).<sup class="cite"><a href="#eu-src-11" data-src="prevalence" data-tip="Nearest national studies: Vaag et al. 2016 (Norway); Musgrave et al. 2025 'When Music Speaks' (Denmark); Kegelaers & Gibney 2025 scoping review. ❓ No pan-EU probability sample of freelancers (Rule 4).">11</a></sup></p>
         </div>
       </div>
     </div>
@@ -933,17 +970,17 @@
 
         <div class="appraise-item">
           <h3>What the EU gets right is the problem-definition</h3>
-          <p>No other jurisdiction in this cycle has assembled the diagnosis as thoroughly. The OMC report is a genuinely useful cross-national map of artist precarity; the Parliament resolution is unusually direct in demanding binding action; and &mdash; most relevant here &mdash; the Council Conclusions on Mental Health and Precarious Work put the precarity-to-distress mechanism into an official EU text, while the &euro;1.23bn comprehensive mental-health approach gives that text a budget and a home.<sup class="cite"><a href="#eu-src-1" data-src="mhprecwork" data-tip="The Council Conclusions put the precarity→distress mechanism into official EU text: Consilium + Eurodiaconia. ✅ Verified.">1</a></sup> For a project whose premise is that creative precarity damages mental health, the EU is the one region that has said so at the policy level &mdash; meaning the framing this NPO would advance is not fringe in Europe, but Council-endorsed.</p>
+          <p>No other jurisdiction in this cycle has assembled the diagnosis as thoroughly. The OMC report is a genuinely useful cross-national map of artist precarity; the Parliament resolution is unusually direct in demanding binding action; and &mdash; most relevant here &mdash; the Council Conclusions on Mental Health and Precarious Work put the precarity-to-distress mechanism into an official EU text, while the &euro;1.23bn comprehensive mental-health approach gives that text a budget and a home.<sup class="cite"><a href="#eu-src-1" data-src="mhprecwork" data-tip="The Council Conclusions put the precarity→distress mechanism into official EU text: Consilium + Eurodiaconia. ✅ Sourced.">1</a></sup> For a project whose premise is that creative precarity damages mental health, the EU is the one region that has said so at the policy level &mdash; meaning the framing this NPO would advance is not fringe in Europe, but Council-endorsed.</p>
         </div>
 
         <div class="appraise-item">
           <h3>However, the EU coordinates a fix it cannot compel</h3>
-          <p>The limit is constitutional, not merely political: culture is a "supporting competence" and social protection a national one, so the Union's strongest instruments are recommendations, conclusions, work plans, and now a charter &mdash; every one non-binding. The sequence tells the story: the Parliament asked for a directive; the Commission answered with 13 soft initiatives; the 2025 Culture Compass formalises the soft form by naming an Artists' Charter that leaves "Member States free to define their own models."<sup class="cite"><a href="#eu-src-5" data-src="compass" data-tip="The Artists' Charter explicitly leaves Member States free to define their own models — soft law by design: EC Culture Compass + COM(2025) 785. ✅ Verified.">5</a></sup> The thing that would actually change a musician's social-security coverage happens, if it happens, in 27 national legislatures the EU can only nudge.<sup class="cite"><a href="#eu-src-4" data-src="ecresp" data-tip="Delivery falls to national legislatures the EU can only nudge; the 2019 Recommendation only encourages: IETM + Social Europe. ✅ Verified.">4</a></sup> The risk is a widening gap between an ever-richer coordination layer and an unchanged delivery layer.</p>
+          <p>The limit is constitutional, not merely political: culture is a "supporting competence" and social protection a national one, so the Union's strongest instruments are recommendations, conclusions, work plans, and now a charter &mdash; every one non-binding. The sequence tells the story: the Parliament asked for a directive; the Commission answered with 13 soft initiatives; the 2025 Culture Compass formalises the soft form by naming an Artists' Charter that leaves "Member States free to define their own models."<sup class="cite"><a href="#eu-src-5" data-src="compass" data-tip="The Artists' Charter explicitly leaves Member States free to define their own models — soft law by design: EC Culture Compass + COM(2025) 785. ✅ Sourced.">5</a></sup> The thing that would actually change a musician's social-security coverage happens, if it happens, in 27 national legislatures the EU can only nudge.<sup class="cite"><a href="#eu-src-4" data-src="ecresp" data-tip="Delivery falls to national legislatures the EU can only nudge; the 2019 Recommendation only encourages: IETM + Social Europe. ✅ Sourced.">4</a></sup> The risk is a widening gap between an ever-richer coordination layer and an unchanged delivery layer.</p>
         </div>
 
         <div class="appraise-item">
           <h3>Read the evidence with three cautions</h3>
-          <p>(1) The mental-health policy link is real but <strong>rhetorical</strong> &mdash; the Council Conclusions name the connection but bind no one and fund nothing directly; the &euro;1.23bn sits with the general mental-health approach, not with artists.<sup class="cite"><a href="#eu-src-7" data-src="mhapproach" data-tip="The €1.23bn is the general comprehensive MH approach, not an artist-specific allocation: EC primary. ✅ Verified scope.">7</a></sup> (2) The Artists' Charter is <strong>announced, not delivered</strong> &mdash; as of June 2026 a 2025 commitment with dialogue beginning in 2026 and text expected ~2027.<sup class="cite"><a href="#eu-src-5" data-src="compass" data-tip="Artists' Charter is a 2025 Culture Compass commitment; dialogue from 2026, text ~2027 — a roadmap, not an operating instrument: EC + EP Legislative Train. ⚠️ As-reported.">5</a></sup> (3) The <strong>peer-reviewed anchor is narrow</strong> &mdash; Finnish, salaried church musicians, a 92-person subgroup, with a loneliness odds ratio whose confidence interval spans two orders of magnitude; a strong signal, not a measurement.<sup class="cite"><a href="#eu-src-8" data-src="kuusi" data-tip="Anchor is Finnish salaried church musicians, n=92, loneliness OR 24.36 with CI 2.78–213.72 — direction credible, magnitude not estimable: Kuusi et al. 2024 (PubMed). ✅ Indexed; ⚠️ scope.">8</a></sup></p>
+          <p>(1) The mental-health policy link is real but <strong>rhetorical</strong> &mdash; the Council Conclusions name the connection but bind no one and fund nothing directly; the &euro;1.23bn sits with the general mental-health approach, not with artists.<sup class="cite"><a href="#eu-src-7" data-src="mhapproach" data-tip="The €1.23bn is the general comprehensive MH approach, not an artist-specific allocation: EC primary. ✅ Sourced scope.">7</a></sup> (2) The Artists' Charter is <strong>announced, not delivered</strong> &mdash; as of June 2026 a 2025 commitment with dialogue beginning in 2026 and text expected ~2027.<sup class="cite"><a href="#eu-src-5" data-src="compass" data-tip="Artists' Charter is a 2025 Culture Compass commitment; dialogue from 2026, text ~2027 — a roadmap, not an operating instrument: EC + EP Legislative Train. ✅ Sourced; announced, not yet adopted (status).">5</a></sup> (3) The <strong>peer-reviewed anchor is narrow</strong> &mdash; Finnish, salaried church musicians, a 92-person subgroup, with a loneliness odds ratio whose confidence interval spans two orders of magnitude; a strong signal, not a measurement.<sup class="cite"><a href="#eu-src-8" data-src="kuusi" data-tip="Anchor is Finnish salaried church musicians, n=92, loneliness OR 24.36 with CI 2.78–213.72 — direction credible, magnitude not estimable: Kuusi et al. 2024 (PubMed). ✅ Sourced (PubMed-indexed); data-quality note: small n=92 subgroup, very wide CI.">8</a></sup></p>
         </div>
 
         <div class="verdict">
@@ -996,7 +1033,7 @@
             <span class="lesson-title">Watch the "artist status" debate</span>
           </div>
           <div class="lesson-body">
-            <p>Across the EU's decade of coordination, the recurring structural recommendation is a defined legal "artist status" carrying portable social protection &mdash; and it remains a member-state matter, largely unbuilt. Taiwan faces the same question (extending &#21214;&#20445;/&#32887;&#26989;&#28797;&#23475;&#20445;&#38522; and a stable status to project-based performers). Track it as the policy prize; position the NPO as evidence-generator and bridge service while the status question is unresolved. The member-state models cluster into three incompatible logics &mdash; itself the reason the EU cannot mandate one "artist status": <strong>contributory insurance funds</strong> (Germany K&uuml;nstlersozialkasse, Austria KSVF), <strong>unemployment-based intermittency</strong> (France intermittents, Belgium statut d'artiste), and <strong>income / pay-floor instruments</strong> (Ireland Basic Income for the Arts &mdash; now moving pilot &rarr; permanent &mdash; and the Netherlands Fair Practice Code). For Taiwan the question is not which European model to copy but which <em>logic</em> best fits its labour-insurance architecture.<sup class="cite"><a href="#eu-src-9" data-src="artiststatus" data-tip="National artist-status models, three logics: insurance funds (DE KSK, AT KSVF); intermittency (FR, BE); income/pay-floor (IE Basic Income for the Arts → permanent in Budget 2026; NL Fair Practice Code). ✅ Verified, illustrative not exhaustive.">9</a></sup></p>
+            <p>Across the EU's decade of coordination, the recurring structural recommendation is a defined legal "artist status" carrying portable social protection &mdash; and it remains a member-state matter, largely unbuilt. Taiwan faces the same question (extending &#21214;&#20445;/&#32887;&#26989;&#28797;&#23475;&#20445;&#38522; and a stable status to project-based performers). Track it as the policy prize; position the NPO as evidence-generator and bridge service while the status question is unresolved. The member-state models cluster into three incompatible logics &mdash; itself the reason the EU cannot mandate one "artist status": <strong>contributory insurance funds</strong> (Germany K&uuml;nstlersozialkasse, Austria KSVF), <strong>unemployment-based intermittency</strong> (France intermittents, Belgium statut d'artiste), and <strong>income / pay-floor instruments</strong> (Ireland Basic Income for the Arts &mdash; now moving pilot &rarr; permanent &mdash; and the Netherlands Fair Practice Code). For Taiwan the question is not which European model to copy but which <em>logic</em> best fits its labour-insurance architecture.<sup class="cite"><a href="#eu-src-9" data-src="artiststatus" data-tip="National artist-status models, three logics: insurance funds (DE KSK, AT KSVF); intermittency (FR, BE); income/pay-floor (IE Basic Income for the Arts → permanent in Budget 2026; NL Fair Practice Code). ✅ Sourced, illustrative not exhaustive.">9</a></sup></p>
           </div>
         </div>
       </div>
@@ -1020,47 +1057,47 @@
                 <tr>
                   <td>Council Conclusions on "Mental Health and Precarious Work" (9 Oct 2023, first-ever); Council Conclusions on Mental Health (30 Nov 2023)</td>
                   <td>WebSearch (Consilium press + Eurodiaconia + FAFCE; direct Consilium fetch empty &mdash; JS-rendered, corroborated by 3 secondary sources)</td>
-                  <td>&#10003; Verified across independent sources</td>
+                  <td>&#10003; Sourced across independent sources</td>
                 </tr>
                 <tr>
                   <td>2023 OMC report <em>Status and working conditions of artists and CCS professionals</em> (4 Jul 2023; 27-MS expert group; non-binding framework recommendation)</td>
                   <td>WebFetch of official EC Culture page (full text) + WebSearch</td>
-                  <td>&#10003; Verified (primary EC source)</td>
+                  <td>&#10003; Sourced (primary EC source)</td>
                 </tr>
                 <tr>
                   <td>EP resolution of 21 Nov 2023 (433&ndash;100&ndash;99; call for a binding directive + employment-status determination + platform + social conditionality)</td>
                   <td>WebSearch (EP press room + EP TA-9-2023-0405 + FERA)</td>
-                  <td>&#10003; Verified (vote + directive demand across EP primary + sector)</td>
+                  <td>&#10003; Sourced (vote + directive demand across EP primary + sector)</td>
                 </tr>
                 <tr>
                   <td>Commission's 2024 non-legislative response (13 initiatives; round table; workshops; "consider reinforcing social conditionality"; no directive); 2019 social-protection recommendation</td>
                   <td>WebSearch (IETM/Circostrada + Social Europe + Creatives Unite)</td>
-                  <td>&#10003; Verified across independent sector sources</td>
+                  <td>&#10003; Sourced across independent sector sources</td>
                 </tr>
                 <tr>
                   <td>Culture Compass for Europe (COM(2025) 785, 12 Nov 2025); EU Artists' Charter (Q2 2027, first tabled 8 Dec 2025); structured dialogue through 2026</td>
                   <td>WebSearch (EC press + EC Culture Compass page + COM PDF + EP Legislative Train)</td>
-                  <td>&#10003; Verified adoption/date/Charter; &#9888; Charter announced, not adopted</td>
+                  <td>&#10003; Sourced adoption/date/Charter; Charter announced, not yet adopted (status)</td>
                 </tr>
                 <tr>
                   <td>Commission Communication <em>A comprehensive approach to mental health</em> (COM(2023) 298, 7 Jun 2023; 20 initiatives; &euro;1.23bn; "good mental health at work"; culture named)</td>
                   <td>WebSearch (EC primary topic page + EC Employment &amp; Social Affairs)</td>
-                  <td>&#10003; Verified (figures/structure from EC primary)</td>
+                  <td>&#10003; Sourced (figures/structure from EC primary)</td>
                 </tr>
                 <tr>
                   <td>Kuusi T, Tervo-Niemel&auml; K, Vierti&ouml; S, "Factors associated with psychological distress of workers in the Finnish Evangelical Lutheran Church," <em>BMC Public Health</em> 2024;24(1):875 (PMID 38515089)</td>
                   <td>PubMed API (record + full abstract retrieved this session)</td>
-                  <td>&#10003; Verified (PubMed-indexed); &#9888; church musicians n=92, salaried; loneliness OR 24.36 (CI 2.78&ndash;213.72)</td>
+                  <td>&#10003; Sourced (PubMed-indexed); data-quality note: church musicians n=92, salaried not freelance; loneliness OR 24.36 with very wide CI 2.78&ndash;213.72</td>
                 </tr>
                 <tr>
                   <td>National "artist status" models &mdash; Germany KSK, Austria KSVF, France intermittents, Belgium statut d'artiste, Ireland Basic Income for the Arts, Netherlands Fair Practice Code</td>
                   <td>WebSearch (national scheme pages + sector reporting)</td>
-                  <td>&#10003; Verified across independent sources (illustrative, not exhaustive)</td>
+                  <td>&#10003; Sourced across independent sources (illustrative, not exhaustive)</td>
                 </tr>
                 <tr>
                   <td>EU-OSHA Healthy Workplaces Campaign 2026&ndash;2028, <em>Together for Mental Health at Work</em> (launches Oct 2026)</td>
                   <td>WebSearch (EU-OSHA + sector summary)</td>
-                  <td>&#10003; Verified; &#9888; campaign forthcoming</td>
+                  <td>&#10003; Sourced; campaign forthcoming (status)</td>
                 </tr>
                 <tr>
                   <td>Pan-EU probability study of freelance musicians' mental health; nearest national studies (Vaag et al. 2016 Norway; "When Music Speaks" Denmark; Kegelaers &amp; Gibney 2025 scoping review)</td>
@@ -1093,30 +1130,39 @@
         <p class="page-label">Citation Registry</p>
         <h2 class="page-title">References</h2>
 
-        <p class="cite-help">Every claim-bearing figure and provision above carries a numbered citation &mdash; hover (desktop) or tap (mobile) a number to see the source; click to jump here. EU-level policy facts are &#10003; verified across independent EU-institutional and sector sources; the Artists' Charter is &#9888; announced, not adopted; the peer-reviewed anchor is &#10003; PubMed-indexed with a scope caveat.</p>
+        <p class="cite-help">Every claim-bearing figure and provision above carries a numbered citation &mdash; hover (desktop) or tap (mobile) a number to see the source; click to jump here. EU-level policy facts are &#10003; sourced across independent EU-institutional and sector sources; the Artists' Charter is &#10003; sourced but announced, not yet adopted; the peer-reviewed anchor is &#10003; PubMed-indexed with a plain data-quality caveat.</p>
 
         <div class="refs" id="refs-all" data-citation-registry="eu-all">
           <div class="refs-title">References</div>
           <ol>
-            <li id="eu-src-1" data-src="mhprecwork">Council of the European Union. (2023, October 9). <em>Council calls for measures to address impact of precarious work on mental health</em> [Press release]. <a href="https://www.consilium.europa.eu/en/press/press-releases/2023/10/09/council-calls-for-measures-to-address-impact-of-precarious-work-on-mental-health/" target="_blank" rel="noopener">consilium.europa.eu</a>; Council of the European Union. (2023, November 30). <em>Mental health: Member states to take action across multiple levels, sectors and ages</em> [Press release]. <a href="https://www.consilium.europa.eu/en/press/press-releases/2023/11/30/mental-health-member-states-to-take-action-across-multiple-levels-sectors-and-ages/" target="_blank" rel="noopener">consilium.europa.eu</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Verified across independent sources (Consilium press releases; Eurodiaconia corroboration).</li>
-            <li id="eu-src-2" data-src="omc">European Commission, Directorate-General for Education, Youth, Sport and Culture. (2023). <em>The status and working conditions of artists and cultural and creative professionals: OMC (open method of coordination) report</em>. Publications Office of the European Union. <a href="https://op.europa.eu/en/publication-detail/-/publication/01fafa79-1a13-11ee-806b-01aa75ed71a1/language-en" target="_blank" rel="noopener">op.europa.eu</a> (full text also read via the EC Culture and Creativity <a href="https://culture.ec.europa.eu/whats-new/news/eu-experts-publish-recommendations-to-improve-working-conditions-of-artists-and-cultural-and-creative-professionals" target="_blank" rel="noopener">announcement</a>) &mdash; Source &middot; Method &middot; Basis: &#10003; Verified (primary EC/Publications Office source; OMC expert group, 27 member states, 2021&ndash;2023).</li>
-            <li id="eu-src-3" data-src="epres">European Parliament. (2023, November 21). <em>European Parliament resolution of 21 November 2023 on an EU framework for the social and professional situation of artists and workers in the cultural and creative sectors</em> (2023/2051(INI)) [P9_TA(2023)0405]. <a href="https://www.europarl.europa.eu/doceo/document/TA-9-2023-0405_EN.html" target="_blank" rel="noopener">europarl.europa.eu</a> (see also the EP <a href="https://www.europarl.europa.eu/news/en/press-room/20231117IPR12106/status-of-the-artist-better-working-conditions-for-artists-and-cultural-workers" target="_blank" rel="noopener">press release</a>) &mdash; Source &middot; Method &middot; Basis: &#10003; Verified (vote 433&ndash;100&ndash;99; co-rapporteurs Ruiz Devesa &amp; Manders; binding directive demand).</li>
-            <li id="eu-src-4" data-src="ecresp">European Commission. (2024). <em>The European Commission's response to the resolution of the European Parliament on an EU framework for the social and professional situation of artists and workers in the cultural and creative sectors</em>. <a href="https://www.ietm.org/en/news/policy-statement-the-european-commissions-response-to-the-resolution-of-the-european" target="_blank" rel="noopener">ietm.org</a>; Council of the European Union. (2019). <em>Council Recommendation of 8 November 2019 on access to social protection for workers and the self-employed</em> (2019/C 387/01). <em>Official Journal of the European Union, C 387</em>, 1&ndash;8. <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=oj:JOC_2019_387_R_0001" target="_blank" rel="noopener">eur-lex.europa.eu</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Verified across independent sector sources (IETM, Social Europe, Creatives Unite) and EUR-Lex primary.</li>
-            <li id="eu-src-5" data-src="compass">European Commission. (2025). <em>Culture Compass for Europe</em> [Communication] (COM(2025) 785 final). <a href="https://culture.ec.europa.eu/sites/default/files/2025-11/Communication%20-%20Culture%20Compass.pdf" target="_blank" rel="noopener">culture.ec.europa.eu (PDF)</a> (see also &ldquo;<a href="https://culture.ec.europa.eu/news/commission-adopts-new-culture-compass-for-europe" target="_blank" rel="noopener">Commission adopts new Culture Compass for Europe</a>&rdquo;) &mdash; Source &middot; Method &middot; Basis: &#10003; Verified adoption 12 Nov 2025 and forthcoming EU Artists' Charter (&ldquo;common principles&hellip; Member States free to define their own models&rdquo;); &#9888; Charter announced not adopted &mdash; first tabled at the High-Level Round Table on Working Conditions, 8 Dec 2025; dialogue through 2026; Charter slated for Q2 2027 (as-reported).</li>
-            <li id="eu-src-6" data-src="creative">European Commission. (n.d.). <em>About the Creative Europe programme</em>. Retrieved June 19, 2026, from <a href="https://culture.ec.europa.eu/creative-europe/about-the-creative-europe-programme" target="_blank" rel="noopener">culture.ec.europa.eu</a> (see also &ldquo;<a href="https://culture.ec.europa.eu/news/creative-europe-2021-2027-programme-launch" target="_blank" rel="noopener">Creative Europe 2021&ndash;2027 programme launch</a>&rdquo;) &mdash; Source &middot; Method &middot; Basis: &#10003; Verified (precise EC figure &euro;2.44 billion, 2021&ndash;2027; funds projects/cooperation/mobility/market access &mdash; not social protection or mental health).</li>
-            <li id="eu-src-7" data-src="mhapproach">European Commission. (2023). <em>A comprehensive approach to mental health</em> [Communication] (COM(2023) 298 final). <a href="https://commission.europa.eu/topics/public-health/european-health-union/comprehensive-approach-mental-health_en" target="_blank" rel="noopener">commission.europa.eu</a> (see also EC <a href="https://ec.europa.eu/social/main.jsp?langId=en&amp;catId=89&amp;newsId=10593&amp;furtherNews=yes" target="_blank" rel="noopener">Employment &amp; Social Affairs</a>) &mdash; Source &middot; Method &middot; Basis: &#10003; Verified (7 Jun 2023; the EU's first comprehensive approach &mdash; a Communication, not a formal &ldquo;strategy&rdquo;; 20 flagship initiatives; &euro;1.23 billion in financing opportunities across existing instruments; prevention/access/reintegration; &ldquo;good mental health at work&rdquo;; culture named).</li>
-            <li id="eu-src-8" data-src="kuusi">Kuusi, T., Tervo-Niemel&auml;, K., &amp; Vierti&ouml;, S. (2024). Factors associated with psychological distress of workers in the Finnish Evangelical Lutheran Church. <em>BMC Public Health, 24</em>(1), Article 875. <a href="https://doi.org/10.1186/s12889-024-18165-x" target="_blank" rel="noopener">https://doi.org/10.1186/s12889-024-18165-x</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Verified, PubMed-indexed (PMID 38515089); pastors (n=241), church musicians (n=92), diaconal (n=85), youth (n=56); MHI-5 cut-off &le;52; loneliness strongest correlate (musicians OR 24.36, 95% CI 2.78&ndash;213.72); work satisfaction protective (OR 0.06). &#9888; salaried church musicians not freelance; small subgroup; very wide key CI.</li>
-            <li id="eu-src-9" data-src="artiststatus">K&uuml;nstlersozialkasse. (n.d.). <em>Social security contributions for artists</em>. touring artists. Retrieved June 19, 2026, from <a href="https://www.touring-artists.info/en/social-security/users-contribution-social-security-contributions-for-artists" target="_blank" rel="noopener">touring-artists.info</a>; K&uuml;nstler-Sozialversicherungsfonds. (n.d.). <em>About</em>. Retrieved June 19, 2026, from <a href="https://www.ksvf.at/About" target="_blank" rel="noopener">ksvf.at</a>; Office National de l'Emploi. (n.d.). <em>R&egrave;gles sp&eacute;cifiques applicables aux travailleurs des arts</em>. Retrieved June 19, 2026, from <a href="https://www.onem.be/page/quelles-sont-les-regles-specifiques-applicables-aux-travailleurs-des-arts-" target="_blank" rel="noopener">onem.be</a>; Basic Income Earth Network. (2026, May). <em>Basic Income for the Arts in Ireland: From pilot to permanent</em>. <a href="https://basicincome.org/news/2026/05/basic-income-for-the-arts-in-ireland-from-pilot-to-permanent/" target="_blank" rel="noopener">basicincome.org</a>; Platform ACCT. (n.d.). <em>Fair Practice Code</em>. Retrieved June 19, 2026, from <a href="https://fairpracticecode.nl/" target="_blank" rel="noopener">fairpracticecode.nl</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Verified across independent sources; illustrative national typology, not exhaustive.</li>
-            <li id="eu-src-10" data-src="euosha">European Agency for Safety and Health at Work. (n.d.). <em>Psychosocial risks and mental health at work</em>. Retrieved June 19, 2026, from <a href="https://osha.europa.eu/en/themes/psychosocial-risks-and-mental-health" target="_blank" rel="noopener">osha.europa.eu</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Verified; &#9888; the Healthy Workplaces Campaign 2026&ndash;2028, <em>Together for Mental Health at Work</em>, is forthcoming (launches October 2026).</li>
+            <li id="eu-src-1" data-src="mhprecwork">Council of the European Union. (2023, October 9). <em>Council calls for measures to address impact of precarious work on mental health</em> [Press release]. <a href="https://www.consilium.europa.eu/en/press/press-releases/2023/10/09/council-calls-for-measures-to-address-impact-of-precarious-work-on-mental-health/" target="_blank" rel="noopener">consilium.europa.eu</a>; Council of the European Union. (2023, November 30). <em>Mental health: Member states to take action across multiple levels, sectors and ages</em> [Press release]. <a href="https://www.consilium.europa.eu/en/press/press-releases/2023/11/30/mental-health-member-states-to-take-action-across-multiple-levels-sectors-and-ages/" target="_blank" rel="noopener">consilium.europa.eu</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced across independent sources (Consilium press releases; Eurodiaconia corroboration).</li>
+            <li id="eu-src-2" data-src="omc">European Commission, Directorate-General for Education, Youth, Sport and Culture. (2023). <em>The status and working conditions of artists and cultural and creative professionals: OMC (open method of coordination) report</em>. Publications Office of the European Union. <a href="https://op.europa.eu/en/publication-detail/-/publication/01fafa79-1a13-11ee-806b-01aa75ed71a1/language-en" target="_blank" rel="noopener">op.europa.eu</a> (full text also read via the EC Culture and Creativity <a href="https://culture.ec.europa.eu/whats-new/news/eu-experts-publish-recommendations-to-improve-working-conditions-of-artists-and-cultural-and-creative-professionals" target="_blank" rel="noopener">announcement</a>) &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (primary EC/Publications Office source; OMC expert group, 27 member states, 2021&ndash;2023).</li>
+            <li id="eu-src-3" data-src="epres">European Parliament. (2023, November 21). <em>European Parliament resolution of 21 November 2023 on an EU framework for the social and professional situation of artists and workers in the cultural and creative sectors</em> (2023/2051(INI)) [P9_TA(2023)0405]. <a href="https://www.europarl.europa.eu/doceo/document/TA-9-2023-0405_EN.html" target="_blank" rel="noopener">europarl.europa.eu</a> (see also the EP <a href="https://www.europarl.europa.eu/news/en/press-room/20231117IPR12106/status-of-the-artist-better-working-conditions-for-artists-and-cultural-workers" target="_blank" rel="noopener">press release</a>) &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (vote 433&ndash;100&ndash;99; co-rapporteurs Ruiz Devesa &amp; Manders; binding directive demand).</li>
+            <li id="eu-src-4" data-src="ecresp">European Commission. (2024). <em>The European Commission's response to the resolution of the European Parliament on an EU framework for the social and professional situation of artists and workers in the cultural and creative sectors</em>. <a href="https://www.ietm.org/en/news/policy-statement-the-european-commissions-response-to-the-resolution-of-the-european" target="_blank" rel="noopener">ietm.org</a>; Council of the European Union. (2019). <em>Council Recommendation of 8 November 2019 on access to social protection for workers and the self-employed</em> (2019/C 387/01). <em>Official Journal of the European Union, C 387</em>, 1&ndash;8. <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=oj:JOC_2019_387_R_0001" target="_blank" rel="noopener">eur-lex.europa.eu</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced across independent sector sources (IETM, Social Europe, Creatives Unite) and EUR-Lex primary.</li>
+            <li id="eu-src-5" data-src="compass">European Commission. (2025). <em>Culture Compass for Europe</em> [Communication] (COM(2025) 785 final). <a href="https://culture.ec.europa.eu/sites/default/files/2025-11/Communication%20-%20Culture%20Compass.pdf" target="_blank" rel="noopener">culture.ec.europa.eu (PDF)</a> (see also &ldquo;<a href="https://culture.ec.europa.eu/news/commission-adopts-new-culture-compass-for-europe" target="_blank" rel="noopener">Commission adopts new Culture Compass for Europe</a>&rdquo;) &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced adoption 12 Nov 2025 and forthcoming EU Artists' Charter (&ldquo;common principles&hellip; Member States free to define their own models&rdquo;); the Charter is announced, not yet adopted &mdash; first tabled at the High-Level Round Table on Working Conditions, 8 Dec 2025; dialogue through 2026; Charter slated for Q2 2027.</li>
+            <li id="eu-src-6" data-src="creative">European Commission. (n.d.). <em>About the Creative Europe programme</em>. Retrieved June 19, 2026, from <a href="https://culture.ec.europa.eu/creative-europe/about-the-creative-europe-programme" target="_blank" rel="noopener">culture.ec.europa.eu</a> (see also &ldquo;<a href="https://culture.ec.europa.eu/news/creative-europe-2021-2027-programme-launch" target="_blank" rel="noopener">Creative Europe 2021&ndash;2027 programme launch</a>&rdquo;) &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (precise EC figure &euro;2.44 billion, 2021&ndash;2027; funds projects/cooperation/mobility/market access &mdash; not social protection or mental health).</li>
+            <li id="eu-src-7" data-src="mhapproach">European Commission. (2023). <em>A comprehensive approach to mental health</em> [Communication] (COM(2023) 298 final). <a href="https://commission.europa.eu/topics/public-health/european-health-union/comprehensive-approach-mental-health_en" target="_blank" rel="noopener">commission.europa.eu</a> (see also EC <a href="https://ec.europa.eu/social/main.jsp?langId=en&amp;catId=89&amp;newsId=10593&amp;furtherNews=yes" target="_blank" rel="noopener">Employment &amp; Social Affairs</a>) &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (7 Jun 2023; the EU's first comprehensive approach &mdash; a Communication, not a formal &ldquo;strategy&rdquo;; 20 flagship initiatives; &euro;1.23 billion in financing opportunities across existing instruments; prevention/access/reintegration; &ldquo;good mental health at work&rdquo;; culture named).</li>
+            <li id="eu-src-8" data-src="kuusi">Kuusi, T., Tervo-Niemel&auml;, K., &amp; Vierti&ouml;, S. (2024). Factors associated with psychological distress of workers in the Finnish Evangelical Lutheran Church. <em>BMC Public Health, 24</em>(1), Article 875. <a href="https://doi.org/10.1186/s12889-024-18165-x" target="_blank" rel="noopener">https://doi.org/10.1186/s12889-024-18165-x</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced, PubMed-indexed (PMID 38515089); pastors (n=241), church musicians (n=92), diaconal (n=85), youth (n=56); MHI-5 cut-off &le;52; loneliness strongest correlate (musicians OR 24.36, 95% CI 2.78&ndash;213.72); work satisfaction protective (OR 0.06). Data-quality note: salaried church musicians not freelance; small n=92 subgroup; very wide key CI &mdash; direction credible, magnitude not estimable.</li>
+            <li id="eu-src-9" data-src="artiststatus">K&uuml;nstlersozialkasse. (n.d.). <em>Social security contributions for artists</em>. touring artists. Retrieved June 19, 2026, from <a href="https://www.touring-artists.info/en/social-security/users-contribution-social-security-contributions-for-artists" target="_blank" rel="noopener">touring-artists.info</a>; K&uuml;nstler-Sozialversicherungsfonds. (n.d.). <em>About</em>. Retrieved June 19, 2026, from <a href="https://www.ksvf.at/About" target="_blank" rel="noopener">ksvf.at</a>; Office National de l'Emploi. (n.d.). <em>R&egrave;gles sp&eacute;cifiques applicables aux travailleurs des arts</em>. Retrieved June 19, 2026, from <a href="https://www.onem.be/page/quelles-sont-les-regles-specifiques-applicables-aux-travailleurs-des-arts-" target="_blank" rel="noopener">onem.be</a>; Basic Income Earth Network. (2026, May). <em>Basic Income for the Arts in Ireland: From pilot to permanent</em>. <a href="https://basicincome.org/news/2026/05/basic-income-for-the-arts-in-ireland-from-pilot-to-permanent/" target="_blank" rel="noopener">basicincome.org</a>; Platform ACCT. (n.d.). <em>Fair Practice Code</em>. Retrieved June 19, 2026, from <a href="https://fairpracticecode.nl/" target="_blank" rel="noopener">fairpracticecode.nl</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced across independent sources; illustrative national typology, not exhaustive.</li>
+            <li id="eu-src-10" data-src="euosha">European Agency for Safety and Health at Work. (n.d.). <em>Psychosocial risks and mental health at work</em>. Retrieved June 19, 2026, from <a href="https://osha.europa.eu/en/themes/psychosocial-risks-and-mental-health" target="_blank" rel="noopener">osha.europa.eu</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced; the Healthy Workplaces Campaign 2026&ndash;2028, <em>Together for Mental Health at Work</em>, is forthcoming (status; launches October 2026).</li>
             <li id="eu-src-11" data-src="prevalence">Vaag, J., Bj&oslash;rngaard, J. H., &amp; Bjerkeset, O. (2016). Symptoms of anxiety and depression among Norwegian musicians compared to the general workforce. <em>Psychology of Music, 44</em>(2), 234&ndash;248. <a href="https://doi.org/10.1177/0305735614564910" target="_blank" rel="noopener">https://doi.org/10.1177/0305735614564910</a>; Musgrave, G., Gross, S. A., &amp; Carney, D. (2025). Determinants of anxiety, depression and subjective wellbeing among musicians in Denmark: Findings from the &lsquo;When Music Speaks&rsquo; project. <em>Scandinavian Journal of Psychology, 66</em>(3), 429&ndash;445. <a href="https://doi.org/10.1111/sjop.13095" target="_blank" rel="noopener">https://doi.org/10.1111/sjop.13095</a>; Kegelaers, J., &amp; Gibney, A. (2025). The mental health of musicians: A scoping review. <em>Psychology of Music</em>. Advance online publication. <a href="https://doi.org/10.1177/03057356251384977" target="_blank" rel="noopener">https://doi.org/10.1177/03057356251384977</a> &mdash; Source &middot; Method &middot; Basis: &#10067; No pan-EU probability sample of freelance musicians located; national / non-EU / review evidence (Rule 4).</li>
           </ol>
           <p class="refs-note">Convention: every claim-bearing marker carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above &mdash; machine-checkable before each deploy (§5.2 / §6 gate 1). The MD draft (<code>2026-06-19_Research_Policy_EU.md</code>) carries the same citations as <code>[^1]</code>&ndash;<code>[^11]</code> footnotes and is the citation source of truth.</p>
         </div>
 
+        <nav class="related-block" aria-label="Related on this site">
+          <p class="related-title">Related</p>
+          <ul>
+            <li><a href="policy-study.html">&larr; Policy Study (hub &middot; all regions)</a></li>
+            <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+            <li><a href="org-study-arts-creators-union.html">Taiwan's nearest existing infrastructure &mdash; &#34269;&#21109;&#24037;&#26371; org study</a></li>
+          </ul>
+        </nav>
+
         <div class="source-info">
           <p><strong>Report:</strong> Research track &mdash; Policy Case Series No.003 (European Union) &middot; Music &amp; Mental Health NPO Research Project</p>
           <p><strong>As of:</strong> 2026-06-19 &middot; Next region: Taiwan</p>
-          <p><strong>Basis:</strong> &#10003; Verified for EU-level policy facts; &#9888; Artists' Charter announced not adopted; &#10003; PubMed-indexed anchor with scope caveat</p>
+          <p><strong>Basis:</strong> &#10003; Sourced for EU-level policy facts; &#10003; Sourced for the Artists' Charter (announced, not yet adopted); &#10003; PubMed-indexed anchor with a data-quality caveat</p>
         </div>
       </div>
     </div>
@@ -1128,10 +1174,12 @@
     var pages = document.querySelectorAll('.page');
     var nums = document.querySelectorAll('.page-num');
     var current = 0;
+    var RM = window.matchMedia('(prefers-reduced-motion: reduce)');
+    function scrollBehavior(){ return RM.matches ? 'auto' : 'smooth'; }
 
     function goTo(index) {
       if (index < 0 || index >= pages.length) return;
-      pages[index].scrollIntoView({ behavior: 'smooth' });
+      pages[index].scrollIntoView({ behavior: scrollBehavior() });
     }
 
     function nextPage() { goTo(current + 1); }
@@ -1170,7 +1218,7 @@
         var el = document.querySelector(id);
         if (!el) return;
         e.preventDefault();
-        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.scrollIntoView({ behavior: scrollBehavior(), block: 'center' });
         location.hash = id;
       });
     });
@@ -1181,12 +1229,38 @@
     });
   </script>
 
+  <script>
+  /* Scroll-reveal — R3.2 paged-safe (observes within .pages-container; per-page anchors only) */
+  (function(){
+    var root = document.querySelector('.pages-container');
+    if (!root) return;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = '.page-title, .part-divider, .page-label, .stat-strip, .method-table, .table-wrap, figure';
+    var nodes = Array.prototype.slice.call(root.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, idx = 0;
+        if (p){ var sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,5) * 60) + 'ms';
+        el.classList.add('in'); io.unobserve(el);
+      });
+    }, { root: root, threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
+
   <!-- nav scroll-state fix: transparent over hero, blurred bar once scrolled -->
   <style>
     nav.nav, .nav { transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease); border-bottom: 1px solid transparent; }
     nav.nav.scrolled, .nav.scrolled {
       right: 0;
-      background: rgba(244, 244, 245, 0.85);
+      background: rgba(244, 244, 245, 0.45);
       -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-light);

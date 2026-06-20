@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Policy scan: Japan — protecting music workers by labor law, not a safety net · MH&W Research">
+  <meta name="description" content="Policy study: Japan — protecting music workers by labor law, not a safety net · MH&W Policy Study">
   <title>Policy: Japan · MH&W</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -39,8 +39,8 @@
       --bg-card-dark: var(--off-black);
       --border-light: rgba(0,0,0,0.07);
       --border-dark: rgba(255,255,255,0.1);
-      --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
-      --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
       --font-mono: 'Space Mono', 'Courier New', monospace;
       --font: var(--font-body);
       --text-hero: clamp(3.5rem, 8vw, 6.5rem);
@@ -53,10 +53,13 @@
       --ease: cubic-bezier(0.4, 0, 0.2, 1);
       --dur: 0.3s;
       --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
       --radius: 4px;
       --radius-lg: 6px;
       --max-w: 1100px;
-      --max-w-text: 660px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -73,6 +76,8 @@
       color: var(--charcoal);
       line-height: 1.7;
       font-size: var(--text-body);
+      font-weight: 400;
+      font-optical-sizing: auto;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -135,7 +140,7 @@
     /* Mobile nav brand */
     .nav-topbar { display: none; }
     .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
-    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:0.5rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:0.2em; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
 
     /* ===== PAGE SIDEBAR ===== */
     .page-sidebar {
@@ -241,73 +246,58 @@
       flex-direction: column;
     }
 
-    /* ===== COVER PAGE ===== */
+    /* ===== COVER PAGE — TWO-LINE MINIMAL (R2.1, decided 2026-06-20) ===== */
     .cover {
-      height: 100vh;
       min-height: 100vh;
-      justify-content: center;
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       text-align: center;
-      padding-top: 0;
+      position: relative;
+      overflow: hidden;            /* clips the wash */
+      padding: 0 2rem;
     }
 
-    .cover .page-inner {
-      max-width: 800px;
-      justify-content: center;
-      align-items: center;
+    /* one soft radial purple wash — the single dia accent */
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%, var(--signal-glow) 0%, rgba(102,103,171,0.06) 38%, rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
     }
 
-    .cover-eyebrow {
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      letter-spacing: 0.5em;
-      text-transform: uppercase;
-      color: var(--grey);
-      margin-bottom: 2.5rem;
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 1280px);
     }
 
     .cover-title {
       font-family: var(--font-display);
-      font-size: clamp(4.5rem, 11vw, 9rem);
-      font-weight: 800;
-      line-height: 0.85;
-      letter-spacing: -0.03em;
-      text-transform: uppercase;
+      font-size: clamp(2.6rem, 8vw, 6.5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
       color: var(--black);
-      margin-bottom: 0.25rem;
+      margin: 0;
+      text-wrap: balance;
     }
 
-    .cover-accent {
-      color: var(--purple-deep);
-    }
-
-    .cover-year {
+    .cover-line {
       font-family: var(--font-mono);
-      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
       font-weight: 400;
-      color: var(--purple-light);
-      letter-spacing: 0.35em;
-      margin-bottom: 2rem;
-    }
-
-    .cover-subtitle {
-      font-family: var(--font-body);
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      font-weight: 300;
-      font-style: italic;
-      color: var(--graphite);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      line-height: 1.5;
-      margin-bottom: 3rem;
-    }
-
-    .cover-meta {
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      color: var(--grey-light);
-      line-height: 2;
-      letter-spacing: 0.02em;
+      color: var(--purple-deep);            /* 4.92:1 AA */
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
     }
 
     .cover-hint {
@@ -319,16 +309,31 @@
       font-size: var(--text-xs);
       color: var(--silver);
       letter-spacing: 0.1em;
-      animation: pulse 2s ease-in-out infinite;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; }
+    /* entrance — soft fade + rise, one time */
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
     }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-line  { animation-delay: 0.22s; }
 
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+    /* reduced-motion: no entrance, no drift, no pulse — everything static & visible */
     @media (prefers-reduced-motion: reduce) {
-      .cover-hint { animation: none; }
+      .cover-inner > *,
+      .cover-wash,
+      .cover-hint { animation: none; opacity: 1; transform: none; }
     }
 
     /* ===== CONTENT PAGES ===== */
@@ -350,6 +355,7 @@
       color: var(--black);
       margin-bottom: 2rem;
       letter-spacing: 0.01em;
+      text-wrap: balance;
     }
 
     .content-block {
@@ -366,7 +372,6 @@
 
     .content-block p {
       margin-bottom: 0.75rem;
-      line-height: 1.75;
       color: var(--graphite);
     }
 
@@ -440,7 +445,6 @@
     }
     .reform-body {
       padding-left: 2.25rem;
-      line-height: 1.75;
       color: var(--graphite);
     }
 
@@ -466,6 +470,7 @@
       font-size: 1.6rem;
       color: var(--purple-deep);
       line-height: 1.1;
+      font-variant-numeric: tabular-nums;
     }
     .stat-label {
       font-family: var(--font-mono);
@@ -489,7 +494,7 @@
       color: var(--charcoal);
       margin-bottom: 0.35rem;
     }
-    .appraise-item p { line-height: 1.75; color: var(--graphite); }
+    .appraise-item p { color: var(--graphite); }
 
     .verdict {
       background: var(--off-black);
@@ -562,6 +567,7 @@
       padding: 0.6rem 0.75rem;
       border-bottom: 1px solid var(--border-light);
       vertical-align: top;
+      font-variant-numeric: tabular-nums;
     }
     .method-table tbody tr:nth-child(odd) { background: var(--white); }
     .method-table tbody tr:nth-child(even) { background: var(--snow); }
@@ -599,7 +605,7 @@
       display: inline-block;
     }
 
-    /* ===== CITATIONS (§5 inline tier) — pattern: case-study-music-minds-matter.html ===== */
+    /* ===== CITATIONS (§5 inline tier) — pattern: org-study-music-minds-matter.html ===== */
     .cite { font-size: 0.72em; line-height: 0; vertical-align: super; letter-spacing: 0; }
     .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
     .cite a:hover, .cite a:focus { color: var(--signal-dim); }
@@ -694,16 +700,17 @@
       }
 
       .cover-title {
-        font-size: clamp(3rem, 16vw, 5rem);
+        font-size: clamp(1.9rem, 8.5vw, 2.6rem);
       }
 
-      .cover-year {
-        font-size: clamp(1.5rem, 6vw, 2rem);
-        letter-spacing: 0.25em;
+      .cover-line {
+        font-size: clamp(0.72rem, 3.2vw, 0.95rem);
+        letter-spacing: 0.18em;
       }
 
-      .cover-subtitle {
-        font-size: 0.85rem;
+      .cover-wash {
+        width: 150vw;
+        height: 150vw;
       }
 
       .page-title {
@@ -741,26 +748,62 @@
     .pages-container::-webkit-scrollbar-track { background: transparent; }
     .pages-container::-webkit-scrollbar-thumb { background: var(--silver); border-radius: 3px; }
     .pages-container::-webkit-scrollbar-thumb:hover { background: var(--grey-light); }
+
+    /* ===== DISCOVERABILITY: related block (closing page) ===== */
+    .related-block {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-light);
+    }
+    .related-title {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--grey);
+      margin-bottom: 0.6rem;
+    }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--signal);
+      text-decoration: none;
+      transition: color var(--dur) var(--ease);
+    }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+    .related-block .related-note { color: var(--graphite); }
+
+    /* ===== Scroll-reveal (R3.2, paged-safe) ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
   </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
 </head>
 <body>
   <a href="#main" class="skip-nav">Skip to content</a>
 
   <!-- Site Navigation -->
-  <nav class="nav">
+  <nav class="nav" aria-label="Site navigation">
     <div class="nav-topbar">
-      <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="this.classList.toggle('open');var x=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',!x);document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
         <span></span><span></span><span></span>
       </button>
       <div class="nav-mobile-brand">MENTAL HEALTH & WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
     </div>
-    <div class="nav-links">
+        <div class="nav-links">
       <a href="index.html">HOME</a>
-      <a href="plan.html">PLAN</a>
       <a href="report-global-npo-landscape.html">ORGS MAP</a>
-      <a href="case-study.html">CASE STUDY</a>
-      <a href="research.html" class="current">RESEARCH</a>
-      <a href="insight-2026-06-18.html">INSIGHT</a>
+      <a href="org-study.html">ORG STUDY</a>
+      <a href="policy-study.html" class="current" aria-current="page">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
     </div>
   </nav>
 
@@ -791,18 +834,12 @@
 
     <!-- PAGE 01: COVER (standard research cover — copied from research-detari-2020.html) -->
     <div class="page cover" id="page-0">
-      <div class="page-inner">
-        <p class="cover-eyebrow">MH&amp;W Research</p>
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="cover-inner">
         <h1 class="cover-title">JAPAN</h1>
-        <p class="cover-year">No.001</p>
-        <p class="cover-subtitle">Protecting Music Workers<br>by Labor Law, Not a Safety Net</p>
-        <div class="cover-meta">
-          <p>Policy Case Series · 2026.6</p>
-          <p>Japan &rarr; Thailand &rarr; Taiwan &rarr; U.S. &rarr; U.K. &rarr; EU</p>
-          <p>Compiled by &#38515;&#26825; &middot; 2026-06-18 (rev. 2026-06-19)</p>
-        </div>
+        <p class="cover-line">Policy Study 001 &middot; 2026.6</p>
       </div>
-      <span class="cover-hint">&darr; scroll or arrow keys</span>
+      <span class="cover-hint" aria-hidden="true">&darr; Scroll</span>
     </div>
 
     <!-- PAGE 02: WHY THIS REGION -->
@@ -864,7 +901,7 @@
             <span class="reform-year">2020–2022</span>
           </div>
           <div class="reform-body">
-            <p>During COVID-19 the Agency for Cultural Affairs ran a sequence of economic-continuity programs &mdash; the &#25991;&#21270;&#33464;&#34899;&#27963;&#21205;&#12398;&#32153;&#32154;&#25903;&#25588;&#20107;&#26989; (FY2020, &asymp;&yen;50.9bn; individuals up to &yen;200,000&ndash;&yen;1.5M) and the two "ARTS for the future!" rounds (up to &yen;25M per organization) &mdash; funding professional arts groups and individual performers to keep working through the crisis.<sup class="cite"><a href="#jp-src-3" data-src="bunka" data-tip="文化庁 COVID arts support (継続支援事業 ≈¥50.9bn; ARTS for the future! up to ¥25M/org), 2020–2022: bunka.go.jp primary pages.">3</a></sup> This was income protection, not care, and it was time-limited. Post-pandemic, &#25991;&#21270;&#24193;'s FY2026 budget <em>request</em> proposes two relevant new lines (a &yen;200M arts-harassment program and a &yen;76M legal-consultation desk), but these are requests, not yet enacted.<sup class="cite"><a href="#jp-src-10" data-src="fy2026" data-tip="文化庁 FY2026 budget request: ¥200M 'dignified creative environment' (harassment policies/desks) + ¥76M legal-consultation desk. ⚠️ Request, not enacted.">10</a></sup></p>
+            <p>During COVID-19 the Agency for Cultural Affairs ran a sequence of economic-continuity programs &mdash; the &#25991;&#21270;&#33464;&#34899;&#27963;&#21205;&#12398;&#32153;&#32154;&#25903;&#25588;&#20107;&#26989; (FY2020, &asymp;&yen;50.9bn; individuals up to &yen;200,000&ndash;&yen;1.5M) and the two "ARTS for the future!" rounds (up to &yen;25M per organization) &mdash; funding professional arts groups and individual performers to keep working through the crisis.<sup class="cite"><a href="#jp-src-3" data-src="bunka" data-tip="文化庁 COVID arts support (継続支援事業 ≈¥50.9bn; ARTS for the future! up to ¥25M/org), 2020–2022: bunka.go.jp primary pages.">3</a></sup> This was income protection, not care, and it was time-limited. Post-pandemic, &#25991;&#21270;&#24193;'s FY2026 budget <em>request</em> proposes two relevant new lines (a &yen;200M arts-harassment program and a &yen;76M legal-consultation desk), but these are requests, not yet enacted.<sup class="cite"><a href="#jp-src-10" data-src="fy2026" data-tip="文化庁 FY2026 budget request: ¥200M 'dignified creative environment' (harassment policies/desks) + ¥76M legal-consultation desk. ✅ Sourced (bunka.go.jp PDF); budget request, not yet enacted.">10</a></sup></p>
           </div>
         </div>
       </div>
@@ -877,7 +914,7 @@
         <h2 class="page-title">Protection Without Care</h2>
 
         <div class="content-block">
-          <p>Against these protections sits the mental-health picture, which is severe. The same editorial reports survey findings that <strong>83% of arts and entertainment workers had experienced psychological attacks and 42.7% reported suicidal thoughts</strong>, with harassment widespread (93% abuse-of-position, 73% sexual).<sup class="cite"><a href="#jp-src-1" data-src="morisaki" data-tip="Mental-health prevalence (83% psychological attacks; 42.7% suicidal thoughts; harassment 93%/73%): survey figures reported within Morisaki M, Industrial Health 2023;61(6):393–394. ⚠️ As-reported, not a peer-reviewed probability sample.">1</a></sup></p>
+          <p>Against these protections sits the mental-health picture, which is severe. The same editorial reports survey findings that <strong>83% of arts and entertainment workers had experienced psychological attacks and 42.7% reported suicidal thoughts</strong>, with harassment widespread (93% abuse-of-position, 73% sexual).<sup class="cite"><a href="#jp-src-1" data-src="morisaki" data-tip="Mental-health prevalence (83% psychological attacks; 42.7% suicidal thoughts; harassment 93%/73%): survey figures reported within Morisaki M, Industrial Health 2023;61(6):393–394. ✅ Sourced (secondary source: Morisaki 2023 editorial); directional — no published n/method, not a probability sample.">1</a></sup></p>
         </div>
 
         <div class="stat-strip">
@@ -894,7 +931,7 @@
             <div class="stat-label">Sexual<br>harassment</div>
           </div>
         </div>
-        <p class="cite-help">Prevalence figures are &#9888; as-reported from advocacy-linked surveys within a PubMed-indexed editorial &mdash; directional, not precise.</p>
+        <p class="cite-help">Prevalence figures are &#10003; sourced (secondary source: the Morisaki 2023 PubMed-indexed editorial relaying an advocacy-body survey) &mdash; directional, not precise: no published sample size or method.</p>
 
         <div class="content-block">
           <p>Overwork is structural: a survey conducted October&ndash;December 2023 for the MHLW's <em>FY2024 White Paper on Measures to Prevent Karoshi</em> (run by JNIOSH; n=488 arts/entertainment workers) found <strong>46.2% of technical staff and 40.7% of stage-direction/production staff working 60+ hours a week, and &le;1 day off a week reported by between 38.5% and 60.4% of roles</strong> (the &asymp;60% figure is the highest-burden role, not "directors and producers" specifically).<sup class="cite"><a href="#jp-src-4" data-src="overwork" data-tip="Overwork: MHLW FY2024 Karōshi White Paper, JNIOSH survey (Oct–Dec 2023, n=488) — technical 46.2% / stage-production 40.7% at 60+ hrs/wk; ≤1 day off 38.5–60.4% across roles. Reported via The Japan Times 2024-10-11.">4</a></sup></p>
@@ -922,7 +959,7 @@
 
         <div class="appraise-item">
           <h3>Read the evidence with care</h3>
-          <p>The headline prevalence figures are the weakest link. They come from a survey reported in a two-page editorial whose author leads the advocacy body campaigning for these reforms &mdash; credible and PubMed-indexed, and consistent with national reporting on overwork, but with no published sample size or methodology, so not a peer-reviewed probability sample. They should be cited as &#9888; as-reported and treated as directional. The wider Japanese evidence base is genuinely thin: no probability-sample prevalence study of this workforce exists, only a small, recent performance-anxiety literature.<sup class="cite"><a href="#jp-src-9" data-src="evidence" data-tip="No pan-Japan probability prevalence study located; small recent MPA literature only (Takagi et al. 2026): PubMed + web, Rule 4.">9</a></sup> The legal and policy facts (the Act's provisions, dates, enforcement record, and the 2021 insurance change) are firm and government-sourced.<sup class="cite"><a href="#jp-src-2" data-src="freelance-act" data-tip="Legal/policy facts are firm and government-sourced: 政府広報オンライン + JFTC + METI/中小企業庁 statute explainer.">2</a></sup></p>
+          <p>The headline prevalence figures are the weakest link. They come from a survey reported in a two-page editorial whose author leads the advocacy body campaigning for these reforms &mdash; credible and PubMed-indexed, and consistent with national reporting on overwork, but with no published sample size or methodology, so not a peer-reviewed probability sample. They are &#10003; sourced (secondary source: the Morisaki editorial) but should be treated as directional, not precise. The wider Japanese evidence base is genuinely thin: no probability-sample prevalence study of this workforce exists, only a small, recent performance-anxiety literature.<sup class="cite"><a href="#jp-src-9" data-src="evidence" data-tip="No pan-Japan probability prevalence study located; small recent MPA literature only (Takagi et al. 2026): PubMed + web, Rule 4.">9</a></sup> The legal and policy facts (the Act's provisions, dates, enforcement record, and the 2021 insurance change) are firm and government-sourced.<sup class="cite"><a href="#jp-src-2" data-src="freelance-act" data-tip="Legal/policy facts are firm and government-sourced: 政府広報オンライン + JFTC + METI/中小企業庁 statute explainer.">2</a></sup></p>
         </div>
 
         <div class="verdict">
@@ -999,47 +1036,47 @@
                 <tr>
                   <td>Morisaki M, "Health and safety situation of arts and entertainment workers in Japan," <em>Industrial Health</em> 2023;61(6):393&ndash;394 (PMID 38057095)</td>
                   <td>PubMed/PMC full text (re-verified)</td>
-                  <td>&#10003; Verified (PubMed-indexed) for policy/insurance facts; &#9888; as-reported for survey prevalence figures (no published n/method)</td>
+                  <td>&#10003; Sourced (PubMed-indexed) for policy/insurance facts; &#10003; Sourced for survey prevalence figures (secondary source: this Morisaki editorial) &mdash; directional, no published n/method</td>
                 </tr>
                 <tr>
                   <td>Freelance Act &mdash; &#25919;&#24220;&#24195;&#22577;&#12458;&#12531;&#12521;&#12452;&#12531;; JFTC; METI/&#20013;&#23567;&#20225;&#26989;&#24193; statute explainer</td>
                   <td>WebSearch (government + legal primary)</td>
-                  <td>&#10003; Verified (provisions, scope, 2024-11-01 date, JFTC/MHLW split, up-to-&yen;500,000 penalty)</td>
+                  <td>&#10003; Sourced (provisions, scope, 2024-11-01 date, JFTC/MHLW split, up-to-&yen;500,000 penalty)</td>
                 </tr>
                 <tr>
                   <td>Freelance Act enforcement &mdash; JFTC recommendation re Shogakukan (17 Jun 2025); 128 broadcasting/advertising guidance actions (Dec 2025)</td>
                   <td>WebSearch (JFTC press releases; corroborated by two independent agents)</td>
-                  <td>&#10003; Verified (first recommendation + guidance waves in creative sectors)</td>
+                  <td>&#10003; Sourced (first recommendation + guidance waves in creative sectors)</td>
                 </tr>
                 <tr>
                   <td>&#21172;&#28797; special enrollment &mdash; &#33464;&#33021;&#38306;&#20418;&#20316;&#26989;&#24467;&#20107;&#32773; added 1 Apr 2021; all-freelancer expansion 1 Nov 2024 (~2.7M eligible)</td>
                   <td>WebSearch (MHLW primary)</td>
-                  <td>&#10003; Verified (dates and scope)</td>
+                  <td>&#10003; Sourced (dates and scope)</td>
                 </tr>
                 <tr>
                   <td>&#25991;&#21270;&#24193; COVID arts support (&#32153;&#32154;&#25903;&#25588;&#20107;&#26989; &asymp;&yen;50.9bn; ARTS for the future! 1 &amp; 2)</td>
                   <td>WebSearch (bunka.go.jp primary)</td>
-                  <td>&#10003; Verified (existence/scope/budget); AFF totals not fully reconciled</td>
+                  <td>&#10003; Sourced (existence/scope/budget); AFF totals not fully reconciled</td>
                 </tr>
                 <tr>
                   <td>&#25991;&#21270;&#24193; FY2026 budget request (&yen;200M dignified-environment line; &yen;76M legal-consultation desk)</td>
                   <td>WebSearch (bunka.go.jp PDF)</td>
-                  <td>&#9888; Budget <em>request</em>, not enacted</td>
+                  <td>&#10003; Sourced (bunka.go.jp PDF); budget <em>request</em>, not yet enacted</td>
                 </tr>
                 <tr>
                   <td>Overwork &mdash; MHLW <em>FY2024 Karoshi White Paper</em> (JNIOSH survey, Oct&ndash;Dec 2023, n=488), via <em>The Japan Times</em> 2024-10-11</td>
                   <td>WebSearch (MHLW primary + news)</td>
-                  <td>&#10003; Verified (46.2% technical / 40.7% stage-production at 60+ hrs/wk; &le;1 day off 38.5&ndash;60.4%)</td>
+                  <td>&#10003; Sourced (46.2% technical / 40.7% stage-production at 60+ hrs/wk; &le;1 day off 38.5&ndash;60.4%)</td>
                 </tr>
                 <tr>
                   <td>Power Harassment Prevention Act (&#25913;&#27491;&#21172;&#20685;&#26045;&#31574;&#32207;&#21512;&#25512;&#36914;&#27861;), 2020/2022; 2025 amendment</td>
                   <td>WebSearch (gov-online primary)</td>
-                  <td>&#10003; Verified (frames the Freelance Act harassment duty as an extension)</td>
+                  <td>&#10003; Sourced (frames the Freelance Act harassment duty as an extension)</td>
                 </tr>
                 <tr>
                   <td>2020 Cabinet Secretariat freelance survey (~4.62M)</td>
                   <td>WebSearch (cas.go.jp primary)</td>
-                  <td>&#10003; Verified for the 4.62M estimate; &#9888; 6.3%/218,250 as-reported via the editorial</td>
+                  <td>&#10003; Sourced for the 4.62M estimate; &#10003; Sourced for 6.3%/218,250 (secondary source: Morisaki 2023 editorial), not reconciled to this survey's tables</td>
                 </tr>
                 <tr>
                   <td>Japanese musician mental-health evidence base (Takagi et al. 2026 and the MPA literature)</td>
@@ -1054,9 +1091,9 @@
         <div class="content-block">
           <h3>Limitations</h3>
           <ol>
-            <li>The mental-health prevalence figures rest on an advocacy-body survey relayed in an editorial with no published sample size or method; treated as &#9888; directional.</li>
+            <li>The mental-health prevalence figures rest on an advocacy-body survey relayed in an editorial (secondary source) with no published sample size or method; &#10003; sourced but treated as directional.</li>
             <li>Japanese-language primary sources (the Freelance Act text; &#25991;&#21270;&#24193; program reports) were read via government summary pages, statute explainers, and secondary legal briefings, not the full statute in every case.</li>
-            <li>This is a policy <em>scan</em>, not an exhaustive review &mdash; Japan's general suicide-prevention framework (&#33258;&#27578;&#23550;&#31574;&#22522;&#26412;&#27861;, amended 2025, child/school-focused) and prefecture-level arts support were noted but not deep-read.</li>
+            <li>This is a policy <em>study</em>, not an exhaustive review &mdash; Japan's general suicide-prevention framework (&#33258;&#27578;&#23550;&#31574;&#22522;&#26412;&#27861;, amended 2025, child/school-focused) and prefecture-level arts support were noted but not deep-read.</li>
             <li>The harassment duty is framed here as an extension of the employee-side Power Harassment Prevention Act; the precise boundary between the two regimes for freelancers was not litigated in primary case law.</li>
             <li>The "6.3% artists" share and the 218,250 headcount are editorial/census figures inherited via the editorial, not independently reconciled to the underlying government tables.</li>
             <li>The &#25991;&#21270;&#24193; FY2026 lines are budget requests, not enacted.</li>
@@ -1073,29 +1110,38 @@
         <p class="page-label">Citation Registry</p>
         <h2 class="page-title">References</h2>
 
-        <p class="cite-help">Every claim-bearing figure and provision above carries a numbered citation &mdash; hover (desktop) or tap (mobile) a number to see the source; click to jump here. Legal and policy facts (incl. the 2025 enforcement record) are &#10003; verified across independent government sources; survey prevalence figures are &#9888; as-reported from a PubMed-indexed editorial; the evidence-base note is &#10067; (no probability study located, Rule 4). Entries follow APA 7th edition.</p>
+        <p class="cite-help">Every claim-bearing figure and provision above carries a numbered citation &mdash; hover (desktop) or tap (mobile) a number to see the source; click to jump here. <strong>Basis key:</strong> &#10003; Sourced = traceable to a source we link to (one source, primary or secondary, is enough); &#9888; Inferred = our own reasoning or estimate, with no source stating it; &#10067; No source = we looked and found none. A <em>secondary source</em> = news or press reporting a figure from elsewhere. Here, legal and policy facts (incl. the 2025 enforcement record) are &#10003; sourced across independent government sources; survey prevalence figures are &#10003; sourced via a secondary source (a PubMed-indexed editorial), directional; the evidence-base note is &#10067; (no probability study located, Rule 4). Entries follow APA 7th edition.</p>
 
         <div class="refs" id="refs-all" data-citation-registry="japan-all">
           <div class="refs-title">References</div>
           <ol>
-            <li id="jp-src-1" data-src="morisaki">Morisaki, M. (2023). Health and safety situation of arts and entertainment workers in Japan. <em>Industrial Health, 61</em>(6), 393&ndash;394. <a href="https://doi.org/10.2486/indhealth.61_600" target="_blank" rel="noopener">https://doi.org/10.2486/indhealth.61_600</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Verified, PubMed-indexed (PMID 38057095; PMCID PMC10731412); editorial by the President of Arts Workers Japan reporting the association's internal survey. Figures verified verbatim in the full text (218,250 performing-arts workers; 94.6% freelancers; 83% psychological attacks; 42.7% suicidal thoughts; harassment 93%/73%; the 2021 accident-insurance change; the consultation service). &#9888; Prevalence figures are as-reported with no published n/method; "6.3% artists" sits within a combined professional category.</li>
-            <li id="jp-src-2" data-src="freelance-act">Government Public Relations Office. (2024, August). <em>The Freelance Act takes effect on November 1, 2024</em> [&#29305;&#23450;&#21463;&#35351;&#20107;&#26989;&#32773;&#12395;&#20418;&#12427;&#21462;&#24341;&#12398;&#36969;&#27491;&#21270;&#31561;&#12395;&#38306;&#12377;&#12427;&#27861;&#24459;]. <a href="https://www.gov-online.go.jp/article/202408/entry-6301.html" target="_blank" rel="noopener">gov-online.go.jp</a>; Japan Fair Trade Commission. (n.d.). <em>Freelance Act special site</em>. Retrieved June 19, 2026, from <a href="https://www.jftc.go.jp/freelancelaw_2024/" target="_blank" rel="noopener">jftc.go.jp</a>; Small and Medium Enterprise Agency. (n.d.). <em>Freelance Act statute explainer</em> [PDF]. Retrieved June 19, 2026, from <a href="https://www.chusho.meti.go.jp/keiei/torihiki/download/freelance/law_02.pdf" target="_blank" rel="noopener">chusho.meti.go.jp</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Verified across independent government sources. Effective 2024-11-01; no-employee business operators incl. creative freelancers; duties tiered by contract length; transaction-fairness duties enforced by the JFTC, work-environment duties by the MHLW; fine up to &yen;500,000 (plus a civil fine up to &yen;100,000).</li>
-            <li id="jp-src-3" data-src="bunka">Agency for Cultural Affairs. (2020). <em>Continuation support project for cultural and artistic activities: Public offering</em> [&#25991;&#21270;&#33464;&#34899;&#27963;&#21205;&#12398;&#32153;&#32154;&#25903;&#25588;&#20107;&#26989;]. <a href="https://www.bunka.go.jp/shinsei_boshu/kobo/20200706.html" target="_blank" rel="noopener">bunka.go.jp</a>; Agency for Cultural Affairs. (2021). <em>ARTS for the future!</em> <a href="https://www.bunka.go.jp/shinsei_boshu/kobo/20210326_01.html" target="_blank" rel="noopener">bunka.go.jp</a>; Continuation Support Project portal. (n.d.). Retrieved June 19, 2026, from <a href="https://keizokushien.ntj.jac.go.jp/" target="_blank" rel="noopener">keizokushien.ntj.jac.go.jp</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Verified (existence/scope/budget); &#32153;&#32154;&#25903;&#25588;&#20107;&#26989; &asymp;&yen;50.9bn (individual tiers up to &yen;200,000 and &yen;1.5M); ARTS for the future! up to &yen;25M per organization. &#9888; The exact AFF1/AFF2 headline totals were not fully reconciled to a single Agency line item.</li>
-            <li id="jp-src-4" data-src="overwork">Ministry of Health, Labour and Welfare. (2024). <em>White paper on measures to prevent karoshi and other overwork-related deaths, FY2024</em> [&#20196;&#21644;6&#24180;&#29256;&#36942;&#21172;&#27515;&#31561;&#38450;&#27490;&#23550;&#31574;&#30333;&#26360;]. <a href="https://www.mhlw.go.jp/stf/newpage_44199.html" target="_blank" rel="noopener">mhlw.go.jp</a> (concise edition: <a href="https://www.mhlw.go.jp/content/11200000/001522035.pdf" target="_blank" rel="noopener">PDF</a>); <em>The Japan Times.</em> (2024, October 11). <em>Widespread overwork and stress found in Japan's arts and health sectors.</em> <a href="https://www.japantimes.co.jp/news/2024/10/11/japan/society/karoshi-entertainment-health-care-report/" target="_blank" rel="noopener">japantimes.co.jp</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Verified (MHLW primary). JNIOSH survey, Oct&ndash;Dec 2023, n=488: technical staff 46.2% and stage-direction/production staff 40.7% at 60+ hrs/week; &le;1 day off/week reported by 38.5&ndash;60.4% across roles. <em>The Japan Times</em> is secondary reportage.</li>
-            <li id="jp-src-5" data-src="enforcement">Japan Fair Trade Commission. (2025, June 17). <em>Recommendation to Shogakukan Inc. under the Freelance Act</em> [&#23567;&#23398;&#39208;&#26666;&#24335;&#20250;&#31038;&#12395;&#23550;&#12377;&#12427;&#21247;&#21578;&#12395;&#12388;&#12356;&#12390;]. <a href="https://www.jftc.go.jp/houdou/250617_fl_syogakukan.html" target="_blank" rel="noopener">jftc.go.jp</a>; Japan Fair Trade Commission. (2025, December 10). <em>Guidance to broadcasting and advertising businesses under the Freelance Act</em> [Press release]. <a href="https://www.jftc.go.jp/houdou/pressrelease/2025/dec/251210_fl_shido.html" target="_blank" rel="noopener">jftc.go.jp</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Verified across the parallel verification run. First recommendation under the Act (191 freelancers: writers, photographers, illustrators, hair-and-makeup; missing written terms + late payment); 128 guidance actions concentrated in broadcasting and advertising by December 2025. A parallel recommendation against Kobunsha was reported in the press (&#9888; secondary for Kobunsha specifically).</li>
-            <li id="jp-src-6" data-src="pawahara">Government Public Relations Office. (2025, October). <em>Customer-harassment and other measures under the revised Labour Policy Comprehensive Promotion Act</em> [&#25913;&#27491;&#21172;&#20685;&#26045;&#31574;&#32207;&#21512;&#25512;&#36914;&#27861;]. <a href="https://www.gov-online.go.jp/article/202510/entry-9434.html" target="_blank" rel="noopener">gov-online.go.jp</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Verified. The Power Harassment Prevention Act made power-harassment measures mandatory for large employers (2020) and SMEs (2022); a 2025 amendment adds customer-harassment duties effective October 2026. Establishes that the Freelance Act's harassment duty extends an existing employee-side regime to freelancers rather than creating a wholly new one.</li>
-            <li id="jp-src-7" data-src="rousai">Ministry of Health, Labour and Welfare. (n.d.). <em>Special enrollment in workers' accident compensation insurance</em> [&#21172;&#28797;&#20445;&#38522;&#12398;&#29305;&#21029;&#21152;&#20837;]. Retrieved June 19, 2026, from <a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/rousai/kanyu_r3.4.1_00010.html" target="_blank" rel="noopener">mhlw.go.jp</a>; Arts Workers Japan. (n.d.). <em>Business and services</em> [&#20107;&#26989;&#20869;&#23481;]. Retrieved June 19, 2026, from <a href="https://artsworkers.jp/business/" target="_blank" rel="noopener">artsworkers.jp</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Verified (MHLW + organizational primary). &#33464;&#33021;&#38306;&#20418;&#20316;&#26989;&#24467;&#20107;&#32773; added to special enrollment 1 April 2021; expanded to all commissioned freelancers (~2.7M estimated eligible) 1 November 2024; Arts Workers Japan operates an approved enrollment body.</li>
-            <li id="jp-src-8" data-src="cabinet">Cabinet Secretariat. (2020). <em>Survey on the actual conditions of freelancers</em> [&#12501;&#12522;&#12540;&#12521;&#12531;&#12473;&#23455;&#24907;&#35519;&#26619;&#32080;&#26524;] [PDF]. <a href="https://www.cas.go.jp/jp/seisaku/atarashii_sihonsyugi/freelance/dai1/siryou13.pdf" target="_blank" rel="noopener">cas.go.jp</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Verified for the ~4.62 million estimate (fielded February&ndash;March 2020; ~2.14M primary + ~2.48M side-job). &#9888; The "6.3% artists" share and the 218,250 headcount are reported via Morisaki (2023) [1], not independently reconciled to this survey's tables.</li>
-            <li id="jp-src-9" data-src="evidence">Takagi, S., Murai, A., &amp; Yoshie, M. (2026). Music-related background and experience as correlates of music performance anxiety among Japanese musicians. <em>Frontiers in Psychology, 17</em>, Article 1763814. <a href="https://doi.org/10.3389/fpsyg.2026.1763814" target="_blank" rel="noopener">https://doi.org/10.3389/fpsyg.2026.1763814</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Verified, PubMed-indexed (PMID 42183524); the largest Japanese-musician sample located (n=390) but measures music performance anxiety, not clinical prevalence, in a convenience sample. &#10067; No pan-Japan probability prevalence study of musicians' mental health located via PubMed + web (Rule 4); the Japanese peer-reviewed base is a small, recent MPA literature.</li>
-            <li id="jp-src-10" data-src="fy2026">Agency for Cultural Affairs. (2025). <em>FY2026 budget request</em> [&#20196;&#21644;8&#24180;&#24230;&#27010;&#31639;&#35201;&#27714;] [PDF]. <a href="https://www.bunka.go.jp/seisaku/bunka_gyosei/yosan/pdf/94263701_01.pdf" target="_blank" rel="noopener">bunka.go.jp</a> &mdash; Source &middot; Method &middot; Basis: &#9888; Budget <em>request</em>, not enacted. Proposes a &yen;200M program for "dignified creative environments" (harassment policies and consultation desks) and a &yen;76M legal-consultation desk for arts activity. Context: the Basic Act on Suicide Prevention (&#33258;&#27578;&#23550;&#31574;&#22522;&#26412;&#27861;) was amended in June 2025, but the amendment is child/school-focused, not arts-specific.</li>
+            <li id="jp-src-1" data-src="morisaki">Morisaki, M. (2023). Health and safety situation of arts and entertainment workers in Japan. <em>Industrial Health, 61</em>(6), 393&ndash;394. <a href="https://doi.org/10.2486/indhealth.61_600" target="_blank" rel="noopener">https://doi.org/10.2486/indhealth.61_600</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced, PubMed-indexed (PMID 38057095; PMCID PMC10731412); editorial by the President of Arts Workers Japan reporting the association's internal survey. Figures verified verbatim in the full text (218,250 performing-arts workers; 94.6% freelancers; 83% psychological attacks; 42.7% suicidal thoughts; harassment 93%/73%; the 2021 accident-insurance change; the consultation service). &#10003; Sourced for the prevalence figures (this editorial is the secondary source relaying the association's internal survey) &mdash; directional, with no published n/method; "6.3% artists" sits within a combined professional category.</li>
+            <li id="jp-src-2" data-src="freelance-act">Government Public Relations Office. (2024, August). <em>The Freelance Act takes effect on November 1, 2024</em> [&#29305;&#23450;&#21463;&#35351;&#20107;&#26989;&#32773;&#12395;&#20418;&#12427;&#21462;&#24341;&#12398;&#36969;&#27491;&#21270;&#31561;&#12395;&#38306;&#12377;&#12427;&#27861;&#24459;]. <a href="https://www.gov-online.go.jp/article/202408/entry-6301.html" target="_blank" rel="noopener">gov-online.go.jp</a>; Japan Fair Trade Commission. (n.d.). <em>Freelance Act special site</em>. Retrieved June 19, 2026, from <a href="https://www.jftc.go.jp/freelancelaw_2024/" target="_blank" rel="noopener">jftc.go.jp</a>; Small and Medium Enterprise Agency. (n.d.). <em>Freelance Act statute explainer</em> [PDF]. Retrieved June 19, 2026, from <a href="https://www.chusho.meti.go.jp/keiei/torihiki/download/freelance/law_02.pdf" target="_blank" rel="noopener">chusho.meti.go.jp</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced across independent government sources. Effective 2024-11-01; no-employee business operators incl. creative freelancers; duties tiered by contract length; transaction-fairness duties enforced by the JFTC, work-environment duties by the MHLW; fine up to &yen;500,000 (plus a civil fine up to &yen;100,000).</li>
+            <li id="jp-src-3" data-src="bunka">Agency for Cultural Affairs. (2020). <em>Continuation support project for cultural and artistic activities: Public offering</em> [&#25991;&#21270;&#33464;&#34899;&#27963;&#21205;&#12398;&#32153;&#32154;&#25903;&#25588;&#20107;&#26989;]. <a href="https://www.bunka.go.jp/shinsei_boshu/kobo/20200706.html" target="_blank" rel="noopener">bunka.go.jp</a>; Agency for Cultural Affairs. (2021). <em>ARTS for the future!</em> <a href="https://www.bunka.go.jp/shinsei_boshu/kobo/20210326_01.html" target="_blank" rel="noopener">bunka.go.jp</a>; Continuation Support Project portal. (n.d.). Retrieved June 19, 2026, from <a href="https://keizokushien.ntj.jac.go.jp/" target="_blank" rel="noopener">keizokushien.ntj.jac.go.jp</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (existence/scope/budget); &#32153;&#32154;&#25903;&#25588;&#20107;&#26989; &asymp;&yen;50.9bn (individual tiers up to &yen;200,000 and &yen;1.5M); ARTS for the future! up to &yen;25M per organization. &#9888; Inferred: the exact AFF1/AFF2 headline totals are our own figures &mdash; we could not reconcile them to a single official Agency line item.</li>
+            <li id="jp-src-4" data-src="overwork">Ministry of Health, Labour and Welfare. (2024). <em>White paper on measures to prevent karoshi and other overwork-related deaths, FY2024</em> [&#20196;&#21644;6&#24180;&#29256;&#36942;&#21172;&#27515;&#31561;&#38450;&#27490;&#23550;&#31574;&#30333;&#26360;]. <a href="https://www.mhlw.go.jp/stf/newpage_44199.html" target="_blank" rel="noopener">mhlw.go.jp</a> (concise edition: <a href="https://www.mhlw.go.jp/content/11200000/001522035.pdf" target="_blank" rel="noopener">PDF</a>); <em>The Japan Times.</em> (2024, October 11). <em>Widespread overwork and stress found in Japan's arts and health sectors.</em> <a href="https://www.japantimes.co.jp/news/2024/10/11/japan/society/karoshi-entertainment-health-care-report/" target="_blank" rel="noopener">japantimes.co.jp</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (MHLW primary). JNIOSH survey, Oct&ndash;Dec 2023, n=488: technical staff 46.2% and stage-direction/production staff 40.7% at 60+ hrs/week; &le;1 day off/week reported by 38.5&ndash;60.4% across roles. <em>The Japan Times</em> is secondary reportage.</li>
+            <li id="jp-src-5" data-src="enforcement">Japan Fair Trade Commission. (2025, June 17). <em>Recommendation to Shogakukan Inc. under the Freelance Act</em> [&#23567;&#23398;&#39208;&#26666;&#24335;&#20250;&#31038;&#12395;&#23550;&#12377;&#12427;&#21247;&#21578;&#12395;&#12388;&#12356;&#12390;]. <a href="https://www.jftc.go.jp/houdou/250617_fl_syogakukan.html" target="_blank" rel="noopener">jftc.go.jp</a>; Japan Fair Trade Commission. (2025, December 10). <em>Guidance to broadcasting and advertising businesses under the Freelance Act</em> [Press release]. <a href="https://www.jftc.go.jp/houdou/pressrelease/2025/dec/251210_fl_shido.html" target="_blank" rel="noopener">jftc.go.jp</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced across the parallel verification run. First recommendation under the Act (191 freelancers: writers, photographers, illustrators, hair-and-makeup; missing written terms + late payment); 128 guidance actions concentrated in broadcasting and advertising by December 2025. A parallel recommendation against Kobunsha is &#10003; sourced for Kobunsha specifically via a secondary source: press reporting.</li>
+            <li id="jp-src-6" data-src="pawahara">Government Public Relations Office. (2025, October). <em>Customer-harassment and other measures under the revised Labour Policy Comprehensive Promotion Act</em> [&#25913;&#27491;&#21172;&#20685;&#26045;&#31574;&#32207;&#21512;&#25512;&#36914;&#27861;]. <a href="https://www.gov-online.go.jp/article/202510/entry-9434.html" target="_blank" rel="noopener">gov-online.go.jp</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced. The Power Harassment Prevention Act made power-harassment measures mandatory for large employers (2020) and SMEs (2022); a 2025 amendment adds customer-harassment duties effective October 2026. Establishes that the Freelance Act's harassment duty extends an existing employee-side regime to freelancers rather than creating a wholly new one.</li>
+            <li id="jp-src-7" data-src="rousai">Ministry of Health, Labour and Welfare. (n.d.). <em>Special enrollment in workers' accident compensation insurance</em> [&#21172;&#28797;&#20445;&#38522;&#12398;&#29305;&#21029;&#21152;&#20837;]. Retrieved June 19, 2026, from <a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/rousai/kanyu_r3.4.1_00010.html" target="_blank" rel="noopener">mhlw.go.jp</a>; Arts Workers Japan. (n.d.). <em>Business and services</em> [&#20107;&#26989;&#20869;&#23481;]. Retrieved June 19, 2026, from <a href="https://artsworkers.jp/business/" target="_blank" rel="noopener">artsworkers.jp</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (MHLW + organizational primary). &#33464;&#33021;&#38306;&#20418;&#20316;&#26989;&#24467;&#20107;&#32773; added to special enrollment 1 April 2021; expanded to all commissioned freelancers (~2.7M estimated eligible) 1 November 2024; Arts Workers Japan operates an approved enrollment body.</li>
+            <li id="jp-src-8" data-src="cabinet">Cabinet Secretariat. (2020). <em>Survey on the actual conditions of freelancers</em> [&#12501;&#12522;&#12540;&#12521;&#12531;&#12473;&#23455;&#24907;&#35519;&#26619;&#32080;&#26524;] [PDF]. <a href="https://www.cas.go.jp/jp/seisaku/atarashii_sihonsyugi/freelance/dai1/siryou13.pdf" target="_blank" rel="noopener">cas.go.jp</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced for the ~4.62 million estimate (fielded February&ndash;March 2020; ~2.14M primary + ~2.48M side-job). &#10003; Sourced for the "6.3% artists" share and the 218,250 headcount via a secondary source: Morisaki (2023) [1] &mdash; not independently reconciled to this survey's tables.</li>
+            <li id="jp-src-9" data-src="evidence">Takagi, S., Murai, A., &amp; Yoshie, M. (2026). Music-related background and experience as correlates of music performance anxiety among Japanese musicians. <em>Frontiers in Psychology, 17</em>, Article 1763814. <a href="https://doi.org/10.3389/fpsyg.2026.1763814" target="_blank" rel="noopener">https://doi.org/10.3389/fpsyg.2026.1763814</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced, PubMed-indexed (PMID 42183524); the largest Japanese-musician sample located (n=390) but measures music performance anxiety, not clinical prevalence, in a convenience sample. &#10067; No pan-Japan probability prevalence study of musicians' mental health located via PubMed + web (Rule 4); the Japanese peer-reviewed base is a small, recent MPA literature.</li>
+            <li id="jp-src-10" data-src="fy2026">Agency for Cultural Affairs. (2025). <em>FY2026 budget request</em> [&#20196;&#21644;8&#24180;&#24230;&#27010;&#31639;&#35201;&#27714;] [PDF]. <a href="https://www.bunka.go.jp/seisaku/bunka_gyosei/yosan/pdf/94263701_01.pdf" target="_blank" rel="noopener">bunka.go.jp</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (bunka.go.jp PDF); a budget <em>request</em>, not yet enacted. Proposes a &yen;200M program for "dignified creative environments" (harassment policies and consultation desks) and a &yen;76M legal-consultation desk for arts activity. Context: the Basic Act on Suicide Prevention (&#33258;&#27578;&#23550;&#31574;&#22522;&#26412;&#27861;) was amended in June 2025, but the amendment is child/school-focused, not arts-specific.</li>
           </ol>
           <p class="refs-note">Convention: every claim-bearing marker carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above &mdash; machine-checkable before each deploy (§5.2 / §6 gate 1). Reference entries follow APA 7th edition (§5.4). The MD draft (<code>2026-06-18_Research_Policy_Japan.md</code>) carries the same citations as <code>[^1]</code>&ndash;<code>[^10]</code> footnotes and is the citation source of truth.</p>
         </div>
 
+        <nav class="related-block" aria-label="Related on this site">
+          <p class="related-title">Related</p>
+          <ul>
+            <li><a href="policy-study.html">&larr; Policy Study (hub &middot; all regions)</a></li>
+            <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+            <li><a href="org-study-arts-creators-union.html">Taiwan's nearest existing infrastructure &mdash; &#34269;&#21109;&#24037;&#26371; org study</a></li>
+          </ul>
+        </nav>
+
         <div class="source-info">
           <p><strong>Report:</strong> Research track &mdash; Policy Case Series No.001 (Japan) &middot; Music &amp; Mental Health NPO Research Project</p>
           <p><strong>As of:</strong> 2026-06-19 (rev.) &middot; Next region: Thailand</p>
-          <p><strong>Basis:</strong> &#10003; Verified for legal/policy facts incl. the 2025 enforcement record; &#9888; as-reported for survey prevalence figures; &#10067; thin peer-reviewed evidence base</p>
+          <p><strong>Basis:</strong> &#10003; Sourced for legal/policy facts incl. the 2025 enforcement record; &#10003; Sourced (secondary source: a PubMed-indexed editorial) for survey prevalence figures, directional; &#10067; No source for a probability prevalence study (thin peer-reviewed evidence base)</p>
         </div>
       </div>
     </div>
@@ -1107,10 +1153,12 @@
     var pages = document.querySelectorAll('.page');
     var nums = document.querySelectorAll('.page-num');
     var current = 0;
+    var RM = window.matchMedia('(prefers-reduced-motion: reduce)');
+    function scrollBehavior(){ return RM.matches ? 'auto' : 'smooth'; }
 
     function goTo(index) {
       if (index < 0 || index >= pages.length) return;
-      pages[index].scrollIntoView({ behavior: 'smooth' });
+      pages[index].scrollIntoView({ behavior: scrollBehavior() });
     }
 
     function nextPage() { goTo(current + 1); }
@@ -1152,7 +1200,7 @@
         var el = document.querySelector(id);
         if (!el) return;
         e.preventDefault();
-        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.scrollIntoView({ behavior: scrollBehavior(), block: 'center' });
         location.hash = id; // updates URL + fires :target highlight
       });
     });
@@ -1163,12 +1211,38 @@
     });
   </script>
 
+  <script>
+  /* Scroll-reveal — R3.2 paged-safe (observes within .pages-container; per-page anchors only) */
+  (function(){
+    var root = document.querySelector('.pages-container');
+    if (!root) return;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = '.page-title, .part-divider, .page-label, .stat-strip, .method-table, .table-wrap, figure';
+    var nodes = Array.prototype.slice.call(root.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, idx = 0;
+        if (p){ var sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,5) * 60) + 'ms';
+        el.classList.add('in'); io.unobserve(el);
+      });
+    }, { root: root, threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
+
   <!-- nav scroll-state fix: transparent over hero, blurred bar once scrolled -->
   <style>
     nav.nav, .nav { transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease); border-bottom: 1px solid transparent; }
     nav.nav.scrolled, .nav.scrolled {
       right: 0;
-      background: rgba(244, 244, 245, 0.85);
+      background: rgba(244, 244, 245, 0.45);
       -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-light);

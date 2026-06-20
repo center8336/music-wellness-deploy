@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>藝創工會 / Arts Creators' Union · Case Study · MH&amp;W</title>
+  <title>藝創工會 / Arts Creators' Union · Org Study · MH&amp;W</title>
   <meta name="description" content="Taiwan's Arts Creators' Union (藝創工會) is the closest existing infrastructure for the music workforce — a partner, an organizing model, and an incumbent benchmark. What it does on occupational health and sexual-harassment prevention in 2025, where mental health is missing, and what a Taiwan music mental-health NPO should take.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
 
     :root {
       --black: #09090b;
@@ -41,8 +41,8 @@
       --bg-card-dark: var(--off-black);
       --border-light: rgba(0,0,0,0.07);
       --border-dark: rgba(255,255,255,0.1);
-      --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
-      --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
       --font-mono: 'Space Mono', 'Courier New', monospace;
       --font: var(--font-body);
       --text-hero: clamp(3.5rem, 8vw, 6.5rem);
@@ -55,20 +55,26 @@
       --ease: cubic-bezier(0.4, 0, 0.2, 1);
       --dur: 0.3s;
       --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
       --radius: 4px;
       --radius-lg: 6px;
       --max-w: 1100px;
-      --max-w-text: 720px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+    html, body { overflow-x: hidden; }
 
     body {
       font-family: var(--font);
       background: var(--bg-light);
       color: var(--black);
-      line-height: 1.6;
+      line-height: 1.7;
+      font-weight: 400;
+      font-optical-sizing: auto;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -105,7 +111,7 @@
       border-bottom: 1px solid transparent;
     }
     nav.nav.scrolled {
-      background: rgba(244, 244, 245, 0.85);
+      background: rgba(244, 244, 245, 0.45);
       -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-light);
@@ -125,7 +131,7 @@
     .nav-toggle.open span:nth-child(2) { opacity:0; }
     .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
     .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
-    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:0.5rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:0.2em; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
 
     /* ===== LAYOUT ===== */
     main {
@@ -166,11 +172,100 @@
       padding: 0.5rem 0.85rem; line-height: 1.5;
     }
 
+    /* ===== TWO-LINE COVER (R2.1, 2026-06-20) — width:100% inside main (no 100vw breakout → no x-overflow) ===== */
+    .cover {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;                /* clips the wash */
+      padding: 0 2rem;
+    }
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%,
+        var(--signal-glow) 0%,
+        rgba(102,103,171,0.06) 38%,
+        rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
+    }
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 1280px);
+    }
+    /* CJK hero (藝創工會): drop text-transform:uppercase (no-op on Han); line-height 0.95; slight positive tracking */
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 8vw, 6.5rem);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      color: var(--black);
+      margin: 0;
+      text-wrap: balance;
+    }
+    .cover-line {
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--purple-deep);
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
+    }
+    .cover-hint {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
+    }
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
+    }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-line  { animation-delay: 0.22s; }
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .cover-wash,
+      .cover-hint,
+      .cover-inner > * { animation: none; opacity: 1; transform: none; }
+    }
+    @media (max-width: 768px) {
+      .cover { padding: 0 1.25rem; }
+      .cover-title { font-size: clamp(1.7rem, 7.3vw, 2.4rem); }
+      .cover-line  { font-size: clamp(0.72rem, 3.2vw, 0.95rem); letter-spacing: 0.18em; }
+    }
+
     /* ===== TYPE ===== */
     h2 {
       font-family: var(--font-display); font-size: var(--text-h2);
       font-weight: 700; line-height: 1.1; color: var(--black);
-      margin-bottom: 1.25rem; letter-spacing: -0.01em;
+      margin-bottom: 1.25rem; letter-spacing: -0.01em; text-wrap: balance;
     }
     h3 {
       font-family: var(--font-display); font-size: var(--text-h3);
@@ -207,7 +302,7 @@
     .stat-item:last-child { border-right: none; }
     .stat-num {
       font-family: var(--font-display); font-size: 2rem; font-weight: 700;
-      color: var(--signal); line-height: 1;
+      color: var(--signal); line-height: 1; font-variant-numeric: tabular-nums;
     }
     .stat-label {
       font-family: var(--font-mono); font-size: var(--text-xs);
@@ -246,7 +341,7 @@
     .table-wrap { overflow-x: auto; margin: 1.25rem 0; border-radius: var(--radius-lg); border: 1px solid var(--border-light); }
     table { width: 100%; border-collapse: collapse; background: var(--bg-card); font-size: var(--text-sm); }
     caption { text-align: left; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); padding: 0.75rem 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
-    th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border-light); vertical-align: top; }
+    th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border-light); vertical-align: top; font-variant-numeric: tabular-nums; }
     thead th { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--graphite); background: var(--snow); }
     tbody tr:last-child td { border-bottom: none; }
     td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
@@ -345,7 +440,24 @@
       .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } nav.nav { transition: none; } }
+
+    /* ===== Scroll-reveal (R3.2 craft pass) ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ===== Related block (no dead-ends, R3.2) ===== */
+    .related-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-light); }
+    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--grey); margin-bottom: 0.6rem; }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a { font-family: var(--font-body); font-size: var(--text-sm); color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
   </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
 </head>
 <body>
   <a href="#main" class="skip-nav">Skip to content</a>
@@ -357,35 +469,38 @@
       </button>
       <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
     </div>
-    <div class="nav-links">
+        <div class="nav-links">
       <a href="index.html">HOME</a>
-      <a href="plan.html">PLAN</a>
       <a href="report-global-npo-landscape.html">ORGS MAP</a>
-      <a href="case-study.html" class="current">CASE STUDY</a>
+      <a href="org-study.html" class="current" aria-current="page">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
       <a href="research.html">RESEARCH</a>
-      <a href="insight-2026-06-18.html">INSIGHT</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
     </div>
   </nav>
 
   <main id="main">
-    <!-- HERO -->
-    <section class="hero">
-      <div class="eyebrow">2026-06-19 · CASE STUDY · v1.0</div>
-      <h1><span class="han">藝創工會</span>Arts Creators'<br>Union</h1>
-      <p class="subtitle">臺北市藝術創作者職業工會 — Taiwan's occupational trade union for arts creators, including music and sound-art workers. The closest existing infrastructure for the music workforce: a partner, an organizing model, and an incumbent benchmark. What it does on occupational health and harassment in 2025 — and the music-specific mental-health layer it does not.</p>
-      <div class="basis-badge">✓ Sourced to the union's own charter, fund rules and 2024 survey, cross-checked against 苦勞網 / NCAF / ARTouch / 行政院 / 勞動部 · accessed 2026-06-19</div>
+    <!-- COVER -->
+    <section class="cover">
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="cover-inner">
+        <h1 class="cover-title">藝創工會</h1>
+        <p class="cover-line">Org Study · Est. 2011</p>
+      </div>
+      <span class="cover-hint" aria-hidden="true">↓ Scroll</span>
     </section>
 
     <!-- MODEL CALLOUT -->
     <div class="model-callout">
       <h2>Why this case is different</h2>
-      <p><a href="case-study-backline.html">Backline</a>, MusiCares, and <a href="case-study-music-minds-matter.html">Music Minds Matter</a> are all mental-health organizations. <strong>藝創工會 is not — it is a trade union of self-employed arts creators, and it is the closest thing Taiwan has to organized infrastructure for the music workforce.</strong> It is read here as three things at once: a <strong>partner</strong> (the natural Allies-model anchor for a Taiwan NPO), an <strong>organizing model</strong> (how a precarious creative workforce builds dues, funds, contracts, and trust — and reaches financial self-sufficiency), and an <strong>incumbent benchmark</strong> (what it delivers on occupational health and harassment in 2025 — and where mental health is, and is not, present). The finding in one line: Taiwan is not an institutional void, but the <em>music-specific mental-health layer is genuinely missing</em> — and this union is the body to build it with.</p>
+      <p><a href="org-study-backline.html">Backline</a>, MusiCares, and <a href="org-study-music-minds-matter.html">Music Minds Matter</a> are all mental-health organizations. <strong>藝創工會 is not — it is a trade union of self-employed arts creators, and it is the closest thing Taiwan has to organized infrastructure for the music workforce.</strong> It is read here as three things at once: a <strong>partner</strong> (the natural Allies-model anchor for a Taiwan NPO), an <strong>organizing model</strong> (how a precarious creative workforce builds dues, funds, contracts, and trust — and reaches financial self-sufficiency), and an <strong>incumbent benchmark</strong> (what it delivers on occupational health and harassment in 2025 — and where mental health is, and is not, present). The finding in one line: Taiwan is not an institutional void, but the <em>music-specific mental-health layer is genuinely missing</em> — and this union is the body to build it with.</p>
     </div>
 
     <!-- 1. PROFILE -->
     <section>
       <div class="section-label">01 — Profile</div>
-      <h2>A union that made art creation an occupation<sup class="cite"><a href="#arc-src-1" data-src="identity" data-tip="Identity, eligibility, leadership, dues, board structure: 藝創工會 工會簡介 / 組織章程 (Art. 6, 13–17, 33) / 理監事資料. Accessed 2026-06-19. Current chair single-source.">1</a></sup></h2>
+      <h2>A union that made art creation an occupation<sup class="cite"><a href="#arc-src-1" data-src="identity" data-tip="Identity, eligibility, leadership, dues, board structure: 藝創工會 工會簡介 / 組織章程 (Art. 6, 13–17, 33) / 理監事資料. Accessed 2026-06-19. Current chair: ✅ Sourced — union's own 理監事 page (primary source).">1</a></sup></h2>
       <p>藝創工會 (the Taipei City Arts Creators' Occupational Trade Union) is a labour union — not an NPO or foundation — for self-employed creative workers across the arts. It organizes the precise population the global research base flags as most exposed to occupational and psychological risk: freelance, project-based, irregular-income creators, including <strong>musicians and sound artists</strong>.</p>
 
       <div class="table-wrap">
@@ -397,7 +512,7 @@
             <tr><th scope="row">Founded</th><td>2011-02-19 (charter adopted at the 1st members' assembly)</td></tr>
             <tr><th scope="row">Competent authority</th><td>臺北市政府勞動局 (Taipei City) — structural; exact 立案字號 not public</td></tr>
             <tr><th scope="row">Eligibility</th><td>Taipei creators in performing arts (music, theatre, dance, opera), theatre design, visual / conceptual / action art, sound art, art film, curation / criticism, arts administration · joining age 16+</td></tr>
-            <tr><th scope="row">Current chair (9th term)</th><td>蔡雅庭 <em>(union-self-reported)</em> · founding chair 湯皇珍 · 8th chair 張文駿 (張吉米)</td></tr>
+            <tr><th scope="row">Current chair (9th term)</th><td>蔡雅庭 <em>(✅ Sourced — union's own 理監事 page)</em> · founding chair 湯皇珍 · 8th chair 張文駿 (張吉米)</td></tr>
             <tr><th scope="row">Board</th><td>9 directors + 3 alternates, 3 supervisors + 1 alternate — all unpaid; chair re-electable once</td></tr>
             <tr><th scope="row">Membership scale</th><td>Not published</td></tr>
             <tr><th scope="row">Dues</th><td>NT$1,000 joining fee + NT$150/month (charter); insurance premiums billed separately</td></tr>
@@ -428,7 +543,7 @@
         <div class="pillar">
           <div class="pn">PILLAR 01</div>
           <h3>It monetizes a statutory function</h3>
-          <p>Self-employed workers enrol in 勞健保 and (since 2022) 職災保險 <em>through an occupational union</em>. Membership is therefore practically necessary, not just ideological — a durable, recurring base a pure advocacy NPO lacks.<sup class="cite"><a href="#arc-src-3" data-src="ncaf-selfsuff" data-tip="Union as social-insurance enrolment vehicle + dues-funded self-sufficiency: NCAF 線上誌 interview (2024) + union site. ✅ Verified.">3</a></sup></p>
+          <p>Self-employed workers enrol in 勞健保 and (since 2022) 職災保險 <em>through an occupational union</em>. Membership is therefore practically necessary, not just ideological — a durable, recurring base a pure advocacy NPO lacks.<sup class="cite"><a href="#arc-src-3" data-src="ncaf-selfsuff" data-tip="Union as social-insurance enrolment vehicle + dues-funded self-sufficiency: NCAF 線上誌 interview (2024) + union site. ✅ Sourced.">3</a></sup></p>
         </div>
         <div class="pillar">
           <div class="pn">PILLAR 02</div>
@@ -467,7 +582,7 @@
       <h3>Sexual harassment / 性平 — a referral programme, not an adjudicating body<sup class="cite"><a href="#arc-src-7" data-src="gender-equity" data-tip="性平專區: 2023 #MeToo framing; training (台灣性別平等教育協會), legal consult (張詒荌), counselling (勵馨蒲公英), hotline signposting; no internal investigating committee.">7</a></sup></h3>
       <p>The 性平專區 is explicitly framed as a response to Taiwan's 2023 arts-sector #MeToo wave. The union provides prevention <strong>training</strong> (with 台灣性別平等教育協會), <strong>legal consultation</strong> via a named lawyer (open to harassment parties including non-members), <strong>psychological counselling</strong> through the 勵馨基金會 蒲公英 sexual-assault centre (union pays the fee), and <strong>signposting</strong> to government hotlines. What it does <em>not</em> have is an internal investigating committee or complaint window — it brokers external lawyers, counsellors, and trainers rather than adjudicating cases. It has argued that self-employed creative workers still fall through the gaps of even the amended <strong>2024 性平三法</strong>, and pushed for a Korea-style dedicated "藝術人保護官" (arts protection officer).</p>
 
-      <h3>The survey series — Taiwan's best labour data on arts workers<sup class="cite"><a href="#arc-src-8" data-src="surveys" data-tip="調查報告: 2019 overwork → 2024《性別平等與勞動情況調查》 n=944, NCAF-sponsored, 67% female. n ✅ verified against PDF; stress percentages ⚠️ not chart-verified.">8</a></sup></h3>
+      <h3>The survey series — Taiwan's best labour data on arts workers<sup class="cite"><a href="#arc-src-8" data-src="surveys" data-tip="調查報告: 2019 overwork → 2024《性別平等與勞動情況調查》 n=944, NCAF-sponsored, 67% female. n ✅ Sourced — checked against the survey PDF; stress percentages ✅ Sourced (secondary source: press summaries) — secondary-quoted, not chart-verified.">8</a></sup></h3>
       <p>The 調查報告 section is, for this project, the union's most valuable asset: a longitudinal labour-data series on a population almost no one else measures — a 2019 overwork survey, 2022 and 2023 instalments, and the flagship <strong>2024《性別平等與勞動情況調查》(n=944</strong>, fielded June–July 2024, NCAF-sponsored, 67% female; n verified against the report PDF).</p>
 
       <div class="stat-strip">
@@ -476,7 +591,7 @@
         <div class="stat-item"><div class="stat-num">NT$35,718</div><div class="stat-label">avg monthly income (vs NT$48,043 national)</div></div>
         <div class="stat-item"><div class="stat-num">944</div><div class="stat-label">survey respondents, 2024</div></div>
       </div>
-      <p><strong>Mental health is treated qualitatively, not as a headline metric.</strong> The report lists harms of bullying and harassment as 焦慮 / 失眠 / 憂鬱 / PTSD and calls for accessible counselling, but publishes no clean measured MH-prevalence rate in its accessible materials; the widely-circulated "過半壓力超標 / 2成達建議就醫" lines appear in secondary write-ups and need chart-level verification before being cited as hard figures. The honest read: the union can field rigorous workforce surveys and has gestured at psychological strain — but <em>mental health has not yet been measured as its own outcome.</em></p>
+      <p><strong>Mental health is treated qualitatively, not as a headline metric.</strong> The report lists harms of bullying and harassment as 焦慮 / 失眠 / 憂鬱 / PTSD and calls for accessible counselling, but publishes no clean measured MH-prevalence rate in its accessible materials; the widely-circulated "過半壓力超標 / 2成達建議就醫" lines are sourced to press summaries (secondary source: press summaries) rather than the union's own chart, so they are reported here as secondary-quoted figures, not chart-verified hard numbers. The honest read: the union can field rigorous workforce surveys and has gestured at psychological strain — but <em>mental health has not yet been measured as its own outcome.</em></p>
 
       <div class="gap-grid">
         <div class="gap-col has">
@@ -564,28 +679,62 @@
     <section>
       <div class="section-label">09 — Methodology &amp; references</div>
       <h2>Basis</h2>
-      <p class="cite-help">Every claim-bearing element carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source; click to jump to the full reference. This is deliberately <em>not</em> a financial model: a Taiwan occupational union files no public IRS-990 equivalent, so the funding section reports published <em>rules</em> and labels every undisclosed balance rather than inventing one. The union's site (WordPress) rendered fully via WebFetch; consequential facts were cross-checked against independent sources (苦勞網, NCAF, ARTouch, 行政院, 勞動部). Flagged-uncertain items — the current chair, fund balances, membership count, 立案字號, and the secondary-quoted stress percentages — are marked ⚠️/❓ in text, not smoothed over.</p>
+      <p class="cite-help">Every claim-bearing element carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source; click to jump to the full reference. This is deliberately <em>not</em> a financial model: a Taiwan occupational union files no public IRS-990 equivalent, so the funding section reports published <em>rules</em> and labels every undisclosed balance rather than inventing one. The union's site (WordPress) rendered fully via WebFetch; consequential facts were cross-checked against independent sources (苦勞網, NCAF, ARTouch, 行政院, 勞動部). Items the project once flagged as uncertain are now graded by sourcing: the current chair is ✅ Sourced from the union's own 理監事 page (a primary source); the secondary-quoted stress percentages are ✅ Sourced from press summaries (secondary source); fund balances, membership count, and the exact 立案字號 are marked ❓ No source, as no public figure exists for them.</p>
 
       <div class="refs" id="refs-all" data-citation-registry="arc-all">
         <div class="refs-title">References</div>
         <ol>
-          <li id="arc-src-1" data-src="identity">Identity, eligibility, leadership, dues, board structure: 藝創工會. (n.d.). <a href="https://artcreator.tw/?page_id=9924" target="_blank" rel="noopener">工會簡介</a>; <a href="https://artcreator.tw/?page_id=2664" target="_blank" rel="noopener">組織章程</a> (Art. 6 eligibility; Art. 13–17 board; Art. 33 dues); <a href="https://artcreator.tw/?page_id=9920" target="_blank" rel="noopener">理監事資料</a>. Retrieved June 19, 2026. Current 9th-term chair 蔡雅庭 named on the 理監事 page only. <strong>Source · Method · Basis:</strong> union site · WebFetch · ✅ Verified (charter facts) / ⚠️ (current chair).</li>
-          <li id="arc-src-2" data-src="founding">Founding (2011-02-19) and leadership lineage: 藝創工會 charter and 理監事 page, corroborated by 苦勞網. (2011, February 18). <a href="https://www.coolloud.org.tw/" target="_blank" rel="noopener">[founding-eve notice]</a>; and 國家文化藝術基金會. (2024). <a href="https://mag.ncafroc.org.tw/article_detail?sid=930" target="_blank" rel="noopener">藝創工會專訪 [線上誌]</a> (names 8th-term chair 張文駿 / 張吉米). <strong>Source · Method · Basis:</strong> union site + 苦勞網 + NCAF · WebFetch / WebSearch · ✅ Verified (founding &amp; founding chair; two methods).</li>
-          <li id="arc-src-3" data-src="ncaf-selfsuff">Union as social-insurance enrolment vehicle, dues-funded self-sufficiency, and the 2024 decision not to re-apply for NCAF operational grants: 國家文化藝術基金會. (2024). <a href="https://mag.ncafroc.org.tw/article_detail?sid=930" target="_blank" rel="noopener">藝創工會專訪 [線上誌]</a> (held org-operations grant 2020–2023; chose not to re-apply in 2024 as 會費收入 covers operations; describes 權益 / 研究 / 預備 funds). <strong>Source · Method · Basis:</strong> NCAF interview + union site · WebFetch · ✅ Verified.</li>
-          <li id="arc-src-4" data-src="funds">Internal funds and published parameters: 藝創工會. (n.d.). <a href="https://artcreator.tw/?page_id=12556" target="_blank" rel="noopener">權益基金辦法</a> (est. 2020-07-25; funded by 1/3 of prior-year surplus; annual spend ≤70% of prior balance; hospitalisation NT$2,000; death NT$3,100; counselling subsidy NT$2,500 × 3/yr, ≤6 per 5 yrs, ≤15% of annual spend); <a href="https://artcreator.tw/?page_id=12554" target="_blank" rel="noopener">研究基金辦法</a> (est. 2024-05-19). Fund balances not published. <strong>Source · Method · Basis:</strong> union site · WebFetch · ✅ Verified (rules) / ❓ (balances).</li>
-          <li id="arc-src-5" data-src="counselling">Counselling subsidy as the operative mental-health benefit: 藝創工會. (n.d.). <a href="https://artcreator.tw/?page_id=11760" target="_blank" rel="noopener">會員權益基金 — 心理諮商補助</a> ("為維護本會會員心理健康"; NT$2,500/session; posted slot cap ~59 members, updated 2026-05-29). <strong>Source · Method · Basis:</strong> union site · WebFetch · ✅ Verified.</li>
-          <li id="arc-src-6" data-src="osh">Occupational safety &amp; health framing: 藝創工會. (n.d.). <a href="https://artcreator.tw/?page_id=11929" target="_blank" rel="noopener">職業安全衛生指引</a> — a directory of nine external government OSH PDFs; hazards physical; the only MH-adjacent phrase ("fatigue management") is borrowed from a government night-work guide; psychological hazard is not a named category. <strong>Source · Method · Basis:</strong> union site · WebFetch · ✅ Verified (incl. the MH-absence finding).</li>
-          <li id="arc-src-7" data-src="gender-equity">性平 / sexual-harassment programme: 藝創工會. (n.d.). <a href="https://artcreator.tw/?page_id=10997" target="_blank" rel="noopener">性平專區</a> — 2023 #MeToo framing; prevention training with 台灣性別平等教育協會; legal consultation via a named lawyer (open to non-members); counselling via 勵馨基金會 蒲公英 centre (union pays fee); government-hotline signposting; no internal investigating committee. 性平三法 in force 2024-03-08 (行政院; 報導者). <strong>Source · Method · Basis:</strong> union site + news · WebFetch / WebSearch · ✅ Verified.</li>
-          <li id="arc-src-8" data-src="surveys">Survey series and 2024 figures: 藝創工會. (n.d.). <a href="https://artcreator.tw/?page_id=10707" target="_blank" rel="noopener">調查報告</a>; 2024《性別平等與勞動情況調查》(n=944; fielded June–July 2024; NCAF-sponsored; 67% female — n verified against the report PDF). Reported figures: verbal sexual harassment witnessed/heard 87.1%; unwanted physical touch 27.3%; hostile-environment 22.3% (p.73); average monthly income NT$35,718 vs national NT$48,043; 182 reported no complaint channel. Mental-health content is qualitative; secondary-quoted stress percentages are not chart-verified and are excluded from the headline figures. <strong>Source · Method · Basis:</strong> union report + summary articles · WebFetch · ✅ Verified (n &amp; harassment figures) / ⚠️ (stress percentages).</li>
-          <li id="arc-src-9" data-src="contracts-insurance">Model contracts and occupational-injury enrolment: 藝創工會. (n.d.). <a href="https://artcreator.tw/?page_id=10034" target="_blank" rel="noopener">合約範本</a> (visual ~13, performing 11, music 3, criticism; versions 2024–2025). Occupational-injury insurance via the 《勞工職業災害保險及保護法》 (effective 2022-05-01; self-employed enrol via occupational union — 勞動部 / <a href="https://www.bli.gov.tw/" target="_blank" rel="noopener">勞工保險局</a>) and the 《文化藝術獎助及促進條例》 §9–§10 (文化部); union 2026-01-01 Tier-1 insured salary NT$29,500. No discrete full-subsidy "arts insurance product" confirmed. <strong>Source · Method · Basis:</strong> union site + 勞動部 / 文化部 statutes · WebFetch / WebSearch · ✅ Verified (mechanism) / ❓ (single product).</li>
-          <li id="arc-src-10" data-src="advocacy">Advocacy record: 藝創工會. (n.d.). <a href="https://artcreator.tw/?page_id=10992" target="_blank" rel="noopener">記者會/新聞稿/聲明</a> and <a href="https://artcreator.tw/?page_id=10996" target="_blank" rel="noopener">媒體專題報導精選</a> — 2018 administrative-litigation win; 2020–2021 occupational-injury-insurance advocacy; 2022 fee-rate-schedule expansion; 2023 copyright royalty +25%; 2022–2023 harassment-case support; the 2023-07-18 Legislative Yuan press conference (with 立委 王婉諭 and an arts coalition; four demands incl. a Korea-style 「藝術人保護官」; represented by 張吉米 / 張文駿) corroborated by ARTouch (2023); 2025-08 "身心自主" statement. <strong>Source · Method · Basis:</strong> union site + ARTouch · WebFetch / WebSearch · ✅ Verified (key items, two methods).</li>
-          <li id="arc-src-11" data-src="governance">Governance: 藝創工會. (n.d.). <a href="https://artcreator.tw/?page_id=2664" target="_blank" rel="noopener">組織章程</a> (Art. 13–17: 9 directors + 3 alternates, 3 supervisors + 1 alternate, unpaid; chair re-electable once) and <a href="https://artcreator.tw/?page_id=12558" target="_blank" rel="noopener">選舉罷免辦法</a> (Art. 7 gender quota). <strong>Source · Method · Basis:</strong> union site · WebFetch · ✅ Verified.</li>
-          <li id="arc-src-12" data-src="mh-policy">National mental-health context: 行政院. (2024). <a href="https://www.ey.gov.tw/" target="_blank" rel="noopener">全民心理健康韌性計畫</a> — NT$56.3億 (NT$5.63B), 2025–2030 (民國114–119), 13-ministry (incl. 文化部), under 健康臺灣 and the amended 精神衛生法. Cross-reference: <em>Taiwan Opportunity</em> wiki article. <strong>Source · Method · Basis:</strong> 行政院 · WebSearch · ✅ Verified.</li>
+          <li id="arc-src-1" data-src="identity">Identity, eligibility, leadership, dues, board structure: 藝創工會. (n.d.). <a href="https://artcreator.tw/?page_id=9924" target="_blank" rel="noopener">工會簡介</a>; <a href="https://artcreator.tw/?page_id=2664" target="_blank" rel="noopener">組織章程</a> (Art. 6 eligibility; Art. 13–17 board; Art. 33 dues); <a href="https://artcreator.tw/?page_id=9920" target="_blank" rel="noopener">理監事資料</a>. Retrieved June 19, 2026. Current 9th-term chair 蔡雅庭 named on the union's own 理監事 page (a primary source). <strong>Source · Method · Basis:</strong> union site · WebFetch · ✅ Sourced (charter facts and current chair).</li>
+          <li id="arc-src-2" data-src="founding">Founding (2011-02-19) and leadership lineage: 藝創工會 charter and 理監事 page, corroborated by 苦勞網. (2011, February 18). <a href="https://www.coolloud.org.tw/" target="_blank" rel="noopener">[founding-eve notice]</a>; and 國家文化藝術基金會. (2024). <a href="https://mag.ncafroc.org.tw/article_detail?sid=930" target="_blank" rel="noopener">藝創工會專訪 [線上誌]</a> (names 8th-term chair 張文駿 / 張吉米). <strong>Source · Method · Basis:</strong> union site + 苦勞網 + NCAF · WebFetch / WebSearch · ✅ Sourced (founding &amp; founding chair; two methods).</li>
+          <li id="arc-src-3" data-src="ncaf-selfsuff">Union as social-insurance enrolment vehicle, dues-funded self-sufficiency, and the 2024 decision not to re-apply for NCAF operational grants: 國家文化藝術基金會. (2024). <a href="https://mag.ncafroc.org.tw/article_detail?sid=930" target="_blank" rel="noopener">藝創工會專訪 [線上誌]</a> (held org-operations grant 2020–2023; chose not to re-apply in 2024 as 會費收入 covers operations; describes 權益 / 研究 / 預備 funds). <strong>Source · Method · Basis:</strong> NCAF interview + union site · WebFetch · ✅ Sourced.</li>
+          <li id="arc-src-4" data-src="funds">Internal funds and published parameters: 藝創工會. (n.d.). <a href="https://artcreator.tw/?page_id=12556" target="_blank" rel="noopener">權益基金辦法</a> (est. 2020-07-25; funded by 1/3 of prior-year surplus; annual spend ≤70% of prior balance; hospitalisation NT$2,000; death NT$3,100; counselling subsidy NT$2,500 × 3/yr, ≤6 per 5 yrs, ≤15% of annual spend); <a href="https://artcreator.tw/?page_id=12554" target="_blank" rel="noopener">研究基金辦法</a> (est. 2024-05-19). Fund balances not published. <strong>Source · Method · Basis:</strong> union site · WebFetch · ✅ Sourced (rules) / ❓ (balances).</li>
+          <li id="arc-src-5" data-src="counselling">Counselling subsidy as the operative mental-health benefit: 藝創工會. (n.d.). <a href="https://artcreator.tw/?page_id=11760" target="_blank" rel="noopener">會員權益基金 — 心理諮商補助</a> ("為維護本會會員心理健康"; NT$2,500/session; posted slot cap ~59 members, updated 2026-05-29). <strong>Source · Method · Basis:</strong> union site · WebFetch · ✅ Sourced.</li>
+          <li id="arc-src-6" data-src="osh">Occupational safety &amp; health framing: 藝創工會. (n.d.). <a href="https://artcreator.tw/?page_id=11929" target="_blank" rel="noopener">職業安全衛生指引</a> — a directory of nine external government OSH PDFs; hazards physical; the only MH-adjacent phrase ("fatigue management") is borrowed from a government night-work guide; psychological hazard is not a named category. <strong>Source · Method · Basis:</strong> union site · WebFetch · ✅ Sourced (incl. the MH-absence finding).</li>
+          <li id="arc-src-7" data-src="gender-equity">性平 / sexual-harassment programme: 藝創工會. (n.d.). <a href="https://artcreator.tw/?page_id=10997" target="_blank" rel="noopener">性平專區</a> — 2023 #MeToo framing; prevention training with 台灣性別平等教育協會; legal consultation via a named lawyer (open to non-members); counselling via 勵馨基金會 蒲公英 centre (union pays fee); government-hotline signposting; no internal investigating committee. 性平三法 in force 2024-03-08 (行政院; 報導者). <strong>Source · Method · Basis:</strong> union site + news · WebFetch / WebSearch · ✅ Sourced.</li>
+          <li id="arc-src-8" data-src="surveys">Survey series and 2024 figures: 藝創工會. (n.d.). <a href="https://artcreator.tw/?page_id=10707" target="_blank" rel="noopener">調查報告</a>; 2024《性別平等與勞動情況調查》(n=944; fielded June–July 2024; NCAF-sponsored; 67% female — n verified against the report PDF). Reported figures: verbal sexual harassment witnessed/heard 87.1%; unwanted physical touch 27.3%; hostile-environment 22.3% (p.73); average monthly income NT$35,718 vs national NT$48,043; 182 reported no complaint channel. Mental-health content is qualitative; the stress percentages are secondary-quoted from press summaries (not the union's own chart) and are excluded from the headline figures. <strong>Source · Method · Basis:</strong> union report + summary articles · WebFetch · ✅ Sourced (n &amp; harassment figures from the report PDF; stress percentages from a secondary source: press summaries).</li>
+          <li id="arc-src-9" data-src="contracts-insurance">Model contracts and occupational-injury enrolment: 藝創工會. (n.d.). <a href="https://artcreator.tw/?page_id=10034" target="_blank" rel="noopener">合約範本</a> (visual ~13, performing 11, music 3, criticism; versions 2024–2025). Occupational-injury insurance via the 《勞工職業災害保險及保護法》 (effective 2022-05-01; self-employed enrol via occupational union — 勞動部 / <a href="https://www.bli.gov.tw/" target="_blank" rel="noopener">勞工保險局</a>) and the 《文化藝術獎助及促進條例》 §9–§10 (文化部); union 2026-01-01 Tier-1 insured salary NT$29,500. No discrete full-subsidy "arts insurance product" confirmed. <strong>Source · Method · Basis:</strong> union site + 勞動部 / 文化部 statutes · WebFetch / WebSearch · ✅ Sourced (mechanism) / ❓ (single product).</li>
+          <li id="arc-src-10" data-src="advocacy">Advocacy record: 藝創工會. (n.d.). <a href="https://artcreator.tw/?page_id=10992" target="_blank" rel="noopener">記者會/新聞稿/聲明</a> and <a href="https://artcreator.tw/?page_id=10996" target="_blank" rel="noopener">媒體專題報導精選</a> — 2018 administrative-litigation win; 2020–2021 occupational-injury-insurance advocacy; 2022 fee-rate-schedule expansion; 2023 copyright royalty +25%; 2022–2023 harassment-case support; the 2023-07-18 Legislative Yuan press conference (with 立委 王婉諭 and an arts coalition; four demands incl. a Korea-style 「藝術人保護官」; represented by 張吉米 / 張文駿) corroborated by ARTouch (2023); 2025-08 "身心自主" statement. <strong>Source · Method · Basis:</strong> union site + ARTouch · WebFetch / WebSearch · ✅ Sourced (key items, two methods).</li>
+          <li id="arc-src-11" data-src="governance">Governance: 藝創工會. (n.d.). <a href="https://artcreator.tw/?page_id=2664" target="_blank" rel="noopener">組織章程</a> (Art. 13–17: 9 directors + 3 alternates, 3 supervisors + 1 alternate, unpaid; chair re-electable once) and <a href="https://artcreator.tw/?page_id=12558" target="_blank" rel="noopener">選舉罷免辦法</a> (Art. 7 gender quota). <strong>Source · Method · Basis:</strong> union site · WebFetch · ✅ Sourced.</li>
+          <li id="arc-src-12" data-src="mh-policy">National mental-health context: 行政院. (2024). <a href="https://www.ey.gov.tw/" target="_blank" rel="noopener">全民心理健康韌性計畫</a> — NT$56.3億 (NT$5.63B), 2025–2030 (民國114–119), 13-ministry (incl. 文化部), under 健康臺灣 and the amended 精神衛生法. Cross-reference: <em>Taiwan Opportunity</em> wiki article. <strong>Source · Method · Basis:</strong> 行政院 · WebSearch · ✅ Sourced.</li>
         </ol>
         <p class="refs-note">Convention: every claim-bearing element carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above — machine-checkable before each deploy (§5.2 / §6 gate 1). Reference entries follow APA 7th edition; the Source · Method · Basis label (§2 Rule 3) is retained after each.</p>
       </div>
     </section>
+
+    <nav class="related-block" aria-label="Related on this site">
+      <p class="related-title">Related</p>
+      <ul>
+        <li><a href="org-study.html">&larr; Org Study (all organizations)</a></li>
+        <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+        <li><a href="policy-study.html">Policy Study &mdash; how jurisdictions protect music workers</a></li>
+      </ul>
+    </nav>
   </main>
+
+  <script>
+  /* Scroll-reveal — R3.2 shared IntersectionObserver (normal-scroll page) */
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = 'section > h2, .stat-strip, figure, .table-wrap, .phases-grid, .sources-card, .refs';
+    var nodes = Array.prototype.slice.call(document.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, sibs, idx = 0;
+        if (p){ sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,6) * 60) + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
 
   <!-- nav scroll-state: transparent over hero, blurred bar once scrolled -->
   <script>

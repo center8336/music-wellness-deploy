@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Research Tools · Measurement Toolkit · MH&amp;W</title>
+  <title>Research Tools · MH&amp;W</title>
   <meta name="description" content="A citation-verified library of validated frameworks and instruments for studying musicians' psychosocial work environment, occupational health, and mental health — organized in four layers, every entry with a primary-source citation (APA 7th).">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
 
     :root {
       --black: #09090b;
@@ -41,8 +41,8 @@
       --bg-card-dark: var(--off-black);
       --border-light: rgba(0,0,0,0.07);
       --border-dark: rgba(255,255,255,0.1);
-      --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
-      --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
       --font-mono: 'Space Mono', 'Courier New', monospace;
       --font: var(--font-body);
       --text-hero: clamp(3.5rem, 8vw, 6.5rem);
@@ -58,17 +58,20 @@
       --radius: 4px;
       --radius-lg: 6px;
       --max-w: 1100px;
-      --max-w-text: 720px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+    html, body { overflow-x: hidden; }
 
     body {
       font-family: var(--font);
       background: var(--bg-light);
       color: var(--black);
       line-height: 1.6;
+      font-optical-sizing: auto;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -96,7 +99,7 @@
       border-bottom: 1px solid transparent;
     }
     nav.nav.scrolled {
-      background: rgba(244, 244, 245, 0.85);
+      background: rgba(244, 244, 245, 0.45);
       -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-light);
@@ -116,10 +119,10 @@
     .nav-toggle.open span:nth-child(2) { opacity:0; }
     .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
     .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
-    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:0.5rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:0.2em; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
 
     /* ===== LAYOUT ===== */
-    main { max-width: var(--max-w); margin: 0 auto; padding: 0 2.5rem 5rem 2.5rem; }
+    main { max-width: var(--max-w); margin: 0 auto; padding: 3rem 2.5rem 5rem 2.5rem; }
     section { margin-bottom: 3.5rem; }
     .narrow { max-width: var(--max-w-text); }
 
@@ -137,7 +140,7 @@
     }
     .hero h1 {
       font-family: var(--font-display); font-size: var(--text-hero);
-      font-weight: 800; line-height: 0.98; color: var(--black); letter-spacing: -0.01em;
+      font-weight: 900; line-height: 1.04; color: var(--black); letter-spacing: -0.01em; text-wrap: balance;
     }
     .hero .subtitle {
       font-family: var(--font-body); font-size: clamp(1.05rem, 2vw, 1.35rem);
@@ -151,9 +154,96 @@
       padding: 0.5rem 0.85rem; line-height: 1.5;
     }
 
+    /* ===== RESEARCH-SERIES COVER (cf. research-detari-2020) ===== */
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      padding: 6rem 2.5rem 3rem;
+      padding-top: calc(6rem + env(safe-area-inset-top));
+    }
+    .cover-inner {
+      max-width: 800px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .cover-eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 2.5rem;
+      max-width: none;
+    }
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 10vw, 8rem);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      text-wrap: balance;
+      color: var(--black);
+      margin-bottom: 0.5rem;
+    }
+    .cover-accent { color: var(--purple-deep); }
+    .cover-year {
+      font-family: var(--font-mono);
+      font-size: clamp(1.4rem, 4vw, 2.4rem);
+      font-weight: 400;
+      color: var(--purple-light);
+      letter-spacing: 0.35em;
+      margin-bottom: 2rem;
+      margin-top: 0.5rem;
+    }
+    .cover-subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(1.1rem, 2vw, 1.375rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--graphite);
+      letter-spacing: 0;
+      line-height: 1.5;
+      margin-bottom: 3rem;
+      max-width: var(--measure);
+    }
+    .cover-meta {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--grey-light);
+      line-height: 2;
+      letter-spacing: 0.02em;
+      max-width: none;
+      margin-bottom: 0;
+    }
+    .cover-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      animation: cover-pulse 2s ease-in-out infinite;
+    }
+    @keyframes cover-pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cover-hint { animation: none; }
+    }
+
     /* ===== TYPE ===== */
-    h2 { font-family: var(--font-display); font-size: var(--text-h2); font-weight: 700; line-height: 1.1; color: var(--black); margin-bottom: 1rem; letter-spacing: -0.01em; }
-    h3 { font-family: var(--font-display); font-size: var(--text-h3); font-weight: 600; color: var(--charcoal); margin: 1.5rem 0 0.75rem; }
+    h2 { font-family: var(--font-display); font-size: var(--text-h2); font-weight: 600; line-height: 1.15; color: var(--black); margin-bottom: 1rem; letter-spacing: -0.005em; text-wrap: balance; }
+    h3 { font-family: var(--font-display); font-size: var(--text-h3); font-weight: 600; letter-spacing: -0.005em; color: var(--charcoal); margin: 1.5rem 0 0.75rem; }
     .section-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
     p { font-size: var(--text-body); color: var(--graphite); max-width: var(--max-w-text); margin-bottom: 1rem; }
     p.lead { font-size: 1.1rem; color: var(--charcoal); }
@@ -217,6 +307,10 @@
       main { padding: 0 1.5rem 3rem 1.5rem; }
       .hero { padding-top: calc(7rem + env(safe-area-inset-top)); }
       .hero h1 { font-size: clamp(2.6rem, 12vw, 3.6rem); }
+      .cover { padding: 5rem 1.5rem 3rem; padding-top: calc(5rem + env(safe-area-inset-top)); }
+      .cover-title { font-size: clamp(3rem, 14vw, 5rem); }
+      .cover-year { font-size: clamp(1.1rem, 6vw, 1.8rem); letter-spacing: 0.22em; }
+      .cover-subtitle { font-size: 0.85rem; }
     }
     @media (max-width: 480px) {
       .legend { grid-template-columns: 1fr; }
@@ -225,6 +319,8 @@
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } nav.nav { transition: none; } }
   </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
 </head>
 <body>
   <a href="#main" class="skip-nav">Skip to content</a>
@@ -236,25 +332,29 @@
       </button>
       <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
     </div>
-    <div class="nav-links">
+        <div class="nav-links">
       <a href="index.html">HOME</a>
-      <a href="plan.html">PLAN</a>
       <a href="report-global-npo-landscape.html">ORGS MAP</a>
-      <a href="case-study.html">CASE STUDY</a>
-      <a href="research.html" class="current">RESEARCH</a>
-      <a href="insight-2026-06-18.html">INSIGHT</a>
+      <a href="org-study.html">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
+      <a href="research.html" class="current" aria-current="page">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
     </div>
   </nav>
 
-  <main id="main">
-    <!-- HERO -->
-    <section class="hero">
-      <div class="eyebrow">2026-06-19 · RESEARCH · v1.0</div>
-      <h1>Research Tools</h1>
-      <p class="subtitle">A citation-verified library of the well-recognized frameworks and instruments for studying musicians' and creative workers' psychosocial work environment, occupational health, and mental health — organized in four layers, every entry carrying a primary-source citation in APA 7th.</p>
-      <div class="basis-badge">✓ ~30 tools · every citation verified against publisher / DOI / issuer pages · 2026-06-19</div>
-    </section>
+  <!-- RESEARCH-SERIES COVER -->
+  <header class="cover">
+    <div class="cover-inner">
+      <p class="cover-eyebrow">MH&amp;W Research</p>
+      <h1 class="cover-title">RESEARCH<br><span class="cover-accent">TOOLS</span></h1>
+      <p class="cover-subtitle">Models, Instruments &amp; Standards — Every Entry Primary-Source Cited</p>
+      <p class="cover-meta">2026-06-19</p>
+    </div>
+    <span class="cover-hint">↓ scroll</span>
+  </header>
 
+  <main id="main">
     <!-- ORIENTATION -->
     <div class="model-callout">
       <h2>Four layers — keep them distinct</h2>
@@ -301,7 +401,7 @@
         <div class="tool-card l1">
           <h3>Effort–Recovery model</h3><div class="abbr">Meijman &amp; Mulder</div>
           <div class="desc">Load reactions from effort must be reversed by recovery; insufficient recovery accumulates strain. Apt for touring.</div>
-          <div class="src-chip"><span class="ok">⚠️</span> Meijman, T. F., &amp; Mulder, G. (1998). Psychological aspects of workload. In P. J. D. Drenth et&nbsp;al. (Eds.), <em>Handbook of work and organizational psychology</em> (2nd ed., Vol. 2, pp. 5–33). Psychology Press. <span style="color:var(--grey)">(book chapter; no native 1998 DOI)</span></div>
+          <div class="src-chip"><span class="ok">✅</span> Meijman, T. F., &amp; Mulder, G. (1998). Psychological aspects of workload. In P. J. D. Drenth et&nbsp;al. (Eds.), <em>Handbook of work and organizational psychology</em> (2nd ed., Vol. 2, pp. 5–33). Psychology Press. <span style="color:var(--grey)">(book chapter; no native 1998 DOI)</span></div>
         </div>
         <div class="tool-card l1">
           <h3>Challenge–Hindrance stressors</h3><div class="abbr">Cavanaugh et al.</div>
@@ -355,7 +455,7 @@
           <h3>QPSNordic</h3><div class="abbr">Nordic general questionnaire</div>
           <div class="desc">~129 items / 26 scales of psychosocial work factors. Used (with JCQ) in the Détári musician study. No Traditional-Chinese version known.</div>
           <div class="attrs"><span class="free">Free for research</span> · report (no DOI)</div>
-          <div class="src-chip"><span class="ok">⚠️</span> Dallner, M., Elo, A.-L., Gamberale, F., Hottinen, V., Knardahl, S., Lindström, K., Skogstad, A., &amp; Ørhede, E. (2000). <em>Validation of the General Nordic Questionnaire (QPSNordic) for psychological and social factors at work</em> (Nord 2000:12). Nordic Council of Ministers.</div>
+          <div class="src-chip"><span class="ok">✅</span> Dallner, M., Elo, A.-L., Gamberale, F., Hottinen, V., Knardahl, S., Lindström, K., Skogstad, A., &amp; Ørhede, E. (2000). <em>Validation of the General Nordic Questionnaire (QPSNordic) for psychological and social factors at work</em> (Nord 2000:12). Nordic Council of Ministers. <span style="color:var(--grey)">(official report; no native DOI)</span></div>
         </div>
         <div class="tool-card l2">
           <h3>NIOSH Worker Well-Being Questionnaire</h3><div class="abbr">WellBQ · 5 domains</div>
@@ -490,7 +590,7 @@
       <div class="used-note">
         <p><strong>Used in our research.</strong> The <a href="research-detari-2020.html">Détári et&nbsp;al. (2020) critical reading</a> measured seven psychosocial dimensions via <strong>JCQ</strong> and <strong>QPSNordic</strong> items — it notes JCQ has validated Chinese versions while QPSNordic does not, which is a direct input to any Taiwan replication. No other deploy report currently fields a named instrument from this catalog.</p>
       </div>
-      <p class="refs-note">All entries APA 7th · every citation verified against publisher / DOI / issuer pages on 2026-06-19 · ✅ verified · ⚠️ verified with a noted caveat (e.g., a report or book chapter without a native DOI). Source of truth: <span style="font-family:var(--font-mono)">wiki/concepts/psychosocial_measurement_tools.md</span>.</p>
+      <p class="refs-note">All entries APA 7th · every citation checked against publisher / DOI / issuer pages on 2026-06-19. Basis (sourcing only): ✅ Sourced — traceable to a real source we link to (one source is enough, primary or secondary; secondary source = news/press reporting on it; a report or book chapter without a native DOI is still a real source) · ⚠️ Inferred — no source states it; our own reasoning or estimate · ❓ No source — we looked and found none. Source of truth: <span style="font-family:var(--font-mono)">wiki/concepts/psychosocial_measurement_tools.md</span>.</p>
     </section>
   </main>
 
