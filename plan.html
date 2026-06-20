@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>PLAN | MH&W</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
 
   :root {
     --black: #09090b;
@@ -30,12 +30,9 @@
     --spectrum-6: #b8a9d4;
 
     /* — Font stacks — */
-    --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
-    --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+    --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+    --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
     --font-mono: 'Space Mono', 'Courier New', monospace;
-
-    --measure: 64ch;
-    --max-w-text: 64ch;
 
     --ease: cubic-bezier(0.4, 0, 0.2, 1);
     --dur: 0.3s;
@@ -47,7 +44,6 @@
     font-family: var(--font-body);
     background: var(--black);
     color: var(--white);
-    font-optical-sizing: auto;
     -webkit-font-smoothing: antialiased;
     min-height: 100%;
     overflow-x: hidden;
@@ -176,10 +172,10 @@
   .hero-title {
     font-family: var(--font-display);
     font-size: clamp(3rem, 8vw, 6.5rem);
-    font-weight: 900;
-    line-height: 1.04;
+    font-weight: 800;
+    line-height: 0.95;
     letter-spacing: -0.01em;
-    text-wrap: balance;
+    text-transform: uppercase;
     color: var(--white);
     margin-bottom: 1.5rem;
   }
@@ -194,12 +190,13 @@
   /* Statement — Body light (editorial contrast) */
   .hero-statement {
     font-family: var(--font-body);
-    font-size: clamp(1.1rem, 2vw, 1.375rem);
-    font-weight: 400;
+    font-size: clamp(1rem, 2vw, 1.35rem);
+    font-weight: 300;
     font-style: italic;
     color: var(--grey-light);
-    letter-spacing: 0;
-    max-width: min(520px, var(--measure));
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    max-width: 520px;
     margin: 0 auto 4.5rem;
     line-height: 1.6;
   }
@@ -236,9 +233,10 @@
 
   .phase-name {
     font-family: var(--font-display);
-    font-size: 1.5rem; font-weight: 600;
-    letter-spacing: -0.005em;
-    line-height: 1.15;
+    font-size: 1.35rem; font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
     margin-bottom: 0.7rem;
     transition: opacity var(--dur) var(--ease);
   }
@@ -251,8 +249,9 @@
 
   .phase-track {
     font-family: var(--font-body);
-    font-size: 0.95rem; font-weight: 400;
-    letter-spacing: 0;
+    font-size: 0.82rem; font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
     color: var(--grey);
     line-height: 1.8;
   }
@@ -355,8 +354,6 @@
   }
   .drop-hint.active { display: flex; }
 </style>
-
-  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
 </head>
 <body>
   <a href="#main" class="skip-nav">Skip to content</a>
@@ -364,22 +361,22 @@
 <div class="drop-hint" id="drop-hint">Drop Photo Here</div>
 
 <!-- ══ NAV — Mono editorial ══ -->
-<nav class="nav" aria-label="Site navigation">
+<nav class="nav">
   <div class="nav-topbar">
-    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="this.classList.toggle('open');var x=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',!x);document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
+    <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
       <span></span><span></span><span></span>
     </button>
     <div class="nav-mobile-brand">MENTAL HEALTH & WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
   </div>
-      <div class="nav-links">
-      <a href="index.html">HOME</a>
-      <a href="report-global-npo-landscape.html">ORGS MAP</a>
-      <a href="org-study.html">ORG STUDY</a>
-      <a href="policy-study.html">POLICY STUDY</a>
-      <a href="research.html">RESEARCH</a>
-      <a href="insight.html">INSIGHT</a>
-      <a href="plan.html" class="current" aria-current="page">PLAN</a>
-    </div>
+  <div class="nav-links">
+  
+    <a href="index.html">HOME</a>
+    <a href="plan.html" class="current">PLAN</a>
+    <a href="report-global-npo-landscape.html">ORGS MAP</a>
+    <a href="case-study.html">CASE STUDY</a>
+    <a href="research.html">RESEARCH</a>
+    <a href="insight-2026-06-18.html">INSIGHT</a>
+  </div>
 </nav>
 
 <!-- ══ HERO ══ -->
@@ -512,7 +509,7 @@
     nav.nav, .nav { transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease); border-bottom: 1px solid transparent; }
     nav.nav.scrolled, .nav.scrolled {
       right: 0;
-      background: rgba(9, 9, 11, 0.45);
+      background: rgba(9, 9, 11, 0.85);
       -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-dark);

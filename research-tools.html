@@ -8,10 +8,10 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
 
     :root {
       --black: #09090b;
@@ -41,8 +41,8 @@
       --bg-card-dark: var(--off-black);
       --border-light: rgba(0,0,0,0.07);
       --border-dark: rgba(255,255,255,0.1);
-      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
-      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+      --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
       --font-mono: 'Space Mono', 'Courier New', monospace;
       --font: var(--font-body);
       --text-hero: clamp(3.5rem, 8vw, 6.5rem);
@@ -58,20 +58,17 @@
       --radius: 4px;
       --radius-lg: 6px;
       --max-w: 1100px;
-      --max-w-text: 64ch;
-      --measure: 64ch;
+      --max-w-text: 720px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    html, body { overflow-x: hidden; }
 
     body {
       font-family: var(--font);
       background: var(--bg-light);
       color: var(--black);
       line-height: 1.6;
-      font-optical-sizing: auto;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -99,7 +96,7 @@
       border-bottom: 1px solid transparent;
     }
     nav.nav.scrolled {
-      background: rgba(244, 244, 245, 0.45);
+      background: rgba(244, 244, 245, 0.85);
       -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-light);
@@ -122,7 +119,7 @@
     .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:0.5rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:0.2em; }
 
     /* ===== LAYOUT ===== */
-    main { max-width: var(--max-w); margin: 0 auto; padding: 3rem 2.5rem 5rem 2.5rem; }
+    main { max-width: var(--max-w); margin: 0 auto; padding: 0 2.5rem 5rem 2.5rem; }
     section { margin-bottom: 3.5rem; }
     .narrow { max-width: var(--max-w-text); }
 
@@ -140,7 +137,7 @@
     }
     .hero h1 {
       font-family: var(--font-display); font-size: var(--text-hero);
-      font-weight: 900; line-height: 1.04; color: var(--black); letter-spacing: -0.01em; text-wrap: balance;
+      font-weight: 800; line-height: 0.98; color: var(--black); letter-spacing: -0.01em;
     }
     .hero .subtitle {
       font-family: var(--font-body); font-size: clamp(1.05rem, 2vw, 1.35rem);
@@ -154,96 +151,9 @@
       padding: 0.5rem 0.85rem; line-height: 1.5;
     }
 
-    /* ===== RESEARCH-SERIES COVER (cf. research-detari-2020) ===== */
-    .cover {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      position: relative;
-      padding: 6rem 2.5rem 3rem;
-      padding-top: calc(6rem + env(safe-area-inset-top));
-    }
-    .cover-inner {
-      max-width: 800px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .cover-eyebrow {
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      letter-spacing: 0.5em;
-      text-transform: uppercase;
-      color: var(--grey);
-      margin-bottom: 2.5rem;
-      max-width: none;
-    }
-    .cover-title {
-      font-family: var(--font-display);
-      font-size: clamp(4rem, 10vw, 8rem);
-      font-weight: 900;
-      line-height: 1.0;
-      letter-spacing: -0.01em;
-      text-wrap: balance;
-      color: var(--black);
-      margin-bottom: 0.5rem;
-    }
-    .cover-accent { color: var(--purple-deep); }
-    .cover-year {
-      font-family: var(--font-mono);
-      font-size: clamp(1.4rem, 4vw, 2.4rem);
-      font-weight: 400;
-      color: var(--purple-light);
-      letter-spacing: 0.35em;
-      margin-bottom: 2rem;
-      margin-top: 0.5rem;
-    }
-    .cover-subtitle {
-      font-family: var(--font-body);
-      font-size: clamp(1.1rem, 2vw, 1.375rem);
-      font-weight: 400;
-      font-style: italic;
-      color: var(--graphite);
-      letter-spacing: 0;
-      line-height: 1.5;
-      margin-bottom: 3rem;
-      max-width: var(--measure);
-    }
-    .cover-meta {
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      color: var(--grey-light);
-      line-height: 2;
-      letter-spacing: 0.02em;
-      max-width: none;
-      margin-bottom: 0;
-    }
-    .cover-hint {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      color: var(--silver);
-      letter-spacing: 0.1em;
-      animation: cover-pulse 2s ease-in-out infinite;
-    }
-    @keyframes cover-pulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .cover-hint { animation: none; }
-    }
-
     /* ===== TYPE ===== */
-    h2 { font-family: var(--font-display); font-size: var(--text-h2); font-weight: 600; line-height: 1.15; color: var(--black); margin-bottom: 1rem; letter-spacing: -0.005em; text-wrap: balance; }
-    h3 { font-family: var(--font-display); font-size: var(--text-h3); font-weight: 600; letter-spacing: -0.005em; color: var(--charcoal); margin: 1.5rem 0 0.75rem; }
+    h2 { font-family: var(--font-display); font-size: var(--text-h2); font-weight: 700; line-height: 1.1; color: var(--black); margin-bottom: 1rem; letter-spacing: -0.01em; }
+    h3 { font-family: var(--font-display); font-size: var(--text-h3); font-weight: 600; color: var(--charcoal); margin: 1.5rem 0 0.75rem; }
     .section-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
     p { font-size: var(--text-body); color: var(--graphite); max-width: var(--max-w-text); margin-bottom: 1rem; }
     p.lead { font-size: 1.1rem; color: var(--charcoal); }
@@ -307,10 +217,6 @@
       main { padding: 0 1.5rem 3rem 1.5rem; }
       .hero { padding-top: calc(7rem + env(safe-area-inset-top)); }
       .hero h1 { font-size: clamp(2.6rem, 12vw, 3.6rem); }
-      .cover { padding: 5rem 1.5rem 3rem; padding-top: calc(5rem + env(safe-area-inset-top)); }
-      .cover-title { font-size: clamp(3rem, 14vw, 5rem); }
-      .cover-year { font-size: clamp(1.1rem, 6vw, 1.8rem); letter-spacing: 0.22em; }
-      .cover-subtitle { font-size: 0.85rem; }
     }
     @media (max-width: 480px) {
       .legend { grid-template-columns: 1fr; }
@@ -319,8 +225,6 @@
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } nav.nav { transition: none; } }
   </style>
-
-  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
 </head>
 <body>
   <a href="#main" class="skip-nav">Skip to content</a>
@@ -332,30 +236,25 @@
       </button>
       <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
     </div>
-        <div class="nav-links">
+    <div class="nav-links">
       <a href="index.html">HOME</a>
-      <a href="report-global-npo-landscape.html">ORGS MAP</a>
-      <a href="org-study.html">ORG STUDY</a>
-      <a href="policy-study.html">POLICY STUDY</a>
-      <a href="research.html" class="current" aria-current="page">RESEARCH</a>
-      <a href="insight.html">INSIGHT</a>
       <a href="plan.html">PLAN</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="case-study.html">CASE STUDY</a>
+      <a href="research.html" class="current">RESEARCH</a>
+      <a href="insight-2026-06-18.html">INSIGHT</a>
     </div>
   </nav>
 
-  <!-- RESEARCH-SERIES COVER -->
-  <header class="cover">
-    <div class="cover-inner">
-      <p class="cover-eyebrow">MH&amp;W Research</p>
-      <h1 class="cover-title">RESEARCH<br><span class="cover-accent">TOOLS</span></h1>
-      <p class="cover-year">MEASUREMENT TOOLKIT</p>
-      <p class="cover-subtitle">Models, Instruments &amp; Standards — Every Entry Primary-Source Cited</p>
-      <p class="cover-meta">~30 tools · APA 7th · 2026-06-19</p>
-    </div>
-    <span class="cover-hint">↓ scroll</span>
-  </header>
-
   <main id="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="eyebrow">2026-06-19 · RESEARCH · v1.0</div>
+      <h1>Research Tools</h1>
+      <p class="subtitle">A citation-verified library of the well-recognized frameworks and instruments for studying musicians' and creative workers' psychosocial work environment, occupational health, and mental health — organized in four layers, every entry carrying a primary-source citation in APA 7th.</p>
+      <div class="basis-badge">✓ ~30 tools · every citation verified against publisher / DOI / issuer pages · 2026-06-19</div>
+    </section>
+
     <!-- ORIENTATION -->
     <div class="model-callout">
       <h2>Four layers — keep them distinct</h2>
