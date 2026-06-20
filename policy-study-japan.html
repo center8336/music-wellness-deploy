@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Policy scan: Japan — protecting music workers by labor law, not a safety net · MH&W Research">
+  <meta name="description" content="Policy study: Japan — protecting music workers by labor law, not a safety net · MH&W Policy Study">
   <title>Policy: Japan · MH&W</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -39,8 +39,8 @@
       --bg-card-dark: var(--off-black);
       --border-light: rgba(0,0,0,0.07);
       --border-dark: rgba(255,255,255,0.1);
-      --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
-      --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
       --font-mono: 'Space Mono', 'Courier New', monospace;
       --font: var(--font-body);
       --text-hero: clamp(3.5rem, 8vw, 6.5rem);
@@ -53,10 +53,13 @@
       --ease: cubic-bezier(0.4, 0, 0.2, 1);
       --dur: 0.3s;
       --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
       --radius: 4px;
       --radius-lg: 6px;
       --max-w: 1100px;
-      --max-w-text: 660px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -73,6 +76,8 @@
       color: var(--charcoal);
       line-height: 1.7;
       font-size: var(--text-body);
+      font-weight: 400;
+      font-optical-sizing: auto;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -241,73 +246,58 @@
       flex-direction: column;
     }
 
-    /* ===== COVER PAGE ===== */
+    /* ===== COVER PAGE — TWO-LINE MINIMAL (R2.1, decided 2026-06-20) ===== */
     .cover {
-      height: 100vh;
       min-height: 100vh;
-      justify-content: center;
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       text-align: center;
-      padding-top: 0;
+      position: relative;
+      overflow: hidden;            /* clips the wash */
+      padding: 0 2rem;
     }
 
-    .cover .page-inner {
-      max-width: 800px;
-      justify-content: center;
-      align-items: center;
+    /* one soft radial purple wash — the single dia accent */
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%, var(--signal-glow) 0%, rgba(102,103,171,0.06) 38%, rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
     }
 
-    .cover-eyebrow {
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      letter-spacing: 0.5em;
-      text-transform: uppercase;
-      color: var(--grey);
-      margin-bottom: 2.5rem;
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 1280px);
     }
 
     .cover-title {
       font-family: var(--font-display);
-      font-size: clamp(4.5rem, 11vw, 9rem);
-      font-weight: 800;
-      line-height: 0.85;
-      letter-spacing: -0.03em;
-      text-transform: uppercase;
+      font-size: clamp(2.6rem, 8vw, 6.5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
       color: var(--black);
-      margin-bottom: 0.25rem;
+      margin: 0;
+      text-wrap: balance;
     }
 
-    .cover-accent {
-      color: var(--purple-deep);
-    }
-
-    .cover-year {
+    .cover-line {
       font-family: var(--font-mono);
-      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
       font-weight: 400;
-      color: var(--purple-light);
-      letter-spacing: 0.35em;
-      margin-bottom: 2rem;
-    }
-
-    .cover-subtitle {
-      font-family: var(--font-body);
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      font-weight: 300;
-      font-style: italic;
-      color: var(--graphite);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      line-height: 1.5;
-      margin-bottom: 3rem;
-    }
-
-    .cover-meta {
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      color: var(--grey-light);
-      line-height: 2;
-      letter-spacing: 0.02em;
+      color: var(--purple-deep);            /* 4.92:1 AA */
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
     }
 
     .cover-hint {
@@ -319,16 +309,31 @@
       font-size: var(--text-xs);
       color: var(--silver);
       letter-spacing: 0.1em;
-      animation: pulse 2s ease-in-out infinite;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; }
+    /* entrance — soft fade + rise, one time */
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
     }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-line  { animation-delay: 0.22s; }
 
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+    /* reduced-motion: no entrance, no drift, no pulse — everything static & visible */
     @media (prefers-reduced-motion: reduce) {
-      .cover-hint { animation: none; }
+      .cover-inner > *,
+      .cover-wash,
+      .cover-hint { animation: none; opacity: 1; transform: none; }
     }
 
     /* ===== CONTENT PAGES ===== */
@@ -350,6 +355,7 @@
       color: var(--black);
       margin-bottom: 2rem;
       letter-spacing: 0.01em;
+      text-wrap: balance;
     }
 
     .content-block {
@@ -366,7 +372,6 @@
 
     .content-block p {
       margin-bottom: 0.75rem;
-      line-height: 1.75;
       color: var(--graphite);
     }
 
@@ -440,7 +445,6 @@
     }
     .reform-body {
       padding-left: 2.25rem;
-      line-height: 1.75;
       color: var(--graphite);
     }
 
@@ -466,6 +470,7 @@
       font-size: 1.6rem;
       color: var(--purple-deep);
       line-height: 1.1;
+      font-variant-numeric: tabular-nums;
     }
     .stat-label {
       font-family: var(--font-mono);
@@ -489,7 +494,7 @@
       color: var(--charcoal);
       margin-bottom: 0.35rem;
     }
-    .appraise-item p { line-height: 1.75; color: var(--graphite); }
+    .appraise-item p { color: var(--graphite); }
 
     .verdict {
       background: var(--off-black);
@@ -562,6 +567,7 @@
       padding: 0.6rem 0.75rem;
       border-bottom: 1px solid var(--border-light);
       vertical-align: top;
+      font-variant-numeric: tabular-nums;
     }
     .method-table tbody tr:nth-child(odd) { background: var(--white); }
     .method-table tbody tr:nth-child(even) { background: var(--snow); }
@@ -599,7 +605,7 @@
       display: inline-block;
     }
 
-    /* ===== CITATIONS (§5 inline tier) — pattern: case-study-music-minds-matter.html ===== */
+    /* ===== CITATIONS (§5 inline tier) — pattern: org-study-music-minds-matter.html ===== */
     .cite { font-size: 0.72em; line-height: 0; vertical-align: super; letter-spacing: 0; }
     .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
     .cite a:hover, .cite a:focus { color: var(--signal-dim); }
@@ -694,16 +700,17 @@
       }
 
       .cover-title {
-        font-size: clamp(3rem, 16vw, 5rem);
+        font-size: clamp(1.9rem, 8.5vw, 2.6rem);
       }
 
-      .cover-year {
-        font-size: clamp(1.5rem, 6vw, 2rem);
-        letter-spacing: 0.25em;
+      .cover-line {
+        font-size: clamp(0.72rem, 3.2vw, 0.95rem);
+        letter-spacing: 0.18em;
       }
 
-      .cover-subtitle {
-        font-size: 0.85rem;
+      .cover-wash {
+        width: 150vw;
+        height: 150vw;
       }
 
       .page-title {
@@ -741,26 +748,62 @@
     .pages-container::-webkit-scrollbar-track { background: transparent; }
     .pages-container::-webkit-scrollbar-thumb { background: var(--silver); border-radius: 3px; }
     .pages-container::-webkit-scrollbar-thumb:hover { background: var(--grey-light); }
+
+    /* ===== DISCOVERABILITY: related block (closing page) ===== */
+    .related-block {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-light);
+    }
+    .related-title {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--grey);
+      margin-bottom: 0.6rem;
+    }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--signal);
+      text-decoration: none;
+      transition: color var(--dur) var(--ease);
+    }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+    .related-block .related-note { color: var(--graphite); }
+
+    /* ===== Scroll-reveal (R3.2, paged-safe) ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
   </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
 </head>
 <body>
   <a href="#main" class="skip-nav">Skip to content</a>
 
   <!-- Site Navigation -->
-  <nav class="nav">
+  <nav class="nav" aria-label="Site navigation">
     <div class="nav-topbar">
-      <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="this.classList.toggle('open');var x=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',!x);document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
         <span></span><span></span><span></span>
       </button>
       <div class="nav-mobile-brand">MENTAL HEALTH & WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
     </div>
-    <div class="nav-links">
+        <div class="nav-links">
       <a href="index.html">HOME</a>
-      <a href="plan.html">PLAN</a>
       <a href="report-global-npo-landscape.html">ORGS MAP</a>
-      <a href="case-study.html">CASE STUDY</a>
-      <a href="research.html" class="current">RESEARCH</a>
-      <a href="insight-2026-06-18.html">INSIGHT</a>
+      <a href="org-study.html">ORG STUDY</a>
+      <a href="policy-study.html" class="current" aria-current="page">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
     </div>
   </nav>
 
@@ -791,18 +834,12 @@
 
     <!-- PAGE 01: COVER (standard research cover — copied from research-detari-2020.html) -->
     <div class="page cover" id="page-0">
-      <div class="page-inner">
-        <p class="cover-eyebrow">MH&amp;W Research</p>
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="cover-inner">
         <h1 class="cover-title">JAPAN</h1>
-        <p class="cover-year">No.001</p>
-        <p class="cover-subtitle">Protecting Music Workers<br>by Labor Law, Not a Safety Net</p>
-        <div class="cover-meta">
-          <p>Policy Case Series · 2026.6</p>
-          <p>Japan &rarr; Thailand &rarr; Taiwan &rarr; U.S. &rarr; U.K. &rarr; EU</p>
-          <p>Compiled by &#38515;&#26825; &middot; 2026-06-18 (rev. 2026-06-19)</p>
-        </div>
+        <p class="cover-line">Policy Study 001 &middot; 2026.6</p>
       </div>
-      <span class="cover-hint">&darr; scroll or arrow keys</span>
+      <span class="cover-hint" aria-hidden="true">&darr; Scroll</span>
     </div>
 
     <!-- PAGE 02: WHY THIS REGION -->
@@ -1056,7 +1093,7 @@
           <ol>
             <li>The mental-health prevalence figures rest on an advocacy-body survey relayed in an editorial with no published sample size or method; treated as &#9888; directional.</li>
             <li>Japanese-language primary sources (the Freelance Act text; &#25991;&#21270;&#24193; program reports) were read via government summary pages, statute explainers, and secondary legal briefings, not the full statute in every case.</li>
-            <li>This is a policy <em>scan</em>, not an exhaustive review &mdash; Japan's general suicide-prevention framework (&#33258;&#27578;&#23550;&#31574;&#22522;&#26412;&#27861;, amended 2025, child/school-focused) and prefecture-level arts support were noted but not deep-read.</li>
+            <li>This is a policy <em>study</em>, not an exhaustive review &mdash; Japan's general suicide-prevention framework (&#33258;&#27578;&#23550;&#31574;&#22522;&#26412;&#27861;, amended 2025, child/school-focused) and prefecture-level arts support were noted but not deep-read.</li>
             <li>The harassment duty is framed here as an extension of the employee-side Power Harassment Prevention Act; the precise boundary between the two regimes for freelancers was not litigated in primary case law.</li>
             <li>The "6.3% artists" share and the 218,250 headcount are editorial/census figures inherited via the editorial, not independently reconciled to the underlying government tables.</li>
             <li>The &#25991;&#21270;&#24193; FY2026 lines are budget requests, not enacted.</li>
@@ -1092,6 +1129,15 @@
           <p class="refs-note">Convention: every claim-bearing marker carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above &mdash; machine-checkable before each deploy (§5.2 / §6 gate 1). Reference entries follow APA 7th edition (§5.4). The MD draft (<code>2026-06-18_Research_Policy_Japan.md</code>) carries the same citations as <code>[^1]</code>&ndash;<code>[^10]</code> footnotes and is the citation source of truth.</p>
         </div>
 
+        <nav class="related-block" aria-label="Related on this site">
+          <p class="related-title">Related</p>
+          <ul>
+            <li><a href="policy-study.html">&larr; Policy Study (hub &middot; all regions)</a></li>
+            <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+            <li><a href="org-study-arts-creators-union.html">Taiwan's nearest existing infrastructure &mdash; &#34269;&#21109;&#24037;&#26371; org study</a></li>
+          </ul>
+        </nav>
+
         <div class="source-info">
           <p><strong>Report:</strong> Research track &mdash; Policy Case Series No.001 (Japan) &middot; Music &amp; Mental Health NPO Research Project</p>
           <p><strong>As of:</strong> 2026-06-19 (rev.) &middot; Next region: Thailand</p>
@@ -1107,10 +1153,12 @@
     var pages = document.querySelectorAll('.page');
     var nums = document.querySelectorAll('.page-num');
     var current = 0;
+    var RM = window.matchMedia('(prefers-reduced-motion: reduce)');
+    function scrollBehavior(){ return RM.matches ? 'auto' : 'smooth'; }
 
     function goTo(index) {
       if (index < 0 || index >= pages.length) return;
-      pages[index].scrollIntoView({ behavior: 'smooth' });
+      pages[index].scrollIntoView({ behavior: scrollBehavior() });
     }
 
     function nextPage() { goTo(current + 1); }
@@ -1152,7 +1200,7 @@
         var el = document.querySelector(id);
         if (!el) return;
         e.preventDefault();
-        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.scrollIntoView({ behavior: scrollBehavior(), block: 'center' });
         location.hash = id; // updates URL + fires :target highlight
       });
     });
@@ -1163,12 +1211,38 @@
     });
   </script>
 
+  <script>
+  /* Scroll-reveal — R3.2 paged-safe (observes within .pages-container; per-page anchors only) */
+  (function(){
+    var root = document.querySelector('.pages-container');
+    if (!root) return;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = '.page-title, .part-divider, .page-label, .stat-strip, .method-table, .table-wrap, figure';
+    var nodes = Array.prototype.slice.call(root.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, idx = 0;
+        if (p){ var sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,5) * 60) + 'ms';
+        el.classList.add('in'); io.unobserve(el);
+      });
+    }, { root: root, threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
+
   <!-- nav scroll-state fix: transparent over hero, blurred bar once scrolled -->
   <style>
     nav.nav, .nav { transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease); border-bottom: 1px solid transparent; }
     nav.nav.scrolled, .nav.scrolled {
       right: 0;
-      background: rgba(244, 244, 245, 0.85);
+      background: rgba(244, 244, 245, 0.45);
       -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-light);
