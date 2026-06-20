@@ -719,8 +719,8 @@
             <h3 class="gapmap-head">Where the support is — and isn't</h3>
             <p class="gapmap-sub">110 organizations worldwide · 1 independent org in Asia · 0 in Taiwan</p>
             <figure class="gapmap-figure">
-                <svg class="gapmap-svg" viewBox="0 14 1000 416" role="img"
-                     aria-label="Projection-accurate equirectangular world map of music mental-health organizations, every marker placed from real longitude and latitude. Support clusters densely in the United States — the largest dot, carrying the Backline and MusiCares nodes — and across Europe: Germany, the United Kingdom (the Music Minds Matter node), France, with smaller dots at Austria, Switzerland, Iceland, Romania and Australia. India holds one independent organization, labelled, on the subcontinent southwest of China. A faint long-tail scatter marks the remaining ~47 organizations across 33 more countries, mostly in Europe with a couple in North America. East Asia is drawn to scale: the mainland-China coastline, the Korean peninsula and Japan's island arc to the north-east are each separate landmasses, and Taiwan is a distinct small island off the south-east China coast, east of the mainland and south-west of Japan, separated from the mainland by the open water of the Taiwan Strait and given its own outline. Taiwan and the rest of East and South-East Asia have zero music-specific mental-health organizations — but Taiwan already has 藝創工會, a creators' union providing adjacent infrastructure (labour and health insurance, occupational health, contracts) since 2011, marked by an outlined ring sitting on the island of Taiwan rather than a solid dot. The gap is the music-specific mental-health layer on top of it. The four named, ringed nodes are clickable links to their Org Study pages.">
+                <svg class="gapmap-svg" viewBox="0 14 1000 226" role="img"
+                     aria-label="Projection-accurate equirectangular world map of music mental-health organizations, cropped to the populated northern band where every marker is placed from real longitude and latitude. Support clusters densely in the United States — the largest dot, carrying the Backline and MusiCares nodes — and across Europe: Germany, the United Kingdom (the Music Minds Matter node), France, with smaller dots at Austria, Switzerland, Iceland and Romania. India holds one independent organization, labelled, on the subcontinent southwest of China. A faint long-tail scatter marks the remaining ~47 organizations across 33 more countries, mostly in Europe with a couple in North America. Australia (about 3 organizations) falls south of the cropped frame and so is shown as an off-map count chip rather than a dot, alongside the 22 borderless organizations that have no home country. East Asia is drawn to scale: the mainland-China coastline, the Korean peninsula and Japan's island arc to the north-east are each separate landmasses, and Taiwan is a distinct small island off the south-east China coast, east of the mainland and south-west of Japan, separated from the mainland by the open water of the Taiwan Strait and given its own outline. The on-map picture is the dense United-States-and-Europe cluster set against an empty East Asia–Pacific: India holds the region's one independent organization, and Taiwan and the rest of East and South-East Asia have zero music-specific mental-health organizations — but Taiwan already has 藝創工會, a creators' union providing adjacent infrastructure (labour and health insurance, occupational health, contracts) since 2011, marked by an outlined ring sitting on the island of Taiwan rather than a solid dot. The gap is the music-specific mental-health layer on top of it. The four named, ringed nodes are clickable links to their Org Study pages.">
                     <!-- ===== geographically faithful backdrop: equirectangular projection ===== -->
                     <!-- x = (lon+130)/285*1000 ; y = (72-lat)/117*480 ; every line & marker computed from real lon/lat -->
                     <!-- faint accurate graticule: meridians every 30° (lon -120..150), parallels every 30° (lat -30..90) -->
@@ -746,9 +746,8 @@
                     <g class="gm-land" aria-hidden="true">
                         <!-- North America (Alaska→Mexico→E coast→Canadian Arctic) -->
                         <path d="M-133.3 28.7 70.2 49.2 0 69.7 17.5 98.5 21.1 131.3 45.6 160 70.2 196.9 105.3 221.5 115.8 188.7 140.4 176.4 171.9 192.8 175.4 164.1 193 139.5 210.5 119 221.1 110.8 245.6 102.6 231.6 82.1 182.5 57.4 122.8 49.2 70.2 16.4 0 8.2 -87.7 4.1 Z"/>
-                        <!-- South America -->
-                        <path d="M182.5 262.6 210.5 250.3 238.6 254.4 280.7 295.4 301.8 307.7 333.3 320 322.8 348.7 287.7 397.9 252.6 439 224.6 480 207 508.7 193 500.5 203.5 467.7 210.5 418.5 207 369.2 186 320 175.4 287.2 Z"/>
-                        <!-- Africa -->
+                        <!-- South America removed: lies entirely below the cropped northern band (top vertex y≈250 > frame bottom y=240) -->
+                        <!-- Africa (kept: only its North-Africa edge, top vertices y≈143–172, falls inside the band) -->
                         <path d="M396.5 233.8 421.1 274.9 484.2 279 487.7 299.5 501.8 344.6 508.8 410.3 526.3 439 554.4 430.8 571.9 402.1 596.5 356.9 635.1 299.5 607 250.3 589.5 229.7 571.9 180.5 568.4 168.2 526.3 160 491.2 143.6 435.1 147.7 421.1 172.3 400 205.1 Z"/>
                         <!-- Europe (Iberia→Mediterranean→Baltic→Scandinavia) -->
                         <path d="M424.6 119 424.6 139.5 449.1 147.7 466.7 123.1 484.2 114.9 498.2 114.9 519.3 131.3 512.3 106.7 501.8 106.7 484.2 77.9 473.7 77.9 470.2 57.4 480.7 36.9 498.2 16.4 529.8 8.2 554.4 4.1 561.4 24.6 540.4 49.2 554.4 61.5 540.4 73.8 522.8 73.8 505.3 73.8 491.2 73.8 484.2 61.5 480.7 82.1 456.1 90.3 438.6 98.5 Z"/>
@@ -765,8 +764,7 @@
                         <path d="M694.7 201 708.8 209.2 712.3 229.7 726.3 262.6 736.8 242.1 736.8 229.7 750.9 217.4 761.4 209.2 768.4 205.1 743.9 196.9 722.8 196.9 701.8 196.9 Z"/>
                         <!-- Taiwan — SEPARATE small island (120.96,23.7 ≈ 881,198), open water (Taiwan Strait) east of the China coast, SW of Japan; thin outline so it reads as distinct -->
                         <path class="gm-tw" d="M877 190 L884 191 L886 198 L883 206 L878 207 L876 199 Z"/>
-                        <!-- Australia (134.5,-25 ≈ 928,398) -->
-                        <path d="M856.1 385.6 884.2 369.2 912.3 344.6 936.8 344.6 957.9 340.5 971.9 373.3 993 397.9 982.5 447.2 957.9 455.4 929.8 439 908.8 426.7 884.2 434.9 859.6 434.9 Z"/>
+                        <!-- Australia removed: lies entirely below the cropped northern band (y≈340–455 > frame bottom y=240); its ~3 orgs are now shown as an off-map count chip -->
                     </g>
 
                     <!-- THE INK: the purple constellation. Size = org count. Every dot placed by the projection formula from real lon/lat. -->
@@ -788,12 +786,11 @@
                     <!-- Europe poles: Germany (10.4,51.2 → 492.6,85.3)=8, France (2.5,46.6 → 464.9,104.2)=6 -->
                     <circle class="gm-dot" cx="492.6" cy="85.3"  r="11" aria-hidden="true"/>
                     <circle class="gm-dot" cx="464.9" cy="104.2" r="9.5" aria-hidden="true"/>
-                    <!-- smaller European/AU poles ~3 each: Austria (507,100.1), Switzerland (484.9,103.4), Iceland (390.9,29.1), Romania (543.9,107.1), Australia (928.1,397.9) -->
+                    <!-- smaller European poles ~3 each: Austria (507,100.1), Switzerland (484.9,103.4), Iceland (390.9,29.1), Romania (543.9,107.1). Australia (was 928.1,397.9) is now an off-map chip — see below. -->
                     <circle class="gm-dot" cx="507.0" cy="100.1" r="6"   aria-hidden="true"/>
                     <circle class="gm-dot" cx="484.9" cy="103.4" r="6"   aria-hidden="true"/>
                     <circle class="gm-dot" cx="390.9" cy="29.1"  r="6"   aria-hidden="true"/>
                     <circle class="gm-dot" cx="543.9" cy="107.1" r="6"   aria-hidden="true"/>
-                    <circle class="gm-dot" cx="928.1" cy="397.9" r="6"   aria-hidden="true"/>
 
                     <!-- India (78.9,22.6 → 733.0,202.7) — the lone independent Asia-Pacific org (TATVA), on the subcontinent SW of China -->
                     <circle class="gm-india" cx="733.0" cy="202.7" r="4.5" aria-hidden="true"/>
@@ -847,16 +844,22 @@
                         <text class="gm-tw-label" x="880.6" y="228" text-anchor="middle" style="font-size:10px; fill:var(--grey); font-weight:400;">adjacent — not yet music-specific MH</text>
                     </a>
 
-                    <!-- off-map tally: the 22 borderless orgs, no home country — minimal: numeral + two short lines -->
-                    <g transform="translate(40, 376)">
-                        <rect class="gm-tally" x="0" y="0" width="172" height="48" rx="6"/>
-                        <text class="gm-tally-num" x="16" y="33">22</text>
-                        <text class="gm-tally-txt" x="64" y="21">borderless</text>
-                        <text class="gm-tally-txt" x="64" y="37">no home country</text>
+                    <!-- off-map count chips, relocated into the empty mid-Atlantic ocean band (between the N. America east coast and Europe): orgs that fall outside the cropped frame. -->
+                    <!-- Australia (~3): south of the crop, shown as a count instead of a dot. -->
+                    <g transform="translate(238, 178)">
+                        <rect class="gm-tally" x="0" y="0" width="158" height="26" rx="6"/>
+                        <text class="gm-tally-num" x="14" y="20" style="font-size:16px;">3</text>
+                        <text class="gm-tally-txt" x="40" y="17">Australia · off-map (south)</text>
+                    </g>
+                    <!-- 22 borderless orgs, no home country — minimal: numeral + two short lines -->
+                    <g transform="translate(238, 210)">
+                        <rect class="gm-tally" x="0" y="0" width="158" height="26" rx="6"/>
+                        <text class="gm-tally-num" x="14" y="20" style="font-size:16px;">22</text>
+                        <text class="gm-tally-txt" x="44" y="17">borderless · no home country</text>
                     </g>
                 </svg>
                 <figcaption class="gapmap-caption">
-                    <span class="gm-key-dot"></span> dot size = org count. The four ringed names link to their <strong>Org Study</strong>. Taiwan's <strong>藝創工會</strong> is adjacent — a union, not music-specific MH — so the gap is the music-specific MH layer.<br>
+                    <span class="gm-key-dot"></span> dot size = org count. Cropped to the populated northern band; Australia (~3) sits south of the frame, so it's an off-map count chip alongside the 22 borderless. The four ringed names link to their <strong>Org Study</strong>. Taiwan's <strong>藝創工會</strong> is adjacent — a union, not music-specific MH — so the gap is the music-specific MH layer.<br>
                     88 of 110 place-bound · 22 borderless · Backline directory, 2026-06.
                 </figcaption>
             </figure>
