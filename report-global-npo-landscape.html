@@ -112,7 +112,7 @@
         }
 
         /* Hero */
-        .hero { margin-bottom: 4rem; }
+        .hero { margin-bottom: 2.25rem; }
 
         .eyebrow {
             font-family: var(--font-mono);
@@ -141,7 +141,7 @@
         /* Stats strip — dark (canonical) */
         .stat-strip {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
-            margin: 3rem 0;
+            margin: 1.75rem 0;
             background: var(--black);
             border-radius: var(--radius-lg); overflow: hidden;
         }
@@ -182,7 +182,7 @@
         .refs li .conf-sym { font-style: normal; margin-right: 0.4em; }
 
         /* Per-tab citation registries (§6.11 block tier) */
-        .refs { background: var(--white); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2.5rem; }
+        .refs { background: var(--white); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 1.5rem; }
         .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
         .refs ol { margin: 0 0 0.25rem 1.25rem; padding: 0; }
         .refs li { font-size: var(--text-sm); color: var(--graphite); line-height: 1.6; margin-bottom: 0.5rem; }
@@ -190,7 +190,7 @@
         .refs-note { font-size: var(--text-xs); color: var(--grey); margin-bottom: 0; }
 
         /* Supplementary-data call-to-action — the per-org table is a primary entry point */
-        .data-cta { display: flex; align-items: center; gap: 1.25rem; background: var(--signal-bg); border: 1px solid var(--signal-glow); border-left: 4px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin: 0 0 2.5rem; text-decoration: none; transition: background var(--dur) var(--ease), transform var(--dur) var(--ease); }
+        .data-cta { display: flex; align-items: center; gap: 1.25rem; background: var(--signal-bg); border: 1px solid var(--signal-glow); border-left: 4px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin: 0 0 1.5rem; text-decoration: none; transition: background var(--dur) var(--ease), transform var(--dur) var(--ease); }
         .data-cta:hover, .data-cta:focus-visible { background: rgba(102,103,171,0.14); transform: translateY(-2px); }
         .data-cta-icon { font-size: 1.6rem; line-height: 1; flex-shrink: 0; }
         .data-cta-eyebrow { display: block; font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.14em; color: var(--signal); }
@@ -198,9 +198,9 @@
         .data-cta-sub { display: block; font-size: var(--text-sm); color: var(--graphite); }
 
         /* Tabs */
-        .tabs-wrapper { margin: 3rem 0; }
+        .tabs-wrapper { margin: 1.75rem 0; }
 
-        .tab-pills { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .tab-pills { display: flex; gap: 0.75rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
 
         .tab-btn {
             padding: 0.65rem 1.25rem;
@@ -304,7 +304,7 @@
         .section-title {
             font-family: var(--font-display);
             font-size: var(--text-h2); font-weight: 700;
-            margin: 2rem 0 1.5rem 0;
+            margin: 1.5rem 0 1rem 0;
             color: var(--charcoal);
             text-transform: uppercase; letter-spacing: -0.01em;
         }
@@ -321,7 +321,7 @@
             background: var(--white);
             border: 1px solid var(--border-light);
             border-radius: var(--radius-lg);
-            padding: 2rem 1.5rem 1.5rem;
+            padding: 1.5rem 1.25rem 1.25rem;
             margin-bottom: 1.5rem;
         }
         .gapmap-head {
@@ -334,7 +334,7 @@
             font-family: var(--font-mono);
             font-size: var(--text-xs); color: var(--grey);
             text-transform: uppercase; letter-spacing: 0.12em;
-            margin: 0 0 1.5rem;
+            margin: 0 0 1rem;
         }
         .gapmap-figure { margin: 0; }
         .gapmap-svg { display: block; width: 100%; height: auto; }
@@ -396,7 +396,7 @@
             font-family: var(--font-mono);
             font-size: var(--text-xs); color: var(--grey);
             line-height: 1.7; letter-spacing: 0.02em;
-            margin: 1.25rem 0 0;
+            margin: 1rem 0 0;
         }
         .gapmap-caption .gm-key-dot {
             display: inline-block; width: 0.6em; height: 0.6em; border-radius: 50%;
@@ -406,7 +406,7 @@
         /* full-list gateway — the map is a visual summary of the complete 110-org table */
         .gapmap-gateway {
             display: flex; align-items: center; gap: 0.85rem;
-            margin: 1.5rem 0 0;
+            margin: 1.15rem 0 0;
             padding: 0.95rem 1.25rem;
             background: var(--signal-bg);
             border: 1px solid var(--signal-glow);
@@ -430,7 +430,7 @@
             .gm-ring { animation: none; opacity: 1; transform: none; }
         }
         @media (max-width: 768px) {
-            .gapmap { padding: 1.5rem 1rem 1.25rem; }
+            .gapmap { padding: 1.15rem 0.85rem 1rem; }
             .gm-india-label, .gm-tw-label { font-size: 13px; }
             .gm-node-name { font-size: 12px; }
             .gm-node-cue { font-size: 10.5px; }
@@ -570,7 +570,7 @@
         .sources-card {
             background-color: var(--white);
             border: 1px solid var(--border-light);
-            padding: 2rem; border-radius: var(--radius-lg);
+            padding: 1.5rem; border-radius: var(--radius-lg);
             margin-bottom: 1.5rem;
         }
 
@@ -719,7 +719,7 @@
             <h3 class="gapmap-head">Where the support is — and isn't</h3>
             <p class="gapmap-sub">110 organizations worldwide · 1 independent org in Asia · 0 in Taiwan</p>
             <figure class="gapmap-figure">
-                <svg class="gapmap-svg" viewBox="0 0 1000 480" role="img"
+                <svg class="gapmap-svg" viewBox="0 14 1000 416" role="img"
                      aria-label="Projection-accurate equirectangular world map of music mental-health organizations, every marker placed from real longitude and latitude. Support clusters densely in the United States — the largest dot, carrying the Backline and MusiCares nodes — and across Europe: Germany, the United Kingdom (the Music Minds Matter node), France, with smaller dots at Austria, Switzerland, Iceland, Romania and Australia. India holds one independent organization, labelled, on the subcontinent southwest of China. A faint long-tail scatter marks the remaining ~47 organizations across 33 more countries, mostly in Europe with a couple in North America. East Asia is drawn to scale: the mainland-China coastline, the Korean peninsula and Japan's island arc to the north-east are each separate landmasses, and Taiwan is a distinct small island off the south-east China coast, east of the mainland and south-west of Japan, separated from the mainland by the open water of the Taiwan Strait and given its own outline. Taiwan and the rest of East and South-East Asia have zero music-specific mental-health organizations — but Taiwan already has 藝創工會, a creators' union providing adjacent infrastructure (labour and health insurance, occupational health, contracts) since 2011, marked by an outlined ring sitting on the island of Taiwan rather than a solid dot. The gap is the music-specific mental-health layer on top of it. The four named, ringed nodes are clickable links to their Org Study pages.">
                     <!-- ===== geographically faithful backdrop: equirectangular projection ===== -->
                     <!-- x = (lon+130)/285*1000 ; y = (72-lat)/117*480 ; every line & marker computed from real lon/lat -->
