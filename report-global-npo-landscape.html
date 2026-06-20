@@ -33,7 +33,7 @@
 /* Fallback-metrics override to tame Fraunces swap CLS on the hero H1 (P3) */
 @font-face{font-family:'Fraunces Fallback';src:local('Georgia');size-adjust:104%;ascent-override:92%;descent-override:24%;line-gap-override:0%}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:60px}
 body{background:var(--bg-light);color:var(--black);font-family:var(--font-body);font-optical-sizing:auto;-webkit-font-smoothing:antialiased;line-height:1.5;font-weight:400}
 /* §10.6 FIX — overflow control on .page wrapper (clip, not on html/body) */
 .page{overflow-x:clip;position:relative}
@@ -51,11 +51,30 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .wrap{max-width:var(--max-w);margin:0 auto;padding:0 clamp(1.2rem,4vw,3rem)}
 
-/* SITE NAV */
-.sitenav{position:relative;z-index:55;display:flex;align-items:center;gap:1.75rem;flex-wrap:wrap;max-width:var(--max-w);margin:0 auto;padding:1.4rem clamp(1.2rem,4vw,3rem) .4rem}
+/* SITE NAV — desktop horizontal bar; collapses to hamburger ≤768px (§10.4) */
+.sitenav{position:relative;z-index:55;max-width:var(--max-w);margin:0 auto;padding:1.4rem clamp(1.2rem,4vw,3rem) .4rem}
+.sitenav .nav-links{display:flex;align-items:center;gap:1.75rem;flex-wrap:wrap}
 .sitenav a{font-family:var(--font-mono);font-size:.8rem;font-weight:400;color:var(--grey);text-transform:uppercase;letter-spacing:.08em}
 .sitenav a:hover{color:var(--black)}
 .sitenav a.current{color:var(--black)}
+.nav-topbar{display:none}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem;margin-left:-.5rem;z-index:101;-webkit-tap-highlight-color:transparent}
+.nav-toggle span{display:block;width:22px;height:2px;background:var(--charcoal);margin:5px 0;transition:all .3s var(--ease)}
+.nav-toggle.open span:nth-child(1){transform:rotate(45deg) translate(4px,5px)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-5px)}
+@media(forced-colors:active){.nav-toggle span{background:CanvasText}}
+.nav-mobile-brand{display:none;font-family:var(--font-display);font-weight:800;color:var(--charcoal);text-transform:uppercase;letter-spacing:.08em;font-size:.65rem;line-height:1.3}
+.nav-mobile-brand .mobile-sub{font-family:var(--font-mono);font-size:.5rem;font-weight:400;color:var(--purple-deep);text-transform:uppercase;letter-spacing:.2em}
+@media(max-width:768px){
+  .sitenav{padding-top:1.1rem;padding-bottom:.85rem}
+  .nav-topbar{display:flex;align-items:center;gap:.75rem}
+  .nav-toggle{display:block;min-width:44px;min-height:44px}
+  .sitenav .nav-links{display:none;flex-direction:column;gap:.9rem;margin-top:1rem;align-items:flex-start}
+  .sitenav .nav-links.show{display:flex}
+  .sitenav .nav-links a{font-size:.85rem}
+  .nav-mobile-brand{display:block}
+}
 
 /* JUMP NAV */
 .jumpnav{position:sticky;top:0;z-index:50;background:var(--nav-blur-bg);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--silver);overflow-x:auto}
@@ -64,6 +83,8 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
 .jumpnav a:hover{color:var(--off-black)}
 .jumpnav a.active{color:var(--off-black);border-bottom-color:var(--signal)}
 .jumpnav a.news{color:var(--signal);font-weight:700}
+/* mobile: hairline separates the sticky jump-nav from the site-nav/hamburger row above it */
+@media(max-width:768px){.jumpnav{border-top:1px solid var(--silver)}}
 /* radardot = STATIC filled dot in BOTH jump-nav and news kicker. No ::after ring loop.
    Animation budget is exactly two infinite loops: .tw-pulse (map) + .disp.fresh .sweep (news). */
 .radardot{width:7px;height:7px;border-radius:50%;background:var(--signal);display:inline-block;position:relative}
@@ -93,6 +114,9 @@ a.conf:hover,a.conf:focus{color:var(--signal-dim);text-decoration:underline}
 .result{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.04em;text-transform:uppercase;color:var(--off-black);margin-top:.6rem;font-weight:700}
 .result .reset{color:var(--signal);text-decoration:underline;cursor:pointer;background:none;border:none;font:inherit;padding:0 0 0 .4rem}
 .result .plain{color:var(--grey);font-weight:400;text-transform:none}
+.filter-clear{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;padding:.4rem .8rem;border:1px solid var(--signal);border-radius:100px;background:var(--signal-bg);color:var(--signal);cursor:pointer;transition:.18s;margin-top:.55rem}
+.filter-clear:hover{background:var(--signal);color:var(--white)}
+.filter-clear[hidden]{display:none}
 .hint{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--grey-light);margin-top:.5rem}
 @media(max-width:680px){.frow{align-items:flex-start}.frow .glabel{width:100%;margin-bottom:.15rem}}
 
@@ -284,13 +308,21 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
 <div class="page">
 
 <nav class="sitenav" aria-label="Site navigation">
-  <a href="index.html">HOME</a>
-  <a href="report-global-npo-landscape.html" class="current" aria-current="page">ORGS MAP</a>
-  <a href="org-study.html">ORG STUDY</a>
-  <a href="policy-study.html">POLICY STUDY</a>
-  <a href="research.html">RESEARCH</a>
-  <a href="insight.html">INSIGHT</a>
-  <a href="plan.html">PLAN</a>
+  <div class="nav-topbar">
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="siteNavLinks" onclick="this.classList.toggle('open');var x=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',String(!x));this.setAttribute('aria-label',x?'Open menu':'Close menu');document.getElementById('siteNavLinks').classList.toggle('show');this.closest('.sitenav').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+  </div>
+  <div class="nav-links" id="siteNavLinks">
+    <a href="index.html">HOME</a>
+    <a href="report-global-npo-landscape.html" class="current" aria-current="page">ORGS MAP</a>
+    <a href="org-study.html">ORG STUDY</a>
+    <a href="policy-study.html">POLICY STUDY</a>
+    <a href="research.html">RESEARCH</a>
+    <a href="insight.html">INSIGHT</a>
+    <a href="plan.html">PLAN</a>
+  </div>
 </nav>
 
 <nav class="jumpnav" aria-label="Jump to section">
@@ -341,6 +373,7 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
       </div>
     </div>
     <p class="result" id="result" aria-live="polite">110 of 110 <span class="plain">· the whole field</span></p>
+    <button class="filter-clear" id="clearAll" type="button" hidden aria-label="Clear all filters and show all 110 organizations">Clear filters · 110</button>
     <p class="hint">↓ Tap any ringed name for details · the two filters narrow the map and the all-110 table together (Service AND Funding)</p>
   </section>
 </div>
@@ -811,6 +844,7 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
   var namedNodes = nodes.filter(function(nd){ return nd.hasAttribute('data-service'); });
   var resultEl = document.getElementById('result');
   var tableCap = document.getElementById('tableCap');
+  var clearAll = document.getElementById('clearAll');
 
   function slugSet(str){ return (str||'').split(/\s+/).filter(Boolean); }
   function matches(el){
@@ -828,7 +862,7 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
   function reading(n){
     var s=state.service, f=state.funding;
     if(s==='all'&&f==='all') return 'the whole field';
-    if(n===0) return 'no organization matches — Reset';
+    if(n===0) return 'no organization matches';
     var sv=serviceLabel[s], fn=fundingLabel[f];
     // two active filters: "{n} of 110 · {service} AND {funding}"
     if(s!=='all'&&f!=='all') return sv+' AND '+fn;
@@ -859,13 +893,9 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
       if(anyFilter && !matches(nd)) nd.classList.add('gm-dimmed');
       else nd.classList.remove('gm-dimmed');
     });
-    if(n===0){
-      resultEl.innerHTML = '0 of 110 <span class="plain">· '+reading(0)+'</span> <button class="reset" type="button" id="resetBtn">Reset</button>';
-      var rb=document.getElementById('resetBtn');
-      if(rb) rb.addEventListener('click', function(){ state.service='all'; state.funding='all'; setChecked('service','all'); setChecked('funding','all'); apply(); });
-    } else {
-      resultEl.innerHTML = n+' of 110 <span class="plain">· '+reading(n)+'</span>';
-    }
+    resultEl.innerHTML = n+' of 110 <span class="plain">· '+reading(n)+'</span>';
+    // global "Clear filters · 110" chip is visible only when a filter is active (one tap clears both rows + URL)
+    if(clearAll) clearAll.hidden = !anyFilter;
     // P2 — table caption echoes the active filter so the off-screen sync is legible at the table
     if(tableCap) tableCap.textContent = 'Showing '+n+' of 110 · '+filterText()+'.';
     writeURL();
@@ -883,6 +913,12 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
     setChecked(group,val);
     apply();
   }
+  // global reset — clears BOTH rows + URL in one tap
+  if(clearAll) clearAll.addEventListener('click', function(){
+    state.service='all'; state.funding='all';
+    setChecked('service','all'); setChecked('funding','all');
+    apply();
+  });
 
   // ===== APG radiogroup — click + roving tabindex + arrow-key nav =====
   document.querySelectorAll('.frow[role="radiogroup"]').forEach(function(grp){
@@ -1072,6 +1108,16 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
     }); }, {rootMargin:'-45% 0px -50% 0px'});
     document.querySelectorAll('section[id]').forEach(function(s){ io.observe(s); });
   }
+})();
+</script>
+<script>
+/* Site-nav hamburger: Esc + tap-outside close, with focus return (progressive enhancement over the inline toggle) */
+(function(){
+  var t=document.querySelector('.sitenav .nav-toggle'), links=document.getElementById('siteNavLinks'), nav=document.querySelector('.sitenav');
+  if(!t||!links||!nav) return;
+  function close(){ links.classList.remove('show'); t.classList.remove('open'); nav.classList.remove('open'); t.setAttribute('aria-expanded','false'); t.setAttribute('aria-label','Open menu'); }
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && links.classList.contains('show')){ close(); t.focus(); } });
+  document.addEventListener('click', function(e){ if(!links.classList.contains('show')) return; if(nav.contains(e.target)) return; close(); });
 })();
 </script>
 </body>
