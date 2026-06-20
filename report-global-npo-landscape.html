@@ -17,7 +17,7 @@
   --sp-pink:#d4799c;--sp-blue:#7aaed4;--sp-green:#85c9a3;--sp-orange:#e8a87c;--sp-lav:#b8a9d4;
   /* AA-safe darkened kicker-text stops (Round 7 → re-tuned Round 8 for 4.5:1 on --snow) */
   --sp-blue-t:#36719c;--sp-green-t:#2f7d59;--sp-orange-t:#9c5618;--sp-lav-t:#6c5b9c;
-  --abroad-text:#b3486f;--abroad-bg:rgba(212,121,156,.14);
+  --abroad-text:#b3486f;--abroad-text-deep:#9c3a5e;--abroad-bg:rgba(212,121,156,.14);
   --nav-blur-bg:rgba(244,244,245,0.92);
   --bg-light:var(--snow);--bg-card:var(--white);
   --border-light:rgba(0,0,0,0.07);--border-dark:rgba(255,255,255,0.1);
@@ -162,7 +162,7 @@ svg.map{width:100%;height:auto;display:block;max-width:980px;margin:0 auto}
 .gm-cue-tw{opacity:1}
 .gm-node:hover .gm-node-dot,.gm-node:focus-visible .gm-node-dot{fill:var(--signal-dim);r:8}
 .gm-node:hover .gm-node-name,.gm-node:focus-visible .gm-node-name{fill:var(--black)}
-.gm-node:focus-visible .gm-node-focus{fill:none;stroke:var(--signal);stroke-width:2;opacity:1}
+.gm-node:focus .gm-node-focus,.gm-node:focus-visible .gm-node-focus{fill:none;stroke:var(--signal);stroke-width:2;opacity:1}
 .gm-node-focus{fill:none;stroke:none;opacity:0}
 .gm-tally{fill:var(--white);stroke:var(--border-light);stroke-width:1}
 .gm-tally-num{font-family:var(--font-mono);font-weight:700;font-size:22px;fill:var(--signal)}
@@ -170,6 +170,67 @@ svg.map{width:100%;height:auto;display:block;max-width:980px;margin:0 auto}
 .mapcap{font-family:var(--font-mono);font-size:var(--text-xs);color:var(--grey);line-height:1.7;letter-spacing:.02em;margin:1rem auto 0;max-width:980px}
 .mapcap strong{color:var(--signal);font-weight:700}
 .mapcap .gm-key-dot{display:inline-block;width:.6em;height:.6em;border-radius:50%;background:var(--off-black);vertical-align:baseline;margin:0 .15em}
+.mapcap .gm-key-scan{display:inline-block;width:.62em;height:.62em;border-radius:50%;background:var(--abroad-text);vertical-align:baseline;margin:0 .15em;box-shadow:0 0 0 2px var(--white),0 0 0 3px var(--abroad-text)}
+.mapcap strong.scan{color:var(--abroad-text)}
+
+/* ===== SOURCE LAYER — native-language-scan provenance. Pink (--abroad-text), NEVER --signal
+   (reserved for Taiwan / the zero). Same disc body as the ink directory nodes → equal weight,
+   different hand. The 4 are real, focusable, peekable links. ===== */
+.gm-scan{cursor:pointer;outline:none}
+.gm-scan-hit{fill:transparent}
+.gm-scan-dot{fill:var(--abroad-text);transition:r var(--dur) var(--ease)}
+.gm-scan-halo{fill:none;stroke:var(--abroad-text);stroke-width:1.4;opacity:.7;transition:opacity var(--dur) var(--ease)}
+.gm-scan-name{font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.02em;fill:var(--abroad-text)}
+.gm-scan-cue{font-family:var(--font-mono);font-size:10px;letter-spacing:.05em;fill:var(--abroad-text);opacity:0;transition:opacity var(--dur) var(--ease)}
+.gm-scan:hover .gm-scan-cue,.gm-scan:focus-visible .gm-scan-cue{opacity:1}
+.gm-scan:hover .gm-scan-dot,.gm-scan:focus-visible .gm-scan-dot{r:6}
+.gm-scan:hover .gm-scan-halo,.gm-scan:focus-visible .gm-scan-halo{opacity:1}
+/* focus ring — :focus fallback so SVG <a> keyboard focus is never invisible (engines vary on :focus-visible for SVG links) */
+.gm-scan:focus .gm-scan-focus,.gm-scan:focus-visible .gm-scan-focus{fill:none;stroke:var(--abroad-text);stroke-width:2;opacity:1}
+.gm-scan-focus{fill:none;stroke:none;opacity:0}
+.map .gm-scan.gm-dimmed{opacity:.18}
+/* MOBILE — the map degrades to a static, non-interactive image; the TABLE is the instrument (§13).
+   Map links lose pointer events here and are removed from the focus order + AT tree via JS (setMapMode);
+   the peek (a desktop map affordance) is hidden — org detail lives in the table + #beyond. */
+@media(max-width:680px){
+  #gapmap a{pointer-events:none}
+  .stage .peek{display:none}
+}
+/* isolate the native scan → fade the directory's aggregate geographic context so the 4 read clearly */
+.map.src-native .gm-dot,.map.src-native .gm-dot-faint,.map.src-native .gm-india,.map.src-native .gm-india-label{opacity:.12}
+
+/* ===== FIELD READOUT — the live where / what / who panel that replaces the 3 chart chapters.
+   Re-bases with the Source filter (114 / 110 / 4); highlights the active Service·Funding chip. ===== */
+.readout{max-width:980px;margin:1.3rem auto 0;border-top:1px solid var(--silver);padding-top:1.2rem}
+.readout-head{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);margin-bottom:.2rem}
+.readout-head b{color:var(--off-black)}
+.ro-base{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.05em;text-transform:uppercase;color:var(--abroad-text);margin-bottom:1rem}
+.ro-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem 2.4rem}
+.ro-block.where{grid-column:1 / -1}
+@media(max-width:680px){.ro-grid{grid-template-columns:1fr;gap:1.2rem}}
+.ro-title{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--off-black);font-weight:700;margin-bottom:.55rem;display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap}
+.ro-title .q{color:var(--grey);font-weight:400;text-transform:none;letter-spacing:.02em}
+.ro-title .ro-src{color:var(--grey);border-bottom:1px solid var(--silver);font-size:.92em}
+.ro-row{display:grid;grid-template-columns:8.6rem minmax(0,1fr) 3.6rem;gap:.55rem;align-items:center;padding:.26rem 0;border-bottom:1px solid var(--snow)}
+@media(max-width:480px){.ro-row{grid-template-columns:7rem minmax(0,1fr) 3rem;gap:.4rem}}
+.ro-row .rl{font-family:var(--font-mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.02em;color:var(--graphite)}
+.ro-track{height:9px;background:var(--snow)}
+/* width animates only in response to a FILTER, not on first paint (the .ro-animate gate is added post-load) */
+.ro-fill{height:9px;background:var(--hue,var(--graphite));min-width:1px}
+#read.ro-animate .ro-fill{transition:width var(--dur) var(--ease)}
+.ro-val{font-family:var(--font-mono);font-size:.62rem;color:var(--off-black);font-weight:700;text-align:right;white-space:nowrap}
+.ro-row.scan .ro-fill{background:var(--abroad-text)}
+.ro-row.scan .rl{color:var(--abroad-text)}
+.ro-row.active{background:var(--signal-bg);box-shadow:inset 3px 0 0 var(--signal)}
+.ro-row.active .rl{color:var(--signal);font-weight:700}
+/* a native-scan row that is also the active filter stays PINK — never --signal purple on the source layer */
+.ro-row.scan.active{box-shadow:inset 3px 0 0 var(--abroad-text)}
+.ro-row.scan.active .rl{color:var(--abroad-text)}
+.ro-where{font-family:var(--font-mono);font-size:.68rem;line-height:2;letter-spacing:.02em;color:var(--graphite)}
+.ro-where b{color:var(--off-black)}
+.ro-where .z{color:var(--signal);font-weight:700}
+.ro-where .sc{color:var(--abroad-text);font-weight:700}
+.ro-note{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.03em;color:var(--grey);margin-top:1.1rem;line-height:1.7}
 
 /* PEEK CARD */
 .peek{position:relative;max-width:980px;margin:1rem auto 0;background:var(--white);border:1px solid var(--signal-glow);border-left:3px solid var(--signal);border-radius:var(--radius-lg);padding:1rem 1.2rem;display:none}
@@ -181,6 +242,10 @@ svg.map{width:100%;height:auto;display:block;max-width:980px;margin:0 auto}
 .peek .peek-actions a{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--signal-glow);padding-bottom:2px}
 .peek .peek-close{position:absolute;top:.5rem;right:.6rem;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:none;border:none;color:var(--grey);cursor:pointer;font-size:1.2rem}
 .peek .peek-close:hover{color:var(--off-black)}
+/* native-scan org → pink provenance accent (never --signal) */
+.peek.peek-scan{border-left-color:var(--abroad-text)}
+.peek.peek-scan .peek-eye{color:var(--abroad-text)}
+.result .rpct{color:var(--off-black)}
 
 /* TAIWAN REVEAL */
 .tw-reveal{max-width:980px;margin:1.4rem auto .2rem;padding:1.1rem 1.2rem .9rem;border-top:1px solid var(--purple-light);background:var(--signal-bg);border-radius:0 0 var(--radius-lg) var(--radius-lg)}
@@ -223,7 +288,7 @@ svg.map{width:100%;height:auto;display:block;max-width:980px;margin:0 auto}
 
 table.tbl{width:100%;border-collapse:collapse;font-size:.86rem;margin-top:.5rem}
 table.tbl caption{font-family:var(--font-mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:var(--grey);text-align:left;padding-bottom:.6rem}
-table.tbl th{font-family:var(--font-mono);font-size:.58rem;text-transform:uppercase;letter-spacing:.08em;text-align:left;color:var(--grey);border-bottom:1px solid var(--graphite);padding:.5rem .6rem;background:var(--snow);position:sticky;top:0}
+table.tbl th{font-family:var(--font-mono);font-size:.58rem;text-transform:uppercase;letter-spacing:.08em;text-align:left;color:var(--grey);border-bottom:1px solid var(--graphite);padding:.5rem .6rem;background:var(--snow);position:sticky;top:0;z-index:3}
 table.tbl td{padding:.55rem .6rem;border-bottom:1px solid var(--silver);vertical-align:top}
 table.tbl td.c{font-family:var(--font-mono);font-size:.78rem;white-space:nowrap}
 table.tbl tbody tr:hover{background:var(--signal-bg)}
@@ -231,6 +296,10 @@ table.tbl td.org a{color:var(--signal);border-bottom:1px solid var(--signal-glow
 .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .tbl-meta{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);white-space:nowrap}
 tr.hidden{display:none}
+/* native-scan group separator + provenance stripe (pink = --abroad-text, never --signal) */
+table.tbl tbody tr.grp td{background:var(--abroad-bg);color:var(--abroad-text-deep);font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:.5rem .6rem;border-bottom:1px solid var(--abroad-text)}
+table.tbl tbody tr[data-source="native-scan"]{box-shadow:inset 3px 0 0 var(--abroad-text)}
+table.tbl tbody tr[data-source="native-scan"] td:first-child{color:var(--abroad-text);font-weight:700}
 /* in-page highlight when a peek's "Locate in table" lands on a row (no navigation) */
 table.tbl tbody tr[data-active]{background:var(--signal-bg);box-shadow:inset 3px 0 0 var(--signal)}
 table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signal)}
@@ -258,7 +327,7 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
 .meta{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem}
 .meta .date{color:var(--grey);font-weight:700}
 .tag{display:inline-flex;align-items:center;gap:.3rem;font-weight:700;padding:.18rem .5rem;border-radius:100px}
-.tag.abroad{color:var(--abroad-text);background:var(--abroad-bg)}
+.tag.abroad{color:var(--abroad-text-deep);background:var(--abroad-bg)}
 .tag.taiwan{color:var(--signal);background:var(--signal-bg)}
 .tag .gl{width:5px;height:5px;border-radius:50%;background:currentColor;display:inline-block}
 .cat{color:var(--grey)}
@@ -298,6 +367,7 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
   .tw-pulse{animation:none;opacity:0}
   .sweep,.disp{animation:none}
   .disp{opacity:1;transform:none}
+  #read .ro-fill{transition:none}
   *{transition-duration:.01ms !important}
 }
 </style>
@@ -328,11 +398,10 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
 <nav class="jumpnav" aria-label="Jump to section">
   <ul>
     <li><a href="#map" class="active">Map</a></li>
-    <li><a href="#where">Where</a></li>
-    <li><a href="#what">What</a></li>
-    <li><a href="#funded">Funded</a></li>
+    <li><a href="#read">Read the field</a></li>
+    <li><a href="#beyond">Beyond</a></li>
     <li><a href="#evidence">Evidence</a></li>
-    <li><a href="#all-110">All 110</a></li>
+    <li><a href="#all-114">All 114</a></li>
     <li><a href="#news" class="news"><span class="radardot" aria-hidden="true"></span>Field News</a></li>
     <li><a href="#sources">Sources</a></li>
   </ul>
@@ -346,12 +415,18 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
 
 <div class="wrap">
   <section class="hero" id="map">
-    <div class="eyebrow">2026-06 · Orgs Map · v3.6</div>
+    <div class="eyebrow">2026-06 · ORGS MAP · v4.1</div>
     <h1>Where the support<br>is — <em>and isn't.</em></h1>
-    <div class="ticker">110 worldwide&nbsp;·&nbsp;0 independent in east asia&nbsp;·&nbsp;<span class="zero">0 in taiwan</span></div>
-    <p class="lede">Backline's Global Resource Hub lists <b>110</b> music mental-health orgs. None reach Taiwan. <b>That absence is the entry point.</b><a class="conf" href="#ov-src-1">1</a></p>
+    <div class="ticker">110 in one directory&nbsp;·&nbsp;4 found beyond&nbsp;·&nbsp;<span class="zero">0 in taiwan</span></div>
+    <p class="lede">Backline's Global Resource Hub lists <b>110</b> music mental-health orgs.<a class="conf" href="#ov-src-1">1</a> Native-language search adds <b>4</b> the directory missed — <b>114</b> across two sources.<a class="conf" href="#ov-src-10">10</a> None reach Taiwan. <b>That absence is the entry point.</b> One directory maps its own network, not the world — so the map below shows both, and lets you read the field by service, funding and place.</p>
 
-    <div class="filters" role="group" aria-label="Filter the map and the all-110 table">
+    <div class="filters" role="group" aria-label="Filter the map, the field readout and the table by source, service and funding">
+      <div class="frow" role="radiogroup" aria-label="Filter by source" data-group="source">
+        <span class="glabel">Source</span>
+        <button class="chip" role="radio" aria-checked="true" data-val="all">All sources</button>
+        <button class="chip" role="radio" aria-checked="false" data-val="directory">Backline directory</button>
+        <button class="chip" role="radio" aria-checked="false" data-val="native-scan">Native-language scan</button>
+      </div>
       <div class="frow" role="radiogroup" aria-label="Filter by service" data-group="service">
         <span class="glabel">Service</span>
         <button class="chip" role="radio" aria-checked="true" data-val="all">All</button>
@@ -372,16 +447,17 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
         <button class="chip" role="radio" aria-checked="false" data-val="unknown">Unknown</button>
       </div>
     </div>
-    <p class="result" id="result" aria-live="polite">110 of 110 <span class="plain">· the whole field</span></p>
-    <button class="filter-clear" id="clearAll" type="button" hidden aria-label="Clear all filters and show all 110 organizations">Clear filters · 110</button>
-    <p class="hint">↓ Tap any ringed name for details · the two filters narrow the map and the all-110 table together (Service AND Funding)</p>
+    <p class="result" id="result">114 of 114 <span class="plain">· the whole field, across two sources</span></p>
+    <span class="vh" id="srLive" aria-live="polite" aria-atomic="true"></span>
+    <button class="filter-clear" id="clearAll" type="button" hidden aria-label="Clear all filters and show all 114 organizations">Clear filters · 114</button>
+    <p class="hint">↓ Tap any node on the map for details · the filters narrow the map, the field readout and the table together — <b>Source</b> re-bases the count (114 · 110 directory · 4 native scan), <b>Service</b> AND <b>Funding</b> combine.</p>
   </section>
 </div>
 
 <div class="wrap"><div class="stage" aria-label="Geographic map of music mental-health organizations">
   <p class="vh">Interactive map; the same organizations are listed in the table below, which is the canonical way to browse them.</p>
   <svg class="map" id="gapmap" viewBox="28 18 986 410" role="img"
-       aria-label="Projection-accurate equirectangular world map of music mental-health organizations, every marker placed from real longitude and latitude. Support clusters densely in the United States — the largest dot, carrying the Backline and MusiCares nodes — and across Europe: Germany, the United Kingdom (the Music Minds Matter node), France, with smaller dots at Austria, Switzerland, Iceland, Romania and Australia. India holds one independent organization, labelled, on the subcontinent southwest of China. A faint long-tail scatter marks the remaining organizations across more countries. East Asia is drawn to scale: mainland-China coastline, the Korean peninsula and Japan's island arc are separate landmasses, and Taiwan is a distinct small island off the south-east China coast, separated by the Taiwan Strait. Taiwan and the rest of East and South-East Asia have zero music-specific mental-health organizations — but Taiwan already has 藝創工會, a creators' union providing adjacent infrastructure since 2011, marked by an outlined pulsing ring. A drawn dashed arc reaches from the United States toward the Taiwan ring — the geographic relationship of a field reaching toward a place it does not yet serve. The four named, ringed nodes are clickable links to their Org Study pages.">
+       aria-label="Projection-accurate equirectangular world map of music mental-health organizations, every marker placed from real longitude and latitude. Support clusters densely in the United States — the largest dot, carrying the Backline and MusiCares nodes — and across Europe: Germany, the United Kingdom (the Music Minds Matter node), France, with smaller dots at Austria, Switzerland, Iceland, Romania and Australia. India holds one independent organization, labelled, on the subcontinent southwest of China. A faint long-tail scatter marks the remaining organizations across more countries. East Asia is drawn to scale: mainland-China coastline, the Korean peninsula and Japan's island arc are separate landmasses, and Taiwan is a distinct small island off the south-east China coast, separated by the Taiwan Strait. Taiwan and the rest of East and South-East Asia have zero music-specific mental-health organizations — but Taiwan already has 藝創工會, a creators' union providing adjacent infrastructure since 2011, marked by an outlined pulsing ring. A drawn dashed arc reaches from the United States toward the Taiwan ring — the geographic relationship of a field reaching toward a place it does not yet serve. The four named, ringed nodes are clickable links to their Org Study pages. Four pink nodes (Japan, Mexico, Brazil, Argentina) are interactive links to music-specific musicians' unions found beyond the directory by native-language search — they, and the directory organizations, are all listed in the table below, which is the canonical way to browse them.">
     <g class="gm-grid" aria-hidden="true">
       <line x1="0" y1="49.2"  x2="1000" y2="49.2"/>
       <line x1="0" y1="172.3" x2="1000" y2="172.3"/>
@@ -480,6 +556,65 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
       <text class="gm-node-cue"  x="449.1" y="35" text-anchor="middle">UK · Org Study →</text>
     </a>
 
+    <!-- NATIVE-LANGUAGE SCAN layer — the four music-specific unions the directory missed.
+         First-class, focusable, peekable links (pink = --abroad-text, the page's "beyond/abroad" hue;
+         NEVER --signal). data-source="native-scan", data-service="union", data-funding="membership"
+         so they are honest filterable citizens of the 114 without faking an MH/directory service. -->
+    <g class="gm-scan-layer" aria-label="Found beyond the directory: four music-specific musicians' unions located by native-language search — Japan, Mexico, Brazil, Argentina. Not in the Backline directory.">
+      <a class="gm-scan" href="#row-muj" role="link" tabindex="0"
+         aria-label="Musicians' Union of Japan — music-specific union found by native-language scan, not in the 110-org directory. Open details."
+         data-source="native-scan" data-service="union" data-funding="membership"
+         data-slug="muj" data-name="Musicians' Union of Japan (日本音楽家ユニオン)" data-country="Japan · native-language scan · not in the 110 directory"
+         data-row="row-muj"
+         data-body="A musicians' union (~5,200 members): self-run mutual-aid (共済), a health-checkup subsidy, and free legal and tax counsel. No union-run mental-health service — the &quot;24-hour helpline&quot; sometimes attributed to it is refuted. Found by native-language search; the directory never listed it.">
+        <circle class="gm-scan-hit"   cx="900" cy="150" r="22"/>
+        <circle class="gm-scan-focus" cx="900" cy="150" r="11"/>
+        <circle class="gm-scan-halo"  cx="900" cy="150" r="8"/>
+        <circle class="gm-scan-dot"   cx="900" cy="150" r="4.5"/>
+        <text class="gm-scan-name" x="900" y="137" text-anchor="middle">Japan</text>
+        <text class="gm-scan-cue"  x="900" y="126" text-anchor="middle">union · open ↓</text>
+      </a>
+      <a class="gm-scan" href="#row-sutm" role="link" tabindex="0"
+         aria-label="SUTM, Mexico — music-worker union found by native-language scan, not in the 110-org directory. Open details."
+         data-source="native-scan" data-service="union" data-funding="membership"
+         data-slug="sutm" data-name="SUTM — Sindicato Único de Trabajadores de la Música" data-country="Mexico · native-language scan · not in the 110 directory"
+         data-row="row-sutm"
+         data-body="A music-worker union: representation, collective bargaining, training. Member welfare, health or mental-health benefits are not documented on its own site, so we do not claim them. Found by native-language search.">
+        <circle class="gm-scan-hit"   cx="165" cy="175" r="22"/>
+        <circle class="gm-scan-focus" cx="165" cy="175" r="11"/>
+        <circle class="gm-scan-halo"  cx="165" cy="175" r="8"/>
+        <circle class="gm-scan-dot"   cx="165" cy="175" r="4.5"/>
+        <text class="gm-scan-name" x="165" y="193" text-anchor="middle">Mexico</text>
+        <text class="gm-scan-cue"  x="165" y="204" text-anchor="middle">union · open ↓</text>
+      </a>
+      <a class="gm-scan" href="#row-sindmusi" role="link" tabindex="0"
+         aria-label="SindMusi, Brazil — musicians' union found by native-language scan, not in the 110-org directory. Open details."
+         data-source="native-scan" data-service="union" data-funding="membership"
+         data-slug="sindmusi" data-name="SindMusi — Sindicato dos Músicos do RJ" data-country="Brazil · native-language scan · not in the 110 directory"
+         data-row="row-sindmusi"
+         data-body="A musicians' union (1907): labour and social-security legal counsel, health-plan brokerage, education discounts. Mental health = a single 2025 workshop, not a standing service. Found by native-language search.">
+        <circle class="gm-scan-hit"   cx="300" cy="300" r="22"/>
+        <circle class="gm-scan-focus" cx="300" cy="300" r="11"/>
+        <circle class="gm-scan-halo"  cx="300" cy="300" r="8"/>
+        <circle class="gm-scan-dot"   cx="300" cy="300" r="4.5"/>
+        <text class="gm-scan-name" x="300" y="287" text-anchor="middle">Brazil</text>
+        <text class="gm-scan-cue"  x="300" y="276" text-anchor="middle">union · open ↓</text>
+      </a>
+      <a class="gm-scan" href="#row-sadem" role="link" tabindex="0"
+         aria-label="SADEM, Argentina — musicians' union found by native-language scan, not in the 110-org directory. Open details."
+         data-source="native-scan" data-service="union" data-funding="membership"
+         data-slug="sadem" data-name="SADEM — Sindicato Argentino de Músicos" data-country="Argentina · native-language scan · not in the 110 directory"
+         data-row="row-sadem"
+         data-body="A musicians' union (1945) running its own health fund, OSDEM (medical, prevention, disability cover), plus legal and welfare support. Standing mental-health counselling is not advertised. Found by native-language search.">
+        <circle class="gm-scan-hit"   cx="280" cy="360" r="22"/>
+        <circle class="gm-scan-focus" cx="280" cy="360" r="11"/>
+        <circle class="gm-scan-halo"  cx="280" cy="360" r="8"/>
+        <circle class="gm-scan-dot"   cx="280" cy="360" r="4.5"/>
+        <text class="gm-scan-name" x="280" y="378" text-anchor="middle">Argentina</text>
+        <text class="gm-scan-cue"  x="280" y="389" text-anchor="middle">union · open ↓</text>
+      </a>
+    </g>
+
     <!-- Taiwan ring — adjacent infrastructure, pulsing -->
     <path class="gm-tw-solid" d="M877 189 L885 190 L887 198 L884 207 L878 208 L875 199 Z" aria-hidden="true"/>
     <circle class="tw-pulse" cx="880.6" cy="198.2" r="9" fill="var(--signal)" aria-hidden="true"/>
@@ -495,8 +630,8 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
       <text class="gm-tw-label" x="880.6" y="228" text-anchor="middle" style="font-size:10px;fill:var(--grey);font-weight:400;">adjacent — not yet music-specific MH</text>
     </a>
 
-    <!-- off-map tally: 22 borderless orgs -->
-    <g transform="translate(250, 268)" aria-hidden="true">
+    <!-- off-map tally: 22 borderless orgs (lower-left open ocean — clear of the Brazil/Argentina scan nodes) -->
+    <g transform="translate(40, 350)" aria-hidden="true">
       <rect class="gm-tally" x="0" y="0" width="172" height="48" rx="6"/>
       <text class="gm-tally-num" x="16" y="33">22</text>
       <text class="gm-tally-txt" x="64" y="21">borderless</text>
@@ -511,14 +646,16 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
     <h3 id="peekName">Backline</h3>
     <p id="peekBody">Case management + a vetted provider network, ~100% donation-funded, 8 staff. A referral model scales without building clinical services in-house — the closest thing to a startup blueprint for a Taiwan org. Its Global Hub has zero Taiwan listings.</p>
     <div class="peek-actions">
-      <a href="#all-110" id="peekLocate">Locate in table ↓</a>
+      <a href="#row-backline" id="peekLocate">Locate in table ↓</a>
       <a href="org-study-backline.html" id="peekStudy">Open Org Study →</a>
     </div>
   </div>
 
-  <p class="mapcap">
-    <span class="gm-key-dot"></span> dot size = org count. The four ringed names link to their <strong>Org Study</strong>. Taiwan's <strong>藝創工會</strong> is adjacent — a union, not music-specific MH — so the gap is the music-specific MH layer.<br>
-    88 of 110 place-bound · 22 borderless · <a href="orgs-funding-classification.html">Backline directory, 2026-06</a>.<a class="conf" href="#ov-src-1">1</a>
+  <p class="mapcap" aria-label="Map legend">
+    <span class="gm-key-dot"></span> <b style="color:var(--off-black)">Directory org</b> — Backline Global Resource Hub (dot size = count); the four ringed names link to their <b style="color:var(--off-black)">Org Study</b>.<br>
+    <span class="gm-key-scan"></span> <b style="color:var(--abroad-text)">Found beyond the directory</b> — music-specific union, native-language scan; tap for details.<br>
+    <span style="display:inline-block;width:.6em;height:.6em;border-radius:50%;border:2px solid var(--signal);vertical-align:baseline;margin:0 .12em"></span> <b style="color:var(--signal)">Taiwan · 藝創工會</b> — adjacent infrastructure, a union not music-specific MH: the entry point, still 0 dedicated orgs.<br>
+    110 directory (88 place-bound · 22 borderless) + 4 native scan = <b style="color:var(--off-black)">114</b> · <a href="orgs-funding-classification.html">Backline directory, 2026-06</a>.<a class="conf" href="#ov-src-1">1</a>
   </p>
 
   <aside class="tw-reveal" aria-label="Taiwan — the entry point">
@@ -535,53 +672,79 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
       <a class="tw-link" href="org-study-arts-creators-union.html">Read the opening →</a>
     </details>
   </aside>
+
+  <!-- ===== FIELD READOUT — live where / what / who, driven by the filters above. Replaces the
+       former #where / #what / #funded chapters. Re-bases with Source (114 · 110 · 4). ===== -->
+  <section class="readout" id="read" aria-label="The field by service, funding and place">
+    <div class="readout-head">Read the field — <b>what they do · who pays · where</b>, straight from the filters above</div>
+    <div class="ro-base" id="roBase">% of all 114 · 110 Backline directory + 4 native-language scan</div>
+    <div class="ro-grid">
+      <div class="ro-block what" style="--hue:var(--sp-green)">
+        <div class="ro-title">What they do <span class="q">— service mix</span> <a class="ro-src" href="#ov-src-6">source</a></div>
+        <div id="roWhat">
+          <div class="ro-row" data-cat="mental-health"><span class="rl">Mental health</span><div class="ro-track"><div class="ro-fill" style="width:100%"></div></div><span class="ro-val">48 · 42%</span></div>
+          <div class="ro-row" data-cat="financial"><span class="rl">Financial</span><div class="ro-track"><div class="ro-fill" style="width:67%"></div></div><span class="ro-val">32 · 28%</span></div>
+          <div class="ro-row" data-cat="career"><span class="rl">Career</span><div class="ro-track"><div class="ro-fill" style="width:65%"></div></div><span class="ro-val">31 · 27%</span></div>
+          <div class="ro-row" data-cat="counseling"><span class="rl">Counseling</span><div class="ro-track"><div class="ro-fill" style="width:48%"></div></div><span class="ro-val">23 · 20%</span></div>
+          <div class="ro-row" data-cat="substance"><span class="rl">Substance use</span><div class="ro-track"><div class="ro-fill" style="width:27%"></div></div><span class="ro-val">13 · 11%</span></div>
+          <div class="ro-row scan" data-cat="union"><span class="rl">Union / mutual-aid</span><div class="ro-track"><div class="ro-fill" style="width:8%"></div></div><span class="ro-val">4 · 4%</span></div>
+        </div>
+      </div>
+      <div class="ro-block who" style="--hue:var(--sp-orange)">
+        <div class="ro-title">Who pays <span class="q">— funding mix</span> <a class="ro-src" href="#ov-src-7">source</a></div>
+        <div id="roWho">
+          <div class="ro-row" data-cat="unknown"><span class="rl">No public info</span><div class="ro-track"><div class="ro-fill" style="width:100%"></div></div><span class="ro-val">54 · 47%</span></div>
+          <div class="ro-row" data-cat="government"><span class="rl">Government</span><div class="ro-track"><div class="ro-fill" style="width:30%"></div></div><span class="ro-val">16 · 14%</span></div>
+          <div class="ro-row" data-cat="philanthropy"><span class="rl">Philanthropy</span><div class="ro-track"><div class="ro-fill" style="width:30%"></div></div><span class="ro-val">16 · 14%</span></div>
+          <div class="ro-row" data-cat="private"><span class="rl">Private / fees</span><div class="ro-track"><div class="ro-fill" style="width:20%"></div></div><span class="ro-val">11 · 10%</span></div>
+          <div class="ro-row" data-cat="trade-body"><span class="rl">Trade body</span><div class="ro-track"><div class="ro-fill" style="width:15%"></div></div><span class="ro-val">8 · 7%</span></div>
+          <div class="ro-row" data-cat="peer-fellowship"><span class="rl">Peer fellowship</span><div class="ro-track"><div class="ro-fill" style="width:9%"></div></div><span class="ro-val">5 · 4%</span></div>
+          <div class="ro-row scan" data-cat="membership"><span class="rl">Membership / dues</span><div class="ro-track"><div class="ro-fill" style="width:7%"></div></div><span class="ro-val">4 · 4%</span></div>
+        </div>
+      </div>
+      <div class="ro-block where">
+        <div class="ro-title">Where they are <span class="q">— the map above is the instrument</span> <a class="ro-src" href="#ov-src-1">source</a></div>
+        <p class="ro-where" id="roWhere"><b>United States</b> 20 · <b>Germany</b> 8 · <b>United Kingdom</b> 7 · <b>France</b> 6 · 33 more countries 47 · worldwide / no single country 22 · <span class="z">Taiwan &amp; E/SE Asia 0</span><span id="roBeyond"> &nbsp;·&nbsp; <span class="sc">beyond the directory: Japan 1 · Mexico 1 · Brazil 1 · Argentina 1</span></span></p>
+      </div>
+    </div>
+    <p class="ro-note">Service tags are non-exclusive (an org can do several), so they don't sum to the total; funding is one class each. The four native-scan unions carry honest <b>Union / mutual-aid</b> service and <b>Membership</b> funding — they never borrow a directory category, so filtering &ldquo;Mental Health&rdquo; correctly leaves them out. Use <b>Source</b> above to re-base every figure to the 110-org directory alone, or to the 4 found beyond it. <b>This is not an exhaustive census:</b> 110 is one directory plus 4 bodies we found by hand — the real field is larger.</p>
+  </section>
 </div></div>
 
 <div class="wrap">
-  <section class="chapter" id="where" style="--hue:var(--sp-blue);--huetext:var(--sp-blue-t)">
-    <div class="kicker">The geography</div>
-    <h2 class="q">Where are these organizations?</h2>
-    <p class="takeaway">Two poles carry the field — the US and continental Europe — and a fifth belong to no country. <b>Taiwan and the rest of East &amp; SE Asia: zero.</b></p>
-    <div class="bars">
-      <div class="bar-row"><span class="bar-label">Worldwide / multi-country</span><div class="bar-track"><div class="bar-fill" style="width:47%"></div></div><span class="bar-val">22</span></div>
-      <div class="bar-row"><span class="bar-label">United States</span><div class="bar-track"><div class="bar-fill" style="width:43%"></div></div><span class="bar-val">20</span></div>
-      <div class="bar-row"><span class="bar-label">Germany</span><div class="bar-track"><div class="bar-fill" style="width:17%"></div></div><span class="bar-val">8</span></div>
-      <div class="bar-row"><span class="bar-label">United Kingdom</span><div class="bar-track"><div class="bar-fill" style="width:15%"></div></div><span class="bar-val">7</span></div>
-      <div class="bar-row"><span class="bar-label">France</span><div class="bar-track"><div class="bar-fill" style="width:13%"></div></div><span class="bar-val">6</span></div>
-      <div class="bar-row"><span class="bar-label">33 more countries · 1–6 each</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">47</span></div>
-      <div class="bar-row zero"><span class="bar-label">Taiwan / E &amp; SE Asia (ex-India)</span><div class="bar-track"><div class="bar-fill absence" style="width:3%"></div></div><span class="bar-val">0</span></div>
+  <section class="chapter" id="beyond" style="--hue:var(--sp-pink);--huetext:var(--graphite)">
+    <div class="kicker">Beyond one directory</div>
+    <h2 class="q">What does one directory miss?</h2>
+    <p class="takeaway" style="display:flex;align-items:baseline;gap:1rem">
+      <span style="font-family:var(--font-display);font-weight:900;font-size:clamp(3rem,9vw,5.6rem);line-height:.9;color:var(--graphite)">4</span>
+      <span style="font-size:clamp(.8rem,2vw,.95rem);color:var(--grey);max-width:24ch">music-specific bodies the directory misses · found by native-language search</span>
+    </p>
+    <p class="takeaway">A single English directory maps its own network, not the world. Searching region-native turns up music-specific worker bodies it never listed — mostly musicians' unions.</p>
+    <div class="tablewrap">
+      <table class="tbl">
+        <caption>Beyond the Backline directory — verified against each org's own site (2026-06-20)</caption>
+        <thead><tr><th>Org</th><th>Country</th><th>Source</th><th>Service</th><th>Funding</th><th>Verification</th></tr></thead>
+        <tbody>
+          <tr><td>Musicians' Union of Japan (日本音楽家ユニオン)<a class="conf" href="#ov-src-10">10</a></td><td>Japan</td><td>native (JA)</td><td>Union; self-run mutual-aid + health-checkup subsidy + free legal/tax counsel. No union-run MH service.</td><td>Membership / union</td><td class="c">✅ Sourced</td></tr>
+          <tr><td>SADEM (Sindicato Argentino de Músicos)<a class="conf" href="#ov-src-11">11</a></td><td>Argentina</td><td>native (ES)</td><td>Union running its <b>own health fund (OSDEM)</b> — medical, prevention, disability cover; legal + welfare. Standing MH not advertised.</td><td>Membership / union</td><td class="c">✅ Sourced</td></tr>
+          <tr><td>SUTM (Sindicato Único de Trabajadores de la Música)<a class="conf" href="#ov-src-12">12</a></td><td>Mexico</td><td>native (ES)</td><td>Union; representation, bargaining, training. Member welfare/health/MH benefits not documented on its own site.</td><td>Membership / union</td><td class="c">✅ / ❓</td></tr>
+          <tr><td>SindMusi (Sindicato dos Músicos do RJ)<a class="conf" href="#ov-src-13">13</a></td><td>Brazil</td><td>native (PT)</td><td>Union; legal/social-security counsel, health-plan brokerage, gym/education. MH = a one-off 2025 workshop.</td><td>Membership / union</td><td class="c">✅ Sourced</td></tr>
+        </tbody>
+      </table>
     </div>
-    <span class="src-chip"><span class="ok">✅</span> Sums to 110. The US leads the 88 place-bound orgs; 22 have no home country. <a href="#ov-src-1">Backline Global Resource Hub directory · all 13 pages · 2026-06</a></span>
+    <p class="takeaway">Counting these, "nothing in East Asia" is a directory artifact — the qualifying-org gap narrows to <b style="color:var(--graphite)">Korea + Taiwan</b>.</p>
+    <p class="method">Two such bodies the directory does list — Unison Fund (Canada) and The Roadie Clinic (US) — confirm the pattern; broad-arts welfare bodies (e.g. Korea's KAWF) are excluded as not music-specific.</p>
+    <span class="src-chip"><span class="ok">✅</span> Four music-specific unions found beyond the directory, each verified against its own site. <a href="#ov-src-10">Native-language scan · 2026-06-20</a></span>
   </section>
+</div>
 
-  <section class="chapter" id="what" style="--hue:var(--sp-green);--huetext:var(--sp-green-t)">
-    <div class="kicker">The services</div>
-    <h2 class="q">What do they actually do?</h2>
-    <p class="takeaway">Mental-health support leads — but it's <b>the field's lead, not its norm</b>: most orgs are single-purpose (mean 1.9 services; 44% offer just one).</p>
-    <div class="bars">
-      <div class="bar-row"><span class="bar-label">Mental Health Support</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">44%</span></div>
-      <div class="bar-row"><span class="bar-label">Financial Resources</span><div class="bar-track"><div class="bar-fill" style="width:66%"></div></div><span class="bar-val">29%</span></div>
-      <div class="bar-row"><span class="bar-label">Career Development</span><div class="bar-track"><div class="bar-fill" style="width:64%"></div></div><span class="bar-val">28%</span></div>
-      <div class="bar-row"><span class="bar-label">Counseling Services</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">21%</span></div>
-      <div class="bar-row"><span class="bar-label">Substance Use</span><div class="bar-track"><div class="bar-fill" style="width:27%"></div></div><span class="bar-val">12%</span></div>
-    </div>
-    <span class="src-chip"><span class="ok">✅</span> Author's tally of the directory's service tags · all 110 orgs. <a href="#ov-src-6">Per-org tags in the supplementary data table</a></span>
-  </section>
-
-  <section class="chapter" id="funded" style="--hue:var(--sp-orange);--huetext:var(--sp-orange-t)">
-    <div class="kicker">The money</div>
-    <h2 class="q">Who pays for this work?</h2>
-    <p class="takeaway"><b>For half the field, we can't tell.</b> No public funding information exists for 49% — much of it impossible to trace from outside.</p>
-    <div class="bars">
-      <div class="bar-row"><span class="bar-label">No public funding info</span><div class="bar-track"><div class="bar-fill absence" style="width:100%"></div></div><span class="bar-val ghost" title="49% — no public funding information">49%</span></div>
-      <div class="bar-row"><span class="bar-label">Government / public-sector</span><div class="bar-track"><div class="bar-fill" style="width:30%"></div></div><span class="bar-val">15%</span></div>
-      <div class="bar-row"><span class="bar-label">Philanthropy / charity</span><div class="bar-track"><div class="bar-fill" style="width:30%"></div></div><span class="bar-val">15%</span></div>
-      <div class="bar-row"><span class="bar-label">Private / user fees</span><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div><span class="bar-val">10%</span></div>
-      <div class="bar-row"><span class="bar-label">Industry-institution / trade body</span><div class="bar-track"><div class="bar-fill" style="width:15%"></div></div><span class="bar-val">7%</span></div>
-      <div class="bar-row"><span class="bar-label">Peer fellowship (member-funded)</span><div class="bar-track"><div class="bar-fill" style="width:9%"></div></div><span class="bar-val">5%</span></div>
-    </div>
-    <span class="src-chip"><span class="ok">✅</span> Author's classification by org type · ✅ 11 verified · ⚠️ 45 inferred · ❓ 54 no info. <a href="#ov-src-7">Every call in the per-org basis table</a></span>
-  </section>
+<div class="wrap">
+  <!-- #where / #what / #funded removed v4.1 — their content is now the live FIELD READOUT (#read) in
+       the map section. Legacy anchors kept so prior deep links still land; citations ov-src-1/6/7 are
+       re-homed to the readout's per-block "source" links. -->
+  <span id="where" class="vh"></span>
+  <span id="what" class="vh"></span>
+  <span id="funded" class="vh"></span>
 
   <section class="chapter" id="evidence" style="--hue:var(--sp-lav);--huetext:var(--sp-lav-t)">
     <div class="kicker">Why it matters</div>
@@ -604,125 +767,131 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
     <span class="src-chip"><span class="ok">✅</span> Soundcheck final report (Revelios / Harrison, Feb 2026; n=1,216) + cross-study base. <a href="#ev-src-1">Primary PDF on file</a></span>
   </section>
 
-  <section class="chapter" id="all-110" style="--hue:var(--silver);--huetext:var(--grey)">
+  <span id="all-110" class="vh"></span>
+  <section class="chapter" id="all-114" style="--hue:var(--silver);--huetext:var(--grey)">
     <div class="kicker">The dataset</div>
-    <h2 class="q">All 110 organizations</h2>
-    <p class="takeaway">Every org with its country, services, funding model and the basis for each call — the canonical table behind the charts and the map. The two filters above narrow it.</p>
+    <h2 class="q">All 114 organizations</h2>
+    <p class="takeaway">Every org with its country, services, funding model and the basis for each call — the canonical table behind the map and the readout. <b>110</b> from the Backline directory, plus <b>4</b> found by native-language scan (a labelled group at the end). The filters above narrow it; <b>Source</b> isolates either set.</p>
     <div class="tablewrap">
       <table class="tbl" id="allTable">
-        <caption><span id="tableCap">Showing 110 of 110 · the whole field.</span> Service tags, funding model, basis, and source / detail. Source: <a href="orgs-funding-classification.html">Backline Global Resource Hub, 2026-06</a> (<a href="#ov-src-1">directory snapshot</a>). The four ringed names link to their Org Study.</caption>
-        <thead><tr><th>#</th><th>Organization</th><th>Country</th><th>Service tags</th><th>Funding model</th><th>Basis</th></tr></thead>
+        <caption><span id="tableCap">Showing 114 of 114 · the whole field, across two sources.</span> Service tags, funding model, and funding basis — ✅ sourced from financials · ⚠️ inferred from org type · ❓ no public funding info. That symbol rates the funding call only; country and service tags come from the directory for every directory row. The final four rows are the native-language scan — verified against each union's own site, not in the Backline census. Source: <a href="orgs-funding-classification.html">Backline Global Resource Hub, 2026-06</a> (<a href="#ov-src-1">directory snapshot</a>) + <a href="#ov-src-10">native-language scan</a>. The four ringed names link to their Org Study.</caption>
+        <thead><tr><th>#</th><th>Organization</th><th>Country</th><th>Service tags</th><th>Funding model</th><th>Funding basis</th></tr></thead>
         <tbody id="allBody">
-<tr data-service="mental-health" data-funding="unknown"><td class="c">1</td><td>Mind the Music: A Mental Health Guide for the Music Industry</td><td>Worldwide</td><td>Mental Health Support</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="mental-health" data-funding="unknown"><td class="c">2</td><td>Backline Tour Support Resources</td><td>Worldwide</td><td>Mental Health Support; Tour Health Support</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="" data-funding="unknown"><td class="c">3</td><td>The Green Room</td><td>Worldwide</td><td>Support Groups</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr id="row-backline" data-service="mental-health financial" data-funding="philanthropy"><td class="c">4</td><td class="org"><a href="org-study-backline.html">Backline Case Management</a></td><td>United States</td><td>Mental Health Support; Financial Resources; Therapist Directory; Case Management</td><td>Philanthropy / charity</td><td class="c">✅</td></tr>
-<tr id="row-musicares" data-service="financial substance" data-funding="trade-body"><td class="c">5</td><td class="org"><a href="org-study-musicares.html">MusiCares</a></td><td>United States</td><td>Support Groups; Financial Resources; Substance Use</td><td>Industry-institution / trade body</td><td class="c">✅</td></tr>
-<tr id="row-music-minds-matter" data-service="mental-health counseling" data-funding="philanthropy"><td class="c">6</td><td class="org"><a href="org-study-music-minds-matter.html">Music Minds Matter</a></td><td>United Kingdom</td><td>Mental Health Support; Counseling Services</td><td>Philanthropy / charity</td><td class="c">✅</td></tr>
-<tr data-service="financial" data-funding="philanthropy"><td class="c">7</td><td>The Blues Foundation – HART Fund</td><td>United States</td><td>Financial Resources</td><td>Philanthropy / charity</td><td class="c">⚠️</td></tr>
-<tr data-service="financial career" data-funding="philanthropy"><td class="c">8</td><td>Entertainment Community Fund</td><td>United States</td><td>Financial Resources; Healthcare; Career Development</td><td>Philanthropy / charity</td><td class="c">⚠️</td></tr>
-<tr data-service="financial" data-funding="trade-body"><td class="c">9</td><td>Jazz Association of America</td><td>United States</td><td>Financial Resources; Healthcare</td><td>Industry-institution / trade body</td><td class="c">⚠️</td></tr>
-<tr data-service="" data-funding="philanthropy"><td class="c">10</td><td>Musically Fed</td><td>United States</td><td>Food &amp; Nutrition</td><td>Philanthropy / charity</td><td class="c">⚠️</td></tr>
-<tr data-service="financial" data-funding="philanthropy"><td class="c">11</td><td>Musicians Foundation</td><td>United States</td><td>Financial Resources</td><td>Philanthropy / charity</td><td class="c">⚠️</td></tr>
-<tr data-service="" data-funding="unknown"><td class="c">12</td><td>Musician Treatment Foundation</td><td>United States</td><td>Healthcare</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="mental-health" data-funding="philanthropy"><td class="c">13</td><td>National Alliance for Eating Disorders</td><td>United States</td><td>Mental Health Support; Support Groups; Healthcare</td><td>Philanthropy / charity</td><td class="c">⚠️</td></tr>
-<tr data-service="" data-funding="unknown"><td class="c">14</td><td>Optimized Touring</td><td>United States</td><td>Tour Health Support</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="mental-health substance career" data-funding="philanthropy"><td class="c">15</td><td>The Roadie Clinic</td><td>United States</td><td>Mental Health Support; Substance Use; Career Development</td><td>Philanthropy / charity</td><td class="c">⚠️</td></tr>
-<tr data-service="" data-funding="unknown"><td class="c">16</td><td>Sight &amp; Sound</td><td>United States</td><td>Healthcare</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="" data-funding="unknown"><td class="c">17</td><td>Sound Nutrition</td><td>United States</td><td>Food &amp; Nutrition</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="financial" data-funding="philanthropy"><td class="c">18</td><td>Sweet Relief</td><td>United States</td><td>Financial Resources</td><td>Philanthropy / charity</td><td class="c">⚠️</td></tr>
-<tr data-service="" data-funding="unknown"><td class="c">19</td><td>NeedyMeds</td><td>United States</td><td>Healthcare</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="mental-health" data-funding="philanthropy"><td class="c">20</td><td>National Alliance on Mental Illness</td><td>United States</td><td>Mental Health Support</td><td>Philanthropy / charity</td><td class="c">⚠️</td></tr>
-<tr data-service="mental-health" data-funding="unknown"><td class="c">21</td><td>Black Mental Health Alliance</td><td>United States</td><td>Mental Health Support; Therapist Directory</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="counseling" data-funding="private"><td class="c">22</td><td>Open Path</td><td>United States, Canada</td><td>Counseling Services</td><td>Private / user fees</td><td class="c">⚠️</td></tr>
-<tr data-service="mental-health" data-funding="unknown"><td class="c">23</td><td>Headstock</td><td>United Kingdom</td><td>Mental Health Support; Emergency Aid Services</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="substance" data-funding="unknown"><td class="c">24</td><td>Accountable</td><td>Worldwide</td><td>Substance Use</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="mental-health" data-funding="unknown"><td class="c">25</td><td>Cope Notes</td><td>Worldwide</td><td>Mental Health Support</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="career" data-funding="unknown"><td class="c">26</td><td>Music Forward Foundation</td><td>Worldwide</td><td>Career Development</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="" data-funding="unknown"><td class="c">27</td><td>MusiCares Support Groups</td><td>Worldwide</td><td>Support Groups</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="substance" data-funding="peer-fellowship"><td class="c">28</td><td>Recovery 2.0</td><td>Worldwide</td><td>Substance Use</td><td>Peer fellowship (member-funded)</td><td class="c">⚠️</td></tr>
-<tr data-service="substance" data-funding="unknown"><td class="c">29</td><td>WeConnect Health</td><td>Worldwide</td><td>Support Groups; Substance Use</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="" data-funding="private"><td class="c">30</td><td>Music Industry Therapist Collective</td><td>US, Australia, France, Germany, India, Italy, Spain, UK</td><td>Therapist Directory</td><td>Private / user fees</td><td class="c">⚠️</td></tr>
-<tr data-service="mental-health" data-funding="philanthropy"><td class="c">31</td><td>To Write Love On Her Arms</td><td>27 countries (incl. India, Japan, Thailand)</td><td>Mental Health Support; Emergency Aid Services</td><td>Philanthropy / charity</td><td class="c">⚠️</td></tr>
-<tr data-service="substance" data-funding="peer-fellowship"><td class="c">32</td><td>The Phoenix</td><td>Worldwide</td><td>Substance Use</td><td>Peer fellowship (member-funded)</td><td class="c">⚠️</td></tr>
-<tr data-service="mental-health" data-funding="unknown"><td class="c">33</td><td>Tonic Rider</td><td>Worldwide, United Kingdom</td><td>Mental Health Support</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="career counseling" data-funding="trade-body"><td class="c">34</td><td>MiM-Verband (Mental Health in Music)</td><td>Germany</td><td>Healthcare; Career Development; Counseling Services</td><td>Industry-institution / trade body</td><td class="c">⚠️</td></tr>
-<tr data-service="counseling" data-funding="unknown"><td class="c">35</td><td>The Musicians' Health Center at Musikhochschule Lübeck</td><td>Germany</td><td>Counseling Services</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="financial" data-funding="unknown"><td class="c">36</td><td>Paul-Klinger-Künstlersozialwerk e.V.</td><td>Germany</td><td>Financial Resources; Coaching Services; Legal Resources</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="financial career" data-funding="government"><td class="c">37</td><td>Centre national de la musique (CNM)</td><td>France</td><td>Financial Resources; Career Development</td><td>Government / public-sector</td><td class="c">✅</td></tr>
-<tr data-service="mental-health" data-funding="unknown"><td class="c">38</td><td>Charte C.A.R.E</td><td>France</td><td>Mental Health Support; Advocacy</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="mental-health" data-funding="unknown"><td class="c">39</td><td>CURA</td><td>France</td><td>Mental Health Support; Advocacy</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="mental-health career counseling" data-funding="unknown"><td class="c">40</td><td>INSAART</td><td>France</td><td>Mental Health Support; Career Development; Counseling Services</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="financial career" data-funding="government"><td class="c">41</td><td>Pôle Régional des Musiques Actuelles (PRMA) de La Réunion</td><td>France</td><td>Financial Resources; Career Development</td><td>Government / public-sector</td><td class="c">⚠️</td></tr>
-<tr data-service="mental-health financial" data-funding="unknown"><td class="c">42</td><td>Behind The Scenes</td><td>United States, Canada</td><td>Mental Health Support; Financial Resources</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="" data-funding="private"><td class="c">43</td><td>LGBTQ+ Healthcare Directory</td><td>United States, Canada</td><td>Therapist Directory</td><td>Private / user fees</td><td class="c">⚠️</td></tr>
-<tr data-service="financial counseling" data-funding="unknown"><td class="c">44</td><td>Unison Fund</td><td>Canada</td><td>Financial Resources; Counseling Services</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="mental-health financial career" data-funding="philanthropy"><td class="c">45</td><td>Help Musicians</td><td>United Kingdom</td><td>Mental Health Support; Financial Resources; Career Development; Emergency Aid Services; Housing</td><td>Philanthropy / charity</td><td class="c">✅</td></tr>
-<tr data-service="mental-health substance" data-funding="unknown"><td class="c">46</td><td>Music Support</td><td>United Kingdom</td><td>Mental Health Support; Substance Use; Case Management</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="mental-health career" data-funding="trade-body"><td class="c">47</td><td>Musician's Union</td><td>United Kingdom</td><td>Mental Health Support; Healthcare; Career Development</td><td>Industry-institution / trade body</td><td class="c">⚠️</td></tr>
-<tr data-service="counseling" data-funding="unknown"><td class="c">48</td><td>Sangath</td><td>India</td><td>Support Groups; Counseling Services</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="mental-health counseling" data-funding="unknown"><td class="c">49</td><td>TATVA</td><td>India</td><td>Mental Health Support; Counseling Services; Emergency Aid Services</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="mental-health" data-funding="unknown"><td class="c">50</td><td>Thrive Mental Wellbeing</td><td>Worldwide</td><td>Mental Health Support</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="mental-health" data-funding="unknown"><td class="c">51</td><td>Mind</td><td>Worldwide, United Kingdom</td><td>Mental Health Support</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="mental-health" data-funding="unknown"><td class="c">52</td><td>Soundcheck</td><td>United Kingdom</td><td>Mental Health Support</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="mental-health" data-funding="unknown"><td class="c">53</td><td>Alexianer Crisis Center</td><td>Germany</td><td>Mental Health Support; Emergency Aid Services</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="mental-health" data-funding="unknown"><td class="c">54</td><td>LARA Berlin</td><td>Germany</td><td>Mental Health Support; Emergency Aid Services</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="mental-health" data-funding="unknown"><td class="c">55</td><td>Soul Collective Berlin</td><td>Germany</td><td>Mental Health Support</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="substance" data-funding="peer-fellowship"><td class="c">56</td><td>Alcoholics Anonymous</td><td>Worldwide</td><td>Substance Use</td><td>Peer fellowship (member-funded)</td><td class="c">✅</td></tr>
-<tr data-service="substance" data-funding="unknown"><td class="c">57</td><td>KnowDrugs</td><td>Worldwide</td><td>Substance Use</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="substance" data-funding="peer-fellowship"><td class="c">58</td><td>Narcotics Anonymous</td><td>Worldwide</td><td>Substance Use</td><td>Peer fellowship (member-funded)</td><td class="c">✅</td></tr>
-<tr data-service="substance" data-funding="peer-fellowship"><td class="c">59</td><td>Recovery Dharma Global</td><td>Worldwide</td><td>Substance Use</td><td>Peer fellowship (member-funded)</td><td class="c">⚠️</td></tr>
-<tr data-service="substance" data-funding="unknown"><td class="c">60</td><td>Sidekicks Berlin</td><td>Germany</td><td>Substance Use</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="mental-health financial substance" data-funding="government"><td class="c">61</td><td>SAMHSA</td><td>United States</td><td>Mental Health Support; Financial Resources; Substance Use; Therapist Directory; Emergency Aid Services</td><td>Government / public-sector</td><td class="c">✅</td></tr>
-<tr data-service="financial" data-funding="philanthropy"><td class="c">62</td><td>The Fondation De la Musique avant toute chose</td><td>France</td><td>Financial Resources</td><td>Philanthropy / charity</td><td class="c">⚠️</td></tr>
-<tr data-service="mental-health" data-funding="unknown"><td class="c">63</td><td>Chimo Helpline</td><td>Canada</td><td>Mental Health Support; Emergency Aid Services</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="" data-funding="private"><td class="c">64</td><td>RedPsi</td><td>Argentina</td><td>Therapist Directory</td><td>Private / user fees</td><td class="c">⚠️</td></tr>
-<tr data-service="mental-health financial counseling" data-funding="government"><td class="c">65</td><td>Support Act</td><td>Australia</td><td>Mental Health Support; Tour Health Support; Financial Resources; Counseling Services; Emergency Aid Services; Case Management</td><td>Government / public-sector</td><td class="c">✅</td></tr>
-<tr data-service="mental-health career counseling" data-funding="unknown"><td class="c">66</td><td>Hey Mate</td><td>Australia</td><td>Mental Health Support; Support Groups; Career Development; Counseling Services; Coaching Services</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="mental-health career" data-funding="government"><td class="c">67</td><td>Music Victoria</td><td>Australia</td><td>Mental Health Support; Career Development; Advocacy</td><td>Government / public-sector</td><td class="c">⚠️</td></tr>
-<tr data-service="counseling" data-funding="unknown"><td class="c">68</td><td>Österreichischen Gesellschaft für Musik und Medizin</td><td>Austria</td><td>Healthcare; Counseling Services; Coaching Services</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="career" data-funding="government"><td class="c">69</td><td>mica-Music Austria</td><td>Austria</td><td>Career Development</td><td>Government / public-sector</td><td class="c">⚠️</td></tr>
-<tr data-service="financial career" data-funding="government"><td class="c">70</td><td>The Austrian Music Fund</td><td>Austria</td><td>Financial Resources; Career Development</td><td>Government / public-sector</td><td class="c">⚠️</td></tr>
-<tr data-service="counseling" data-funding="private"><td class="c">71</td><td>Psychologist Belgium</td><td>Belgium</td><td>Counseling Services</td><td>Private / user fees</td><td class="c">⚠️</td></tr>
-<tr data-service="career" data-funding="unknown"><td class="c">72</td><td>Volta</td><td>Belgium</td><td>Career Development; Coaching Services</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="" data-funding="private"><td class="c">73</td><td>Psicólogos Colombia</td><td>Colombia</td><td>Therapist Directory</td><td>Private / user fees</td><td class="c">⚠️</td></tr>
-<tr data-service="mental-health career" data-funding="unknown"><td class="c">74</td><td>Mental Voice</td><td>Denmark</td><td>Mental Health Support; Career Development; Coaching Services</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="financial career" data-funding="government"><td class="c">75</td><td>Music Export Denmark (MXD)</td><td>Denmark</td><td>Financial Resources; Career Development</td><td>Government / public-sector</td><td class="c">⚠️</td></tr>
-<tr data-service="" data-funding="private"><td class="c">76</td><td>Pszichológuskereső.hu</td><td>Hungary</td><td>Therapist Directory</td><td>Private / user fees</td><td class="c">⚠️</td></tr>
-<tr data-service="financial career" data-funding="government"><td class="c">77</td><td>Iceland Music</td><td>Iceland</td><td>Financial Resources; Career Development</td><td>Government / public-sector</td><td class="c">⚠️</td></tr>
-<tr data-service="financial career" data-funding="government"><td class="c">78</td><td>Kraumar Music Fund</td><td>Iceland</td><td>Financial Resources; Career Development</td><td>Government / public-sector</td><td class="c">⚠️</td></tr>
-<tr data-service="mental-health counseling" data-funding="unknown"><td class="c">79</td><td>Geðhjálp – The Icelandic Mental Health Alliance</td><td>Iceland</td><td>Mental Health Support; Support Groups; Counseling Services; Advocacy</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="financial career counseling" data-funding="unknown"><td class="c">80</td><td>Minding Creative Minds</td><td>Ireland</td><td>Financial Resources; Career Development; Counseling Services; Emergency Aid Services</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="financial career" data-funding="government"><td class="c">81</td><td>Italia Music Export</td><td>Italy</td><td>Financial Resources; Career Development</td><td>Government / public-sector</td><td class="c">⚠️</td></tr>
-<tr data-service="" data-funding="private"><td class="c">82</td><td>Psicologi Italia</td><td>Italy</td><td>Therapist Directory</td><td>Private / user fees</td><td class="c">⚠️</td></tr>
-<tr data-service="mental-health counseling" data-funding="unknown"><td class="c">83</td><td>The B-Side Project</td><td>Japan</td><td>Mental Health Support; Counseling Services</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="career" data-funding="unknown"><td class="c">84</td><td>The Music Way Project</td><td>Japan</td><td>Career Development</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="career" data-funding="trade-body"><td class="c">85</td><td>The Lithuanian Music Business Association</td><td>Lithuania</td><td>Career Development</td><td>Industry-institution / trade body</td><td class="c">⚠️</td></tr>
-<tr data-service="" data-funding="private"><td class="c">86</td><td>TherapyRoute – Lithuania</td><td>Lithuania</td><td>Therapist Directory</td><td>Private / user fees</td><td class="c">⚠️</td></tr>
-<tr data-service="financial career" data-funding="government"><td class="c">87</td><td>The Sistema Nacional de Creadores de Arte (SNCA)</td><td>Mexico</td><td>Financial Resources; Career Development</td><td>Government / public-sector</td><td class="c">⚠️</td></tr>
-<tr data-service="" data-funding="private"><td class="c">88</td><td>Psico.mx</td><td>Mexico</td><td>Therapist Directory</td><td>Private / user fees</td><td class="c">⚠️</td></tr>
-<tr data-service="mental-health" data-funding="unknown"><td class="c">89</td><td>Stichting MIND</td><td>Netherlands</td><td>Mental Health Support; Emergency Aid Services</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="career counseling" data-funding="unknown"><td class="c">90</td><td>Dutch Support Group – Artists</td><td>Netherlands</td><td>Career Development; Counseling Services; Coaching Services</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="financial counseling" data-funding="unknown"><td class="c">91</td><td>MusicHelps</td><td>New Zealand</td><td>Financial Resources; Counseling Services; Emergency Aid Services</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="financial career" data-funding="government"><td class="c">92</td><td>Creative New Zealand</td><td>New Zealand</td><td>Financial Resources; Career Development</td><td>Government / public-sector</td><td class="c">✅</td></tr>
-<tr data-service="mental-health" data-funding="trade-body"><td class="c">93</td><td>Association For Electronic Music (AFEM)</td><td>United Kingdom</td><td>Mental Health Support (guide in English &amp; Japanese)</td><td>Industry-institution / trade body</td><td class="c">⚠️</td></tr>
-<tr data-service="counseling" data-funding="unknown"><td class="c">94</td><td>Alterstatus</td><td>Portugal</td><td>Counseling Services</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="financial" data-funding="trade-body"><td class="c">95</td><td>Fundação GDA</td><td>Portugal</td><td>Financial Resources; Coaching Services; Advocacy</td><td>Industry-institution / trade body</td><td class="c">⚠️</td></tr>
-<tr data-service="mental-health counseling" data-funding="unknown"><td class="c">96</td><td>Mental Health for Romania (MHR)</td><td>Romania</td><td>Mental Health Support; Counseling Services</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="mental-health counseling" data-funding="unknown"><td class="c">97</td><td>Mentality Project – Interactive Map</td><td>Romania</td><td>Mental Health Support; Counseling Services</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="financial career" data-funding="philanthropy"><td class="c">98</td><td>Margareta of Romania Royal Foundation – Young Talents</td><td>Romania</td><td>Financial Resources; Career Development</td><td>Philanthropy / charity</td><td class="c">⚠️</td></tr>
-<tr data-service="financial career" data-funding="government"><td class="c">99</td><td>Music in Africa</td><td>South Africa</td><td>Financial Resources; Career Development</td><td>Government / public-sector</td><td class="c">⚠️</td></tr>
-<tr data-service="mental-health counseling" data-funding="unknown"><td class="c">100</td><td>M.I. Therapy</td><td>Spain</td><td>Mental Health Support; Counseling Services</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="mental-health financial" data-funding="philanthropy"><td class="c">101</td><td>Tim Bergling Foundation</td><td>Sweden</td><td>Mental Health Support; Financial Resources</td><td>Philanthropy / charity</td><td class="c">⚠️</td></tr>
-<tr data-service="mental-health" data-funding="unknown"><td class="c">102</td><td>Samaritans of Thailand</td><td>Thailand</td><td>Mental Health Support</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="mental-health" data-funding="private"><td class="c">103</td><td>Swissmedmusica</td><td>Switzerland</td><td>Mental Health Support; Therapist Directory</td><td>Private / user fees</td><td class="c">⚠️</td></tr>
-<tr data-service="financial career" data-funding="government"><td class="c">104</td><td>Pro Helvetia – Swiss Arts Council</td><td>Switzerland</td><td>Financial Resources; Career Development</td><td>Government / public-sector</td><td class="c">✅</td></tr>
-<tr data-service="mental-health financial career" data-funding="trade-body"><td class="c">105</td><td>Schweizerische Interpretenstiftung (SIS)</td><td>Switzerland</td><td>Mental Health Support; Financial Resources; Career Development</td><td>Industry-institution / trade body</td><td class="c">⚠️</td></tr>
-<tr data-service="mental-health" data-funding="government"><td class="c">106</td><td>The Rede de Atenção Psicossocial (RAPS)</td><td>Brazil</td><td>Mental Health Support</td><td>Government / public-sector</td><td class="c">⚠️</td></tr>
-<tr data-service="mental-health" data-funding="philanthropy"><td class="c">107</td><td>The Live Love Laugh Foundation</td><td>India</td><td>Mental Health Support</td><td>Philanthropy / charity</td><td class="c">⚠️</td></tr>
-<tr data-service="mental-health career counseling" data-funding="unknown"><td class="c">108</td><td>TGR (The Green Room)</td><td>Germany</td><td>Mental Health Support; Career Development; Counseling Services; Coaching Services</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="mental-health career counseling" data-funding="unknown"><td class="c">109</td><td>EcchoLive</td><td>United States</td><td>Mental Health Support; Career Development; Counseling Services</td><td>No public funding info</td><td class="c">❓</td></tr>
-<tr data-service="mental-health financial" data-funding="unknown"><td class="c">110</td><td>Sofaburn, Inc.</td><td>United States</td><td>Mental Health Support; Financial Resources; Advocacy</td><td>No public funding info</td><td class="c">❓</td></tr>
+<tr data-service="mental-health" data-funding="unknown"><td class="c">1</td><td>Mind the Music: A Mental Health Guide for the Music Industry</td><td>Worldwide</td><td>Mental Health Support</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="mental-health" data-funding="unknown"><td class="c">2</td><td>Backline Tour Support Resources</td><td>Worldwide</td><td>Mental Health Support; Tour Health Support</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="" data-funding="unknown"><td class="c">3</td><td>The Green Room</td><td>Worldwide</td><td>Support Groups</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr id="row-backline" data-service="mental-health financial" data-funding="philanthropy"><td class="c">4</td><td class="org"><a href="org-study-backline.html">Backline Case Management</a></td><td>United States</td><td>Mental Health Support; Financial Resources; Therapist Directory; Case Management</td><td>Philanthropy / charity</td><td class="c">✅ Sourced</td></tr>
+<tr id="row-musicares" data-service="financial substance" data-funding="trade-body"><td class="c">5</td><td class="org"><a href="org-study-musicares.html">MusiCares</a></td><td>United States</td><td>Support Groups; Financial Resources; Substance Use</td><td>Industry-institution / trade body</td><td class="c">✅ Sourced</td></tr>
+<tr id="row-music-minds-matter" data-service="mental-health counseling" data-funding="philanthropy"><td class="c">6</td><td class="org"><a href="org-study-music-minds-matter.html">Music Minds Matter</a></td><td>United Kingdom</td><td>Mental Health Support; Counseling Services</td><td>Philanthropy / charity</td><td class="c">✅ Sourced</td></tr>
+<tr data-service="financial" data-funding="philanthropy"><td class="c">7</td><td>The Blues Foundation – HART Fund</td><td>United States</td><td>Financial Resources</td><td>Philanthropy / charity</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="financial career" data-funding="philanthropy"><td class="c">8</td><td>Entertainment Community Fund</td><td>United States</td><td>Financial Resources; Healthcare; Career Development</td><td>Philanthropy / charity</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="financial" data-funding="trade-body"><td class="c">9</td><td>Jazz Association of America</td><td>United States</td><td>Financial Resources; Healthcare</td><td>Industry-institution / trade body</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="" data-funding="philanthropy"><td class="c">10</td><td>Musically Fed</td><td>United States</td><td>Food &amp; Nutrition</td><td>Philanthropy / charity</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="financial" data-funding="philanthropy"><td class="c">11</td><td>Musicians Foundation</td><td>United States</td><td>Financial Resources</td><td>Philanthropy / charity</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="" data-funding="unknown"><td class="c">12</td><td>Musician Treatment Foundation</td><td>United States</td><td>Healthcare</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="mental-health" data-funding="philanthropy"><td class="c">13</td><td>National Alliance for Eating Disorders</td><td>United States</td><td>Mental Health Support; Support Groups; Healthcare</td><td>Philanthropy / charity</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="" data-funding="unknown"><td class="c">14</td><td>Optimized Touring</td><td>United States</td><td>Tour Health Support</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="mental-health substance career" data-funding="philanthropy"><td class="c">15</td><td>The Roadie Clinic</td><td>United States</td><td>Mental Health Support; Substance Use; Career Development</td><td>Philanthropy / charity</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="" data-funding="unknown"><td class="c">16</td><td>Sight &amp; Sound</td><td>United States</td><td>Healthcare</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="" data-funding="unknown"><td class="c">17</td><td>Sound Nutrition</td><td>United States</td><td>Food &amp; Nutrition</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="financial" data-funding="philanthropy"><td class="c">18</td><td>Sweet Relief</td><td>United States</td><td>Financial Resources</td><td>Philanthropy / charity</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="" data-funding="unknown"><td class="c">19</td><td>NeedyMeds</td><td>United States</td><td>Healthcare</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="mental-health" data-funding="philanthropy"><td class="c">20</td><td>National Alliance on Mental Illness</td><td>United States</td><td>Mental Health Support</td><td>Philanthropy / charity</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="mental-health" data-funding="unknown"><td class="c">21</td><td>Black Mental Health Alliance</td><td>United States</td><td>Mental Health Support; Therapist Directory</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="counseling" data-funding="private"><td class="c">22</td><td>Open Path</td><td>United States, Canada</td><td>Counseling Services</td><td>Private / user fees</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="mental-health" data-funding="unknown"><td class="c">23</td><td>Headstock</td><td>United Kingdom</td><td>Mental Health Support; Emergency Aid Services</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="substance" data-funding="unknown"><td class="c">24</td><td>Accountable</td><td>Worldwide</td><td>Substance Use</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="mental-health" data-funding="unknown"><td class="c">25</td><td>Cope Notes</td><td>Worldwide</td><td>Mental Health Support</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="career" data-funding="unknown"><td class="c">26</td><td>Music Forward Foundation</td><td>Worldwide</td><td>Career Development</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="" data-funding="unknown"><td class="c">27</td><td>MusiCares Support Groups</td><td>Worldwide</td><td>Support Groups</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="substance" data-funding="peer-fellowship"><td class="c">28</td><td>Recovery 2.0</td><td>Worldwide</td><td>Substance Use</td><td>Peer fellowship (member-funded)</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="substance" data-funding="unknown"><td class="c">29</td><td>WeConnect Health</td><td>Worldwide</td><td>Support Groups; Substance Use</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="" data-funding="private"><td class="c">30</td><td>Music Industry Therapist Collective</td><td>US, Australia, France, Germany, India, Italy, Spain, UK</td><td>Therapist Directory</td><td>Private / user fees</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="mental-health" data-funding="philanthropy"><td class="c">31</td><td>To Write Love On Her Arms</td><td>27 countries (incl. India, Japan, Thailand)</td><td>Mental Health Support; Emergency Aid Services</td><td>Philanthropy / charity</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="substance" data-funding="peer-fellowship"><td class="c">32</td><td>The Phoenix</td><td>Worldwide</td><td>Substance Use</td><td>Peer fellowship (member-funded)</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="mental-health" data-funding="unknown"><td class="c">33</td><td>Tonic Rider</td><td>Worldwide, United Kingdom</td><td>Mental Health Support</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="career counseling" data-funding="trade-body"><td class="c">34</td><td>MiM-Verband (Mental Health in Music)</td><td>Germany</td><td>Healthcare; Career Development; Counseling Services</td><td>Industry-institution / trade body</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="counseling" data-funding="unknown"><td class="c">35</td><td>The Musicians' Health Center at Musikhochschule Lübeck</td><td>Germany</td><td>Counseling Services</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="financial" data-funding="unknown"><td class="c">36</td><td>Paul-Klinger-Künstlersozialwerk e.V.</td><td>Germany</td><td>Financial Resources; Coaching Services; Legal Resources</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="financial career" data-funding="government"><td class="c">37</td><td>Centre national de la musique (CNM)</td><td>France</td><td>Financial Resources; Career Development</td><td>Government / public-sector</td><td class="c">✅ Sourced</td></tr>
+<tr data-service="mental-health" data-funding="unknown"><td class="c">38</td><td>Charte C.A.R.E</td><td>France</td><td>Mental Health Support; Advocacy</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="mental-health" data-funding="unknown"><td class="c">39</td><td>CURA</td><td>France</td><td>Mental Health Support; Advocacy</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="mental-health career counseling" data-funding="unknown"><td class="c">40</td><td>INSAART</td><td>France</td><td>Mental Health Support; Career Development; Counseling Services</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="financial career" data-funding="government"><td class="c">41</td><td>Pôle Régional des Musiques Actuelles (PRMA) de La Réunion</td><td>France</td><td>Financial Resources; Career Development</td><td>Government / public-sector</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="mental-health financial" data-funding="unknown"><td class="c">42</td><td>Behind The Scenes</td><td>United States, Canada</td><td>Mental Health Support; Financial Resources</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="" data-funding="private"><td class="c">43</td><td>LGBTQ+ Healthcare Directory</td><td>United States, Canada</td><td>Therapist Directory</td><td>Private / user fees</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="financial counseling" data-funding="unknown"><td class="c">44</td><td>Unison Fund</td><td>Canada</td><td>Financial Resources; Counseling Services</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="mental-health financial career" data-funding="philanthropy"><td class="c">45</td><td>Help Musicians</td><td>United Kingdom</td><td>Mental Health Support; Financial Resources; Career Development; Emergency Aid Services; Housing</td><td>Philanthropy / charity</td><td class="c">✅ Sourced</td></tr>
+<tr data-service="mental-health substance" data-funding="unknown"><td class="c">46</td><td>Music Support</td><td>United Kingdom</td><td>Mental Health Support; Substance Use; Case Management</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="mental-health career" data-funding="trade-body"><td class="c">47</td><td>Musician's Union</td><td>United Kingdom</td><td>Mental Health Support; Healthcare; Career Development</td><td>Industry-institution / trade body</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="counseling" data-funding="unknown"><td class="c">48</td><td>Sangath</td><td>India</td><td>Support Groups; Counseling Services</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="mental-health counseling" data-funding="unknown"><td class="c">49</td><td>TATVA</td><td>India</td><td>Mental Health Support; Counseling Services; Emergency Aid Services</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="mental-health" data-funding="unknown"><td class="c">50</td><td>Thrive Mental Wellbeing</td><td>Worldwide</td><td>Mental Health Support</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="mental-health" data-funding="unknown"><td class="c">51</td><td>Mind</td><td>Worldwide, United Kingdom</td><td>Mental Health Support</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="mental-health" data-funding="unknown"><td class="c">52</td><td>Soundcheck</td><td>United Kingdom</td><td>Mental Health Support</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="mental-health" data-funding="unknown"><td class="c">53</td><td>Alexianer Crisis Center</td><td>Germany</td><td>Mental Health Support; Emergency Aid Services</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="mental-health" data-funding="unknown"><td class="c">54</td><td>LARA Berlin</td><td>Germany</td><td>Mental Health Support; Emergency Aid Services</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="mental-health" data-funding="unknown"><td class="c">55</td><td>Soul Collective Berlin</td><td>Germany</td><td>Mental Health Support</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="substance" data-funding="peer-fellowship"><td class="c">56</td><td>Alcoholics Anonymous</td><td>Worldwide</td><td>Substance Use</td><td>Peer fellowship (member-funded)</td><td class="c">✅ Sourced</td></tr>
+<tr data-service="substance" data-funding="unknown"><td class="c">57</td><td>KnowDrugs</td><td>Worldwide</td><td>Substance Use</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="substance" data-funding="peer-fellowship"><td class="c">58</td><td>Narcotics Anonymous</td><td>Worldwide</td><td>Substance Use</td><td>Peer fellowship (member-funded)</td><td class="c">✅ Sourced</td></tr>
+<tr data-service="substance" data-funding="peer-fellowship"><td class="c">59</td><td>Recovery Dharma Global</td><td>Worldwide</td><td>Substance Use</td><td>Peer fellowship (member-funded)</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="substance" data-funding="unknown"><td class="c">60</td><td>Sidekicks Berlin</td><td>Germany</td><td>Substance Use</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="mental-health financial substance" data-funding="government"><td class="c">61</td><td>SAMHSA</td><td>United States</td><td>Mental Health Support; Financial Resources; Substance Use; Therapist Directory; Emergency Aid Services</td><td>Government / public-sector</td><td class="c">✅ Sourced</td></tr>
+<tr data-service="financial" data-funding="philanthropy"><td class="c">62</td><td>The Fondation De la Musique avant toute chose</td><td>France</td><td>Financial Resources</td><td>Philanthropy / charity</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="mental-health" data-funding="unknown"><td class="c">63</td><td>Chimo Helpline</td><td>Canada</td><td>Mental Health Support; Emergency Aid Services</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="" data-funding="private"><td class="c">64</td><td>RedPsi</td><td>Argentina</td><td>Therapist Directory</td><td>Private / user fees</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="mental-health financial counseling" data-funding="government"><td class="c">65</td><td>Support Act</td><td>Australia</td><td>Mental Health Support; Tour Health Support; Financial Resources; Counseling Services; Emergency Aid Services; Case Management</td><td>Government / public-sector</td><td class="c">✅ Sourced</td></tr>
+<tr data-service="mental-health career counseling" data-funding="unknown"><td class="c">66</td><td>Hey Mate</td><td>Australia</td><td>Mental Health Support; Support Groups; Career Development; Counseling Services; Coaching Services</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="mental-health career" data-funding="government"><td class="c">67</td><td>Music Victoria</td><td>Australia</td><td>Mental Health Support; Career Development; Advocacy</td><td>Government / public-sector</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="counseling" data-funding="unknown"><td class="c">68</td><td>Österreichischen Gesellschaft für Musik und Medizin</td><td>Austria</td><td>Healthcare; Counseling Services; Coaching Services</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="career" data-funding="government"><td class="c">69</td><td>mica-Music Austria</td><td>Austria</td><td>Career Development</td><td>Government / public-sector</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="financial career" data-funding="government"><td class="c">70</td><td>The Austrian Music Fund</td><td>Austria</td><td>Financial Resources; Career Development</td><td>Government / public-sector</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="counseling" data-funding="private"><td class="c">71</td><td>Psychologist Belgium</td><td>Belgium</td><td>Counseling Services</td><td>Private / user fees</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="career" data-funding="unknown"><td class="c">72</td><td>Volta</td><td>Belgium</td><td>Career Development; Coaching Services</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="" data-funding="private"><td class="c">73</td><td>Psicólogos Colombia</td><td>Colombia</td><td>Therapist Directory</td><td>Private / user fees</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="mental-health career" data-funding="unknown"><td class="c">74</td><td>Mental Voice</td><td>Denmark</td><td>Mental Health Support; Career Development; Coaching Services</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="financial career" data-funding="government"><td class="c">75</td><td>Music Export Denmark (MXD)</td><td>Denmark</td><td>Financial Resources; Career Development</td><td>Government / public-sector</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="" data-funding="private"><td class="c">76</td><td>Pszichológuskereső.hu</td><td>Hungary</td><td>Therapist Directory</td><td>Private / user fees</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="financial career" data-funding="government"><td class="c">77</td><td>Iceland Music</td><td>Iceland</td><td>Financial Resources; Career Development</td><td>Government / public-sector</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="financial career" data-funding="government"><td class="c">78</td><td>Kraumar Music Fund</td><td>Iceland</td><td>Financial Resources; Career Development</td><td>Government / public-sector</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="mental-health counseling" data-funding="unknown"><td class="c">79</td><td>Geðhjálp – The Icelandic Mental Health Alliance</td><td>Iceland</td><td>Mental Health Support; Support Groups; Counseling Services; Advocacy</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="financial career counseling" data-funding="unknown"><td class="c">80</td><td>Minding Creative Minds</td><td>Ireland</td><td>Financial Resources; Career Development; Counseling Services; Emergency Aid Services</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="financial career" data-funding="government"><td class="c">81</td><td>Italia Music Export</td><td>Italy</td><td>Financial Resources; Career Development</td><td>Government / public-sector</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="" data-funding="private"><td class="c">82</td><td>Psicologi Italia</td><td>Italy</td><td>Therapist Directory</td><td>Private / user fees</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="mental-health counseling" data-funding="unknown"><td class="c">83</td><td>The B-Side Project</td><td>Japan</td><td>Mental Health Support; Counseling Services</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="career" data-funding="unknown"><td class="c">84</td><td>The Music Way Project</td><td>Japan</td><td>Career Development</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="career" data-funding="trade-body"><td class="c">85</td><td>The Lithuanian Music Business Association</td><td>Lithuania</td><td>Career Development</td><td>Industry-institution / trade body</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="" data-funding="private"><td class="c">86</td><td>TherapyRoute – Lithuania</td><td>Lithuania</td><td>Therapist Directory</td><td>Private / user fees</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="financial career" data-funding="government"><td class="c">87</td><td>The Sistema Nacional de Creadores de Arte (SNCA)</td><td>Mexico</td><td>Financial Resources; Career Development</td><td>Government / public-sector</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="" data-funding="private"><td class="c">88</td><td>Psico.mx</td><td>Mexico</td><td>Therapist Directory</td><td>Private / user fees</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="mental-health" data-funding="unknown"><td class="c">89</td><td>Stichting MIND</td><td>Netherlands</td><td>Mental Health Support; Emergency Aid Services</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="career counseling" data-funding="unknown"><td class="c">90</td><td>Dutch Support Group – Artists</td><td>Netherlands</td><td>Career Development; Counseling Services; Coaching Services</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="financial counseling" data-funding="unknown"><td class="c">91</td><td>MusicHelps</td><td>New Zealand</td><td>Financial Resources; Counseling Services; Emergency Aid Services</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="financial career" data-funding="government"><td class="c">92</td><td>Creative New Zealand</td><td>New Zealand</td><td>Financial Resources; Career Development</td><td>Government / public-sector</td><td class="c">✅ Sourced</td></tr>
+<tr data-service="mental-health" data-funding="trade-body"><td class="c">93</td><td>Association For Electronic Music (AFEM)</td><td>United Kingdom</td><td>Mental Health Support (guide in English &amp; Japanese)</td><td>Industry-institution / trade body</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="counseling" data-funding="unknown"><td class="c">94</td><td>Alterstatus</td><td>Portugal</td><td>Counseling Services</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="financial" data-funding="trade-body"><td class="c">95</td><td>Fundação GDA</td><td>Portugal</td><td>Financial Resources; Coaching Services; Advocacy</td><td>Industry-institution / trade body</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="mental-health counseling" data-funding="unknown"><td class="c">96</td><td>Mental Health for Romania (MHR)</td><td>Romania</td><td>Mental Health Support; Counseling Services</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="mental-health counseling" data-funding="unknown"><td class="c">97</td><td>Mentality Project – Interactive Map</td><td>Romania</td><td>Mental Health Support; Counseling Services</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="financial career" data-funding="philanthropy"><td class="c">98</td><td>Margareta of Romania Royal Foundation – Young Talents</td><td>Romania</td><td>Financial Resources; Career Development</td><td>Philanthropy / charity</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="financial career" data-funding="government"><td class="c">99</td><td>Music in Africa</td><td>South Africa</td><td>Financial Resources; Career Development</td><td>Government / public-sector</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="mental-health counseling" data-funding="unknown"><td class="c">100</td><td>M.I. Therapy</td><td>Spain</td><td>Mental Health Support; Counseling Services</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="mental-health financial" data-funding="philanthropy"><td class="c">101</td><td>Tim Bergling Foundation</td><td>Sweden</td><td>Mental Health Support; Financial Resources</td><td>Philanthropy / charity</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="mental-health" data-funding="unknown"><td class="c">102</td><td>Samaritans of Thailand</td><td>Thailand</td><td>Mental Health Support</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="mental-health" data-funding="private"><td class="c">103</td><td>Swissmedmusica</td><td>Switzerland</td><td>Mental Health Support; Therapist Directory</td><td>Private / user fees</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="financial career" data-funding="government"><td class="c">104</td><td>Pro Helvetia – Swiss Arts Council</td><td>Switzerland</td><td>Financial Resources; Career Development</td><td>Government / public-sector</td><td class="c">✅ Sourced</td></tr>
+<tr data-service="mental-health financial career" data-funding="trade-body"><td class="c">105</td><td>Schweizerische Interpretenstiftung (SIS)</td><td>Switzerland</td><td>Mental Health Support; Financial Resources; Career Development</td><td>Industry-institution / trade body</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="mental-health" data-funding="government"><td class="c">106</td><td>The Rede de Atenção Psicossocial (RAPS)</td><td>Brazil</td><td>Mental Health Support</td><td>Government / public-sector</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="mental-health" data-funding="philanthropy"><td class="c">107</td><td>The Live Love Laugh Foundation</td><td>India</td><td>Mental Health Support</td><td>Philanthropy / charity</td><td class="c">⚠️ Inferred</td></tr>
+<tr data-service="mental-health career counseling" data-funding="unknown"><td class="c">108</td><td>TGR (The Green Room)</td><td>Germany</td><td>Mental Health Support; Career Development; Counseling Services; Coaching Services</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="mental-health career counseling" data-funding="unknown"><td class="c">109</td><td>EcchoLive</td><td>United States</td><td>Mental Health Support; Career Development; Counseling Services</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr data-service="mental-health financial" data-funding="unknown"><td class="c">110</td><td>Sofaburn, Inc.</td><td>United States</td><td>Mental Health Support; Financial Resources; Advocacy</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
+<tr class="grp"><td colspan="6">↓ Beyond the directory · native-language scan · not in the Backline census (cited separately)</td></tr>
+<tr id="row-muj" data-source="native-scan" data-service="union" data-funding="membership"><td class="c">111</td><td>Musicians' Union of Japan (日本音楽家ユニオン)<a class="conf" href="#ov-src-10">10</a></td><td>Japan</td><td>Union · mutual-aid (共済), health-checkup subsidy, free legal/tax counsel; no union-run MH service</td><td>Membership / union dues</td><td class="c">✅ Sourced</td></tr>
+<tr id="row-sutm" data-source="native-scan" data-service="union" data-funding="membership"><td class="c">112</td><td>SUTM — Sindicato Único de Trabajadores de la Música<a class="conf" href="#ov-src-12">12</a></td><td>Mexico</td><td>Union · representation, bargaining, training; member health / MH benefits not documented on its own site</td><td>Membership / union dues</td><td class="c">✅ / ❓</td></tr>
+<tr id="row-sindmusi" data-source="native-scan" data-service="union" data-funding="membership"><td class="c">113</td><td>SindMusi — Sindicato dos Músicos do RJ<a class="conf" href="#ov-src-13">13</a></td><td>Brazil</td><td>Union · labour/social-security counsel, health-plan brokerage, education; MH = a one-off 2025 workshop</td><td>Membership / union dues</td><td class="c">✅ Sourced</td></tr>
+<tr id="row-sadem" data-source="native-scan" data-service="union" data-funding="membership"><td class="c">114</td><td>SADEM — Sindicato Argentino de Músicos<a class="conf" href="#ov-src-11">11</a></td><td>Argentina</td><td>Union · own health fund OSDEM (medical/prevention/disability), legal + welfare; standing MH not advertised</td><td>Membership / union dues</td><td class="c">✅ Sourced</td></tr>
         </tbody>
       </table>
     </div>
@@ -754,7 +923,7 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
           <div class="meta"><span class="date">2025-10</span><span class="tag abroad"><span class="gl"></span>Abroad</span><span class="cat">Working conditions</span></div>
           <h4>Korea's Idol Labor Union puts mental-health protocols at the centre of its first demands</h4>
           <p>Union recognition filed Sep–Oct 2025 demands an enforceable agency MH-care manual, crisis protocols and cyberbullying legal support — but approval is contested and unresolved. East Asia's pathway runs through labor law, not philanthropy. <a class="arrow" href="#cl-src-5">→ Source</a></p>
-          <div class="basis"><span class="meter v2" aria-hidden="true"><i></i><i></i><i></i></span><span><span class="lvl">Developing</span> · <a href="#cl-src-5">Korea Times + Sports Kyunghyang</a> · filing verified, status unresolved</span></div>
+          <div class="basis"><span class="meter v3" aria-hidden="true"><i></i><i></i><i></i></span><span><span class="lvl">Verified</span> · <a href="#cl-src-5">Korea Times + Sports Kyunghyang</a> · two outlets; union approval still unresolved</span></div>
         </div>
       </div>
 
@@ -777,19 +946,20 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
   <section class="chapter" id="sources" style="--hue:var(--silver);--huetext:var(--grey);border-top-width:1px">
     <div class="kicker">The receipts</div>
     <h2 class="q">Sources &amp; method</h2>
-    <p class="method">This report's claims trace to four method classes. <strong>Directory data:</strong> the Backline Global Resource Hub scraped page-by-page via browser automation (13 pages); the April 2026 scrape deduplicated to 111 and the June 2026 full re-scrape updated the roster to <strong>110</strong> (the count used throughout); dated snapshots archived on file. <strong>Financial data:</strong> IRS Form 990 figures from the ProPublica Nonprofit Explorer API (re-verified 2026-06-11). <strong>Study data:</strong> quoted directly from primary report PDFs (on file). <strong>News &amp; organization facts:</strong> cross-checked against official sites and at least one independent press source. Anything not verifiable by two methods is labeled.</p>
+    <p class="method">This report's claims trace to five method classes. <strong>Directory data:</strong> the Backline Global Resource Hub scraped page-by-page via browser automation (13 pages); the April 2026 scrape deduplicated to 111 and the June 2026 full re-scrape updated the roster to <strong>110</strong> — the directory census, and the base for every percentage; dated snapshots archived on file. <strong>Native-language scan:</strong> a separate region-native search (JA / ES / PT) surfaced <strong>4</strong> music-specific unions the directory never listed, each verified against its own site — shown alongside the 110 for <strong>114</strong> total, but kept out of the directory percentages (a different, non-exhaustive sampling frame). <strong>Financial data:</strong> IRS Form 990 figures from the ProPublica Nonprofit Explorer API (re-verified 2026-06-11). <strong>Study data:</strong> quoted directly from primary report PDFs (on file). <strong>News &amp; organization facts:</strong> traced to official sites or independent press. Anything we can't trace to a public source is labeled (Rule 3).</p>
 
     <div class="basis-key">
-      <strong>Basis</strong> —
-      <span>✅ Verified · 2+ methods or primary source</span>
-      <span>⚠️ Single-source / developing · one method only</span>
-      <span>❓ Uncertain · no public basis found</span>
+      <strong>Basis</strong> — can you trace it to a source?
+      <span>✅ Sourced · backed by a source we link to</span>
+      <span>⚠️ Inferred · our own read, no direct source</span>
+      <span>❓ No source · none found publicly</span>
     </div>
+    <p style="font-family:var(--font-mono);font-size:.6rem;color:var(--graphite);line-height:1.9;margin:-1rem 0 1.4rem;max-width:64ch">What the symbol rates depends on the row. For the <strong>110 directory rows</strong> it rates the <strong>funding-model call only</strong> (country and service tags come straight from the directory). For the <strong>4 native-language-scan rows</strong> and in “Beyond one directory” it rates <strong>verification against the union's own site</strong>; a paired <strong>✅ / ❓</strong> means the body is sourced but a specific claimed benefit (e.g. SUTM's member health benefits) is undocumented. Field News uses the same three levels for each item; a story's unresolved status is noted in its text, not as a separate level.</p>
 
     <div class="refs-title">References — Overview &amp; dataset</div>
     <div class="refs">
       <ol>
-        <li id="ov-src-1" data-src="directory-snapshot"><span class="conf-sym">✅</span>Backline <a href="https://backline.care/global-resources/" target="_blank" rel="noopener">Global Resource Hub</a> directory — Chrome-automated scrape of all 13 pages. April 2026 scrape deduplicated to 111; June 2026 full re-scrape updated the roster to <strong>110</strong> (net −1), the count used throughout. Per-org tags, funding model and basis in the <a href="orgs-funding-classification.html">supplementary data table</a>.</li>
+        <li id="ov-src-1" data-src="directory-snapshot"><span class="conf-sym">✅</span>Backline <a href="https://backline.care/global-resources/" target="_blank" rel="noopener">Global Resource Hub</a> directory — Chrome-automated scrape of all 13 pages. April 2026 scrape deduplicated to 111; June 2026 full re-scrape updated the roster to <strong>110</strong> (net −1) — the directory census and the base for every percentage; the 4 native-language-scan unions (refs 10–13) are shown alongside it for <strong>114</strong> total but kept out of the directory rates. Per-org tags, funding model and basis in the <a href="orgs-funding-classification.html">supplementary data table</a>.</li>
         <li id="ov-src-2" data-src="org-financials"><span class="conf-sym">✅</span>Backline Form 990s FY2020–2023 — <a href="https://projects.propublica.org/nonprofits/organizations/843338712" target="_blank" rel="noopener">ProPublica Nonprofit Explorer API</a>, accessed 2026-06-11; MusiCares FY2024 990 — <a href="https://projects.propublica.org/nonprofits/organizations/954470909" target="_blank" rel="noopener">ProPublica</a>.</li>
         <li id="ov-src-3" data-src="tw-policy"><span class="conf-sym">✅</span>行政院 — <a href="https://www.ey.gov.tw/Page/5A8A0CB5B41DA11E/8e8835ef-5b07-4e02-8b19-906b6964a10c" target="_blank" rel="noopener">全民心理健康韌性計畫</a>; 衛福部心理健康司 — <a href="https://dep.mohw.gov.tw/DOMHAOH/lp-329-107.html" target="_blank" rel="noopener">計畫專區</a>. Method: official policy pages.</li>
         <li id="ov-src-4" data-src="helpmusicians-funding"><span class="conf-sym">✅</span>Help Musicians / Music Minds Matter income — major donors, legacies, corporate partners (not government): <a href="https://www.helpmusicians.org.uk/about-us/news/help-musicians-release-2024-annual-report" target="_blank" rel="noopener">Help Musicians 2024 Annual Report</a>. Accessed 2026-06-15.</li>
@@ -798,6 +968,10 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
         <li id="ov-src-7" data-src="directory-funding-class"><span class="conf-sym">⚠️</span>Funding model — author's classification of the 110 <a href="https://backline.care/global-resources/" target="_blank" rel="noopener">Backline directory</a> organizations by organisational type (the directory carries no funding field). Per-org basis: ✅ 11 verified from financials / official sources · ⚠️ 45 inferred from organisational type · ❓ 54 no public info. Method and basis for every organization in the <a href="orgs-funding-classification.html">supplementary data table</a>. Not a 110-org financials census.</li>
         <li id="ov-src-8" data-src="gov-funding-anchors"><span class="conf-sym">✅</span>Government/public-sector cluster anchors (web-verified): <a href="https://cnm.fr/en/uncategorized/about-us/" target="_blank" rel="noopener">Centre national de la musique</a>; <a href="https://prohelvetia.ch/en/our-mission/" target="_blank" rel="noopener">Pro Helvetia</a>; <a href="https://creativenz.govt.nz/about-creative-nz/what-we-do/arts-funding" target="_blank" rel="noopener">Creative New Zealand</a>; <a href="https://www.samhsa.gov/" target="_blank" rel="noopener">SAMHSA</a>; plus Support Act (see 5). Method: WebSearch + official pages, 2026-06-15.</li>
         <li id="ov-src-9" data-src="tw-creators-union"><span class="conf-sym">✅</span>藝創工會 — 臺北市藝術創作者職業工會 — covers art creators including musicians; member benefits are labour/health-insurance (勞健保) access, occupational-injury cover, occupational-safety guidance, legal/contract support and advocacy — no mental-health service. <a href="https://artcreator.tw/?page_id=1194" target="_blank" rel="noopener">工會簡介</a>; <a href="https://artcreator.tw/?p=2175" target="_blank" rel="noopener">會員福利權益</a>. Method: WebSearch + union site, 2026-06-16.</li>
+        <li id="ov-src-10" data-src="muj-union"><span class="conf-sym">✅</span>Musicians' Union of Japan (日本音楽家ユニオン) — <a href="https://www.muj.or.jp/" target="_blank" rel="noopener">muj.or.jp</a> member-services: self-run 共済 mutual-aid, health-checkup subsidy, free legal/tax counsel; ~5,200 members; sole Asian member of the International Federation of Musicians. Confirmed via the org's own pages (archived) + site-restricted search (live site 403-blocks bots). No union-run MH service; the "24-hour helpline" attributed to MUJ is refuted (it belongs to unrelated health-insurance funds).</li>
+        <li id="ov-src-11" data-src="sadem-osdem"><span class="conf-sym">✅</span>SADEM — <a href="https://sadem.org.ar/" target="_blank" rel="noopener">sadem.org.ar</a> + its health fund OSDEM <a href="https://www.osdem.org.ar/" target="_blank" rel="noopener">osdem.org.ar</a>: musicians' union (1945) running its own obra social (medical, prevention, disability cover); standing musician MH counselling not advertised (❓).</li>
+        <li id="ov-src-12" data-src="sutm-union"><span class="conf-sym">✅/❓</span>SUTM — <a href="https://sutm.mx/" target="_blank" rel="noopener">sutm.mx</a>: music-worker union; representation, bargaining, training, a Secretaría de Previsión Social office. Member funeral/health/psychological benefits + size are not documented on sutm.mx (full site rendered via Chrome) → ❓; re-verify against SUTM's estatutos / contrato colectivo.</li>
+        <li id="ov-src-13" data-src="sindmusi-union"><span class="conf-sym">✅</span>SindMusi — <a href="https://www.sindmusi.org.br/" target="_blank" rel="noopener">sindmusi.org.br</a>: musicians' union (1907) — free labour/social-security legal counsel, health-plan brokerage, gym/education discounts. MH = a single 2025 workshop ("Saúde do Músico na Prática"), not a standing service.</li>
       </ol>
     </div>
 
@@ -834,50 +1008,65 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
 </div>
 <script>
 (function(){
-  // ===== FILTER STATE (URL is the store; no localStorage) =====
-  var state = { service:'all', funding:'all', org:null };
+  // ===== FILTER STATE — three dimensions (URL is the store; no localStorage) =====
+  var state = { source:'all', service:'all', funding:'all', org:null };
   var map = document.getElementById('gapmap');
   var body = document.getElementById('allBody');
-  var rows = Array.prototype.slice.call(body.querySelectorAll('tr'));
-  // Only NAMED org nodes (carry data-service) are filterable; the Taiwan node + context dots do not.
+  // org rows only — exclude the native-scan group separator
+  var rows = Array.prototype.slice.call(body.querySelectorAll('tr')).filter(function(r){ return !r.classList.contains('grp'); });
+  // directory studied orgs carry data-service; the Taiwan node + context dots do not (never dimmed).
   var nodes = Array.prototype.slice.call(map.querySelectorAll('.gm-node'));
   var namedNodes = nodes.filter(function(nd){ return nd.hasAttribute('data-service'); });
+  // native-language-scan nodes — a SEPARATE set: filterable, but never confused with the directory census.
+  var scanNodes = Array.prototype.slice.call(map.querySelectorAll('.gm-scan'));
+  var filterNodes = namedNodes.concat(scanNodes);   // both dim under an active filter
+  var peekNodes   = namedNodes.concat(scanNodes);   // both open the shared peek
   var resultEl = document.getElementById('result');
   var tableCap = document.getElementById('tableCap');
   var clearAll = document.getElementById('clearAll');
+  var srLive   = document.getElementById('srLive');   // debounced plain-text live region (AT)
+  var srTimer;
 
   function slugSet(str){ return (str||'').split(/\s+/).filter(Boolean); }
+  function rowSource(el){ return el.getAttribute('data-source') || 'directory'; } // 110 rows default to directory
+  function matchSource(el){ return state.source==='all' || rowSource(el)===state.source; }
   function matches(el){
     var svc = slugSet(el.getAttribute('data-service'));
     var fnd = slugSet(el.getAttribute('data-funding'));
+    var okSrc = matchSource(el);
     var okS = state.service==='all' || svc.indexOf(state.service)>-1;
     var okF = state.funding==='all' || fnd.indexOf(state.funding)>-1;
-    return okS && okF;
+    return okSrc && okS && okF;
   }
 
   var serviceLabel = {'all':'','mental-health':'mental health','financial':'financial','career':'career','counseling':'counseling','substance':'substance use'};
   var fundingLabel = {'all':'','government':'government','philanthropy':'philanthropy','private':'private','trade-body':'trade body','peer-fellowship':'peer fellowship','unknown':'unknown funding'};
+  var sourceLabel  = {'all':'','directory':'the Backline directory','native-scan':'the native-language scan'};
 
-  // reading() — result-sentence per Round 7 spec
+  // base = the rows under the active SOURCE filter (the honest denominator: 114 · 110 · 4)
+  function baseRows(){ return rows.filter(matchSource); }
+  function pct(n,d){ return d>0 ? Math.round(n/d*100) : 0; }
+
   function reading(n){
-    var s=state.service, f=state.funding;
-    if(s==='all'&&f==='all') return 'the whole field';
-    if(n===0) return 'no organization matches';
-    var sv=serviceLabel[s], fn=fundingLabel[f];
-    // two active filters: "{n} of 110 · {service} AND {funding}"
-    if(s!=='all'&&f!=='all') return sv+' AND '+fn;
-    // one active filter: "{label}", append rarity note when sparse (≤10)
-    var label = s!=='all' ? sv : fn;
-    if(n<=10) return label+' — '+label+' is rare in this field';
-    return label;
-  }
-  function filterText(){
-    var s=state.service,f=state.funding;
-    if(s==='all'&&f==='all') return 'the whole field';
+    var s=state.service, f=state.funding, src=state.source;
     var parts=[];
     if(s!=='all') parts.push(serviceLabel[s]);
     if(f!=='all') parts.push(fundingLabel[f]);
-    return parts.join(' AND ');
+    var sentence = parts.join(' AND ');
+    if(s==='all'&&f==='all'){
+      if(src==='all') return 'the whole field, across two sources';
+      if(src==='directory') return 'the Backline directory';
+      return 'found beyond the directory · native-language scan';
+    }
+    if(n===0) return (sentence||'no match')+' — none in this view';
+    return sentence + (n<=10 ? ' · rare in this field' : '');
+  }
+  function filterText(){
+    var parts=[];
+    if(state.source!=='all') parts.push(sourceLabel[state.source]);
+    if(state.service!=='all') parts.push(serviceLabel[state.service]);
+    if(state.funding!=='all') parts.push(fundingLabel[state.funding]);
+    return parts.join(' · ') || 'the whole field';
   }
 
   function apply(){
@@ -886,19 +1075,64 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
       if(matches(r)){ r.classList.remove('hidden'); n++; }
       else r.classList.add('hidden');
     });
-    var anyFilter = !(state.service==='all'&&state.funding==='all');
-    // P0 #1 — dim ONLY named nodes that don't match. Context dots (no data-service) are untouched:
-    // the cluster shape, scatter, India and the Taiwan node stay full-opacity under every filter.
-    namedNodes.forEach(function(nd){
-      if(anyFilter && !matches(nd)) nd.classList.add('gm-dimmed');
-      else nd.classList.remove('gm-dimmed');
+    // native-scan group separator: visible only when at least one native row shows
+    var grp = body.querySelector('tr.grp');
+    if(grp){
+      var anyNative = rows.some(function(r){ return r.getAttribute('data-source')==='native-scan' && !r.classList.contains('hidden'); });
+      grp.classList.toggle('hidden', !anyNative);
+    }
+    var anyFilter = !(state.source==='all'&&state.service==='all'&&state.funding==='all');
+    // dim non-matching interactive nodes (directory studied + native scan). Context dots never dim.
+    filterNodes.forEach(function(nd){
+      if(!matches(nd)) nd.classList.add('gm-dimmed'); else nd.classList.remove('gm-dimmed');
     });
-    resultEl.innerHTML = n+' of 110 <span class="plain">· '+reading(n)+'</span>';
-    // global "Clear filters · 110" chip is visible only when a filter is active (one tap clears both rows + URL)
-    if(clearAll) clearAll.hidden = !anyFilter;
-    // P2 — table caption echoes the active filter so the off-screen sync is legible at the table
-    if(tableCap) tableCap.textContent = 'Showing '+n+' of 110 · '+filterText()+'.';
+    // isolate the native scan → fade the directory's aggregate geographic context so the 4 read clearly
+    if(map) map.classList.toggle('src-native', state.source==='native-scan');
+
+    var denom = baseRows().length;                  // 114 / 110 / 4 — never a blend
+    var showPct = !(state.service==='all'&&state.funding==='all');
+    var p = pct(n, denom);
+    resultEl.innerHTML = n+' of '+denom + (showPct ? (' <b class="rpct">· '+p+'%</b>') : '') + ' <span class="plain">· '+reading(n)+'</span>';
+    // AT: announce as debounced PLAIN text so arrow-keying the chips doesn't fire a chatty queue of rich-markup updates
+    if(srLive){ clearTimeout(srTimer); srTimer=setTimeout(function(){ srLive.textContent = n+' of '+denom+(showPct?(' · '+p+'%'):'')+' · '+filterText(); }, 450); }
+    if(clearAll){ clearAll.hidden = !anyFilter; clearAll.textContent = 'Clear filters · '+denom; }
+    if(tableCap) tableCap.textContent = 'Showing '+n+' of '+denom + (showPct?(' ('+p+'%)'):'') + ' · '+filterText()+'.';
+
+    renderReadout();
     writeURL();
+  }
+
+  // ===== LIVE READOUT — recompute the where/what/who breakdown over the SOURCE base =====
+  var svcCats=['mental-health','financial','career','counseling','substance','union'];
+  var fndCats=['unknown','government','philanthropy','private','trade-body','peer-fellowship','membership'];
+  function countCat(set, attr, cat){ return set.filter(function(r){ return slugSet(r.getAttribute(attr)).indexOf(cat)>-1; }).length; }
+  function paintRows(containerId, attr, cats, activeVal){
+    var cont=document.getElementById(containerId); if(!cont) return;
+    var base=baseRows(), denom=base.length||1, counts={}, max=0;
+    cats.forEach(function(c){ var k=countCat(base,attr,c); counts[c]=k; if(k>max)max=k; });
+    cont.querySelectorAll('.ro-row').forEach(function(row){
+      var c=row.getAttribute('data-cat'), k=counts[c]||0;
+      // the union/membership categories only exist in the native scan — hide them when empty
+      row.style.display = (k===0 && (c==='union'||c==='membership')) ? 'none' : '';
+      var fill=row.querySelector('.ro-fill'), val=row.querySelector('.ro-val');
+      if(fill) fill.style.width = (max>0?Math.round(k/max*100):0)+'%';
+      if(val) val.textContent = k+' · '+pct(k,denom)+'%';
+      row.classList.toggle('active', activeVal && activeVal!=='all' && c===activeVal);
+    });
+  }
+  function renderReadout(){
+    paintRows('roWhat','data-service',svcCats, state.service);
+    paintRows('roWho','data-funding',fndCats, state.funding);
+    var beyond=document.getElementById('roBeyond');
+    if(beyond) beyond.style.display = (state.source==='directory') ? 'none' : '';
+    var roBase=document.getElementById('roBase');
+    if(roBase){
+      roBase.textContent = state.source==='all'
+          ? '% across both sources combined (114) — a mixed base, not a like-for-like rate; pick Backline directory for a clean denominator'
+        : state.source==='directory'
+          ? '% of the 110-org Backline directory — the clean, comparable base'
+          : '% of the 4 found beyond the directory (native-language scan)';
+    }
   }
 
   function setChecked(group,val){
@@ -908,15 +1142,11 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
       c.classList.toggle('on', on);
     });
   }
-  function setFilter(group,val){
-    state[group]=val;
-    setChecked(group,val);
-    apply();
-  }
-  // global reset — clears BOTH rows + URL in one tap
+  function setFilter(group,val){ state[group]=val; setChecked(group,val); apply(); }
+  // global reset — clears all three dimensions + URL in one tap
   if(clearAll) clearAll.addEventListener('click', function(){
-    state.service='all'; state.funding='all';
-    setChecked('service','all'); setChecked('funding','all');
+    state.source='all'; state.service='all'; state.funding='all';
+    setChecked('source','all'); setChecked('service','all'); setChecked('funding','all');
     apply();
   });
 
@@ -951,6 +1181,7 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
   // ===== URL state — ?service & ?funding (replaceState on filter), ?org (pushState on select) =====
   function buildURL(){
     var p=new URLSearchParams();
+    if(state.source!=='all') p.set('source',state.source);
     if(state.service!=='all') p.set('service',state.service);
     if(state.funding!=='all') p.set('funding',state.funding);
     if(state.org) p.set('org',state.org);
@@ -968,8 +1199,10 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
   var peekLocate=document.getElementById('peekLocate');
   var peekStudy=document.getElementById('peekStudy');
 
+  // resolve ANY interactive node (directory studied + native scan) for peek / deep-link —
+  // the census filter set (namedNodes) stays separate, so this never pollutes the count math.
   function nodeBySlug(slug){
-    for(var i=0;i<namedNodes.length;i++){ if(namedNodes[i].getAttribute('data-slug')===slug) return namedNodes[i]; }
+    for(var i=0;i<peekNodes.length;i++){ if(peekNodes[i].getAttribute('data-slug')===slug) return peekNodes[i]; }
     return null;
   }
   function clearRowHighlight(){
@@ -978,13 +1211,19 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
   // populate + show the pinned peek from a node's data
   function fillPeek(nd){
     if(!peek||!nd) return;
+    var beyond = nd.getAttribute('data-source')==='native-scan';
     peekEye.textContent  = nd.getAttribute('data-country')||'';
     peekName.textContent = nd.getAttribute('data-name')||'';
     peekBody.textContent = nd.getAttribute('data-body')||'';
-    var rowId = 'row-'+nd.getAttribute('data-slug');
+    var rowId = nd.getAttribute('data-row') || ('row-'+nd.getAttribute('data-slug'));
     peekLocate.setAttribute('href', '#'+rowId);
     peekLocate.setAttribute('data-row', rowId);
-    peekStudy.setAttribute('href', nd.getAttribute('data-study')||'#');
+    peekLocate.textContent = beyond ? 'Find in the table ↓' : 'Locate in table ↓';
+    // native-scan unions have no Org Study page — hide that action rather than fake one
+    var study = nd.getAttribute('data-study');
+    if(study){ peekStudy.style.display=''; peekStudy.setAttribute('href', study); }
+    else { peekStudy.style.display='none'; }
+    peek.classList.toggle('peek-scan', beyond);
     peek.setAttribute('data-slug', nd.getAttribute('data-slug'));
     peek.setAttribute('data-row', rowId);
   }
@@ -1007,7 +1246,7 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
   var finePointer = window.matchMedia && window.matchMedia('(pointer:fine)').matches;
   var previewing=false;
 
-  namedNodes.forEach(function(nd){
+  peekNodes.forEach(function(nd){
     // click/Enter opens the pinned peek — must NOT bypass straight to the Org Study
     nd.addEventListener('click', function(e){
       e.preventDefault();
@@ -1034,7 +1273,7 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
   document.addEventListener('click', function(e){
     if(!peek || !peek.classList.contains('show') || previewing) return;
     if(peek.contains(e.target)) return;
-    if(e.target.closest && e.target.closest('.gm-node')) return; // node clicks handled above
+    if(e.target.closest && (e.target.closest('.gm-node')||e.target.closest('.gm-scan'))) return; // node clicks handled above
     closePeek();
   });
 
@@ -1052,23 +1291,43 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
   // ===== LOAD ORDER: parse ?filters → apply → open ?org peek (+scroll/highlight) → THEN honor #hash =====
   function parseState(){
     var p=new URLSearchParams(location.search);
-    var s=p.get('service'), f=p.get('funding'), o=p.get('org');
+    var src=p.get('source'), s=p.get('service'), f=p.get('funding'), o=p.get('org');
+    var srcVals=['directory','native-scan'];
     var svcVals=['mental-health','financial','career','counseling','substance'];
     var fndVals=['government','philanthropy','private','trade-body','peer-fellowship','unknown'];
+    state.source  = (src&&srcVals.indexOf(src)>-1)?src:'all';
     state.service = (s&&svcVals.indexOf(s)>-1)?s:'all';
     state.funding = (f&&fndVals.indexOf(f)>-1)?f:'all';
-    setChecked('service',state.service); setChecked('funding',state.funding);
+    setChecked('source',state.source); setChecked('service',state.service); setChecked('funding',state.funding);
     state.org = (o&&nodeBySlug(o))?o:null;
   }
   parseState();
   apply();                 // applies filters first
+
+  // MOBILE (≤680px): degrade the map to a static, non-interactive image — drop the SVG from the AT
+  // tree and its links from the focus order so the sub-44px markers aren't tappable controls; the
+  // table is the instrument (§13). Pointer-events are killed in CSS; re-evaluated on resize.
+  var allMapLinks = nodes.concat(scanNodes);
+  function setMapMode(){
+    var small = window.matchMedia('(max-width:680px)').matches;
+    if(map){ if(small) map.setAttribute('aria-hidden','true'); else map.removeAttribute('aria-hidden'); }
+    allMapLinks.forEach(function(a){ a.setAttribute('tabindex', small?'-1':'0'); });
+  }
+  setMapMode();
+  var mmTimer; window.addEventListener('resize', function(){ clearTimeout(mmTimer); mmTimer=setTimeout(setMapMode, 200); });
+
+  // animate the readout bars only on FILTER changes, not on first paint (no load-time width tween)
+  var readEl=document.getElementById('read');
+  if(readEl) requestAnimationFrame(function(){ readEl.classList.add('ro-animate'); });
 
   if(state.org){
     var nd=nodeBySlug(state.org);
     if(nd){
       fillPeek(nd);
       peek.classList.add('show');
-      var rowId='row-'+state.org, tr=document.getElementById(rowId);
+      // a deep-linked native-scan org must not stay hidden under a directory-only view
+      if(nd.getAttribute('data-source')==='native-scan' && state.source==='directory'){ state.source='all'; setChecked('source','all'); apply(); }
+      var rowId=nd.getAttribute('data-row')||('row-'+state.org), tr=document.getElementById(rowId);
       if(tr){ clearRowHighlight(); tr.setAttribute('data-active',''); }
     }
   } else if(peek && peek.classList.contains('show')){
@@ -1090,7 +1349,7 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
   // browser Back closes the peek / restores state
   window.addEventListener('popstate', function(){
     parseState();
-    setChecked('service',state.service); setChecked('funding',state.funding);
+    setChecked('source',state.source); setChecked('service',state.service); setChecked('funding',state.funding);
     apply();
     if(state.org){ var nd=nodeBySlug(state.org); if(nd){ fillPeek(nd); peek.classList.add('show'); } }
     else if(peek) peek.classList.remove('show');
