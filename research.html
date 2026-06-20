@@ -387,6 +387,232 @@
   </style>
 
   <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
+
+  <style>
+    /* ===== EVIDENCE BACKDROP (re-homed from Orgs Map, 2026-06-21) =====
+       The cross-study prevalence base — the motivational anchor that says why
+       this whole shelf of studies exists. Re-placed as the page lede: it frames
+       the field directly under the hero, above the card grid, so the figures
+       read first and the cards below become "the studies behind the numbers."
+       Built in the Research page's own vocabulary: a frosted glass section
+       (sibling of .work-card) over the forest canvas, Fraunces headings +
+       Space Mono labels, tokens only. Sensitive topic — figures stated plainly
+       with their sources, no dramatization. */
+    .evidence {
+      position: relative;
+      z-index: 1;
+      margin: 0.5rem 0 3.5rem;
+      padding: clamp(1.75rem, 4vw, 2.75rem);
+      background: rgba(244, 244, 245, 0.6);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: var(--radius-lg);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 2px 12px rgba(102,103,171,0.05);
+    }
+
+    .evidence .kicker {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--purple-deep);
+      margin-bottom: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .evidence .kicker::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--purple-deep);
+    }
+
+    .evidence h2 {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: var(--text-h2);
+      line-height: 1.05;
+      letter-spacing: -0.005em;
+      color: var(--black);
+      max-width: 24ch;
+      text-wrap: balance;
+    }
+
+    .evidence .takeaway {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+      line-height: 1.55;
+      color: var(--graphite);
+      max-width: var(--measure);
+      margin: 1rem 0 1.5rem;
+    }
+    .evidence .takeaway b { color: var(--signal); font-weight: 600; }
+
+    /* Lead stat pair — the 86% / 43% anchor, given presence without drama.
+       Two figures sit side by side, each with a plain caption + same-page cite. */
+    .evidence .stat-pair {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(1rem, 3vw, 2rem);
+      margin: 1.5rem 0 1.75rem;
+      padding: 1.5rem 0 0.25rem;
+      border-top: 1px solid var(--border-light);
+    }
+    .evidence .stat {
+      min-width: 0;
+    }
+    .evidence .stat .fig {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(2.75rem, 7vw, 4rem);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--signal);
+      font-variant-numeric: tabular-nums;
+      display: block;
+    }
+    .evidence .stat .lab {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      line-height: 1.5;
+      color: var(--graphite);
+      margin-top: 0.5rem;
+      max-width: 30ch;
+    }
+    .evidence .stat .lab .ctx {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.04em;
+      color: var(--grey);
+      margin-top: 0.3rem;
+    }
+
+    /* Connective line — ties the backdrop to the cards that follow. */
+    .evidence .lede-to-cards {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--grey);
+      margin-bottom: 1.5rem;
+    }
+
+    /* same-page citation marker — superscript chip, matches the prose tier */
+    a.conf {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: var(--signal);
+      vertical-align: super;
+      line-height: 0;
+      margin-left: 0.12em;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    a.conf:hover, a.conf:focus { color: var(--signal-dim); text-decoration: underline; }
+
+    .evidence .tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+    table.tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--text-sm);
+      margin-top: 0.25rem;
+    }
+    table.tbl caption {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--grey);
+      text-align: left;
+      padding-bottom: 0.6rem;
+    }
+    table.tbl th {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      text-align: left;
+      color: var(--grey);
+      border-bottom: 1px solid var(--graphite);
+      padding: 0.5rem 0.65rem;
+      background: var(--snow);
+    }
+    table.tbl td {
+      padding: 0.55rem 0.65rem;
+      border-bottom: 1px solid var(--silver);
+      vertical-align: top;
+      color: var(--charcoal);
+    }
+    table.tbl td.c {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+    table.tbl tbody tr:hover { background: var(--signal-bg); }
+
+    .src-chip {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-top: 1.25rem;
+      display: inline-block;
+    }
+    .src-chip .ok { color: var(--signal); }
+    .src-chip a { color: var(--grey); border-bottom: 1px solid var(--silver); text-decoration: none; }
+    .src-chip a:hover, .src-chip a:focus { color: var(--charcoal); }
+
+    /* ===== REFERENCES (project "References" pattern) ===== */
+    .refs-section {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 1.5rem 5rem;
+    }
+    .refs-title {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--grey);
+      margin: 0 0 0.8rem;
+    }
+    .refs {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--graphite);
+      line-height: 1.7;
+      max-width: 72ch;
+    }
+    .refs ol { margin: 0 0 0 1.2rem; padding: 0; }
+    .refs li { margin-bottom: 0.55rem; }
+    .refs li:target {
+      background: var(--signal-bg);
+      border-radius: var(--radius);
+      outline: 2px solid var(--signal-glow);
+    }
+    .refs .conf-sym { font-style: normal; margin-right: 0.4em; }
+    .refs a { color: var(--signal); border-bottom: 1px solid var(--signal-glow); text-decoration: none; }
+    .refs a:hover, .refs a:focus { color: var(--signal-dim); }
+
+    @media (max-width: 768px) {
+      .evidence { margin: 0.5rem 0 2.5rem; }
+      .evidence h2 { max-width: none; }
+      .refs-section { padding-bottom: 3rem; }
+    }
+    /* Stat pair stacks below the wider phones so the figures stay legible. */
+    @media (max-width: 560px) {
+      .evidence .stat-pair { grid-template-columns: 1fr; gap: 1.5rem; }
+    }
+  </style>
 </head>
 <body>
   <a href="#main" class="skip-nav">Skip to content</a>
@@ -407,6 +633,7 @@
       <a href="research.html" class="current" aria-current="page">RESEARCH</a>
       <a href="insight.html">INSIGHT</a>
       <a href="plan.html">PLAN</a>
+      <a href="field-news.html">FIELD NEWS</a>
     </div>
   </nav>
 
@@ -419,7 +646,45 @@
         <h1>Research</h1>
       </div>
 
-      <!-- Works Grid -->
+      <!-- Evidence backdrop: the motivational anchor, placed as the page lede
+           (re-homed from the Orgs Map, 2026-06-21). The cross-study prevalence
+           base the individual paper-studies below sit against. Sensitive topic —
+           figures stated plainly with their sources, no dramatization. -->
+      <section class="evidence" aria-labelledby="evidence-h">
+        <div class="kicker">Why this field matters</div>
+        <h2 class="q" id="evidence-h">What does the evidence say?</h2>
+        <p class="takeaway">The need is real and measured. Canada's first national study of music professionals (n&nbsp;=&nbsp;1,216) puts the gap between this workforce and the general population in plain numbers.<a class="conf" href="#ev-src-1" aria-label="Source A">A</a></p>
+
+        <div class="stat-pair">
+          <div class="stat">
+            <span class="fig">86%</span>
+            <span class="lab">of music professionals personally experienced mental-health challenges<span class="ctx">vs. ~12% of the general workforce</span></span>
+          </div>
+          <div class="stat">
+            <span class="fig">43%</span>
+            <span class="lab">have had lifetime suicidal thoughts<span class="ctx">vs. ~12% in the general population</span></span>
+          </div>
+        </div>
+
+        <div class="tablewrap">
+          <table class="tbl">
+            <caption>Prevalence findings across six studies · each row traced to its paper<a class="conf" href="#ev-src-2" aria-label="Source B">B</a></caption>
+            <thead><tr><th scope="col">Study</th><th scope="col">Country</th><th scope="col">Key finding</th></tr></thead>
+            <tbody>
+              <tr><td class="c">Soundcheck / Harrison 2026</td><td>Canada</td><td>50–86% report MH challenges vs ~12% general workforce (n=1,216)</td></tr>
+              <tr><td class="c">Musgrave &amp; Lamis 2025</td><td>UK/US</td><td>Musicians among top-5 occupations for suicide; US male musicians 138.7/100K vs 14.2 general</td></tr>
+              <tr><td class="c">Détári et al. 2020</td><td>Norway</td><td>Higher demands, lower support, more work–family conflict vs general workforce (all p&lt;0.001, n≈10K)</td></tr>
+              <tr><td class="c">Vaag et al. 2016</td><td>Norway</td><td>Depression/anxiety ~2× higher in musicians than general workforce</td></tr>
+              <tr><td class="c">Kenny et al. 2014</td><td>Australia</td><td>23% depression, 33% social phobia among orchestral musicians</td></tr>
+              <tr><td class="c">UK Musicians' Census</td><td>UK</td><td>~30% of professional musicians report poor mental health</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <span class="src-chip"><span class="ok">✅</span> Soundcheck final report (Revelios / Harrison, Feb 2026; n=1,216) + cross-study base. <a href="#ev-src-1">Primary PDF on file</a></span>
+      </section>
+
+      <!-- Works Grid: the individual studies behind the numbers above -->
+      <p class="lede-to-cards">The studies behind these numbers</p>
       <div class="works-list">
 
         <!-- Détári 2020 -->
@@ -470,6 +735,17 @@
         </div>
 
       </div>
+    </div>
+  </section>
+
+  <!-- References — Evidence (citations re-homed alongside the block, 2026-06-21) -->
+  <section class="refs-section" aria-labelledby="refs-evidence-h">
+    <div class="refs-title" id="refs-evidence-h">References — Evidence</div>
+    <div class="refs">
+      <ol>
+        <li id="ev-src-1" data-src="soundcheck-pdf"><span class="conf-sym">✅</span>Soundcheck final report (Revelios / Harrison, Feb 2026; n=1,216) — primary PDF on file; <a href="https://www.revelios.com/soundcheck/" target="_blank" rel="noopener">revelios.com/soundcheck</a>. 86% personally experienced MH challenges; 43% lifetime suicidal thoughts vs 12% general population. Method: figures quoted as published.</li>
+        <li id="ev-src-2" data-src="cross-study"><span class="conf-sym">✅</span>Cross-study rows: Musgrave &amp; Lamis 2025 — <a href="https://www.frontiersin.org/journals/public-health/articles/10.3389/fpubh.2025.1507772/full" target="_blank" rel="noopener">Frontiers in Public Health</a>; Détari et al. 2020 — <a href="https://doi.org/10.3389/fpsyg.2020.01315" target="_blank" rel="noopener">Frontiers in Psychology</a>; Vaag et al. 2016; Kenny et al. 2014; UK Musicians' Census — compiled in our evidence-base synthesis (on file).</li>
+      </ol>
     </div>
   </section>
 

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Field News · MH&amp;W</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Space+Mono:wght@400;700&display=swap');
+
+:root{
+  --black:#09090b;--off-black:#141416;--charcoal:#27272a;--graphite:#3f3f46;--grey:#71717a;--grey-light:#a1a1aa;
+  --silver:#d4d4d8;--snow:#f4f4f5;--white:#fafafa;
+  --purple-light:#CBB9D6;--purple-deep:#6667AB;--signal:var(--purple-deep);--signal-dim:#565799;
+  --signal-bg:rgba(102,103,171,0.08);--signal-glow:rgba(102,103,171,0.28);
+  --spectrum-1:#d4799c;--spectrum-2:#e8a87c;--spectrum-3:#d4c97a;--spectrum-4:#85c9a3;--spectrum-5:#7aaed4;--spectrum-6:#b8a9d4;
+  --sp-pink:#d4799c;--sp-blue:#7aaed4;--sp-green:#85c9a3;--sp-orange:#e8a87c;--sp-lav:#b8a9d4;
+  /* AA-safe darkened kicker-text stops (Round 7 → re-tuned Round 8 for 4.5:1 on --snow) */
+  --sp-blue-t:#36719c;--sp-green-t:#2f7d59;--sp-orange-t:#9c5618;--sp-lav-t:#6c5b9c;
+  --abroad-text:#b3486f;--abroad-text-deep:#9c3a5e;--abroad-bg:rgba(212,121,156,.14);
+  --nav-blur-bg:rgba(244,244,245,0.92);
+  --bg-light:var(--snow);--bg-card:var(--white);
+  --border-light:rgba(0,0,0,0.07);--border-dark:rgba(255,255,255,0.1);
+  --font-display:'Fraunces','Noto Serif TC',Georgia,serif;
+  --font-body:'Fraunces','Noto Serif TC',Georgia,serif;
+  --font-mono:'Space Mono','Courier New',monospace;
+  --font-cjk:'Noto Serif TC',serif;
+  --ease:cubic-bezier(0.4,0,0.2,1);--dur:0.3s;--dur-slow:0.6s;
+  --text-xs:0.75rem;
+  --radius:4px;--radius-lg:6px;
+  --max-w:1180px;--measure:64ch;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{background:var(--bg-light);color:var(--black);font-family:var(--font-body);font-optical-sizing:auto;-webkit-font-smoothing:antialiased;line-height:1.5;font-weight:400}
+.page{overflow-x:clip;position:relative}
+::selection{background:var(--signal);color:var(--white)}
+a{color:var(--signal);text-decoration:none;transition:color var(--dur) var(--ease)}
+a:hover{color:var(--signal-dim)}
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--signal);outline-offset:2px;border-radius:var(--radius)}
+
+/* GRAIN — static riso tooth, gated behind reduced-motion AND forced-colors */
+.grain{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:60;opacity:.045;mix-blend-mode:multiply}
+@media (forced-colors:active){.grain{display:none}}
+
+.skip-nav{position:absolute;left:-9999px;top:0;z-index:200;background:var(--signal);color:var(--white);padding:.5rem 1rem;font-family:var(--font-mono);font-size:var(--text-xs)}
+.skip-nav:focus{left:1rem;top:.5rem}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:var(--max-w);margin:0 auto;padding:0 clamp(1.2rem,4vw,3rem)}
+
+/* ===== SITE NAV — desktop horizontal bar; collapses to hamburger ≤768px ===== */
+nav.nav{position:relative;z-index:55;max-width:var(--max-w);margin:0 auto;padding:1.4rem clamp(1.2rem,4vw,3rem) .4rem;display:flex;flex-direction:column}
+.nav-links{display:flex;align-items:center;gap:1.75rem;flex-wrap:wrap}
+.nav-links a{font-family:var(--font-mono);font-size:.8rem;font-weight:400;color:var(--grey);text-transform:uppercase;letter-spacing:.08em;transition:color var(--dur) var(--ease)}
+.nav-links a:hover{color:var(--black)}
+.nav-links a.current{color:var(--black)}
+.nav-links a:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius)}
+
+.nav-topbar{display:none}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem;z-index:101;-webkit-tap-highlight-color:transparent}
+.nav-toggle span{display:block;width:22px;height:2px;background:var(--charcoal);margin:5px 0;transition:all .3s var(--ease)}
+.nav-toggle.open span:nth-child(1){transform:rotate(45deg) translate(4px,5px)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-5px)}
+
+.nav-mobile-brand{display:none;font-family:var(--font-display);font-weight:900;color:var(--charcoal);text-transform:uppercase;letter-spacing:.08em;font-size:.65rem;line-height:1.3}
+.nav-mobile-brand .mobile-sub{font-family:var(--font-mono);font-size:.58rem;font-weight:400;color:var(--purple-deep);text-transform:uppercase;letter-spacing:.14em}
+
+@media (max-width:768px){
+  nav.nav{padding:1.2rem 1.5rem;padding-top:calc(1.2rem + env(safe-area-inset-top))}
+  nav.nav.open{background:var(--nav-blur-bg);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--border-light)}
+  .nav-topbar{display:flex;align-items:center;gap:.75rem}
+  .nav-toggle{display:block}
+  .nav-links{display:none;flex-direction:column;gap:.75rem;margin-top:1rem}
+  .nav-links.show{display:flex}
+  .nav-links a{font-size:.85rem}
+  .nav-mobile-brand{display:block}
+}
+@media (max-width:480px){
+  .nav-mobile-brand{font-size:.58rem}
+  .nav-mobile-brand .mobile-sub{font-size:.45rem;letter-spacing:.15em}
+}
+
+/* ===== HERO (the single page header) ===== */
+.hero{position:relative;z-index:2;padding:clamp(.5rem,2vw,1.2rem) 0 clamp(1.8rem,4.5vw,3rem)}
+.hero .eyebrow{font-family:var(--font-mono);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.16em;color:var(--signal);margin-bottom:1rem}
+.hero h1{font-family:var(--font-display);font-weight:900;font-size:clamp(3rem,8vw,5.5rem);line-height:1.02;letter-spacing:-.01em;color:var(--black);text-wrap:balance}
+.hero .dek{font-family:var(--font-body);font-size:clamp(1.05rem,2vw,1.25rem);line-height:1.5;color:var(--graphite);max-width:60ch;margin:1.1rem 0 .9rem}
+.hero .stamp-hero{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.07em;text-transform:uppercase;color:var(--grey)}
+.hero .stamp-hero b{color:var(--off-black)}
+
+/* FIELD NEWS — radar */
+.news{position:relative;background:linear-gradient(180deg,var(--white),var(--snow));padding:clamp(1.6rem,4vw,2.8rem) 0 clamp(2.6rem,6vw,4.6rem);overflow:hidden;z-index:2}
+.radarbg{position:absolute;right:-120px;top:50%;transform:translateY(-50%);width:520px;height:520px;pointer-events:none;opacity:.5}
+.radarbg circle{fill:none;stroke:var(--silver);stroke-width:1}
+.feed{position:relative;z-index:2;max-width:780px}
+.disp{position:relative;display:grid;grid-template-columns:30px 1fr;gap:1rem;padding:1.2rem 0;border-bottom:1px solid var(--silver);opacity:0;transform:translateY(12px);animation:dispIn .55s cubic-bezier(.2,.7,.2,1) both}
+.disp:nth-child(1){animation-delay:.1s}.disp:nth-child(2){animation-delay:.19s}.disp:nth-child(3){animation-delay:.28s}
+@keyframes dispIn{to{opacity:1;transform:none}}
+.disp.pin{border-left:2px solid var(--signal);margin-left:-1rem;padding-left:1rem;background:linear-gradient(90deg,var(--signal-bg),transparent 60%)}
+.node{position:relative;width:30px;height:30px;margin-top:.2rem}
+.node .core{position:absolute;inset:11px;border-radius:50%;background:var(--silver)}
+.disp.pin .node .core{background:var(--signal);box-shadow:0 0 0 3px var(--signal-glow)}
+.disp.fresh .node .core{background:var(--signal)}
+.disp.fresh .node .sweep{position:absolute;inset:2px;border-radius:50%;background:conic-gradient(from 0deg,var(--signal-glow),transparent 60%);animation:spin 2.6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.meta{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem}
+.meta .date{color:var(--grey);font-weight:700}
+.tag{display:inline-flex;align-items:center;gap:.3rem;font-weight:700;padding:.18rem .5rem;border-radius:100px}
+.tag.abroad{color:var(--abroad-text-deep);background:var(--abroad-bg)}
+.tag.taiwan{color:var(--signal);background:var(--signal-bg)}
+.tag .gl{width:5px;height:5px;border-radius:50%;background:currentColor;display:inline-block}
+.cat{color:var(--grey)}
+.pinlabel{color:var(--signal);font-weight:700;letter-spacing:.12em}
+.disp h4{font-family:var(--font-display);font-weight:600;font-size:clamp(1.12rem,2.3vw,1.4rem);line-height:1.2;letter-spacing:-.005em;margin:.1rem 0 .35rem;color:var(--off-black)}
+.disp p{font-family:var(--font-body);font-size:.95rem;line-height:1.55;color:var(--graphite);max-width:62ch}
+.disp p .arrow{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--signal);border-bottom:1px solid var(--purple-light)}
+.basis{display:inline-flex;align-items:center;gap:.55rem;margin-top:.7rem;font-family:var(--font-mono);font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);border:1px solid var(--silver);border-radius:3px;padding:.3rem .55rem}
+.basis a{color:var(--graphite);border-bottom:1px solid var(--silver)}
+.meter{display:inline-flex;gap:2px}
+.meter i{width:4px;height:11px;background:var(--silver);display:inline-block}
+.meter.v3 i{background:var(--signal)}
+.meter.v2 i:nth-child(-n+2){background:var(--signal)}
+.meter.v1 i:nth-child(1){background:var(--signal)}
+.basis .lvl{font-weight:700;color:var(--off-black)}
+.newsmore{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);border-bottom:1px solid var(--silver);padding-bottom:2px;position:relative;z-index:2;display:inline-block;margin:1.3rem 0 0}
+@media(max-width:680px){.disp{grid-template-columns:22px 1fr;gap:.7rem}.node{width:22px;height:22px}.node .core{inset:7px}.radarbg{opacity:.3}}
+
+/* archive affordance */
+.news details{position:relative;z-index:2;max-width:780px;margin:1.3rem 0 0}
+.news details > summary{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);border-bottom:1px solid var(--silver);padding-bottom:2px;display:inline-block;cursor:pointer;list-style:none}
+.news details > summary::-webkit-details-marker{display:none}
+.news details > summary::before{content:"▸ ";color:var(--signal)}
+.news details[open] > summary::before{content:"▾ "}
+.news details > summary:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius)}
+.news details .archive-note{font-family:var(--font-body);font-size:.86rem;line-height:1.6;color:var(--grey);max-width:62ch;margin:.7rem 0 0}
+
+/* SOURCES — neutral */
+.refbox{position:relative;z-index:2;padding:clamp(2.4rem,5vw,3.6rem) 0 clamp(3rem,7vw,5rem);border-top:1px solid var(--border-light)}
+.refbox .kicker{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--grey);margin-bottom:.6rem}
+.refbox h2{font-family:var(--font-display);font-weight:900;font-size:clamp(1.5rem,3vw,2rem);line-height:1.05;letter-spacing:-.01em;color:var(--off-black);margin-bottom:1.1rem}
+.refs{font-size:.82rem;color:var(--graphite);line-height:1.7;max-width:72ch}
+.refs ol{margin:0 0 0 1.2rem;padding:0}
+.refs li{margin-bottom:.55rem}
+.refs li:target{background:var(--signal-bg);border-radius:var(--radius);outline:2px solid var(--signal-glow)}
+.refs .conf-sym{font-style:normal;margin-right:.4em}
+.refs-title{font-family:var(--font-mono);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.16em;color:var(--grey);margin:0 0 .8rem}
+.absence{font-size:.72rem;color:var(--grey);margin-top:.8rem;padding:.7rem .85rem;max-width:72ch;border-left:2px solid var(--silver);background:var(--snow)}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .sweep,.disp{animation:none}
+  .disp{opacity:1;transform:none}
+  *{transition-duration:.01ms !important}
+}
+  </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
+</head>
+<body>
+  <a href="#feed" class="skip-nav">Skip to the feed</a>
+
+  <!-- GRAIN — static riso tooth -->
+  <svg class="grain" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <filter id="grainf"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/></filter>
+    <rect width="100%" height="100%" filter="url(#grainf)"/>
+  </svg>
+
+  <div class="page">
+
+  <!-- Navigation -->
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="org-study.html">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
+      <a href="field-news.html" class="current" aria-current="page">FIELD NEWS</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="wrap">
+      <p class="eyebrow">2026-06 · FIELD NEWS</p>
+      <h1>Field News</h1>
+      <p class="dek">Musician and music-industry mental-health, wellness and occupational-health developments — abroad and in Taiwan.</p>
+      <p class="stamp-hero">Updated biweekly · last published <b>2026-06-20</b></p>
+    </div>
+  </header>
+
+  <!-- FIELD NEWS FEED -->
+  <section class="news" id="feed" aria-label="Field news feed">
+    <svg class="radarbg" viewBox="0 0 520 520" aria-hidden="true"><circle cx="120" cy="260" r="90"/><circle cx="120" cy="260" r="170"/><circle cx="120" cy="260" r="250"/><circle cx="120" cy="260" r="330"/></svg>
+    <div class="wrap">
+      <div class="feed">
+
+        <div class="disp fresh">
+          <div class="node"><div class="sweep"></div><div class="core"></div></div>
+          <div>
+            <div class="meta"><span class="date">2026-05-14</span><span class="tag abroad"><span class="gl"></span>Abroad</span><span class="cat">Programs</span></div>
+            <h4>Spotify &amp; Backline release a songwriter mental-health guide — a free, copyable service template</h4>
+            <p>A songwriter-specific guide built by Backline's clinical team under Spotify's Heart &amp; Soul, debuted at a Nashville summit. The model — platform money, NPO delivery, one segment at a time — is the partnership a Taiwan org could pitch locally. <a class="arrow" href="#cl-src-3">→ Source</a></p>
+            <div class="basis"><span class="meter v3" aria-hidden="true"><i></i><i></i><i></i></span><span><span class="lvl">Verified</span> · <a href="#cl-src-3">Spotify Newsroom + MusicRow</a> · Tier-1 press, two outlets</span></div>
+          </div>
+        </div>
+
+        <div class="disp">
+          <div class="node"><div class="core"></div></div>
+          <div>
+            <div class="meta"><span class="date">2025-10</span><span class="tag abroad"><span class="gl"></span>Abroad</span><span class="cat">Working conditions</span></div>
+            <h4>Korea's Idol Labor Union puts mental-health protocols at the centre of its first demands</h4>
+            <p>Union recognition filed Sep–Oct 2025 demands an enforceable agency MH-care manual, crisis protocols and cyberbullying legal support — but approval is contested and unresolved. East Asia's pathway runs through labor law, not philanthropy. <a class="arrow" href="#cl-src-5">→ Source</a></p>
+            <div class="basis"><span class="meter v3" aria-hidden="true"><i></i><i></i><i></i></span><span><span class="lvl">Verified</span> · <a href="#cl-src-5">Korea Times + Sports Kyunghyang</a> · two outlets; union approval still unresolved</span></div>
+          </div>
+        </div>
+
+        <div class="disp">
+          <div class="node"><div class="core"></div></div>
+          <div>
+            <div class="meta"><span class="date">2026-04-16</span><span class="tag abroad"><span class="gl"></span>Abroad</span><span class="cat">Research</span></div>
+            <h4>The Global Wellness Institute names musician mental-health resources a top-4 wellness trend for 2026</h4>
+            <p>An external wellness-economy body independently citing this field — B-LINE, Amber Health, MusiCares×JED — as a top trend is itself a datapoint: musician MH has entered mainstream wellness discourse, and the funding follows discourse. <a class="arrow" href="#cl-src-6">→ Source</a></p>
+            <div class="basis"><span class="meter v3" aria-hidden="true"><i></i><i></i><i></i></span><span><span class="lvl">Verified</span> · <a href="#cl-src-6">Global Wellness Institute</a> · Tier-1 primary publication</span></div>
+          </div>
+        </div>
+
+      </div>
+
+      <details>
+        <summary>See all field news — older items promoted each quarter</summary>
+        <p class="archive-note">The field-monitoring feed publishes biweekly, ≤3 verified items, with Taiwan items pinned when one clears the bar. Older dispatches are folded into the body of the relevant report each quarter rather than kept as a running archive here. There is no current Taiwan field-news item that clears the verification bar — its absence is reported honestly, not padded.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- REFERENCES -->
+  <section class="refbox" id="sources" aria-labelledby="ref-title">
+    <div class="wrap">
+      <h2 id="ref-title">References</h2>
+      <div class="refs">
+        <ol>
+          <li id="cl-src-3" data-src="btl-summit"><span class="conf-sym">✅</span><a href="https://newsroom.spotify.com/2026-05-14/nashville-songwriting-mental-health-summit/" target="_blank" rel="noopener">Spotify Newsroom</a> (2026-05-14); <a href="https://musicrow.com/2026/05/spotify-brings-together-nashville-songwriting-community-for-mental-health-summit/" target="_blank" rel="noopener">MusicRow</a> (same day). Accessed 2026-06-12. Method: press, two independent outlets.</li>
+          <li id="cl-src-5" data-src="idol-union"><span class="conf-sym">✅/❓</span><a href="https://www.koreatimes.co.kr/entertainment/others/20251108/k-pop-idols-to-form-koreas-first-labor-union-could-launch-by-end-of-year" target="_blank" rel="noopener">Korea Times</a> (2025-11-08); <a href="https://www.allkpop.com/article/2025/11/k-pop-idol-union-set-to-launch-this-year-aiming-to-protect-artists-labor-rights-and-mental-health" target="_blank" rel="noopener">allkpop</a>; status: <a href="https://sports.khan.co.kr/en/article/202605221216007/" target="_blank" rel="noopener">Sports Kyunghyang</a> (2026-05-22). Accessed 2026-06-12. Filing + demands ✅ (multiple independent outlets); approval status ❓ unresolved.</li>
+          <li id="cl-src-6" data-src="gwi-trends"><span class="conf-sym">✅</span><a href="https://globalwellnessinstitute.org/global-wellness-institute-blog/2026/04/16/music-for-health-and-wellbeing-initiative-trends-for-2026/" target="_blank" rel="noopener">Global Wellness Institute</a> (2026-04-16), accessed 2026-06-12 via primary publication.</li>
+        </ol>
+        <p class="absence">Field-news scope, cadence and the full archive: the field-monitoring feed (musician MH, wellness &amp; occupational health, abroad + Taiwan) publishes biweekly, ≤3 verified items, Taiwan items pinned. There is no current Taiwan field-news item that clears the bar — its absence is reported honestly, not padded.</p>
+      </div>
+    </div>
+  </section>
+
+  </div><!-- /.page -->
+
+  <!-- hamburger toggle -->
+  <script>
+  (function(){
+    'use strict';
+    var nav = document.querySelector('nav.nav');
+    if(!nav) return;
+    var toggle = nav.querySelector('.nav-toggle');
+    var links = nav.querySelector('.nav-links');
+    if(!toggle || !links) return;
+    toggle.addEventListener('click', function(){
+      var open = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!open));
+      toggle.classList.toggle('open');
+      links.classList.toggle('show');
+      nav.classList.toggle('open');
+    });
+  })();
+  </script>
+</body>
+</html>

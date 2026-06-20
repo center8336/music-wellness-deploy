@@ -76,18 +76,7 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
   .nav-mobile-brand{display:block}
 }
 
-/* JUMP NAV */
-.jumpnav{position:sticky;top:0;z-index:50;background:var(--nav-blur-bg);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--silver);overflow-x:auto}
-.jumpnav ul{display:flex;list-style:none;max-width:var(--max-w);margin:0 auto;padding:0 clamp(.6rem,3vw,2rem)}
-.jumpnav a{display:flex;align-items:center;gap:.35rem;font-family:var(--font-mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--grey);text-decoration:none;padding:.85rem .72rem;white-space:nowrap;border-bottom:2px solid transparent;transition:.15s}
-.jumpnav a:hover{color:var(--off-black)}
-.jumpnav a.active{color:var(--off-black);border-bottom-color:var(--signal)}
-.jumpnav a.news{color:var(--signal);font-weight:700}
-/* mobile: hairline separates the sticky jump-nav from the site-nav/hamburger row above it */
-@media(max-width:768px){.jumpnav{border-top:1px solid var(--silver)}}
-/* radardot = STATIC filled dot in BOTH jump-nav and news kicker. No ::after ring loop.
-   Animation budget is exactly two infinite loops: .tw-pulse (map) + .disp.fresh .sweep (news). */
-.radardot{width:7px;height:7px;border-radius:50%;background:var(--signal);display:inline-block;position:relative}
+/* Animation budget: exactly one infinite loop on this page — .tw-pulse (the Taiwan map node). */
 
 /* HERO */
 .hero{padding:clamp(2.2rem,5vw,4rem) 0 1rem;position:relative;z-index:2}
@@ -115,6 +104,12 @@ a.conf:hover,a.conf:focus{color:var(--signal-dim);text-decoration:underline}
 .result .reset{color:var(--signal);text-decoration:underline;cursor:pointer;background:none;border:none;font:inherit;padding:0 0 0 .4rem}
 .result .plain{color:var(--grey);font-weight:400;text-transform:none}
 .filter-clear{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;padding:.4rem .8rem;border:1px solid var(--signal);border-radius:100px;background:var(--signal-bg);color:var(--signal);cursor:pointer;transition:.18s;margin-top:.55rem}
+/* COUNTRY SELECT — native <select> dressed to match the filter chips */
+.csel{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;padding:.42rem 1.7rem .42rem .8rem;border:1px solid var(--silver);border-radius:100px;background:transparent;color:var(--graphite);cursor:pointer;transition:.18s;-webkit-appearance:none;-moz-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23666' stroke-width='1.4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .65rem center}
+.csel:hover{border-color:var(--signal);color:var(--signal)}
+.csel:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+.csel.on{border-color:var(--black);background-color:var(--black);color:var(--white);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23fff' stroke-width='1.4'/%3E%3C/svg%3E")}
+.csel option{color:var(--off-black);background:var(--white);text-transform:none;letter-spacing:0}
 .filter-clear:hover{background:var(--signal);color:var(--white)}
 .filter-clear[hidden]{display:none}
 .hint{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--grey-light);margin-top:.5rem}
@@ -199,38 +194,6 @@ svg.map{width:100%;height:auto;display:block;max-width:980px;margin:0 auto}
 /* isolate the native scan → fade the directory's aggregate geographic context so the 4 read clearly */
 .map.src-native .gm-dot,.map.src-native .gm-dot-faint,.map.src-native .gm-india,.map.src-native .gm-india-label{opacity:.12}
 
-/* ===== FIELD READOUT — the live where / what / who panel that replaces the 3 chart chapters.
-   Re-bases with the Source filter (114 / 110 / 4); highlights the active Service·Funding chip. ===== */
-.readout{max-width:980px;margin:1.3rem auto 0;border-top:1px solid var(--silver);padding-top:1.2rem}
-.readout-head{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);margin-bottom:.2rem}
-.readout-head b{color:var(--off-black)}
-.ro-base{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.05em;text-transform:uppercase;color:var(--abroad-text);margin-bottom:1rem}
-.ro-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem 2.4rem}
-.ro-block.where{grid-column:1 / -1}
-@media(max-width:680px){.ro-grid{grid-template-columns:1fr;gap:1.2rem}}
-.ro-title{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--off-black);font-weight:700;margin-bottom:.55rem;display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap}
-.ro-title .q{color:var(--grey);font-weight:400;text-transform:none;letter-spacing:.02em}
-.ro-title .ro-src{color:var(--grey);border-bottom:1px solid var(--silver);font-size:.92em}
-.ro-row{display:grid;grid-template-columns:8.6rem minmax(0,1fr) 3.6rem;gap:.55rem;align-items:center;padding:.26rem 0;border-bottom:1px solid var(--snow)}
-@media(max-width:480px){.ro-row{grid-template-columns:7rem minmax(0,1fr) 3rem;gap:.4rem}}
-.ro-row .rl{font-family:var(--font-mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.02em;color:var(--graphite)}
-.ro-track{height:9px;background:var(--snow)}
-/* width animates only in response to a FILTER, not on first paint (the .ro-animate gate is added post-load) */
-.ro-fill{height:9px;background:var(--hue,var(--graphite));min-width:1px}
-#read.ro-animate .ro-fill{transition:width var(--dur) var(--ease)}
-.ro-val{font-family:var(--font-mono);font-size:.62rem;color:var(--off-black);font-weight:700;text-align:right;white-space:nowrap}
-.ro-row.scan .ro-fill{background:var(--abroad-text)}
-.ro-row.scan .rl{color:var(--abroad-text)}
-.ro-row.active{background:var(--signal-bg);box-shadow:inset 3px 0 0 var(--signal)}
-.ro-row.active .rl{color:var(--signal);font-weight:700}
-/* a native-scan row that is also the active filter stays PINK — never --signal purple on the source layer */
-.ro-row.scan.active{box-shadow:inset 3px 0 0 var(--abroad-text)}
-.ro-row.scan.active .rl{color:var(--abroad-text)}
-.ro-where{font-family:var(--font-mono);font-size:.68rem;line-height:2;letter-spacing:.02em;color:var(--graphite)}
-.ro-where b{color:var(--off-black)}
-.ro-where .z{color:var(--signal);font-weight:700}
-.ro-where .sc{color:var(--abroad-text);font-weight:700}
-.ro-note{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.03em;color:var(--grey);margin-top:1.1rem;line-height:1.7}
 
 /* PEEK CARD */
 .peek{position:relative;max-width:980px;margin:1rem auto 0;background:var(--white);border:1px solid var(--signal-glow);border-left:3px solid var(--signal);border-radius:var(--radius-lg);padding:1rem 1.2rem;display:none}
@@ -247,19 +210,6 @@ svg.map{width:100%;height:auto;display:block;max-width:980px;margin:0 auto}
 .peek.peek-scan .peek-eye{color:var(--abroad-text)}
 .result .rpct{color:var(--off-black)}
 
-/* TAIWAN REVEAL */
-.tw-reveal{max-width:980px;margin:1.4rem auto .2rem;padding:1.1rem 1.2rem .9rem;border-top:1px solid var(--purple-light);background:var(--signal-bg);border-radius:0 0 var(--radius-lg) var(--radius-lg)}
-.tw-reveal .tw-eye{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--signal);margin-bottom:.55rem}
-.tw-reveal .tw-name{font-family:var(--font-cjk);font-weight:600;font-size:clamp(2rem,5vw,3rem);line-height:1;color:var(--off-black);letter-spacing:.02em}
-.tw-reveal .tw-line{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:clamp(1.05rem,2vw,1.3rem);line-height:1.34;color:var(--graphite);margin:.65rem 0 .9rem;max-width:40ch}
-.tw-reveal .tw-line b{font-style:normal;font-weight:600;color:var(--signal)}
-.tw-reveal .tw-link{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--signal);border-bottom:1px solid var(--purple-light);padding-bottom:2px}
-.tw-reveal details{display:none}
-@media(max-width:680px){
-  .tw-reveal .open-only{display:none}
-  .tw-reveal details{display:block}
-  .tw-reveal summary{min-height:44px;display:flex;align-items:center;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--signal);cursor:pointer}
-}
 
 /* CHAPTERS — spectrum-coded (hue on hairline / kicker dot / bar fills only) */
 .chapter{padding:clamp(2.6rem,6vw,4.6rem) 0;border-top:2px solid var(--hue,var(--silver));position:relative;z-index:2}
@@ -392,21 +342,11 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
     <a href="research.html">RESEARCH</a>
     <a href="insight.html">INSIGHT</a>
     <a href="plan.html">PLAN</a>
+    <a href="field-news.html">FIELD NEWS</a>
   </div>
 </nav>
 
-<nav class="jumpnav" aria-label="Jump to section">
-  <ul>
-    <li><a href="#map" class="active">Map</a></li>
-    <li><a href="#read">Read the field</a></li>
-    <li><a href="#beyond">Beyond</a></li>
-    <li><a href="#evidence">Evidence</a></li>
-    <li><a href="#all-114">All 114</a></li>
-    <li><a href="#news" class="news"><span class="radardot" aria-hidden="true"></span>Field News</a></li>
-    <li><a href="#sources">Sources</a></li>
-  </ul>
-</nav>
-
+<!-- v4.2: the in-page jump-nav index was removed — the page is lean enough (map · table · reference) to scroll. -->
 <!-- Legacy deep-link anchors so prior links still land -->
 <span id="overview" class="vh"></span>
 <span id="organizations" class="vh"></span>
@@ -415,10 +355,10 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
 
 <div class="wrap">
   <section class="hero" id="map">
-    <div class="eyebrow">2026-06 · ORGS MAP · v4.1</div>
+    <div class="eyebrow">2026-06 · ORGS MAP · v4.2</div>
     <h1>Where the support<br>is — <em>and isn't.</em></h1>
     <div class="ticker">110 in one directory&nbsp;·&nbsp;4 found beyond&nbsp;·&nbsp;<span class="zero">0 in taiwan</span></div>
-    <p class="lede">Backline's Global Resource Hub lists <b>110</b> music mental-health orgs.<a class="conf" href="#ov-src-1">1</a> Native-language search adds <b>4</b> the directory missed — <b>114</b> across two sources.<a class="conf" href="#ov-src-10">10</a> None reach Taiwan. <b>That absence is the entry point.</b> One directory maps its own network, not the world — so the map below shows both, and lets you read the field by service, funding and place.</p>
+    <p class="lede">Backline's Global Resource Hub lists <b>110</b> music mental-health orgs.<a class="conf" href="#ov-src-1">1</a> Native-language search adds <b>4</b> the directory missed — <b>114</b> across two sources.<a class="conf" href="#ov-src-10">10</a> None reach Taiwan. <b>That absence is the entry point.</b></p>
 
     <div class="filters" role="group" aria-label="Filter the map, the field readout and the table by source, service and funding">
       <div class="frow" role="radiogroup" aria-label="Filter by source" data-group="source">
@@ -446,11 +386,16 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
         <button class="chip" role="radio" aria-checked="false" data-val="peer-fellowship">Peer fellowship</button>
         <button class="chip" role="radio" aria-checked="false" data-val="unknown">Unknown</button>
       </div>
+      <div class="frow" role="group" aria-label="Filter by country" data-group="country">
+        <span class="glabel">Country</span>
+        <select id="countrySel" class="csel" aria-label="Filter the map and the table by country">
+          <option value="all">Any country</option>
+        </select>
+      </div>
     </div>
-    <p class="result" id="result">114 of 114 <span class="plain">· the whole field, across two sources</span></p>
+    <p class="result" id="result"></p>
     <span class="vh" id="srLive" aria-live="polite" aria-atomic="true"></span>
     <button class="filter-clear" id="clearAll" type="button" hidden aria-label="Clear all filters and show all 114 organizations">Clear filters · 114</button>
-    <p class="hint">↓ Tap any node on the map for details · the filters narrow the map, the field readout and the table together — <b>Source</b> re-bases the count (114 · 110 directory · 4 native scan), <b>Service</b> AND <b>Funding</b> combine.</p>
   </section>
 </div>
 
@@ -516,7 +461,7 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
 
     <!-- India — lone independent Asia-Pacific org -->
     <circle class="gm-india" cx="733.0" cy="202.7" r="4.5" aria-hidden="true"/>
-    <text class="gm-india-label" x="743" y="207" aria-hidden="true">TATVA · India · 1</text>
+    <text class="gm-india-label" x="724" y="206" text-anchor="end" aria-hidden="true">TATVA · India · 1</text>
 
     <!-- studied org nodes — real links, ≥44px hit targets, aria-labels -->
     <a class="gm-node" href="org-study-backline.html"
@@ -625,9 +570,8 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
       <circle class="gm-node-ring-outer" cx="880.6" cy="198.2" r="11"/>
       <circle class="gm-node-ring-inner" cx="880.6" cy="198.2" r="7"/>
       <circle class="gm-node-ring-core"  cx="880.6" cy="198.2" r="2.4"/>
-      <text class="gm-node-name gm-name-tw" x="880.6" y="160" text-anchor="middle">Taiwan · 藝創工會</text>
-      <text class="gm-node-cue gm-cue-tw"  x="880.6" y="172" text-anchor="middle">adjacent · the entry point ↓</text>
-      <text class="gm-tw-label" x="880.6" y="228" text-anchor="middle" style="font-size:10px;fill:var(--grey);font-weight:400;">adjacent — not yet music-specific MH</text>
+      <text class="gm-node-name gm-name-tw" x="880.6" y="233" text-anchor="middle">Taiwan · 藝創工會</text>
+      <text class="gm-node-cue gm-cue-tw"  x="880.6" y="246" text-anchor="middle">the entry point</text>
     </a>
 
     <!-- off-map tally: 22 borderless orgs (lower-left open ocean — clear of the Brazil/Argentina scan nodes) -->
@@ -654,128 +598,29 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
   <p class="mapcap" aria-label="Map legend">
     <span class="gm-key-dot"></span> <b style="color:var(--off-black)">Directory org</b> — Backline Global Resource Hub (dot size = count); the four ringed names link to their <b style="color:var(--off-black)">Org Study</b>.<br>
     <span class="gm-key-scan"></span> <b style="color:var(--abroad-text)">Found beyond the directory</b> — music-specific union, native-language scan; tap for details.<br>
-    <span style="display:inline-block;width:.6em;height:.6em;border-radius:50%;border:2px solid var(--signal);vertical-align:baseline;margin:0 .12em"></span> <b style="color:var(--signal)">Taiwan · 藝創工會</b> — adjacent infrastructure, a union not music-specific MH: the entry point, still 0 dedicated orgs.<br>
-    110 directory (88 place-bound · 22 borderless) + 4 native scan = <b style="color:var(--off-black)">114</b> · <a href="orgs-funding-classification.html">Backline directory, 2026-06</a>.<a class="conf" href="#ov-src-1">1</a>
+    <span style="display:inline-block;width:.6em;height:.6em;border-radius:50%;border:2px solid var(--signal);vertical-align:baseline;margin:0 .12em"></span> <b style="color:var(--signal)">Taiwan · 藝創工會</b> — the closest yet — not musicians / music-industry-specific.
   </p>
 
-  <aside class="tw-reveal" aria-label="Taiwan — the entry point">
-    <div class="tw-eye">↙ The entry point · Taiwan · 0 orgs</div>
-    <div class="open-only">
-      <div class="tw-name cjk">藝創工會</div>
-      <p class="tw-line">is the closest Taiwan has.</p>
-      <a class="tw-link" href="org-study-arts-creators-union.html">Read the opening →</a>
-    </div>
-    <details>
-      <summary>藝創工會 · the entry point — tap to read</summary>
-      <div class="tw-name cjk" style="margin-top:.7rem">藝創工會</div>
-      <p class="tw-line">is the closest Taiwan has.</p>
-      <a class="tw-link" href="org-study-arts-creators-union.html">Read the opening →</a>
-    </details>
-  </aside>
-
-  <!-- ===== FIELD READOUT — live where / what / who, driven by the filters above. Replaces the
-       former #where / #what / #funded chapters. Re-bases with Source (114 · 110 · 4). ===== -->
-  <section class="readout" id="read" aria-label="The field by service, funding and place">
-    <div class="readout-head">Read the field — <b>what they do · who pays · where</b>, straight from the filters above</div>
-    <div class="ro-base" id="roBase">% of all 114 · 110 Backline directory + 4 native-language scan</div>
-    <div class="ro-grid">
-      <div class="ro-block what" style="--hue:var(--sp-green)">
-        <div class="ro-title">What they do <span class="q">— service mix</span> <a class="ro-src" href="#ov-src-6">source</a></div>
-        <div id="roWhat">
-          <div class="ro-row" data-cat="mental-health"><span class="rl">Mental health</span><div class="ro-track"><div class="ro-fill" style="width:100%"></div></div><span class="ro-val">48 · 42%</span></div>
-          <div class="ro-row" data-cat="financial"><span class="rl">Financial</span><div class="ro-track"><div class="ro-fill" style="width:67%"></div></div><span class="ro-val">32 · 28%</span></div>
-          <div class="ro-row" data-cat="career"><span class="rl">Career</span><div class="ro-track"><div class="ro-fill" style="width:65%"></div></div><span class="ro-val">31 · 27%</span></div>
-          <div class="ro-row" data-cat="counseling"><span class="rl">Counseling</span><div class="ro-track"><div class="ro-fill" style="width:48%"></div></div><span class="ro-val">23 · 20%</span></div>
-          <div class="ro-row" data-cat="substance"><span class="rl">Substance use</span><div class="ro-track"><div class="ro-fill" style="width:27%"></div></div><span class="ro-val">13 · 11%</span></div>
-          <div class="ro-row scan" data-cat="union"><span class="rl">Union / mutual-aid</span><div class="ro-track"><div class="ro-fill" style="width:8%"></div></div><span class="ro-val">4 · 4%</span></div>
-        </div>
-      </div>
-      <div class="ro-block who" style="--hue:var(--sp-orange)">
-        <div class="ro-title">Who pays <span class="q">— funding mix</span> <a class="ro-src" href="#ov-src-7">source</a></div>
-        <div id="roWho">
-          <div class="ro-row" data-cat="unknown"><span class="rl">No public info</span><div class="ro-track"><div class="ro-fill" style="width:100%"></div></div><span class="ro-val">54 · 47%</span></div>
-          <div class="ro-row" data-cat="government"><span class="rl">Government</span><div class="ro-track"><div class="ro-fill" style="width:30%"></div></div><span class="ro-val">16 · 14%</span></div>
-          <div class="ro-row" data-cat="philanthropy"><span class="rl">Philanthropy</span><div class="ro-track"><div class="ro-fill" style="width:30%"></div></div><span class="ro-val">16 · 14%</span></div>
-          <div class="ro-row" data-cat="private"><span class="rl">Private / fees</span><div class="ro-track"><div class="ro-fill" style="width:20%"></div></div><span class="ro-val">11 · 10%</span></div>
-          <div class="ro-row" data-cat="trade-body"><span class="rl">Trade body</span><div class="ro-track"><div class="ro-fill" style="width:15%"></div></div><span class="ro-val">8 · 7%</span></div>
-          <div class="ro-row" data-cat="peer-fellowship"><span class="rl">Peer fellowship</span><div class="ro-track"><div class="ro-fill" style="width:9%"></div></div><span class="ro-val">5 · 4%</span></div>
-          <div class="ro-row scan" data-cat="membership"><span class="rl">Membership / dues</span><div class="ro-track"><div class="ro-fill" style="width:7%"></div></div><span class="ro-val">4 · 4%</span></div>
-        </div>
-      </div>
-      <div class="ro-block where">
-        <div class="ro-title">Where they are <span class="q">— the map above is the instrument</span> <a class="ro-src" href="#ov-src-1">source</a></div>
-        <p class="ro-where" id="roWhere"><b>United States</b> 20 · <b>Germany</b> 8 · <b>United Kingdom</b> 7 · <b>France</b> 6 · 33 more countries 47 · worldwide / no single country 22 · <span class="z">Taiwan &amp; E/SE Asia 0</span><span id="roBeyond"> &nbsp;·&nbsp; <span class="sc">beyond the directory: Japan 1 · Mexico 1 · Brazil 1 · Argentina 1</span></span></p>
-      </div>
-    </div>
-    <p class="ro-note">Service tags are non-exclusive (an org can do several), so they don't sum to the total; funding is one class each. The four native-scan unions carry honest <b>Union / mutual-aid</b> service and <b>Membership</b> funding — they never borrow a directory category, so filtering &ldquo;Mental Health&rdquo; correctly leaves them out. Use <b>Source</b> above to re-base every figure to the 110-org directory alone, or to the 4 found beyond it. <b>This is not an exhaustive census:</b> 110 is one directory plus 4 bodies we found by hand — the real field is larger.</p>
-  </section>
+  <!-- v4.2: the separate 藝創工會 "entry point" block + the Korea+Taiwan gapnote were removed — the map's
+       Taiwan node (purple, labelled "the entry point", linking to the org study) is the single entry now;
+       the #read readout is gone too (field composition is read via the live Service/Funding filters). -->
+  <span id="read" class="vh"></span>
 </div></div>
 
 <div class="wrap">
-  <section class="chapter" id="beyond" style="--hue:var(--sp-pink);--huetext:var(--graphite)">
-    <div class="kicker">Beyond one directory</div>
-    <h2 class="q">What does one directory miss?</h2>
-    <p class="takeaway" style="display:flex;align-items:baseline;gap:1rem">
-      <span style="font-family:var(--font-display);font-weight:900;font-size:clamp(3rem,9vw,5.6rem);line-height:.9;color:var(--graphite)">4</span>
-      <span style="font-size:clamp(.8rem,2vw,.95rem);color:var(--grey);max-width:24ch">music-specific bodies the directory misses · found by native-language search</span>
-    </p>
-    <p class="takeaway">A single English directory maps its own network, not the world. Searching region-native turns up music-specific worker bodies it never listed — mostly musicians' unions.</p>
-    <div class="tablewrap">
-      <table class="tbl">
-        <caption>Beyond the Backline directory — verified against each org's own site (2026-06-20)</caption>
-        <thead><tr><th>Org</th><th>Country</th><th>Source</th><th>Service</th><th>Funding</th><th>Verification</th></tr></thead>
-        <tbody>
-          <tr><td>Musicians' Union of Japan (日本音楽家ユニオン)<a class="conf" href="#ov-src-10">10</a></td><td>Japan</td><td>native (JA)</td><td>Union; self-run mutual-aid + health-checkup subsidy + free legal/tax counsel. No union-run MH service.</td><td>Membership / union</td><td class="c">✅ Sourced</td></tr>
-          <tr><td>SADEM (Sindicato Argentino de Músicos)<a class="conf" href="#ov-src-11">11</a></td><td>Argentina</td><td>native (ES)</td><td>Union running its <b>own health fund (OSDEM)</b> — medical, prevention, disability cover; legal + welfare. Standing MH not advertised.</td><td>Membership / union</td><td class="c">✅ Sourced</td></tr>
-          <tr><td>SUTM (Sindicato Único de Trabajadores de la Música)<a class="conf" href="#ov-src-12">12</a></td><td>Mexico</td><td>native (ES)</td><td>Union; representation, bargaining, training. Member welfare/health/MH benefits not documented on its own site.</td><td>Membership / union</td><td class="c">✅ / ❓</td></tr>
-          <tr><td>SindMusi (Sindicato dos Músicos do RJ)<a class="conf" href="#ov-src-13">13</a></td><td>Brazil</td><td>native (PT)</td><td>Union; legal/social-security counsel, health-plan brokerage, gym/education. MH = a one-off 2025 workshop.</td><td>Membership / union</td><td class="c">✅ Sourced</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="takeaway">Counting these, "nothing in East Asia" is a directory artifact — the qualifying-org gap narrows to <b style="color:var(--graphite)">Korea + Taiwan</b>.</p>
-    <p class="method">Two such bodies the directory does list — Unison Fund (Canada) and The Roadie Clinic (US) — confirm the pattern; broad-arts welfare bodies (e.g. Korea's KAWF) are excluded as not music-specific.</p>
-    <span class="src-chip"><span class="ok">✅</span> Four music-specific unions found beyond the directory, each verified against its own site. <a href="#ov-src-10">Native-language scan · 2026-06-20</a></span>
-  </section>
-</div>
-
-<div class="wrap">
-  <!-- #where / #what / #funded removed v4.1 — their content is now the live FIELD READOUT (#read) in
-       the map section. Legacy anchors kept so prior deep links still land; citations ov-src-1/6/7 are
-       re-homed to the readout's per-block "source" links. -->
-  <span id="where" class="vh"></span>
-  <span id="what" class="vh"></span>
-  <span id="funded" class="vh"></span>
-
-  <section class="chapter" id="evidence" style="--hue:var(--sp-lav);--huetext:var(--sp-lav-t)">
-    <div class="kicker">Why it matters</div>
-    <h2 class="q">What does the evidence say?</h2>
-    <p class="takeaway">The need is real and measured. Canada's first national study (n=1,216) finds <b>86%</b> of music professionals personally experienced mental-health challenges vs. ~12% of the general workforce; <b>43%</b> have had lifetime suicidal thoughts vs. 12% in the general population.<a class="conf" href="#ev-src-1">A</a></p>
-    <div class="tablewrap">
-      <table class="tbl">
-        <caption>Prevalence findings across six studies · each row traced to its paper<a class="conf" href="#ev-src-2">B</a></caption>
-        <thead><tr><th>Study</th><th>Country</th><th>Key finding</th></tr></thead>
-        <tbody>
-          <tr><td class="c">Soundcheck / Harrison 2026</td><td>Canada</td><td>50–86% report MH challenges vs ~12% general workforce (n=1,216)</td></tr>
-          <tr><td class="c">Musgrave &amp; Lamis 2025</td><td>UK/US</td><td>Musicians among top-5 occupations for suicide; US male musicians 138.7/100K vs 14.2 general</td></tr>
-          <tr><td class="c">Détari et al. 2020</td><td>Norway</td><td>Higher demands, lower support, more work–family conflict vs general workforce (all p&lt;0.001, n≈10K)</td></tr>
-          <tr><td class="c">Vaag et al. 2016</td><td>Norway</td><td>Depression/anxiety ~2× higher in musicians than general workforce</td></tr>
-          <tr><td class="c">Kenny et al. 2014</td><td>Australia</td><td>23% depression, 33% social phobia among orchestral musicians</td></tr>
-          <tr><td class="c">UK Musicians' Census</td><td>UK</td><td>~30% of professional musicians report poor mental health</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <span class="src-chip"><span class="ok">✅</span> Soundcheck final report (Revelios / Harrison, Feb 2026; n=1,216) + cross-study base. <a href="#ev-src-1">Primary PDF on file</a></span>
-  </section>
-
-  <span id="all-110" class="vh"></span>
+  <!-- v4.2 lean restructure — sections removed/moved; legacy anchors kept so prior deep links still land:
+       #read readout removed (field composition is found via the live Service/Funding filters);
+       #beyond folded into the map legend + the All-114 table; #evidence moved to research.html;
+       #news moved to the standalone field-news.html (with a #news → field-news.html JS hash-forward). -->
+  <span id="where" class="vh"></span><span id="what" class="vh"></span><span id="funded" class="vh"></span>
+  <span id="beyond" class="vh"></span><span id="evidence" class="vh"></span><span id="all-110" class="vh"></span>
   <section class="chapter" id="all-114" style="--hue:var(--silver);--huetext:var(--grey)">
     <div class="kicker">The dataset</div>
     <h2 class="q">All 114 organizations</h2>
-    <p class="takeaway">Every org with its country, services, funding model and the basis for each call — the canonical table behind the map and the readout. <b>110</b> from the Backline directory, plus <b>4</b> found by native-language scan (a labelled group at the end). The filters above narrow it; <b>Source</b> isolates either set.</p>
     <div class="tablewrap">
       <table class="tbl" id="allTable">
-        <caption><span id="tableCap">Showing 114 of 114 · the whole field, across two sources.</span> Service tags, funding model, and funding basis — ✅ sourced from financials · ⚠️ inferred from org type · ❓ no public funding info. That symbol rates the funding call only; country and service tags come from the directory for every directory row. The final four rows are the native-language scan — verified against each union's own site, not in the Backline census. Source: <a href="orgs-funding-classification.html">Backline Global Resource Hub, 2026-06</a> (<a href="#ov-src-1">directory snapshot</a>) + <a href="#ov-src-10">native-language scan</a>. The four ringed names link to their Org Study.</caption>
-        <thead><tr><th>#</th><th>Organization</th><th>Country</th><th>Service tags</th><th>Funding model</th><th>Funding basis</th></tr></thead>
+        <caption class="vh"><span id="tableCap">Showing 114 of 114.</span> All 114 organizations — 110 from the Backline directory plus 4 from the native-language scan (the final four rows; not in the Backline census).</caption>
+        <thead><tr><th>#</th><th>Organization</th><th>Country</th><th>Service tags<a class="conf" href="#ov-src-6">6</a></th><th>Funding model<a class="conf" href="#ov-src-7">7</a></th><th>Funding basis</th></tr></thead>
         <tbody id="allBody">
 <tr data-service="mental-health" data-funding="unknown"><td class="c">1</td><td>Mind the Music: A Mental Health Guide for the Music Industry</td><td>Worldwide</td><td>Mental Health Support</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
 <tr data-service="mental-health" data-funding="unknown"><td class="c">2</td><td>Backline Tour Support Resources</td><td>Worldwide</td><td>Mental Health Support; Tour Health Support</td><td>No public funding info</td><td class="c">❓ No source</td></tr>
@@ -898,65 +743,21 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
   </section>
 </div>
 
-<section class="news" id="news" aria-label="Field news">
-  <svg class="radarbg" viewBox="0 0 520 520" aria-hidden="true"><circle cx="120" cy="260" r="90"/><circle cx="120" cy="260" r="170"/><circle cx="120" cy="260" r="250"/><circle cx="120" cy="260" r="330"/></svg>
-  <div class="wrap">
-    <div class="kicker"><span class="radardot" aria-hidden="true"></span> Field News</div>
-    <h2 class="q">What's moving in musician mental health?</h2>
-    <p class="scope">Verified developments in musician and music-industry mental health, wellness and occupational health — abroad and in Taiwan — kept to items that change what a Taiwan music-MH NPO should know.</p>
-    <p class="stamp">Updated biweekly · last published <b>2026-06-20</b></p>
-    <div class="feed">
-
-      <div class="disp fresh">
-        <div class="node"><div class="sweep"></div><div class="core"></div></div>
-        <div>
-          <div class="meta"><span class="date">2026-05-14</span><span class="tag abroad"><span class="gl"></span>Abroad</span><span class="cat">Programs</span></div>
-          <h4>Spotify &amp; Backline release a songwriter mental-health guide — a free, copyable service template</h4>
-          <p>A songwriter-specific guide built by Backline's clinical team under Spotify's Heart &amp; Soul, debuted at a Nashville summit. The model — platform money, NPO delivery, one segment at a time — is the partnership a Taiwan org could pitch locally. <a class="arrow" href="#cl-src-3">→ Source</a></p>
-          <div class="basis"><span class="meter v3" aria-hidden="true"><i></i><i></i><i></i></span><span><span class="lvl">Verified</span> · <a href="#cl-src-3">Spotify Newsroom + MusicRow</a> · Tier-1 press, two outlets</span></div>
-        </div>
-      </div>
-
-      <div class="disp">
-        <div class="node"><div class="core"></div></div>
-        <div>
-          <div class="meta"><span class="date">2025-10</span><span class="tag abroad"><span class="gl"></span>Abroad</span><span class="cat">Working conditions</span></div>
-          <h4>Korea's Idol Labor Union puts mental-health protocols at the centre of its first demands</h4>
-          <p>Union recognition filed Sep–Oct 2025 demands an enforceable agency MH-care manual, crisis protocols and cyberbullying legal support — but approval is contested and unresolved. East Asia's pathway runs through labor law, not philanthropy. <a class="arrow" href="#cl-src-5">→ Source</a></p>
-          <div class="basis"><span class="meter v3" aria-hidden="true"><i></i><i></i><i></i></span><span><span class="lvl">Verified</span> · <a href="#cl-src-5">Korea Times + Sports Kyunghyang</a> · two outlets; union approval still unresolved</span></div>
-        </div>
-      </div>
-
-      <div class="disp">
-        <div class="node"><div class="core"></div></div>
-        <div>
-          <div class="meta"><span class="date">2026-04-16</span><span class="tag abroad"><span class="gl"></span>Abroad</span><span class="cat">Research</span></div>
-          <h4>The Global Wellness Institute names musician mental-health resources a top-4 wellness trend for 2026</h4>
-          <p>An external wellness-economy body independently citing this field — B-LINE, Amber Health, MusiCares×JED — as a top trend is itself a datapoint: musician MH has entered mainstream wellness discourse, and the funding follows discourse. <a class="arrow" href="#cl-src-6">→ Source</a></p>
-          <div class="basis"><span class="meter v3" aria-hidden="true"><i></i><i></i><i></i></span><span><span class="lvl">Verified</span> · <a href="#cl-src-6">Global Wellness Institute</a> · Tier-1 primary publication</span></div>
-        </div>
-      </div>
-
-    </div>
-    <p class="newsmore" style="border-bottom:none;color:var(--grey)">Older items promoted into the body each quarter.</p>
-  </div>
-</section>
+<!-- v4.2: Field News is now the standalone field-news.html page (its own nav section). Legacy #news
+     anchor kept; a JS hash-forward (in the script below) routes #news → field-news.html. -->
+<span id="news" class="vh"></span>
 
 <div class="wrap">
   <section class="chapter" id="sources" style="--hue:var(--silver);--huetext:var(--grey);border-top-width:1px">
-    <div class="kicker">The receipts</div>
-    <h2 class="q">Sources &amp; method</h2>
-    <p class="method">This report's claims trace to five method classes. <strong>Directory data:</strong> the Backline Global Resource Hub scraped page-by-page via browser automation (13 pages); the April 2026 scrape deduplicated to 111 and the June 2026 full re-scrape updated the roster to <strong>110</strong> — the directory census, and the base for every percentage; dated snapshots archived on file. <strong>Native-language scan:</strong> a separate region-native search (JA / ES / PT) surfaced <strong>4</strong> music-specific unions the directory never listed, each verified against its own site — shown alongside the 110 for <strong>114</strong> total, but kept out of the directory percentages (a different, non-exhaustive sampling frame). <strong>Financial data:</strong> IRS Form 990 figures from the ProPublica Nonprofit Explorer API (re-verified 2026-06-11). <strong>Study data:</strong> quoted directly from primary report PDFs (on file). <strong>News &amp; organization facts:</strong> traced to official sites or independent press. Anything we can't trace to a public source is labeled (Rule 3).</p>
+    <h2 class="q">Reference</h2>
 
     <div class="basis-key">
-      <strong>Basis</strong> — can you trace it to a source?
       <span>✅ Sourced · backed by a source we link to</span>
       <span>⚠️ Inferred · our own read, no direct source</span>
       <span>❓ No source · none found publicly</span>
     </div>
-    <p style="font-family:var(--font-mono);font-size:.6rem;color:var(--graphite);line-height:1.9;margin:-1rem 0 1.4rem;max-width:64ch">What the symbol rates depends on the row. For the <strong>110 directory rows</strong> it rates the <strong>funding-model call only</strong> (country and service tags come straight from the directory). For the <strong>4 native-language-scan rows</strong> and in “Beyond one directory” it rates <strong>verification against the union's own site</strong>; a paired <strong>✅ / ❓</strong> means the body is sourced but a specific claimed benefit (e.g. SUTM's member health benefits) is undocumented. Field News uses the same three levels for each item; a story's unresolved status is noted in its text, not as a separate level.</p>
 
-    <div class="refs-title">References — Overview &amp; dataset</div>
+    <div class="refs-title">References</div>
     <div class="refs">
       <ol>
         <li id="ov-src-1" data-src="directory-snapshot"><span class="conf-sym">✅</span>Backline <a href="https://backline.care/global-resources/" target="_blank" rel="noopener">Global Resource Hub</a> directory — Chrome-automated scrape of all 13 pages. April 2026 scrape deduplicated to 111; June 2026 full re-scrape updated the roster to <strong>110</strong> (net −1) — the directory census and the base for every percentage; the 4 native-language-scan unions (refs 10–13) are shown alongside it for <strong>114</strong> total but kept out of the directory rates. Per-org tags, funding model and basis in the <a href="orgs-funding-classification.html">supplementary data table</a>.</li>
@@ -975,41 +776,16 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
       </ol>
     </div>
 
-    <div class="refs-title">References — Evidence</div>
-    <div class="refs">
-      <ol>
-        <li id="ev-src-1" data-src="soundcheck-pdf"><span class="conf-sym">✅</span>Soundcheck final report (Revelios / Harrison, Feb 2026; n=1,216) — primary PDF on file; <a href="https://www.revelios.com/soundcheck/" target="_blank" rel="noopener">revelios.com/soundcheck</a>. 86% personally experienced MH challenges; 43% lifetime suicidal thoughts vs 12% general population. Method: figures quoted as published.</li>
-        <li id="ev-src-2" data-src="cross-study"><span class="conf-sym">✅</span>Cross-study rows: Musgrave &amp; Lamis 2025 — <a href="https://www.frontiersin.org/journals/public-health/articles/10.3389/fpubh.2025.1507772/full" target="_blank" rel="noopener">Frontiers in Public Health</a>; Détari et al. 2020 — <a href="https://doi.org/10.3389/fpsyg.2020.01315" target="_blank" rel="noopener">Frontiers in Psychology</a>; Vaag et al. 2016; Kenny et al. 2014; UK Musicians' Census — compiled in our evidence-base synthesis (on file).</li>
-      </ol>
-    </div>
-
-    <div class="refs-title">References — Field News</div>
-    <div class="refs">
-      <ol>
-        <li id="cl-src-3" data-src="btl-summit"><span class="conf-sym">✅</span><a href="https://newsroom.spotify.com/2026-05-14/nashville-songwriting-mental-health-summit/" target="_blank" rel="noopener">Spotify Newsroom</a> (2026-05-14); <a href="https://musicrow.com/2026/05/spotify-brings-together-nashville-songwriting-community-for-mental-health-summit/" target="_blank" rel="noopener">MusicRow</a> (same day). Accessed 2026-06-12. Method: press, two independent outlets.</li>
-        <li id="cl-src-5" data-src="idol-union"><span class="conf-sym">✅/❓</span><a href="https://www.koreatimes.co.kr/entertainment/others/20251108/k-pop-idols-to-form-koreas-first-labor-union-could-launch-by-end-of-year" target="_blank" rel="noopener">Korea Times</a> (2025-11-08); <a href="https://www.allkpop.com/article/2025/11/k-pop-idol-union-set-to-launch-this-year-aiming-to-protect-artists-labor-rights-and-mental-health" target="_blank" rel="noopener">allkpop</a>; status: <a href="https://sports.khan.co.kr/en/article/202605221216007/" target="_blank" rel="noopener">Sports Kyunghyang</a> (2026-05-22). Accessed 2026-06-12. Filing + demands ✅ (multiple independent outlets); approval status ❓ unresolved.</li>
-        <li id="cl-src-6" data-src="gwi-trends"><span class="conf-sym">✅</span><a href="https://globalwellnessinstitute.org/global-wellness-institute-blog/2026/04/16/music-for-health-and-wellbeing-initiative-trends-for-2026/" target="_blank" rel="noopener">Global Wellness Institute</a> (2026-04-16), accessed 2026-06-12 via primary publication.</li>
-      </ol>
-      <p class="absence" style="font-size:.72rem;color:var(--grey);margin-top:.8rem;padding:.7rem .85rem">Field-news scope, cadence and the full archive: the field-monitoring feed (musician MH, wellness &amp; occupational health, abroad + Taiwan) publishes biweekly, ≤3 verified items, Taiwan items pinned. There is no current Taiwan field-news item that clears the bar — its absence is reported honestly, not padded.</p>
-    </div>
-
-    <div class="src-section" style="margin-top:1.6rem">
-      <div class="src-label">Primary data</div>
-      <div class="src-links">
-        <a href="https://backline.care/global-resources/" target="_blank" rel="noopener">Backline Global Resource Hub (110-org directory)</a>
-        <a href="https://projects.propublica.org/nonprofits/organizations/843338712" target="_blank" rel="noopener">ProPublica Nonprofit Explorer — Backline Care Inc. (990s)</a>
-        <a href="https://projects.propublica.org/nonprofits/organizations/954470909" target="_blank" rel="noopener">ProPublica Nonprofit Explorer — MusiCares (990s)</a>
-        <a href="https://www.revelios.com/soundcheck/" target="_blank" rel="noopener">Soundcheck final report (Revelios, Feb 2026)</a>
-      </div>
-    </div>
   </section>
 </div>
 
 </div>
 <script>
 (function(){
-  // ===== FILTER STATE — three dimensions (URL is the store; no localStorage) =====
-  var state = { source:'all', service:'all', funding:'all', org:null };
+  // Field News is its own page now — forward legacy #news deep-links before anything else runs.
+  if(location.hash==='#news'){ try{ location.replace('field-news.html'); }catch(e){ location.href='field-news.html'; } return; }
+  // ===== FILTER STATE — four dimensions (URL is the store; no localStorage) =====
+  var state = { source:'all', service:'all', funding:'all', country:'all', org:null };
   var map = document.getElementById('gapmap');
   var body = document.getElementById('allBody');
   // org rows only — exclude the native-scan group separator
@@ -1027,6 +803,17 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
   var srLive   = document.getElementById('srLive');   // debounced plain-text live region (AT)
   var srTimer;
 
+  // ===== COUNTRY — a dropdown, not chips (30+ countries; many orgs are multi-country / borderless).
+  // Narrows the table + dims the identifiable map nodes; the aggregate poles stay (geographic context). =====
+  var countrySel = document.getElementById('countrySel');
+  function countryText(el){ return el.getAttribute('data-country') || (el.cells && el.cells[2] ? el.cells[2].textContent : ''); }
+  function matchCountry(el){
+    if(state.country==='all') return true;
+    var c=countryText(el);
+    if(state.country==='__multi') return /worldwide|[0-9]+\s*countries|,/i.test(c);
+    return c.indexOf(state.country)>-1;
+  }
+
   function slugSet(str){ return (str||'').split(/\s+/).filter(Boolean); }
   function rowSource(el){ return el.getAttribute('data-source') || 'directory'; } // 110 rows default to directory
   function matchSource(el){ return state.source==='all' || rowSource(el)===state.source; }
@@ -1036,7 +823,7 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
     var okSrc = matchSource(el);
     var okS = state.service==='all' || svc.indexOf(state.service)>-1;
     var okF = state.funding==='all' || fnd.indexOf(state.funding)>-1;
-    return okSrc && okS && okF;
+    return okSrc && okS && okF && matchCountry(el);
   }
 
   var serviceLabel = {'all':'','mental-health':'mental health','financial':'financial','career':'career','counseling':'counseling','substance':'substance use'};
@@ -1066,6 +853,7 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
     if(state.source!=='all') parts.push(sourceLabel[state.source]);
     if(state.service!=='all') parts.push(serviceLabel[state.service]);
     if(state.funding!=='all') parts.push(fundingLabel[state.funding]);
+    if(state.country!=='all') parts.push(state.country==='__multi'?'worldwide / multi-country':state.country);
     return parts.join(' · ') || 'the whole field';
   }
 
@@ -1081,58 +869,25 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
       var anyNative = rows.some(function(r){ return r.getAttribute('data-source')==='native-scan' && !r.classList.contains('hidden'); });
       grp.classList.toggle('hidden', !anyNative);
     }
-    var anyFilter = !(state.source==='all'&&state.service==='all'&&state.funding==='all');
+    var anyFilter = !(state.source==='all'&&state.service==='all'&&state.funding==='all'&&state.country==='all');
     // dim non-matching interactive nodes (directory studied + native scan). Context dots never dim.
     filterNodes.forEach(function(nd){
       if(!matches(nd)) nd.classList.add('gm-dimmed'); else nd.classList.remove('gm-dimmed');
     });
     // isolate the native scan → fade the directory's aggregate geographic context so the 4 read clearly
     if(map) map.classList.toggle('src-native', state.source==='native-scan');
+    if(countrySel) countrySel.classList.toggle('on', state.country!=='all');
 
     var denom = baseRows().length;                  // 114 / 110 / 4 — never a blend
     var showPct = !(state.service==='all'&&state.funding==='all');
     var p = pct(n, denom);
-    resultEl.innerHTML = n+' of '+denom + (showPct ? (' <b class="rpct">· '+p+'%</b>') : '') + ' <span class="plain">· '+reading(n)+'</span>';
+    resultEl.innerHTML = anyFilter ? (n+' of '+denom + (showPct ? (' <b class="rpct">· '+p+'%</b>') : '') + ' <span class="plain">· '+reading(n)+'</span>') : '';
     // AT: announce as debounced PLAIN text so arrow-keying the chips doesn't fire a chatty queue of rich-markup updates
     if(srLive){ clearTimeout(srTimer); srTimer=setTimeout(function(){ srLive.textContent = n+' of '+denom+(showPct?(' · '+p+'%'):'')+' · '+filterText(); }, 450); }
     if(clearAll){ clearAll.hidden = !anyFilter; clearAll.textContent = 'Clear filters · '+denom; }
     if(tableCap) tableCap.textContent = 'Showing '+n+' of '+denom + (showPct?(' ('+p+'%)'):'') + ' · '+filterText()+'.';
 
-    renderReadout();
     writeURL();
-  }
-
-  // ===== LIVE READOUT — recompute the where/what/who breakdown over the SOURCE base =====
-  var svcCats=['mental-health','financial','career','counseling','substance','union'];
-  var fndCats=['unknown','government','philanthropy','private','trade-body','peer-fellowship','membership'];
-  function countCat(set, attr, cat){ return set.filter(function(r){ return slugSet(r.getAttribute(attr)).indexOf(cat)>-1; }).length; }
-  function paintRows(containerId, attr, cats, activeVal){
-    var cont=document.getElementById(containerId); if(!cont) return;
-    var base=baseRows(), denom=base.length||1, counts={}, max=0;
-    cats.forEach(function(c){ var k=countCat(base,attr,c); counts[c]=k; if(k>max)max=k; });
-    cont.querySelectorAll('.ro-row').forEach(function(row){
-      var c=row.getAttribute('data-cat'), k=counts[c]||0;
-      // the union/membership categories only exist in the native scan — hide them when empty
-      row.style.display = (k===0 && (c==='union'||c==='membership')) ? 'none' : '';
-      var fill=row.querySelector('.ro-fill'), val=row.querySelector('.ro-val');
-      if(fill) fill.style.width = (max>0?Math.round(k/max*100):0)+'%';
-      if(val) val.textContent = k+' · '+pct(k,denom)+'%';
-      row.classList.toggle('active', activeVal && activeVal!=='all' && c===activeVal);
-    });
-  }
-  function renderReadout(){
-    paintRows('roWhat','data-service',svcCats, state.service);
-    paintRows('roWho','data-funding',fndCats, state.funding);
-    var beyond=document.getElementById('roBeyond');
-    if(beyond) beyond.style.display = (state.source==='directory') ? 'none' : '';
-    var roBase=document.getElementById('roBase');
-    if(roBase){
-      roBase.textContent = state.source==='all'
-          ? '% across both sources combined (114) — a mixed base, not a like-for-like rate; pick Backline directory for a clean denominator'
-        : state.source==='directory'
-          ? '% of the 110-org Backline directory — the clean, comparable base'
-          : '% of the 4 found beyond the directory (native-language scan)';
-    }
   }
 
   function setChecked(group,val){
@@ -1145,8 +900,9 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
   function setFilter(group,val){ state[group]=val; setChecked(group,val); apply(); }
   // global reset — clears all three dimensions + URL in one tap
   if(clearAll) clearAll.addEventListener('click', function(){
-    state.source='all'; state.service='all'; state.funding='all';
+    state.source='all'; state.service='all'; state.funding='all'; state.country='all';
     setChecked('source','all'); setChecked('service','all'); setChecked('funding','all');
+    if(countrySel) countrySel.value='all';
     apply();
   });
 
@@ -1178,12 +934,24 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
     });
   });
 
-  // ===== URL state — ?service & ?funding (replaceState on filter), ?org (pushState on select) =====
+  // ===== COUNTRY dropdown — options built from the table; one change handler drives apply() =====
+  (function(){
+    if(!countrySel) return;
+    var known=['United States','United Kingdom','Germany','France','Canada','Australia','Japan','India','Mexico','Brazil','Argentina','Austria','Belgium','Colombia','Denmark','Hungary','Iceland','Ireland','Italy','Lithuania','Netherlands','New Zealand','Portugal','Romania','South Africa','Spain','Sweden','Switzerland','Thailand'];
+    var present={}, multi=false;
+    rows.forEach(function(r){ var c=countryText(r); known.forEach(function(k){ if(c.indexOf(k)>-1) present[k]=1; }); if(/worldwide|[0-9]+\s*countries|,/i.test(c)) multi=true; });
+    if(multi){ var o=document.createElement('option'); o.value='__multi'; o.textContent='Worldwide / multi-country'; countrySel.appendChild(o); }
+    Object.keys(present).sort().forEach(function(k){ var o=document.createElement('option'); o.value=k; o.textContent=k; countrySel.appendChild(o); });
+    countrySel.addEventListener('change', function(){ state.country=countrySel.value; apply(); });
+  })();
+
+  // ===== URL state — ?source &?service &?funding &?country (replaceState); ?org (pushState) =====
   function buildURL(){
     var p=new URLSearchParams();
     if(state.source!=='all') p.set('source',state.source);
     if(state.service!=='all') p.set('service',state.service);
     if(state.funding!=='all') p.set('funding',state.funding);
+    if(state.country!=='all') p.set('country',state.country);
     if(state.org) p.set('org',state.org);
     var qs=p.toString();
     return location.pathname+(qs?('?'+qs):'')+location.hash;
@@ -1291,13 +1059,15 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
   // ===== LOAD ORDER: parse ?filters → apply → open ?org peek (+scroll/highlight) → THEN honor #hash =====
   function parseState(){
     var p=new URLSearchParams(location.search);
-    var src=p.get('source'), s=p.get('service'), f=p.get('funding'), o=p.get('org');
+    var src=p.get('source'), s=p.get('service'), f=p.get('funding'), ct=p.get('country'), o=p.get('org');
     var srcVals=['directory','native-scan'];
     var svcVals=['mental-health','financial','career','counseling','substance'];
     var fndVals=['government','philanthropy','private','trade-body','peer-fellowship','unknown'];
     state.source  = (src&&srcVals.indexOf(src)>-1)?src:'all';
     state.service = (s&&svcVals.indexOf(s)>-1)?s:'all';
     state.funding = (f&&fndVals.indexOf(f)>-1)?f:'all';
+    state.country = (ct && countrySel && Array.prototype.some.call(countrySel.options, function(o){return o.value===ct;})) ? ct : 'all';
+    if(countrySel) countrySel.value = state.country;
     setChecked('source',state.source); setChecked('service',state.service); setChecked('funding',state.funding);
     state.org = (o&&nodeBySlug(o))?o:null;
   }
@@ -1315,10 +1085,6 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
   }
   setMapMode();
   var mmTimer; window.addEventListener('resize', function(){ clearTimeout(mmTimer); mmTimer=setTimeout(setMapMode, 200); });
-
-  // animate the readout bars only on FILTER changes, not on first paint (no load-time width tween)
-  var readEl=document.getElementById('read');
-  if(readEl) requestAnimationFrame(function(){ readEl.classList.add('ro-animate'); });
 
   if(state.org){
     var nd=nodeBySlug(state.org);
@@ -1355,18 +1121,6 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
     else if(peek) peek.classList.remove('show');
   });
 
-  // ===== JUMP NAV active state =====
-  var links={};
-  document.querySelectorAll('.jumpnav a').forEach(function(a){ links[a.getAttribute('href').slice(1)]=a; });
-  if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(es){ es.forEach(function(e){
-      if(e.isIntersecting){
-        Object.values(links).forEach(function(l){ l.classList.remove('active'); });
-        var id=e.target.getAttribute('id'); if(links[id]) links[id].classList.add('active');
-      }
-    }); }, {rootMargin:'-45% 0px -50% 0px'});
-    document.querySelectorAll('section[id]').forEach(function(s){ io.observe(s); });
-  }
 })();
 </script>
 <script>
