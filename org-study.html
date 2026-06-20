@@ -43,6 +43,7 @@
       --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
       --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
       --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font-cjk: 'Noto Serif TC', serif;
       --font: var(--font-body);
       --text-hero: clamp(3.5rem, 8vw, 6.5rem);
       --text-h1: clamp(2rem, 4.5vw, 3rem);
@@ -51,6 +52,8 @@
       --text-body: 1rem;
       --text-sm: 0.875rem;
       --text-xs: 0.75rem;
+      /* ── DIA-GRADE READING SCALE (root 16px; calibrated to Dia browser, serif-corrected) ── */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;--lh-prose:1.7;--wt-prose:440;--measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;--label-ink:var(--graphite);
       --ease: cubic-bezier(0.4, 0, 0.2, 1);
       --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
       --dur: 0.3s;
@@ -70,11 +73,17 @@
       font-family: var(--font);
       background: var(--bg-light);
       color: var(--black);
-      line-height: 1.6;
-      font-weight: 400;
+      line-height: var(--lh-prose);
+      font-weight: var(--wt-prose);
+      font-size: clamp(1.125rem,1rem + 0.62vw,1.3125rem);
+      text-wrap: pretty;
       font-optical-sizing: auto;
       -webkit-font-smoothing: antialiased;
     }
+    p{overflow-wrap:anywhere}
+    .cjk{font-family:var(--font-cjk)}
+    p.cjk,.cjk p{line-height:1.95;font-weight:600;letter-spacing:0;max-width:var(--measure-cjk)}
+    .cjk-inline{font-size:.93em;vertical-align:.02em;letter-spacing:.02em;font-weight:inherit}
 
     ::selection { background: var(--signal); color: var(--white); }
 
@@ -113,7 +122,7 @@
       font-family: var(--font-mono);
       font-size: 1.1rem;
       font-weight: 400;
-      color: var(--grey);
+      color: var(--label-ink);
       text-decoration: none;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -198,20 +207,22 @@
 
     .page-header h1 {
       font-family: var(--font-display);
-      font-size: var(--text-hero);
+      font-size: clamp(2.2rem,1.35rem + 5.2vw,6.5rem);
       font-weight: 900;
-      line-height: 1.05;
+      line-height: 1.04;
       letter-spacing: -0.005em;
       color: var(--black);
       text-wrap: balance;
+      overflow-wrap: break-word;
+      hyphens: auto;
     }
 
     .page-dek {
       font-family: var(--font-body);
-      font-size: var(--text-body);
+      font-size: clamp(1.25rem,1.05rem + 1.4vw,1.5rem);
       color: var(--graphite);
-      line-height: 1.6;
-      max-width: var(--measure);
+      line-height: 1.55;
+      max-width: 54ch;
       margin-top: 1.25rem;
     }
 
@@ -264,10 +275,10 @@
 
     .work-card .card-title {
       font-family: var(--font-display);
-      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      font-size: clamp(1.3rem,1.1rem + 1vw,1.65rem);
       font-weight: 600;
       color: var(--charcoal);
-      line-height: 1.15;
+      line-height: 1.25;
       letter-spacing: -0.005em;
       text-align: center;
       text-wrap: balance;
@@ -323,7 +334,7 @@
     .work-item .caption .type {
       font-family: var(--font-mono);
       font-size: var(--text-xs);
-      color: var(--grey);
+      color: var(--label-ink);
       text-transform: uppercase;
       letter-spacing: 0.06em;
       margin-top: 0.25rem;
@@ -336,7 +347,7 @@
     }
 
     .work-card.placeholder .card-title {
-      color: var(--grey-light);
+      color: var(--label-ink);
       font-size: var(--text-sm);
       font-weight: 400;
     }
@@ -373,9 +384,14 @@
       }
 
       .work-card.placeholder .card-title {
-        color: var(--grey-light);
+        color: var(--label-ink);
         opacity: 0.6;
       }
+    }
+
+    /* Release reading-measure caps to ~90vw on phones */
+    @media (max-width: 680px) {
+      .page-dek { max-width: none; }
     }
 
     @media (min-width: 769px) and (max-width: 1024px) {

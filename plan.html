@@ -33,9 +33,13 @@
     --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
     --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
     --font-mono: 'Space Mono', 'Courier New', monospace;
+    --font-cjk: 'Noto Serif TC', serif;
 
     --measure: 64ch;
     --max-w-text: 64ch;
+    --text-xs: 0.75rem;
+    /* ── DIA-GRADE READING SCALE (root 16px; calibrated to Dia browser, serif-corrected) ── */
+    --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;--lh-prose:1.7;--wt-prose:440;--measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;--label-ink:var(--graphite);
 
     --ease: cubic-bezier(0.4, 0, 0.2, 1);
     --dur: 0.3s;
@@ -47,11 +51,19 @@
     font-family: var(--font-body);
     background: var(--black);
     color: var(--white);
+    font-size: clamp(1.125rem,1rem + 0.62vw,1.3125rem);
+    line-height: var(--lh-prose);
+    font-weight: var(--wt-prose);
+    text-wrap: pretty;
     font-optical-sizing: auto;
     -webkit-font-smoothing: antialiased;
     min-height: 100%;
     overflow-x: hidden;
   }
+  p{overflow-wrap:anywhere}
+  .cjk{font-family:var(--font-cjk)}
+  p.cjk,.cjk p{line-height:1.95;font-weight:600;letter-spacing:0;max-width:var(--measure-cjk)}
+  .cjk-inline{font-size:.93em;vertical-align:.02em;letter-spacing:.02em;font-weight:inherit}
   ::selection { background: var(--signal); color: var(--white); }
 
   /* ════════════════════════════════════════
@@ -175,11 +187,13 @@
   /* Title — Syne display (editorial weight) */
   .hero-title {
     font-family: var(--font-display);
-    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-size: clamp(2.2rem,1.35rem + 5.2vw,6.5rem);
     font-weight: 900;
     line-height: 1.04;
     letter-spacing: -0.01em;
     text-wrap: balance;
+    overflow-wrap: break-word;
+    hyphens: auto;
     color: var(--white);
     margin-bottom: 1.5rem;
   }
@@ -194,14 +208,14 @@
   /* Statement — Body light (editorial contrast) */
   .hero-statement {
     font-family: var(--font-body);
-    font-size: clamp(1.1rem, 2vw, 1.375rem);
+    font-size: clamp(1.25rem,1.05rem + 1.4vw,1.5rem);
     font-weight: 400;
     font-style: italic;
     color: var(--grey-light);
     letter-spacing: 0;
-    max-width: min(520px, var(--measure));
+    max-width: min(540px, var(--measure));
     margin: 0 auto 4.5rem;
-    line-height: 1.6;
+    line-height: 1.55;
   }
 
   /* Thin separator */
@@ -228,7 +242,7 @@
 
   .phase-years {
     font-family: var(--font-mono);
-    font-size: 0.58rem; font-weight: 400;
+    font-size: var(--text-micro); font-weight: 400;
     letter-spacing: 0.3em; text-transform: uppercase;
     color: var(--grey);
     margin-bottom: 0.7rem;
@@ -236,9 +250,9 @@
 
   .phase-name {
     font-family: var(--font-display);
-    font-size: 1.5rem; font-weight: 600;
+    font-size: clamp(1.3rem,1.1rem + 1vw,1.65rem); font-weight: 600;
     letter-spacing: -0.005em;
-    line-height: 1.15;
+    line-height: 1.25;
     margin-bottom: 0.7rem;
     transition: opacity var(--dur) var(--ease);
   }
@@ -263,7 +277,7 @@
 
   .track-label {
     font-family: var(--font-mono);
-    font-size: 0.55rem;
+    font-size: var(--text-micro);
     font-weight: 400;
     letter-spacing: 0.2em;
     color: var(--grey);
@@ -290,10 +304,11 @@
     .nav-toggle span { background:var(--grey-light); }
     .nav-links { display:none; flex-direction:column; gap:0.75rem; margin-top:1rem; }
     .nav-links.show { display:flex; }
-    .nav-links a { font-size: 0.85rem; }
+    .nav-links a { font-size: 0.85rem; min-height:44px; display:flex; align-items:center; }
     .nav-brand { display:none; }
     .nav-sub { display:none; }
     .nav-mobile-brand { display:block; }
+    .nav-toggle { min-width:44px; min-height:44px; }
     .hero { padding-top: calc(4.5rem + env(safe-area-inset-top, 0px)); padding-bottom: 1.5rem; }
     .hero-photo img { opacity: 0.5; }
     .hero::after {
@@ -304,7 +319,7 @@
     }
     .hero-content { padding: 1.5rem 1rem; }
     .hero-eyebrow { margin-bottom: 2rem; }
-    .hero-statement { margin: 0 auto 3rem; }
+    .hero-statement { margin: 0 auto 3rem; max-width: 90vw; }
     .hero-divider { margin: 0 auto 3rem; }
     .phase-grid { grid-template-columns: 1fr; gap: 2.5rem; max-width: 360px; }
   }

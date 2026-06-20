@@ -33,6 +33,7 @@
       --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
       --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
       --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font-cjk: 'Noto Serif TC', serif;
       --font: var(--font-body);
       --ease: cubic-bezier(0.4, 0, 0.2, 1);
       --dur: 0.3s;
@@ -46,6 +47,8 @@
       --text-body: 1rem;
       --text-sm: 0.875rem;
       --text-xs: 0.75rem;
+      /* ── DIA-GRADE READING SCALE (root 16px; calibrated to Dia browser, serif-corrected) ── */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;--lh-prose:1.7;--wt-prose:440;--measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;--label-ink:var(--graphite);
       --radius: 4px;
       --radius-lg: 6px;
       --max-w: 1100px;
@@ -69,12 +72,17 @@
       font-family: var(--font-body);
       background-color: var(--bg-light);
       color: var(--charcoal);
-      line-height: 1.7;
-      font-weight: 400;
+      line-height: var(--lh-prose);
+      font-weight: var(--wt-prose);
       font-optical-sizing: auto;
-      font-size: var(--text-body);
+      font-size: clamp(1.125rem,1rem + 0.62vw,1.3125rem);
+      text-wrap: pretty;
       -webkit-font-smoothing: antialiased;
     }
+    p{overflow-wrap:anywhere}
+    .cjk{font-family:var(--font-cjk)}
+    p.cjk,.cjk p{line-height:1.95;font-weight:600;letter-spacing:0;max-width:var(--measure-cjk)}
+    .cjk-inline{font-size:.93em;vertical-align:.02em;letter-spacing:.02em;font-weight:inherit}
 
     ::selection {
       background: var(--signal);
@@ -103,7 +111,7 @@
       font-family: var(--font-mono);
       font-size: 1.1rem;
       font-weight: 400;
-      color: var(--grey);
+      color: var(--label-ink);
       text-decoration: none;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -146,23 +154,25 @@
 
     .hero h1 {
       font-family: var(--font-display);
-      font-size: var(--text-hero);
+      font-size: clamp(2.2rem,1.35rem + 5.2vw,6.5rem);
       font-weight: 800;
       color: var(--black);
-      line-height: 0.95;
+      line-height: 1.04;
       letter-spacing: -0.01em;
       margin-bottom: 1rem;
+      overflow-wrap: break-word;
+      hyphens: auto;
     }
 
     .hero .subtitle {
       font-family: var(--font-body);
-      font-size: var(--text-h3);
+      font-size: clamp(1.25rem,1.05rem + 1.4vw,1.5rem);
       font-weight: 300;
       font-style: italic;
-      color: var(--grey);
-      max-width: var(--max-w-text);
+      color: var(--label-ink);
+      max-width: 54ch;
       margin-bottom: 1.5rem;
-      line-height: 1.5;
+      line-height: 1.55;
       letter-spacing: 0.02em;
     }
 
@@ -295,14 +305,17 @@
       border-bottom: 1px solid var(--border-light);
       text-transform: uppercase;
       letter-spacing: -0.01em;
+      line-height: 1.1;
       text-wrap: balance;
+      overflow-wrap: break-word;
     }
 
     section h3 {
       font-family: var(--font-display);
-      font-size: var(--text-h3);
+      font-size: clamp(1.3rem,1.1rem + 1vw,1.65rem);
       font-weight: 600;
       color: var(--charcoal);
+      line-height: 1.25;
       margin-top: 2rem;
       margin-bottom: 1rem;
       text-transform: uppercase;
@@ -311,14 +324,14 @@
 
     section p {
       margin-bottom: 1rem;
-      color: var(--grey);
-      line-height: 1.7;
-      max-width: var(--max-w-text);
+      color: var(--label-ink);
+      line-height: 1.65;
+      max-width: var(--measure-prose);
     }
 
     .note {
       font-size: var(--text-sm);
-      color: var(--grey);
+      color: var(--label-ink);
       margin-bottom: 1.5rem;
       font-weight: 300;
     }
@@ -328,6 +341,7 @@
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
     }
+    .table-wrap:focus-visible{outline:2px solid var(--signal);outline-offset:2px;border-radius:var(--radius)}
 
     table {
       width: 100%;
@@ -346,7 +360,7 @@
       text-align: left;
       font-family: var(--font-mono);
       font-weight: 400;
-      font-size: var(--text-xs);
+      font-size: var(--text-micro);
       text-transform: uppercase;
       letter-spacing: 0.06em;
     }
@@ -354,7 +368,7 @@
     td {
       padding: 0.65rem 1rem;
       border-bottom: 1px solid var(--border-light);
-      font-size: var(--text-sm);
+      font-size: var(--text-small);
       font-family: var(--font-body);
       color: var(--charcoal);
       font-variant-numeric: tabular-nums;
@@ -403,7 +417,7 @@
       font-family: var(--font-mono);
       font-size: var(--text-xs);
       font-weight: 400;
-      color: var(--grey);
+      color: var(--label-ink);
       text-transform: uppercase;
       letter-spacing: 0.1em;
     }
@@ -430,7 +444,7 @@
     }
 
     .bar-label-value {
-      color: var(--grey);
+      color: var(--label-ink);
     }
 
     .bar {
@@ -466,13 +480,13 @@
 
     .phase-subtitle {
       font-size: var(--text-sm);
-      color: var(--grey);
+      color: var(--label-ink);
       margin-bottom: 1rem;
     }
 
     .phase-text {
       font-size: var(--text-sm);
-      color: var(--grey);
+      color: var(--label-ink);
       line-height: 1.6;
     }
 
@@ -511,7 +525,7 @@
       font-family: var(--font-mono);
       font-size: var(--text-xs);
       font-weight: 400;
-      color: var(--grey);
+      color: var(--label-ink);
       text-transform: uppercase;
       letter-spacing: 0.16em;
       margin-bottom: 0.5rem;
@@ -536,7 +550,7 @@
 
     /* Citations (§6.11 standard — report-wide) */
     .cite {
-      font-size: 0.72em;
+      font-size: 0.7em;
       line-height: 0;
       vertical-align: super;
       letter-spacing: 0;
@@ -592,7 +606,7 @@
     .refs-title {
       font-family: var(--font-mono);
       font-size: var(--text-xs);
-      color: var(--grey);
+      color: var(--label-ink);
       text-transform: uppercase;
       letter-spacing: 0.16em;
       margin-bottom: 0.75rem;
@@ -601,10 +615,11 @@
     .refs ol {
       margin: 0 0 0.75rem 1.25rem;
       padding: 0;
+      max-width: var(--measure-ref);
     }
 
     .refs li {
-      font-size: var(--text-sm);
+      font-size: var(--text-fine);
       color: var(--graphite);
       line-height: 1.6;
       margin-bottom: 0.5rem;
@@ -618,7 +633,7 @@
 
     .refs-note {
       font-size: var(--text-xs);
-      color: var(--grey);
+      color: var(--label-ink);
       margin-bottom: 0;
       max-width: none;
     }
@@ -757,6 +772,17 @@
       .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
     }
 
+    /* Release reading-measure caps to ~90vw on phones */
+    @media (max-width: 680px) {
+      .hero .subtitle, section p, .refs ol, .refs li { max-width: none; }
+    }
+
+    /* Table on small phones: shrink but keep ≥13px */
+    @media (max-width: 480px) {
+      table { font-size: 0.82rem; }
+      th, td { padding: 0.5rem 0.6rem; }
+    }
+
     /* Print */
     @media print {
       nav.nav {
@@ -784,7 +810,7 @@
 
     /* ===== Related block (no dead-ends, R3.2) ===== */
     .related-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-light); }
-    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--grey); margin-bottom: 0.6rem; }
+    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--label-ink); margin-bottom: 0.6rem; }
     .related-block ul { list-style: none; margin: 0; padding: 0; }
     .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
     .related-block a { font-family: var(--font-body); font-size: var(--text-sm); color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
@@ -836,7 +862,7 @@
     <section>
       <h2>Organization Profile<sup class="cite"><a href="#prof-src-1" data-src="org-registration" data-tip="Registration data (legal name, EIN, NTEE, addresses): Form 990 filings — ProPublica API, accessed 2026-06-11; mission &amp; ED from backline.care; rating from Charity Navigator (97% Four-Star), accessed 2026-06-11.">1</a></sup></h2>
 
-      <div class="table-wrap"><table>
+      <div class="table-wrap" role="region" aria-label="Organization profile table" tabindex="0"><table>
         <tr>
           <th>Field</th>
           <th>Details</th>
@@ -958,7 +984,7 @@
 
       <h3>Team &amp; Organizational Structure<sup class="cite"><a href="#ops-src-8" data-src="backline-team" data-tip="backline.care/team — fetched 2026-06-11. Headcounts (8 staff / 12 board / 3 advisors / 8 clinical advisory) counted from the page.">8</a></sup></h3>
       <p class="note">Source: backline.care/team — fetched 2026-06-11. Operations and clinical staff (8):</p>
-      <div class="table-wrap"><table>
+      <div class="table-wrap" role="region" aria-label="Team and organizational structure table" tabindex="0"><table>
         <tr>
           <th>Name</th>
           <th>Title</th>
@@ -1009,7 +1035,7 @@
       <p class="note">Board: 12 members — incl. Charlie Hellman (Spotify), Chris Keogh (Goldman Sachs), Michael McDonald (Mick Management), Shira E. Saville Psy.D., and co-founders Joshua Knight, Matthew Wilson, Stephen Grybowski. Advisors: 3 (Dr. Charlie Kautz, Dr. Stacy Cohen, Peter Shapiro). Clinical Advisory Board: 8 licensed professionals — incl. Dr. George Musgrave FRSPH (Goldsmiths) and Dr. Dorian A. Lamis. Total organizational footprint: ~31 people. Half the staff hold clinical licenses (LCPC, LCSW, LPC, MSW) — the clinical-to-operations ratio is itself a design choice worth copying.</p>
 
       <h3>Key Partnerships<sup class="cite"><a href="#ops-src-9" data-src="partnerships" data-tip="Spotify Newsroom B-LINE announcement (partner list), Jan 27, 2026; Pollstar We Got You! coverage, Feb 10, 2025; backline.care.">9</a></sup></h3>
-      <div class="table-wrap"><table>
+      <div class="table-wrap" role="region" aria-label="Key partnerships table" tabindex="0"><table>
         <tr>
           <th>Partner</th>
           <th>Role / Contribution</th>
@@ -1060,7 +1086,7 @@
       <p class="note">Every figure in this report carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source without leaving the text; click to jump to the full reference. <em>§6.11 citation standard — prototyped here 2026-06-11, extended report-wide in v2.1.</em></p>
 
       <h3>Revenue &amp; Expenses Summary<sup class="cite"><a href="#fin-src-10" data-src="propublica-990" data-tip="Form 990 filings FY2020–2023 — ProPublica Nonprofit Explorer API, pulled 2026-06-11. Figures quoted directly from filed returns.">10</a></sup></h3>
-      <div class="table-wrap"><table>
+      <div class="table-wrap" role="region" aria-label="Revenue and expenses summary table" tabindex="0"><table>
         <tr>
           <th>Fiscal Year</th>
           <th>Revenue</th>
@@ -1148,7 +1174,7 @@
 
       <h3>Revenue Composition (Form 990)<sup class="cite"><a href="#fin-src-10" data-src="propublica-990" data-tip="Form 990 filings FY2020–2023 — ProPublica Nonprofit Explorer API, pulled 2026-06-11. Line items quoted directly.">10</a></sup></h3>
       <p class="note">The 990 shows Backline is essentially 100% contribution-funded: $0 program service revenue in every filed year. Donor-type splits (individual vs. foundation vs. corporate) are not disclosed in 990 filings — a previous version of this report presented an invented breakdown, removed in v2.</p>
-      <div class="table-wrap"><table>
+      <div class="table-wrap" role="region" aria-label="Revenue composition table" tabindex="0"><table>
         <tr>
           <th>Component</th>
           <th>2020</th>
@@ -1188,7 +1214,7 @@
       <p class="note">Known funding drivers (press-verified): Spotify (B-LINE lead sponsor),<sup class="cite"><a href="#fin-src-14" data-src="spotify-bline-2026" data-tip="Spotify Newsroom, Jan 27 2026 — B-LINE launch announcement naming Spotify as lead sponsor.">14</a></sup> Live Nation, AEG Presents; the artist-led We Got You! campaign (Feb 2025) netted $353K within a month of Chappell Roan's Grammy speech and reached $475K+ cumulatively by January 2026,<sup class="cite"><a href="#fin-src-13" data-src="billboard-wgy-2025" data-tip="Billboard Pro, Mar 2025 — $353,000 first month; Pollstar, Jan 2026 — $475K+ cumulative (org/press-reported).">13</a></sup> with $25K seed gifts from Chappell Roan, Noah Kahan, and Charli XCX.<sup class="cite"><a href="#fin-src-12" data-src="pollstar-wgy-2025" data-tip="Pollstar, Feb 10 2025 — campaign launch; $25K seed donations from Chappell Roan, Noah Kahan, Charli XCX, with industry matching.">12</a></sup></p>
 
       <h3>Compensation &amp; Staffing (Form 990)<sup class="cite"><a href="#fin-src-10" data-src="propublica-990" data-tip="Form 990 filings FY2020–2023 — ProPublica Nonprofit Explorer API, pulled 2026-06-11. Compensation lines quoted directly.">10</a></sup></h3>
-      <div class="table-wrap"><table>
+      <div class="table-wrap" role="region" aria-label="Compensation and staffing table" tabindex="0"><table>
         <tr>
           <th>Item</th>
           <th>2020</th>
@@ -1228,7 +1254,7 @@
       <p class="note">The organization ran fully volunteer through 2021 — two years of service delivery before the first paid salary. Detailed program/admin functional splits are not available in the e-filed extracts; they will be added when the full 2024 990 PDF is published.</p>
 
       <h3>Financial Health Metrics<sup class="cite"><a href="#fin-src-10" data-src="propublica-990" data-tip="Ratios computed from Form 990 figures (FY2020–2023) — derived values, not quoted from any source.">10</a></sup></h3>
-      <div class="table-wrap"><table>
+      <div class="table-wrap" role="region" aria-label="Financial health metrics table" tabindex="0"><table>
         <tr>
           <th>Metric</th>
           <th>2020</th>
@@ -1285,7 +1311,7 @@
       <h2>Growth Trajectory</h2>
 
       <h3>Timeline of Milestones<sup class="cite"><a href="#growth-src-15" data-src="growth-timeline" data-tip="Revenue figures: Form 990 / IRS BMF via ProPublica API, accessed 2026-06-11. Milestones: Pollstar (Feb 2025), Billboard Pro (Mar 2025), Grateful Web (Apr 2025), Spotify Newsroom (Jun 2025; Jan 2026).">15</a></sup></h3>
-      <div class="table-wrap"><table>
+      <div class="table-wrap" role="region" aria-label="Timeline of milestones table" tabindex="0"><table>
         <tr>
           <th>Date</th>
           <th>Milestone</th>

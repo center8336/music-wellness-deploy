@@ -52,6 +52,12 @@
       --text-body: 1rem;
       --text-sm: 0.875rem;
       --text-xs: 0.75rem;
+      /* — Dia-grade reading environment (v1 spec) — */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;
+      --lh-prose:1.7;--wt-prose:440;
+      --measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;
+      --label-ink:var(--graphite);
+      --font-cjk:'Noto Serif TC', serif;
       --ease: cubic-bezier(0.4, 0, 0.2, 1);
       --dur: 0.3s;
       --dur-slow: 0.6s;
@@ -70,10 +76,17 @@
       font-family: var(--font);
       background: var(--bg-light);
       color: var(--black);
-      line-height: 1.6;
+      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      line-height: var(--lh-prose);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
       font-optical-sizing: auto;
       -webkit-font-smoothing: antialiased;
     }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
 
     ::selection { background: var(--signal); color: var(--white); }
 
@@ -107,7 +120,7 @@
     .nav-links { display: flex; gap: 2.5rem; }
     .nav-links a {
       font-family: var(--font-mono); font-size: 1.1rem; font-weight: 400;
-      color: var(--grey); text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.08em;
     }
     .nav-links a:hover { color: var(--black); }
     .nav-links a.current { color: var(--black); }
@@ -135,16 +148,17 @@
     }
     .eyebrow {
       font-family: var(--font-mono); font-size: var(--text-xs);
-      color: var(--grey); text-transform: uppercase; letter-spacing: 0.18em;
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.18em;
       margin-bottom: 1.25rem;
     }
     .hero h1 {
-      font-family: var(--font-display); font-size: var(--text-hero);
+      font-family: var(--font-display); font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6.5rem);
       font-weight: 900; line-height: 1.04; color: var(--black); letter-spacing: -0.01em; text-wrap: balance;
+      overflow-wrap: break-word; hyphens: auto;
     }
     .hero .subtitle {
-      font-family: var(--font-body); font-size: clamp(1.05rem, 2vw, 1.35rem);
-      color: var(--graphite); line-height: 1.5; margin-top: 1.5rem; max-width: var(--max-w-text);
+      font-family: var(--font-body); font-size: clamp(1.25rem, 1.05rem + 1.4vw, 1.5rem);
+      color: var(--graphite); line-height: 1.55; margin-top: 1.5rem; max-width: var(--max-w-text);
     }
     .basis-badge {
       display: inline-block; margin-top: 1.75rem;
@@ -178,17 +192,19 @@
       font-size: var(--text-xs);
       letter-spacing: 0.5em;
       text-transform: uppercase;
-      color: var(--grey);
+      color: var(--label-ink);
       margin-bottom: 2.5rem;
       max-width: none;
     }
     .cover-title {
       font-family: var(--font-display);
-      font-size: clamp(4rem, 10vw, 8rem);
+      font-size: clamp(2.2rem, 1.35rem + 5.2vw, 8rem);
       font-weight: 900;
-      line-height: 1.0;
+      line-height: 1.04;
       letter-spacing: -0.01em;
       text-wrap: balance;
+      overflow-wrap: break-word;
+      hyphens: auto;
       color: var(--black);
       margin-bottom: 0.5rem;
     }
@@ -204,19 +220,19 @@
     }
     .cover-subtitle {
       font-family: var(--font-body);
-      font-size: clamp(1.1rem, 2vw, 1.375rem);
+      font-size: clamp(1.25rem, 1.05rem + 1.4vw, 1.5rem);
       font-weight: 400;
       font-style: italic;
       color: var(--graphite);
       letter-spacing: 0;
-      line-height: 1.5;
+      line-height: 1.55;
       margin-bottom: 3rem;
       max-width: var(--measure);
     }
     .cover-meta {
       font-family: var(--font-mono);
       font-size: var(--text-xs);
-      color: var(--grey-light);
+      color: var(--label-ink);
       line-height: 2;
       letter-spacing: 0.02em;
       max-width: none;
@@ -242,11 +258,11 @@
     }
 
     /* ===== TYPE ===== */
-    h2 { font-family: var(--font-display); font-size: var(--text-h2); font-weight: 600; line-height: 1.15; color: var(--black); margin-bottom: 1rem; letter-spacing: -0.005em; text-wrap: balance; }
-    h3 { font-family: var(--font-display); font-size: var(--text-h3); font-weight: 600; letter-spacing: -0.005em; color: var(--charcoal); margin: 1.5rem 0 0.75rem; }
+    h2 { font-family: var(--font-display); font-size: var(--text-h2); font-weight: 600; line-height: 1.1; color: var(--black); margin-bottom: 1rem; letter-spacing: -0.005em; text-wrap: balance; overflow-wrap: break-word; }
+    h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem); line-height: 1.25; font-weight: 600; letter-spacing: -0.005em; color: var(--charcoal); margin: 1.5rem 0 0.75rem; }
     .section-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
-    p { font-size: var(--text-body); color: var(--graphite); max-width: var(--max-w-text); margin-bottom: 1rem; }
-    p.lead { font-size: 1.1rem; color: var(--charcoal); }
+    p { color: var(--graphite); max-width: var(--measure-prose); margin-bottom: 1rem; }
+    p.lead { font-size: clamp(1.1875rem, 1rem + 1.1vw, 1.3125rem); line-height: 1.62; color: var(--charcoal); max-width: var(--measure-prose); }
     strong { color: var(--charcoal); font-weight: 600; }
 
     /* ===== ORIENTATION CALLOUT ===== */
@@ -272,23 +288,23 @@
     .tool-card.l2 { border-left-color: var(--spectrum-4); }
     .tool-card.l3 { border-left-color: var(--spectrum-1); }
     .tool-card.l4 { border-left-color: var(--spectrum-3); }
-    .tool-card h3 { margin: 0 0 0.15rem; font-size: 1.05rem; color: var(--black); }
-    .tool-card .abbr { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); letter-spacing: 0.06em; text-transform: uppercase; }
-    .tool-card .desc { font-size: var(--text-sm); color: var(--graphite); margin: 0.55rem 0 0.5rem; }
-    .tool-card .attrs { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); margin-bottom: 0.7rem; }
+    .tool-card h3 { margin: 0 0 0.15rem; font-size: clamp(1.1rem, 1rem + 0.5vw, 1.3rem); line-height: 1.25; color: var(--black); }
+    .tool-card .abbr { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); letter-spacing: 0.06em; text-transform: uppercase; }
+    .tool-card .desc { font-size: clamp(1rem, 0.95rem + 0.35vw, 1.1875rem); line-height: 1.55; color: var(--graphite); margin: 0.55rem 0 0.5rem; }
+    .tool-card .attrs { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); margin-bottom: 0.7rem; }
     .tool-card .attrs .free { color: var(--spectrum-4); }
-    .src-chip { margin-top: auto; font-size: 0.78rem; color: var(--graphite); background: var(--signal-bg); border: 1px solid var(--signal-glow); border-radius: var(--radius); padding: 0.5rem 0.65rem; line-height: 1.5; }
+    .src-chip { margin-top: auto; font-size: var(--text-fine); color: var(--graphite); background: var(--signal-bg); border: 1px solid var(--signal-glow); border-radius: var(--radius); padding: 0.5rem 0.65rem; line-height: 1.55; }
     .src-chip .ok { font-family: var(--font-mono); color: var(--signal-dim); font-weight: 700; }
     .src-chip a { word-break: break-word; }
 
     /* ===== USAGE / LESSON BOXES ===== */
     .use-box { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--spectrum-4); border-radius: var(--radius-lg); padding: 1.5rem 1.6rem; margin: 1.25rem 0; }
     .use-box h3 { margin-top: 0; }
-    .use-box p { font-size: var(--text-sm); margin-bottom: 0; }
+    .use-box p { font-size: clamp(1rem, 0.95rem + 0.35vw, 1.1875rem); line-height: 1.6; max-width: var(--measure-prose); margin-bottom: 0; }
     .used-note { background: var(--signal-bg); border: 1px solid var(--signal-glow); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin: 1.25rem 0; }
-    .used-note p { font-size: var(--text-sm); margin-bottom: 0; }
+    .used-note p { font-size: clamp(1rem, 0.95rem + 0.35vw, 1.1875rem); line-height: 1.6; max-width: var(--measure-prose); margin-bottom: 0; }
 
-    .refs-note { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); max-width: none; margin-top: 1rem; }
+    .refs-note { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); max-width: none; margin-top: 1rem; }
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 900px) {
@@ -310,7 +326,11 @@
       .cover { padding: 5rem 1.5rem 3rem; padding-top: calc(5rem + env(safe-area-inset-top)); }
       .cover-title { font-size: clamp(3rem, 14vw, 5rem); }
       .cover-year { font-size: clamp(1.1rem, 6vw, 1.8rem); letter-spacing: 0.22em; }
-      .cover-subtitle { font-size: 0.85rem; }
+      /* lede keeps its clamp floor on phone (spec §6: phone floor is the deliverable) */
+    }
+    /* Release reading-column caps to ~90vw on phones (spec §6). */
+    @media (max-width: 680px) {
+      p, p.lead, .cover-subtitle, .hero .subtitle, .use-box p, .used-note p { max-width: none; }
     }
     @media (max-width: 480px) {
       .legend { grid-template-columns: 1fr; }
@@ -402,7 +422,7 @@
         <div class="tool-card l1">
           <h3>Effort–Recovery model</h3><div class="abbr">Meijman &amp; Mulder</div>
           <div class="desc">Load reactions from effort must be reversed by recovery; insufficient recovery accumulates strain. Apt for touring.</div>
-          <div class="src-chip"><span class="ok">✅</span> Meijman, T. F., &amp; Mulder, G. (1998). Psychological aspects of workload. In P. J. D. Drenth et&nbsp;al. (Eds.), <em>Handbook of work and organizational psychology</em> (2nd ed., Vol. 2, pp. 5–33). Psychology Press. <span style="color:var(--grey)">(book chapter; no native 1998 DOI)</span></div>
+          <div class="src-chip"><span class="ok">✅</span> Meijman, T. F., &amp; Mulder, G. (1998). Psychological aspects of workload. In P. J. D. Drenth et&nbsp;al. (Eds.), <em>Handbook of work and organizational psychology</em> (2nd ed., Vol. 2, pp. 5–33). Psychology Press. <span style="color:var(--label-ink)">(book chapter; no native 1998 DOI)</span></div>
         </div>
         <div class="tool-card l1">
           <h3>Challenge–Hindrance stressors</h3><div class="abbr">Cavanaugh et al.</div>
@@ -456,7 +476,7 @@
           <h3>QPSNordic</h3><div class="abbr">Nordic general questionnaire</div>
           <div class="desc">~129 items / 26 scales of psychosocial work factors. Used (with JCQ) in the Détári musician study. No Traditional-Chinese version known.</div>
           <div class="attrs"><span class="free">Free for research</span> · report (no DOI)</div>
-          <div class="src-chip"><span class="ok">✅</span> Dallner, M., Elo, A.-L., Gamberale, F., Hottinen, V., Knardahl, S., Lindström, K., Skogstad, A., &amp; Ørhede, E. (2000). <em>Validation of the General Nordic Questionnaire (QPSNordic) for psychological and social factors at work</em> (Nord 2000:12). Nordic Council of Ministers. <span style="color:var(--grey)">(official report; no native DOI)</span></div>
+          <div class="src-chip"><span class="ok">✅</span> Dallner, M., Elo, A.-L., Gamberale, F., Hottinen, V., Knardahl, S., Lindström, K., Skogstad, A., &amp; Ørhede, E. (2000). <em>Validation of the General Nordic Questionnaire (QPSNordic) for psychological and social factors at work</em> (Nord 2000:12). Nordic Council of Ministers. <span style="color:var(--label-ink)">(official report; no native DOI)</span></div>
         </div>
         <div class="tool-card l2">
           <h3>NIOSH Worker Well-Being Questionnaire</h3><div class="abbr">WellBQ · 5 domains</div>
@@ -554,7 +574,7 @@
       <div class="tool-grid">
         <div class="tool-card l4">
           <h3>ISO 45003:2021</h3><div class="abbr">international standard</div>
-          <div class="desc">Psychological health &amp; safety at work — guidelines for managing psychosocial risk within an OH&amp;S system. The one to cite for 勞動部/文化部.</div>
+          <div class="desc">Psychological health &amp; safety at work — guidelines for managing psychosocial risk within an OH&amp;S system. The one to cite for <span class="cjk cjk-inline">勞動部/文化部</span>.</div>
           <div class="src-chip"><span class="ok">✅</span> International Organization for Standardization. (2021). <em>Occupational health and safety management — Psychological health and safety at work — Guidelines for managing psychosocial risks</em> (ISO 45003:2021). <a href="https://www.iso.org/standard/64283.html" target="_blank" rel="noopener">iso.org/standard/64283.html</a></div>
         </div>
         <div class="tool-card l4">

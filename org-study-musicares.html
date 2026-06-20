@@ -52,6 +52,9 @@
       --text-body: 1rem;
       --text-sm: 0.875rem;
       --text-xs: 0.75rem;
+      /* ── DIA-GRADE READING SCALE (calibrated to Dia browser, serif-corrected) ── */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;--lh-prose:1.7;--wt-prose:440;--measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;--label-ink:var(--graphite);
+      --font-cjk:'Noto Serif TC',serif;
       --ease: cubic-bezier(0.4, 0, 0.2, 1);
       --dur: 0.3s;
       --dur-slow: 0.6s;
@@ -72,11 +75,17 @@
       font-family: var(--font);
       background: var(--bg-light);
       color: var(--black);
-      line-height: 1.7;
-      font-weight: 400;
+      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      line-height: var(--lh-prose);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
       font-optical-sizing: auto;
       -webkit-font-smoothing: antialiased;
     }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
 
     ::selection { background: var(--signal); color: var(--white); }
 
@@ -111,13 +120,13 @@
     .nav-links { display: flex; gap: 2.5rem; }
     .nav-links a {
       font-family: var(--font-mono); font-size: 1.1rem; font-weight: 400;
-      color: var(--grey); text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.08em;
     }
     .nav-links a:hover { color: var(--black); }
     .nav-links a.current { color: var(--black); }
 
     .nav-topbar { display:none; }
-    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; z-index:101; -webkit-tap-highlight-color:transparent; }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; min-width:44px; min-height:44px; z-index:101; -webkit-tap-highlight-color:transparent; }
     .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
     .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
     .nav-toggle.open span:nth-child(2) { opacity:0; }
@@ -139,17 +148,18 @@
     }
     .eyebrow {
       font-family: var(--font-mono); font-size: var(--text-xs);
-      color: var(--grey); text-transform: uppercase; letter-spacing: 0.18em;
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.18em;
       margin-bottom: 1.25rem;
     }
     .hero h1 {
-      font-family: var(--font-display); font-size: var(--text-hero);
-      font-weight: 800; line-height: 0.96; color: var(--black); letter-spacing: -0.01em;
+      font-family: var(--font-display); font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6.5rem);
+      font-weight: 800; line-height: 1.04; color: var(--black); letter-spacing: -0.01em;
+      overflow-wrap: break-word; hyphens: auto;
     }
     .hero h1 .tail { display:block; font-size: clamp(1.15rem, 2.6vw, 1.9rem); font-weight: 600; color: var(--signal); letter-spacing: 0; margin-top: 0.9rem; }
     .hero .subtitle {
-      font-family: var(--font-body); font-size: clamp(1.05rem, 2vw, 1.35rem);
-      color: var(--graphite); line-height: 1.5; margin-top: 1.5rem; max-width: var(--max-w-text);
+      font-family: var(--font-body); font-size: clamp(1.25rem, 1.05rem + 1.4vw, 1.5rem);
+      color: var(--graphite); line-height: 1.55; margin-top: 1.5rem; max-width: 54ch;
     }
     .basis-badge {
       display: inline-block; margin-top: 1.75rem;
@@ -252,14 +262,14 @@
       font-family: var(--font-display); font-size: var(--text-h2);
       font-weight: 700; line-height: 1.1; color: var(--black);
       margin-bottom: 1.25rem; letter-spacing: -0.01em;
-      text-wrap: balance;
+      text-wrap: balance; overflow-wrap: break-word;
     }
-    h3 { font-family: var(--font-display); font-size: var(--text-h3); font-weight: 600; color: var(--charcoal); margin: 1.75rem 0 0.75rem; }
+    h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem); line-height: 1.25; font-weight: 600; color: var(--charcoal); margin: 1.75rem 0 0.75rem; }
     .section-label {
       font-family: var(--font-mono); font-size: var(--text-xs);
       color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem;
     }
-    p { font-size: var(--text-body); color: var(--graphite); max-width: var(--max-w-text); margin-bottom: 1rem; }
+    p { color: var(--graphite); max-width: var(--measure-prose); margin-bottom: 1rem; line-height: 1.65; }
     p.lead { font-size: 1.1rem; color: var(--charcoal); }
     strong { color: var(--charcoal); font-weight: 600; }
     em { color: var(--graphite); }
@@ -301,7 +311,7 @@
       background: var(--bg-card); border: 1px solid var(--border-light);
       border-left: 3px solid var(--spectrum-2); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem;
     }
-    .gear .gn { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); letter-spacing: 0.1em; }
+    .gear .gn { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); letter-spacing: 0.1em; }
     .gear h3 { margin: 0.35rem 0 0.5rem; font-size: 1.08rem; }
     .gear p { font-size: var(--text-sm); margin-bottom: 0; }
 
@@ -310,31 +320,32 @@
     .stat-item { padding: 1.75rem 1.25rem; border-right: 1px solid var(--border-light); }
     .stat-item:last-child { border-right: none; }
     .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--signal); line-height: 1; font-variant-numeric: tabular-nums; }
-    .stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.6rem; line-height: 1.4; }
+    .stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.6rem; line-height: 1.4; }
 
     /* ===== COLUMN CHART (revenue trajectory) ===== */
     figure.chart { margin: 1.5rem 0; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 2rem 1.75rem 1.25rem; }
-    figure.chart figcaption { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
+    figure.chart figcaption { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
     .col-chart { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.6rem; align-items: end; }
     .col { display: flex; flex-direction: column; align-items: center; }
     .ctrack { position: relative; width: 100%; height: 190px; display: flex; align-items: flex-end; }
     .cbar { width: 100%; max-width: 54px; margin: 0 auto; background: var(--signal); border-radius: var(--radius) var(--radius) 0 0; position: relative; transition: height var(--dur-slow) var(--ease); }
     .cbar.peak { background: var(--spectrum-2); }
     .cbar .cval { position: absolute; top: -1.35rem; left: -50%; right: -50%; text-align: center; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--charcoal); font-variant-numeric: tabular-nums; }
-    .cyr { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); margin-top: 0.55rem; letter-spacing: 0.02em; }
-    .chart-note { font-size: var(--text-xs); color: var(--grey); margin-top: 1rem; max-width: none; }
+    .cyr { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); margin-top: 0.55rem; letter-spacing: 0.02em; }
+    .chart-note { font-size: var(--text-xs); color: var(--label-ink); margin-top: 1rem; max-width: none; }
     .chart-key { display: flex; gap: 1.25rem; flex-wrap: wrap; margin-top: 0.5rem; }
-    .chart-key span { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); display: inline-flex; align-items: center; gap: 0.4rem; }
+    .chart-key span { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); display: inline-flex; align-items: center; gap: 0.4rem; }
     .swatch { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
     .swatch.s-rev { background: var(--signal); }
     .swatch.s-covid { background: var(--spectrum-2); }
 
     /* ===== TABLES ===== */
-    .table-wrap { overflow-x: auto; margin: 1.25rem 0; border-radius: var(--radius-lg); border: 1px solid var(--border-light); }
-    table { width: 100%; border-collapse: collapse; background: var(--bg-card); font-size: var(--text-sm); }
-    caption { text-align: left; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); padding: 0.75rem 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; margin: 1.25rem 0; border-radius: var(--radius-lg); border: 1px solid var(--border-light); }
+    .table-wrap:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+    table { width: 100%; border-collapse: collapse; background: var(--bg-card); font-size: var(--text-small); }
+    caption { text-align: left; font-family: var(--font-mono); font-size: var(--text-caption); color: var(--label-ink); padding: 0.75rem 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
     th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border-light); vertical-align: top; font-variant-numeric: tabular-nums; }
-    thead th { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--graphite); background: var(--snow); }
+    thead th { font-family: var(--font-mono); font-size: var(--text-micro); text-transform: uppercase; letter-spacing: 0.06em; color: var(--label-ink); background: var(--snow); }
     tbody tr:last-child td { border-bottom: none; }
     td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
     .row-emph td { background: var(--signal-bg); font-weight: 600; color: var(--charcoal); }
@@ -371,7 +382,7 @@
     .lessons p { font-size: var(--text-sm); margin-bottom: 0; }
 
     /* ===== CITATIONS (§5 inline tier) ===== */
-    .cite { font-size: 0.72em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite { font-size: 0.7em; line-height: 0; vertical-align: super; letter-spacing: 0; }
     .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
     .cite a:hover, .cite a:focus { color: var(--signal-dim); }
     .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
@@ -382,12 +393,12 @@
       white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
     }
     .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem; }
-    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
     .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
-    .refs li { font-size: var(--text-sm); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; }
+    .refs li { font-size: var(--text-fine); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; max-width: var(--measure-ref); overflow-wrap: anywhere; }
     .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
-    .refs-note { font-size: var(--text-xs); color: var(--grey); margin-bottom: 0; max-width: none; }
-    .cite-help { font-size: var(--text-sm); color: var(--grey); font-style: italic; max-width: var(--max-w-text); }
+    .refs-note { font-size: var(--text-xs); color: var(--label-ink); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-sm); color: var(--label-ink); font-style: italic; max-width: var(--max-w-text); }
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 900px) {
@@ -415,6 +426,9 @@
       .ctrack { height: 150px; }
       .cbar .cval { font-size: 0.62rem; }
     }
+    @media (max-width: 680px) {
+      p, .hero .subtitle, .refs li, .cite-help { max-width: none; }
+    }
     @media (max-width: 480px) {
       .stat-strip { grid-template-columns: 1fr; }
       .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
@@ -422,6 +436,9 @@
       .nav-mobile-brand { font-size:0.58rem; }
       .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
       .cyr { font-size: 0.6rem; }
+      table { font-size: 0.82rem; }
+      thead th { font-size: 0.6rem; }
+      th, td { padding: 0.5rem 0.5rem; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } nav.nav, .cbar { transition: none; } .fw-arc { animation: none; } }
 
@@ -434,7 +451,7 @@
 
     /* ===== Related block (no dead-ends, R3.2) ===== */
     .related-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-light); }
-    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--grey); margin-bottom: 0.6rem; }
+    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--label-ink); margin-bottom: 0.6rem; }
     .related-block ul { list-style: none; margin: 0; padding: 0; }
     .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
     .related-block a { font-family: var(--font-body); font-size: var(--text-sm); color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
@@ -488,7 +505,7 @@
       <h2>The official charity of the GRAMMYs<sup class="cite"><a href="#mc-src-2" data-src="academy-1989" data-tip="Recording Academy affiliation &amp; 1989 founding: MusiCares / The Jed Foundation release (BusinessWire, 2026-04-14); MusiCares About.">2</a></sup></h2>
       <p>MusiCares is the United States' largest and most established music-specific human-services charity. It was created by the Recording Academy — the organization behind the GRAMMY Awards — in 1989, and has operated as the Academy's affiliated charity ever since. That single fact explains everything else on this page.</p>
 
-      <div class="table-wrap">
+      <div class="table-wrap" role="region" aria-label="Organization profile — MusiCares (scrollable table)" tabindex="0">
         <table>
           <caption>Organization profile — MusiCares (sources cited inline)</caption>
           <tbody>
@@ -602,7 +619,7 @@
         <p class="chart-note">Revenue tripled to $32.4M in FY2020 and has settled near $14M since — well above the pre-pandemic $9M baseline. The crisis permanently enlarged the donor base.</p>
       </figure>
 
-      <div class="table-wrap">
+      <div class="table-wrap" role="region" aria-label="MusiCares financials, FY2019–FY2024 (scrollable table)" tabindex="0">
         <table>
           <caption>MusiCares financials, FY2019–FY2024 — IRS Form 990 via ProPublica</caption>
           <thead><tr><th scope="col">FY (end Jul)</th><th scope="col" class="num">Revenue</th><th scope="col" class="num">Expenses</th><th scope="col" class="num">Net income</th><th scope="col" class="num">Total assets</th><th scope="col" class="num">Net assets</th></tr></thead>

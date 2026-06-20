@@ -51,6 +51,12 @@
       --text-body: 1rem;
       --text-sm: 0.875rem;
       --text-xs: 0.75rem;
+      /* — Dia-grade reading environment (v1 spec) — */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;
+      --lh-prose:1.7;--wt-prose:440;
+      --measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;
+      --label-ink:var(--graphite);
+      --font-cjk:'Noto Serif TC', serif;
       --ease: cubic-bezier(0.4, 0, 0.2, 1);
       --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
       --dur: 0.3s;
@@ -70,11 +76,17 @@
       font-family: var(--font);
       background: var(--bg-light);
       color: var(--black);
-      line-height: 1.6;
-      font-weight: 400;
+      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      line-height: var(--lh-prose);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
       font-optical-sizing: auto;
       -webkit-font-smoothing: antialiased;
     }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
 
     ::selection { background: var(--signal); color: var(--white); }
 
@@ -100,7 +112,7 @@
       font-family: var(--font-mono);
       font-size: 1.1rem;
       font-weight: 400;
-      color: var(--grey);
+      color: var(--label-ink);
       text-decoration: none;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -185,20 +197,22 @@
 
     .page-header h1 {
       font-family: var(--font-display);
-      font-size: var(--text-hero);
+      font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6.5rem);
       font-weight: 900;
-      line-height: 1.05;
+      line-height: 1.04;
       letter-spacing: -0.005em;
       color: var(--black);
       text-wrap: balance;
+      overflow-wrap: break-word;
+      hyphens: auto;
     }
 
     .page-dek {
       font-family: var(--font-body);
-      font-size: var(--text-body);
+      font-size: clamp(1.25rem, 1.05rem + 1.4vw, 1.5rem);
       color: var(--graphite);
-      line-height: 1.6;
-      max-width: var(--measure);
+      line-height: 1.55;
+      max-width: 54ch;
       margin-top: 1.25rem;
     }
 
@@ -261,10 +275,10 @@
 
     .work-card .card-title {
       font-family: var(--font-display);
-      font-size: clamp(1rem, 1.6vw, 1.25rem);
+      font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem);
       font-weight: 600;
       color: var(--charcoal);
-      line-height: 1.15;
+      line-height: 1.25;
       letter-spacing: -0.005em;
       text-align: center;
       text-wrap: balance;
@@ -273,7 +287,7 @@
     .work-card .card-meta {
       font-family: var(--font-mono);
       font-size: var(--text-xs);
-      color: var(--grey);
+      color: var(--label-ink);
       text-transform: uppercase;
       letter-spacing: 0.08em;
       font-variant-numeric: tabular-nums;
@@ -318,7 +332,7 @@
     .work-item .caption .type {
       font-family: var(--font-mono);
       font-size: var(--text-xs);
-      color: var(--grey);
+      color: var(--label-ink);
       text-transform: uppercase;
       letter-spacing: 0.06em;
       margin-top: 0.25rem;
@@ -434,19 +448,20 @@
       font-family: var(--font-display);
       font-weight: 900;
       font-size: var(--text-h2);
-      line-height: 1.05;
+      line-height: 1.1;
       letter-spacing: -0.005em;
       color: var(--black);
       max-width: 24ch;
       text-wrap: balance;
+      overflow-wrap: break-word;
     }
 
     .evidence .takeaway {
       font-family: var(--font-body);
-      font-size: clamp(1rem, 1.6vw, 1.15rem);
-      line-height: 1.55;
+      font-size: clamp(1.1875rem, 1rem + 1.1vw, 1.3125rem);
+      line-height: 1.62;
       color: var(--graphite);
-      max-width: var(--measure);
+      max-width: var(--measure-prose);
       margin: 1rem 0 1.5rem;
     }
     .evidence .takeaway b { color: var(--signal); font-weight: 600; }
@@ -476,8 +491,8 @@
     }
     .evidence .stat .lab {
       font-family: var(--font-body);
-      font-size: var(--text-sm);
-      line-height: 1.5;
+      font-size: var(--text-fine);
+      line-height: 1.55;
       color: var(--graphite);
       margin-top: 0.5rem;
       max-width: 30ch;
@@ -487,7 +502,7 @@
       font-family: var(--font-mono);
       font-size: var(--text-xs);
       letter-spacing: 0.04em;
-      color: var(--grey);
+      color: var(--label-ink);
       margin-top: 0.3rem;
     }
 
@@ -497,14 +512,14 @@
       font-size: var(--text-xs);
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: var(--grey);
+      color: var(--label-ink);
       margin-bottom: 1.5rem;
     }
 
     /* same-page citation marker — superscript chip, matches the prose tier */
     a.conf {
       font-family: var(--font-mono);
-      font-size: 0.6rem;
+      font-size: 0.7em;
       font-weight: 700;
       color: var(--signal);
       vertical-align: super;
@@ -516,29 +531,30 @@
     a.conf:hover, a.conf:focus { color: var(--signal-dim); text-decoration: underline; }
 
     .evidence .tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .evidence .tablewrap:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: var(--radius); }
 
     table.tbl {
       width: 100%;
       border-collapse: collapse;
-      font-size: var(--text-sm);
+      font-size: var(--text-small);
       margin-top: 0.25rem;
     }
     table.tbl caption {
       font-family: var(--font-mono);
-      font-size: 0.62rem;
+      font-size: var(--text-caption);
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: var(--grey);
+      color: var(--label-ink);
       text-align: left;
       padding-bottom: 0.6rem;
     }
     table.tbl th {
       font-family: var(--font-mono);
-      font-size: 0.6rem;
+      font-size: var(--text-micro);
       text-transform: uppercase;
       letter-spacing: 0.08em;
       text-align: left;
-      color: var(--grey);
+      color: var(--label-ink);
       border-bottom: 1px solid var(--graphite);
       padding: 0.5rem 0.65rem;
       background: var(--snow);
@@ -551,22 +567,27 @@
     }
     table.tbl td.c {
       font-family: var(--font-mono);
-      font-size: 0.78rem;
+      font-size: var(--text-fine);
       white-space: nowrap;
     }
     table.tbl tbody tr:hover { background: var(--signal-bg); }
+    @media (max-width: 480px) {
+      table.tbl { font-size: .82rem; }
+      table.tbl th, table.tbl td { padding: 0.4rem 0.5rem; }
+      table.tbl td.c { font-size: .78rem; }
+    }
 
     .src-chip {
       font-family: var(--font-mono);
       font-size: 0.6rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: var(--grey);
+      color: var(--label-ink);
       margin-top: 1.25rem;
       display: inline-block;
     }
     .src-chip .ok { color: var(--signal); }
-    .src-chip a { color: var(--grey); border-bottom: 1px solid var(--silver); text-decoration: none; }
+    .src-chip a { color: var(--label-ink); border-bottom: 1px solid var(--silver); text-decoration: none; }
     .src-chip a:hover, .src-chip a:focus { color: var(--charcoal); }
 
     /* ===== REFERENCES (project "References" pattern) ===== */
@@ -582,15 +603,15 @@
       font-size: var(--text-xs);
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      color: var(--grey);
+      color: var(--label-ink);
       margin: 0 0 0.8rem;
     }
     .refs {
       font-family: var(--font-body);
-      font-size: var(--text-sm);
+      font-size: var(--text-fine);
       color: var(--graphite);
       line-height: 1.7;
-      max-width: 72ch;
+      max-width: var(--measure-ref);
     }
     .refs ol { margin: 0 0 0 1.2rem; padding: 0; }
     .refs li { margin-bottom: 0.55rem; }
@@ -603,6 +624,10 @@
     .refs a { color: var(--signal); border-bottom: 1px solid var(--signal-glow); text-decoration: none; }
     .refs a:hover, .refs a:focus { color: var(--signal-dim); }
 
+    /* Release reading-column caps to ~90vw on phones (spec §6). */
+    @media (max-width: 680px) {
+      .page-dek, .evidence .takeaway, .evidence .stat .lab, .refs { max-width: none; }
+    }
     @media (max-width: 768px) {
       .evidence { margin: 0.5rem 0 2.5rem; }
       .evidence h2 { max-width: none; }
@@ -666,7 +691,7 @@
           </div>
         </div>
 
-        <div class="tablewrap">
+        <div class="tablewrap" role="region" aria-label="Prevalence findings across six studies (scrollable table)" tabindex="0">
           <table class="tbl">
             <caption>Prevalence findings across six studies · each row traced to its paper<a class="conf" href="#ev-src-2" aria-label="Source B">B</a></caption>
             <thead><tr><th scope="col">Study</th><th scope="col">Country</th><th scope="col">Key finding</th></tr></thead>
