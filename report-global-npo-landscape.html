@@ -100,6 +100,9 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
 .lede{font-size:clamp(1.3rem,1.05rem + 1.5vw,1.5rem);line-height:1.5;color:var(--graphite);max-width:52ch}
 .lede b{color:var(--signal);font-weight:600}
 .cjk{font-family:var(--font-cjk)}
+/* 中文: prose gets more leading + weight (not bigger); inline Han tokens balance to Latin */
+p.cjk,.cjk p{line-height:1.95;font-weight:600;letter-spacing:0;max-width:var(--measure-cjk)}
+.cjk-inline{font-size:.93em;vertical-align:.02em;letter-spacing:.02em;font-weight:inherit}
 .conf{font-family:var(--font-mono);font-size:.7em;font-weight:700;color:var(--signal);vertical-align:super;line-height:0;margin-left:.12em;white-space:nowrap;text-decoration:none}
 a.conf:hover,a.conf:focus{color:var(--signal-dim);text-decoration:underline}
 
@@ -255,7 +258,17 @@ table.tbl td{padding:.55rem .6rem;border-bottom:1px solid var(--silver);vertical
 table.tbl td.c{font-family:var(--font-mono);font-size:.85rem;white-space:nowrap}
 table.tbl tbody tr:hover{background:var(--signal-bg)}
 table.tbl td.org a{color:var(--signal);border-bottom:1px solid var(--signal-glow)}
-.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.tablewrap:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+/* ── Reading env: phone measure release + touch targets + table step ── */
+@media(max-width:680px){.lede,.chapter .takeaway,.disp p,.method,.refs{max-width:none}}
+@media(max-width:480px){
+  table.tbl{font-size:.82rem}
+  table.tbl th{font-size:.6rem}
+  table.tbl td,table.tbl th{padding:.5rem .5rem}
+  table.tbl td.c{font-size:.76rem}
+  .chip,.csel,.filter-clear{min-height:44px;display:inline-flex;align-items:center}
+}
 .tbl-meta{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--label-ink);white-space:nowrap}
 tr.hidden{display:none}
 /* native-scan group separator + provenance stripe (pink = --abroad-text, never --signal) */
@@ -610,7 +623,7 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
   <p class="mapcap" aria-label="Map legend">
     <span class="gm-key-dot"></span> <b style="color:var(--off-black)">Directory org</b> — Backline Global Resource Hub (dot size = count); the four ringed names link to their <b style="color:var(--off-black)">Org Study</b>.<br>
     <span class="gm-key-scan"></span> <b style="color:var(--abroad-text)">Found beyond the directory</b> — music-specific union, native-language scan; tap for details.<br>
-    <span style="display:inline-block;width:.6em;height:.6em;border-radius:50%;border:2px solid var(--signal);vertical-align:baseline;margin:0 .12em"></span> <b style="color:var(--signal)">Taiwan · 藝創工會</b> — the closest yet — not musicians / music-industry-specific.
+    <span style="display:inline-block;width:.6em;height:.6em;border-radius:50%;border:2px solid var(--signal);vertical-align:baseline;margin:0 .12em"></span> <b style="color:var(--signal)">Taiwan · <span class="cjk cjk-inline">藝創工會</span></b> — the closest yet — not musicians / music-industry-specific.
   </p>
 
   <!-- v4.2: the separate 藝創工會 "entry point" block + the Korea+Taiwan gapnote were removed — the map's
