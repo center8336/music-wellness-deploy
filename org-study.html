@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Research · MH&W</title>
+  <title>Org Study · MH&amp;W</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,6 +77,19 @@
     }
 
     ::selection { background: var(--signal); color: var(--white); }
+
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--signal);
+      outline-offset: 3px;
+      border-radius: var(--radius);
+    }
+
+    .skip-nav {
+      position: absolute; left: -9999px; top: 0; z-index: 200;
+      background: var(--signal); color: var(--white);
+      padding: 0.5rem 1rem; font-family: var(--font-mono);
+    }
+    .skip-nav:focus { left: 0; }
 
     /* ===== NAVIGATION ===== */
     nav.nav {
@@ -222,12 +235,6 @@
       position: relative;
       overflow: hidden;
       aspect-ratio: 16 / 10;
-      /* Strict 16:10 — aspect-ratio alone is a default that content can override.
-         The padding-bottom hack pins height to width × 0.625, and the inner
-         .card-visual is absolutely positioned so long titles can't grow the box
-         (Détári vs Rousseau size mismatch). */
-      height: 0;
-      padding-bottom: 62.5%;
       background: rgba(244, 244, 245, 0.55);
       -webkit-backdrop-filter: blur(8px);
       backdrop-filter: blur(8px);
@@ -242,17 +249,13 @@
     }
 
     .work-card .card-visual {
-      position: absolute;
-      inset: 0;
+      width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 1.5rem 1.25rem;
+      padding: 2rem;
       transition: transform var(--dur-slow) var(--ease), opacity var(--dur-slow) var(--ease);
-    }
-
-    .work-card .card-visual > div {
-      max-width: 100%;
     }
 
     .work-item:hover .card-visual {
@@ -261,7 +264,7 @@
 
     .work-card .card-title {
       font-family: var(--font-display);
-      font-size: clamp(1rem, 1.6vw, 1.25rem);
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
       font-weight: 600;
       color: var(--charcoal);
       line-height: 1.15;
@@ -273,7 +276,7 @@
     .work-card .card-meta {
       font-family: var(--font-mono);
       font-size: var(--text-xs);
-      color: var(--grey);
+      color: var(--graphite); /* AA on the light card wash (--grey fails at ~3.9:1) */
       text-transform: uppercase;
       letter-spacing: 0.08em;
       font-variant-numeric: tabular-nums;
@@ -281,28 +284,30 @@
       text-align: center;
     }
 
-    /* accent-3: forest pool — gradient from mossy-teal to sky-blue, softened edges */
-    .work-card.accent-3 {
+    /* accent-1: stage light — warm rose-to-peach wash for org case studies
+       (research.html hub uses the cool accent-3 forest pool; same component,
+       sibling palette. Future MusiCares card reuses this class.) */
+    .work-card.accent-1 {
       background: linear-gradient(
         168deg,
-        rgba(133, 201, 163, 0.12) 0%,
-        rgba(122, 174, 212, 0.18) 45%,
-        rgba(122, 174, 212, 0.22) 100%
+        rgba(212, 121, 156, 0.12) 0%,
+        rgba(232, 168, 124, 0.16) 45%,
+        rgba(232, 168, 124, 0.22) 100%
       );
-      border-color: rgba(122, 174, 212, 0.12);
+      border-color: rgba(212, 121, 156, 0.12);
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.3),
-                  0 2px 12px rgba(122, 174, 212, 0.06);
+                  0 2px 12px rgba(212, 121, 156, 0.06);
     }
-    .work-item:hover .work-card.accent-3 {
+    .work-item:hover .work-card.accent-1 {
       background: linear-gradient(
         168deg,
-        rgba(133, 201, 163, 0.16) 0%,
-        rgba(122, 174, 212, 0.25) 45%,
-        rgba(122, 174, 212, 0.28) 100%
+        rgba(212, 121, 156, 0.16) 0%,
+        rgba(232, 168, 124, 0.22) 45%,
+        rgba(232, 168, 124, 0.28) 100%
       );
-      border-color: rgba(122, 174, 212, 0.22);
+      border-color: rgba(212, 121, 156, 0.22);
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.35),
-                  0 3px 16px rgba(122, 174, 212, 0.1);
+                  0 3px 16px rgba(212, 121, 156, 0.1);
     }
 
     .work-item .caption {
@@ -356,7 +361,6 @@
 
       .work-card {
         aspect-ratio: 16 / 9;
-        padding-bottom: 56.25%;
       }
 
       .work-item .caption {
@@ -389,6 +393,7 @@
   <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
 </head>
 <body>
+
   <a href="#main" class="skip-nav">Skip to content</a>
 
   <!-- Navigation -->
@@ -402,9 +407,9 @@
         <div class="nav-links">
       <a href="index.html">HOME</a>
       <a href="report-global-npo-landscape.html">ORGS MAP</a>
-      <a href="org-study.html">ORG STUDY</a>
+      <a href="org-study.html" class="current" aria-current="page">ORG STUDY</a>
       <a href="policy-study.html">POLICY STUDY</a>
-      <a href="research.html" class="current" aria-current="page">RESEARCH</a>
+      <a href="research.html">RESEARCH</a>
       <a href="insight.html">INSIGHT</a>
       <a href="plan.html">PLAN</a>
     </div>
@@ -416,54 +421,66 @@
 
     <div class="page-content" id="main">
       <div class="page-header">
-        <h1>Research</h1>
+        <h1>Org Study</h1>
       </div>
 
       <!-- Works Grid -->
       <div class="works-list">
 
-        <!-- Détári 2020 -->
-        <a class="work-item" href="research-detari-2020.html" data-tree>
-          <div class="work-card accent-3">
+        <!-- Backline -->
+        <a class="work-item" href="org-study-backline.html" data-tree>
+          <div class="work-card accent-1">
             <div class="card-visual">
               <div>
-                <div class="card-title">Psychosocial Work Environment Among Musicians</div>
-                <div class="card-meta">Détári et al. · 2020 · Frontiers in Psychology</div>
+                <div class="card-title">Backline: Operations, Finances &amp; Growth</div>
+                <div class="card-meta">US nonprofit · est. 2019</div>
               </div>
             </div>
           </div>
         </a>
 
-        <!-- Rousseau et al. 2026 -->
-        <a class="work-item" href="research-rousseau-2026.html" data-tree>
-          <div class="work-card accent-3">
+        <!-- Music Minds Matter -->
+        <a class="work-item" href="org-study-music-minds-matter.html" data-tree>
+          <div class="work-card accent-1">
             <div class="card-visual">
               <div>
-                <div class="card-title">Health &amp; Well-being in Metal Musicians</div>
-                <div class="card-meta">Rousseau et al. · 2026 · Frontiers in Psychology</div>
+                <div class="card-title">Music Minds Matter: Incubation, Spin-Out &amp; the Allies Model</div>
+                <div class="card-meta">UK charity · est. 2017</div>
               </div>
             </div>
           </div>
         </a>
 
-        <!-- Research Tools (reference toolkit) -->
-        <a class="work-item" href="research-tools.html" data-tree>
-          <div class="work-card accent-3">
+        <!-- MusiCares -->
+        <a class="work-item" href="org-study-musicares.html" data-tree>
+          <div class="work-card accent-1">
             <div class="card-visual">
               <div>
-                <div class="card-title">Research Tools:</div>
-                <div class="card-meta">Models, instruments &amp; standards</div>
+                <div class="card-title">MusiCares: The Incumbent's Flywheel</div>
+                <div class="card-meta">US nonprofit · est. 1989</div>
               </div>
             </div>
           </div>
         </a>
 
-        <!-- Placeholder -->
+        <!-- 藝創工會 / Arts Creators' Union -->
+        <a class="work-item" href="org-study-arts-creators-union.html" data-tree>
+          <div class="work-card accent-1">
+            <div class="card-visual">
+              <div>
+                <div class="card-title">藝創工會: Partner, Model &amp; the Missing MH Layer</div>
+                <div class="card-meta">Taiwan trade union · est. 2011</div>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Placeholder (next case study card slots in above this block) -->
         <div class="work-item" data-ghost>
           <div class="work-card placeholder">
             <div class="card-visual">
               <div>
-                <div class="card-title">Next · in progress</div>
+                <div class="card-title">Next · a Taiwan-based org</div>
               </div>
             </div>
           </div>
@@ -481,8 +498,11 @@
     var ctx = canvas.getContext('2d');
     var forestEl = document.querySelector('.forest-page');
     var W, H, dpr;
-    var SEED = 71;
+    var SEED = 137; /* sibling forest — research.html uses 71 */
     var time = 0;
+
+    var prefersReducedMotion = window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     var segments = [];
     var particles = [];
@@ -550,10 +570,10 @@
       }
     }
 
-    // ===== BUILD FOREST: pre-existing landscape + article trees =====
-    // 見樹又見林 — the forest already exists; the researcher walks through it.
-    // Ambient trees fill the landscape regardless of article count.
-    // Article-linked trees are slightly more prominent — they're the ones you've found so far.
+    // ===== BUILD FOREST: pre-existing landscape + org-study trees =====
+    // 見樹又見林 — the field already exists; each case study is a tree
+    // we've walked up to and examined closely. Ambient trees fill the
+    // landscape regardless of how many studies are done.
     function buildForest() {
       rng = mulberry32(SEED);
       segments = [];
@@ -568,9 +588,8 @@
       var refH = isMobile ? Math.min(H, W * 2.2) : H;
       var treeIdx = 0;
 
-      // --- 1. Ambient forest: trees that exist independent of articles ---
-      // 見樹又見林 — the forest must still feel like a forest on mobile.
-      // Use stratified Y bands so every vertical zone gets guaranteed trees.
+      // --- 1. Ambient forest: trees that exist independent of case studies ---
+      // Stratified Y bands so every vertical zone gets guaranteed trees.
       var ambientCount = isMobile ? 18 : 12;
       var bandH = (H * 0.83) / ambientCount; // divide usable height into bands
       for (var a = 0; a < ambientCount; a++) {
@@ -594,7 +613,7 @@
         treeIdx++;
       }
 
-      // --- 2. Article-linked trees: positioned behind their cards ---
+      // --- 2. Card-linked trees: positioned behind their cards ---
       var cards = document.querySelectorAll('.works-list .work-item');
       var forestRect = forestEl.getBoundingClientRect();
 
@@ -636,7 +655,7 @@
         treeIdx++;
       }
 
-      // --- 3. Particles: spores / connections in the research ecosystem ---
+      // --- 3. Particles: spores / connections in the field ecosystem ---
       var basePCount = W > 768 ? 30 : 16;
       var pCount = Math.min(basePCount, 90);
       for (var p = 0; p < pCount; p++) {
@@ -731,7 +750,10 @@
         }
       }
 
-      requestAnimationFrame(drawFrame);
+      // Respect prefers-reduced-motion: render one static forest frame, no loop
+      if (!prefersReducedMotion) {
+        requestAnimationFrame(drawFrame);
+      }
     }
 
     // ===== SIZING =====
@@ -764,10 +786,14 @@
     window.addEventListener('resize', function() {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(resize, 200);
+      if (prefersReducedMotion) {
+        // re-render the static frame after resize rebuilds the forest
+        setTimeout(drawFrame, 220);
+      }
     });
   })();
   </script>
-  <!-- nav scroll-state fix: transparent over hero, blurred bar once scrolled (prevents body text colliding with nav links) -->
+  <!-- nav scroll-state fix: transparent over hero, blurred bar once scrolled -->
   <style>
     nav.nav, .nav { transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease); border-bottom: 1px solid transparent; }
     nav.nav.scrolled, .nav.scrolled {
@@ -778,8 +804,6 @@
       border-bottom: 1px solid var(--border-light);
     }
     @media (prefers-reduced-motion: reduce){ nav.nav, .nav { transition: none; } }
-    .skip-nav { position: absolute; left: -9999px; top: 0; z-index: 200; background: var(--signal); color: var(--white); padding: 0.5rem 1rem; font-family: var(--font-mono); }
-    .skip-nav:focus { left: 0; }
   </style>
   <script>
   (function(){
