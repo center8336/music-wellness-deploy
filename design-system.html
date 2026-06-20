@@ -513,7 +513,7 @@
   .table-wrap {
     border: 1px solid var(--border-light);
     border-radius: var(--radius-lg);
-    overflow: hidden;
+    overflow-x: auto;
     background: var(--bg-card);
   }
 
@@ -1376,7 +1376,7 @@
 <!-- ══ TABLE ══ -->
 <section class="ds-section">
   <div class="ds-label">Data Table — Dark header (dashboard / financial)</div>
-  <div class="table-wrap">
+  <div class="table-wrap" role="region" aria-label="Table (scrollable)" tabindex="0">
     <table>
       <thead><tr><th>Year</th><th>Revenue</th><th>Expenses</th><th>Net</th><th>Staff</th></tr></thead>
       <tbody>
@@ -1391,7 +1391,7 @@
 
 <section class="ds-section">
   <div class="ds-label">Findings Table — Purple header + eta bars (research reports)</div>
-  <div class="table-wrap">
+  <div class="table-wrap" role="region" aria-label="Table (scrollable)" tabindex="0">
     <table class="findings-table">
       <thead>
         <tr><th>Dimension</th><th>Direction</th><th>&eta;&sup2;</th><th>Magnitude</th></tr>

@@ -208,12 +208,13 @@
 
     .page-header h1 {
       font-family: var(--font-display);
-      font-size: var(--text-hero);
+      font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6.5rem);
       font-weight: 900;
       line-height: 1.05;
       letter-spacing: -0.005em;
       color: var(--black);
       text-wrap: balance;
+      overflow-wrap: break-word;
     }
 
     .page-dek {
