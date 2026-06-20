@@ -6,7 +6,7 @@
 <title>News &amp; Trends — June 2026 | MH&amp;W</title>
 <meta name="description" content="Monthly scan of the music mental health field: global developments, new data, Asia-Pacific & Taiwan, emerging trends. June 12, 2026.">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
 
 :root {
   /* — Neutral Scale — */
@@ -45,8 +45,8 @@
   --border-dark: rgba(255,255,255,0.1);
 
   /* — Typography: 3 font stacks — */
-  --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
-  --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+  --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+  --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
   --font-mono: 'Space Mono', 'Courier New', monospace;
   --font: var(--font-body);
 
@@ -68,7 +68,8 @@
   --radius: 4px;
   --radius-lg: 6px;
   --max-w: 1100px;
-  --max-w-text: 660px;
+  --max-w-text: 64ch;
+  --measure: 64ch;
 }
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -78,6 +79,7 @@ body {
   background:var(--snow);
   color:var(--graphite);
   line-height:1.65;
+  font-optical-sizing:auto;
   overflow-x:hidden;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
 }
@@ -138,9 +140,9 @@ nav.nav {
 }
 .masthead-top .live-dot { color:var(--signal); }
 .masthead h1 {
-  font-family:var(--font-display); font-weight:800; color:var(--black);
-  font-size:var(--text-h1); line-height:1.02; text-transform:uppercase;
-  letter-spacing:-0.01em; max-width:900px;
+  font-family:var(--font-display); font-weight:900; color:var(--black);
+  font-size:var(--text-h1); line-height:1.04;
+  letter-spacing:-0.01em; text-wrap:balance; max-width:900px;
 }
 .masthead h1 em { font-style:normal; color:var(--signal); }
 .masthead-dek {
@@ -154,7 +156,7 @@ nav.nav {
 }
 .stat-item { background:var(--bg-card); padding:1.2rem 1.4rem; }
 .stat-num {
-  font-family:var(--font-display); font-weight:800; font-size:1.9rem;
+  font-family:var(--font-mono); font-weight:700; font-size:1.9rem;
   color:var(--black); line-height:1.1;
 }
 .stat-num .accent { color:var(--signal); }
@@ -172,8 +174,9 @@ nav.nav {
   letter-spacing:0.1em;
 }
 .section-head h2 {
-  font-family:var(--font-display); font-weight:800; text-transform:uppercase;
-  font-size:var(--text-h2); color:var(--black); letter-spacing:-0.01em;
+  font-family:var(--font-display); font-weight:600;
+  font-size:var(--text-h2); color:var(--black); letter-spacing:-0.005em;
+  line-height:1.15; text-wrap:balance;
 }
 .section-head .section-sub { margin-left:auto; font-family:var(--font-mono); font-size:var(--text-xs); color:var(--grey); text-transform:uppercase; letter-spacing:0.12em; }
 
@@ -194,8 +197,8 @@ nav.nav {
 .item:last-of-type { border-bottom:none; }
 .item-head { display:flex; align-items:baseline; flex-wrap:wrap; gap:0.6rem 1rem; margin-bottom:0.7rem; }
 .item-date { font-family:var(--font-mono); font-size:var(--text-xs); color:var(--signal); letter-spacing:0.08em; white-space:nowrap; }
-.item h3 { font-family:var(--font-display); font-weight:700; font-size:var(--text-h3); color:var(--black); }
-.item p { margin-bottom:0.8rem; max-width:78ch; }
+.item h3 { font-family:var(--font-display); font-weight:600; font-size:var(--text-h3); color:var(--black); letter-spacing:-0.005em; line-height:1.15; }
+.item p { margin-bottom:0.8rem; max-width:var(--measure); }
 .item p strong { color:var(--black); }
 .conf {
   font-family:var(--font-mono); font-size:0.66rem; letter-spacing:0.06em;
@@ -256,8 +259,8 @@ sup.cite a:focus-visible { outline:2px solid var(--signal); outline-offset:2px; 
   padding:1.6rem 1.8rem; margin:0.6rem 0 1.6rem; max-width:860px;
 }
 .apac-callout .big {
-  font-family:var(--font-display); font-weight:800; font-size:1.5rem; color:var(--white);
-  margin-bottom:0.4rem;
+  font-family:var(--font-display); font-weight:600; font-size:1.5rem; color:var(--white);
+  letter-spacing:-0.005em; line-height:1.15; margin-bottom:0.4rem;
 }
 .apac-callout .big .zero { color:var(--purple-light); }
 .apac-callout p { font-size:var(--text-sm); color:var(--grey-light); max-width:72ch; }
@@ -266,7 +269,7 @@ sup.cite a:focus-visible { outline:2px solid var(--signal); outline-offset:2px; 
 .trend { display:grid; grid-template-columns:64px minmax(0,1fr); gap:1.4rem; padding:1.8rem 0; border-bottom:1px solid var(--border-light); max-width:920px; }
 .trend:last-of-type { border-bottom:none; }
 .trend-no {
-  font-family:var(--font-display); font-weight:800; font-size:2.2rem; line-height:1;
+  font-family:var(--font-mono); font-weight:700; font-size:2.2rem; line-height:1;
   color:var(--black);
 }
 .trend:nth-of-type(1) .trend-no { color:var(--spectrum-1); }
@@ -274,8 +277,8 @@ sup.cite a:focus-visible { outline:2px solid var(--signal); outline-offset:2px; 
 .trend:nth-of-type(3) .trend-no { color:var(--spectrum-3); }
 .trend:nth-of-type(4) .trend-no { color:var(--spectrum-4); }
 .trend:nth-of-type(5) .trend-no { color:var(--spectrum-5); }
-.trend h3 { font-family:var(--font-display); font-weight:700; font-size:var(--text-h3); color:var(--black); margin-bottom:0.5rem; }
-.trend p { margin-bottom:0.8rem; max-width:76ch; }
+.trend h3 { font-family:var(--font-display); font-weight:600; font-size:var(--text-h3); color:var(--black); letter-spacing:-0.005em; line-height:1.15; margin-bottom:0.5rem; }
+.trend p { margin-bottom:0.8rem; max-width:var(--measure); }
 .tw-imp {
   border-left:3px solid var(--signal); background:var(--signal-bg);
   padding:0.8rem 1.1rem; border-radius:0 var(--radius-lg) var(--radius-lg) 0;

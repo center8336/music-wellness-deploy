@@ -6,7 +6,7 @@
     <title>Org Overview — Global NPO Landscape</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --black: #09090b;
@@ -36,8 +36,8 @@
             --bg-card-dark: var(--off-black);
             --border-light: rgba(0,0,0,0.07);
             --border-dark: rgba(255,255,255,0.1);
-            --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
-            --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+            --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+            --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
             --font-mono: 'Space Mono', 'Courier New', monospace;
             --font: var(--font-body);
             --ease: cubic-bezier(0.4, 0, 0.2, 1);
@@ -54,7 +54,8 @@
             --radius: 4px;
             --radius-lg: 6px;
             --max-w: 1100px;
-            --max-w-text: 680px;        /* comfortable measure for the bigger reading text */
+            --max-w-text: 64ch;         /* Dia-style narrow reading measure for the bigger serif text (~62–66ch) */
+            --measure: 64ch;            /* canonical prose measure cap */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -65,9 +66,10 @@
             font-family: var(--font-body);
             background-color: var(--bg-light);
             color: var(--charcoal);
-            font-weight: 300;
+            font-weight: 400;                 /* Fraunces body reads best at 400, not 300 */
             line-height: 1.7;
             font-size: var(--text-body);
+            font-optical-sizing: auto;        /* opsz axis → text-optimized letterforms */
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
         }
@@ -112,31 +114,33 @@
             max-width: var(--max-w); margin: 0 auto;
         }
 
-        /* Hero */
-        .hero { margin-bottom: 2.25rem; }
+        /* Hero — editorial masthead (Dia-leaning): generous top air, calm eyebrow→headline→subtitle stack */
+        .hero { margin-top: 1.5rem; margin-bottom: 3rem; }
 
         .eyebrow {
             font-family: var(--font-mono);
             font-size: var(--text-xs); font-weight: 400;
             color: var(--signal);
-            text-transform: uppercase; letter-spacing: 0.5em;
-            margin-bottom: 1rem;
+            text-transform: uppercase; letter-spacing: 0.4em;
+            margin-bottom: 1.5rem;
         }
 
+        /* Big confident display: heavy high-contrast Fraunces, mixed-case so the serif's
+           contrast carries the editorial weight; relaxed tracking so it doesn't crowd. */
         .hero h1 {
             font-family: var(--font-display);
-            font-size: var(--text-h1); font-weight: 800;
-            line-height: 1.1; margin-bottom: 1.25rem;
+            font-size: var(--text-hero); font-weight: 900;
+            line-height: 1.04; margin-bottom: 1.75rem;
             color: var(--black); letter-spacing: -0.01em;
-            text-transform: uppercase;
+            text-wrap: balance;
         }
 
         .subtitle {
             font-family: var(--font-body);
-            font-size: 1.2rem; font-style: italic;
+            font-size: 1.375rem; font-style: italic;
             color: var(--graphite);
-            max-width: var(--max-w-text);
-            line-height: 1.6; font-weight: 300; letter-spacing: 0.02em;
+            max-width: var(--measure);
+            line-height: 1.55; font-weight: 400; letter-spacing: 0;
         }
 
         /* Stats strip — dark (canonical) */
@@ -199,9 +203,9 @@
         .data-cta-sub { display: block; font-size: var(--text-sm); color: var(--graphite); }
 
         /* Tabs */
-        .tabs-wrapper { margin: 1.75rem 0; }
+        .tabs-wrapper { margin: 2.5rem 0; }
 
-        .tab-pills { display: flex; gap: 0.75rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+        .tab-pills { display: flex; gap: 0.75rem; margin-bottom: 1.75rem; flex-wrap: wrap; }
 
         .tab-btn {
             padding: 0.65rem 1.25rem;
@@ -224,16 +228,16 @@
             background: var(--white);
             border: 1px solid var(--border-light);
             border-radius: var(--radius-lg);
-            padding: 1.5rem; margin-bottom: 1.5rem;
+            padding: 1.85rem; margin-bottom: 1.75rem;
             transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
         }
         .card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
 
         .card h3 {
             font-family: var(--font-display);
-            font-size: var(--text-h3); font-weight: 700;
+            font-size: var(--text-h2); font-weight: 600;
             margin-bottom: 1rem; color: var(--black);
-            text-transform: uppercase; letter-spacing: -0.01em;
+            letter-spacing: -0.005em; line-height: 1.15;
         }
 
         .card-label {
@@ -247,9 +251,16 @@
 
         .card-meta { font-size: var(--text-sm); color: var(--grey); margin: 0.5rem 0; }
 
-        .card p, .card li { color: var(--graphite); line-height: 1.65; }
-        /* comfortable reading measure so big prose doesn't run edge-to-edge (prose only) */
-        .card > p, .chart-container > p { max-width: 68ch; }
+        .card p, .card li { color: var(--graphite); line-height: 1.7; }
+        /* Dia-style narrow reading measure: the bigger serif prose gets an elegant line length.
+           Prose only — the map, charts, tables and tab bar stay full-width. */
+        .card > p,
+        .chart-container > p,
+        .news-relevance,
+        .insight-text,
+        .method-note,
+        .gapmap-caption,
+        .chart-note { max-width: var(--measure); }
 
         /* Expandable cards */
         .expandable-card { cursor: pointer; transition: all var(--dur) var(--ease); }
@@ -306,10 +317,10 @@
         /* Section title */
         .section-title {
             font-family: var(--font-display);
-            font-size: var(--text-h2); font-weight: 700;
-            margin: 1.5rem 0 1rem 0;
+            font-size: var(--text-h2); font-weight: 600;
+            margin: 2.5rem 0 1rem 0;
             color: var(--charcoal);
-            text-transform: uppercase; letter-spacing: -0.01em;
+            letter-spacing: -0.005em; line-height: 1.15;
         }
 
         .section-subtitle {
@@ -324,13 +335,14 @@
             background: var(--white);
             border: 1px solid var(--border-light);
             border-radius: var(--radius-lg);
-            padding: 1.5rem 1.25rem 1.25rem;
-            margin-bottom: 1.5rem;
+            padding: 2rem 1.75rem 1.5rem;
+            margin-bottom: 2.5rem;
         }
         .gapmap-head {
             font-family: var(--font-display);
-            font-size: var(--text-h3); font-weight: 600;
-            color: var(--black); margin: 0 0 0.35rem;
+            font-size: var(--text-h2); font-weight: 600;
+            color: var(--black); margin: 0 0 0.5rem;
+            letter-spacing: -0.005em; line-height: 1.15;
             text-wrap: balance;
         }
         .gapmap-sub {
@@ -393,7 +405,7 @@
         .gm-tally {
             fill: var(--white); stroke: var(--border-light); stroke-width: 1;
         }
-        .gm-tally-num { font-family: var(--font-display); font-weight: 800; font-size: 22px; fill: var(--purple-deep); }
+        .gm-tally-num { font-family: var(--font-mono); font-weight: 700; font-size: 22px; fill: var(--purple-deep); }
         .gm-tally-txt { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; fill: var(--grey); }
         .gapmap-caption {
             font-family: var(--font-mono);
@@ -444,10 +456,10 @@
             background: var(--white);
             border: 1px solid var(--border-light);
             border-radius: var(--radius-lg);
-            padding: 1.5rem; margin-bottom: 1.5rem;
+            padding: 1.85rem; margin-bottom: 1.75rem;
         }
 
-        .chart-title { font-size: var(--text-h3); font-weight: 500; margin-bottom: 0.4rem; color: var(--black); }
+        .chart-title { font-family: var(--font-display); font-size: var(--text-h3); font-weight: 600; margin-bottom: 0.4rem; color: var(--black); letter-spacing: -0.005em; }
         .chart-note { font-size: var(--text-xs); color: var(--grey); margin-bottom: 1.25rem; }
 
         .chart-bar { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
@@ -579,9 +591,9 @@
 
         .sources-card h3 {
             font-family: var(--font-display);
-            font-size: var(--text-h3); font-weight: 700;
+            font-size: var(--text-h2); font-weight: 600;
             color: var(--black); margin-bottom: 1.25rem;
-            text-transform: uppercase;
+            letter-spacing: -0.005em; line-height: 1.15;
         }
 
         .source-section { margin-bottom: 1.5rem; }
@@ -644,7 +656,8 @@
             .stat-item:nth-child(1),
             .stat-item:nth-child(2) { border-bottom: 1px solid var(--border-dark); }
 
-            .hero h1 { font-size: 1.8rem; }
+            .hero h1 { font-size: 2.4rem; line-height: 1.08; }
+            .subtitle { font-size: 1.2rem; }
 
             .tab-pills { gap: 0.5rem; }
             .tab-btn { padding: 0.5rem 1rem; font-size: 0.75rem; }
@@ -665,7 +678,7 @@
         @media (max-width: 480px) {
             .container { padding-top: 4.5rem; }
             .nav { padding: 1rem 1rem; }
-            .hero h1 { font-size: 1.5rem; }
+            .hero h1 { font-size: 2rem; }
             .nav-links { padding: 1.2rem 1.5rem; }
             .nav-mobile-brand { font-size:0.58rem; }
             .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }

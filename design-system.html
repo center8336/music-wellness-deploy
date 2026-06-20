@@ -5,12 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Design System v6.2 · MH&W</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
 
   /* ════════════════════════════════════════
      DESIGN TOKENS v5.1
      Purple duo + neutral + spectrum
-     3 font stacks · Reference: PERIMETRON
+     Type: Fraunces (display + body) · Space Mono (labels) · Noto Serif TC (CJK)
+     v6.3 (2026-06-20): editorial type pivot — Syne/Space Grotesk → Fraunces serif;
+           display/headings now mixed-case, mono chrome stays uppercase (Round 4)
      v5: paper-link component + logo integration
      v5.1: type scale bump (body→1rem) + stat-meta + 560px breakpoint
      v6: paper-link v2 (lighter, no duplication) + PERIMETRON-style logo
@@ -56,9 +58,9 @@
     --border-light: rgba(0,0,0,0.07);
     --border-dark: rgba(255,255,255,0.1);
 
-    /* — Typography: 3 font stacks — */
-    --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
-    --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+    /* — Typography: serif display + body (Fraunces / Noto Serif TC), mono labels (Space Mono) — */
+    --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+    --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
     --font-mono: 'Space Mono', 'Courier New', monospace;
 
     /* legacy alias */
@@ -84,7 +86,8 @@
     --radius: 4px;
     --radius-lg: 6px;
     --max-w: 1100px;
-    --max-w-text: 660px;
+    --max-w-text: 64ch;
+    --measure: 64ch;
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -96,6 +99,7 @@
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     font-size: var(--text-body);
+    font-optical-sizing: auto;
   }
 
   ::selection { background: var(--signal); color: var(--white); }
@@ -184,10 +188,10 @@
   .hero-title {
     font-family: var(--font-display);
     font-size: var(--text-hero);
-    font-weight: 800;
-    line-height: 0.95;
+    font-weight: 900;
+    line-height: 1.04;
     letter-spacing: -0.01em;
-    text-transform: uppercase;
+    text-wrap: balance;
     color: var(--white);
     margin-bottom: 1rem;
   }
@@ -203,12 +207,11 @@
 
   .hero-sub {
     font-family: var(--font-body);
-    font-size: 1rem;
-    font-weight: 300;
+    font-size: 1.2rem;
+    font-weight: 400;
     font-style: italic;
     color: var(--purple-light);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
+    letter-spacing: 0;
   }
 
   .hero-tag {
@@ -247,7 +250,8 @@
   .swatch-hex { font-size: 0.62rem; opacity: 0.65; font-family: var(--font-mono); }
 
   /* ════════════════════════════════════════
-     TYPOGRAPHY — 4 FONT STACKS
+     TYPOGRAPHY — 3 FONT STACKS
+     Fraunces (display + body) · Space Mono (labels) · Noto Serif TC (CJK)
      ════════════════════════════════════════ */
   .type-row {
     margin-bottom: 2.5rem;
@@ -262,72 +266,70 @@
     margin-bottom: 0.4rem;
   }
 
-  /* Display — Syne 800 */
+  /* Display — Fraunces 900 (mixed-case high-contrast serif) */
   .t-display {
     font-family: var(--font-display);
     font-size: var(--text-hero);
-    font-weight: 800;
-    line-height: 0.95;
+    font-weight: 900;
+    line-height: 1.04;
     letter-spacing: -0.01em;
-    text-transform: uppercase;
+    text-wrap: balance;
     color: var(--black);
   }
   .t-display em { font-style: normal; color: var(--signal); }
   .t-display .dot { color: var(--purple-light); }
 
-  /* H1 — Syne 700 */
+  /* H1 — Fraunces 600 */
   .t-h1 {
     font-family: var(--font-display);
     font-size: var(--text-h1);
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1.1;
-    letter-spacing: 0.01em;
-    text-transform: uppercase;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
     color: var(--black);
   }
 
-  /* H2 — Syne 600 */
+  /* H2 — Fraunces 600 */
   .t-h2 {
     font-family: var(--font-display);
     font-size: var(--text-h2);
     font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
     color: var(--charcoal);
   }
 
-  /* H3 — Space Grotesk 600 */
+  /* H3 — Fraunces 600 (section headings, card titles) */
   .t-h3 {
     font-family: var(--font-body);
     font-size: var(--text-h3);
     font-weight: 600;
     line-height: 1.3;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
+    letter-spacing: -0.005em;
     color: var(--charcoal);
   }
 
-  /* Body — Space Grotesk 400 */
+  /* Body — Fraunces 400 */
   .t-body {
     font-family: var(--font-body);
     font-size: var(--text-body);
     line-height: 1.8;
     color: var(--graphite);
-    max-width: var(--max-w-text);
+    max-width: var(--measure);
   }
 
-  /* Editorial — Space Grotesk 300 */
+  /* Editorial — Fraunces 400 italic */
   .t-editorial {
     font-family: var(--font-body);
-    font-size: clamp(1rem, 2vw, 1.35rem);
-    font-weight: 300;
+    font-size: clamp(1.2rem, 2vw, 1.375rem);
+    font-weight: 400;
     font-style: italic;
     color: var(--graphite);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    letter-spacing: 0;
     line-height: 1.6;
-    max-width: var(--max-w-text);
+    max-width: var(--measure);
   }
 
   /* Mono — Space Mono */
@@ -353,10 +355,9 @@
   /* Spectrum text */
   .t-spectrum span {
     font-family: var(--font-display);
-    font-size: 1.35rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.005em;
     margin-right: 2.5rem;
     display: inline-block;
     margin-bottom: 0.5rem;
@@ -401,12 +402,12 @@
   .card-title {
     font-family: var(--font-display);
     font-size: var(--text-h3);
-    font-weight: 700;
+    font-weight: 600;
     color: var(--black);
     margin-bottom: 0.5rem;
     line-height: 1.25;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
   }
 
   .card-desc {
@@ -1117,30 +1118,30 @@
 
 <!-- ══ TYPOGRAPHY — 3 STACKS ══ -->
 <section class="ds-section">
-  <div class="ds-label">Typography — 3 Font Stacks</div>
+  <div class="ds-label">Typography — Fraunces (display + body) · Space Mono (labels) · Noto Serif TC (CJK)</div>
 
   <div class="type-row">
-    <div class="type-meta">Display — Syne 800 · Hero titles, page names</div>
+    <div class="type-meta">Display — Fraunces 900 · Hero titles, page names (mixed-case)</div>
     <div class="t-display">Music & <em>Minds</em><span class="dot">.</span></div>
   </div>
 
   <div class="type-row">
-    <div class="type-meta">H1 — Syne 700</div>
+    <div class="type-meta">H1 — Fraunces 600</div>
     <h1 class="t-h1">Backline Case Study: Operations & Growth</h1>
   </div>
 
   <div class="type-row">
-    <div class="type-meta">H2 — Syne 600</div>
+    <div class="type-meta">H2 — Fraunces 600</div>
     <h2 class="t-h2">Financial Analysis — IRS 990 Data</h2>
   </div>
 
   <div class="type-row">
-    <div class="type-meta">H3 — Space Grotesk 600 · Section headings, card titles</div>
+    <div class="type-meta">H3 — Fraunces 600 · Section headings, card titles</div>
     <h3 class="t-h3">Revenue Growth CAGR: 58%</h3>
   </div>
 
   <div class="type-row">
-    <div class="type-meta">Body — Space Grotesk 400 · Paragraphs, descriptions</div>
+    <div class="type-meta">Body — Fraunces 400 · Paragraphs, descriptions</div>
     <p class="t-body">Backline was founded in 2019 to address a critical gap in the music industry: the lack of accessible, stigma-free mental health support for music professionals and their families. Operating as a 501(c)(3) nonprofit, the organization connects individuals with licensed therapists through a national referral network.</p>
   </div>
 
@@ -1151,7 +1152,7 @@
   </div>
 
   <div class="type-row">
-    <div class="type-meta">Spectrum Text — Syne 700 · Colored phase/member names</div>
+    <div class="type-meta">Spectrum Text — Fraunces 600 · Colored phase/member names</div>
     <div class="t-spectrum">
       <span style="color:var(--spectrum-1);">Exploration</span>
       <span style="color:var(--spectrum-5);">Launch</span>
@@ -1460,7 +1461,7 @@
     Purple Duo: #CBB9D6 + #6667AB · Spectrum: 6 accent colors · Ref: PERIMETRON
   </p>
   <p style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--grey-light); margin-top: 0.3rem; letter-spacing: 0.15em;">
-    Syne (display) · Space Grotesk (body) · Space Mono (mono/nav)
+    Fraunces (display + body) · Space Mono (mono/nav) · Noto Serif TC (CJK)
   </p>
 </section>
 
