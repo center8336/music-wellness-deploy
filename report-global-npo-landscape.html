@@ -88,7 +88,7 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
   .nav-mobile-brand{display:block}
 }
 
-/* Animation budget: exactly one infinite loop on this page — .tw-pulse (the Taiwan map node). */
+/* Animation budget: exactly one infinite loop on this page — .gm-ripple (the Taiwan void). */
 
 /* HERO */
 .hero{padding:clamp(2.2rem,5vw,4rem) 0 1rem;position:relative;z-index:2}
@@ -130,84 +130,72 @@ a.conf:hover,a.conf:focus{color:var(--signal-dim);text-decoration:underline}
 .hint{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--grey-light);margin-top:.5rem}
 @media(max-width:680px){.frow{align-items:flex-start}.frow .glabel{width:100%;margin-bottom:.15rem}}
 
-/* MAP STAGE */
+/* ===== MAP STAGE — v4.3 "the gravity well" ===== */
 .stage{position:relative;margin:.4rem 0 0;border-top:1px solid var(--silver);border-bottom:1px solid var(--silver);padding:1.4rem 0;overflow:hidden;z-index:2}
-svg.map{width:100%;height:auto;display:block;max-width:980px;margin:0 auto}
-.gm-grid{stroke:var(--silver);stroke-width:0.6;fill:none;opacity:.4}
-.gm-land{fill:var(--silver);opacity:.28}
-.gm-land .gm-tw{stroke:var(--graphite);stroke-width:1.4}
-.gm-tw-solid{fill:var(--silver);opacity:.78;stroke:var(--graphite);stroke-width:1.1}
-.gm-dot{fill:var(--off-black);transition:opacity var(--dur) var(--ease)}
-.gm-dot-faint{fill:var(--off-black);opacity:.4;transition:opacity var(--dur) var(--ease)}
-.gm-india{fill:var(--off-black);transition:opacity var(--dur) var(--ease)}
-.gm-india-label,.gm-tw-label{font-family:var(--font-mono);font-size:15px;letter-spacing:.04em}
-.gm-india-label{fill:var(--graphite)}
-.gm-tw-label{fill:var(--signal);font-weight:700}
-/* P0 FIX — under a filter, ONLY the named org nodes (which carry real data-service/data-funding)
-   respond. The aggregate density-pole dots, the long-tail scatter, the India context dot and the
-   Taiwan node carry NO data-service: they are geographic CONTEXT, not filterable single orgs, so they
-   must NEVER dim — the cluster shape ("where the field is") must survive every filter. The TABLE
-   carries the actual filtering. A named node dims only when JS marks it .gm-dimmed (no match). */
-.map .gm-node.gm-dimmed{opacity:.16}
-/* drawn US→Taiwan arc — one-time map reveal (NOT news-triggered) */
-.arc{fill:none;stroke:var(--purple-light);stroke-width:2;stroke-dasharray:5 5;stroke-dashoffset:760;animation:draw 2.4s cubic-bezier(.16,1,.3,1) .4s forwards}
-/* underlay gives the gesture ink weight — same one-shot keyframe, no extra loop */
-.arc-under{fill:none;stroke:var(--signal-dim);stroke-width:2;opacity:.25;stroke-dasharray:5 5;stroke-dashoffset:760;animation:draw 2.4s cubic-bezier(.16,1,.3,1) .4s forwards}
-@keyframes draw{to{stroke-dashoffset:0}}
-/* Taiwan ring pulse — 2.6s loop */
-.tw-pulse{animation:pulse 2.6s ease-out infinite;transform-box:fill-box;transform-origin:center}
-@keyframes pulse{0%{opacity:.7;transform:scale(1)}70%{opacity:0;transform:scale(2.6)}100%{opacity:0;transform:scale(2.6)}}
-/* studied org nodes */
-.gm-node{cursor:pointer;outline:none}
-.gm-node-hit{fill:transparent}
-.gm-node-dot{fill:var(--off-black);transition:r var(--dur) var(--ease),fill var(--dur) var(--ease)}
-.gm-node-ring-outer{fill:var(--white);stroke:var(--signal);stroke-width:2.5}
-.gm-node-ring-inner{fill:none;stroke:var(--signal);stroke-width:1.3;opacity:.5}
-.gm-node-ring-core{fill:var(--signal)}
-.gm-node-name{font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:.02em;fill:var(--graphite)}
-.gm-node-name.gm-name-tw{fill:var(--signal)}
-.gm-node-cue{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;fill:var(--signal);opacity:0;transition:opacity var(--dur) var(--ease)}
-.gm-node:hover .gm-node-cue,.gm-node:focus-visible .gm-node-cue{opacity:1}
-/* Taiwan's "entry point" cue is always legible — it is the page's emotional anchor, not a hover reward */
-.gm-cue-tw{opacity:1}
-.gm-node:hover .gm-node-dot,.gm-node:focus-visible .gm-node-dot{fill:var(--signal-dim);r:8}
-.gm-node:hover .gm-node-name,.gm-node:focus-visible .gm-node-name{fill:var(--black)}
-.gm-node:focus .gm-node-focus,.gm-node:focus-visible .gm-node-focus{fill:none;stroke:var(--signal);stroke-width:2;opacity:1}
-.gm-node-focus{fill:none;stroke:none;opacity:0}
-.gm-tally{fill:var(--white);stroke:var(--border-light);stroke-width:1}
-.gm-tally-num{font-family:var(--font-mono);font-weight:700;font-size:22px;fill:var(--signal)}
-.gm-tally-txt{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;fill:var(--grey)}
-.mapcap{font-family:var(--font-mono);font-size:var(--text-xs);color:var(--label-ink);line-height:1.7;letter-spacing:.02em;margin:1rem auto 0;max-width:980px}
-.mapcap strong{color:var(--signal);font-weight:700}
-.mapcap .gm-key-dot{display:inline-block;width:.6em;height:.6em;border-radius:50%;background:var(--off-black);vertical-align:baseline;margin:0 .15em}
-.mapcap .gm-key-scan{display:inline-block;width:.62em;height:.62em;border-radius:50%;background:var(--abroad-text);vertical-align:baseline;margin:0 .15em;box-shadow:0 0 0 2px var(--white),0 0 0 3px var(--abroad-text)}
-.mapcap strong.scan{color:var(--abroad-text)}
-
-/* ===== SOURCE LAYER — native-language-scan provenance. Pink (--abroad-text), NEVER --signal
-   (reserved for Taiwan / the zero). Same disc body as the ink directory nodes → equal weight,
-   different hand. The 4 are real, focusable, peekable links. ===== */
+svg.map{width:100%;height:auto;display:block;max-width:1000px;margin:0 auto}
+.gm-grat line{stroke:var(--silver);stroke-width:.5;opacity:.3}
+.gm-land{fill:var(--silver);opacity:.42}
+.gm-glow{fill:url(#gm-glow);pointer-events:none}
+.gm-sh0{stop-color:var(--off-black);stop-opacity:0}
+.gm-sh1{stop-color:var(--off-black);stop-opacity:.5}
+.gm-gl0{stop-color:var(--signal);stop-opacity:.17}
+.gm-gl1{stop-color:var(--signal);stop-opacity:0}
+.gm-thread{fill:none;stroke:var(--abroad-text);stroke-width:1.3;opacity:.6;stroke-dasharray:0.1 4.5;stroke-linecap:round}
+.gm-tick{fill:none;stroke:var(--grey-light);stroke-width:.7;opacity:.7}
+/* country count nodes */
+.gm-c{cursor:pointer;outline:none}
+.gm-hit{fill:transparent}
+.gm-c-disc{fill:var(--off-black);fill-opacity:.6;stroke:var(--off-black);stroke-opacity:.72;stroke-width:.75;transition:fill-opacity var(--dur) var(--ease)}
+.gm-c.gm-big .gm-c-disc{stroke-width:1}
+.gm-num{fill:var(--white);font-family:var(--font-mono);font-weight:700;paint-order:stroke;stroke:var(--silver);stroke-width:2.6}
+.gm-cue{fill:var(--label-ink);font-family:var(--font-mono);font-weight:700;font-size:11px;letter-spacing:.04em;opacity:0;transition:opacity var(--dur) var(--ease);pointer-events:none}
+.gm-c:hover .gm-cue,.gm-c:focus .gm-cue,.gm-c:focus-visible .gm-cue,.gm-scan:hover .gm-cue,.gm-scan:focus .gm-cue,.gm-scan:focus-visible .gm-cue{opacity:1}
+.gm-c:hover .gm-c-disc,.gm-c:focus-visible .gm-c-disc{fill-opacity:.8}
+.gm-c:focus .gm-c-disc,.gm-c:focus-visible .gm-c-disc{stroke:var(--signal);stroke-opacity:1;stroke-width:2}
+.gm-c.gm-dimmed{opacity:.2}
+.gm-c.gm-c-sel .gm-c-disc{stroke:var(--signal);stroke-opacity:1;stroke-width:2.4}
+.gm-labels text{fill:var(--label-ink);font-family:var(--font-mono);font-weight:700;font-size:11px;letter-spacing:.05em}
+/* native-language-scan rings (found beyond the directory) */
 .gm-scan{cursor:pointer;outline:none}
-.gm-scan-hit{fill:transparent}
-.gm-scan-dot{fill:var(--abroad-text);transition:r var(--dur) var(--ease)}
-.gm-scan-halo{fill:none;stroke:var(--abroad-text);stroke-width:1.4;opacity:.7;transition:opacity var(--dur) var(--ease)}
-.gm-scan-name{font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.02em;fill:var(--abroad-text)}
-.gm-scan-cue{font-family:var(--font-mono);font-size:10px;letter-spacing:.05em;fill:var(--abroad-text);opacity:0;transition:opacity var(--dur) var(--ease)}
-.gm-scan:hover .gm-scan-cue,.gm-scan:focus-visible .gm-scan-cue{opacity:1}
-.gm-scan:hover .gm-scan-dot,.gm-scan:focus-visible .gm-scan-dot{r:6}
-.gm-scan:hover .gm-scan-halo,.gm-scan:focus-visible .gm-scan-halo{opacity:1}
-/* focus ring — :focus fallback so SVG <a> keyboard focus is never invisible (engines vary on :focus-visible for SVG links) */
-.gm-scan:focus .gm-scan-focus,.gm-scan:focus-visible .gm-scan-focus{fill:none;stroke:var(--abroad-text);stroke-width:2;opacity:1}
-.gm-scan-focus{fill:none;stroke:none;opacity:0}
-.map .gm-scan.gm-dimmed{opacity:.18}
-/* MOBILE — the map degrades to a static, non-interactive image; the TABLE is the instrument (§13).
-   Map links lose pointer events here and are removed from the focus order + AT tree via JS (setMapMode);
-   the peek (a desktop map affordance) is hidden — org detail lives in the table + #beyond. */
-@media(max-width:680px){
-  #gapmap a{pointer-events:none}
-  .stage .peek{display:none}
-}
-/* isolate the native scan → fade the directory's aggregate geographic context so the 4 read clearly */
-.map.src-native .gm-dot,.map.src-native .gm-dot-faint,.map.src-native .gm-india,.map.src-native .gm-india-label{opacity:.12}
+.gm-scan-ring{fill:none;stroke:var(--abroad-text);stroke-width:1.6;transition:stroke-width var(--dur) var(--ease)}
+.gm-scan-dot{fill:var(--abroad-text)}
+.gm-scan:hover .gm-scan-ring,.gm-scan:focus-visible .gm-scan-ring{stroke-width:2.4}
+.gm-scan .gm-cue{fill:var(--abroad-text);font-size:10px}
+.gm-scan.gm-dimmed{opacity:.2}
+/* THE VOID — Taiwan punched through the field; ripple = the page's single infinite loop */
+.gm-void{cursor:pointer;outline:none}
+.gm-void-paper{fill:var(--white)}
+.gm-void-sh{fill:url(#gm-sh)}
+.gm-void-rim{fill:none;stroke:var(--signal);stroke-width:1.7;transition:stroke-width var(--dur) var(--ease)}
+.gm-void:hover .gm-void-rim,.gm-void:focus-visible .gm-void-rim{stroke-width:2.6}
+.gm-void:focus-visible .gm-void-rim,.gm-void:focus .gm-void-rim{stroke-width:2.6}
+.gm-void-0{fill:var(--signal);font-family:var(--font-mono);font-weight:700;font-size:14px}
+.gm-void-label{fill:var(--signal);font-family:var(--font-mono);font-weight:700;font-size:11px;letter-spacing:.06em;text-anchor:middle}
+.gm-void-cap{fill:var(--grey);font-family:var(--font-mono);font-size:8.5px;letter-spacing:.03em}
+.gm-ripple{fill:none;stroke:var(--signal);stroke-width:1.1;transform-box:fill-box;transform-origin:center;animation:gm-emit 3.6s ease-out infinite}
+.gm-ripple0{opacity:.10}.gm-ripple1{opacity:.16;animation-delay:1.2s}.gm-ripple2{opacity:.24;animation-delay:2.4s}
+@keyframes gm-emit{0%{transform:scale(.6);opacity:.30}70%{opacity:0}100%{transform:scale(1.5);opacity:0}}
+@media(prefers-reduced-motion:reduce){.gm-ripple{animation:none}}
+/* legend + off-map tally */
+.gm-leg-c{fill:none;stroke:var(--off-black);stroke-opacity:.55;stroke-width:.8}
+.gm-leg-t{fill:var(--label-ink);font-family:var(--font-mono);font-size:9px}
+.gm-leg-cap{fill:var(--label-ink);font-family:var(--font-mono);font-size:8px;letter-spacing:.06em}
+.gm-tally-box{fill:var(--white);stroke:var(--silver)}
+.gm-tally-num{fill:var(--off-black);font-family:var(--font-mono);font-weight:700;font-size:21px}
+.gm-tally-txt{fill:var(--label-ink);font-family:var(--font-mono);font-size:9px;letter-spacing:.06em}
+/* MOBILE ≤680: map degrades to a static, non-interactive image; the TABLE is the instrument (§13) */
+@media(max-width:680px){#gapmap a{pointer-events:none}.stage .peek{display:none}}
+/* map legend (mapcap) */
+.mapcap{font-family:var(--font-mono);font-size:var(--text-caption);color:var(--label-ink);line-height:1.7;letter-spacing:.02em;margin:1rem auto 0;max-width:1000px}
+.mapcap b{color:var(--off-black);font-weight:700}
+.mapcap-how{margin-bottom:.55rem}
+.mapcap-keys{margin-bottom:.4rem}
+.mapcap .cjk{display:block;margin-top:.35rem;font-family:var(--font-cjk);line-height:1.9;color:var(--graphite)}
+.gm-key{display:inline-block;width:.72em;height:.72em;vertical-align:baseline;margin:0 .12em}
+.gm-key-disc{border-radius:50%;background:var(--off-black);opacity:.6}
+.gm-key-void{border-radius:50%;border:2px solid var(--signal)}
+.gm-key-scan{border-radius:50%;border:2px solid var(--abroad-text)}
+.gm-key-tally{width:auto;font-weight:700;color:var(--off-black)}
 
 
 /* PEEK CARD */
@@ -261,7 +249,7 @@ table.tbl td.org a{color:var(--signal);border-bottom:1px solid var(--signal-glow
 .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
 .tablewrap:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
 /* ── Reading env: phone measure release + touch targets + table step ── */
-@media(max-width:680px){.lede,.chapter .takeaway,.disp p,.method,.refs{max-width:none}}
+@media(max-width:680px){.lede,.chapter .takeaway,.method,.refs{max-width:none}}
 @media(max-width:480px){
   table.tbl{font-size:.82rem}
   table.tbl th{font-size:.6rem}
@@ -278,48 +266,6 @@ table.tbl tbody tr[data-source="native-scan"] td:first-child{color:var(--abroad-
 /* in-page highlight when a peek's "Locate in table" lands on a row (no navigation) */
 table.tbl tbody tr[data-active]{background:var(--signal-bg);box-shadow:inset 3px 0 0 var(--signal)}
 table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signal)}
-
-/* FIELD NEWS — radar */
-.news{position:relative;border-top:2px solid var(--signal);background:linear-gradient(180deg,var(--white),var(--snow));padding:clamp(2.6rem,6vw,4.6rem) 0;overflow:hidden;z-index:2}
-.radarbg{position:absolute;right:-120px;top:50%;transform:translateY(-50%);width:520px;height:520px;pointer-events:none;opacity:.5}
-.radarbg circle{fill:none;stroke:var(--silver);stroke-width:1}
-.news .kicker{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--signal);margin-bottom:.7rem;display:flex;align-items:center;gap:.45rem;position:relative;z-index:2}
-.news .q{font-family:var(--font-display);font-weight:900;font-size:clamp(1.9rem,4.6vw,3.2rem);line-height:1.02;letter-spacing:-.01em;max-width:22ch;color:var(--off-black);position:relative;z-index:2}
-.news .scope{font-size:1.02rem;line-height:1.5;color:var(--graphite);max-width:54ch;margin:.9rem 0 .4rem;position:relative;z-index:2}
-.stamp{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.07em;text-transform:uppercase;color:var(--label-ink);margin-bottom:1.8rem;position:relative;z-index:2}
-.stamp b{color:var(--off-black)}
-.feed{position:relative;z-index:2;max-width:780px}
-.disp{position:relative;display:grid;grid-template-columns:30px 1fr;gap:1rem;padding:1.2rem 0;border-bottom:1px solid var(--silver);opacity:0;transform:translateY(12px);animation:dispIn .55s cubic-bezier(.2,.7,.2,1) both}
-.disp:nth-child(1){animation-delay:.1s}.disp:nth-child(2){animation-delay:.19s}.disp:nth-child(3){animation-delay:.28s}
-@keyframes dispIn{to{opacity:1;transform:none}}
-.disp.pin{border-left:2px solid var(--signal);margin-left:-1rem;padding-left:1rem;background:linear-gradient(90deg,var(--signal-bg),transparent 60%)}
-.node{position:relative;width:30px;height:30px;margin-top:.2rem}
-.node .core{position:absolute;inset:11px;border-radius:50%;background:var(--silver)}
-.disp.pin .node .core{background:var(--signal);box-shadow:0 0 0 3px var(--signal-glow)}
-.disp.fresh .node .core{background:var(--signal)}
-.disp.fresh .node .sweep{position:absolute;inset:2px;border-radius:50%;background:conic-gradient(from 0deg,var(--signal-glow),transparent 60%);animation:spin 2.6s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.meta{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem}
-.meta .date{color:var(--label-ink);font-weight:700}
-.tag{display:inline-flex;align-items:center;gap:.3rem;font-weight:700;padding:.18rem .5rem;border-radius:100px}
-.tag.abroad{color:var(--abroad-text-deep);background:var(--abroad-bg)}
-.tag.taiwan{color:var(--signal);background:var(--signal-bg)}
-.tag .gl{width:5px;height:5px;border-radius:50%;background:currentColor;display:inline-block}
-.cat{color:var(--label-ink)}
-.pinlabel{color:var(--signal);font-weight:700;letter-spacing:.12em}
-.disp h4{font-family:var(--font-display);font-weight:600;font-size:clamp(1.3rem,1.1rem + 1vw,1.65rem);line-height:1.25;letter-spacing:-.005em;margin:.1rem 0 .35rem;color:var(--off-black)}
-.disp p{font-family:var(--font-body);font-size:.95rem;line-height:1.55;color:var(--graphite);max-width:62ch}
-.disp p .arrow{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--signal);border-bottom:1px solid var(--purple-light)}
-.basis{display:inline-flex;align-items:center;gap:.55rem;margin-top:.7rem;font-family:var(--font-mono);font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);border:1px solid var(--silver);border-radius:3px;padding:.3rem .55rem}
-.basis a{color:var(--graphite);border-bottom:1px solid var(--silver)}
-.meter{display:inline-flex;gap:2px}
-.meter i{width:4px;height:11px;background:var(--silver);display:inline-block}
-.meter.v3 i{background:var(--signal)}
-.meter.v2 i:nth-child(-n+2){background:var(--signal)}
-.meter.v1 i:nth-child(1){background:var(--signal)}
-.basis .lvl{font-weight:700;color:var(--off-black)}
-.newsmore{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);border-bottom:1px solid var(--silver);padding-bottom:2px;position:relative;z-index:2;display:inline-block;margin:1.3rem 0 0}
-@media(max-width:680px){.disp{grid-template-columns:22px 1fr;gap:.7rem}.node{width:22px;height:22px}.node .core{inset:7px}.radarbg{opacity:.3}}
 
 /* SOURCES — neutral */
 .method{font-size:1rem;color:var(--graphite);line-height:1.6;max-width:var(--measure-ref);margin-bottom:1.6rem}
@@ -338,11 +284,7 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
 
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .arc,.arc-under{animation:none;stroke-dashoffset:0}
-  .tw-pulse{animation:none;opacity:0}
-  .sweep,.disp{animation:none}
-  .disp{opacity:1;transform:none}
-  #read .ro-fill{transition:none}
+  .gm-ripple{animation:none}
   *{transition-duration:.01ms !important}
 }
 </style>
@@ -380,7 +322,7 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
 
 <div class="wrap">
   <section class="hero" id="map">
-    <div class="eyebrow">2026-06 · ORGS MAP · v4.2</div>
+    <div class="eyebrow">2026-06 · ORGS MAP · v4.3</div>
     <h1>Where the support<br>is — <em>and isn't.</em></h1>
     <div class="ticker">110 in one directory&nbsp;·&nbsp;4 found beyond&nbsp;·&nbsp;<span class="zero">0 in taiwan</span></div>
     <p class="lede">Backline's Global Resource Hub lists <b>110</b> music mental-health orgs.<a class="conf" href="#ov-src-1">1</a> Native-language search adds <b>4</b> the directory missed — <b>114</b> across two sources.<a class="conf" href="#ov-src-10">10</a> None reach Taiwan. <b>That absence is the entry point.</b></p>
@@ -424,207 +366,161 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
   </section>
 </div>
 
-<div class="wrap"><div class="stage" aria-label="Geographic map of music mental-health organizations">
-  <p class="vh">Interactive map; the same organizations are listed in the table below, which is the canonical way to browse them.</p>
-  <svg class="map" id="gapmap" viewBox="28 18 986 410" role="img"
-       aria-label="Projection-accurate equirectangular world map of music mental-health organizations, every marker placed from real longitude and latitude. Support clusters densely in the United States — the largest dot, carrying the Backline and MusiCares nodes — and across Europe: Germany, the United Kingdom (the Music Minds Matter node), France, with smaller dots at Austria, Switzerland, Iceland, Romania and Australia. India holds one independent organization, labelled, on the subcontinent southwest of China. A faint long-tail scatter marks the remaining organizations across more countries. East Asia is drawn to scale: mainland-China coastline, the Korean peninsula and Japan's island arc are separate landmasses, and Taiwan is a distinct small island off the south-east China coast, separated by the Taiwan Strait. Taiwan and the rest of East and South-East Asia have zero music-specific mental-health organizations — but Taiwan already has 藝創工會, a creators' union providing adjacent infrastructure since 2011, marked by an outlined pulsing ring. A drawn dashed arc reaches from the United States toward the Taiwan ring — the geographic relationship of a field reaching toward a place it does not yet serve. The four named, ringed nodes are clickable links to their Org Study pages. Four pink nodes (Japan, Mexico, Brazil, Argentina) are interactive links to music-specific musicians' unions found beyond the directory by native-language search — they, and the directory organizations, are all listed in the table below, which is the canonical way to browse them.">
-    <g class="gm-grid" aria-hidden="true">
-      <line x1="0" y1="49.2"  x2="1000" y2="49.2"/>
-      <line x1="0" y1="172.3" x2="1000" y2="172.3"/>
-      <line x1="0" y1="295.4" x2="1000" y2="295.4"/>
-      <line x1="0" y1="418.5" x2="1000" y2="418.5"/>
-      <line x1="35.1"  y1="0" x2="35.1"  y2="480"/>
-      <line x1="140.4" y1="0" x2="140.4" y2="480"/>
-      <line x1="245.6" y1="0" x2="245.6" y2="480"/>
-      <line x1="350.9" y1="0" x2="350.9" y2="480"/>
-      <line x1="456.1" y1="0" x2="456.1" y2="480"/>
-      <line x1="561.4" y1="0" x2="561.4" y2="480"/>
-      <line x1="666.7" y1="0" x2="666.7" y2="480"/>
-      <line x1="771.9" y1="0" x2="771.9" y2="480"/>
-      <line x1="877.2" y1="0" x2="877.2" y2="480"/>
-      <line x1="982.5" y1="0" x2="982.5" y2="480"/>
-    </g>
-    <g class="gm-land" aria-hidden="true">
-      <path d="M-133.3 28.7 70.2 49.2 0 69.7 17.5 98.5 21.1 131.3 45.6 160 70.2 196.9 105.3 221.5 115.8 188.7 140.4 176.4 171.9 192.8 175.4 164.1 193 139.5 210.5 119 221.1 110.8 245.6 102.6 231.6 82.1 182.5 57.4 122.8 49.2 70.2 16.4 0 8.2 -87.7 4.1 Z"/>
-      <path d="M182.5 262.6 210.5 250.3 238.6 254.4 280.7 295.4 301.8 307.7 333.3 320 322.8 348.7 287.7 397.9 252.6 439 224.6 480 207 508.7 193 500.5 203.5 467.7 210.5 418.5 207 369.2 186 320 175.4 287.2 Z"/>
-      <path d="M396.5 233.8 421.1 274.9 484.2 279 487.7 299.5 501.8 344.6 508.8 410.3 526.3 439 554.4 430.8 571.9 402.1 596.5 356.9 635.1 299.5 607 250.3 589.5 229.7 571.9 180.5 568.4 168.2 526.3 160 491.2 143.6 435.1 147.7 421.1 172.3 400 205.1 Z"/>
-      <path d="M424.6 119 424.6 139.5 449.1 147.7 466.7 123.1 484.2 114.9 498.2 114.9 519.3 131.3 512.3 106.7 501.8 106.7 484.2 77.9 473.7 77.9 470.2 57.4 480.7 36.9 498.2 16.4 529.8 8.2 554.4 4.1 561.4 24.6 540.4 49.2 554.4 61.5 540.4 73.8 522.8 73.8 505.3 73.8 491.2 73.8 484.2 61.5 480.7 82.1 456.1 90.3 438.6 98.5 Z"/>
-      <path d="M438.6 90.3 445.6 86.2 459.6 86.2 456.1 77.9 449.1 65.6 438.6 57.4 435.1 61.5 438.6 73.8 Z"/>
-      <path d="M730 116 L808 108 L860 114 L895 120 L885 144 L882 165 L872 182 L865 196 L838 208 L802 200 L770 191 L746 170 L733 142 Z"/>
-      <path d="M901 130 L910 131 L910 151 L905 159 L900 151 L898 137 Z"/>
-      <path d="M915 163 L925 154 L938 146 L948 132 L956 120 L951 121 L942 134 L933 147 L924 156 Z"/>
-      <path d="M694.7 201 708.8 209.2 712.3 229.7 726.3 262.6 736.8 242.1 736.8 229.7 750.9 217.4 761.4 209.2 768.4 205.1 743.9 196.9 722.8 196.9 701.8 196.9 Z"/>
-      <path class="gm-tw" d="M877 190 L884 191 L886 198 L883 206 L878 207 L876 199 Z"/>
-      <path d="M856.1 385.6 884.2 369.2 912.3 344.6 936.8 344.6 957.9 340.5 971.9 373.3 993 397.9 982.5 447.2 957.9 455.4 929.8 439 908.8 426.7 884.2 434.9 859.6 434.9 Z"/>
-    </g>
-
-    <!-- drawn US→Taiwan arc — one-time map reveal (underlay gives the gesture ink weight) -->
-    <path class="arc-under" d="M110.5 132.1 Q500 -10 878 196" aria-hidden="true"/>
-    <path class="arc" d="M110.5 132.1 Q500 -10 878 196" aria-hidden="true"/>
-
-    <!-- faint long-tail scatter -->
-    <g class="gm-dot-faint" aria-hidden="true">
-      <circle cx="443.2" cy="129.6" r="4.5"/>
-      <circle cx="500.0" cy="123.5" r="4.5"/>
-      <circle cx="474.7" cy="81.6"  r="4"/>
-      <circle cx="428.1" cy="77.9"  r="4"/>
-      <circle cx="508.8" cy="41.0"  r="4"/>
-      <circle cx="522.8" cy="82.1"  r="4.5"/>
-      <circle cx="84.2"  cy="65.6"  r="4.5"/>
-      <circle cx="98.2"  cy="201.0" r="4"/>
-    </g>
-
-    <!-- density poles -->
-    <circle class="gm-dot" cx="110.5" cy="132.1" r="20" aria-hidden="true"/>
-    <circle class="gm-dot" cx="492.6" cy="85.3"  r="11" aria-hidden="true"/>
-    <circle class="gm-dot" cx="464.9" cy="104.2" r="9.5" aria-hidden="true"/>
-    <circle class="gm-dot" cx="507.0" cy="100.1" r="6"   aria-hidden="true"/>
-    <circle class="gm-dot" cx="484.9" cy="103.4" r="6"   aria-hidden="true"/>
-    <circle class="gm-dot" cx="390.9" cy="29.1"  r="6"   aria-hidden="true"/>
-    <circle class="gm-dot" cx="543.9" cy="107.1" r="6"   aria-hidden="true"/>
-    <circle class="gm-dot" cx="928.1" cy="397.9" r="6"   aria-hidden="true"/>
-
-    <!-- India — lone independent Asia-Pacific org -->
-    <circle class="gm-india" cx="733.0" cy="202.7" r="4.5" aria-hidden="true"/>
-    <text class="gm-india-label" x="724" y="206" text-anchor="end" aria-hidden="true">TATVA · India · 1</text>
-
-    <!-- studied org nodes — real links, ≥44px hit targets, aria-labels -->
-    <a class="gm-node" href="org-study-backline.html"
-       role="link" tabindex="0" aria-label="Backline — United States, est. 2019. Open peek."
-       data-service="mental-health financial counseling" data-funding="philanthropy"
-       data-slug="backline" data-name="Backline" data-country="United States · est. 2019 · the most transferable blueprint"
-       data-row="4" data-study="org-study-backline.html"
-       data-body="Case management + a vetted provider network, ~100% donation-funded, 8 staff. A referral model scales without building clinical services in-house — the closest thing to a startup blueprint for a Taiwan org. Its Global Hub has zero Taiwan listings.">
-      <circle class="gm-node-hit"   cx="98" cy="118" r="22"/>
-      <circle class="gm-node-focus" cx="98" cy="118" r="11"/>
-      <circle class="gm-node-dot"   cx="98" cy="118" r="6.5"/>
-      <text class="gm-node-name" x="98" y="100" text-anchor="middle">Backline</text>
-      <text class="gm-node-cue"  x="98" y="89" text-anchor="middle">Org Study →</text>
-    </a>
-    <a class="gm-node" href="org-study-musicares.html"
-       role="link" tabindex="0" aria-label="MusiCares — United States, est. 1989. Open peek."
-       data-service="financial substance" data-funding="trade-body"
-       data-slug="musicares" data-name="MusiCares" data-country="United States · est. 1989 · the trade-body endowment model"
-       data-row="5" data-study="org-study-musicares.html"
-       data-body="The Recording Academy's charitable arm: emergency financial aid, addiction recovery and health services, funded through the music industry itself. A large endowment and trade-body backing — a fundamentally different scale and funding base than a startup, useful as the contrast case.">
-      <circle class="gm-node-hit"   cx="124" cy="148" r="22"/>
-      <circle class="gm-node-focus" cx="124" cy="148" r="11"/>
-      <circle class="gm-node-dot"   cx="124" cy="148" r="6.5"/>
-      <text class="gm-node-name" x="124" y="174" text-anchor="middle">MusiCares</text>
-      <text class="gm-node-cue"  x="124" y="185" text-anchor="middle">Org Study →</text>
-    </a>
-    <a class="gm-node" href="org-study-music-minds-matter.html"
-       role="link" tabindex="0" aria-label="Music Minds Matter — United Kingdom, est. 2017. Open peek."
-       data-service="mental-health counseling" data-funding="philanthropy"
-       data-slug="music-minds-matter" data-name="Music Minds Matter" data-country="United Kingdom · est. 2017 · a 24/7 helpline model"
-       data-row="6" data-study="org-study-music-minds-matter.html"
-       data-body="Help Musicians' dedicated mental-health line: a free 24/7 helpline plus short-term counselling, charity-funded. The lightest-weight service layer here — a helpline-first entry that a small Taiwan org could realistically stand up before building anything clinical.">
-      <circle class="gm-node-hit"   cx="449.1" cy="73.8" r="22"/>
-      <circle class="gm-node-focus" cx="449.1" cy="73.8" r="10"/>
-      <circle class="gm-node-dot"   cx="449.1" cy="73.8" r="6"/>
-      <text class="gm-node-name" x="449.1" y="46" text-anchor="middle">Music Minds Matter</text>
-      <text class="gm-node-cue"  x="449.1" y="35" text-anchor="middle">UK · Org Study →</text>
-    </a>
-
-    <!-- NATIVE-LANGUAGE SCAN layer — the four music-specific unions the directory missed.
-         First-class, focusable, peekable links (pink = --abroad-text, the page's "beyond/abroad" hue;
-         NEVER --signal). data-source="native-scan", data-service="union", data-funding="membership"
-         so they are honest filterable citizens of the 114 without faking an MH/directory service. -->
-    <g class="gm-scan-layer" aria-label="Found beyond the directory: four music-specific musicians' unions located by native-language search — Japan, Mexico, Brazil, Argentina. Not in the Backline directory.">
-      <a class="gm-scan" href="#row-muj" role="link" tabindex="0"
-         aria-label="Musicians' Union of Japan — music-specific union found by native-language scan, not in the 110-org directory. Open details."
-         data-source="native-scan" data-service="union" data-funding="membership"
-         data-slug="muj" data-name="Musicians' Union of Japan (日本音楽家ユニオン)" data-country="Japan · native-language scan · not in the 110 directory"
-         data-row="row-muj"
-         data-body="A musicians' union (~5,200 members): self-run mutual-aid (共済), a health-checkup subsidy, and free legal and tax counsel. No union-run mental-health service — the &quot;24-hour helpline&quot; sometimes attributed to it is refuted. Found by native-language search; the directory never listed it.">
-        <circle class="gm-scan-hit"   cx="900" cy="150" r="22"/>
-        <circle class="gm-scan-focus" cx="900" cy="150" r="11"/>
-        <circle class="gm-scan-halo"  cx="900" cy="150" r="8"/>
-        <circle class="gm-scan-dot"   cx="900" cy="150" r="4.5"/>
-        <text class="gm-scan-name" x="900" y="137" text-anchor="middle">Japan</text>
-        <text class="gm-scan-cue"  x="900" y="126" text-anchor="middle">union · open ↓</text>
-      </a>
-      <a class="gm-scan" href="#row-sutm" role="link" tabindex="0"
-         aria-label="SUTM, Mexico — music-worker union found by native-language scan, not in the 110-org directory. Open details."
-         data-source="native-scan" data-service="union" data-funding="membership"
-         data-slug="sutm" data-name="SUTM — Sindicato Único de Trabajadores de la Música" data-country="Mexico · native-language scan · not in the 110 directory"
-         data-row="row-sutm"
-         data-body="A music-worker union: representation, collective bargaining, training. Member welfare, health or mental-health benefits are not documented on its own site, so we do not claim them. Found by native-language search.">
-        <circle class="gm-scan-hit"   cx="165" cy="175" r="22"/>
-        <circle class="gm-scan-focus" cx="165" cy="175" r="11"/>
-        <circle class="gm-scan-halo"  cx="165" cy="175" r="8"/>
-        <circle class="gm-scan-dot"   cx="165" cy="175" r="4.5"/>
-        <text class="gm-scan-name" x="165" y="193" text-anchor="middle">Mexico</text>
-        <text class="gm-scan-cue"  x="165" y="204" text-anchor="middle">union · open ↓</text>
-      </a>
-      <a class="gm-scan" href="#row-sindmusi" role="link" tabindex="0"
-         aria-label="SindMusi, Brazil — musicians' union found by native-language scan, not in the 110-org directory. Open details."
-         data-source="native-scan" data-service="union" data-funding="membership"
-         data-slug="sindmusi" data-name="SindMusi — Sindicato dos Músicos do RJ" data-country="Brazil · native-language scan · not in the 110 directory"
-         data-row="row-sindmusi"
-         data-body="A musicians' union (1907): labour and social-security legal counsel, health-plan brokerage, education discounts. Mental health = a single 2025 workshop, not a standing service. Found by native-language search.">
-        <circle class="gm-scan-hit"   cx="300" cy="300" r="22"/>
-        <circle class="gm-scan-focus" cx="300" cy="300" r="11"/>
-        <circle class="gm-scan-halo"  cx="300" cy="300" r="8"/>
-        <circle class="gm-scan-dot"   cx="300" cy="300" r="4.5"/>
-        <text class="gm-scan-name" x="300" y="287" text-anchor="middle">Brazil</text>
-        <text class="gm-scan-cue"  x="300" y="276" text-anchor="middle">union · open ↓</text>
-      </a>
-      <a class="gm-scan" href="#row-sadem" role="link" tabindex="0"
-         aria-label="SADEM, Argentina — musicians' union found by native-language scan, not in the 110-org directory. Open details."
-         data-source="native-scan" data-service="union" data-funding="membership"
-         data-slug="sadem" data-name="SADEM — Sindicato Argentino de Músicos" data-country="Argentina · native-language scan · not in the 110 directory"
-         data-row="row-sadem"
-         data-body="A musicians' union (1945) running its own health fund, OSDEM (medical, prevention, disability cover), plus legal and welfare support. Standing mental-health counselling is not advertised. Found by native-language search.">
-        <circle class="gm-scan-hit"   cx="280" cy="360" r="22"/>
-        <circle class="gm-scan-focus" cx="280" cy="360" r="11"/>
-        <circle class="gm-scan-halo"  cx="280" cy="360" r="8"/>
-        <circle class="gm-scan-dot"   cx="280" cy="360" r="4.5"/>
-        <text class="gm-scan-name" x="280" y="378" text-anchor="middle">Argentina</text>
-        <text class="gm-scan-cue"  x="280" y="389" text-anchor="middle">union · open ↓</text>
-      </a>
-    </g>
-
-    <!-- Taiwan ring — adjacent infrastructure, pulsing -->
-    <path class="gm-tw-solid" d="M877 189 L885 190 L887 198 L884 207 L878 208 L875 199 Z" aria-hidden="true"/>
-    <circle class="tw-pulse" cx="880.6" cy="198.2" r="9" fill="var(--signal)" aria-hidden="true"/>
-    <a class="gm-node gm-node-tw" href="org-study-arts-creators-union.html"
-       aria-label="Taiwan — 藝創工會 (creators' union); the entry point">
-      <circle class="gm-node-hit"        cx="880.6" cy="198.2" r="22"/>
-      <circle class="gm-node-focus"      cx="880.6" cy="198.2" r="18"/>
-      <circle class="gm-node-ring-outer" cx="880.6" cy="198.2" r="11"/>
-      <circle class="gm-node-ring-inner" cx="880.6" cy="198.2" r="7"/>
-      <circle class="gm-node-ring-core"  cx="880.6" cy="198.2" r="2.4"/>
-      <text class="gm-node-name gm-name-tw" x="880.6" y="233" text-anchor="middle">Taiwan · 藝創工會</text>
-      <text class="gm-node-cue gm-cue-tw"  x="880.6" y="246" text-anchor="middle">the entry point</text>
-    </a>
-
-    <!-- off-map tally: 22 borderless orgs (lower-left open ocean — clear of the Brazil/Argentina scan nodes) -->
-    <g transform="translate(40, 350)" aria-hidden="true">
-      <rect class="gm-tally" x="0" y="0" width="172" height="48" rx="6"/>
-      <text class="gm-tally-num" x="16" y="33">22</text>
-      <text class="gm-tally-txt" x="64" y="21">borderless</text>
-      <text class="gm-tally-txt" x="64" y="37">no home country</text>
-    </g>
-  </svg>
+<div class="wrap"><div class="stage" aria-label="Geographic map of music mental-health organizations by country">
+  <p class="vh">Interactive map of music mental-health organizations by country; every count is also in the table below, which is the canonical way to browse them.</p>
+  <span id="gm-hint" class="vh">Arrow keys move between countries; Enter opens. The United States leads with 20; Taiwan has zero — the gap this project exists to close.</span>
+<svg class="map" id="gapmap" viewBox="120 40 884 392" role="group" aria-roledescription="organization map" aria-label="World map of music mental-health organizations by country. The United States leads with 20. Europe is a dense cluster led by Germany 8, the United Kingdom 7 and France 6. Taiwan has zero — drawn as a void the rest of the field leans toward. Every count is also listed in the table below." aria-describedby="gm-hint">
+<defs><radialGradient id="gm-sh" cx="50%" cy="42%" r="60%"><stop class="gm-sh0" offset="32%"/><stop class="gm-sh1" offset="100%"/></radialGradient><radialGradient id="gm-glow" cx="50%" cy="50%" r="50%"><stop class="gm-gl0" offset="0%"/><stop class="gm-gl1" offset="100%"/></radialGradient></defs>
+<g class="gm-grat" aria-hidden="true">
+<line x1="0.0" y1="22.2" x2="0.0" y2="402.8"/>
+<line x1="83.3" y1="22.2" x2="83.3" y2="402.8"/>
+<line x1="166.7" y1="22.2" x2="166.7" y2="402.8"/>
+<line x1="250.0" y1="22.2" x2="250.0" y2="402.8"/>
+<line x1="333.3" y1="22.2" x2="333.3" y2="402.8"/>
+<line x1="416.7" y1="22.2" x2="416.7" y2="402.8"/>
+<line x1="500.0" y1="22.2" x2="500.0" y2="402.8"/>
+<line x1="583.3" y1="22.2" x2="583.3" y2="402.8"/>
+<line x1="666.7" y1="22.2" x2="666.7" y2="402.8"/>
+<line x1="750.0" y1="22.2" x2="750.0" y2="402.8"/>
+<line x1="833.3" y1="22.2" x2="833.3" y2="402.8"/>
+<line x1="916.7" y1="22.2" x2="916.7" y2="402.8"/>
+<line x1="1000.0" y1="22.2" x2="1000.0" y2="402.8"/>
+<line x1="5.6" y1="361.1" x2="994.4" y2="361.1"/>
+<line x1="5.6" y1="305.6" x2="994.4" y2="305.6"/>
+<line x1="5.6" y1="250.0" x2="994.4" y2="250.0"/>
+<line x1="5.6" y1="194.4" x2="994.4" y2="194.4"/>
+<line x1="5.6" y1="138.9" x2="994.4" y2="138.9"/>
+<line x1="5.6" y1="83.3" x2="994.4" y2="83.3"/>
+<line x1="5.6" y1="27.8" x2="994.4" y2="27.8"/>
+</g>
+<mask id="gm-void"><rect width="1000" height="500" fill="white"/><circle cx="836.1" cy="184.2" r="12.5" fill="black"/></mask>
+<g class="gm-land" mask="url(#gm-void)" aria-hidden="true">
+<path d="M 41.7 83.3 L 55.6 72.2 L 38.9 61.1 L 66.7 52.8 L 111.1 55.6 L 155.6 55.6 L 194.4 61.1 L 236.1 58.3 L 272.2 47.2 L 280.6 63.9 L 275.0 77.8 L 305.6 83.3 L 322.2 83.3 L 333.3 97.2 L 316.7 105.6 L 344.4 111.1 L 333.3 122.2 L 313.9 125.0 L 305.6 136.1 L 294.4 138.9 L 288.9 152.8 L 275.0 163.9 L 277.8 180.6 L 266.7 177.8 L 250.0 169.4 L 236.1 169.4 L 230.6 177.8 L 230.6 188.9 L 208.3 188.9 L 205.6 186.1 L 194.4 186.1 L 186.1 169.4 L 175.0 161.1 L 163.9 152.8 L 155.6 138.9 L 155.6 116.7 L 138.9 105.6 L 125.0 91.7 L 88.9 83.3 L 75.0 86.1 L 41.7 83.3 Z"/>
+<path d="M 230.6 200.0 L 244.4 208.3 L 261.1 216.7 L 269.4 225.0 L 280.6 227.8 L 266.7 211.1 L 250.0 205.6 L 236.1 200.0 Z"/>
+<path d="M 280.6 227.8 L 300.0 219.4 L 327.8 222.2 L 361.1 250.0 L 377.8 255.6 L 402.8 263.9 L 391.7 288.9 L 366.7 319.4 L 347.2 344.4 L 327.8 358.3 L 313.9 372.2 L 297.2 394.4 L 300.0 375.0 L 302.8 355.6 L 300.0 333.3 L 302.8 300.0 L 286.1 283.3 L 275.0 263.9 L 277.8 250.0 L 283.3 236.1 Z"/>
+<path d="M 372.2 83.3 L 416.7 61.1 L 438.9 55.6 L 444.4 38.9 L 411.1 22.2 L 361.1 27.8 L 344.4 50.0 L 361.1 77.8 Z"/>
+<path d="M 475.0 130.6 L 475.0 144.4 L 483.3 150.0 L 497.2 150.0 L 500.0 141.7 L 511.1 133.3 L 508.3 127.8 L 494.4 127.8 L 494.4 119.4 L 486.1 116.7 L 497.2 113.9 L 505.6 108.3 L 513.9 105.6 L 519.4 100.0 L 522.2 91.7 L 530.6 88.9 L 516.7 88.9 L 519.4 80.6 L 530.6 72.2 L 541.7 66.7 L 550.0 58.3 L 566.7 52.8 L 577.8 55.6 L 586.1 66.7 L 577.8 83.3 L 583.3 83.3 L 611.1 66.7 L 652.8 61.1 L 638.9 97.2 L 616.7 116.7 L 611.1 122.2 L 594.4 125.0 L 580.6 125.0 L 577.8 136.1 L 566.7 138.9 L 555.6 138.9 L 552.8 133.3 L 544.4 138.9 L 550.0 125.0 L 536.1 122.2 L 536.1 133.3 L 544.4 138.9 L 541.7 127.8 L 522.2 127.8 L 508.3 130.6 L 494.4 130.6 L 491.7 138.9 Z"/>
+<path d="M 452.8 191.7 L 455.6 211.1 L 475.0 236.1 L 508.3 236.1 L 525.0 238.9 L 525.0 252.8 L 533.3 266.7 L 536.1 283.3 L 533.3 297.2 L 541.7 330.6 L 555.6 347.2 L 566.7 344.4 L 577.8 341.7 L 591.7 327.8 L 597.2 311.1 L 611.1 291.7 L 613.9 263.9 L 619.4 244.4 L 633.3 236.1 L 641.7 216.7 L 625.0 219.4 L 619.4 208.3 L 611.1 200.0 L 602.8 188.9 L 594.4 172.2 L 591.7 163.9 L 569.4 161.1 L 550.0 163.9 L 530.6 155.6 L 527.8 147.2 L 505.6 147.2 L 483.3 150.0 L 472.2 166.7 Z"/>
+<path d="M 577.8 83.3 L 611.1 66.7 L 652.8 61.1 L 694.4 50.0 L 750.0 38.9 L 805.6 36.1 L 861.1 47.2 L 897.2 52.8 L 944.4 58.3 L 972.2 61.1 L 994.4 63.9 L 1000.0 77.8 L 958.3 80.6 L 944.4 88.9 L 930.6 105.6 L 897.2 119.4 L 875.0 127.8 L 863.9 130.6 L 855.6 136.1 L 838.9 138.9 L 836.1 141.7 L 827.8 144.4 L 833.3 152.8 L 838.9 163.9 L 836.1 172.2 L 827.8 183.3 L 819.4 186.1 L 805.6 191.7 L 800.0 205.6 L 794.4 222.2 L 791.7 244.4 L 786.1 247.2 L 777.8 230.6 L 775.0 222.2 L 772.2 205.6 L 761.1 205.6 L 752.8 188.9 L 741.7 191.7 L 730.6 200.0 L 722.2 225.0 L 713.9 227.8 L 702.8 202.8 L 694.4 191.7 L 686.1 183.3 L 675.0 180.6 L 666.7 180.6 L 658.3 180.6 L 655.6 177.8 L 638.9 166.7 L 633.3 166.7 L 633.3 183.3 L 622.2 213.9 L 619.4 216.7 L 633.3 213.9 L 641.7 205.6 L 658.3 191.7 L 666.7 183.3 L 647.2 175.0 L 633.3 166.7 L 611.1 144.4 L 600.0 133.3 L 597.2 125.0 L 611.1 122.2 L 616.7 116.7 L 638.9 97.2 Z"/>
+<path d="M 891.7 125.0 L 897.2 127.8 L 891.7 138.9 L 888.9 147.2 L 880.6 152.8 L 875.0 155.6 L 883.3 147.2 L 888.9 136.1 Z"/>
+<path d="M 837.8 179.7 L 838.9 183.3 L 835.8 188.9 L 833.6 185.6 L 835.0 181.7 Z"/>
+<path d="M 850.0 144.4 L 858.3 144.4 L 858.3 152.8 L 852.8 154.2 L 850.0 150.8 Z"/>
+<path d="M 816.7 311.1 L 838.9 300.0 L 861.1 283.3 L 880.6 280.6 L 897.2 280.6 L 905.6 302.8 L 916.7 316.7 L 925.0 327.8 L 916.7 352.8 L 905.6 358.3 L 888.9 355.6 L 875.0 347.2 L 858.3 338.9 L 841.7 344.4 L 819.4 347.2 L 816.7 327.8 Z"/>
+<path d="M 980.6 347.2 L 994.4 355.6 L 988.9 366.7 L 972.2 372.2 L 966.7 369.4 L 977.8 358.3 L 977.8 350.0 Z"/>
+<path d="M 963.9 372.2 L 975.0 377.8 L 966.7 380.6 L 961.1 375.0 Z"/>
+<path d="M 433.3 68.1 L 447.2 65.3 L 461.1 68.3 L 458.3 72.5 L 438.9 72.8 Z"/>
+<path d="M 486.1 87.5 L 494.4 90.3 L 500.0 101.4 L 502.8 108.3 L 488.9 111.1 L 491.7 102.8 L 486.1 98.6 Z"/>
+<path d="M 472.2 98.6 L 483.3 97.2 L 483.3 105.6 L 472.2 105.6 Z"/>
+</g>
+<circle class="gm-glow" cx="836.1" cy="184.2" r="150" aria-hidden="true"/>
+<path class="gm-thread" d="M 227.8 141.7 Q 531.9 75.7 821.1 182.2" aria-hidden="true"/>
+<path class="gm-thread" style="opacity:0.42" d="M 823.1 184.2 q -9 -4 -13 -4" aria-hidden="true"/>
+<path class="gm-thread" style="opacity:0.32" d="M 823.1 184.2 q -11 1 -15 1" aria-hidden="true"/>
+<path class="gm-thread" style="opacity:0.24" d="M 823.1 184.2 q -8 5 -12 5" aria-hidden="true"/>
+<circle class="gm-tick" cx="227.8" cy="141.7" r="1.5" aria-hidden="true"/>
+<a class="gm-c gm-big" href="?country=United+States#all-114" role="link" tabindex="-1" data-country="United States" data-count="20" aria-label="United States — 20 organizations. Filter the table."><title>United States — 20 organizations</title><circle class="gm-hit" cx="245.6" cy="142.9" r="38.0"/><circle class="gm-c-disc" cx="245.6" cy="142.9" r="32.00"/><text class="gm-num" x="245.6" y="142.9" font-size="26" aria-hidden="true">20</text><text class="gm-cue" x="245.6" y="103.9" aria-hidden="true">UNITED STATES</text></a>
+<circle class="gm-tick" cx="528.9" cy="107.8" r="1.5" aria-hidden="true"/>
+<a class="gm-c gm-big" href="?country=Germany#all-114" role="link" tabindex="-1" data-country="Germany" data-count="8" aria-label="Germany — 8 organizations. Filter the table."><title>Germany — 8 organizations</title><circle class="gm-hit" cx="554.4" cy="100.2" r="26.2"/><circle class="gm-c-disc" cx="554.4" cy="100.2" r="20.24"/><text class="gm-num" x="554.4" y="100.2" font-size="17" aria-hidden="true">8</text><text class="gm-cue" x="554.4" y="73.0" aria-hidden="true">GERMANY</text></a>
+<circle class="gm-tick" cx="495.8" cy="101.4" r="1.5" aria-hidden="true"/>
+<a class="gm-c gm-big" href="?country=United+Kingdom#all-114" role="link" tabindex="-1" data-country="United Kingdom" data-count="7" aria-label="United Kingdom — 7 organizations. Filter the table."><title>United Kingdom — 7 organizations</title><circle class="gm-hit" cx="502.1" cy="92.7" r="24.9"/><circle class="gm-c-disc" cx="502.1" cy="92.7" r="18.93"/><text class="gm-num" x="502.1" y="92.7" font-size="17" aria-hidden="true">7</text><text class="gm-cue" x="502.1" y="66.7" aria-hidden="true">UNITED KINGDOM</text></a>
+<circle class="gm-tick" cx="506.7" cy="120.6" r="1.5" aria-hidden="true"/>
+<a class="gm-c gm-big" href="?country=France#all-114" role="link" tabindex="-1" data-country="France" data-count="6" aria-label="France — 6 organizations. Filter the table."><title>France — 6 organizations</title><circle class="gm-hit" cx="514.4" cy="139.1" r="23.5"/><circle class="gm-c-disc" cx="514.4" cy="139.1" r="17.53"/><text class="gm-num" x="514.4" y="139.1" font-size="17" aria-hidden="true">6</text><text class="gm-cue" x="514.4" y="114.6" aria-hidden="true">FRANCE</text></a>
+<circle class="gm-tick" cx="719.4" cy="188.9" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=India#all-114" role="link" tabindex="-1" data-country="India" data-count="3" aria-label="India — 3 organizations. Filter the table."><title>India — 3 organizations</title><circle class="gm-hit" cx="726.4" cy="188.6" r="22.0"/><circle class="gm-c-disc" cx="726.4" cy="188.6" r="12.39"/><text class="gm-num" x="726.4" y="188.6" font-size="13" aria-hidden="true">3</text><text class="gm-cue" x="726.4" y="169.2" aria-hidden="true">INDIA</text></a>
+<circle class="gm-tick" cx="872.2" cy="319.4" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=Australia#all-114" role="link" tabindex="-1" data-country="Australia" data-count="3" aria-label="Australia — 3 organizations. Filter the table."><title>Australia — 3 organizations</title><circle class="gm-hit" cx="870.4" cy="312.8" r="22.0"/><circle class="gm-c-disc" cx="870.4" cy="312.8" r="12.39"/><text class="gm-num" x="870.4" y="312.8" font-size="13" aria-hidden="true">3</text><text class="gm-cue" x="870.4" y="293.4" aria-hidden="true">AUSTRALIA</text></a>
+<circle class="gm-tick" cx="540.3" cy="117.8" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=Austria#all-114" role="link" tabindex="-1" data-country="Austria" data-count="3" aria-label="Austria — 3 organizations. Filter the table."><title>Austria — 3 organizations</title><circle class="gm-hit" cx="552.8" cy="128.6" r="22.0"/><circle class="gm-c-disc" cx="552.8" cy="128.6" r="12.39"/><text class="gm-num" x="552.8" y="128.6" font-size="13" aria-hidden="true">3</text><text class="gm-cue" x="552.8" y="109.2" aria-hidden="true">AUSTRIA</text></a>
+<circle class="gm-tick" cx="447.2" cy="69.7" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=Iceland#all-114" role="link" tabindex="-1" data-country="Iceland" data-count="3" aria-label="Iceland — 3 organizations. Filter the table."><title>Iceland — 3 organizations</title><circle class="gm-hit" cx="453.9" cy="71.7" r="22.0"/><circle class="gm-c-disc" cx="453.9" cy="71.7" r="12.39"/><text class="gm-num" x="453.9" y="71.7" font-size="13" aria-hidden="true">3</text><text class="gm-cue" x="453.9" y="52.3" aria-hidden="true">ICELAND</text></a>
+<circle class="gm-tick" cx="569.4" cy="122.5" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=Romania#all-114" role="link" tabindex="-1" data-country="Romania" data-count="3" aria-label="Romania — 3 organizations. Filter the table."><title>Romania — 3 organizations</title><circle class="gm-hit" cx="581.3" cy="127.4" r="22.0"/><circle class="gm-c-disc" cx="581.3" cy="127.4" r="12.39"/><text class="gm-num" x="581.3" y="127.4" font-size="13" aria-hidden="true">3</text><text class="gm-cue" x="581.3" y="108.0" aria-hidden="true">ROMANIA</text></a>
+<circle class="gm-tick" cx="522.8" cy="120.0" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=Switzerland#all-114" role="link" tabindex="-1" data-country="Switzerland" data-count="3" aria-label="Switzerland — 3 organizations. Filter the table."><title>Switzerland — 3 organizations</title><circle class="gm-hit" cx="531.6" cy="121.0" r="22.0"/><circle class="gm-c-disc" cx="531.6" cy="121.0" r="12.39"/><text class="gm-num" x="531.6" y="121.0" font-size="13" aria-hidden="true">3</text><text class="gm-cue" x="531.6" y="101.6" aria-hidden="true">SWITZERLAND</text></a>
+<circle class="gm-tick" cx="233.3" cy="94.4" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=Canada#all-114" role="link" tabindex="-1" data-country="Canada" data-count="2" aria-label="Canada — 2 organizations. Filter the table."><title>Canada — 2 organizations</title><circle class="gm-hit" cx="238.9" cy="95.3" r="22.0"/><circle class="gm-c-disc" cx="238.9" cy="95.3" r="10.12"/><text class="gm-num" x="238.9" y="95.3" font-size="13" aria-hidden="true">2</text><text class="gm-cue" x="238.9" y="78.2" aria-hidden="true">CANADA</text></a>
+<circle class="gm-tick" cx="512.5" cy="109.4" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=Belgium#all-114" role="link" tabindex="-1" data-country="Belgium" data-count="2" aria-label="Belgium — 2 organizations. Filter the table."><title>Belgium — 2 organizations</title><circle class="gm-hit" cx="510.3" cy="114.5" r="22.0"/><circle class="gm-c-disc" cx="510.3" cy="114.5" r="10.12"/><text class="gm-num" x="510.3" y="114.5" font-size="13" aria-hidden="true">2</text><text class="gm-cue" x="510.3" y="97.4" aria-hidden="true">BELGIUM</text></a>
+<circle class="gm-tick" cx="527.8" cy="94.4" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=Denmark#all-114" role="link" tabindex="-1" data-country="Denmark" data-count="2" aria-label="Denmark — 2 organizations. Filter the table."><title>Denmark — 2 organizations</title><circle class="gm-hit" cx="525.4" cy="84.2" r="22.0"/><circle class="gm-c-disc" cx="525.4" cy="84.2" r="10.12"/><text class="gm-num" x="525.4" y="84.2" font-size="13" aria-hidden="true">2</text><text class="gm-cue" x="525.4" y="67.0" aria-hidden="true">DENMARK</text></a>
+<circle class="gm-tick" cx="534.7" cy="133.3" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=Italy#all-114" role="link" tabindex="-1" data-country="Italy" data-count="2" aria-label="Italy — 2 organizations. Filter the table."><title>Italy — 2 organizations</title><circle class="gm-hit" cx="535.5" cy="140.2" r="22.0"/><circle class="gm-c-disc" cx="535.5" cy="140.2" r="10.12"/><text class="gm-num" x="535.5" y="140.2" font-size="13" aria-hidden="true">2</text><text class="gm-cue" x="535.5" y="123.1" aria-hidden="true">ITALY</text></a>
+<circle class="gm-tick" cx="888.9" cy="143.1" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=Japan#all-114" role="link" tabindex="-1" data-country="Japan" data-count="2" aria-label="Japan — 2 organizations. Filter the table."><title>Japan — 2 organizations</title><circle class="gm-hit" cx="884.4" cy="146.5" r="22.0"/><circle class="gm-c-disc" cx="884.4" cy="146.5" r="10.12"/><text class="gm-num" x="884.4" y="146.5" font-size="13" aria-hidden="true">2</text><text class="gm-cue" x="884.4" y="129.4" aria-hidden="true">JAPAN</text></a>
+<circle class="gm-tick" cx="566.7" cy="96.4" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=Lithuania#all-114" role="link" tabindex="-1" data-country="Lithuania" data-count="2" aria-label="Lithuania — 2 organizations. Filter the table."><title>Lithuania — 2 organizations</title><circle class="gm-hit" cx="578.0" cy="98.2" r="22.0"/><circle class="gm-c-disc" cx="578.0" cy="98.2" r="10.12"/><text class="gm-num" x="578.0" y="98.2" font-size="13" aria-hidden="true">2</text><text class="gm-cue" x="578.0" y="81.1" aria-hidden="true">LITHUANIA</text></a>
+<circle class="gm-tick" cx="216.7" cy="184.4" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=Mexico#all-114" role="link" tabindex="-1" data-country="Mexico" data-count="2" aria-label="Mexico — 2 organizations. Filter the table."><title>Mexico — 2 organizations</title><circle class="gm-hit" cx="222.3" cy="184.4" r="22.0"/><circle class="gm-c-disc" cx="222.3" cy="184.4" r="10.12"/><text class="gm-num" x="222.3" y="184.4" font-size="13" aria-hidden="true">2</text><text class="gm-cue" x="222.3" y="167.3" aria-hidden="true">MEXICO</text></a>
+<circle class="gm-tick" cx="514.7" cy="103.9" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=Netherlands#all-114" role="link" tabindex="-1" data-country="Netherlands" data-count="2" aria-label="Netherlands — 2 organizations. Filter the table."><title>Netherlands — 2 organizations</title><circle class="gm-hit" cx="522.2" cy="101.9" r="22.0"/><circle class="gm-c-disc" cx="522.2" cy="101.9" r="10.12"/><text class="gm-num" x="522.2" y="101.9" font-size="13" aria-hidden="true">2</text><text class="gm-cue" x="522.2" y="84.7" aria-hidden="true">NETHERLANDS</text></a>
+<circle class="gm-tick" cx="980.6" cy="366.7" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=New+Zealand#all-114" role="link" tabindex="-1" data-country="New Zealand" data-count="2" aria-label="New Zealand — 2 organizations. Filter the table."><title>New Zealand — 2 organizations</title><circle class="gm-hit" cx="977.0" cy="362.2" r="22.0"/><circle class="gm-c-disc" cx="977.0" cy="362.2" r="10.12"/><text class="gm-num" x="977.0" y="362.2" font-size="13" aria-hidden="true">2</text><text class="gm-cue" x="977.0" y="345.1" aria-hidden="true">NEW ZEALAND</text></a>
+<circle class="gm-tick" cx="476.4" cy="140.3" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=Portugal#all-114" role="link" tabindex="-1" data-country="Portugal" data-count="2" aria-label="Portugal — 2 organizations. Filter the table."><title>Portugal — 2 organizations</title><circle class="gm-hit" cx="477.6" cy="136.6" r="22.0"/><circle class="gm-c-disc" cx="477.6" cy="136.6" r="10.12"/><text class="gm-num" x="477.6" y="136.6" font-size="13" aria-hidden="true">2</text><text class="gm-cue" x="477.6" y="119.5" aria-hidden="true">PORTUGAL</text></a>
+<circle class="gm-tick" cx="322.2" cy="355.6" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=Argentina#all-114" role="link" tabindex="-1" data-country="Argentina" data-count="1" aria-label="Argentina — 1 organization. Filter the table."><title>Argentina — 1 organization</title><circle class="gm-hit" cx="326.0" cy="354.3" r="22.0"/><circle class="gm-c-disc" cx="326.0" cy="354.3" r="7.16"/><text class="gm-num" x="326.0" y="354.3" font-size="11" aria-hidden="true">1</text><text class="gm-cue" x="326.0" y="340.1" aria-hidden="true">ARGENTINA</text></a>
+<circle class="gm-tick" cx="294.4" cy="237.2" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=Colombia#all-114" role="link" tabindex="-1" data-country="Colombia" data-count="1" aria-label="Colombia — 1 organization. Filter the table."><title>Colombia — 1 organization</title><circle class="gm-hit" cx="298.4" cy="236.8" r="22.0"/><circle class="gm-c-disc" cx="298.4" cy="236.8" r="7.16"/><text class="gm-num" x="298.4" y="236.8" font-size="11" aria-hidden="true">1</text><text class="gm-cue" x="298.4" y="222.7" aria-hidden="true">COLOMBIA</text></a>
+<circle class="gm-tick" cx="552.8" cy="118.9" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=Hungary#all-114" role="link" tabindex="-1" data-country="Hungary" data-count="1" aria-label="Hungary — 1 organization. Filter the table."><title>Hungary — 1 organization</title><circle class="gm-hit" cx="563.3" cy="117.2" r="22.0"/><circle class="gm-c-disc" cx="563.3" cy="117.2" r="7.16"/><text class="gm-num" x="563.3" y="117.2" font-size="11" aria-hidden="true">1</text><text class="gm-cue" x="563.3" y="103.1" aria-hidden="true">HUNGARY</text></a>
+<circle class="gm-tick" cx="477.8" cy="101.7" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=Ireland#all-114" role="link" tabindex="-1" data-country="Ireland" data-count="1" aria-label="Ireland — 1 organization. Filter the table."><title>Ireland — 1 organization</title><circle class="gm-hit" cx="477.6" cy="106.2" r="22.0"/><circle class="gm-c-disc" cx="477.6" cy="106.2" r="7.16"/><text class="gm-num" x="477.6" y="106.2" font-size="11" aria-hidden="true">1</text><text class="gm-cue" x="477.6" y="92.1" aria-hidden="true">IRELAND</text></a>
+<circle class="gm-tick" cx="569.4" cy="330.6" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=South+Africa#all-114" role="link" tabindex="-1" data-country="South Africa" data-count="1" aria-label="South Africa — 1 organization. Filter the table."><title>South Africa — 1 organization</title><circle class="gm-hit" cx="573.0" cy="328.6" r="22.0"/><circle class="gm-c-disc" cx="573.0" cy="328.6" r="7.16"/><text class="gm-num" x="573.0" y="328.6" font-size="11" aria-hidden="true">1</text><text class="gm-cue" x="573.0" y="314.5" aria-hidden="true">SOUTH AFRICA</text></a>
+<circle class="gm-tick" cx="489.7" cy="138.1" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=Spain#all-114" role="link" tabindex="-1" data-country="Spain" data-count="1" aria-label="Spain — 1 organization. Filter the table."><title>Spain — 1 organization</title><circle class="gm-hit" cx="487.3" cy="146.6" r="22.0"/><circle class="gm-c-disc" cx="487.3" cy="146.6" r="7.16"/><text class="gm-num" x="487.3" y="146.6" font-size="11" aria-hidden="true">1</text><text class="gm-cue" x="487.3" y="132.5" aria-hidden="true">SPAIN</text></a>
+<circle class="gm-tick" cx="541.7" cy="77.8" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=Sweden#all-114" role="link" tabindex="-1" data-country="Sweden" data-count="1" aria-label="Sweden — 1 organization. Filter the table."><title>Sweden — 1 organization</title><circle class="gm-hit" cx="544.4" cy="72.5" r="22.0"/><circle class="gm-c-disc" cx="544.4" cy="72.5" r="7.16"/><text class="gm-num" x="544.4" y="72.5" font-size="11" aria-hidden="true">1</text><text class="gm-cue" x="544.4" y="58.4" aria-hidden="true">SWEDEN</text></a>
+<circle class="gm-tick" cx="780.6" cy="208.3" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=Thailand#all-114" role="link" tabindex="-1" data-country="Thailand" data-count="1" aria-label="Thailand — 1 organization. Filter the table."><title>Thailand — 1 organization</title><circle class="gm-hit" cx="784.2" cy="206.7" r="22.0"/><circle class="gm-c-disc" cx="784.2" cy="206.7" r="7.16"/><text class="gm-num" x="784.2" y="206.7" font-size="11" aria-hidden="true">1</text><text class="gm-cue" x="784.2" y="192.6" aria-hidden="true">THAILAND</text></a>
+<circle class="gm-tick" cx="369.4" cy="283.3" r="1.5" aria-hidden="true"/>
+<a class="gm-c" href="?country=Brazil#all-114" role="link" tabindex="-1" data-country="Brazil" data-count="1" aria-label="Brazil — 1 organization. Filter the table."><title>Brazil — 1 organization</title><circle class="gm-hit" cx="373.4" cy="282.5" r="22.0"/><circle class="gm-c-disc" cx="373.4" cy="282.5" r="7.16"/><text class="gm-num" x="373.4" y="282.5" font-size="11" aria-hidden="true">1</text><text class="gm-cue" x="373.4" y="268.3" aria-hidden="true">BRAZIL</text></a>
+<a class="gm-scan" href="#row-muj" role="link" tabindex="-1" data-source="native-scan" data-service="union" data-funding="membership" data-slug="muj" data-name="Musicians' Union of Japan (日本音楽家ユニオン)" data-country="Japan · native-language scan · not in the 110 directory" data-row="row-muj" data-body="Music-specific union found by native-language search, outside the 110-org Backline directory. See its row in the table for the verified detail." aria-label="Japan — music-specific union found beyond the directory. Details in the table."><title>Japan — union found beyond the directory</title><circle class="gm-hit" cx="902.9" cy="155.1" r="22"/><circle class="gm-scan-ring" cx="902.9" cy="155.1" r="5"/><circle class="gm-scan-dot" cx="902.9" cy="155.1" r="1.7"/><text class="gm-cue" x="902.9" y="143.1" aria-hidden="true">JAPAN · BEYOND</text></a>
+<a class="gm-scan" href="#row-sutm" role="link" tabindex="-1" data-source="native-scan" data-service="union" data-funding="membership" data-slug="sutm" data-name="SUTM — Sindicato Único de Trabajadores de la Música" data-country="Mexico · native-language scan · not in the 110 directory" data-row="row-sutm" data-body="Music-specific union found by native-language search, outside the 110-org Backline directory. See its row in the table for the verified detail." aria-label="Mexico — music-specific union found beyond the directory. Details in the table."><title>Mexico — union found beyond the directory</title><circle class="gm-hit" cx="229.7" cy="195.4" r="22"/><circle class="gm-scan-ring" cx="229.7" cy="195.4" r="5"/><circle class="gm-scan-dot" cx="229.7" cy="195.4" r="1.7"/><text class="gm-cue" x="229.7" y="183.4" aria-hidden="true">MEXICO · BEYOND</text></a>
+<a class="gm-scan" href="#row-sindmusi" role="link" tabindex="-1" data-source="native-scan" data-service="union" data-funding="membership" data-slug="sindmusi" data-name="SindMusi — Sindicato dos Músicos do RJ" data-country="Brazil · native-language scan · not in the 110 directory" data-row="row-sindmusi" data-body="Music-specific union found by native-language search, outside the 110-org Backline directory. See its row in the table for the verified detail." aria-label="Brazil — music-specific union found beyond the directory. Details in the table."><title>Brazil — union found beyond the directory</title><circle class="gm-hit" cx="381.4" cy="295.3" r="22"/><circle class="gm-scan-ring" cx="381.4" cy="295.3" r="5"/><circle class="gm-scan-dot" cx="381.4" cy="295.3" r="1.7"/><text class="gm-cue" x="381.4" y="283.3" aria-hidden="true">BRAZIL · BEYOND</text></a>
+<a class="gm-scan" href="#row-sadem" role="link" tabindex="-1" data-source="native-scan" data-service="union" data-funding="membership" data-slug="sadem" data-name="SADEM — Sindicato Argentino de Músicos" data-country="Argentina · native-language scan · not in the 110 directory" data-row="row-sadem" data-body="Music-specific union found by native-language search, outside the 110-org Backline directory. See its row in the table for the verified detail." aria-label="Argentina — music-specific union found beyond the directory. Details in the table."><title>Argentina — union found beyond the directory</title><circle class="gm-hit" cx="334.2" cy="366.6" r="22"/><circle class="gm-scan-ring" cx="334.2" cy="366.6" r="5"/><circle class="gm-scan-dot" cx="334.2" cy="366.6" r="1.7"/><text class="gm-cue" x="334.2" y="354.6" aria-hidden="true">ARGENTINA · BEYOND</text></a>
+<g class="gm-labels" aria-hidden="true">
+<text x="726.4" y="170.2" text-anchor="middle">INDIA</text>
+<text x="924.5" y="138.4" text-anchor="middle">JAPAN</text>
+<text x="784.2" y="193.6" text-anchor="middle">THAILAND</text>
+</g>
+<a class="gm-void" href="org-study-arts-creators-union.html" role="link" tabindex="0" aria-label="Taiwan — 0 organizations. The gap this project exists to close; opens 藝創工會, the adjacent creators’ union.">
+<title>Taiwan — 0 organizations. The gap.</title>
+<circle class="gm-ripple gm-ripple0" cx="836.1" cy="184.2" r="30"/>
+<circle class="gm-ripple gm-ripple1" cx="836.1" cy="184.2" r="24"/>
+<circle class="gm-ripple gm-ripple2" cx="836.1" cy="184.2" r="18"/>
+<circle class="gm-hit" cx="836.1" cy="184.2" r="24"/>
+<circle class="gm-void-paper" cx="836.1" cy="184.2" r="12.5"/>
+<circle class="gm-void-sh" cx="836.1" cy="184.2" r="12.5"/>
+<circle class="gm-void-rim" cx="836.1" cy="184.2" r="12.5"/>
+<text class="gm-void-0" x="836.1" y="184.2" aria-hidden="true">0</text>
+<text class="gm-void-label" x="836.1" y="211.2" aria-hidden="true">TAIWAN</text></a>
+<text class="gm-void-cap" x="836.1" y="225.2" text-anchor="middle" aria-hidden="true">drawn pulled toward the gap · ticks = true location</text>
+<g class="gm-leg" aria-hidden="true">
+<circle class="gm-leg-c" cx="416.7" cy="306.9" r="32.00"/><text class="gm-leg-t" x="456.7" y="278.9">20</text>
+<circle class="gm-leg-c" cx="416.7" cy="321.4" r="17.53"/><text class="gm-leg-t" x="456.7" y="307.8">6</text>
+<circle class="gm-leg-c" cx="416.7" cy="331.7" r="7.16"/><text class="gm-leg-t" x="456.7" y="328.6">1</text>
+<text class="gm-leg-cap" x="392.7" y="351.9">ORGS = NODE AREA</text></g>
+<g class="gm-tally" transform="translate(126,386)" aria-hidden="true"><rect class="gm-tally-box" x="0" y="0" width="158" height="38" rx="5"/><text class="gm-tally-num" x="12" y="26">22</text><text class="gm-tally-txt" x="46" y="16">WORLDWIDE /</text><text class="gm-tally-txt" x="46" y="29">MULTI-COUNTRY</text></g>
+</svg>
 
   <!-- pre-opened worked-example peek (Backline) -->
-  <div class="peek show" id="peek" role="region" aria-label="Organization preview" tabindex="-1" data-slug="backline" data-row="row-backline">
+    <div class="peek" id="peek" role="region" aria-label="Organization preview" tabindex="-1">
     <button class="peek-close" id="peekClose" aria-label="Close preview">✕</button>
-    <div class="peek-eye" id="peekEye">United States · est. 2019 · the most transferable blueprint</div>
-    <h3 id="peekName">Backline</h3>
-    <p id="peekBody">Case management + a vetted provider network, ~100% donation-funded, 8 staff. A referral model scales without building clinical services in-house — the closest thing to a startup blueprint for a Taiwan org. Its Global Hub has zero Taiwan listings.</p>
+    <div class="peek-eye" id="peekEye"></div>
+    <h3 id="peekName"></h3>
+    <p id="peekBody"></p>
     <div class="peek-actions">
-      <a href="#row-backline" id="peekLocate">Locate in table ↓</a>
-      <a href="org-study-backline.html" id="peekStudy">Open Org Study →</a>
+      <a href="#all-114" id="peekLocate">Locate in table ↓</a>
+      <a href="#" id="peekStudy" style="display:none">Open Org Study →</a>
     </div>
   </div>
 
-  <p class="mapcap" aria-label="Map legend">
-    <span class="gm-key-dot"></span> <b style="color:var(--off-black)">Directory org</b> — Backline Global Resource Hub (dot size = count); the four ringed names link to their <b style="color:var(--off-black)">Org Study</b>.<br>
-    <span class="gm-key-scan"></span> <b style="color:var(--abroad-text)">Found beyond the directory</b> — music-specific union, native-language scan; tap for details.<br>
-    <span style="display:inline-block;width:.6em;height:.6em;border-radius:50%;border:2px solid var(--signal);vertical-align:baseline;margin:0 .12em"></span> <b style="color:var(--signal)">Taiwan · <span class="cjk cjk-inline">藝創工會</span></b> — the closest yet — not musicians / music-industry-specific.
-  </p>
+    <div class="mapcap" aria-label="Map legend and how to read">
+    <p class="mapcap-how"><b>How to read</b> — each circle is one country; its <b>area</b> = music &amp; mental-health organizations based there (√-scaled, so compare areas, not widths). Asian countries are named on the map; elsewhere, hover or focus a circle to identify it. Discs are drawn <b>pulled toward Taiwan</b> to show the gap's pull — hairline ticks mark each true location.<span class="cjk">每個圓代表一個國家，面積＝該國音樂與心理健康相關組織數（平方根縮放，請比較面積而非寬度）。亞洲國家於圖上標出國名，其餘地區移標或聚焦即可辨識。圓點向台灣偏移，以呈現這個缺口的「拉力」；細點標示各國真實位置。</span></p>
+    <p class="mapcap-keys"><span class="gm-key gm-key-disc"></span> Directory org count &nbsp;·&nbsp; <span class="gm-key gm-key-void"></span> <b style="color:var(--signal)">Taiwan — 0, the gap</b> &nbsp;·&nbsp; <span class="gm-key gm-key-scan"></span> <b style="color:var(--abroad-text)">found beyond the directory</b> (native-language scan) &nbsp;·&nbsp; <span class="gm-key gm-key-tally">22</span> worldwide / multi-country (no single home)</p>
+    <p class="mapcap-total"><b>114</b> organizations total = <b>110</b> in the Backline directory (88 placed by home country on the map + 22 worldwide / multi-country, shown off-map) + <b>4</b> found beyond by native-language scan.<a class="conf" href="#ov-src-1">1</a></p>
+  </div>
 
   <!-- v4.2: the separate 藝創工會 "entry point" block + the Korea+Taiwan gapnote were removed — the map's
        Taiwan node (purple, labelled "the entry point", linking to the org study) is the single entry now;
@@ -816,12 +712,12 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
   // org rows only — exclude the native-scan group separator
   var rows = Array.prototype.slice.call(body.querySelectorAll('tr')).filter(function(r){ return !r.classList.contains('grp'); });
   // directory studied orgs carry data-service; the Taiwan node + context dots do not (never dimmed).
-  var nodes = Array.prototype.slice.call(map.querySelectorAll('.gm-node'));
-  var namedNodes = nodes.filter(function(nd){ return nd.hasAttribute('data-service'); });
-  // native-language-scan nodes — a SEPARATE set: filterable, but never confused with the directory census.
+  // v4.3: per-country COUNT nodes (.gm-c) link to the filtered table; native-scan rings (.gm-scan) keep the peek; the Taiwan void (.gm-void) links to the entry-point org study.
+  var countryNodes = Array.prototype.slice.call(map.querySelectorAll('.gm-c'));
   var scanNodes = Array.prototype.slice.call(map.querySelectorAll('.gm-scan'));
-  var filterNodes = namedNodes.concat(scanNodes);   // both dim under an active filter
-  var peekNodes   = namedNodes.concat(scanNodes);   // both open the shared peek
+  var voidNode = map.querySelector('.gm-void');
+  var filterNodes = scanNodes.slice();   // only scan rings dim under source/service/funding (country aggregates never dim)
+  var peekNodes   = scanNodes.slice();   // only scan rings use the shared peek
   var resultEl = document.getElementById('result');
   var tableCap = document.getElementById('tableCap');
   var clearAll = document.getElementById('clearAll');
@@ -895,12 +791,16 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
       grp.classList.toggle('hidden', !anyNative);
     }
     var anyFilter = !(state.source==='all'&&state.service==='all'&&state.funding==='all'&&state.country==='all');
-    // dim non-matching interactive nodes (directory studied + native scan). Context dots never dim.
+    // dim non-matching scan rings; country aggregates never dim on service/funding.
     filterNodes.forEach(function(nd){
       if(!matches(nd)) nd.classList.add('gm-dimmed'); else nd.classList.remove('gm-dimmed');
     });
-    // isolate the native scan → fade the directory's aggregate geographic context so the 4 read clearly
-    if(map) map.classList.toggle('src-native', state.source==='native-scan');
+    // country count-nodes: highlight the selected country, soften the rest
+    countryNodes.forEach(function(nd){
+      var sel = state.country!=='all' && nd.getAttribute('data-country')===state.country;
+      nd.classList.toggle('gm-c-sel', sel);
+      nd.classList.toggle('gm-dimmed', state.country!=='all' && !sel);
+    });
     if(countrySel) countrySel.classList.toggle('on', state.country!=='all');
 
     var denom = baseRows().length;                  // 114 / 110 / 4 — never a blend
@@ -1060,13 +960,35 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
     }
   });
 
+  // ===== v4.3 COUNTRY COUNT-NODES → filter the table to that country + scroll (href degrades w/o JS) =====
+  countryNodes.forEach(function(nd){
+    function go(){ var c=nd.getAttribute('data-country'); if(countrySel) countrySel.value=c; state.country=c; apply(); var t=document.getElementById('all-114'); if(t) t.scrollIntoView({behavior:'smooth',block:'start'}); }
+    nd.addEventListener('click', function(e){ e.preventDefault(); go(); });
+    nd.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); } });
+  });
+  // ===== MAP ROVING TABINDEX — the map is ONE tab stop; arrows move between marks; Enter activates =====
+  (function(){
+    var marks = countryNodes.concat(scanNodes); if(voidNode) marks.push(voidNode);
+    if(!marks.length) return;
+    function setRove(i){ marks.forEach(function(m,k){ m.setAttribute('tabindex', k===i?'0':'-1'); }); }
+    marks.forEach(function(m,i){
+      m.addEventListener('keydown', function(e){
+        var n=-1;
+        if(e.key==='ArrowRight'||e.key==='ArrowDown') n=(i+1)%marks.length;
+        else if(e.key==='ArrowLeft'||e.key==='ArrowUp') n=(i-1+marks.length)%marks.length;
+        else if(e.key==='Home') n=0; else if(e.key==='End') n=marks.length-1; else return;
+        e.preventDefault(); setRove(n); marks[n].focus();
+      });
+    });
+    window.__gmRove = setRove;
+  })();
   if(peekClose) peekClose.addEventListener('click', function(){ closePeek(); });
   document.addEventListener('keydown', function(e){ if(e.key==='Escape') closePeek(); });
   // tap-outside closes the pinned peek
   document.addEventListener('click', function(e){
     if(!peek || !peek.classList.contains('show') || previewing) return;
     if(peek.contains(e.target)) return;
-    if(e.target.closest && (e.target.closest('.gm-node')||e.target.closest('.gm-scan'))) return; // node clicks handled above
+    if(e.target.closest && (e.target.closest('.gm-c')||e.target.closest('.gm-scan')||e.target.closest('.gm-void'))) return; // node clicks handled above
     closePeek();
   });
 
@@ -1102,11 +1024,12 @@ table.tbl tbody tr[data-active] td:first-child{font-weight:700;color:var(--signa
   // MOBILE (≤680px): degrade the map to a static, non-interactive image — drop the SVG from the AT
   // tree and its links from the focus order so the sub-44px markers aren't tappable controls; the
   // table is the instrument (§13). Pointer-events are killed in CSS; re-evaluated on resize.
-  var allMapLinks = nodes.concat(scanNodes);
+  var allMapLinks = countryNodes.concat(scanNodes); if(voidNode) allMapLinks.push(voidNode);
   function setMapMode(){
     var small = window.matchMedia('(max-width:680px)').matches;
     if(map){ if(small) map.setAttribute('aria-hidden','true'); else map.removeAttribute('aria-hidden'); }
-    allMapLinks.forEach(function(a){ a.setAttribute('tabindex', small?'-1':'0'); });
+    if(small){ allMapLinks.forEach(function(a){ a.setAttribute('tabindex','-1'); }); }
+    else if(window.__gmRove){ var e=voidNode?allMapLinks.indexOf(voidNode):0; window.__gmRove(e<0?0:e); }
   }
   setMapMode();
   var mmTimer; window.addEventListener('resize', function(){ clearTimeout(mmTimer); mmTimer=setTimeout(setMapMode, 200); });
