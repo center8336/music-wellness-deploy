@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Policy study: Thailand — building the stage before the safety net · MH&W Policy Study">
+  <meta name="description" content="Policy scan: Thailand — building the stage before the safety net · MH&W Research">
   <title>Policy: Thailand · MH&W</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -39,33 +39,24 @@
       --bg-card-dark: var(--off-black);
       --border-light: rgba(0,0,0,0.07);
       --border-dark: rgba(255,255,255,0.1);
-      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
-      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+      --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
       --font-mono: 'Space Mono', 'Courier New', monospace;
-      --font-cjk: 'Noto Serif TC', serif;
       --font: var(--font-body);
       --text-hero: clamp(3.5rem, 8vw, 6.5rem);
       --text-h1: clamp(2rem, 4.5vw, 3rem);
       --text-h2: clamp(1.5rem, 3vw, 2rem);
-      --text-h3: clamp(1.3rem, 1.1rem + 1vw, 1.65rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
       --text-body: 1rem;
       --text-sm: 0.875rem;
       --text-xs: 0.75rem;
-      /* ── DIA-GRADE READING SCALE (calibrated to Dia browser, serif-corrected) ── */
-      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;
-      --lh-prose:1.7;--wt-prose:440;
-      --measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;
-      --label-ink:var(--graphite);
       --ease: cubic-bezier(0.4, 0, 0.2, 1);
       --dur: 0.3s;
       --dur-slow: 0.6s;
-      --dur-slower: 1.1s;
-      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
       --radius: 4px;
       --radius-lg: 6px;
       --max-w: 1100px;
-      --max-w-text: 64ch;
-      --measure: 64ch;
+      --max-w-text: 660px;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -80,17 +71,10 @@
       font-family: var(--font);
       background: var(--bg-light);
       color: var(--charcoal);
-      line-height: var(--lh-prose);
-      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
-      font-weight: var(--wt-prose);
-      text-wrap: pretty;
-      font-optical-sizing: auto;
+      line-height: 1.7;
+      font-size: var(--text-body);
       -webkit-font-smoothing: antialiased;
     }
-    p { overflow-wrap: anywhere; }
-    .cjk { font-family: var(--font-cjk); }
-    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
-    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
 
     ::selection { background: var(--signal); color: var(--white); }
 
@@ -117,7 +101,7 @@
       font-family: var(--font-mono);
       font-size: 0.85rem;
       font-weight: 400;
-      color: var(--label-ink);
+      color: var(--grey);
       text-decoration: none;
       text-transform: uppercase;
       letter-spacing: 0.04em;
@@ -151,7 +135,7 @@
     /* Mobile nav brand */
     .nav-topbar { display: none; }
     .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
-    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:0.5rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:0.2em; }
 
     /* ===== PAGE SIDEBAR ===== */
     .page-sidebar {
@@ -184,7 +168,7 @@
       user-select: none;
     }
 
-    .page-num:hover { color: var(--label-ink); }
+    .page-num:hover { color: var(--grey); }
     .page-num.active { color: var(--black); font-weight: 700; }
 
     .page-arrows {
@@ -204,7 +188,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--label-ink);
+      color: var(--grey-light);
       font-size: 0.7rem;
       transition: all var(--dur) var(--ease);
       -webkit-tap-highlight-color: transparent;
@@ -257,60 +241,73 @@
       flex-direction: column;
     }
 
-    /* ===== COVER PAGE — TWO-LINE MINIMAL (R2.1, decided 2026-06-20) ===== */
+    /* ===== COVER PAGE ===== */
     .cover {
+      height: 100vh;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       text-align: center;
-      position: relative;
-      overflow: hidden;            /* clips the wash */
-      padding: 0 2rem;
+      padding-top: 0;
     }
 
-    /* one soft radial purple wash — the single dia accent */
-    .cover-wash {
-      position: absolute;
-      top: 50%; left: 50%;
-      width: min(115vw, 1100px);
-      height: min(115vw, 1100px);
-      transform: translate(-50%, -54%);
-      background: radial-gradient(circle at 50% 45%, var(--signal-glow) 0%, rgba(102,103,171,0.06) 38%, rgba(102,103,171,0) 68%);
-      pointer-events: none;
-      z-index: 0;
-      animation: coverWashDrift 18s ease-in-out infinite alternate;
+    .cover .page-inner {
+      max-width: 800px;
+      justify-content: center;
+      align-items: center;
     }
 
-    .cover-inner {
-      position: relative;
-      z-index: 1;
-      max-width: min(94vw, 1280px);
+    .cover-eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 2.5rem;
     }
 
     .cover-title {
       font-family: var(--font-display);
-      font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6rem);
-      font-weight: 900;
-      line-height: 1.04;
-      letter-spacing: -0.01em;
+      font-size: clamp(3.2rem, 9vw, 7.5rem);
+      font-weight: 800;
+      line-height: 0.85;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
       color: var(--black);
-      margin: 0;
-      text-wrap: balance;
-      overflow-wrap: break-word;
-      hyphens: auto;
+      margin-bottom: 0.25rem;
     }
 
-    .cover-line {
+    .cover-accent {
+      color: var(--purple-deep);
+    }
+
+    .cover-year {
       font-family: var(--font-mono);
-      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
+      font-size: clamp(2rem, 5vw, 3.5rem);
       font-weight: 400;
-      letter-spacing: 0.25em;
+      color: var(--purple-light);
+      letter-spacing: 0.35em;
+      margin-bottom: 2rem;
+    }
+
+    .cover-subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--graphite);
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--purple-deep);            /* 4.92:1 AA */
-      margin: 1.75rem 0 0;
-      padding-left: 0.25em;
+      line-height: 1.5;
+      margin-bottom: 3rem;
+    }
+
+    .cover-meta {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--grey-light);
+      line-height: 2;
+      letter-spacing: 0.02em;
     }
 
     .cover-hint {
@@ -322,31 +319,16 @@
       font-size: var(--text-xs);
       color: var(--silver);
       letter-spacing: 0.1em;
-      z-index: 1;
-      animation: coverPulse 2s ease-in-out infinite;
+      animation: pulse 2s ease-in-out infinite;
     }
 
-    /* entrance — soft fade + rise, one time */
-    .cover-inner > * {
-      opacity: 0;
-      transform: translateY(14px);
-      animation: coverRise 0.7s var(--ease) forwards;
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
     }
-    .cover-inner > .cover-title { animation-delay: 0.08s; }
-    .cover-inner > .cover-line  { animation-delay: 0.22s; }
 
-    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
-    @keyframes coverWashDrift {
-      0%   { transform: translate(-50%, -54%) scale(1); }
-      100% { transform: translate(-50%, -48%) scale(1.06); }
-    }
-    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
-
-    /* reduced-motion: no entrance, no drift, no pulse — everything static & visible */
     @media (prefers-reduced-motion: reduce) {
-      .cover-inner > *,
-      .cover-wash,
-      .cover-hint { animation: none; opacity: 1; transform: none; }
+      .cover-hint { animation: none; }
     }
 
     /* ===== CONTENT PAGES ===== */
@@ -368,8 +350,6 @@
       color: var(--black);
       margin-bottom: 2rem;
       letter-spacing: 0.01em;
-      text-wrap: balance;
-      overflow-wrap: break-word;
     }
 
     .content-block {
@@ -379,7 +359,6 @@
     .content-block h3 {
       font-family: var(--font-display);
       font-size: var(--text-h3);
-      line-height: 1.25;
       font-weight: 600;
       color: var(--charcoal);
       margin-bottom: 0.5rem;
@@ -387,11 +366,9 @@
 
     .content-block p {
       margin-bottom: 0.75rem;
+      line-height: 1.75;
       color: var(--graphite);
-      max-width: var(--measure-prose);
-      line-height: 1.65;
     }
-    .content-block p + p { margin-top: 0.9em; }
 
     .content-block strong {
       font-weight: 600;
@@ -423,10 +400,9 @@
       margin: 1rem 0 0;
     }
     .lead-quote p {
-      font-size: clamp(1.1875rem, 1rem + 1.1vw, 1.3125rem);
-      line-height: 1.62;
+      font-size: 1.05rem;
+      line-height: 1.7;
       color: var(--charcoal);
-      max-width: var(--measure-prose);
       margin-bottom: 0.75rem;
     }
     .lead-quote p:last-child { margin-bottom: 0; }
@@ -451,22 +427,21 @@
     }
     .reform-title {
       font-family: var(--font-display);
-      font-size: 1.2rem;
-      line-height: 1.25;
+      font-size: 1.05rem;
       font-weight: 600;
       color: var(--charcoal);
     }
     .reform-year {
       font-family: var(--font-mono);
       font-size: var(--text-xs);
-      color: var(--label-ink);
+      color: var(--grey-light);
       margin-left: auto;
       flex-shrink: 0;
     }
     .reform-body {
       padding-left: 2.25rem;
+      line-height: 1.75;
       color: var(--graphite);
-      max-width: calc(var(--measure-prose) + 2.25rem);
     }
 
     /* ===== STAT STRIP ===== */
@@ -491,14 +466,13 @@
       font-size: 1.6rem;
       color: var(--purple-deep);
       line-height: 1.1;
-      font-variant-numeric: tabular-nums;
     }
     .stat-label {
       font-family: var(--font-mono);
-      font-size: var(--text-micro);
+      font-size: 0.62rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--label-ink);
+      color: var(--grey);
       margin-top: 0.35rem;
     }
 
@@ -510,13 +484,12 @@
     .appraise-item:last-child { border-bottom: none; }
     .appraise-item h3 {
       font-family: var(--font-display);
-      font-size: var(--text-h3);
-      line-height: 1.25;
+      font-size: 1.05rem;
       font-weight: 600;
       color: var(--charcoal);
       margin-bottom: 0.35rem;
     }
-    .appraise-item p { color: var(--graphite); max-width: var(--measure-prose); }
+    .appraise-item p { line-height: 1.75; color: var(--graphite); }
 
     .verdict {
       background: var(--off-black);
@@ -556,8 +529,7 @@
     }
     .lesson-title {
       font-family: var(--font-display);
-      font-size: 1.2rem;
-      line-height: 1.25;
+      font-size: 1rem;
       font-weight: 600;
       color: var(--charcoal);
     }
@@ -565,14 +537,13 @@
       padding-left: 2.25rem;
       line-height: 1.7;
       color: var(--graphite);
-      max-width: calc(var(--measure-prose) + 2.25rem);
     }
 
     /* ===== METHOD TABLE ===== */
     .method-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: var(--text-small);
+      font-size: var(--text-sm);
       margin: 1rem 0;
     }
     .method-table thead {
@@ -583,17 +554,14 @@
       padding: 0.6rem 0.75rem;
       text-align: left;
       font-weight: 600;
-      font-size: var(--text-micro);
+      font-size: var(--text-xs);
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }
-    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
-    .table-scroll:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; border-radius: var(--radius); }
     .method-table td {
       padding: 0.6rem 0.75rem;
       border-bottom: 1px solid var(--border-light);
       vertical-align: top;
-      font-variant-numeric: tabular-nums;
     }
     .method-table tbody tr:nth-child(odd) { background: var(--white); }
     .method-table tbody tr:nth-child(even) { background: var(--snow); }
@@ -605,7 +573,7 @@
       border-top: 1px solid var(--border-light);
       font-family: var(--font-mono);
       font-size: var(--text-xs);
-      color: var(--label-ink);
+      color: var(--grey-light);
       line-height: 1.8;
     }
 
@@ -615,7 +583,7 @@
       padding: 0.1rem 0.3rem;
       border-radius: var(--radius);
       font-size: inherit;
-      color: var(--label-ink);
+      color: var(--grey);
     }
 
     /* ===== SECTION DIVIDER ===== */
@@ -631,7 +599,7 @@
       display: inline-block;
     }
 
-    /* ===== CITATIONS (§5 inline tier) — pattern: policy-study-japan.html ===== */
+    /* ===== CITATIONS (§5 inline tier) — pattern: research-policy-japan.html ===== */
     .cite { font-size: 0.72em; line-height: 0; vertical-align: super; letter-spacing: 0; }
     .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
     .cite a:hover, .cite a:focus { color: var(--signal-dim); }
@@ -643,14 +611,14 @@
       padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
       white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
     }
-    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 1.5rem; max-width: var(--measure-ref); }
-    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 1.5rem; }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
     .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
-    .refs li { font-size: var(--text-fine); color: var(--graphite); line-height: 1.7; margin-bottom: 0.6rem; overflow-wrap: anywhere; }
+    .refs li { font-size: var(--text-sm); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; }
     .refs li a { color: var(--signal); }
     .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
-    .refs-note { font-size: var(--text-xs); color: var(--label-ink); margin-bottom: 0; max-width: none; }
-    .cite-help { font-size: var(--text-fine); color: var(--label-ink); font-style: italic; margin-bottom: 0.5rem; }
+    .refs-note { font-size: var(--text-xs); color: var(--grey); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-sm); color: var(--grey); font-style: italic; margin-bottom: 0.5rem; }
 
     /* ===== MOBILE ===== */
     @media (max-width: 768px) {
@@ -726,17 +694,16 @@
       }
 
       .cover-title {
-        font-size: clamp(1.9rem, 8.5vw, 2.6rem);
+        font-size: clamp(2.6rem, 13vw, 4.5rem);
       }
 
-      .cover-line {
-        font-size: clamp(0.72rem, 3.2vw, 0.95rem);
-        letter-spacing: 0.18em;
+      .cover-year {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+        letter-spacing: 0.25em;
       }
 
-      .cover-wash {
-        width: 150vw;
-        height: 150vw;
+      .cover-subtitle {
+        font-size: 0.85rem;
       }
 
       .page-title {
@@ -764,21 +731,9 @@
       .method-table th, .method-table td { padding: 0.4rem 0.5rem; }
     }
 
-    /* ── Reading env: phone measure release ── */
-    @media (max-width: 680px) {
-      .content-block p, .content-block p + p, .lead-quote p, .appraise-item p,
-      .reform-body, .lesson-body, .refs, .content-block li { max-width: none; }
-    }
-
     @media (max-width: 480px) {
       .nav-mobile-brand { font-size:0.58rem; }
       .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
-      /* table stays ≥13px, not 0.7rem; tighten padding instead */
-      .method-table { font-size: 0.82rem; }
-      .method-table th { font-size: var(--text-micro); }
-      .method-table th, .method-table td { padding: 0.4rem 0.45rem; }
-      /* pager controls reach a 44px tap target */
-      .arrow-btn { width: 44px; height: 44px; }
     }
 
     /* Scrollbar styling */
@@ -786,63 +741,26 @@
     .pages-container::-webkit-scrollbar-track { background: transparent; }
     .pages-container::-webkit-scrollbar-thumb { background: var(--silver); border-radius: 3px; }
     .pages-container::-webkit-scrollbar-thumb:hover { background: var(--grey-light); }
-
-    /* ===== DISCOVERABILITY: related block (closing page) ===== */
-    .related-block {
-      margin-top: 1.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border-light);
-    }
-    .related-title {
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--label-ink);
-      margin-bottom: 0.6rem;
-    }
-    .related-block ul { list-style: none; margin: 0; padding: 0; }
-    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
-    .related-block a {
-      font-family: var(--font-body);
-      font-size: var(--text-sm);
-      color: var(--signal);
-      text-decoration: none;
-      transition: color var(--dur) var(--ease);
-    }
-    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
-    .related-block .related-note { color: var(--graphite); }
-
-    /* ===== Scroll-reveal (R3.2, paged-safe) ===== */
-    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
-    .reveal.in { opacity: 1; transform: none; }
-    @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1; transform: none; transition: none; }
-    }
   </style>
-
-  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
 </head>
 <body>
   <a href="#main" class="skip-nav">Skip to content</a>
 
   <!-- Site Navigation -->
-  <nav class="nav" aria-label="Site navigation">
+  <nav class="nav">
     <div class="nav-topbar">
-      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="this.classList.toggle('open');var x=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',!x);document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
+      <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
         <span></span><span></span><span></span>
       </button>
       <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
     </div>
-        <div class="nav-links">
+    <div class="nav-links">
       <a href="index.html">HOME</a>
-      <a href="report-global-npo-landscape.html">ORGS MAP</a>
-      <a href="org-study.html">ORG STUDY</a>
-      <a href="policy-study.html" class="current" aria-current="page">POLICY STUDY</a>
-      <a href="research.html">RESEARCH</a>
-      <a href="insight.html">INSIGHT</a>
       <a href="plan.html">PLAN</a>
-      <a href="field-news.html">FIELD NEWS</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="case-study.html">CASE STUDY</a>
+      <a href="research.html" class="current">RESEARCH</a>
+      <a href="insight-2026-06-18.html">INSIGHT</a>
     </div>
   </nav>
 
@@ -871,14 +789,20 @@
   <!-- Pages -->
   <div class="pages-container" id="main">
 
-    <!-- PAGE 01: COVER (standard research cover — copied from policy-study-japan.html) -->
+    <!-- PAGE 01: COVER (standard research cover — copied from research-policy-japan.html) -->
     <div class="page cover" id="page-0">
-      <div class="cover-wash" aria-hidden="true"></div>
-      <div class="cover-inner">
+      <div class="page-inner">
+        <p class="cover-eyebrow">MH&amp;W Research</p>
         <h1 class="cover-title">THAILAND</h1>
-        <p class="cover-line">Policy Study 002 &middot; 2026.6</p>
+        <p class="cover-year">No.002</p>
+        <p class="cover-subtitle">Building the Stage<br>Before the Safety Net</p>
+        <div class="cover-meta">
+          <p>Policy Case Series · 2026.6</p>
+          <p>Japan &rarr; Thailand &rarr; Taiwan &rarr; U.S. &rarr; U.K. &rarr; EU</p>
+          <p>Compiled by &#38515;&#26825; &middot; 2026-06-18</p>
+        </div>
       </div>
-      <span class="cover-hint" aria-hidden="true">&darr; Scroll</span>
+      <span class="cover-hint">&darr; scroll or arrow keys</span>
     </div>
 
     <!-- PAGE 02: WHY THIS REGION -->
@@ -907,7 +831,7 @@
         <h2 class="page-title">The Soft-Power Bet</h2>
 
         <div class="content-block">
-          <p>Since 2023 the Thai state has made the creative economy a headline national priority. The vehicle is <strong>THACCA &mdash; the Thailand Creative Culture Agency</strong> &mdash; informally stood up in early 2024 and explicitly modeled on South Korea's Korea Creative Content Agency (KOCCA), the body credited with engineering the "Korean Wave."<sup class="cite"><a href="#th-src-2" data-src="thacca" data-tip="THACCA, the KOCCA model, and the 11 soft-power industries: Thailand Creative Culture Agency (Wikipedia) + Bangkok Post + Deadline/TCCF + ISEAS Perspective + thacca.go.th. ✅ Sourced across independent sources.">2</a></sup></p>
+          <p>Since 2023 the Thai state has made the creative economy a headline national priority. The vehicle is <strong>THACCA &mdash; the Thailand Creative Culture Agency</strong> &mdash; informally stood up in early 2024 and explicitly modeled on South Korea's Korea Creative Content Agency (KOCCA), the body credited with engineering the "Korean Wave."<sup class="cite"><a href="#th-src-2" data-src="thacca" data-tip="THACCA, the KOCCA model, and the 11 soft-power industries: Thailand Creative Culture Agency (Wikipedia) + Bangkok Post + Deadline/TCCF + ISEAS Perspective + thacca.go.th. ✅ Verified across independent sources.">2</a></sup></p>
         </div>
 
         <div class="reform-item">
@@ -917,7 +841,7 @@
             <span class="reform-year">2024&ndash;2026</span>
           </div>
           <div class="reform-body">
-            <p>THACCA is mandated to develop <strong>11 soft-power industries</strong> &mdash; food, sports, festivals, tourism, music, books, film, games, art, design, and fashion &mdash; and is intended to become a statutory super agency. As of June 2026 it is <strong>not yet legally established</strong>: the first <strong>Creative Culture Promotion Act</strong> has completed drafting at the Council of State and awaits Cabinet consideration, and on <strong>25 March 2026</strong> ten party-sponsored bills &mdash; including a THACCA Bill &mdash; were submitted to Parliament. While THACCA awaits its statute, the programs run through the body that already has legal standing, the <strong>Creative Economy Agency (CEA)</strong>. The program is framed in jobs: a target of roughly <strong>20 million creative-industry jobs</strong> via training, hiring subsidies, and tax incentives.<sup class="cite"><a href="#th-src-2" data-src="thacca" data-tip="Creative Culture Promotion Act (drafted, awaiting Cabinet), the 25 Mar 2026 party-sponsored bills, CEA as interim delivery body, and the ~20M-jobs goal: Wikipedia + Bangkok Post + Deadline/TCCF + British Council. ✅ Sourced; Act not yet enacted.">2</a></sup></p>
+            <p>THACCA is mandated to develop <strong>11 soft-power industries</strong> &mdash; food, sports, festivals, tourism, music, books, film, games, art, design, and fashion &mdash; and is intended to become a statutory super agency. As of June 2026 it is <strong>not yet legally established</strong>: the first <strong>Creative Culture Promotion Act</strong> has completed drafting at the Council of State and awaits Cabinet consideration, and on <strong>25 March 2026</strong> ten party-sponsored bills &mdash; including a THACCA Bill &mdash; were submitted to Parliament. While THACCA awaits its statute, the programs run through the body that already has legal standing, the <strong>Creative Economy Agency (CEA)</strong>. The program is framed in jobs: a target of roughly <strong>20 million creative-industry jobs</strong> via training, hiring subsidies, and tax incentives.<sup class="cite"><a href="#th-src-2" data-src="thacca" data-tip="Creative Culture Promotion Act (drafted, awaiting Cabinet), the 25 Mar 2026 party-sponsored bills, CEA as interim delivery body, and the ~20M-jobs goal: Wikipedia + Bangkok Post + Deadline/TCCF + British Council. ✅ Verified; Act not yet enacted.">2</a></sup></p>
           </div>
         </div>
 
@@ -928,7 +852,7 @@
             <span class="reform-year">2024&ndash;</span>
           </div>
           <div class="reform-body">
-            <p><strong>Music Exchange</strong>, the flagship for musicians, part-funds Thai artists to perform abroad. In its inaugural 2024 year &mdash; run by CEA with the music subcommittee &mdash; it part-funded <strong>48 Thai artists and bands across 44 festivals in 12 international markets</strong> and brought ~78 international professionals to five Thai festivals, exceeding its ~30-act target. An export-and-exposure subsidy, not a welfare program.<sup class="cite"><a href="#th-src-5" data-src="musicexchange" data-tip="Music Exchange 2024 inaugural year: 48 artists/bands across 44 festivals in 12 markets; ~78 international professionals to 5 Thai festivals; delivered by CEA with the music subcommittee. CEA (cea.or.th) + Nation Thailand. ✅ Sourced.">5</a></sup></p>
+            <p><strong>Music Exchange</strong>, the flagship for musicians, part-funds Thai artists to perform abroad. In its inaugural 2024 year &mdash; run by CEA with the music subcommittee &mdash; it part-funded <strong>48 Thai artists and bands across 44 festivals in 12 international markets</strong> and brought ~78 international professionals to five Thai festivals, exceeding its ~30-act target. An export-and-exposure subsidy, not a welfare program.<sup class="cite"><a href="#th-src-5" data-src="musicexchange" data-tip="Music Exchange 2024 inaugural year: 48 artists/bands across 44 festivals in 12 markets; ~78 international professionals to 5 Thai festivals; delivered by CEA with the music subcommittee. CEA (cea.or.th) + Nation Thailand. ✅ Verified.">5</a></sup></p>
           </div>
         </div>
 
@@ -939,7 +863,7 @@
             <span class="reform-year">2025</span>
           </div>
           <div class="reform-body">
-            <p>The 2025 budget approved roughly <strong>200 million baht</strong> for screen content, and a more durable subsidy followed: under <strong>Royal Decree No. 803, gazetted 6 February 2026</strong>, artists earning income under Section 40(6) of the Revenue Code may deduct <strong>60% as expenses (up from 30%), permanently from the 2025 tax year</strong> &mdash; a direct subsidy to creative incomes.<sup class="cite"><a href="#th-src-6" data-src="taxincentive" data-tip="60% expense deduction under Section 40(6) made permanent from the 2025 tax year (up from 30%) via Royal Decree No. 803, gazetted 6 Feb 2026; plus the ~200M-baht 2025 screen-content budget: Bangkok Post + Nation Thailand + ExpatTax/Forvis Mazars. ✅ Sourced (decree); ✅ budget — secondary source: Bangkok Post / Nation Thailand.">6</a></sup> Real money &mdash; but investment in <em>output</em> and <em>export</em>, not in welfare or mental health.</p>
+            <p>The 2025 budget approved roughly <strong>200 million baht</strong> for screen content, and a more durable subsidy followed: under <strong>Royal Decree No. 803, gazetted 6 February 2026</strong>, artists earning income under Section 40(6) of the Revenue Code may deduct <strong>60% as expenses (up from 30%), permanently from the 2025 tax year</strong> &mdash; a direct subsidy to creative incomes.<sup class="cite"><a href="#th-src-6" data-src="taxincentive" data-tip="60% expense deduction under Section 40(6) made permanent from the 2025 tax year (up from 30%) via Royal Decree No. 803, gazetted 6 Feb 2026; plus the ~200M-baht 2025 screen-content budget: Bangkok Post + Nation Thailand + ExpatTax/Forvis Mazars. ✅ Verified (decree); ⚠️ budget single-source.">6</a></sup> Real money &mdash; but investment in <em>output</em> and <em>export</em>, not in welfare or mental health.</p>
           </div>
         </div>
       </div>
@@ -952,7 +876,7 @@
         <h2 class="page-title">Protection Lags the Ambition</h2>
 
         <div class="content-block">
-          <p>Underneath the ambition, the workforce that produces the content is largely unprotected. Most Thai creative workers are <strong>freelance or informal</strong> &mdash; outside the employee protections of Sections 33/39 of the Social Security Act, unable to use the labour-protection complaint machinery, left to pursue unpaid fees through civil court themselves.<sup class="cite"><a href="#th-src-4" data-src="section40" data-tip="Most creative workers are informal/freelance and outside Sections 33/39 protections: Bangkok Post + Ministry of Labour. ✅ Sourced.">4</a></sup> A 2024 survey by the <strong>Creative Workers Union Thailand (CUT)</strong> &mdash; a young union founded to make creative labor legible as labor &mdash; put numbers on it.<sup class="cite"><a href="#th-src-3" data-src="cut" data-tip="CUT survey of 380 illustrators: ≈80% commission-based/underpaid; 54.4% under 1,000 baht/project; 47.7% below the ~3,000-baht poverty line. Bangkok Post + cutunion.org. ✅ Sourced — one self-selected union survey of 380 illustrators (directional, one occupation).">3</a></sup></p>
+          <p>Underneath the ambition, the workforce that produces the content is largely unprotected. Most Thai creative workers are <strong>freelance or informal</strong> &mdash; outside the employee protections of Sections 33/39 of the Social Security Act, unable to use the labour-protection complaint machinery, left to pursue unpaid fees through civil court themselves.<sup class="cite"><a href="#th-src-4" data-src="section40" data-tip="Most creative workers are informal/freelance and outside Sections 33/39 protections: Bangkok Post + Ministry of Labour. ✅ Verified.">4</a></sup> A 2024 survey by the <strong>Creative Workers Union Thailand (CUT)</strong> &mdash; a young union founded to make creative labor legible as labor &mdash; put numbers on it.<sup class="cite"><a href="#th-src-3" data-src="cut" data-tip="CUT survey of 380 illustrators: ≈80% commission-based/underpaid; 54.4% under 1,000 baht/project; 47.7% below the ~3,000-baht poverty line. Bangkok Post + cutunion.org. ⚠️ As-reported, single union survey of one occupation.">3</a></sup></p>
         </div>
 
         <div class="stat-strip">
@@ -969,11 +893,11 @@
             <div class="stat-label">Below the<br>poverty line</div>
           </div>
         </div>
-        <p class="cite-help">&#10003; Sourced &mdash; figures rest on one self-selected CUT survey of 380 illustrators: directional, one occupation.</p>
+        <p class="cite-help">Figures are &#9888; as-reported from one CUT survey of 380 illustrators &mdash; directional, one occupation, self-selected.</p>
 
         <div class="content-block">
-          <p>The state's answer is <strong>opt-in and thin.</strong> Self-employed people can enroll under <strong>Section 40</strong> for <strong>70, 100, or 300 baht a month</strong>, buying benefits well short of an employee's; roughly <strong>10.9 million</strong> are currently insured against a Labour Ministry target of <strong>20 million</strong> independent workers. A structural fix &mdash; the draft <strong>Independent Labour Promotion and Protection Act</strong>, Cabinet-endorsed in principle and under Council of State review, guaranteeing basic occupational rights, social-security access, and <em>the right to form unions</em>, and covering actors and production staff &mdash; is not yet law.<sup class="cite"><a href="#th-src-4" data-src="section40" data-tip="Section 40 packages (70/100/300 baht), ~10.9M currently insured vs the 20M target, and the still-draft Independent Labour Promotion and Protection Act (right to unionize; covers actors/production staff): Ministry of Labour + Bangkok Post. ✅ Sourced; bill still draft.">4</a></sup> A legal obstacle compounds the gap: Thai law requires union members to come from the <strong>same company or sector</strong>, blocking the cross-sector organizing a fragmented freelance workforce needs.<sup class="cite"><a href="#th-src-3" data-src="cut" data-tip="Same-company/sector union restriction blocking cross-sector creative organizing: Bangkok Post, 'Labouring under an illusion' (full text). ✅ Sourced.">3</a></sup></p>
-          <p>On mental health there is <strong>nothing targeted.</strong> The peer-reviewed evidence is structural: a matched case-control study of Thai informal workers found occupation-linked health disparities, with unskilled informal workers at elevated risk, and called for government budget for informal-worker health.<sup class="cite"><a href="#th-src-1" data-src="infworker" data-tip="Informal-worker health disparities and the call for government budget: Tipayamongkholgul et al., J Occup Health 2021;63(1):e12249 (PubMed, DOI 10.1002/1348-9585.12249). ✅ PubMed-indexed; about informal workers/NCDs, not musicians' mental health.">1</a></sup> Thailand's general mental-health burden is rising, concentrated among 20&ndash;29-year-olds &mdash; the same cohort that fills the creative workforce.<sup class="cite"><a href="#th-src-3" data-src="cut" data-tip="Rising national mental-health burden concentrated at ages 20–29: WHO Thailand feature. ✅ Sourced (org source).">3</a></sup> The drivers are documented; the services are not.</p>
+          <p>The state's answer is <strong>opt-in and thin.</strong> Self-employed people can enroll under <strong>Section 40</strong> for <strong>70, 100, or 300 baht a month</strong>, buying benefits well short of an employee's; roughly <strong>10.9 million</strong> are currently insured against a Labour Ministry target of <strong>20 million</strong> independent workers. A structural fix &mdash; the draft <strong>Independent Labour Promotion and Protection Act</strong>, Cabinet-endorsed in principle and under Council of State review, guaranteeing basic occupational rights, social-security access, and <em>the right to form unions</em>, and covering actors and production staff &mdash; is not yet law.<sup class="cite"><a href="#th-src-4" data-src="section40" data-tip="Section 40 packages (70/100/300 baht), ~10.9M currently insured vs the 20M target, and the still-draft Independent Labour Promotion and Protection Act (right to unionize; covers actors/production staff): Ministry of Labour + Bangkok Post. ✅ Verified; bill still draft.">4</a></sup> A legal obstacle compounds the gap: Thai law requires union members to come from the <strong>same company or sector</strong>, blocking the cross-sector organizing a fragmented freelance workforce needs.<sup class="cite"><a href="#th-src-3" data-src="cut" data-tip="Same-company/sector union restriction blocking cross-sector creative organizing: Bangkok Post, 'Labouring under an illusion' (full text). ⚠️ As-reported.">3</a></sup></p>
+          <p>On mental health there is <strong>nothing targeted.</strong> The peer-reviewed evidence is structural: a matched case-control study of Thai informal workers found occupation-linked health disparities, with unskilled informal workers at elevated risk, and called for government budget for informal-worker health.<sup class="cite"><a href="#th-src-1" data-src="infworker" data-tip="Informal-worker health disparities and the call for government budget: Tipayamongkholgul et al., J Occup Health 2021;63(1):e12249 (PubMed, DOI 10.1002/1348-9585.12249). ✅ PubMed-indexed; about informal workers/NCDs, not musicians' mental health.">1</a></sup> Thailand's general mental-health burden is rising, concentrated among 20&ndash;29-year-olds &mdash; the same cohort that fills the creative workforce.<sup class="cite"><a href="#th-src-3" data-src="cut" data-tip="Rising national mental-health burden concentrated at ages 20–29: WHO Thailand feature. ✅ Verified (org source).">3</a></sup> The drivers are documented; the services are not.</p>
         </div>
       </div>
     </div>
@@ -987,17 +911,17 @@
 
         <div class="appraise-item">
           <h3>What Thailand gets right is the bet on leverage</h3>
-          <p>Treating the creative sector as a strategic growth engine, not a charity case, is not na&iuml;ve: it builds political constituency, public budget, and institutional infrastructure &mdash; THACCA, a statute, sub-committees with sector representatives &mdash; that a purely welfare framing rarely commands. The 60% tax deduction &mdash; now locked in by royal decree &mdash; and Music Exchange grants put money directly into creative livelihoods.<sup class="cite"><a href="#th-src-6" data-src="taxincentive" data-tip="60% deduction (Royal Decree 803) and Music Exchange grants as direct subsidy to creative incomes: Bangkok Post + Nation Thailand + CEA. ✅ Sourced.">6</a></sup> And the formalization drive &mdash; Section 40 plus the independent-worker bill &mdash; is, in principle, the mechanism that could eventually pull freelance musicians into a protective net.</p>
+          <p>Treating the creative sector as a strategic growth engine, not a charity case, is not na&iuml;ve: it builds political constituency, public budget, and institutional infrastructure &mdash; THACCA, a statute, sub-committees with sector representatives &mdash; that a purely welfare framing rarely commands. The 60% tax deduction &mdash; now locked in by royal decree &mdash; and Music Exchange grants put money directly into creative livelihoods.<sup class="cite"><a href="#th-src-6" data-src="taxincentive" data-tip="60% deduction (Royal Decree 803) and Music Exchange grants as direct subsidy to creative incomes: Bangkok Post + Nation Thailand + CEA. ✅ Verified.">6</a></sup> And the formalization drive &mdash; Section 40 plus the independent-worker bill &mdash; is, in principle, the mechanism that could eventually pull freelance musicians into a protective net.</p>
         </div>
 
         <div class="appraise-item">
           <h3>However, it builds the stage before the safety net</h3>
-          <p>The soft-power spending flows to <em>projects, exports, festivals, and reskilling</em> &mdash; to the industry's output, not to the welfare or mental health of the people producing it. The protections that would matter are opt-in (Section 40, which a worker earning under 3,000 baht a month is unlikely to prioritize, and which has reached only ~10.9M of a 20M target), thin in benefit, and &mdash; for the structural bill &mdash; still draft.<sup class="cite"><a href="#th-src-4" data-src="section40" data-tip="Protections are opt-in, thin (~10.9M of 20M insured), and (for the structural bill) still draft: Ministry of Labour + Bangkok Post. ✅ Sourced.">4</a></sup> The union route that could force the issue is itself hobbled by a law that forbids cross-sector membership. KOCCA's model, which THACCA copies, was an export engine, not a worker-welfare body; importing it imports that silence. For mental health specifically there is nothing: no service, no line item, no agency mandate.</p>
+          <p>The soft-power spending flows to <em>projects, exports, festivals, and reskilling</em> &mdash; to the industry's output, not to the welfare or mental health of the people producing it. The protections that would matter are opt-in (Section 40, which a worker earning under 3,000 baht a month is unlikely to prioritize, and which has reached only ~10.9M of a 20M target), thin in benefit, and &mdash; for the structural bill &mdash; still draft.<sup class="cite"><a href="#th-src-4" data-src="section40" data-tip="Protections are opt-in, thin (~10.9M of 20M insured), and (for the structural bill) still draft: Ministry of Labour + Bangkok Post. ✅ Verified.">4</a></sup> The union route that could force the issue is itself hobbled by a law that forbids cross-sector membership. KOCCA's model, which THACCA copies, was an export engine, not a worker-welfare body; importing it imports that silence. For mental health specifically there is nothing: no service, no line item, no agency mandate.</p>
         </div>
 
         <div class="appraise-item">
           <h3>Read the evidence with care</h3>
-          <p>Three caveats. (1) The headline precarity figures come from a <strong>single CUT survey of 380 illustrators</strong> &mdash; credible and directionally consistent with the informal-economy literature, but one union, one occupation, self-selected, with percentages carried from prior reporting and not re-extracted this run &mdash; &#10003; sourced, directional.<sup class="cite"><a href="#th-src-3" data-src="cut" data-tip="Precarity figures are one CUT survey of 380 illustrators, self-selected, carried from prior Bangkok Post reporting: Bangkok Post + cutunion.org. ✅ Sourced — directional, one self-selected survey.">3</a></sup> (2) <strong>THACCA is still pre-statute</strong> &mdash; announced and budgeted but not yet enacted, so this reads an <em>intended</em> architecture as much as an operating one.<sup class="cite"><a href="#th-src-2" data-src="thacca" data-tip="THACCA's statutory form (Creative Culture Promotion Act) is not yet enacted: Wikipedia + Bangkok Post + ISEAS. ✅ Sourced the Act is still draft.">2</a></sup> (3) The <strong>peer-reviewed anchor</strong> concerns informal workers broadly and non-communicable disease, not musicians' mental health &mdash; a problem-size citation, not a what-works one.<sup class="cite"><a href="#th-src-1" data-src="infworker" data-tip="Peer-reviewed anchor is about informal workers/NCDs, not musicians' mental health: Tipayamongkholgul et al. 2021. ✅ PubMed-indexed; scope caveat.">1</a></sup></p>
+          <p>Three caveats. (1) The headline precarity figures come from a <strong>single CUT survey of 380 illustrators</strong> &mdash; credible and directionally consistent with the informal-economy literature, but one union, one occupation, self-selected, with percentages carried from prior reporting and not re-extracted this run; &#9888; as-reported.<sup class="cite"><a href="#th-src-3" data-src="cut" data-tip="Precarity figures are one CUT survey of 380 illustrators, self-selected, carried from prior Bangkok Post reporting: Bangkok Post + cutunion.org. ⚠️ As-reported.">3</a></sup> (2) <strong>THACCA is still pre-statute</strong> &mdash; announced and budgeted but not yet enacted, so this reads an <em>intended</em> architecture as much as an operating one.<sup class="cite"><a href="#th-src-2" data-src="thacca" data-tip="THACCA's statutory form (Creative Culture Promotion Act) is not yet enacted: Wikipedia + Bangkok Post + ISEAS. ✅ Verified the Act is still draft.">2</a></sup> (3) The <strong>peer-reviewed anchor</strong> concerns informal workers broadly and non-communicable disease, not musicians' mental health &mdash; a problem-size citation, not a what-works one.<sup class="cite"><a href="#th-src-1" data-src="infworker" data-tip="Peer-reviewed anchor is about informal workers/NCDs, not musicians' mental health: Tipayamongkholgul et al. 2021. ✅ PubMed-indexed; scope caveat.">1</a></sup></p>
         </div>
 
         <div class="verdict">
@@ -1020,7 +944,7 @@
             <span class="lesson-title">Don't mistake creative-economy investment for worker welfare</span>
           </div>
           <div class="lesson-body">
-            <p>Taiwan already has its own KOCCA-style body &mdash; <span class="cjk cjk-inline">&#25991;&#21270;&#20839;&#23481;&#31574;&#36914;&#38498;</span> (TAICCA) &mdash; pursuing the same content-and-export logic THACCA copies. Thailand warns that this apparatus, however well-funded, leaves the worker-welfare and mental-health gap untouched. Position the NPO <em>against that gap</em>, not in the assumption the creative-economy agency will close it.</p>
+            <p>Taiwan already has its own KOCCA-style body &mdash; &#25991;&#21270;&#20839;&#23481;&#31574;&#36914;&#38498; (TAICCA) &mdash; pursuing the same content-and-export logic THACCA copies. Thailand warns that this apparatus, however well-funded, leaves the worker-welfare and mental-health gap untouched. Position the NPO <em>against that gap</em>, not in the assumption the creative-economy agency will close it.</p>
           </div>
         </div>
 
@@ -1030,7 +954,7 @@
             <span class="lesson-title">The union is the engine of worker protection &mdash; back it</span>
           </div>
           <div class="lesson-body">
-            <p>The most concrete pressure for creative-worker rights in Thailand comes not from the state but from CUT, a young union that made precarity legible by surveying its own members. Taiwan's analog is <span class="cjk cjk-inline">&#34269;&#21109;&#24037;&#26371;</span>; partnering with it (data, a counseling pilot, joint advocacy) is a faster route to legitimacy and reach than building from zero.</p>
+            <p>The most concrete pressure for creative-worker rights in Thailand comes not from the state but from CUT, a young union that made precarity legible by surveying its own members. Taiwan's analog is &#34269;&#21109;&#24037;&#26371;; partnering with it (data, a counseling pilot, joint advocacy) is a faster route to legitimacy and reach than building from zero.</p>
           </div>
         </div>
 
@@ -1040,7 +964,7 @@
             <span class="lesson-title">Opt-in social security won't reach freelance musicians alone</span>
           </div>
           <div class="lesson-body">
-            <p>Section 40 shows a voluntary, low-benefit scheme barely touches workers below the poverty line. Taiwan's <span class="cjk cjk-inline">&#32887;&#26989;&#28797;&#23475;&#20445;&#38522;</span> and labor-insurance debates face the same adverse-selection problem. The NPO's role is to <em>bridge</em> &mdash; enrollment help, subsidized premiums, or a complementary benefit &mdash; not to assume the state scheme suffices.</p>
+            <p>Section 40 shows a voluntary, low-benefit scheme barely touches workers below the poverty line. Taiwan's &#32887;&#26989;&#28797;&#23475;&#20445;&#38522; and labor-insurance debates face the same adverse-selection problem. The NPO's role is to <em>bridge</em> &mdash; enrollment help, subsidized premiums, or a complementary benefit &mdash; not to assume the state scheme suffices.</p>
           </div>
         </div>
 
@@ -1064,7 +988,7 @@
         <h2 class="page-title">Sources &amp; Limits</h2>
 
         <div class="content-block">
-          <div class="table-scroll" role="region" aria-label="Source, method and basis table" tabindex="0">
+          <div style="overflow-x:auto;">
             <table class="method-table">
               <caption class="cite-help" style="text-align:left;caption-side:top;margin-bottom:0.5rem;">Source &middot; Method &middot; Basis (PROJECT_RULES §2 Rule 3). Full references on the next page.</caption>
               <thead>
@@ -1074,7 +998,7 @@
                 <tr>
                   <td>Tipayamongkholgul M, Kongtip P, Woskie S, "Association between occupations and selected noncommunicable diseases: A matched case-control among Thai informal workers," <em>J Occup Health</em> 2021;63(1):e12249 (PubMed PMID 34263504)</td>
                   <td>PubMed API</td>
-                  <td>&#10003; Sourced (PubMed-indexed) for informal-worker health disparities. Relevance: not music-specific, NCD- not MH-focused</td>
+                  <td>&#10003; Verified (PubMed-indexed) for informal-worker health disparities; &#9888; not music-specific, NCD- not MH-focused</td>
                 </tr>
                 <tr>
                   <td>Thailand-affiliated musician / performing-artist mental-health study</td>
@@ -1084,27 +1008,27 @@
                 <tr>
                   <td>THACCA / soft-power apparatus; Creative Culture Promotion Act status; 11 industries; ~20M-jobs goal; 25 Mar 2026 parliamentary bills; CEA as interim delivery body</td>
                   <td>WebSearch (Wikipedia + <em>Bangkok Post</em> + <em>Deadline</em>/TCCF + British Council)</td>
-                  <td>&#10003; Sourced across 3+ independent sources. Status: Act drafted + before Parliament, not yet enacted</td>
+                  <td>&#10003; Verified across 3+ independent sources; &#9888; Act drafted + before Parliament, not yet enacted</td>
                 </tr>
                 <tr>
                   <td>Music Exchange 2024 results (48 acts / 44 festivals / 12 markets; CEA + music subcommittee delivery)</td>
                   <td>WebSearch (CEA cea.or.th + <em>Nation Thailand</em>)</td>
-                  <td>&#10003; Sourced (program scope, operator)</td>
+                  <td>&#10003; Verified (program scope, operator)</td>
                 </tr>
                 <tr>
                   <td>Art tax incentive &mdash; 60% deduction under Section 40(6), permanent from 2025 tax year, Royal Decree No. 803 gazetted 2026-02-06; ~200M-baht 2025 screen-content budget</td>
                   <td>WebSearch (<em>Bangkok Post</em> + <em>Nation Thailand</em> + ExpatTax/Forvis Mazars)</td>
-                  <td>&#10003; Sourced (decree); &#10003; budget &mdash; secondary source: Bangkok Post / Nation Thailand</td>
+                  <td>&#10003; Verified for the decree; &#9888; screen-content budget single-source</td>
                 </tr>
                 <tr>
                   <td>Section 40 social security (70/100/300 baht; ~10.9M insured; 20M target); draft Independent Labour Promotion and Protection Act (right to unionize; covers actors/production staff)</td>
                   <td>WebSearch (Ministry of Labour primary + <em>Bangkok Post</em> "Labouring under an illusion", read in full)</td>
-                  <td>&#10003; Sourced across independent sources; bill still draft</td>
+                  <td>&#10003; Verified across independent sources; bill still draft</td>
                 </tr>
                 <tr>
                   <td>Creative-worker precarity (no contracts, 16-hr shifts, below-the-line underpay, set-safety risk; cross-sector union ban); illustrator survey (n=380; 54.4% &lt;1,000 baht/project; 47.7% below poverty line)</td>
                   <td>WebFetch full text (<em>Bangkok Post</em>) + WebSearch (cutunion.org)</td>
-                  <td>&#10003; Sourced &mdash; union spokespeople + one self-selected survey (small, one occupation, directional); illustrator percentages carried from prior reporting</td>
+                  <td>&#9888; As-reported &mdash; union spokespeople + one self-selected survey; illustrator percentages carried from prior reporting</td>
                 </tr>
               </tbody>
             </table>
@@ -1114,7 +1038,7 @@
         <div class="content-block">
           <h3>Limitations</h3>
           <ol>
-            <li>The creative-worker precarity figures rest on union sources and one CUT survey of illustrators, not a representative sample of music/performing-arts workers; the qualitative crew account was read in full this session, but the illustrator percentages were not re-extracted this run and are carried from prior reporting &mdash; &#10003; sourced but directional, not a representative music-sector sample.</li>
+            <li>The creative-worker precarity figures rest on union sources and one CUT survey of illustrators, not a representative sample of music/performing-arts workers; the qualitative crew account was read in full this session, but the illustrator percentages were not re-extracted this run and are carried from prior reporting &mdash; treated as &#9888; directional.</li>
             <li>THACCA's statutory form is not yet enacted &mdash; the report reads an intended architecture as much as a settled one, with CEA as the current delivery body.</li>
             <li>The peer-reviewed anchor concerns informal workers and NCDs generally, not musicians' mental health; no Thailand-specific peer-reviewed study of musician mental health was located via PubMed (absence &ne; non-existence &mdash; Rule 4).</li>
             <li>Thai-language primary sources (the draft Act; Ministry of Labour notices) were read via English government summaries, national press, and policy-analysis secondary sources, not the full statutes.</li>
@@ -1131,34 +1055,25 @@
         <p class="page-label">Citation Registry</p>
         <h2 class="page-title">References</h2>
 
-        <p class="cite-help">Every claim-bearing figure and provision above carries a numbered citation &mdash; hover (desktop) or tap (mobile) a number to see the source; click to jump here. All claims are &#10003; sourced to a source; the creative-worker precarity figures rest on union sources + one self-selected survey (directional, not a representative music-sector sample).</p>
+        <p class="cite-help">Every claim-bearing figure and provision above carries a numbered citation &mdash; hover (desktop) or tap (mobile) a number to see the source; click to jump here. Policy/industrial facts are &#10003; verified across independent sources; the precarity figures are &#9888; as-reported from a single union survey.</p>
 
         <div class="refs" id="refs-all" data-citation-registry="thailand-all">
           <div class="refs-title">References</div>
           <ol>
             <li id="th-src-1" data-src="infworker">Informal-worker health disparities and the call for government budget for informal-worker health: Tipayamongkholgul M, Kongtip P, Woskie S, "Association between occupations and selected noncommunicable diseases: A matched case-control among Thai informal workers," <em>Journal of Occupational Health</em> 2021;63(1):e12249, <a href="https://doi.org/10.1002/1348-9585.12249" target="_blank" rel="noopener">DOI 10.1002/1348-9585.12249</a> (PubMed, PMID 34263504). &#10003; PubMed-indexed. Note: about Thai informal workers broadly and non-communicable disease, not musicians' mental health.</li>
-            <li id="th-src-2" data-src="thacca">THACCA / National Soft Power Strategy, the KOCCA model, the 11 soft-power industries, the draft Creative Culture Promotion Act and its June-2026 pre-statute status, the 25 March 2026 party-sponsored bills (incl. a THACCA Bill) submitted to Parliament, CEA as the interim delivery body, and the ~20M-jobs goal: <a href="https://en.wikipedia.org/wiki/Thailand_Creative_Culture_Agency" target="_blank" rel="noopener">Thailand Creative Culture Agency (Wikipedia)</a>; <a href="https://www.bangkokpost.com/business/general/3004732/drive-to-promote-thai-soft-power-heats-up" target="_blank" rel="noopener"><em>Bangkok Post</em>, "Drive to promote Thai soft power heats up"</a>; <a href="https://www.bangkokpost.com/thailand/general/2686594/soft-power-act-creative-agency-in-the-works" target="_blank" rel="noopener"><em>Bangkok Post</em>, "Soft Power Act, creative agency 'in the works'"</a>; <a href="https://deadline.com/2024/11/thailand-creative-culture-agency-chalermchatri-yukol-1236167476/" target="_blank" rel="noopener"><em>Deadline</em>, "Thailand Unveils Plans For THACCA Content Agency" (TCCF, 2024-11)</a>; <a href="https://opportunities-insight.britishcouncil.org/short-articles/news/thailands-new-government-embarks-soft-power-policies" target="_blank" rel="noopener">British Council, "Thailand's new government embarks on soft power policies"</a>. &#10003; Sourced across independent sources; the Act is drafted and before Parliament, not yet enacted.</li>
-            <li id="th-src-3" data-src="cut">Creative-worker precarity (freelance/no contracts; below-the-line underpay vs. above-the-line; up to 16-hour shifts; set-safety risks; the same-company/sector union restriction; the draft Independent Labour Promotion and Protection Act covering actors/production staff; the soft-power welfare/harassment task force): <a href="https://www.bangkokpost.com/business/general/3007364/labouring-under-an-illusion" target="_blank" rel="noopener"><em>Bangkok Post</em>, "Labouring under an illusion"</a> (full text read this session); <a href="https://cutunion.org/" target="_blank" rel="noopener">Creative Workers Union Thailand (CUT)</a>. Illustrator survey figures (n=380; &#8776;80% commission-based; 54.4% &lt;1,000 baht/project; 47.7% below the ~3,000-baht poverty line): <a href="https://www.bangkokpost.com/life/arts-and-entertainment/2453995/freelance-artists-need-rights-protections-union-says" target="_blank" rel="noopener"><em>Bangkok Post</em>, "Freelance artists need rights protections, union says"</a> (prior reporting; percentages not re-extracted this run). Rising national mental-health burden concentrated in people in their twenties: <a href="https://www.who.int/thailand/news/feature-stories/detail/mental-health-and-social-connection-in-thailand" target="_blank" rel="noopener">WHO Thailand, "Mental Health and Social Connection in Thailand"</a>. &#10003; Sourced &mdash; precarity figures rest on union sources + one self-selected survey (directional, not a representative music-sector sample).</li>
-            <li id="th-src-4" data-src="section40">Most creative workers are informal/freelance and outside Sections 33/39 protections; Section 40 packages (70/100/300 baht); ~10.9M currently insured and the 20-million-worker coverage target; the draft Independent Labour Promotion and Protection Act (basic occupational rights, social-security access, right to unionize; covers actors/production staff): <a href="https://www.mol.go.th/en/news/labour-minister-aiming-to-cover-20-million-independent-workers-under-social-security-section-40-to-take-care-of-quality-of-life-in-the-long-term" target="_blank" rel="noopener">Ministry of Labour</a>; <a href="https://www.bangkokpost.com/business/general/3007364/labouring-under-an-illusion" target="_blank" rel="noopener"><em>Bangkok Post</em>, "Labouring under an illusion"</a>; <a href="https://www.thailand-business-news.com/law/87410-thai-government-introduces-financial-security-packages-for-freelancers" target="_blank" rel="noopener">thailand-business-news</a>. &#10003; Sourced across independent sources; bill still draft.</li>
-            <li id="th-src-5" data-src="musicexchange">Music Exchange (2024 inaugural year: 48 Thai artists/bands part-funded across 44 festivals in 12 international markets; ~78 international professionals to 5 Thai festivals; delivered by the Creative Economy Agency with the National Soft Power Development Subcommittee for Music; ~30-act initial target): <a href="https://www.cea.or.th/en/single-project/music-exchange-2025" target="_blank" rel="noopener">CEA, "Music Exchange 2025"</a>; <a href="https://www.nationthailand.com/news/general/40042183" target="_blank" rel="noopener"><em>Nation Thailand</em>, "Ambitious initiative aims to elevate Thai music industry"</a>. &#10003; Sourced (scope, operator).</li>
-            <li id="th-src-6" data-src="taxincentive">Art tax incentive &mdash; 60% expense deduction under Section 40(6) of the Revenue Code, permanent from the 2025 tax year (up from 30%), via Royal Decree No. 803 gazetted 6 February 2026; and the ~200M-baht 2025 screen-content budget: <a href="https://www.bangkokpost.com/thailand/general/3089590/cabinet-gives-green-light-for-tax-incentives-to-aid-artists" target="_blank" rel="noopener"><em>Bangkok Post</em>, "Cabinet gives green light for tax incentives to aid artists"</a>; <a href="https://www.nationthailand.com/news/policy/40054235" target="_blank" rel="noopener"><em>Nation Thailand</em>, "Cabinet approves two tax measures to help artists"</a>; <a href="https://www.expattaxthailand.com/new-thai-tax-breaks-for-art-buyers-and-artists-explained/" target="_blank" rel="noopener">ExpatTax Thailand</a>. &#10003; Sourced (decree); &#10003; budget &mdash; secondary source: Bangkok Post / Nation Thailand.</li>
+            <li id="th-src-2" data-src="thacca">THACCA / National Soft Power Strategy, the KOCCA model, the 11 soft-power industries, the draft Creative Culture Promotion Act and its June-2026 pre-statute status, the 25 March 2026 party-sponsored bills (incl. a THACCA Bill) submitted to Parliament, CEA as the interim delivery body, and the ~20M-jobs goal: <a href="https://en.wikipedia.org/wiki/Thailand_Creative_Culture_Agency" target="_blank" rel="noopener">Thailand Creative Culture Agency (Wikipedia)</a>; <a href="https://www.bangkokpost.com/business/general/3004732/drive-to-promote-thai-soft-power-heats-up" target="_blank" rel="noopener"><em>Bangkok Post</em>, "Drive to promote Thai soft power heats up"</a>; <a href="https://www.bangkokpost.com/thailand/general/2686594/soft-power-act-creative-agency-in-the-works" target="_blank" rel="noopener"><em>Bangkok Post</em>, "Soft Power Act, creative agency 'in the works'"</a>; <a href="https://deadline.com/2024/11/thailand-creative-culture-agency-chalermchatri-yukol-1236167476/" target="_blank" rel="noopener"><em>Deadline</em>, "Thailand Unveils Plans For THACCA Content Agency" (TCCF, 2024-11)</a>; <a href="https://opportunities-insight.britishcouncil.org/short-articles/news/thailands-new-government-embarks-soft-power-policies" target="_blank" rel="noopener">British Council, "Thailand's new government embarks on soft power policies"</a>. &#10003; Verified across independent sources; the Act is drafted and before Parliament, not yet enacted.</li>
+            <li id="th-src-3" data-src="cut">Creative-worker precarity (freelance/no contracts; below-the-line underpay vs. above-the-line; up to 16-hour shifts; set-safety risks; the same-company/sector union restriction; the draft Independent Labour Promotion and Protection Act covering actors/production staff; the soft-power welfare/harassment task force): <a href="https://www.bangkokpost.com/business/general/3007364/labouring-under-an-illusion" target="_blank" rel="noopener"><em>Bangkok Post</em>, "Labouring under an illusion"</a> (full text read this session); <a href="https://cutunion.org/" target="_blank" rel="noopener">Creative Workers Union Thailand (CUT)</a>. Illustrator survey figures (n=380; &#8776;80% commission-based; 54.4% &lt;1,000 baht/project; 47.7% below the ~3,000-baht poverty line): <a href="https://www.bangkokpost.com/life/arts-and-entertainment/2453995/freelance-artists-need-rights-protections-union-says" target="_blank" rel="noopener"><em>Bangkok Post</em>, "Freelance artists need rights protections, union says"</a> (prior reporting; percentages not re-extracted this run). Rising national mental-health burden concentrated in people in their twenties: <a href="https://www.who.int/thailand/news/feature-stories/detail/mental-health-and-social-connection-in-thailand" target="_blank" rel="noopener">WHO Thailand, "Mental Health and Social Connection in Thailand"</a>. &#9888; Precarity figures are as-reported from union sources / a single union survey.</li>
+            <li id="th-src-4" data-src="section40">Most creative workers are informal/freelance and outside Sections 33/39 protections; Section 40 packages (70/100/300 baht); ~10.9M currently insured and the 20-million-worker coverage target; the draft Independent Labour Promotion and Protection Act (basic occupational rights, social-security access, right to unionize; covers actors/production staff): <a href="https://www.mol.go.th/en/news/labour-minister-aiming-to-cover-20-million-independent-workers-under-social-security-section-40-to-take-care-of-quality-of-life-in-the-long-term" target="_blank" rel="noopener">Ministry of Labour</a>; <a href="https://www.bangkokpost.com/business/general/3007364/labouring-under-an-illusion" target="_blank" rel="noopener"><em>Bangkok Post</em>, "Labouring under an illusion"</a>; <a href="https://www.thailand-business-news.com/law/87410-thai-government-introduces-financial-security-packages-for-freelancers" target="_blank" rel="noopener">thailand-business-news</a>. &#10003; Verified across independent sources; bill still draft.</li>
+            <li id="th-src-5" data-src="musicexchange">Music Exchange (2024 inaugural year: 48 Thai artists/bands part-funded across 44 festivals in 12 international markets; ~78 international professionals to 5 Thai festivals; delivered by the Creative Economy Agency with the National Soft Power Development Subcommittee for Music; ~30-act initial target): <a href="https://www.cea.or.th/en/single-project/music-exchange-2025" target="_blank" rel="noopener">CEA, "Music Exchange 2025"</a>; <a href="https://www.nationthailand.com/news/general/40042183" target="_blank" rel="noopener"><em>Nation Thailand</em>, "Ambitious initiative aims to elevate Thai music industry"</a>. &#10003; Verified (scope, operator).</li>
+            <li id="th-src-6" data-src="taxincentive">Art tax incentive &mdash; 60% expense deduction under Section 40(6) of the Revenue Code, permanent from the 2025 tax year (up from 30%), via Royal Decree No. 803 gazetted 6 February 2026; and the ~200M-baht 2025 screen-content budget: <a href="https://www.bangkokpost.com/thailand/general/3089590/cabinet-gives-green-light-for-tax-incentives-to-aid-artists" target="_blank" rel="noopener"><em>Bangkok Post</em>, "Cabinet gives green light for tax incentives to aid artists"</a>; <a href="https://www.nationthailand.com/news/policy/40054235" target="_blank" rel="noopener"><em>Nation Thailand</em>, "Cabinet approves two tax measures to help artists"</a>; <a href="https://www.expattaxthailand.com/new-thai-tax-breaks-for-art-buyers-and-artists-explained/" target="_blank" rel="noopener">ExpatTax Thailand</a>. &#10003; Verified for the decree; &#9888; screen-content budget single-source.</li>
           </ol>
           <p class="refs-note">Convention: every claim-bearing marker carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above &mdash; machine-checkable before each deploy (§5.2 / §6 gate 1). The MD draft (<code>2026-06-18_Research_Policy_Thailand.md</code>) carries the same citations as <code>[^1]</code>&ndash;<code>[^6]</code> footnotes and is the citation source of truth.</p>
         </div>
 
-        <nav class="related-block" aria-label="Related on this site">
-          <p class="related-title">Related</p>
-          <ul>
-            <li><a href="policy-study.html">&larr; Policy Study (hub &middot; all regions)</a></li>
-            <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
-            <li><a href="org-study-arts-creators-union.html">Taiwan's nearest existing infrastructure &mdash; <span class="cjk cjk-inline">&#34269;&#21109;&#24037;&#26371;</span> org study</a></li>
-          </ul>
-        </nav>
-
         <div class="source-info">
           <p><strong>Report:</strong> Research track &mdash; Policy Case Series No.002 (Thailand) &middot; Music &amp; Mental Health NPO Research Project</p>
           <p><strong>As of:</strong> 2026-06-18 &middot; Next region: Taiwan</p>
-          <p><strong>Basis:</strong> &#10003; sourced throughout; creative-worker precarity figures rest on union sources + one self-selected survey (directional, not a representative music-sector sample)</p>
+          <p><strong>Basis:</strong> &#10003; Verified for policy/industrial facts; &#9888; as-reported for creative-worker precarity figures</p>
         </div>
       </div>
     </div>
@@ -1170,12 +1085,10 @@
     var pages = document.querySelectorAll('.page');
     var nums = document.querySelectorAll('.page-num');
     var current = 0;
-    var RM = window.matchMedia('(prefers-reduced-motion: reduce)');
-    function scrollBehavior(){ return RM.matches ? 'auto' : 'smooth'; }
 
     function goTo(index) {
       if (index < 0 || index >= pages.length) return;
-      pages[index].scrollIntoView({ behavior: scrollBehavior() });
+      pages[index].scrollIntoView({ behavior: 'smooth' });
     }
 
     function nextPage() { goTo(current + 1); }
@@ -1214,7 +1127,7 @@
         var el = document.querySelector(id);
         if (!el) return;
         e.preventDefault();
-        el.scrollIntoView({ behavior: scrollBehavior(), block: 'center' });
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
         location.hash = id;
       });
     });
@@ -1225,38 +1138,12 @@
     });
   </script>
 
-  <script>
-  /* Scroll-reveal — R3.2 paged-safe (observes within .pages-container; per-page anchors only) */
-  (function(){
-    var root = document.querySelector('.pages-container');
-    if (!root) return;
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var sel = '.page-title, .part-divider, .page-label, .stat-strip, .method-table, .table-wrap, figure';
-    var nodes = Array.prototype.slice.call(root.querySelectorAll(sel));
-    if (!('IntersectionObserver' in window) || reduce) {
-      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
-      return;
-    }
-    nodes.forEach(function(el){ el.classList.add('reveal'); });
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if (!e.isIntersecting) return;
-        var el = e.target, p = el.parentElement, idx = 0;
-        if (p){ var sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
-        el.style.transitionDelay = (Math.min(idx,5) * 60) + 'ms';
-        el.classList.add('in'); io.unobserve(el);
-      });
-    }, { root: root, threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
-    nodes.forEach(function(el){ io.observe(el); });
-  })();
-  </script>
-
   <!-- nav scroll-state fix: transparent over hero, blurred bar once scrolled -->
   <style>
     nav.nav, .nav { transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease); border-bottom: 1px solid transparent; }
     nav.nav.scrolled, .nav.scrolled {
       right: 0;
-      background: rgba(244, 244, 245, 0.45);
+      background: rgba(244, 244, 245, 0.85);
       -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-light);

@@ -8,7 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -39,8 +39,8 @@
       --bg-card-dark: var(--off-black);
       --border-light: rgba(0,0,0,0.07);
       --border-dark: rgba(255,255,255,0.1);
-      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
-      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-display: 'Syne', 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+      --font-body: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
       --font-mono: 'Space Mono', 'Courier New', monospace;
       --font: var(--font-body);
       --text-hero: clamp(3.5rem, 8vw, 6.5rem);
@@ -50,22 +50,13 @@
       --text-body: 1rem;
       --text-sm: 0.875rem;
       --text-xs: 0.75rem;
-      /* — Dia-grade reading environment (v1 spec) — */
-      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;
-      --lh-prose:1.7;--wt-prose:440;
-      --measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;
-      --label-ink:var(--graphite);
-      --font-cjk:'Noto Serif TC', serif;
       --ease: cubic-bezier(0.4, 0, 0.2, 1);
       --dur: 0.3s;
       --dur-slow: 0.6s;
-      --dur-slower: 1.1s;
-      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
       --radius: 4px;
       --radius-lg: 6px;
       --max-w: 1100px;
-      --max-w-text: 64ch;
-      --measure: 64ch;
+      --max-w-text: 660px;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -80,17 +71,10 @@
       font-family: var(--font);
       background: var(--bg-light);
       color: var(--charcoal);
-      line-height: var(--lh-prose);
-      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
-      font-weight: var(--wt-prose);
-      text-wrap: pretty;
-      font-optical-sizing: auto;
+      line-height: 1.7;
+      font-size: var(--text-body);
       -webkit-font-smoothing: antialiased;
     }
-    p { overflow-wrap: anywhere; }
-    .cjk { font-family: var(--font-cjk); }
-    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
-    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
 
     ::selection { background: var(--signal); color: var(--white); }
 
@@ -117,7 +101,7 @@
       font-family: var(--font-mono);
       font-size: 0.85rem;
       font-weight: 400;
-      color: var(--label-ink);
+      color: var(--grey);
       text-decoration: none;
       text-transform: uppercase;
       letter-spacing: 0.04em;
@@ -151,7 +135,7 @@
     /* Mobile nav brand */
     .nav-topbar { display: none; }
     .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
-    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:0.5rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:0.2em; }
 
     /* ===== PAGE SIDEBAR ===== */
     .page-sidebar {
@@ -277,21 +261,19 @@
       font-size: var(--text-xs);
       letter-spacing: 0.5em;
       text-transform: uppercase;
-      color: var(--label-ink);
+      color: var(--grey);
       margin-bottom: 2.5rem;
     }
 
     .cover-title {
       font-family: var(--font-display);
-      font-size: clamp(2.2rem, 1.35rem + 5.2vw, 8rem);
-      font-weight: 900;
-      line-height: 1.04;
-      letter-spacing: -0.01em;
+      font-size: clamp(4.5rem, 11vw, 9rem);
+      font-weight: 800;
+      line-height: 0.85;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
       color: var(--black);
-      margin-bottom: 0.5rem;
-      text-wrap: balance;
-      overflow-wrap: break-word;
-      hyphens: auto;
+      margin-bottom: 0.25rem;
     }
 
     .cover-accent {
@@ -309,22 +291,20 @@
 
     .cover-subtitle {
       font-family: var(--font-body);
-      font-size: clamp(1.25rem, 1.05rem + 1.4vw, 1.5rem);
-      font-weight: 400;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 300;
       font-style: italic;
       color: var(--graphite);
-      letter-spacing: 0;
-      line-height: 1.55;
-      max-width: var(--measure);
-      margin-left: auto;
-      margin-right: auto;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.5;
       margin-bottom: 3rem;
     }
 
     .cover-meta {
       font-family: var(--font-mono);
       font-size: var(--text-xs);
-      color: var(--label-ink);
+      color: var(--grey-light);
       line-height: 2;
       letter-spacing: 0.02em;
     }
@@ -359,13 +339,12 @@
     .page-title {
       font-family: var(--font-display);
       font-size: var(--text-h1);
-      font-weight: 600;
+      font-weight: 700;
       line-height: 1.1;
+      text-transform: uppercase;
       color: var(--black);
       margin-bottom: 2rem;
-      letter-spacing: -0.005em;
-      text-wrap: balance;
-      overflow-wrap: break-word;
+      letter-spacing: 0.01em;
     }
 
     .content-block {
@@ -374,15 +353,15 @@
 
     .content-block h3 {
       font-family: var(--font-display);
-      font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem);
+      font-size: var(--text-h3);
       font-weight: 600;
-      line-height: 1.25;
       color: var(--charcoal);
       margin-bottom: 0.5rem;
     }
 
     .content-block p {
       margin-bottom: 0.75rem;
+      line-height: 1.75;
       color: var(--graphite);
     }
 
@@ -427,7 +406,7 @@
     .issue-num {
       font-family: var(--font-mono);
       font-size: var(--text-xs);
-      color: var(--label-ink);
+      color: var(--grey-light);
       flex-shrink: 0;
     }
 
@@ -440,6 +419,7 @@
 
     .issue-body {
       padding-left: 2.5rem;
+      line-height: 1.75;
       color: var(--graphite);
     }
 
@@ -535,7 +515,7 @@
     .findings-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: var(--text-small);
+      font-size: var(--text-sm);
       margin: 1.25rem 0;
     }
 
@@ -548,7 +528,7 @@
       padding: 0.6rem 0.75rem;
       text-align: left;
       font-weight: 600;
-      font-size: var(--text-micro);
+      font-size: var(--text-xs);
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }
@@ -556,11 +536,7 @@
     .findings-table td {
       padding: 0.6rem 0.75rem;
       border-bottom: 1px solid var(--border-light);
-      font-variant-numeric: tabular-nums;
     }
-
-    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .table-scroll:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: var(--radius); }
 
     .findings-table tbody tr:nth-child(odd) { background: var(--white); }
     .findings-table tbody tr:nth-child(even) { background: var(--snow); }
@@ -598,7 +574,7 @@
       border-top: 1px solid var(--border-light);
       font-family: var(--font-mono);
       font-size: var(--text-xs);
-      color: var(--label-ink);
+      color: var(--grey-light);
       line-height: 1.8;
     }
 
@@ -608,7 +584,7 @@
       padding: 0.1rem 0.3rem;
       border-radius: var(--radius);
       font-size: inherit;
-      color: var(--label-ink);
+      color: var(--grey);
     }
 
     /* ===== SECTION DIVIDER ===== */
@@ -790,7 +766,7 @@
       }
 
       .findings-table {
-        font-size: 0.82rem;
+        font-size: 0.7rem;
       }
 
       .findings-table th, .findings-table td {
@@ -807,11 +783,6 @@
       .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
     }
 
-    /* Release reading-column caps to ~90vw on phones (spec §6). */
-    @media (max-width: 680px) {
-      .cover-subtitle { max-width: none; }
-    }
-
     /* Scrollbar styling */
     .pages-container::-webkit-scrollbar {
       width: 3px;
@@ -826,45 +797,26 @@
     .pages-container::-webkit-scrollbar-thumb:hover {
       background: var(--grey-light);
     }
-
-    /* ===== Scroll-reveal (R3.2, paged-safe) ===== */
-    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
-    .reveal.in { opacity: 1; transform: none; }
-    @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1; transform: none; transition: none; }
-    }
-
-    /* ===== Related block (no dead-ends, R3.2) ===== */
-    .related-block { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-light); }
-    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--label-ink); margin-bottom: 0.6rem; }
-    .related-block ul { list-style: none; margin: 0; padding: 0; }
-    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
-    .related-block a { font-family: var(--font-body); font-size: var(--text-sm); color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
-    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
   </style>
-
-  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
 </head>
 <body>
   <a href="#main" class="skip-nav">Skip to content</a>
 
   <!-- Site Navigation -->
-  <nav class="nav" aria-label="Site navigation">
+  <nav class="nav">
     <div class="nav-topbar">
-      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="this.classList.toggle('open');var x=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',!x);document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
+      <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
         <span></span><span></span><span></span>
       </button>
       <div class="nav-mobile-brand">MENTAL HEALTH & WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
     </div>
-        <div class="nav-links">
+    <div class="nav-links">
       <a href="index.html">HOME</a>
-      <a href="report-global-npo-landscape.html">ORGS MAP</a>
-      <a href="org-study.html">ORG STUDY</a>
-      <a href="policy-study.html">POLICY STUDY</a>
-      <a href="research.html" class="current" aria-current="page">RESEARCH</a>
-      <a href="insight.html">INSIGHT</a>
       <a href="plan.html">PLAN</a>
-      <a href="field-news.html">FIELD NEWS</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="case-study.html">CASE STUDY</a>
+      <a href="research.html" class="current">RESEARCH</a>
+      <a href="insight-2026-06-18.html">INSIGHT</a>
     </div>
   </nav>
 
@@ -905,7 +857,7 @@
           <p>Reviewed by 陳棉 · 2026-04-11</p>
         </div>
       </div>
-      <span class="cover-hint">↓ Scroll</span>
+      <span class="cover-hint">↓ scroll or arrow keys</span>
     </div>
 
     <!-- PAGE 02: SUMMARY — BACKGROUND & METHODS -->
@@ -947,7 +899,7 @@
 
         <div class="content-block">
           <h3>Effect Sizes</h3>
-          <div class="table-scroll" role="region" aria-label="Effect sizes by psychosocial dimension (scrollable table)" tabindex="0">
+          <div style="overflow-x:auto;">
             <table class="findings-table">
               <thead>
                 <tr><th>Dimension</th><th>Direction</th><th>&eta;&sup2;</th><th>Magnitude</th></tr>
@@ -1160,25 +1112,16 @@
 
         <div class="content-block">
           <h3>Taiwan-Specific Implications</h3>
-          <p><strong>Sampling frames:</strong> No single musician union exists. Alternatives include performing arts guilds (<span class="cjk cjk-inline">&#21508;&#32291;&#24066;&#28436;&#34269;&#24037;&#26371;</span>), though these are primarily labor insurance vehicles &mdash; membership rolls are unreliable. Ministry of Culture registered performance groups or venue networks may be more viable intermediaries.</p>
-          <p><strong>National comparison:</strong> Taiwan's <span class="cjk cjk-inline">&#24037;&#20316;&#29872;&#22659;&#23433;&#20840;&#34907;&#29983;&#29376;&#27841;&#35469;&#30693;&#35519;&#26597;</span> (IOSH Work Environment Survey) as general workforce comparator.</p>
+          <p><strong>Sampling frames:</strong> No single musician union exists. Alternatives include performing arts guilds (&#21508;&#32291;&#24066;&#28436;&#34269;&#24037;&#26371;), though these are primarily labor insurance vehicles &mdash; membership rolls are unreliable. Ministry of Culture registered performance groups or venue networks may be more viable intermediaries.</p>
+          <p><strong>National comparison:</strong> Taiwan's &#24037;&#20316;&#29872;&#22659;&#23433;&#20840;&#34907;&#29983;&#29376;&#27841;&#35469;&#30693;&#35519;&#26597; (IOSH Work Environment Survey) as general workforce comparator.</p>
           <p><strong>Instrument needs:</strong> JCQ has Chinese validation. QPS-Nordic likely needs Traditional Chinese translation and validation &mdash; a research contribution in itself.</p>
         </div>
 
         <div class="source-info">
           <p><strong>Source:</strong> <code>raw/papers/Detari_2020_Psychosocial_Norway.pdf</code></p>
           <p><strong>Method:</strong> Full text extraction via PyMuPDF, critical analysis by reviewer</p>
-          <p><strong>Basis:</strong> &#10003; Sourced &mdash; primary source PDF read in full</p>
+          <p><strong>Basis:</strong> &#10003; Verified &mdash; primary source PDF read in full</p>
         </div>
-
-        <nav class="related-block" aria-label="Related on this site">
-          <p class="related-title">Related</p>
-          <ul>
-            <li><a href="research.html">&larr; Research (all readings)</a></li>
-            <li><a href="research-rousseau-2026.html">Rousseau et al. (2026) &mdash; metal musicians scoping review</a></li>
-            <li><a href="policy-study.html">Policy Study &mdash; how jurisdictions protect music workers</a></li>
-          </ul>
-        </nav>
       </div>
     </div>
 
@@ -1197,13 +1140,11 @@
     var pages = document.querySelectorAll('.page');
     var nums = document.querySelectorAll('.page-num');
     var current = 0;
-    var RM = window.matchMedia('(prefers-reduced-motion: reduce)');
-    function scrollBehavior(){ return RM.matches ? 'auto' : 'smooth'; }
 
     // --- Navigation via scrollIntoView ---
     function goTo(index) {
       if (index < 0 || index >= pages.length) return;
-      pages[index].scrollIntoView({ behavior: scrollBehavior() });
+      pages[index].scrollIntoView({ behavior: 'smooth' });
     }
 
     function nextPage() { goTo(current + 1); }
@@ -1251,39 +1192,12 @@
     // Wheel & touch are handled natively by CSS scroll-snap.
     // No JS wheel or touch handlers needed.
   </script>
-
-  <script>
-  /* Scroll-reveal — R3.2 paged-safe (observes within .pages-container; per-page anchors only) */
-  (function(){
-    var root = document.querySelector('.pages-container');
-    if (!root) return;
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var sel = '.page-title, .part-divider, .page-label, .stat-strip, .method-table, .table-wrap, figure';
-    var nodes = Array.prototype.slice.call(root.querySelectorAll(sel));
-    if (!('IntersectionObserver' in window) || reduce) {
-      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
-      return;
-    }
-    nodes.forEach(function(el){ el.classList.add('reveal'); });
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if (!e.isIntersecting) return;
-        var el = e.target, p = el.parentElement, idx = 0;
-        if (p){ var sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
-        el.style.transitionDelay = (Math.min(idx,5) * 60) + 'ms';
-        el.classList.add('in'); io.unobserve(el);
-      });
-    }, { root: root, threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
-    nodes.forEach(function(el){ io.observe(el); });
-  })();
-  </script>
-
   <!-- nav scroll-state fix: transparent over hero, blurred bar once scrolled -->
   <style>
     nav.nav, .nav { transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease); border-bottom: 1px solid transparent; }
     nav.nav.scrolled, .nav.scrolled {
       right: 0;
-      background: rgba(244, 244, 245, 0.45);
+      background: rgba(244, 244, 245, 0.85);
       -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-light);
