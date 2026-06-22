@@ -1,15 +1,29 @@
-# Renamed 2026-06-12 — deploy slug standardization (PROJECT_RULES §4)
+# Renamed 2026-06-12 — deploy slug standardization (PROJECT_RULES §13)
 /detari-2020-critical.html      /research-detari-2020.html      301
 /rousseau-2026-metal-musicians.html /research-rousseau-2026.html 301
 /w1-report-global-npo-landscape.html /report-global-npo-landscape.html 301
-/w2-report-backline-case-study.html  /case-study-backline.html        301
+/w2-report-backline-case-study.html  /org-study-backline.html        301
 
-# News demoted to landscape changelog 2026-06-12 (PROJECT_RULES Rule 13).
-# Standalone News & Trends reports discontinued; news now lives as the
-# "Recent Changes" feed on the Orgs Map. Forced (301!) so the redirect fires
-# even though the legacy file is kept on disk as a self-contained archive.
-/news-trends-2026-06-12.html /report-global-npo-landscape.html#changelog 301!
-/news-trends-2026-04-24.html /report-global-npo-landscape.html#changelog 301!
+# Field News promoted to a standalone page 2026-06-21 (PROJECT_RULES Rule 13).
+# News no longer lives as an Orgs Map section; it is now its own page,
+# field-news.html, with a top-level nav item. Forced (301!) so the redirect
+# fires even though the legacy file is kept on disk as a self-contained archive.
+/news-trends-2026-06-12.html /field-news.html 301!
+/news-trends-2026-04-24.html /field-news.html 301!
+
+# CASE STUDY → ORG STUDY genre migration, 2026-06-20 (PROJECT_RULES §13).
+# True rename: old files removed from disk → plain 301 (no bang needed).
+/case-study.html                     /org-study.html                     301
+/case-study-backline.html            /org-study-backline.html            301
+/case-study-music-minds-matter.html  /org-study-music-minds-matter.html  301
+/case-study-musicares.html           /org-study-musicares.html           301
+/case-study-arts-creators-union.html /org-study-arts-creators-union.html 301
+
+# POLICY STUDY section, 2026-06-20 — policy scans migrated out of the Research
+# genre into their own section (PROJECT_RULES §13). True rename → plain 301.
+/research-policy-japan.html    /policy-study-japan.html    301
+/research-policy-thailand.html /policy-study-thailand.html 301
+/research-policy-eu.html       /policy-study-eu.html       301
 
 /index-meshwork.html   /   301
 
