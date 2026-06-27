@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Alexianer Crisis Center · Org Study · MH&amp;W</title>
+  <meta name="description" content="&quot;Alexianer Crisis Center&quot; is a Catholic hospital group's psychiatric crisis service in Berlin (best match: the DeKIZ at St. Hedwig-Krankenhaus) — general mental health, funded by statutory health insurance, nothing music-specific. Studied as the general crisis safety-net a musician would fall back on absent a music-specific service, and what that substitution costs.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      /* ── DIA-GRADE READING SCALE (calibrated to Dia browser, serif-corrected) ── */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;--lh-prose:1.7;--wt-prose:440;--measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;--label-ink:var(--graphite);
+      --font-cjk:'Noto Serif TC',serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { overflow-x: hidden; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--black);
+      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      line-height: var(--lh-prose);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    a { color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    a:hover { color: var(--signal-dim); }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--signal); outline-offset: 3px; border-radius: var(--radius);
+    }
+
+    .skip-nav {
+      position: absolute; left: -9999px; top: 0; z-index: 200;
+      background: var(--signal); color: var(--white);
+      padding: 0.5rem 1rem; font-family: var(--font-mono);
+    }
+    .skip-nav:focus { left: 0; }
+
+    /* ===== NAVIGATION ===== */
+    nav.nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; flex-direction: column;
+      padding: 2rem 2.5rem;
+      padding-top: calc(2rem + env(safe-area-inset-top));
+      background: transparent;
+      transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    nav.nav.scrolled {
+      background: rgba(244, 244, 245, 0.45);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: var(--font-mono); font-size: 1.1rem; font-weight: 400;
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-topbar { display:none; }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; min-width:44px; min-height:44px; z-index:101; -webkit-tap-highlight-color:transparent; }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity:0; }
+    .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
+
+    /* ===== LAYOUT ===== */
+    main { max-width: var(--max-w); margin: 0 auto; padding: 0 2.5rem 5rem 2.5rem; }
+    section { margin-bottom: 4rem; }
+    .narrow { max-width: var(--max-w-text); }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding-top: calc(9rem + env(safe-area-inset-top));
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-light);
+      margin-bottom: 3rem;
+    }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.18em;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: var(--font-display); font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6.5rem);
+      font-weight: 800; line-height: 1.04; color: var(--black); letter-spacing: -0.01em;
+      overflow-wrap: break-word; hyphens: auto;
+    }
+    .hero h1 .tail { display:block; font-size: clamp(1.15rem, 2.6vw, 1.9rem); font-weight: 600; color: var(--signal); letter-spacing: 0; margin-top: 0.9rem; }
+    .hero .subtitle {
+      font-family: var(--font-body); font-size: clamp(1.25rem, 1.05rem + 1.4vw, 1.5rem);
+      color: var(--graphite); line-height: 1.55; margin-top: 1.5rem; max-width: 54ch;
+    }
+    .basis-badge {
+      display: inline-block; margin-top: 1.75rem;
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--graphite); background: var(--signal-bg);
+      border: 1px solid var(--signal-glow); border-radius: var(--radius);
+      padding: 0.5rem 0.85rem; line-height: 1.5;
+    }
+
+    /* ===== TWO-LINE COVER (R2.1, 2026-06-20) — width:100% inside main (no 100vw breakout → no x-overflow) ===== */
+    .cover {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;                /* clips the wash */
+      padding: 0 2rem;
+    }
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%,
+        var(--signal-glow) 0%,
+        rgba(102,103,171,0.06) 38%,
+        rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
+    }
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 1280px);
+    }
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin: 0;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+    .cover-sub {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 2.4vw, 1.5rem);
+      font-weight: 500;
+      font-style: italic;
+      color: var(--graphite);
+      margin: 1rem 0 0;
+      letter-spacing: 0.01em;
+      max-width: 34ch;
+      margin-left: auto; margin-right: auto;
+      line-height: 1.4;
+    }
+    .cover-line {
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--purple-deep);
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
+    }
+    .cover-hint {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
+    }
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
+    }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-sub  { animation-delay: 0.16s; }
+    .cover-inner > .cover-line  { animation-delay: 0.24s; }
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .cover-wash,
+      .cover-hint,
+      .cover-inner > * { animation: none; opacity: 1; transform: none; }
+    }
+    @media (max-width: 768px) {
+      .cover { padding: 0 1.25rem; }
+      .cover-title { font-size: clamp(1.7rem, 7.3vw, 2.4rem); }
+      .cover-line  { font-size: clamp(0.72rem, 3.2vw, 0.95rem); letter-spacing: 0.18em; }
+    }
+
+    /* ===== TYPE ===== */
+    h2 {
+      font-family: var(--font-display); font-size: var(--text-h2);
+      font-weight: 700; line-height: 1.1; color: var(--black);
+      margin-bottom: 1.25rem; letter-spacing: -0.01em;
+      text-wrap: balance; overflow-wrap: break-word;
+    }
+    h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem); line-height: 1.25; font-weight: 600; color: var(--charcoal); margin: 1.75rem 0 0.75rem; }
+    .section-label {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem;
+    }
+    p { color: var(--graphite); max-width: var(--measure-prose); margin-bottom: 1rem; line-height: 1.65; }
+    p.lead { font-size: 1.1rem; color: var(--charcoal); }
+    strong { color: var(--charcoal); font-weight: 600; }
+    em { color: var(--graphite); }
+
+    /* ===== MODEL CALLOUT ===== */
+    .model-callout { background: var(--bg-card-dark); color: var(--snow); border-radius: var(--radius-lg); padding: 2.25rem 2.5rem; margin-bottom: 3rem; }
+    .model-callout h2 { color: var(--white); margin-bottom: 1rem; }
+    .model-callout p { color: var(--silver); max-width: none; }
+    .model-callout strong { color: var(--white); }
+    .model-callout a { color: var(--spectrum-3); text-decoration: underline; text-underline-offset: 2px; }
+    .model-callout a:hover { color: var(--white); }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-card); margin: 1.5rem 0 0.75rem; }
+    .stat-item { padding: 1.75rem 1.25rem; border-right: 1px solid var(--border-light); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--signal); line-height: 1; font-variant-numeric: tabular-nums; }
+    .stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.6rem; line-height: 1.4; }
+
+    /* ===== TABLES ===== */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; margin: 1.25rem 0; border-radius: var(--radius-lg); border: 1px solid var(--border-light); }
+    .table-wrap:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+    table { width: 100%; border-collapse: collapse; background: var(--bg-card); font-size: var(--text-small); }
+    caption { text-align: left; font-family: var(--font-mono); font-size: var(--text-caption); color: var(--label-ink); padding: 0.75rem 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border-light); vertical-align: top; font-variant-numeric: tabular-nums; }
+    thead th { font-family: var(--font-mono); font-size: var(--text-micro); text-transform: uppercase; letter-spacing: 0.06em; color: var(--label-ink); background: var(--snow); }
+    tbody tr:last-child td { border-bottom: none; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .row-emph td { background: var(--signal-bg); font-weight: 600; color: var(--charcoal); }
+
+    /* ===== PROGRAM / MODEL LIST ===== */
+    .prog { list-style: none; margin: 1.25rem 0 0; padding: 0; }
+    .prog li { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 0.85rem; }
+    .prog h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .prog p { font-size: var(--text-sm); margin-bottom: 0; }
+    .prog .ptag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ===== DISAMBIGUATION / CRISIS CARDS (reusing crisis-grid shape) ===== */
+    .crisis-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .crisis { background: var(--bg-card); border: 1px solid var(--border-light); border-top: 3px solid var(--spectrum-1); border-radius: var(--radius-lg); padding: 1.5rem 1.6rem; }
+    .crisis.match { border-top-color: var(--spectrum-4); }
+    .crisis.notalx { border-top-color: var(--spectrum-2); }
+    .crisis .cyrtag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--graphite); letter-spacing: 0.08em; text-transform: uppercase; }
+    .crisis h3 { margin: 0.3rem 0 0.6rem; font-size: 1.08rem; }
+    .crisis p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== SW CARDS ===== */
+    .sw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.25rem; }
+    .sw-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem; }
+    .sw-card.weak { border-left: 3px solid var(--spectrum-2); }
+    .sw-card.strong { border-left: 3px solid var(--spectrum-4); }
+    .sw-card h3 { margin: 0 0 0.4rem; font-size: 1rem; }
+    .sw-card p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== LESSONS ===== */
+    .lessons { counter-reset: lesson; list-style: none; margin: 1.5rem 0 0; padding: 0; }
+    .lessons li { position: relative; padding: 1.25rem 1.5rem 1.25rem 3.5rem; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); margin-bottom: 0.85rem; }
+    .lessons li::before { counter-increment: lesson; content: counter(lesson); position: absolute; left: 1.25rem; top: 1.25rem; font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--signal); }
+    .lessons h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .lessons p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== CITATIONS (§5 inline tier) ===== */
+    .cite { font-size: 0.7em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem; }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-fine); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; max-width: var(--measure-ref); overflow-wrap: anywhere; }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs-note { font-size: var(--text-xs); color: var(--label-ink); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-sm); color: var(--label-ink); font-style: italic; max-width: var(--max-w-text); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .crisis-grid { grid-template-columns: 1fr; }
+      .sw-grid { grid-template-columns: 1fr; }
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2n) { border-right: none; }
+      .stat-item:nth-child(-n+2) { border-bottom: 1px solid var(--border-light); }
+    }
+    @media (max-width: 768px) {
+      nav.nav { padding: 1.2rem 1.5rem; padding-top: calc(1.2rem + env(safe-area-inset-top)); }
+      nav.nav.open { background: rgba(244,244,245,0.95); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-light); }
+      .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
+      .nav-toggle { display:block; }
+      .nav-mobile-brand { display:block; }
+      .nav-links { display:none; flex-direction:column; gap:0.75rem; margin-top:1rem; }
+      .nav-links.show { display:flex; }
+      .nav-links a { font-size: 0.85rem; }
+      main { padding: 0 1.5rem 3rem 1.5rem; }
+      .hero { padding-top: calc(7rem + env(safe-area-inset-top)); }
+      .hero h1 { font-size: clamp(2.4rem, 10.5vw, 3.4rem); }
+      .model-callout { padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
+    @media (max-width: 680px) {
+      p, .hero .subtitle, .refs li, .cite-help { max-width: none; }
+    }
+    @media (max-width: 480px) {
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+      .stat-item:last-child { border-bottom: none; }
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
+      table { font-size: 0.82rem; }
+      thead th { font-size: 0.6rem; }
+      th, td { padding: 0.5rem 0.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } nav.nav { transition: none; } }
+
+    /* ===== Scroll-reveal (R3.2 craft pass) ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ===== Related block (no dead-ends, R3.2) ===== */
+    .related-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-light); }
+    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--label-ink); margin-bottom: 0.6rem; }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a { font-family: var(--font-body); font-size: var(--text-sm); color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+  </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open');this.setAttribute('aria-expanded',o)">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+        <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="org-study.html" class="current" aria-current="page">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
+      <a href="field-news.html">FIELD NEWS</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- COVER -->
+    <section class="cover">
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="cover-inner">
+        <h1 class="cover-title">ALEXIANER CRISIS</h1>
+        <p class="cover-sub">A Catholic hospital group's psychiatric crisis service in Berlin — general mental health, not a music-sector org</p>
+        <p class="cover-line">Org Study · St. Hedwig est. 1846</p>
+      </div>
+      <span class="cover-hint" aria-hidden="true">↓ Scroll</span>
+    </section>
+
+    <!-- MODEL CALLOUT -->
+    <div class="model-callout">
+      <h2>One model, in one line</h2>
+      <p><a href="org-study-musicares.html">MusiCares</a> is a music-industry incumbent; <a href="org-study-sadem.html">SADEM</a> is a musicians' union that owns a health fund; <a href="org-study-samaritans-thailand.html">Samaritans of Thailand</a> is a volunteer befriending line. <strong>"Alexianer Crisis Center" is none of those — it is a Catholic hospital group's psychiatric crisis-intervention service, embedded in Germany's statutory health system and open to everyone in its Berlin catchment.</strong> It sits on this project's map for one reason: absent a music-specific crisis service, a Berlin musician in an acute mental-health emergency would be caught by exactly this kind of sectorised, insurance-funded psychiatric care — and that <em>substitution</em> has real costs. The transferable lesson is the statutory <strong>floor</strong> it rests on, not anything music-specific.<sup class="cite"><a href="#alx-src-1" data-src="alx-corp" data-tip="Alexianer = one of Germany's largest Catholic health groups; not-for-profit Träger (Stiftung der Alexianerbrüder). Alexianer GmbH, Unternehmen und Struktur.">1</a></sup><sup class="cite"><a href="#alx-src-10" data-src="orgs-map" data-tip="Map row #53: 'Alexianer Crisis Center · Germany · Mental Health Support; Emergency Aid Services'. The listing this study examines.">10</a></sup></p>
+    </div>
+
+    <!-- 0. DISAMBIGUATION -->
+    <section>
+      <div class="section-label">00 — Which service is this?</div>
+      <h2>The map says "Alexianer Crisis Center." There isn't one by that name<sup class="cite"><a href="#alx-src-10" data-src="orgs-map" data-tip="Orgs Map row #53 label: 'Alexianer Crisis Center · Mental Health Support; Emergency Aid Services · ❓ No source'.">10</a></sup></h2>
+      <p>The first finding is a disambiguation. The Orgs Map lists <strong>"Alexianer Crisis Center"</strong> with the profile <em>Mental Health Support; Emergency Aid Services</em> — but that English label does not map onto a single, discretely-named service. <strong>Alexianer runs several distinct crisis-related psychiatric services in Berlin</strong>, and there is also a <em>separate, non-Alexianer</em> city-wide service with a confusingly similar name. Pinning down the most plausible referent is itself part of the work (⚠️ — the identification is best-match, not certain).</p>
+
+      <div class="crisis-grid">
+        <div class="crisis match">
+          <div class="cyrtag">Best match · Alexianer</div>
+          <h3>DeKIZ — Depressions- und Kriseninterventionszentrum</h3>
+          <p>An <strong>open inpatient ward, 13 places</strong>, at St. Hedwig-Krankenhaus (Mitte), giving CBT-based treatment of depression and depressive crises. Its German name literally contains <em>Kriseninterventionszentrum</em> ("crisis-intervention centre") — the only Alexianer Berlin service named a "centre" for crisis. <strong>Treated here as the primary referent.</strong><sup class="cite"><a href="#alx-src-3" data-src="dekiz" data-tip="'Eine offene Station mit 13 Behandlungsplätzen'; CBT for depression; Charité affective-disorders research. Alexianer St. Hedwig-Krankenhaus, DeKIZ page.">3</a></sup></p>
+        </div>
+        <div class="crisis">
+          <div class="cyrtag">Sibling · Alexianer</div>
+          <h3>AKI — Akute komplexe Krisenintervention</h3>
+          <p>A <strong>day clinic</strong> (Tagesklinik St. Antonia, Weißensee) for severe psychological crises where inpatient care is unwanted or unsuitable — explicitly part of the regional <em>Pflichtversorgung</em>, so catchment-limited to Weißensee / Pankow / Prenzlauer Berg, referral required.<sup class="cite"><a href="#alx-src-6" data-src="aki" data-tip="'Menschen in einer schweren psychischen Krise'; 'Teil der regionalen Pflichtversorgung' → catchment Weißensee/Pankow/Prenzlauer Berg; Einweisung required. Alexianer Weißensee, AKI page.">6</a></sup></p>
+        </div>
+        <div class="crisis">
+          <div class="cyrtag">Sibling · Alexianer</div>
+          <h3>ER psychiatric crisis support</h3>
+          <p>At St. Gertrauden-Krankenhaus, specially trained staff handle acute psychiatric crises within the central emergency department — the "emergency aid" framing of the map label, but not a standalone "centre."<sup class="cite"><a href="#alx-src-1" data-src="alx-corp" data-tip="St. Gertrauden central ER provides specially-trained support for acute psychiatric crises. Alexianer Berlin (region/group pages).">1</a></sup></p>
+        </div>
+        <div class="crisis notalx">
+          <div class="cyrtag">NOT Alexianer · do not conflate</div>
+          <h3>Berliner Krisendienst</h3>
+          <p>Berlin's actual frontline 24/7 psychosocial crisis service — <strong>free, anonymous, 9 locations</strong> — is run by <em>six other</em> carriers (Albatros, Caritas Berlin, KBS, KUB, neuhland, Platane 19) and funded by the Land Berlin. <strong>Alexianer is not one of them.</strong> Kept separate throughout this study.<sup class="cite"><a href="#alx-src-7" data-src="bkd" data-tip="'Kostenlos. 24 Stunden am Tag … An 9 Berliner Standorten'; carriers Albatros/Caritas/KBS/KUB/neuhland/Platane 19 (no Alexianer); Land-funded. berliner-krisendienst.de.">7</a></sup></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. PROFILE -->
+    <section>
+      <div class="section-label">01 — Profile</div>
+      <h2>A Catholic hospital group's crisis ward, not a charity<sup class="cite"><a href="#alx-src-1" data-src="alx-corp" data-tip="Konfessioneller Träger, nicht gewinnorientiert; >35,000 staff; 28 hospitals ~7,250 beds; 5 Verbünde / 6 Länder. Alexianer GmbH, Unternehmen und Struktur.">1</a></sup></h2>
+      <p>Alexianer is <strong>one of Germany's largest Catholic (konfessionell) health and social-care groups</strong>. The operating holding, <strong>Alexianer GmbH (Münster)</strong>, runs the group on behalf of the <strong>Stiftung der Alexianerbrüder</strong> (Foundation of the Alexian Brothers) and is explicitly <strong>not-for-profit</strong>. It reports more than 35,000 staff and 28 psychiatric and somatic hospitals across five regional groups in six federal states.<sup class="cite"><a href="#alx-src-1" data-src="alx-corp" data-tip="'Als konfessioneller Träger arbeitet die Alexianer GmbH nicht gewinnorientiert'; '> 35.000 Mitarbeitende'; '28 … Krankenhäuser … rund 7.250 Betten'; '5 Verbünde in sechs Bundesländern'. Alexianer GmbH.">1</a></sup> Its order traces back roughly 800 years to the Begarden lay movement (early 13th century), was recognised as a religious order in <strong>1507</strong>, takes its name from St. Alexius, and has run psychiatric institutions since the 19th century.<sup class="cite"><a href="#alx-src-2" data-src="alx-history" data-tip="'Ordensgemeinschaft mit 800-jähriger Geschichte'; Begarden; 'anno 1507 … als Ordensgemeinschaft anerkannt'; named for St. Alexius. Alexianer GmbH, Geschichte.">2</a></sup></p>
+
+      <p>The specific crisis service — the <strong>DeKIZ</strong> — sits inside the <strong>Alexianer St. Hedwig-Krankenhaus</strong>, Berlin-Mitte: founded <strong>1846</strong> (one of Berlin's oldest large hospitals), <strong>469 beds</strong>, Catholic, historically sustained by the Caritas association, run by the Alexianer since <strong>1999</strong>. Its psychiatric department is simultaneously the <strong>Charité university psychiatric clinic</strong> and holds the <strong>statutory psychiatric care mandate (Versorgungsauftrag) for Bezirk Mitte</strong>.<sup class="cite"><a href="#alx-src-5" data-src="wiki-shk" data-tip="St. Hedwig: founded 1846; 469 beds; Berlin-Mitte; Catholic + Caritas; Alexianer takeover 1999; Charité psych Versorgungsauftrag for Bezirk Mitte. de.wikipedia (St. Hedwig-Krankenhaus).">5</a></sup><sup class="cite"><a href="#alx-src-4" data-src="shk-psych" data-tip="'Psychiatrische Universitätsklinik der Charité im St. Hedwig-Krankenhaus'; Chefarzt Prof. Felix Bermpohl; 'Weddinger Modell'. Alexianer St. Hedwig, Psychiatrie page.">4</a></sup></p>
+
+      <div class="table-wrap" role="region" aria-label="Organization profile — Alexianer Crisis Center / DeKIZ (scrollable table)" tabindex="0">
+        <table>
+          <caption>Organization profile — "Alexianer Crisis Center" (best match: DeKIZ) · sources cited inline</caption>
+          <tbody>
+            <tr><th scope="row">Parent group</th><td>Alexianer GmbH (Münster) — for the Stiftung der Alexianerbrüder (Catholic)</td></tr>
+            <tr><th scope="row">Legal / funding character</th><td>Konfessioneller Träger, <strong>nicht gewinnorientiert</strong> (not-for-profit); care reimbursed by statutory health insurance</td></tr>
+            <tr><th scope="row">Specific service (best match)</th><td><strong>DeKIZ</strong> — Depressions- und Kriseninterventionszentrum, St. Hedwig-Krankenhaus (⚠️ map label is ambiguous)</td></tr>
+            <tr><th scope="row">Host hospital</th><td>Alexianer St. Hedwig-Krankenhaus, Große Hamburger Str. 5–11, 10115 Berlin-Mitte (founded 1846; 469 beds)</td></tr>
+            <tr><th scope="row">Service form</th><td>Open inpatient ward, <strong>13 treatment places</strong>; CBT-based treatment of depression &amp; crises</td></tr>
+            <tr><th scope="row">Academic tie</th><td>Charité Psychiatric University Clinic at St. Hedwig; DeKIZ in Charité affective-disorders research; Chefarzt Prof. Felix Bermpohl</td></tr>
+            <tr><th scope="row">Catchment</th><td>Bezirk Mitte (statutory care mandate / Versorgungsauftrag)</td></tr>
+            <tr><th scope="row">Sibling Alexianer crisis services</th><td>AKI day-clinic (Weißensee; catchment Weißensee/Pankow/Prenzlauer Berg) · psychiatric crisis support in St. Gertrauden ER</td></tr>
+            <tr><th scope="row">Funding</th><td>German statutory health insurance (GKV) via the PEPP system (mandatory since 2018), under KHG/BPflV — ⚠️ Inferred (system-level; no service budget published)</td></tr>
+            <tr><th scope="row">Music-specific?</th><td><strong>No</strong> — general psychiatric care; offers Musiktherapie (music as a clinical <em>modality</em>), nothing for the music <em>sector</em></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 2. WHAT IT DOES -->
+    <section>
+      <div class="section-label">02 — What it does</div>
+      <h2>Inpatient crisis intervention, by referral and catchment<sup class="cite"><a href="#alx-src-3" data-src="dekiz" data-tip="DeKIZ: open ward, 13 places, CBT for depression; self-contact + phone screening; excludes acute suicidality/addiction; crisis referrals via the ER on-call doctor. Alexianer St. Hedwig, DeKIZ page.">3</a></sup></h2>
+      <p>The distinctive thing is not breadth of programming — it is a hospital ward — but its <strong>place in a sectorised system</strong>: who it admits, how, and (tellingly) whom it turns away.</p>
+      <ul class="prog">
+        <li><div class="ptag">DeKIZ · the best-match "centre"</div><h3>An open ward of 13, for depression &amp; crises — but not acute suicidality</h3><p>The Depressions- und Kriseninterventionszentrum is "eine offene Station mit 13 Behandlungsplätzen," offering guideline-based <strong>cognitive-behavioural</strong> treatment of depression and depressive crises. Access is low-threshold for an inpatient ward — patients can contact the ward directly, get a <strong>telephone screening</strong>, then an in-person pre-conversation. Crucially it has <strong>exclusion criteria — "z.&nbsp;B. akute Suizidalität, im Vordergrund stehende Suchterkrankung"</strong> — so the service whose name says "crisis" does <em>not</em> catch acute suicidal crisis; referring doctors are sent to the on-call doctor via the emergency department. Its staff belong to the <strong>Charité affective-disorders research</strong> group.<sup class="cite"><a href="#alx-src-3" data-src="dekiz" data-tip="'offene Station mit 13 Behandlungsplätzen'; CBT; self-contact + phone screening; exclusion 'akute Suizidalität, im Vordergrund stehende Suchterkrankung'; crisis referrals via Notaufnahme; Charité affective-disorders research. DeKIZ page.">3</a></sup></p></li>
+        <li><div class="ptag">Host clinic · Charité university psychiatry</div><h3>The "Weddinger Modell," catchment Mitte</h3><p>The host department is the <strong>Psychiatric University Clinic of the Charité at St. Hedwig-Krankenhaus</strong> (Chefarzt <strong>Prof. Dr. Felix Bermpohl</strong>), running the recovery-oriented integrative <strong>"Weddinger Modell"</strong> across outpatient, day-clinic and full-inpatient settings, in close cooperation with Mitte's community psychiatric services.<sup class="cite"><a href="#alx-src-4" data-src="shk-psych" data-tip="Charité Universitätsklinik at St. Hedwig; Prof. Felix Bermpohl; 'Weddinger Modell'; cooperation with Bezirk Mitte services. Alexianer St. Hedwig, Psychiatrie page.">4</a></sup></p></li>
+        <li><div class="ptag">Sibling · day-clinic crisis</div><h3>AKI: crisis care without a hospital bed — but only for three districts</h3><p>AKI at Tagesklinik St. Antonia (Weißensee) is a <strong>day-clinic</strong> crisis service for people "in einer schweren psychischen Krise" where inpatient care is unwanted/unsuitable — to avoid or shorten hospital stays without removing people from their social context. As <strong>part of the regional Pflichtversorgung</strong>, only patients from the <strong>Weißensee / Pankow / Prenzlauer Berg</strong> catchment can be treated, and a <strong>referral (Einweisung)</strong> from a specialist is required.<sup class="cite"><a href="#alx-src-6" data-src="aki" data-tip="AKI day clinic; 'schwere psychische Krise'; 'Teil der regionalen Pflichtversorgung' → catchment-limited; Einweisung required. Alexianer Weißensee, AKI page.">6</a></sup></p></li>
+      </ul>
+    </section>
+
+    <!-- 3. FUNDING -->
+    <section>
+      <div class="section-label">03 — Who funds it</div>
+      <h2>The statutory floor — not a charity balance sheet<sup class="cite"><a href="#alx-src-8" data-src="pepp" data-tip="German psychiatric hospital care is reimbursed via the PEPP system (mandatory since 2018) under KHG/BPflV; Pflichtversorgung = sectorised duty-to-treat. vdek / AOK / BMG.">8</a></sup></h2>
+      <p>This is the part most relevant to the project's <em>floor vs room</em> thesis, and the cleanest <strong>statutory floor</strong> in the whole org-study series. Unlike a donation-funded NPO, Alexianer's psychiatric crisis services are <strong>reimbursed care inside Germany's statutory health-insurance (GKV) system</strong>. Since 2013 psychiatric and psychosomatic hospital care is paid via the <strong>PEPP system</strong> (pauschalierendes Entgeltsystem für Psychiatrie und Psychosomatik), <strong>mandatory for all such hospitals since 2018</strong>, under the KHG and the Bundespflegesatzverordnung. Hospitals carrying a <strong>Pflichtversorgung</strong> (sectorised duty-to-treat for a region) are funded to take all comers in their catchment.<sup class="cite"><a href="#alx-src-8" data-src="pepp" data-tip="PEPP introduced 2013, mandatory since 2018; KHG/BPflV/PEPPV; Pflichtversorgung distinct cost recognition; GKV-reimbursed. vdek/AOK/BMG.">8</a></sup></p>
+      <p>The corporate parent is a <strong>not-for-profit Catholic Träger</strong> — but that is the <em>ownership</em> form, not the funding stream. The money that pays for a crisis admission is <strong>statutory insurance</strong>, free at the point of use for the insured. (⚠️ Inferred at the service level: Alexianer does <strong>not</strong> publish a DeKIZ-specific budget, so no euro figure is claimed; ❓ for any service-line amount.)<sup class="cite"><a href="#alx-src-1" data-src="alx-corp" data-tip="Not-for-profit Catholic Träger (ownership form). Alexianer GmbH, Unternehmen und Struktur.">1</a></sup><sup class="cite"><a href="#alx-src-6" data-src="aki" data-tip="The AKI page's own 'Teil der regionalen Pflichtversorgung' statement anchors the sectorised-care funding model at service level. Alexianer Weißensee.">6</a></sup></p>
+
+      <h3>The separate frontline — and how it is funded</h3>
+      <p>What most Berliners would actually call first in an acute psychosocial crisis is the <strong>Berliner Krisendienst</strong>: <strong>free, anonymous, 24 hours a day</strong>, by phone / in person / on site (with an on-call doctor for escalations), across <strong>9 locations</strong> (overnight and weekends via a citywide on-call line). It is <strong>funded by the Land Berlin / its districts</strong> and run by a six-carrier consortium — <strong>not Alexianer</strong>. On the map, the distinction matters: the "Alexianer Crisis Center" is a <em>hospital</em> crisis-intervention centre, not the city's frontline crisis line.<sup class="cite"><a href="#alx-src-7" data-src="bkd" data-tip="Berliner Krisendienst: 'Kostenlos. 24 Stunden … 9 Berliner Standorten'; Land-funded; carriers exclude Alexianer. berliner-krisendienst.de.">7</a></sup></p>
+
+      <div class="stat-strip">
+        <div class="stat-item"><div class="stat-num">13</div><div class="stat-label">DeKIZ treatment places (open inpatient ward)</div></div>
+        <div class="stat-item"><div class="stat-num">469</div><div class="stat-label">beds at the host hospital, St. Hedwig (Mitte, est. 1846)</div></div>
+        <div class="stat-item"><div class="stat-num">2018</div><div class="stat-label">PEPP statutory-insurance reimbursement mandatory for psych hospitals</div></div>
+        <div class="stat-item"><div class="stat-num">€0</div><div class="stat-label">cost to the insured patient at point of use (statutory floor)</div></div>
+      </div>
+    </section>
+
+    <!-- 4. SCOPE FINDING -->
+    <section>
+      <div class="section-label">04 — Scope finding</div>
+      <h2>General mental health, not music — said plainly<sup class="cite"><a href="#alx-src-9" data-src="musiktherapie" data-tip="Alexianer offers Musiktherapie (music as a clinical modality), not music-sector support; music-sector MH in Germany is served by other bodies (MiM-Verband, scene counselling). Alexianer Musiktherapie + sector context.">9</a></sup></h2>
+      <p>This must be stated without hedging: <strong>the Alexianer crisis services offer nothing designed for the music sector.</strong> No musician track, no industry partnership, no occupational-health framing for performers, no touring/gig content, no music-industry-aware staff. DeKIZ treats depression and crises for whoever is referred; AKI treats whoever lives in its three Berlin districts. A musician in crisis reaches exactly the same ward, the same catchment rules, the same Charité clinicians as any other Berliner.<sup class="cite"><a href="#alx-src-3" data-src="dekiz" data-tip="DeKIZ admits by referral/screening for depression & crises generally — no occupational or music-specific track. DeKIZ page.">3</a></sup><sup class="cite"><a href="#alx-src-6" data-src="aki" data-tip="AKI admits by district catchment — no occupational or music-specific track. AKI page.">6</a></sup></p>
+      <p>The one place "music" appears in Alexianer's psychiatry is <strong>Musiktherapie</strong> — music used as a <em>clinical treatment modality</em> inside the ward ("aktives Musizieren … kann die Heilung psychiatrischer Erkrankungen fördern," for patients of any musical ability). That is the <strong>inverse</strong> of music-sector mental-health support: it treats patients <em>with</em> music; it does not serve <em>musicians as a workforce</em>. In Berlin, the bodies that actually address the music sector's mental health are different organizations — e.g. scene counselling for music professionals and the <strong>MiM-Verband (Mental Health in Music)</strong> trade body — not Alexianer.<sup class="cite"><a href="#alx-src-9" data-src="musiktherapie" data-tip="Musiktherapie = clinical modality, not workforce support; music-sector MH served by MiM-Verband / scene counselling, not Alexianer. Alexianer Musiktherapie + sector context.">9</a></sup></p>
+      <p>So why is it on the map at all? Because it documents the <strong>default the absence forces</strong>: lacking a music-specific crisis service, a Berlin musician falls back onto the general, sectorised, insurance-funded psychiatric safety-net. Its value to the music sector is real but <strong>incidental</strong> — it is part of the <em>floor</em>, not a music-sector <em>room</em>.</p>
+    </section>
+
+    <!-- 5. SUBSTITUTION COST -->
+    <section>
+      <div class="section-label">05 — The substitution cost</div>
+      <h2>What a musician loses by falling back on the general system</h2>
+      <p>The angle for Taiwan: picture the equivalent substitution at home — a music worker in acute distress with <strong>no</strong> music-specific service, falling back on the general psychiatric system (in Taiwan, the <span class="cjk cjk-inline">安心專線</span> 1925 line and hospital psychiatry). Alexianer's German version of that fallback shows precisely what the substitution costs — even inside a <em>well-funded</em> system.</p>
+      <div class="sw-grid">
+        <div class="sw-card weak"><h3>No sector understanding</h3><p>General psychiatry has no frame for the specific stressors — night work, income precarity, tour isolation, performance identity, public exposure. The musician is a generic patient; the occupational drivers go unaddressed.<sup class="cite"><a href="#alx-src-3" data-src="dekiz" data-tip="DeKIZ is general depression/crisis psychiatry; no occupational track. DeKIZ page.">3</a></sup></p></div>
+        <div class="sw-card weak"><h3>Access by postcode, not by need</h3><p>Pflichtversorgung gates care by <strong>catchment</strong>: AKI can only treat residents of three districts; a touring musician, or one a district over, is turned away to "their" service. A mobile, gig-economy workforce maps badly onto sectorised care.<sup class="cite"><a href="#alx-src-6" data-src="aki" data-tip="'Nur Patientinnen und Patienten aus dem Einzugsgebiet Weißensee, Pankow und Prenzlauer Berg' — catchment gating. AKI page.">6</a></sup></p></div>
+        <div class="sw-card weak"><h3>The acute-crisis gap</h3><p>The named "crisis" centre (DeKIZ) <strong>excludes acute suicidality</strong> and routes it to the ER/on-call doctor — the service whose name says "crisis" is not the one catching the sharpest crisis. The referral chain (GP → Einweisung → screening) assumes system literacy a precarious worker may lack.<sup class="cite"><a href="#alx-src-3" data-src="dekiz" data-tip="Exclusion 'akute Suizidalität'; crisis cases routed via the ER on-call doctor; referral chain. DeKIZ page.">3</a></sup></p></div>
+        <div class="sw-card weak"><h3>Even a strong floor leaves a sector gap</h3><p>Germany has an excellent statutory floor — universal, insurance-funded, sectorised psychiatry — and <strong>still</strong> has no music-specific crisis room; that gap is filled by separate small bodies (MiM-Verband, scene counselling). A strong floor does not remove the need for a music-specific room.<sup class="cite"><a href="#alx-src-9" data-src="musiktherapie" data-tip="Music-sector MH served by separate bodies, not the statutory psychiatric floor. Sector context.">9</a></sup></p></div>
+      </div>
+    </section>
+
+    <!-- 6. LESSONS -->
+    <section>
+      <div class="section-label">06 — Lessons for Taiwan</div>
+      <h2>What a Taiwan music mental health NPO should take</h2>
+      <ol class="lessons">
+        <li><h3>Don't rebuild the floor — partner with it, and learn its referral logic</h3><p>Alexianer/Charité psychiatric care is the German floor; the right relationship is <strong>referral</strong>, not duplication. A Taiwan NPO should map the equivalent statutory floor (1925 <span class="cjk cjk-inline">安心專線</span>, hospital psychiatric emergency care, the national MH plan) and be the <strong>music-sector layer that refers acute risk into it</strong> — the floor a musician would otherwise have to find alone.<sup class="cite"><a href="#alx-src-8" data-src="pepp" data-tip="The statutory floor (GKV/PEPP/Pflichtversorgung) is the referral destination, not something to rebuild. vdek/AOK/BMG.">8</a></sup></p></li>
+        <li><h3>Name the crisis-scope boundary explicitly</h3><p>DeKIZ shows the danger of a service <em>called</em> a crisis centre that <strong>excludes acute suicidality</strong>. A Taiwan music-MH NPO must state plainly what it does and does <strong>not</strong> handle, and route acute suicidal risk to the statutory crisis line (1925) without ambiguity — the boundary <a href="org-study-tgr-green-room.html">TGR</a> also failed to foreground.<sup class="cite"><a href="#alx-src-3" data-src="dekiz" data-tip="DeKIZ excludes acute suicidality — the scope-boundary cautionary tale. DeKIZ page.">3</a></sup></p></li>
+        <li><h3>Design for a mobile, precarious workforce — what sectorised care can't do</h3><p>The sharpest failure of the German fallback is <strong>catchment gating</strong> (postcode, referral chains). The music sector is mobile and gig-based; a Taiwan NPO's comparative advantage is being <strong>reachable regardless of residence or referral</strong> — low-threshold, identity-light, occupation-aware.<sup class="cite"><a href="#alx-src-6" data-src="aki" data-tip="Catchment gating is the structural failure a mobile music workforce hits. AKI page.">6</a></sup></p></li>
+        <li><h3>A strong public floor is the anchor, not the answer</h3><p>Germany proves universal funded psychiatry still leaves a music gap. Taiwan's statutory MH spending is a base to <strong>anchor to</strong> (so a startup isn't donation-fragile like <a href="org-study-samaritans-thailand.html">Samaritans of Thailand</a>), but the value a music-MH NPO adds is the <strong>room</strong> the floor structurally cannot be: sector-specific, mobile, culturally fluent in music work.<sup class="cite"><a href="#alx-src-9" data-src="musiktherapie" data-tip="A funded floor coexists with a music-specific gap; the NPO's value is the room, not the floor. Sector context.">9</a></sup></p></li>
+        <li><h3>Faith-based, non-profit, statutory-funded is a viable shell — note it, don't copy it</h3><p>Alexianer shows an 800-year-old religious order operating a modern, non-profit, insurance-funded hospital network. The transferable point is the <em>combination</em> — mission-driven owner + statutory reimbursement — not the religious form: a credible non-profit owner plus a public funding stream beats donation-dependence.<sup class="cite"><a href="#alx-src-1" data-src="alx-corp" data-tip="Mission-driven non-profit owner + statutory reimbursement = the transferable institutional shell. Alexianer GmbH.">1</a></sup><sup class="cite"><a href="#alx-src-8" data-src="pepp" data-tip="Statutory reimbursement (GKV/PEPP) is the funding leg of that shell. vdek/AOK/BMG.">8</a></sup></p></li>
+      </ol>
+    </section>
+
+    <!-- 9. METHOD + REFERENCES -->
+    <section>
+      <div class="section-label">09 — Methodology &amp; references</div>
+      <h2>Basis</h2>
+      <p class="cite-help">Every claim carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source; click to jump to the full reference. Identity, structure and the host hospital are ✅ Sourced to Alexianer's own corporate and St. Hedwig service pages and the German-Wikipedia hospital article (cross-checked). The specific-service identification (DeKIZ as the map's "Alexianer Crisis Center") is ⚠️ best-match — the map's English label is ambiguous and Alexianer runs several crisis services; DeKIZ is the only one named a Kriseninterventionszentrum. Service funding is ⚠️ Inferred at the system level (GKV / PEPP / Pflichtversorgung), with no DeKIZ-specific budget published, so no amount is claimed (❓). The music-scope finding is ✅ Sourced (Alexianer offers Musiktherapie, not music-sector support) and documents an absence per Rule 4, not a non-existence claim. The Berliner Krisendienst is documented separately to avoid conflation. Several Alexianer pages are JS-rendered and were read via Chrome (Rule 1).</p>
+
+      <div class="refs" id="refs-all" data-citation-registry="alx-all">
+        <div class="refs-title">References</div>
+        <ol>
+          <li id="alx-src-1" data-src="alx-corp">Alexianer GmbH. (n.d.). <em>Unternehmen und Struktur</em> [Company and structure]. Retrieved June 28, 2026, from <a href="https://www.alexianer.de/gruppe/unternehmen-und-struktur" target="_blank" rel="noopener">alexianer.de</a> — "Als eines der größten katholischen Gesundheitsunternehmen …"; "Ihre Führungsaufgabe nimmt die Alexianer GmbH im Auftrag der Stiftung der Alexianerbrüder wahr. Als konfessioneller Träger arbeitet die Alexianer GmbH nicht gewinnorientiert"; Sitz Münster; "&gt; 35.000 Mitarbeitende", "5 Verbünde in sechs Bundesländern", "28 psychiatrische und somatische Krankenhäuser … rund 7.250 Betten", "&gt; 10.000 Betreuungsplätze." The St. Gertrauden central-ER psychiatric-crisis support is per the Alexianer Berlin region pages. <strong>Source · Method · Basis:</strong> organization primary site · WebFetch (rendered) · ✅ Sourced.</li>
+          <li id="alx-src-2" data-src="alx-history">Alexianer GmbH. (n.d.). <em>Geschichte</em> [History]. Retrieved June 28, 2026, from <a href="https://www.alexianer.de/gruppe/geschichte" target="_blank" rel="noopener">alexianer.de</a> — "Die Alexianer sind eine Ordensgemeinschaft mit 800-jähriger Geschichte"; Begarden lay movement, early 13th c.; "anno 1507 … werden die Alexianer als Ordensgemeinschaft anerkannt"; named for St. Alexius; international houses and professionalisation in the 19th century. <strong>Source · Method · Basis:</strong> organization primary site · WebFetch (rendered) · ✅ Sourced.</li>
+          <li id="alx-src-3" data-src="dekiz">Alexianer St. Hedwig-Krankenhaus. (n.d.). <em>Depressions- und Kriseninterventionszentrum (DeKIZ)</em>. Retrieved June 28, 2026, from <a href="https://www.alexianer-berlin-hedwigkliniken.de/st-hedwig-krankenhaus/leistungen/zentren/depressions-und-kriseninterventionszentrum-dekiz" target="_blank" rel="noopener">alexianer-berlin-hedwigkliniken.de</a> — "eine offene Station mit 13 Behandlungsplätzen"; "leitliniengerechte Behandlung … mit Depressionen nach einem kognitiv-verhaltenstherapeutischen Konzept"; "bei akuten seelischen Problemen und Depressionen"; self-contact + telephone screening; exclusion "z.&nbsp;B. akute Suizidalität, im Vordergrund stehende Suchterkrankung"; "Für die Aufnahme von Krisenpatienten wenden sich einweisende Ärzte … über die Notaufnahme"; "gehören dem Forschungsbereich Affektive Erkrankungen der Charité an"; Oberärztliche Leitung Dr. med. Rouven Bathe-Peters; Große Hamburger Straße 5–11, 10115 Berlin. <strong>Source · Method · Basis:</strong> organization primary site (JS-rendered → Chrome get_page_text) · ✅ Sourced.</li>
+          <li id="alx-src-4" data-src="shk-psych">Alexianer St. Hedwig-Krankenhaus. (n.d.). <em>Klinik für Psychiatrie und Psychotherapie</em>. Retrieved June 28, 2026, from <a href="https://www.alexianer-berlin-hedwigkliniken.de/st-hedwig-krankenhaus/leistungen/kliniken/psychiatrie-und-psychotherapie" target="_blank" rel="noopener">alexianer-berlin-hedwigkliniken.de</a> — "Psychiatrische Universitätsklinik der Charité im St. Hedwig-Krankenhaus … Unter der Leitung von Professor Felix Bermpohl"; "Teil des Alexianer St. Hedwig-Krankenhauses in Bezug auf die Patientenversorgung und Teil der Charité in Bezug auf Forschung und Lehre"; cooperation with "sozialpsychiatrischen Einrichtungen des Bezirkes Mitte"; "integratives Behandlungskonzept ‚Weddinger Modell'." <strong>Source · Method · Basis:</strong> organization primary site (JS-rendered → Chrome) · ✅ Sourced.</li>
+          <li id="alx-src-5" data-src="wiki-shk"><em>Alexianer St. Hedwig-Krankenhaus</em>. (n.d.). In Wikipedia (German). Retrieved June 28, 2026, from <a href="https://de.wikipedia.org/wiki/Alexianer_St._Hedwig-Krankenhaus" target="_blank" rel="noopener">de.wikipedia.org</a> — "Das Krankenhaus wurde 1846 gegründet"; "in der Großen Hamburger Straße … im Berliner Ortsteil Mitte"; "katholische Alexianer St. Hedwig-Krankenhaus"; Caritas support; "Es hält insgesamt 469 Betten vor (nach Krankenhausplan 2020)"; "Im Jahr 1999 übernahmen die Alexianerbrüder die Trägerschaft" (infobox; one passage says 1998 — discrepancy flagged); "Die Psychiatrische Universitätsklinik der Charité im St. Hedwig-Krankenhaus hat den psychiatrischen Versorgungsauftrag für den Bezirk Mitte." <strong>Source · Method · Basis:</strong> encyclopedia (secondary; cross-checks the org pages) · Chrome · ✅ Sourced (general facts; takeover-year discrepancy noted).</li>
+          <li id="alx-src-6" data-src="aki">Alexianer St. Joseph-Krankenhaus Berlin-Weißensee. (n.d.). <em>Akute komplexe Krisenintervention (AKI) in der Tagesklinik St. Antonia</em>. Retrieved June 28, 2026, from <a href="https://www.alexianer-berlin-weissensee.de/leistungen/tageskliniken/aki-akute-komplexe-krisenintervention" target="_blank" rel="noopener">alexianer-berlin-weissensee.de</a> — "richtet sich an Menschen in einer schweren psychischen Krise, bei denen eine stationäre Behandlung ungünstig erscheint"; "Ziel ist es, Krankenhausaufenthalte zu vermeiden oder zu verkürzen"; "Da wir Teil der regionalen Pflichtversorgung sind, können nur Patientinnen und Patienten aus dem Einzugsgebiet Weißensee, Pankow und Prenzlauer Berg … behandelt werden"; "Indikation für eine teilstationäre Behandlung auf einer Einweisung durch Ihren Facharzt/Psychotherapeuten … benötigt"; Gartenstr. 1, 13088 Berlin. <strong>Source · Method · Basis:</strong> organization primary site (JS-rendered → Chrome) · ✅ Sourced.</li>
+          <li id="alx-src-7" data-src="bkd">Berliner Krisendienst. (n.d.). <em>Homepage</em> &amp; <em>Träger</em> [Carriers]. Retrieved June 28, 2026, from <a href="https://www.berliner-krisendienst.de/" target="_blank" rel="noopener">berliner-krisendienst.de</a> and <a href="https://www.berliner-krisendienst.de/informationen/traeger/" target="_blank" rel="noopener">/informationen/traeger</a> — "hilft schnell und qualifiziert bei psychosozialen Krisen bis hin zu akuten psychiatrischen Notsituationen. Kostenlos. 24 Stunden am Tag. Auf Wunsch anonym … An 9 Berliner Standorten"; carriers Albatros gGmbH, Caritasverband für das Erzbistum Berlin e.V., KBS e.V., KUB e.V., neuhland, Platane 19 gGmbH (Alexianer not listed); overnight/weekend citywide line 030 390 63-10; publicly funded by the Land Berlin / districts. <strong>Source · Method · Basis:</strong> organization primary site · WebFetch + WebSearch · ✅ Sourced (establishes a service <em>separate</em> from Alexianer).</li>
+          <li id="alx-src-8" data-src="pepp">Funding of German psychiatric hospital care: vdek. (n.d.). <em>Entgeltsystem Psychiatrie, Psychotherapie und Psychosomatik (PEPP-System)</em>. <a href="https://www.vdek.com/vertragspartner/Krankenhaeuser/pepp.html" target="_blank" rel="noopener">vdek.com</a>; AOK Gesundheitspartner, <em>PEPP-Vereinbarung und -katalog 2026</em>, <a href="https://www.aok.de/gp/krankenhaus/verguetung-psychiatrie/fallpauschalen/vereinbarung-und-katalog" target="_blank" rel="noopener">aok.de</a>; Bundesministerium für Gesundheit, <em>Krankenhausfinanzierung</em>, <a href="https://www.bundesgesundheitsministerium.de/krankenhausfinanzierung" target="_blank" rel="noopener">bundesgesundheitsministerium.de</a> — PEPP introduced January 2013, <strong>mandatory since 2018</strong>; legal basis KHG / Bundespflegesatzverordnung (BPflV) / PEPPV; Pflichtversorgung = sectorised duty-to-treat; care reimbursed by statutory health insurance (GKV). <strong>Source · Method · Basis:</strong> payer/ministry primary + Deutsches Ärzteblatt · WebSearch · ✅ Sourced (system-level; ⚠️ Inferred at the service level, ❓ for amounts — no DeKIZ budget published).</li>
+          <li id="alx-src-9" data-src="musiktherapie">Alexianer Berlin. (n.d.). <em>Musiktherapie</em> (St. Hedwig / Hedwigshöhe / Weißensee). Retrieved June 28, 2026, from <a href="https://www.alexianer-berlin-hedwigkliniken.de/st-hedwig-krankenhaus/leistungen/therapieangebote-und-beratung/musiktherapie" target="_blank" rel="noopener">alexianer-berlin-hedwigkliniken.de</a> — music therapy as a clinical adjunct in psychiatry ("aktives Musizieren … kann die Heilung psychiatrischer Erkrankungen fördern"; suitable for patients regardless of musical training). Music-<em>sector</em> MH support in Germany comes from separate bodies — scene counselling for music professionals and the MiM-Verband (Mental Health in Music) trade body (DE-1) — not Alexianer. <strong>Source · Method · Basis:</strong> organization primary site + sector context · WebSearch · ✅ Sourced (confirms it is <em>not</em> a music-MH org; documents the music-sector gap per Rule 4).</li>
+          <li id="alx-src-10" data-src="orgs-map">MH&amp;W. (2026). <em>Global NPO landscape — Orgs Map</em>, row #53. <a href="report-global-npo-landscape.html" target="_blank" rel="noopener">report-global-npo-landscape.html</a> — "Alexianer Crisis Center · Germany · Mental Health Support; Emergency Aid Services · No public funding info · ❓ No source." Documents why the organization appears in this project (the listing under study). <strong>Source · Method · Basis:</strong> project internal map (the listing being studied) · file · ✅ Sourced (as the listing); funding Basis updated to ⚠️ Inferred by this study.</li>
+        </ol>
+        <p class="refs-note">Convention: every claim-bearing element carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above — machine-checkable before each deploy (§5.2 / §6 gate 1). Service identification is ⚠️ best-match (ambiguous map label); service funding is ⚠️ Inferred (system-level), ❓ for amounts; the music-scope finding documents an absence per Rule 4.</p>
+      </div>
+    </section>
+
+    <nav class="related-block" aria-label="Related on this site">
+      <p class="related-title">Related</p>
+      <ul>
+        <li><a href="org-study.html">&larr; Org Study (all organizations)</a></li>
+        <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+        <li><a href="policy-study.html">Policy Study &mdash; how jurisdictions protect music workers</a></li>
+        <li><a href="policy-study-germany.html">Policy Study &mdash; Germany (the companion policy scan)</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <script>
+  /* Scroll-reveal — R3.2 shared IntersectionObserver (normal-scroll page) */
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = 'section > h2, .stat-strip, figure, .table-wrap, .phases-grid, .sources-card, .refs';
+    var nodes = Array.prototype.slice.call(document.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, sibs, idx = 0;
+        if (p){ sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,6) * 60) + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
+
+  <!-- nav scroll-state: transparent over hero, blurred bar once scrolled -->
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden','true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>

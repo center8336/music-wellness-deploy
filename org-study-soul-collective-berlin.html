@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Soul Collective Berlin · Org Study · MH&amp;W</title>
+  <meta name="description" content="Soul Collective Berlin is listed on the Orgs Map under 'Mental Health Support' — but primary sources show a small for-profit wellness-events business, not a music mental-health nonprofit. A boundary-case study and a record-correction: what it actually is, and the one lesson it offers a Taiwan NPO.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      /* ── DIA-GRADE READING SCALE (calibrated to Dia browser, serif-corrected) ── */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;--lh-prose:1.7;--wt-prose:440;--measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;--label-ink:var(--graphite);
+      --font-cjk:'Noto Serif TC',serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { overflow-x: hidden; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--black);
+      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      line-height: var(--lh-prose);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    a { color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    a:hover { color: var(--signal-dim); }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--signal); outline-offset: 3px; border-radius: var(--radius);
+    }
+
+    .skip-nav {
+      position: absolute; left: -9999px; top: 0; z-index: 200;
+      background: var(--signal); color: var(--white);
+      padding: 0.5rem 1rem; font-family: var(--font-mono);
+    }
+    .skip-nav:focus { left: 0; }
+
+    /* ===== NAVIGATION ===== */
+    nav.nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; flex-direction: column;
+      padding: 2rem 2.5rem;
+      padding-top: calc(2rem + env(safe-area-inset-top));
+      background: transparent;
+      transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    nav.nav.scrolled {
+      background: rgba(244, 244, 245, 0.45);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: var(--font-mono); font-size: 1.1rem; font-weight: 400;
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-topbar { display:none; }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; min-width:44px; min-height:44px; z-index:101; -webkit-tap-highlight-color:transparent; }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity:0; }
+    .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
+
+    /* ===== LAYOUT ===== */
+    main { max-width: var(--max-w); margin: 0 auto; padding: 0 2.5rem 5rem 2.5rem; }
+    section { margin-bottom: 4rem; }
+    .narrow { max-width: var(--max-w-text); }
+
+    /* ===== HERO ===== */
+    .eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.18em;
+      margin-bottom: 1.25rem;
+    }
+
+    /* ===== TWO-LINE COVER (R2.1, 2026-06-20) — width:100% inside main (no 100vw breakout → no x-overflow) ===== */
+    .cover {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;                /* clips the wash */
+      padding: 0 2rem;
+    }
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%,
+        var(--signal-glow) 0%,
+        rgba(102,103,171,0.06) 38%,
+        rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
+    }
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 1280px);
+    }
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin: 0;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+    .cover-sub {
+      display: block;
+      font-family: var(--font-display);
+      font-size: clamp(0.95rem, 2.4vw, 1.5rem);
+      font-weight: 500;
+      font-style: italic;
+      letter-spacing: 0;
+      color: var(--graphite);
+      margin-top: 0.9rem;
+      text-wrap: balance;
+    }
+    .cover-line {
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--purple-deep);
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
+    }
+    .cover-hint {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
+    }
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
+    }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-line  { animation-delay: 0.22s; }
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .cover-wash,
+      .cover-hint,
+      .cover-inner > * { animation: none; opacity: 1; transform: none; }
+    }
+    @media (max-width: 768px) {
+      .cover { padding: 0 1.25rem; }
+      .cover-title { font-size: clamp(1.7rem, 7.3vw, 2.4rem); }
+      .cover-sub { font-size: clamp(0.85rem, 3.4vw, 1.05rem); }
+      .cover-line  { font-size: clamp(0.72rem, 3.2vw, 0.95rem); letter-spacing: 0.18em; }
+    }
+
+    /* ===== TYPE ===== */
+    h2 {
+      font-family: var(--font-display); font-size: var(--text-h2);
+      font-weight: 700; line-height: 1.1; color: var(--black);
+      margin-bottom: 1.25rem; letter-spacing: -0.01em;
+      text-wrap: balance; overflow-wrap: break-word;
+    }
+    h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem); line-height: 1.25; font-weight: 600; color: var(--charcoal); margin: 1.75rem 0 0.75rem; }
+    .section-label {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem;
+    }
+    p { color: var(--graphite); max-width: var(--measure-prose); margin-bottom: 1rem; line-height: 1.65; }
+    p.lead { font-size: 1.1rem; color: var(--charcoal); }
+    strong { color: var(--charcoal); font-weight: 600; }
+    em { color: var(--graphite); }
+
+    /* ===== MODEL CALLOUT ===== */
+    .model-callout { background: var(--bg-card-dark); color: var(--snow); border-radius: var(--radius-lg); padding: 2.25rem 2.5rem; margin-bottom: 3rem; }
+    .model-callout h2 { color: var(--white); margin-bottom: 1rem; }
+    .model-callout p { color: var(--silver); max-width: none; }
+    .model-callout strong { color: var(--white); }
+    .model-callout a { color: var(--spectrum-3); text-decoration: underline; text-underline-offset: 2px; }
+    .model-callout a:hover { color: var(--white); }
+
+    /* ===== SCOPE-FLAG BANNER (boundary-case marker) ===== */
+    .scope-flag {
+      background: var(--signal-bg);
+      border: 1px solid var(--signal-glow);
+      border-left: 3px solid var(--signal);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem 1.6rem;
+      margin: 0 0 2.5rem;
+    }
+    .scope-flag .sf-tag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 0.55rem; }
+    .scope-flag p { margin-bottom: 0; max-width: none; color: var(--charcoal); }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-card); margin: 1.5rem 0 0.75rem; }
+    .stat-item { padding: 1.75rem 1.25rem; border-right: 1px solid var(--border-light); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--signal); line-height: 1; font-variant-numeric: tabular-nums; }
+    .stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.6rem; line-height: 1.4; }
+
+    /* ===== TABLES ===== */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; margin: 1.25rem 0; border-radius: var(--radius-lg); border: 1px solid var(--border-light); }
+    .table-wrap:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+    table { width: 100%; border-collapse: collapse; background: var(--bg-card); font-size: var(--text-small); }
+    caption { text-align: left; font-family: var(--font-mono); font-size: var(--text-caption); color: var(--label-ink); padding: 0.75rem 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border-light); vertical-align: top; font-variant-numeric: tabular-nums; }
+    thead th { font-family: var(--font-mono); font-size: var(--text-micro); text-transform: uppercase; letter-spacing: 0.06em; color: var(--label-ink); background: var(--snow); }
+    tbody tr:last-child td { border-bottom: none; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .row-emph td { background: var(--signal-bg); font-weight: 600; color: var(--charcoal); }
+    .basis-yes { font-family: var(--font-mono); font-size: var(--text-micro); color: var(--spectrum-4); }
+    .basis-no  { font-family: var(--font-mono); font-size: var(--text-micro); color: var(--spectrum-1); }
+
+    /* ===== SW CARDS (reused for the three scope gaps) ===== */
+    .sw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.25rem; }
+    .sw-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem; }
+    .sw-card.weak { border-left: 3px solid var(--spectrum-2); }
+    .sw-card.strong { border-left: 3px solid var(--spectrum-4); }
+    .sw-card h3 { margin: 0 0 0.4rem; font-size: 1rem; }
+    .sw-card p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== PROGRAM LIST (reused for "what it actually offers") ===== */
+    .prog { list-style: none; margin: 1.25rem 0 0; padding: 0; }
+    .prog li { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 0.85rem; }
+    .prog h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .prog p { font-size: var(--text-sm); margin-bottom: 0; }
+    .prog .ptag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ===== LESSONS ===== */
+    .lessons { counter-reset: lesson; list-style: none; margin: 1.5rem 0 0; padding: 0; }
+    .lessons li { position: relative; padding: 1.25rem 1.5rem 1.25rem 3.5rem; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); margin-bottom: 0.85rem; }
+    .lessons li::before { counter-increment: lesson; content: counter(lesson); position: absolute; left: 1.25rem; top: 1.25rem; font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--signal); }
+    .lessons h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .lessons p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== CITATIONS (§5 inline tier) ===== */
+    .cite { font-size: 0.7em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem; }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-fine); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; max-width: var(--measure-ref); overflow-wrap: anywhere; }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs-note { font-size: var(--text-xs); color: var(--label-ink); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-sm); color: var(--label-ink); font-style: italic; max-width: var(--max-w-text); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .sw-grid { grid-template-columns: 1fr; }
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2n) { border-right: none; }
+      .stat-item:nth-child(-n+2) { border-bottom: 1px solid var(--border-light); }
+    }
+    @media (max-width: 768px) {
+      nav.nav { padding: 1.2rem 1.5rem; padding-top: calc(1.2rem + env(safe-area-inset-top)); }
+      nav.nav.open { background: rgba(244,244,245,0.95); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-light); }
+      .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
+      .nav-toggle { display:block; }
+      .nav-mobile-brand { display:block; }
+      .nav-links { display:none; flex-direction:column; gap:0.75rem; margin-top:1rem; }
+      .nav-links.show { display:flex; }
+      .nav-links a { font-size: 0.85rem; }
+      main { padding: 0 1.5rem 3rem 1.5rem; }
+      .model-callout { padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
+    @media (max-width: 680px) {
+      p, .refs li, .cite-help { max-width: none; }
+    }
+    @media (max-width: 480px) {
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+      .stat-item:last-child { border-bottom: none; }
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
+      table { font-size: 0.82rem; }
+      thead th { font-size: 0.6rem; }
+      th, td { padding: 0.5rem 0.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } nav.nav { transition: none; } }
+
+    /* ===== Scroll-reveal (R3.2 craft pass) ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ===== Related block (no dead-ends, R3.2) ===== */
+    .related-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-light); }
+    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--label-ink); margin-bottom: 0.6rem; }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a { font-family: var(--font-body); font-size: var(--text-sm); color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+  </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open');this.setAttribute('aria-expanded',o)">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+        <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="org-study.html" class="current" aria-current="page">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
+      <a href="field-news.html">FIELD NEWS</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- COVER -->
+    <section class="cover">
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="cover-inner">
+        <h1 class="cover-title">SOUL COLLECTIVE<span class="cover-sub">A Berlin wellness platform on the map — but not what the label says</span></h1>
+        <p class="cover-line">Org Study · Est. 2019</p>
+      </div>
+      <span class="cover-hint" aria-hidden="true">↓ Scroll</span>
+    </section>
+
+    <!-- SCOPE FLAG -->
+    <div class="scope-flag">
+      <div class="sf-tag">Scope flag · boundary case</div>
+      <p>The Orgs Map lists <strong>Soul Collective Berlin</strong> under the profile <strong>"Mental Health Support."</strong> Primary sources show the entity behind that name is <strong>a small for-profit wellness-events business</strong> — a curated guide to yoga, meditation, sound-healing and retreats — <strong>not a nonprofit, not a mental-health service, and not music-specific</strong>. This study verifies what it actually is and corrects the record. Per the project's evidence discipline, a short honest page is the right output here.</p>
+    </div>
+
+    <!-- MODEL CALLOUT -->
+    <div class="model-callout">
+      <h2>One model, in one line</h2>
+      <p>The big U.S. funds answer "what does the ceiling look like?"; Germany's <a href="org-study-tgr-green-room.html">TGR The Green Room</a> answers "what is the smallest credible shape a care service can take?" <strong>Soul Collective Berlin answers neither — because it is not a care service at all.</strong> It is a two-founder commercial platform that curates and resells <em>access to</em> wellness experiences hosted by independent Berlin practitioners. It earns its place in this series only as a <strong>calibration point</strong>: proof of what a directory's loosest "wellness" inclusion criteria sweep in, and a reminder that a Taiwan org's own resource map will need a definition of "mental-health support" tight enough to keep lifestyle-wellness businesses out of it.</p>
+    </div>
+
+    <!-- 1. IDENTITY -->
+    <section>
+      <div class="section-label">01 — Identity</div>
+      <h2>What it actually is<sup class="cite"><a href="#sc-src-2" data-src="about" data-tip="Self-description and 2019 founding by Marianne &amp; Natalie: Soul Collective, About page (soulcollective.eu).">2</a></sup></h2>
+      <p>Soul Collective (operating as <strong>Soul Collective Berlin</strong>; domains <em>soulcollective.berlin</em> → <em>soulcollective.eu</em>) describes itself, in its own words, as <strong>"an online guide to mindfulness, connection and well-being experiences,"</strong> sharing <strong>"workshops, ceremonies, events, retreats, trainings and courses that promote personal growth and transformation."</strong> It was <strong>founded in 2019 by Marianne and Natalie</strong>, who "hand-select offerings from teachers and practitioners that inspire them."<sup class="cite"><a href="#sc-src-2" data-src="about" data-tip="'An online guide to mindfulness, connection and well-being experiences… founded in 2019 by Marianne and Natalie.' Soul Collective, About.">2</a></sup></p>
+      <p>The legal entity, per the site's own Impressum (the German §5 TMG legal notice), is <strong>Marianne Abbott &amp; Natalie Herb GbR</strong> — a <em>Gesellschaft bürgerlichen Rechts</em>, the German civil-law <strong>business partnership</strong> form. A GbR is a <strong>for-profit partnership</strong>: it is not an <em>eingetragener Verein</em> (e.V.), not a <em>gemeinnützige</em> (charitable) entity, and carries no nonprofit or public-benefit status.<sup class="cite"><a href="#sc-src-3" data-src="imprint" data-tip="Operator 'Marianne Abbott &amp; Natalie Herb GbR' (civil-law partnership) — establishes the for-profit, non-charitable legal form. Soul Collective Berlin Impressum (§5 TMG).">3</a></sup></p>
+
+      <div class="table-wrap" role="region" aria-label="Organization profile — Soul Collective Berlin (scrollable table)" tabindex="0">
+        <table>
+          <caption>Profile — Soul Collective Berlin (sources cited inline; Basis in last column)</caption>
+          <thead><tr><th scope="col">Field</th><th scope="col">Value</th><th scope="col">Basis</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Trading name</th><td>Soul Collective / Soul Collective Berlin</td><td><span class="basis-yes">✅ own site</span></td></tr>
+            <tr><th scope="row">Legal entity</th><td>Marianne Abbott &amp; Natalie Herb GbR (civil-law partnership)</td><td><span class="basis-yes">✅ imprint</span></td></tr>
+            <tr class="row-emph"><th scope="row">Legal nature</th><td>For-profit business partnership — <strong>not</strong> a Verein, <strong>not</strong> charitable</td><td><span class="basis-yes">✅ GbR form</span></td></tr>
+            <tr><th scope="row">Founded</th><td>2019</td><td><span class="basis-yes">✅ own site + indep.</span></td></tr>
+            <tr><th scope="row">Founders</th><td>Marianne Abbott, Natalie Herb</td><td><span class="basis-yes">✅ site / imprint</span></td></tr>
+            <tr><th scope="row">Base</th><td>Berlin (Neukölln); curates Munich + pan-European retreats</td><td><span class="basis-yes">✅ own site</span></td></tr>
+            <tr class="row-emph"><th scope="row">Music-specific?</th><td><strong>No</strong> — no music framing anywhere on the site</td><td><span class="basis-no">✅ no music scope</span></td></tr>
+            <tr class="row-emph"><th scope="row">Mental-health service?</th><td><strong>No</strong> — wellness/lifestyle curation, not clinical or peer MH support</td><td><span class="basis-no">✅ own description</span></td></tr>
+            <tr class="row-emph"><th scope="row">Nonprofit?</th><td><strong>No</strong></td><td><span class="basis-no">✅ GbR form</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Disambiguation — "Soul Collective" is a crowded name</h3>
+      <p>"Soul Collective" is common across wellness, music and dance — searches surface a "Soul Collective Agency," music/label uses, a "Soul Care Circle Berlin" Meetup, and "soulspace Berlin" (a youth-crisis service), among others. The entity profiled here is positively pinned by a consistent fingerprint: <strong>domains soulcollective.berlin / soulcollective.eu, founders Marianne &amp; Natalie, the GbR imprint (Abbott &amp; Herb), the Squarespace storefront, and the "online guide to mindfulness… experiences" tagline</strong>. That is the same name, profile and country the project's captured Backline directory snapshot records at row #55, so it is the entity the Orgs Map means. No separate Berlin "Soul Collective" providing <em>music-industry mental-health support</em> could be found.<sup class="cite"><a href="#sc-src-5" data-src="disambig" data-tip="Disambiguation searches surfaced only the wellness platform plus unrelated homonyms; no music-MH 'Soul Collective' in Berlin. Negative finding (Rule 4).">5</a></sup><sup class="cite"><a href="#sc-src-6" data-src="snapshot" data-tip="Row #55 'Soul Collective Berlin | Germany | Mental Health Support' in the project's captured Backline directory snapshot; funding flagged ❓.">6</a></sup></p>
+    </section>
+
+    <!-- 2. THE SCOPE FINDING -->
+    <section>
+      <div class="section-label">02 — The scope finding</div>
+      <h2>The map says "Mental Health Support." The evidence says "wellness business."</h2>
+      <p>Three gaps separate the label from the entity, each established from the organization's own pages.</p>
+      <div class="sw-grid">
+        <div class="sw-card weak"><h3>Not a mental-health service</h3><p>No counseling, no therapy, no peer-support groups, no crisis line, no clinical referral. The catalogue is yoga, meditation, sound healing, breathwork, cacao ceremonies, ecstatic dance, tantra, permaculture and retreats — consumer wellness experiences it curates and resells, not mental-health care it delivers.<sup class="cite"><a href="#sc-src-1" data-src="home" data-tip="Catalogue and 'guide to… well-being experiences' framing: Soul Collective home + events/trainings/retreats pages.">1</a></sup></p></div>
+        <div class="sw-card weak"><h3>Not music-specific</h3><p>Nothing frames musicians, the music industry, performing artists, or the night-life/electronic scene as a target group. The audience is the general Berlin wellness consumer; corporate clients are tech and lifestyle brands (Ironhack, Veuve Clicquot, Liganova). Music appears only incidentally — a "somatic singing circle" among hundreds of events.<sup class="cite"><a href="#sc-src-2" data-src="about" data-tip="General-audience mission; corporate/festival clients Ironhack, Liganova, Veuve Clicquot. Soul Collective, About.">2</a></sup></p></div>
+        <div class="sw-card weak"><h3>Not a nonprofit</h3><p>A GbR — a commercial partnership with a shopping cart, paid listings and gift certificates — not a charity, foundation or association. The "floor vs. room" frame does not apply, because it sits outside the rights-and-services field entirely.<sup class="cite"><a href="#sc-src-3" data-src="imprint" data-tip="GbR (for-profit partnership) per the imprint; commerce surfaces (cart, gift certificates, paid listings) per the site.">3</a></sup></p></div>
+        <div class="sw-card strong"><h3>How it got the "MH Support" tag</h3><p>Backline's global directory casts a deliberately wide, multilingual net over "mental health <em>and wellness</em>" resources, with coarse taxonomy buckets. A Berlin platform that programs meditation and sound healing is plausibly swept in and surfaced under a broad "Mental Health Support" label. The project's mid-2026 pass had already flagged this row <strong>❓ "No public funding information located"</strong> — an entry not yet verified to entity level.<sup class="cite"><a href="#sc-src-7" data-src="backline" data-tip="Backline directory scope: 'mental health AND wellness' resources, broad inclusion. backline.care/global-resources.">7</a></sup><sup class="cite"><a href="#sc-src-6" data-src="snapshot" data-tip="Project funding-classification snapshot flagged row #55 ❓ — no public funding info located.">6</a></sup></p></div>
+      </div>
+      <p style="margin-top:1.5rem;"><strong>Recommended record action</strong> (a documentation fix for the Orgs Map maintainer — not changed by this study): keep the row, since it documents a real directory entry, but relabel its service profile to <strong>"Wellness / mindfulness platform (general; for-profit)"</strong> and note that it is <strong>not music-specific and not a nonprofit</strong>. The funding Basis stays ❓ in the nonprofit-funding sense — there is no public nonprofit funding because it is not a nonprofit. The honest one-liner: <em>commercial wellness business — out of scope as a music-MH NPO.</em></p>
+    </section>
+
+    <!-- 3. WHAT IT OFFERS / MODEL -->
+    <section>
+      <div class="section-label">03 — Model</div>
+      <h2>A wellness marketplace, briefly<sup class="cite"><a href="#sc-src-1" data-src="home" data-tip="Revenue surfaces: paid listings/advertising invitation, retreat &amp; training sales, gift certificates, corporate/festival programming. Soul Collective site.">1</a></sup></h2>
+      <p>Because Soul Collective is commercial, the usual NPO funding question — grants? donations? a statutory floor? — does not apply. Its revenue model, read from its own site, is a <strong>wellness-marketplace / media stack</strong>:</p>
+      <ul class="prog">
+        <li><div class="ptag">Listings</div><h3>Paid event &amp; retreat advertising</h3><p>"If you have an upcoming event, retreat, training or course you'd like to share with our audience, please send us an email" — a paid-placement / curation model, with sponsored third-party features marked "Sponsored Post."<sup class="cite"><a href="#sc-src-4" data-src="ceecee" data-tip="ceecee.cc feature is explicitly a 'Sponsored Post' — evidence of the sponsored-content revenue stream; also corroborates the 2019 founding and catalogue.">4</a></sup></p></li>
+        <li><div class="ptag">Sales</div><h3>Retreats, teacher trainings, gift certificates</h3><p>Sells access to its own and partner retreats and yoga/sound/breathwork teacher trainings across Europe, plus gift certificates — an e-commerce storefront, not a donation page.<sup class="cite"><a href="#sc-src-1" data-src="home" data-tip="Retreats, trainings, gift certificates, shopping cart. Soul Collective home.">1</a></sup></p></li>
+        <li><div class="ptag">B2B</div><h3>Corporate &amp; festival wellness</h3><p>"Soul Collective creates mindfulness and well-being offerings for companies, festivals and conferences" — paid programming for brands and events.<sup class="cite"><a href="#sc-src-2" data-src="about" data-tip="'Creates mindfulness and well-being offerings for companies, festivals and conferences.' Soul Collective, About.">2</a></sup></p></li>
+      </ul>
+      <p><strong>No charitable donations, no membership dues, no public/statutory funding, no foundation grants</strong> — none of the mechanisms that define the nonprofits elsewhere in this series. No public financial figures exist, and none are expected: a small GbR files nothing comparable to an IRS 990 or a Vereinsregister account, and it publishes no budget. <strong>Basis: ⚠️ model described from the site's own commerce surfaces; no figures (none public).</strong></p>
+    </section>
+
+    <!-- 4. LESSONS -->
+    <section>
+      <div class="section-label">04 — Lessons for Taiwan</div>
+      <h2>What a boundary case teaches</h2>
+      <p>This page earns its keep precisely <em>because</em> the org is out of scope. Three transferable takeaways:</p>
+      <ol class="lessons">
+        <li><h3>Define "mental-health support" before you map it</h3><p>The most useful lesson is methodological. A Taiwan org building its own resource directory will face the temptation that put Soul Collective on the map: "wellness" is elastic, and yoga/retreat/mindfulness businesses cluster at its edge. Decide up front whether the directory lists <strong>clinical and peer mental-health services</strong> (counseling, therapy, support groups, crisis lines, financial-aid funds) or the broader <strong>wellness-and-lifestyle field</strong> — and label the two differently. Conflating them inflates the apparent size of the support ecosystem and risks sending a musician in distress toward a cacao ceremony.<sup class="cite"><a href="#sc-src-1" data-src="home" data-tip="The elastic 'wellness' catalogue is the boundary the directory definition must draw. Soul Collective site.">1</a></sup></p></li>
+        <li><h3>A wide net is a feature for discovery, a bug for trust</h3><p>Backline's inclusiveness is a strength for a global concierge whose job is to surface anything that might help. But a Taiwan directory that wants to be a <em>trusted</em> referral source needs a verification gate — entity type, service type, music-relevance — so users can rely on what they find. The cost of the wide net is exactly cases like this one; the project's own ❓ funding flag shows that gate working in slow motion.<sup class="cite"><a href="#sc-src-7" data-src="backline" data-tip="Backline's broad 'mental health and wellness' net is good for discovery, weaker for trust. backline.care/global-resources.">7</a></sup><sup class="cite"><a href="#sc-src-6" data-src="snapshot" data-tip="The project's ❓ funding flag on row #55 is the verification gate beginning to catch the mis-scope.">6</a></sup></p></li>
+        <li><h3>Commercial wellness is the comparison class, not the competitor</h3><p>For a Taiwan music-MH NPO, profitable, well-marketed wellness platforms are useful context: there is consumer demand and willingness to pay for "well-being" experiences — but that market does not serve precarious or in-crisis music workers, and is not trying to. The NPO's distinct value proposition (free or subsidized, music-literate, care-grade, not lifestyle-grade) is clearer once the wellness-marketplace space next door is named and set aside.<sup class="cite"><a href="#sc-src-2" data-src="about" data-tip="Soul Collective serves the general wellness consumer and corporate clients, not precarious music workers. Soul Collective, About.">2</a></sup></p></li>
+      </ol>
+      <p style="margin-top:1.5rem;"><strong>What this study deliberately does not claim:</strong> any music-MH impact, any reach figures, any nonprofit status, any founders beyond the two named, any funding numbers. None exist in the sources; inventing them would be the exact failure this page exists to avoid.</p>
+    </section>
+
+    <!-- 5. METHOD + REFERENCES -->
+    <section>
+      <div class="section-label">05 — Methodology &amp; references</div>
+      <h2>Basis</h2>
+      <p class="cite-help">Every claim carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source; click to jump to the full reference. Sourcing is primary throughout: the organization's own website (home + About + events/trainings/retreats) and its own legal Impressum, corroborated by an independent Berlin culture guide (a sponsored but third-party-written profile) and by the project's captured Backline directory snapshot. Founding year and founders agree across the org's own About page and the independent profile. No financial figures are quoted because none are public — stated plainly rather than estimated. The scope correction is the finding; it is traceable, not padded.</p>
+
+      <div class="refs" id="refs-all" data-citation-registry="sc-all">
+        <div class="refs-title">References</div>
+        <ol>
+          <li id="sc-src-1" data-src="home">Soul Collective. (n.d.). <em>Home</em> &amp; <em>Events / Trainings / Retreats</em>. Retrieved June 28, 2026, from <a href="https://www.soulcollective.eu/" target="_blank" rel="noopener">soulcollective.eu</a> (redirected from <a href="https://www.soulcollective.berlin/home" target="_blank" rel="noopener">soulcollective.berlin/home</a>) — self-description as "a guide to mindfulness, connection &amp; well-being experiences"; catalogue of yoga, sound, breathwork, permaculture, somatic water therapy, ceremonies, ecstatic dance, tantra, retreats; the advertising/listings invitation; shopping cart and gift certificates; corporate clients. <strong>Source · Method · Basis:</strong> organization primary site · web (server-rendered) · ✅ Sourced.</li>
+          <li id="sc-src-2" data-src="about">Soul Collective. (n.d.). <em>About Soul Collective Berlin</em>. Retrieved June 28, 2026, from <a href="https://www.soulcollective.eu/about-soul-collective-berlin" target="_blank" rel="noopener">soulcollective.eu/about-soul-collective-berlin</a> — "Soul Collective is an online guide to mindfulness, connection and well-being experiences… founded in 2019 by Marianne and Natalie"; "creates mindfulness and well-being offerings for companies, festivals and conferences"; clients incl. Ironhack, Liganova, Veuve Clicquot. <strong>Source · Method · Basis:</strong> organization primary (About page) · web · ✅ Sourced.</li>
+          <li id="sc-src-3" data-src="imprint">Soul Collective Berlin. (n.d.). <em>Impressum</em> (§5 TMG legal notice), soulcollective.berlin. Operator: <strong>Marianne Abbott &amp; Natalie Herb GbR</strong>, Berlin (Neukölln); contact info@soulcollective.berlin. The §5 TMG Impressum (<a href="https://www.soulcollective.eu/imprint" target="_blank" rel="noopener">soulcollective.eu/imprint</a>) names "Marianne Abbott &amp; Natalie Herb GbR, Manitiusstraße 15, 12047 Berlin-Neukölln" (tax no. 16/201/10552, Finanzamt Neukölln), retrieved June 28, 2026. Establishes the for-profit GbR form (not e.V., not gemeinnützig). <strong>Source · Method · Basis:</strong> organization primary (legal imprint) · web · ✅ Sourced.</li>
+          <li id="sc-src-4" data-src="ceecee">Cee Cee Berlin (Steffen, R.). (2024). <em>Soul Collective — Yoga Retreats, Sound Healing &amp; Kakao-Zeremonien</em> [Sponsored post]. <a href="https://ceecee.cc/en/soul-collective-yoga-retreats-sound-healing-kakao-zeremonien/" target="_blank" rel="noopener">ceecee.cc</a> — independent Berlin culture guide; corroborates founding "2019 by Marianne and Natalie," the community/curation model, and the yoga/meditation/sound-healing/retreat catalogue. Marked "Sponsored Post" (paid placement), but written by the guide's editor, not the org. <strong>Source · Method · Basis:</strong> independent culture guide (sponsored) · web · ✅ Sourced (corroborating, sponsored caveat).</li>
+          <li id="sc-src-5" data-src="disambig">Disambiguation searches (web), June 28, 2026: "Soul Collective" Berlin mental health / wellbeing / Achtsamkeit / Verein / e.V. / Musik / nonprofit / nightlife — surfaced the wellness platform above plus unrelated homonyms ("Soul Collective Agency"; "Soul Care Circle Berlin" Meetup; "soulspace Berlin" youth-crisis service; music/label uses). No Berlin "Soul Collective" providing music-industry mental-health support was found. <strong>Source · Method · Basis:</strong> absence check across multiple queries · web search · ⚠️ Basis (negative finding per Rule 4 — absence of evidence, not proof of non-existence).</li>
+          <li id="sc-src-6" data-src="snapshot">Backline directory snapshot &amp; project funding classification: <em>Backline_Directory_2026-06-12.md</em> (row 55: "Soul Collective Berlin | Germany | Mental Health Support") and <em>Directory_Analysis_Service_Funding_2026-06-15.md</em> (row 55, funding <strong>❓ — "No public funding information located"</strong>), in the project wiki snapshots. The public origin is Backline's directory; the snapshot is the project's dated record of that listing and the source of the Orgs Map row. <strong>Source · Method · Basis:</strong> project snapshot of a public directory · file · ✅ Sourced (for what the directory listed and how the project classified it).</li>
+          <li id="sc-src-7" data-src="backline">Backline Care, Inc. (n.d.). <em>Mental Health &amp; Wellness Resources for the Global Music Industry</em> (global resource directory). Retrieved June 28, 2026, from <a href="https://backline.care/global-resources/" target="_blank" rel="noopener">backline.care/global-resources</a> — Backline's multilingual directory of "mental health <strong>and wellness</strong>" resources for the music community; broad, coarse-bucketed inclusion (the mechanism by which a general wellness platform is surfaced under a "Mental Health Support" label). Soul Collective is not on directory page 1 of 13 as accessed; the captured listing is the project's dated evidence of its inclusion. <strong>Source · Method · Basis:</strong> the listing source (org primary) · web · ✅ Sourced (for the directory's scope and labels).</li>
+        </ol>
+        <p class="refs-note">Convention: every claim-bearing element carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above — machine-checkable before each deploy (§5.2 / §6 gate 1). This page is a boundary-case / record-correction; per Rule 4 a short honest study is the correct output where the evidence is thin.</p>
+      </div>
+    </section>
+
+    <nav class="related-block" aria-label="Related on this site">
+      <p class="related-title">Related</p>
+      <ul>
+        <li><a href="org-study.html">&larr; Org Study (all organizations)</a></li>
+        <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+        <li><a href="policy-study.html">Policy Study &mdash; how jurisdictions protect music workers</a></li>
+        <li><a href="policy-study-germany.html">Policy Study: Germany &mdash; the Künstlersozialkasse floor</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <script>
+  /* Scroll-reveal — R3.2 shared IntersectionObserver (normal-scroll page) */
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = 'section > h2, .stat-strip, figure, .table-wrap, .phases-grid, .sources-card, .refs, .sw-grid, .scope-flag';
+    var nodes = Array.prototype.slice.call(document.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, sibs, idx = 0;
+        if (p){ sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,6) * 60) + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
+
+  <!-- nav scroll-state: transparent over hero, blurred bar once scrolled -->
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden','true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>

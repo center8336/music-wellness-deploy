@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>sidekicks.berlin · Org Study · MH&amp;W</title>
+  <meta name="description" content="sidekicks.berlin (formerly man*check) is the nightlife-prevention project of Schwulenberatung Berlin — state-funded, queer-community harm reduction delivered inside Berlin's clubs and sex-positive parties, plus a share in the city's free drug-checking service. A scene-embedded model — but its scene is the queer community, not music workers. What a Taiwan music-mental-health NPO can borrow, and where the population gap bites.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      /* ── DIA-GRADE READING SCALE (calibrated to Dia browser, serif-corrected) ── */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;--lh-prose:1.7;--wt-prose:440;--measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;--label-ink:var(--graphite);
+      --font-cjk:'Noto Serif TC',serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { overflow-x: hidden; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--black);
+      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      line-height: var(--lh-prose);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    a { color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    a:hover { color: var(--signal-dim); }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--signal); outline-offset: 3px; border-radius: var(--radius);
+    }
+
+    .skip-nav {
+      position: absolute; left: -9999px; top: 0; z-index: 200;
+      background: var(--signal); color: var(--white);
+      padding: 0.5rem 1rem; font-family: var(--font-mono);
+    }
+    .skip-nav:focus { left: 0; }
+
+    /* ===== NAVIGATION ===== */
+    nav.nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; flex-direction: column;
+      padding: 2rem 2.5rem;
+      padding-top: calc(2rem + env(safe-area-inset-top));
+      background: transparent;
+      transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    nav.nav.scrolled {
+      background: rgba(244, 244, 245, 0.45);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: var(--font-mono); font-size: 1.1rem; font-weight: 400;
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-topbar { display:none; }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; min-width:44px; min-height:44px; z-index:101; -webkit-tap-highlight-color:transparent; }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity:0; }
+    .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
+
+    /* ===== LAYOUT ===== */
+    main { max-width: var(--max-w); margin: 0 auto; padding: 0 2.5rem 5rem 2.5rem; }
+    section { margin-bottom: 4rem; }
+    .narrow { max-width: var(--max-w-text); }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding-top: calc(9rem + env(safe-area-inset-top));
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-light);
+      margin-bottom: 3rem;
+    }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.18em;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: var(--font-display); font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6.5rem);
+      font-weight: 800; line-height: 1.04; color: var(--black); letter-spacing: -0.01em;
+      overflow-wrap: break-word; hyphens: auto;
+    }
+    .hero h1 .tail { display:block; font-size: clamp(1.15rem, 2.6vw, 1.9rem); font-weight: 600; color: var(--signal); letter-spacing: 0; margin-top: 0.9rem; }
+    .hero .subtitle {
+      font-family: var(--font-body); font-size: clamp(1.25rem, 1.05rem + 1.4vw, 1.5rem);
+      color: var(--graphite); line-height: 1.55; margin-top: 1.5rem; max-width: 54ch;
+    }
+    .basis-badge {
+      display: inline-block; margin-top: 1.75rem;
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--graphite); background: var(--signal-bg);
+      border: 1px solid var(--signal-glow); border-radius: var(--radius);
+      padding: 0.5rem 0.85rem; line-height: 1.5;
+    }
+
+    /* ===== TWO-LINE COVER (R2.1, 2026-06-20) — width:100% inside main (no 100vw breakout → no x-overflow) ===== */
+    .cover {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;                /* clips the wash */
+      padding: 0 2rem;
+    }
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%,
+        var(--signal-glow) 0%,
+        rgba(102,103,171,0.06) 38%,
+        rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
+    }
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 1280px);
+    }
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin: 0;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+    .cover-sub {
+      display: block;
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2.6vw, 1.5rem);
+      font-weight: 500;
+      font-style: italic;
+      letter-spacing: 0;
+      color: var(--graphite);
+      margin-top: 1rem;
+      text-wrap: balance;
+    }
+    .cover-line {
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--purple-deep);
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
+    }
+    .cover-hint {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
+    }
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
+    }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-line  { animation-delay: 0.22s; }
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .cover-wash,
+      .cover-hint,
+      .cover-inner > * { animation: none; opacity: 1; transform: none; }
+    }
+    @media (max-width: 768px) {
+      .cover { padding: 0 1.25rem; }
+      .cover-title { font-size: clamp(1.7rem, 7.3vw, 2.4rem); }
+      .cover-line  { font-size: clamp(0.72rem, 3.2vw, 0.95rem); letter-spacing: 0.18em; }
+    }
+
+    /* ===== TYPE ===== */
+    h2 {
+      font-family: var(--font-display); font-size: var(--text-h2);
+      font-weight: 700; line-height: 1.1; color: var(--black);
+      margin-bottom: 1.25rem; letter-spacing: -0.01em;
+      text-wrap: balance; overflow-wrap: break-word;
+    }
+    h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem); line-height: 1.25; font-weight: 600; color: var(--charcoal); margin: 1.75rem 0 0.75rem; }
+    .section-label {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem;
+    }
+    p { color: var(--graphite); max-width: var(--measure-prose); margin-bottom: 1rem; line-height: 1.65; }
+    p.lead { font-size: 1.1rem; color: var(--charcoal); }
+    strong { color: var(--charcoal); font-weight: 600; }
+    em { color: var(--graphite); }
+
+    /* ===== MODEL CALLOUT ===== */
+    .model-callout { background: var(--bg-card-dark); color: var(--snow); border-radius: var(--radius-lg); padding: 2.25rem 2.5rem; margin-bottom: 3rem; }
+    .model-callout h2 { color: var(--white); margin-bottom: 1rem; }
+    .model-callout p { color: var(--silver); max-width: none; }
+    .model-callout strong { color: var(--white); }
+    .model-callout a { color: var(--spectrum-3); text-decoration: underline; text-underline-offset: 2px; }
+    .model-callout a:hover { color: var(--white); }
+
+    /* ===== SCOPE FLAG (signature panel) ===== */
+    .scope-panel {
+      background: var(--bg-card-dark);
+      border-radius: var(--radius-lg);
+      padding: 2rem 2rem 1.5rem;
+      margin: 1.5rem 0 1.75rem;
+      border: 1px solid var(--border-dark);
+    }
+    .scope-panel .sp-cap {
+      font-family: var(--font-mono); font-size: var(--text-xs); color: var(--spectrum-3);
+      text-transform: uppercase; letter-spacing: 0.16em; text-align: center; margin-bottom: 1rem;
+    }
+    .scope-axes { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: stretch; }
+    .scope-axis { background: var(--off-black); border: 1px solid var(--border-dark); border-radius: var(--radius-lg); padding: 1.25rem 1.4rem; }
+    .scope-axis.is { border-left: 3px solid var(--spectrum-4); }
+    .scope-axis.not { border-left: 3px solid var(--spectrum-1); }
+    .scope-axis .ax-tag { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .scope-axis.is .ax-tag { color: var(--spectrum-4); }
+    .scope-axis.not .ax-tag { color: var(--spectrum-1); }
+    .scope-axis h3 { color: var(--snow); margin: 0 0 0.4rem; font-size: 1.05rem; }
+    .scope-axis p { color: var(--grey-light); font-size: var(--text-sm); margin: 0; max-width: none; }
+    .scope-vs { display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey); letter-spacing: 0.12em; }
+
+    /* ===== GEAR / CHOICE CARDS ===== */
+    .gear-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .gear {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-left: 3px solid var(--spectrum-2); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem;
+    }
+    .gear .gn { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); letter-spacing: 0.1em; }
+    .gear h3 { margin: 0.35rem 0 0.5rem; font-size: 1.08rem; }
+    .gear p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-card); margin: 1.5rem 0 0.75rem; }
+    .stat-item { padding: 1.75rem 1.25rem; border-right: 1px solid var(--border-light); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--signal); line-height: 1; font-variant-numeric: tabular-nums; }
+    .stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.6rem; line-height: 1.4; }
+
+    /* ===== TABLES ===== */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; margin: 1.25rem 0; border-radius: var(--radius-lg); border: 1px solid var(--border-light); }
+    .table-wrap:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+    table { width: 100%; border-collapse: collapse; background: var(--bg-card); font-size: var(--text-small); }
+    caption { text-align: left; font-family: var(--font-mono); font-size: var(--text-caption); color: var(--label-ink); padding: 0.75rem 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border-light); vertical-align: top; font-variant-numeric: tabular-nums; }
+    thead th { font-family: var(--font-mono); font-size: var(--text-micro); text-transform: uppercase; letter-spacing: 0.06em; color: var(--label-ink); background: var(--snow); }
+    tbody tr:last-child td { border-bottom: none; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .row-emph td { background: var(--signal-bg); font-weight: 600; color: var(--charcoal); }
+
+    /* ===== PROGRAM LIST ===== */
+    .prog { list-style: none; margin: 1.25rem 0 0; padding: 0; }
+    .prog li { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 0.85rem; }
+    .prog h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .prog p { font-size: var(--text-sm); margin-bottom: 0; }
+    .prog .ptag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ===== SW CARDS ===== */
+    .sw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.25rem; }
+    .sw-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem; }
+    .sw-card.weak { border-left: 3px solid var(--spectrum-2); }
+    .sw-card.strong { border-left: 3px solid var(--spectrum-4); }
+    .sw-card h3 { margin: 0 0 0.4rem; font-size: 1rem; }
+    .sw-card p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== LESSONS ===== */
+    .lessons { counter-reset: lesson; list-style: none; margin: 1.5rem 0 0; padding: 0; }
+    .lessons li { position: relative; padding: 1.25rem 1.5rem 1.25rem 3.5rem; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); margin-bottom: 0.85rem; }
+    .lessons li::before { counter-increment: lesson; content: counter(lesson); position: absolute; left: 1.25rem; top: 1.25rem; font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--signal); }
+    .lessons h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .lessons p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== CITATIONS (§5 inline tier) ===== */
+    .cite { font-size: 0.7em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem; }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-fine); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; max-width: var(--measure-ref); overflow-wrap: anywhere; }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs-note { font-size: var(--text-xs); color: var(--label-ink); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-sm); color: var(--label-ink); font-style: italic; max-width: var(--max-w-text); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .gear-cards { grid-template-columns: 1fr; }
+      .sw-grid { grid-template-columns: 1fr; }
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2n) { border-right: none; }
+      .stat-item:nth-child(-n+2) { border-bottom: 1px solid var(--border-light); }
+      .scope-axes { grid-template-columns: 1fr; }
+      .scope-vs { padding: 0.25rem 0; }
+    }
+    @media (max-width: 768px) {
+      nav.nav { padding: 1.2rem 1.5rem; padding-top: calc(1.2rem + env(safe-area-inset-top)); }
+      nav.nav.open { background: rgba(244,244,245,0.95); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-light); }
+      .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
+      .nav-toggle { display:block; }
+      .nav-mobile-brand { display:block; }
+      .nav-links { display:none; flex-direction:column; gap:0.75rem; margin-top:1rem; }
+      .nav-links.show { display:flex; }
+      .nav-links a { font-size: 0.85rem; }
+      main { padding: 0 1.5rem 3rem 1.5rem; }
+      .hero { padding-top: calc(7rem + env(safe-area-inset-top)); }
+      .hero h1 { font-size: clamp(2.4rem, 10.5vw, 3.4rem); }
+      .model-callout, .scope-panel { padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
+    @media (max-width: 680px) {
+      p, .hero .subtitle, .refs li, .cite-help { max-width: none; }
+    }
+    @media (max-width: 480px) {
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+      .stat-item:last-child { border-bottom: none; }
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
+      table { font-size: 0.82rem; }
+      thead th { font-size: 0.6rem; }
+      th, td { padding: 0.5rem 0.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } nav.nav { transition: none; } }
+
+    /* ===== Scroll-reveal (R3.2 craft pass) ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ===== Related block (no dead-ends, R3.2) ===== */
+    .related-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-light); }
+    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--label-ink); margin-bottom: 0.6rem; }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a { font-family: var(--font-body); font-size: var(--text-sm); color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+  </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open');this.setAttribute('aria-expanded',o)">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+        <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="org-study.html" class="current" aria-current="page">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
+      <a href="field-news.html">FIELD NEWS</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- COVER -->
+    <section class="cover">
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="cover-inner">
+        <h1 class="cover-title">SIDEKICKS<span class="cover-sub">Scene-embedded harm reduction — for the queer community, not music workers</span></h1>
+        <p class="cover-line">Org Study · Berlin</p>
+      </div>
+      <span class="cover-hint" aria-hidden="true">↓ Scroll</span>
+    </section>
+
+    <!-- MODEL CALLOUT -->
+    <div class="model-callout">
+      <h2>One model, in one line</h2>
+      <p>Germany's <strong>MiM-Verband</strong> is an advocacy trade body and <a href="org-study-tgr-green-room.html">TGR The Green Room</a> is a founder-built care "room" — both organised <em>around musicians</em>. <strong>sidekicks.berlin is organised around a community, not a craft.</strong> It is the nightlife-prevention project of <strong>Schwulenberatung Berlin</strong> — one of Europe's largest LGBTIQ+ psychosocial organisations — that walks into Berlin's queer clubs, sex-positive parties and cruising areas to hand out safer-sex and safer-drug-use materials, non-judgmental conversation, and (since 2023) free anonymous <strong>drug checking</strong>. It is <strong>state-funded, embedded, grassroots-in-method but institution-backed.</strong> For a Taiwan music-mental-health NPO it is the clearest worked example of <em>scene-embedded harm reduction</em> — but its scene is the <strong>queer community</strong>, and it serves <strong>clubbers and partygoers, not music workers</strong>. That gap is the whole lesson: this model reaches people <em>where the music happens</em> without ever being a service <em>for the people who make the music.</em></p>
+    </div>
+
+    <!-- 1. IDENTITY -->
+    <section>
+      <div class="section-label">01 — Identity &amp; the name problem</div>
+      <h2>A queer-health project, not an independent "Sidekicks"<sup class="cite"><a href="#sk-src-1" data-src="about" data-tip="Identity, scope, parent, funder: sidekicks.berlin, About / Über uns. WebFetch.">1</a></sup></h2>
+      <p>"Sidekicks" is a common word, so identification matters. The organisation profiled here is <strong>sidekicks.berlin</strong> (domain <a href="https://sidekicks.berlin/en/" target="_blank" rel="noopener">sidekicks.berlin</a>), the <strong>queer sexual-health and harm-reduction project of Schwulenberatung Berlin gGmbH</strong> in Berlin-Charlottenburg.<sup class="cite"><a href="#sk-src-1" data-src="about" data-tip="'sidekicks.berlin is a project of Schwulenberatung Berlin.' About page.">1</a></sup><sup class="cite"><a href="#sk-src-5" data-src="impressum" data-tip="Legal entity Schwulenberatung Berlin gGmbH, HRB 110342 B, Niebuhrstraße 59/60. Impressum.">5</a></sup> It is <strong>not</strong> an independent association, not a music-industry body, and not any of the unrelated companies, clubs or media projects that share the name "Sidekicks."</p>
+
+      <p>The project has a documented lineage. It launched in <strong>2003 as <span style="font-family:var(--font-mono);">man*check</span></strong>, an HIV/AIDS prevention project for "gay and other men who have sex with men (MSM)," and was <strong>renamed sidekicks.berlin in July 2023</strong> to address the full spectrum of queer / gender and sexual diversity rather than MSM alone. The metaphor is deliberate — <em>"You're the main character, we're your sidekicks"</em> — a supporting role that accompanies the partygoer rather than directing them.<sup class="cite"><a href="#sk-src-4" data-src="rebrand" data-tip="'What started in 2003 as a prevention project … for MSM has evolved …'; renamed July 2023; 'You're the main character — we're your sidekicks!' Rebrand statement.">4</a></sup></p>
+
+      <div class="table-wrap" role="region" aria-label="Organization profile — sidekicks.berlin (scrollable table)" tabindex="0">
+        <table>
+          <caption>Organization profile — sidekicks.berlin (sources cited inline)</caption>
+          <tbody>
+            <tr><th scope="row">Project name</th><td>sidekicks.berlin (formerly man*check, 2003–2023)</td></tr>
+            <tr><th scope="row">Legal entity</th><td><strong>Schwulenberatung Berlin gGmbH</strong> (non-profit GmbH); sidekicks is a <em>project</em>, not its own legal person</td></tr>
+            <tr><th scope="row">Shareholder of the gGmbH</th><td>Psychosoziales Zentrum für Schwule e.V.</td></tr>
+            <tr><th scope="row">Register</th><td>Amtsgericht Charlottenburg · HRB 110342 B</td></tr>
+            <tr><th scope="row">Managing director (gGmbH)</th><td>Marcel de Groot</td></tr>
+            <tr><th scope="row">Address</th><td>Niebuhrstraße 59/60, 10629 Berlin-Charlottenburg</td></tr>
+            <tr><th scope="row">Project start</th><td>2003 (as man*check); rebranded July 2023</td></tr>
+            <tr><th scope="row">Scope</th><td>Berlin; the queer / LGBTIQ+ community in nightlife &amp; sexual-health settings</td></tr>
+            <tr><th scope="row">Website</th><td><a href="https://sidekicks.berlin/en/" target="_blank" rel="noopener">sidekicks.berlin</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>On the parent.</strong> Schwulenberatung Berlin ("Gay Counselling Berlin") was founded in <strong>1981</strong> and is, by its own and third-party description, <strong>one of the largest LGBTIQ+ psychosocial facilities in Europe</strong> — a multidisciplinary team of physicians, psychologists, psychotherapists, social scientists and social workers, plus volunteers, offering counselling on coming-out, mental health, ageing, alcohol and drug use, addiction, HIV/AIDS, discrimination, and trans/inter topics.<sup class="cite"><a href="#sk-src-8" data-src="parent" data-tip="Schwulenberatung Berlin: counselling for gay/bi men, trans*/inter* people, people with HIV/AIDS; multidisciplinary team; founded 1981; one of the largest of its kind in Europe. Parent About page + search corroboration.">8</a></sup> sidekicks.berlin is the part of that organisation that does <strong>outreach prevention in the nightlife scene</strong>. This parent relationship is the single most important structural fact on this page: the storefront is grassroots, but the back office is a 200-plus-staff institution.</p>
+    </section>
+
+    <!-- 2. SCOPE -->
+    <section>
+      <div class="section-label">02 — Scope: what it actually is</div>
+      <h2>Scene-adjacent harm reduction, not a music service</h2>
+      <p>This is the section a Taiwan reader must not skim. <strong>sidekicks.berlin is scene-<em>adjacent</em> harm reduction, not a music-specific service.</strong> Two things are true at once, and the honest study holds both: it is embedded in (electronic-)music nightlife, and it is not a service for music workers.</p>
+
+      <div class="scope-panel">
+        <div class="sp-cap">The scope distinction, held honestly</div>
+        <div class="scope-axes">
+          <div class="scope-axis is">
+            <div class="ax-tag">✓ What it is</div>
+            <h3>Inside the music-nightlife setting</h3>
+            <p>"We are everywhere the queer community gathers: parties, clubs, bars, festivals, cruising areas." Press observed the team at the KitKat-Club, a techno institution, where people "dance extensively to electronic music." The <em>physical setting</em> is the club / electronic-music scene.</p>
+          </div>
+          <div class="scope-vs" aria-hidden="true">VS</div>
+          <div class="scope-axis not">
+            <div class="ax-tag">✗ What it is not</div>
+            <h3>A service for music workers</h3>
+            <p>The <em>target group</em> is the queer / LGBTIQ+ community — partygoers, MSM, trans &amp; inter people — defined by sexual identity and nightlife, <strong>not occupation</strong>. Musicians, DJs and crew are not its unit of analysis; a DJ it helps, it helps as a <em>queer partygoer</em>, not a <em>worker</em>.</p>
+          </div>
+        </div>
+      </div>
+
+      <p><strong>It IS embedded in (electronic-)music nightlife.</strong> Its own description: <em>"We are everywhere the queer community gathers — parties, clubs, bars, big events, street fairs, festivals, cruising areas, congresses, workshops."</em><sup class="cite"><a href="#sk-src-1" data-src="about" data-tip="'We are everywhere the queer community gathers: parties, clubs, bars … festivals, cruising areas …' About page.">1</a></sup> Independent press observed the team working an info table at the <strong>KitKat-Club</strong> — a Berlin techno / fetish institution — at a sex-positive party where people <em>"dance extensively to electronic music"</em> and a range of drugs are used.<sup class="cite"><a href="#sk-src-6" data-src="paritaet" data-tip="On-site at KitKat-Club, sex-positive party, 'zu elektronischer Musik ausgiebig getanzt.' Der Paritätische magazine 03|2023.">6</a></sup> So the setting is exactly the club / electronic-music scene a music-MH project would also work in.</p>
+
+      <p><strong>It is NOT a service for music workers.</strong> The <strong>target group is the queer / LGBTIQ+ community</strong> — defined by sexual identity and nightlife participation, not by occupation.<sup class="cite"><a href="#sk-src-1" data-src="about" data-tip="Target group = the queer community in nightlife/sexual-health settings. About page.">1</a></sup><sup class="cite"><a href="#sk-src-4" data-src="rebrand" data-tip="'Our goal is to reach as many queer people as possible … focused on gender and sexual diversity.' Rebrand statement.">4</a></sup> Its substance work is, in its own words, "one of many topics in nightlife," tightly interwoven with HIV / hepatitis / STI prevention and <strong>chemsex</strong>.<sup class="cite"><a href="#sk-src-3" data-src="koop" data-tip="'Im Nachtleben ist Drogengebrauch eines von vielen Themen'; interwoven with HIV/hepatitis/STI prevention. Kooperationen page.">3</a></sup> Nothing in its materials frames music as a profession, occupational mental health, or artists' welfare. The cleanest placement against the rest of this series: TGR and MiM ask <em>"how do you serve musicians?"</em>; sidekicks.berlin answers <em>"how do you reach a community inside nightlife at all?"</em> — a method question a music-MH NPO can borrow even though the population differs.</p>
+    </section>
+
+    <!-- 3. THE DISTINCTIVE MODEL -->
+    <section>
+      <div class="section-label">03 — The distinctive model</div>
+      <h2>Embedded, accepting, institution-backed</h2>
+      <p>Three structural choices define sidekicks.berlin and separate it from clinics and trade bodies.</p>
+
+      <div class="gear-cards">
+        <div class="gear">
+          <div class="gn">CHOICE 01</div>
+          <h3>Go to the scene; don't wait for the clinic</h3>
+          <p>The core method is <strong>outreach / on-site work</strong>: paid staff plus trained volunteers set up info tables inside clubs, sex-positive parties, bars, festivals and cruising areas, handing out free safer-sex and safer-use materials (clean snorting tubes, dosing aids, cards to divide substances, condoms) and offering conversation — an estimated <strong>~45–60 contacts per party</strong>.<sup class="cite"><a href="#sk-src-6" data-src="paritaet" data-tip="On-site materials, ~45–60 contacts per party (org estimate). Der Paritätische 03|2023.">6</a></sup><sup class="cite"><a href="#sk-src-1" data-src="about" data-tip="On-site team of paid staff + volunteers across nightlife venues. About page.">1</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">CHOICE 02</div>
+          <h3>Accepting, non-judgmental harm reduction</h3>
+          <p>All drug-field partners work to an <strong>"accepting" harm-reduction approach</strong> (the Deutsche Aidshilfe model): the goal is <em>"safer," not "safe"</em> use — no moralising, no abstinence requirement. The on-site rule is demand-led: <em>"someone who asks for condoms is not handed a safer-use pack."</em><sup class="cite"><a href="#sk-src-3" data-src="koop" data-tip="'Alle kooperierenden Partner … arbeiten nach dem akzeptierenden Harm-Reduction Ansatz.' Kooperationen.">3</a></sup><sup class="cite"><a href="#sk-src-6" data-src="paritaet" data-tip="'Safer, not safe'; demand-led — condoms-asker not given a safer-use pack. Der Paritätische 03|2023.">6</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">CHOICE 03</div>
+          <h3>Institutional backing, grassroots delivery</h3>
+          <p>Unlike a bootstrapped collective, sidekicks sits inside Schwulenberatung Berlin and is <strong>funded from State of Berlin public funds</strong>, plus donations and sponsoring. The grassroots feel (volunteers, club tables, Telegram/Instagram) runs on an institutional spine — a gGmbH employer, a 1981 parent, formal quality management.<sup class="cite"><a href="#sk-src-5" data-src="impressum" data-tip="'sidekicks.berlin wird aus Mitteln des Landes Berlin gefördert'; donations to the gGmbH. Impressum + About.">5</a></sup><sup class="cite"><a href="#sk-src-8" data-src="parent" data-tip="Parent: Schwulenberatung Berlin, founded 1981, 200+ staff. Parent About + search.">8</a></sup></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. SERVICES -->
+    <section>
+      <div class="section-label">04 — Services &amp; programs</div>
+      <h2>Sexual-health and substance services, interlocked<sup class="cite"><a href="#sk-src-2" data-src="drugchecking" data-tip="Service detail incl. free anonymous drug checking, 3 sites, GerMed lab. Drug Checking page.">2</a></sup></h2>
+      <p>sidekicks.berlin runs an interlocking set of sexual-health and substance services; the substance side is one strand of a wider queer-health offer.</p>
+
+      <div class="table-wrap" role="region" aria-label="sidekicks.berlin — service lines (scrollable table)" tabindex="0">
+        <table>
+          <caption>The service catalogue — sidekicks.berlin (sources cited inline)</caption>
+          <thead><tr><th scope="col">Service line</th><th scope="col">What it is</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">On-site nightlife prevention</th><td>Info tables at queer clubs, sex-positive parties, bars, festivals, cruising areas; free safer-sex + safer-use materials; non-judgmental conversation</td></tr>
+            <tr class="row-emph"><th scope="row">Drug checking (since June 2023)</th><td>Free, anonymous lab analysis of psychoactive substances; the Schwulenberatung/sidekicks site at Niebuhrstraße is <strong>one of three</strong> official Berlin drop-off points</td></tr>
+            <tr><th scope="row">Safer-use information</th><td>Substance-by-substance harm-reduction guides (MDMA, GHB/GBL, ketamine, mephedrone/3-MMC, cocaine, crystal/"Tina", 2C-B…) + injection/"slamming" guidance</td></tr>
+            <tr><th scope="row">Chemsex support</th><td>Information and counselling routing for sex-and-drugs ("chills") — a distinctively queer harm-reduction niche</td></tr>
+            <tr><th scope="row">HIV / STI prevention &amp; testing info</th><td>Safer Sex 3.0, PrEP, PEP, Doxy-PEP, mpox, STI-testing signposting — the project's historical core</td></tr>
+            <tr><th scope="row">Drug-emergency &amp; counselling signposting</th><td>What-to-do-in-an-emergency guidance; routing to confidential drug/chemsex counselling</td></tr>
+            <tr><th scope="row">Info-display service</th><td>Brochure displays on HIV/STI and substances placed in bars, cafés, saunas across the scene</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>Drug checking — the flagship, and a shared one.</strong> Berlin's drug-checking pilot went into routine operation on <strong>6 June 2023</strong>, announced by the Senate Department for Health after years of lobbying. Samples (cocaine, ecstasy, speed and more — not herbal cannabis or mushrooms) are dropped at <strong>three counselling-centre sites — Fixpunkt, Vista, and the gay counselling centre at Niebuhrstraße 59/60 (Schwulenberatung/sidekicks)</strong> — analysed by the <strong>State Institute for Forensic and Social Medicine (GerMed)</strong>, with results returned after a few days; a safe-harbour agreement among police, prosecutor, health department and the providers means users face no added legal risk near the sites.<sup class="cite"><a href="#sk-src-2" data-src="drugchecking" data-tip="June 2023; 3 sites; anonymous; legal safe-harbour 'between the police, the public prosecutor's office, the municipal department of health and the participating organizations.' Drug Checking page.">2</a></sup><sup class="cite"><a href="#sk-src-7" data-src="berlin-senate" data-tip="Official: Senate Dept. for Health announced 6 June 2023; 3 sites incl. 'the counseling center for gay people (Niebuhrstraße 59/60)'; GerMed analysis. Berlin.de.">7</a></sup> sidekicks runs the <strong>queer-facing</strong> drop-off point of a citywide consortium — a <em>partner in</em>, not the <em>owner of</em>, Berlin drug checking.</p>
+
+      <div class="stat-strip" role="group" aria-label="sidekicks.berlin at a glance">
+        <div class="stat-item"><div class="stat-num">2003</div><div class="stat-label">Project start (as man*check)</div></div>
+        <div class="stat-item"><div class="stat-num">1 of 3</div><div class="stat-label">Official Berlin drug-checking sites</div></div>
+        <div class="stat-item"><div class="stat-num">~45–60</div><div class="stat-label">Contacts per party (org est.)</div></div>
+        <div class="stat-item"><div class="stat-num">Land Berlin</div><div class="stat-label">Public funder</div></div>
+      </div>
+      <p style="font-size:var(--text-xs);color:var(--label-ink);max-width:none;">Reach is genuinely modest by design: across all three sites the programme's stated early capacity was a maximum of ~47 samples/week (83 in the first weeks of routine operation) — a small, high-touch pilot. <strong>⚠️ Sample figures are programme-wide and as-reported; the per-party contacts figure is the team's own estimate.</strong><sup class="cite"><a href="#sk-src-7" data-src="berlin-senate" data-tip="Programme-wide capacity ~47 samples/week; 83 early samples. Berlin.de + corroborating coverage. As-reported.">7</a></sup></p>
+    </section>
+
+    <!-- 5. FUNDING -->
+    <section>
+      <div class="section-label">05 — Funding &amp; finances</div>
+      <h2>Publicly funded — through the parent<sup class="cite"><a href="#sk-src-5" data-src="impressum" data-tip="'sidekicks.berlin wird aus Mitteln des Landes Berlin gefördert'; donations to Schwulenberatung Berlin gGmbH. Impressum + About.">5</a></sup></h2>
+      <p>sidekicks.berlin is <strong>funded from State of Berlin (Land Berlin) public funds</strong>, delivered through the Schwulenberatung Berlin gGmbH, supplemented by donations and sponsoring. The drug-checking strand is specifically <strong>Berlin-Senate-funded</strong> (Senate Department for Health), with roughly <strong>€150,000</strong> in the biennial budget at launch for the consortium's counselling and lab analysis — a programme-wide figure, not sidekicks-only.<sup class="cite"><a href="#sk-src-7" data-src="berlin-senate" data-tip="Senate-funded; ~€150,000 biennial budget for the drug-checking consortium at launch. Berlin.de + coverage.">7</a></sup></p>
+
+      <div class="table-wrap" role="region" aria-label="sidekicks.berlin funding (scrollable table)" tabindex="0">
+        <table>
+          <caption>Funding picture — sidekicks.berlin (sources cited inline)</caption>
+          <thead><tr><th scope="col">Element</th><th scope="col">Detail</th><th scope="col">Basis</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Primary funding</th><td>State of Berlin (Land Berlin) public funds — "funded from funds of the State of Berlin"</td><td>✅ Sourced</td></tr>
+            <tr><th scope="row">Drug-checking funding</th><td>Berlin Senate (Dept. for Health); ~€150k biennial for the consortium at launch (programme-wide)</td><td>✅ Sourced</td></tr>
+            <tr><th scope="row">Supplementary</th><td>Donations (to Schwulenberatung Berlin gGmbH, purpose "sidekicks.berlin") + sponsoring / in-kind</td><td>✅ Sourced</td></tr>
+            <tr><th scope="row">Project-level budget</th><td>Not separately published — sidekicks' own line item is not broken out from the parent gGmbH accounts</td><td>❓ No source</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="model-callout">
+        <h2>Funding-Basis note for the Orgs Map</h2>
+        <p>Map row #60 currently records funding as <strong>"No public funding info · ❓ No source."</strong> The primary sources establish that sidekicks.berlin is <strong>publicly funded (Land Berlin / Senate), delivered through the Schwulenberatung Berlin gGmbH, plus donations</strong> — supporting an upgrade of that row's funding Basis label from <strong>❓ No source → ✅ Sourced</strong> (government / public-sector). What is <em>not</em> public is the <strong>project-level budget</strong>: sidekicks' own annual figure is not disaggregated from the gGmbH, so any euro amount for sidekicks <em>specifically</em> stays ❓. The funding <em>source</em> is sourced; the funding <em>size</em> is not. (The map edit itself is an integration step, handled separately — not on this page.)</p>
+      </div>
+    </section>
+
+    <!-- 6. NETWORKS -->
+    <section>
+      <div class="section-label">06 — Networks &amp; embedding</div>
+      <h2>The network <em>is</em> the model<sup class="cite"><a href="#sk-src-3" data-src="koop" data-tip="Network map: Deutsche Aidshilfe, SP5, Fixpunkt, BEST clubbing, Sonar, community partners, Beyond Borders. Kooperationen.">3</a></sup></h2>
+      <p>For a project of its size, sidekicks.berlin is densely networked — and the network is the model.</p>
+      <ul class="prog">
+        <li><span class="ptag">Parent</span><h3>Schwulenberatung Berlin gGmbH</h3><p>Counselling, housing, care, refugee and addiction services; founded 1981; one of Europe's largest LGBTIQ+ psychosocial bodies.<sup class="cite"><a href="#sk-src-8" data-src="parent" data-tip="Parent organisation, 1981, one of the largest of its kind in Europe. Parent About + search.">8</a></sup></p></li>
+        <li><span class="ptag">National umbrella</span><h3>Deutsche Aidshilfe e.V. · SP5</h3><p>The national AIDS-support umbrella, plus the SP5 working group of the five big-city MSM-prevention projects (Hamburg, Munich, Frankfurt, Cologne, Berlin), collaborating since 2003 and authors of the shared mission statement.<sup class="cite"><a href="#sk-src-3" data-src="koop" data-tip="Deutsche Aids Hilfe als Dachverband; SP5 der 5 Metropolenprojekte seit 2003. Kooperationen.">3</a></sup><sup class="cite"><a href="#sk-src-4" data-src="rebrand" data-tip="Mission-statement continuity since the 2003 start (SP5 Leitbild). Rebrand statement / Leitbild.">4</a></sup></p></li>
+        <li><span class="ptag">Drug-checking consortium</span><h3>Fixpunkt e.V. · Vista (Misfit) · GerMed</h3><p>Under the Drug Checking Initiative Berlin/Brandenburg, with lab analysis by the State Institute for Forensic and Social Medicine.<sup class="cite"><a href="#sk-src-2" data-src="drugchecking" data-tip="Drug Checking Initiative Berlin/Brandenburg; 3 sites; GerMed lab. Drug Checking page.">2</a></sup><sup class="cite"><a href="#sk-src-7" data-src="berlin-senate" data-tip="Fixpunkt, Vista, Schwulenberatung as the three sites. Berlin.de.">7</a></sup></p></li>
+        <li><span class="ptag">Club harm reduction</span><h3>BEST clubbing · Sonar</h3><p>Part of Fixpunkt's BEST clubbing health-promotion training; cooperates with Sonar (safer-nightlife.berlin) party teams on joint safer-sex/safer-use outreach.<sup class="cite"><a href="#sk-src-3" data-src="koop" data-tip="'Teil des BEST-Schulungsprogramms'; Partyteams von Sonar. Kooperationen.">3</a></sup></p></li>
+        <li><span class="ptag">Community access</span><h3>Mann-O-Meter · GLADT · Hilfe für Jungs · others</h3><p>Community partners used to reach "hard-to-reach" sub-groups, including queer people of migrant background.<sup class="cite"><a href="#sk-src-3" data-src="koop" data-tip="Mann-O-Meter, Sonntagsclub, GLADT, Hilfe für Jungs e.V. as community access partners. Kooperationen.">3</a></sup></p></li>
+        <li><span class="ptag">European</span><h3>Beyond Borders</h3><p>EU Grundtvig-funded project with Lambda Warsaw and the Terrence Higgins Trust (London).<sup class="cite"><a href="#sk-src-3" data-src="koop" data-tip="Beyond Borders mit Lambda Warschau und Terrence Higgins Trust London. Kooperationen.">3</a></sup></p></li>
+      </ul>
+    </section>
+
+    <!-- 7. STRENGTHS -->
+    <section>
+      <div class="section-label">07 — Strengths</div>
+      <h2>What works</h2>
+      <div class="sw-grid">
+        <div class="sw-card strong"><h3>Being where the scene is</h3><p>The whole point: prevention delivered <em>inside</em> clubs, parties and cruising areas, not in a clinic the target group never enters.<sup class="cite"><a href="#sk-src-1" data-src="about" data-tip="On-site everywhere the queer community gathers. About page.">1</a></sup><sup class="cite"><a href="#sk-src-6" data-src="paritaet" data-tip="Observed working an info table inside the club. Der Paritätische 03|2023.">6</a></sup></p></div>
+        <div class="sw-card strong"><h3>Accepting, non-judgmental stance</h3><p>"Safer, not safe," demand-led, no moralising — what makes a prevention worker welcome at a party rather than resented.<sup class="cite"><a href="#sk-src-3" data-src="koop" data-tip="Accepting harm-reduction approach. Kooperationen.">3</a></sup><sup class="cite"><a href="#sk-src-6" data-src="paritaet" data-tip="Demand-led, 'safer not safe.' Der Paritätische 03|2023.">6</a></sup></p></div>
+        <div class="sw-card strong"><h3>Institutional backing without coldness</h3><p>A 1981, 200-plus-staff parent and stable public funding behind a grassroots-feeling storefront — durability a bootstrapped collective lacks.<sup class="cite"><a href="#sk-src-5" data-src="impressum" data-tip="State-of-Berlin funded; delivered through the gGmbH. Impressum + About.">5</a></sup><sup class="cite"><a href="#sk-src-8" data-src="parent" data-tip="200+ staff parent, founded 1981. Parent About + search.">8</a></sup></p></div>
+        <div class="sw-card strong"><h3>A legally-protected drug-checking pathway</h3><p>Co-runs one of three official Berlin drop-off points under a police/prosecutor safe-harbour agreement — a real clinical-grade service, not just leafleting.<sup class="cite"><a href="#sk-src-2" data-src="drugchecking" data-tip="Free anonymous drug checking with legal safe-harbour. Drug Checking page.">2</a></sup><sup class="cite"><a href="#sk-src-7" data-src="berlin-senate" data-tip="Official Senate confirmation of the 3-site project. Berlin.de.">7</a></sup></p></div>
+        <div class="sw-card strong"><h3>Community-specific cultural fluency</h3><p>Chemsex, queer venues, the "Tina"/crystal vocabulary, trans/inter inclusion — credibility from speaking the exact community's language.<sup class="cite"><a href="#sk-src-3" data-src="koop" data-tip="Holistic queer-community approach; chemsex; community partners. Kooperationen.">3</a></sup><sup class="cite"><a href="#sk-src-4" data-src="rebrand" data-tip="Explicit gender/sexual-diversity focus. Rebrand statement.">4</a></sup></p></div>
+      </div>
+    </section>
+
+    <!-- 8. WEAKNESSES -->
+    <section>
+      <div class="section-label">08 — Weaknesses &amp; limits (as a <em>music</em> model)</div>
+      <h2>What to watch</h2>
+      <div class="sw-grid">
+        <div class="sw-card weak"><h3>Not a music-worker service — by design</h3><p>Serves the queer community in nightlife, not musicians/DJs/crew as an occupational group. A Taiwan music-MH NPO can borrow the <em>method</em> but not import the <em>mission</em>. ⚠️ scope<sup class="cite"><a href="#sk-src-1" data-src="about" data-tip="Target group = queer community, not music workers. About page.">1</a></sup><sup class="cite"><a href="#sk-src-4" data-src="rebrand" data-tip="'Reach as many queer people as possible.' Rebrand statement.">4</a></sup></p></div>
+        <div class="sw-card weak"><h3>Substance + sexual health, not mental health per se</h3><p>Its "MH" footprint is harm reduction + signposting, not psychological care; deeper mental-health treatment lives in the <em>parent</em> (Schwulenberatung), not in sidekicks itself. ⚠️<sup class="cite"><a href="#sk-src-1" data-src="about" data-tip="Sexual-health + substance focus. About page.">1</a></sup><sup class="cite"><a href="#sk-src-8" data-src="parent" data-tip="Mental-health counselling sits in the parent organisation. Parent About.">8</a></sup></p></div>
+        <div class="sw-card weak"><h3>No project-level financial transparency</h3><p>sidekicks' own budget/reach is not disaggregated from the gGmbH; reach figures are org-reported, not audited. ❓ / ⚠️<sup class="cite"><a href="#sk-src-5" data-src="impressum" data-tip="No separate sidekicks budget published; donations to the gGmbH. Impressum + About.">5</a></sup><sup class="cite"><a href="#sk-src-6" data-src="paritaet" data-tip="Reach figure is the team's own estimate. Der Paritätische 03|2023.">6</a></sup></p></div>
+        <div class="sw-card weak"><h3>Deliberately small</h3><p>Outreach is labour-intensive and capacity-bounded (a club table reaches dozens; drug checking ~47 samples/week consortium-wide at launch). Depth over scale is a choice, but it caps reach. ⚠️<sup class="cite"><a href="#sk-src-6" data-src="paritaet" data-tip="~45–60 contacts/party. Der Paritätische 03|2023.">6</a></sup><sup class="cite"><a href="#sk-src-7" data-src="berlin-senate" data-tip="~47 samples/week consortium-wide. Berlin.de.">7</a></sup></p></div>
+        <div class="sw-card weak"><h3>Hard-to-replicate enabling conditions</h3><p>The model presupposes a permissive legal climate (a Senate-brokered drug-checking safe harbour) and a large queer-NGO parent — neither of which a Taiwan founder can assume. ⚠️<sup class="cite"><a href="#sk-src-2" data-src="drugchecking" data-tip="Legal safe-harbour with police/prosecutor. Drug Checking page.">2</a></sup><sup class="cite"><a href="#sk-src-7" data-src="berlin-senate" data-tip="Senate-brokered project. Berlin.de.">7</a></sup></p></div>
+      </div>
+    </section>
+
+    <!-- 9. LESSONS -->
+    <section>
+      <div class="section-label">09 — Lessons for Taiwan</div>
+      <h2>What a Taiwan music mental health NPO should take</h2>
+      <ol class="lessons">
+        <li><h3>Steal the delivery model, not the mission: go to the venue</h3><p>sidekicks.berlin proves outreach <em>inside</em> the scene — info tables at gigs, clubs, festivals — reaches people who will never walk into a clinic. A Taiwan music-MH NPO should put itself <strong>at Live Houses, festivals (e.g. 大港開唱 / Megaport), and rehearsal hubs</strong>, not only behind a booking page.<sup class="cite"><a href="#sk-src-1" data-src="about" data-tip="On-site outreach across nightlife venues. About page.">1</a></sup><sup class="cite"><a href="#sk-src-6" data-src="paritaet" data-tip="Info table inside the club; ~45–60 contacts/party. Der Paritätische 03|2023.">6</a></sup></p></li>
+        <li><h3>Adopt the "accepting," demand-led stance</h3><p>No moralising, "safer not safe," and only go deeper when the person opens the door. For musicians wary of being pathologised, this lowers the threshold to a first conversation far better than a clinical front-door.<sup class="cite"><a href="#sk-src-3" data-src="koop" data-tip="Accepting harm-reduction approach. Kooperationen.">3</a></sup><sup class="cite"><a href="#sk-src-6" data-src="paritaet" data-tip="Demand-led; only deeper on the user's cue. Der Paritätische 03|2023.">6</a></sup></p></li>
+        <li><h3>Anchor inside a larger host rather than standing fully alone</h3><p>sidekicks runs grassroots-style precisely because a 200-staff gGmbH carries the employment, funding and governance. A Taiwan founder might <strong>embed a music-MH program inside an existing arts foundation, union, or counselling NGO</strong> for the same durability — grassroots feel, institutional spine.<sup class="cite"><a href="#sk-src-5" data-src="impressum" data-tip="Delivered through the parent gGmbH; state-funded. Impressum + About.">5</a></sup><sup class="cite"><a href="#sk-src-8" data-src="parent" data-tip="Large, durable parent organisation. Parent About + search.">8</a></sup></p></li>
+        <li><h3>Build (or join) a referral consortium; don't own everything</h3><p>sidekicks runs the queer-facing node of a <em>shared</em> drug-checking and prevention network. A Taiwan NPO should similarly <strong>partner</strong> — route to <strong class="cjk">諮商心理師</strong>/<strong class="cjk">臨床心理師</strong> and the <strong class="cjk">1925 安心專線</strong> for clinical and crisis needs — and own only the scene-facing layer it is best placed to run.<sup class="cite"><a href="#sk-src-2" data-src="drugchecking" data-tip="Queer-facing node of a shared drug-checking consortium. Drug Checking page.">2</a></sup><sup class="cite"><a href="#sk-src-3" data-src="koop" data-tip="Dense referral/partner network. Kooperationen.">3</a></sup></p></li>
+        <li><h3>Name the scope boundary out loud</h3><p>sidekicks is honest that it is prevention/harm-reduction, with deeper care living in the parent. A Taiwan service should state plainly <strong>what it is and is not</strong> (peer support and signposting ≠ therapy ≠ crisis line) so a light-touch scene program is never mistaken for clinical treatment.<sup class="cite"><a href="#sk-src-1" data-src="about" data-tip="Prevention/harm-reduction scope; deeper care in the parent. About page.">1</a></sup><sup class="cite"><a href="#sk-src-8" data-src="parent" data-tip="Clinical counselling sits in the parent. Parent About.">8</a></sup></p></li>
+        <li><h3>Mind the population gap when borrowing</h3><p>This is a <em>community</em> model (queer nightlife), not a <em>craft</em> model (music workers). The transferable asset is "embedded, non-judgmental, venue-based outreach"; the part a Taiwan NPO must build itself is the music-occupational framing sidekicks never had. ⚠️ scope<sup class="cite"><a href="#sk-src-1" data-src="about" data-tip="Community (queer) target group, not occupational. About page.">1</a></sup><sup class="cite"><a href="#sk-src-4" data-src="rebrand" data-tip="Defined by sexual/gender diversity, not profession. Rebrand statement.">4</a></sup></p></li>
+      </ol>
+    </section>
+
+    <!-- 10. METHOD + REFERENCES -->
+    <section>
+      <div class="section-label">10 — Methodology &amp; references</div>
+      <h2>Basis</h2>
+      <p class="cite-help">Every figure carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source; click to jump to the full reference. Identity, scope, services, the rebrand history, the team, networks and the funding <em>source</em> come from sidekicks.berlin's own website, captured by WebFetch (the site is server-rendered WordPress — Chrome tools were not needed). The legal entity, register number and address come from the site Impressum. Drug-checking facts and the public-funding picture are corroborated by the official Berlin Senate news portal (berlin.de) and <em>Der Paritätische</em> welfare-association magazine, which also supplies on-the-ground observation. The parent's stature is from Schwulenberatung Berlin's own About page. No people, dates or figures are asserted that are not on one of these sources; the project-level budget is not public and is marked ❓; reach figures are org-/programme-reported and marked ⚠️. The org was disambiguated explicitly (sidekicks.berlin = the Schwulenberatung Berlin project, formerly man*check — not unrelated "Sidekicks" entities).</p>
+
+      <div class="table-wrap" role="region" aria-label="Methodology — sources, methods and basis (scrollable table)" tabindex="0">
+        <table>
+          <caption>Methodology — sources, methods and basis</caption>
+          <thead><tr><th scope="col">Source</th><th scope="col">Method</th><th scope="col">Basis</th></tr></thead>
+          <tbody>
+            <tr><td>sidekicks.berlin — About/Über uns, Drugs, Drug Checking, Kooperationen, rebrand statement, Impressum</td><td>WebFetch (server-rendered)</td><td>✅ Sourced — organisation-published primary</td></tr>
+            <tr><td>Berlin.de — Senate Dept. for Health, drug-checking launch (official city portal)</td><td>WebFetch</td><td>✅ Sourced — government primary</td></tr>
+            <tr><td>Der Paritätische magazine, Ausgabe 03|2023 ("Sichererer feiern gehen")</td><td>WebFetch</td><td>✅ Sourced — named welfare-association press (on-site reportage)</td></tr>
+            <tr><td>Schwulenberatung Berlin — About us (parent)</td><td>WebFetch + WebSearch corroboration</td><td>✅ Sourced — parent organisation primary</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Limitations.</strong> (1) sidekicks' <strong>project-level budget</strong> is not disaggregated from the Schwulenberatung Berlin gGmbH accounts (§5, ❓). (2) <strong>Reach</strong> figures (~45–60 contacts/party; ~47 samples/week; 83 early samples) are organisation- or programme-reported, not independently audited, and the sample counts are <em>consortium-wide</em>, not sidekicks-only (§4/§8, ⚠️). (3) Staff are listed by first name only on the public site; individual qualifications were not separately verified. (4) No direct organisational contact; all data from public primary and named-press sources.</p>
+
+      <div class="refs" id="refs-all" data-citation-registry="sk-all">
+        <div class="refs-title">References</div>
+        <ol>
+          <li id="sk-src-1" data-src="about">Scope, target group, team, on-site settings, info-display service and the funder line: sidekicks.berlin. (n.d.). <em>About sidekicks.berlin</em> / <em>Über sidekicks.berlin</em>. Retrieved June 28, 2026, from <a href="https://sidekicks.berlin/en/about/" target="_blank" rel="noopener">sidekicks.berlin/en/about</a> and <a href="https://sidekicks.berlin/about/" target="_blank" rel="noopener">/about</a> ("We are everywhere the queer community gathers: parties, clubs, bars, big events, street fairs, festivals, cruising areas, congresses, workshops"; team of paid staff [Rolf, team lead] and volunteers; "sidekicks.berlin is a project of Schwulenberatung Berlin, funded by the Senate Department for Higher Education and Research, Health and Long-Term Care"; "sidekicks.berlin wird aus Mitteln des Landes Berlin gefördert"). <strong>Source · Method · Basis:</strong> organisation website · WebFetch · ✅ Sourced.</li>
+          <li id="sk-src-2" data-src="drugchecking">Free anonymous drug checking, three drop-off sites, GerMed lab analysis, the legal safe-harbour, substance scope and limits: sidekicks.berlin. (n.d.). <em>Drug Checking in Berlin</em>. Retrieved June 28, 2026, from <a href="https://sidekicks.berlin/en/drug-checking/" target="_blank" rel="noopener">sidekicks.berlin/en/drug-checking</a> ("In June 2023, free and anonymous drug checking launched in Berlin"; drop off at one of 3 locations at weekly time slots; powder/liquid/pill/synthetic-cannabis accepted, plant matter/pharma/poppers not; anonymous code + voluntary questionnaire; "you do not run any additional legal risks … guaranteed by an agreement … between the police, the public prosecutor's office, the municipal department of health and the participating organizations"; counsellors "familiar with queer lifestyles — especially at Schwulenberatung Berlin"). <strong>Source · Method · Basis:</strong> organisation website · WebFetch · ✅ Sourced.</li>
+          <li id="sk-src-3" data-src="koop">Harm-reduction approach, nightlife structural prevention, and the cooperation/network map (Deutsche Aidshilfe, SP5, Fixpunkt, BEST clubbing, Sonar, community partners, Beyond Borders): sidekicks.berlin. (n.d.). <em>Kooperationen</em> [Cooperations]. Retrieved June 28, 2026, from <a href="https://sidekicks.berlin/kooperationen/" target="_blank" rel="noopener">sidekicks.berlin/kooperationen</a> ("SIDEKICKS.BERLIN hat einen ganzheitlichen Ansatz … Im Nachtleben ist Drogengebrauch eines von vielen Themen. Hier arbeitet SIDEKICKS.BERLIN intensiv mit Fixpunkt e.V. zusammen. Auch engagiert sich SIDEKICKS.BERLIN in der Drugchecking Initiative Berlin Brandenburg. Alle kooperierenden Partner … arbeiten nach dem akzeptierenden Harm-Reduction Ansatz"; "Teil des BEST-Schulungsprogramms zur Gesundheitsförderung im Partysetting"; Partyteams von Sonar; Deutsche Aids Hilfe e.V. als Dachverband; SP5 der 5 Metropolenprojekte seit 2003; Beyond Borders mit Lambda Warschau und Terrence Higgins Trust London). <strong>Source · Method · Basis:</strong> organisation website · WebFetch · ✅ Sourced.</li>
+          <li id="sk-src-4" data-src="rebrand">Project origin (2003, as man*check, for MSM), the July 2023 rebrand and widened queer scope, and the "sidekick" metaphor: sidekicks.berlin. (n.d.). <em>man*check is now sidekicks.berlin</em>. Retrieved June 28, 2026, from <a href="https://sidekicks.berlin/en/mancheck-ist-jetzt-sidekicks/" target="_blank" rel="noopener">sidekicks.berlin/en/mancheck-ist-jetzt-sidekicks</a> ("What started in 2003 as a prevention project for HIV and Aids for 'gay and other men who have sex with men (MSM)' has evolved into so much more today … 20 years after launching man*check …"; "Our goal is to reach as many queer people as possible … explicitly focused on gender and sexual diversity"; "You're the main character — we're your sidekicks!"; Berlin, July 2023). Mission-statement continuity since 2003 also per the org's <em>Leitbild</em> (SP5 common mission, in force for sidekicks since the 2003 project start). <strong>Source · Method · Basis:</strong> organisation website · WebFetch · ✅ Sourced.</li>
+          <li id="sk-src-5" data-src="impressum">Legal entity, register, managing director, address, and the funding/donation structure: sidekicks.berlin. (n.d.). <em>Impressum</em> [Legal notice] &amp; <em>Über sidekicks.berlin — Unterstütze uns</em>. Retrieved June 28, 2026, from <a href="https://sidekicks.berlin/impressum/" target="_blank" rel="noopener">sidekicks.berlin/impressum</a> and <a href="https://sidekicks.berlin/about/" target="_blank" rel="noopener">/about</a> (Schwulenberatung Berlin gGmbH; Gesellschafter: Psychosoziales Zentrum für Schwule e.V.; Niebuhrstraße 59/60, 10629 Berlin-Charlottenburg; vertreten durch Marcel de Groot, Geschäftsführer; Amtsgericht Charlottenburg HRB 110342 B; donations to "Schwulenberatung Berlin gGmbH", Verwendungszweck "sidekicks.berlin"; "sidekicks.berlin wird aus Mitteln des Landes Berlin gefördert. Wir sind auf Spenden angewiesen …"). <strong>Source · Method · Basis:</strong> organisation website (legal notice) · WebFetch · ✅ Sourced.</li>
+          <li id="sk-src-6" data-src="paritaet">Independent on-site reportage — outreach method, materials, the accepting stance, the ~45–60-contacts-per-party estimate, paid-plus-volunteer staffing, the electronic-music club setting: Meinert, P. (2023). Sichererer feiern gehen [Partying more safely]. <em>Der Paritätische — Verbandsmagazin</em>, Ausgabe 03|2023 (Sucht &amp; Drogen). <a href="https://www.der-paritaetische.de/magazin/ausgabe-03-2023-sucht-drogen/sichererer-feiern-gehen/" target="_blank" rel="noopener">der-paritaetische.de</a> (reporter accompanies sidekicks.berlin worker "Basti" — employed since May 2023 — at an info table in the KitKat-Club at a sex-positive party where people "zu elektronischer Musik ausgiebig getanzt" and varied drugs are used; safer-use materials = clean syringes, single-use snorting tubes, dosing aids, plastic cards to divide drugs; "Wir bieten Materialien an, um sichererer zu konsumieren. Also nicht sicher"; demand-led — "Wer nach Kondomen fragt, bekommt von uns kein Safer Use-Pack angedreht"; estimate of "zwischen 45 und 60 Beratungen" per party; volunteer "Markus"; sidekicks/Schwulenberatung named alongside Fixpunkt and Vista/Misfit as drug-checking drop-off sites). <strong>Source · Method · Basis:</strong> named welfare-association magazine (on-site reportage) · WebFetch · ✅ Sourced (reach figure ⚠️ org-estimated, as-reported).</li>
+          <li id="sk-src-7" data-src="berlin-senate">Official confirmation of the Berlin drug-checking project — launch date, three counselling-centre sites (incl. the gay counselling centre at Niebuhrstraße 59/60 = Schwulenberatung/sidekicks), GerMed analysis, and Senate funding: Senatsverwaltung für Wissenschaft, Gesundheit und Pflege / dpa. (2023, June 6; updated June 14, 2023). <em>Drug checking project now offers free and anonymous drug tests</em>. Berlin.de — The Official Website of Berlin. <a href="https://www.berlin.de/en/news/8262563-5559700-drug-checking-free-anonymous-drug-testin.en.html" target="_blank" rel="noopener">berlin.de</a> (project announced by the Senate Department for Health on 6 June 2023; samples handed in at three locations — Fixpunkt, Vista, and "the counseling center for gay people (Niebuhrstraße 59/60)"; analysis by the State Institute for Forensic and Social Medicine [GerMed]). Senate funding (~€150,000 biennial) and ~47-samples/week / 83-early-samples capacity per Berlin.de and corroborating coverage of the same programme. <strong>Source · Method · Basis:</strong> official city/government portal · WebFetch · ✅ Sourced (sample/budget figures ⚠️ programme-wide, as-reported).</li>
+          <li id="sk-src-8" data-src="parent">Parent organisation profile: Schwulenberatung Berlin. (n.d.). <em>Welcome to Schwulenberatung Berlin!</em> [About us]. Retrieved June 28, 2026, from <a href="https://schwulenberatungberlin.de/about-us/" target="_blank" rel="noopener">schwulenberatungberlin.de/about-us</a> (counselling for gay and bisexual men, trans* and inter* people, people living with HIV/AIDS and relatives; multidisciplinary team of doctors, health scientists, pedagogues, psychologists, psychotherapists, social scientists, social workers, volunteers and freelancers; 1-on-1 and group counselling on coming-out, mental health, ageing, alcohol and drug use, addiction, HIV/AIDS, discrimination, trans/inter topics; Niebuhrstraße 59-60, Berlin-Charlottenburg); founding year 1981 and "one of the largest LGBTIQ facilities of its kind in Europe / 200+ full-time employees" corroborated via web search of the organisation's public materials. <strong>Source · Method · Basis:</strong> parent organisation website + web-search corroboration · WebFetch + WebSearch · ✅ Sourced.</li>
+        </ol>
+        <p class="refs-note">Convention: every claim-bearing element carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above — machine-checkable before each deploy (§5.2 / §6 gate 1). Reach figures are labelled as-reported; the project-level budget is marked ❓. Citation source of truth: <span style="font-family:var(--font-mono);">2026-06-28_Report_Org_Study_Sidekicks_Berlin.md</span>.</p>
+      </div>
+    </section>
+
+    <nav class="related-block" aria-label="Related on this site">
+      <p class="related-title">Related</p>
+      <ul>
+        <li><a href="org-study.html">&larr; Org Study (all organizations)</a></li>
+        <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+        <li><a href="policy-study-germany.html">Policy Study &mdash; Germany (the rights floor: Künstlersozialkasse)</a></li>
+        <li><a href="policy-study.html">Policy Study &mdash; how jurisdictions protect music workers</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <script>
+  /* Scroll-reveal — R3.2 shared IntersectionObserver (normal-scroll page) */
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = 'section > h2, .stat-strip, figure, .table-wrap, .scope-panel, .gear-cards, .sw-grid, .prog, .refs';
+    var nodes = Array.prototype.slice.call(document.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, sibs, idx = 0;
+        if (p){ sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,6) * 60) + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
+
+  <!-- nav scroll-state: transparent over hero, blurred bar once scrolled -->
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden','true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>

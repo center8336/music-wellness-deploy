@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>LARA Berlin · Org Study · MH&amp;W</title>
+  <meta name="description" content="LARA Berlin is a Berlin-Senate-financed specialist crisis and counselling centre for women, trans*, inter* and non-binary people affected by sexualized violence — a general (not music) service. Studied as the general crisis safety-net a musician would fall back on absent a music-specific service, and what that substitution costs.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      /* ── DIA-GRADE READING SCALE (calibrated to Dia browser, serif-corrected) ── */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;--lh-prose:1.7;--wt-prose:440;--measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;--label-ink:var(--graphite);
+      --font-cjk:'Noto Serif TC',serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { overflow-x: hidden; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--black);
+      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      line-height: var(--lh-prose);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    a { color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    a:hover { color: var(--signal-dim); }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--signal); outline-offset: 3px; border-radius: var(--radius);
+    }
+
+    .skip-nav {
+      position: absolute; left: -9999px; top: 0; z-index: 200;
+      background: var(--signal); color: var(--white);
+      padding: 0.5rem 1rem; font-family: var(--font-mono);
+    }
+    .skip-nav:focus { left: 0; }
+
+    /* ===== NAVIGATION ===== */
+    nav.nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; flex-direction: column;
+      padding: 2rem 2.5rem;
+      padding-top: calc(2rem + env(safe-area-inset-top));
+      background: transparent;
+      transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    nav.nav.scrolled {
+      background: rgba(244, 244, 245, 0.45);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: var(--font-mono); font-size: 1.1rem; font-weight: 400;
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-topbar { display:none; }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; min-width:44px; min-height:44px; z-index:101; -webkit-tap-highlight-color:transparent; }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity:0; }
+    .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
+
+    /* ===== LAYOUT ===== */
+    main { max-width: var(--max-w); margin: 0 auto; padding: 0 2.5rem 5rem 2.5rem; }
+    section { margin-bottom: 4rem; }
+    .narrow { max-width: var(--max-w-text); }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding-top: calc(9rem + env(safe-area-inset-top));
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-light);
+      margin-bottom: 3rem;
+    }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.18em;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: var(--font-display); font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6.5rem);
+      font-weight: 800; line-height: 1.04; color: var(--black); letter-spacing: -0.01em;
+      overflow-wrap: break-word; hyphens: auto;
+    }
+    .hero h1 .tail { display:block; font-size: clamp(1.15rem, 2.6vw, 1.9rem); font-weight: 600; color: var(--signal); letter-spacing: 0; margin-top: 0.9rem; }
+    .hero .subtitle {
+      font-family: var(--font-body); font-size: clamp(1.25rem, 1.05rem + 1.4vw, 1.5rem);
+      color: var(--graphite); line-height: 1.55; margin-top: 1.5rem; max-width: 54ch;
+    }
+    .basis-badge {
+      display: inline-block; margin-top: 1.75rem;
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--graphite); background: var(--signal-bg);
+      border: 1px solid var(--signal-glow); border-radius: var(--radius);
+      padding: 0.5rem 0.85rem; line-height: 1.5;
+    }
+
+    /* ===== TWO-LINE COVER (R2.1, 2026-06-20) — width:100% inside main (no 100vw breakout → no x-overflow) ===== */
+    .cover {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;                /* clips the wash */
+      padding: 0 2rem;
+    }
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%,
+        var(--signal-glow) 0%,
+        rgba(102,103,171,0.06) 38%,
+        rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
+    }
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 1280px);
+    }
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin: 0;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+    .cover-sub {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2.4vw, 1.45rem);
+      font-weight: 500;
+      font-style: italic;
+      color: var(--graphite);
+      margin: 1.1rem auto 0;
+      max-width: 46ch;
+      letter-spacing: 0;
+      line-height: 1.4;
+    }
+    .cover-line {
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--purple-deep);
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
+    }
+    .cover-hint {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
+    }
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
+    }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-sub { animation-delay: 0.16s; }
+    .cover-inner > .cover-line  { animation-delay: 0.24s; }
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .cover-wash,
+      .cover-hint,
+      .cover-inner > * { animation: none; opacity: 1; transform: none; }
+    }
+    @media (max-width: 768px) {
+      .cover { padding: 0 1.25rem; }
+      .cover-title { font-size: clamp(1.7rem, 7.3vw, 2.4rem); }
+      .cover-line  { font-size: clamp(0.72rem, 3.2vw, 0.95rem); letter-spacing: 0.18em; }
+    }
+
+    /* ===== TYPE ===== */
+    h2 {
+      font-family: var(--font-display); font-size: var(--text-h2);
+      font-weight: 700; line-height: 1.1; color: var(--black);
+      margin-bottom: 1.25rem; letter-spacing: -0.01em;
+      text-wrap: balance; overflow-wrap: break-word;
+    }
+    h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem); line-height: 1.25; font-weight: 600; color: var(--charcoal); margin: 1.75rem 0 0.75rem; }
+    .section-label {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem;
+    }
+    p { color: var(--graphite); max-width: var(--measure-prose); margin-bottom: 1rem; line-height: 1.65; }
+    p.lead { font-size: 1.1rem; color: var(--charcoal); }
+    strong { color: var(--charcoal); font-weight: 600; }
+    em { color: var(--graphite); }
+
+    /* ===== MODEL CALLOUT ===== */
+    .model-callout { background: var(--bg-card-dark); color: var(--snow); border-radius: var(--radius-lg); padding: 2.25rem 2.5rem; margin-bottom: 3rem; }
+    .model-callout h2 { color: var(--white); margin-bottom: 1rem; }
+    .model-callout p { color: var(--silver); max-width: none; }
+    .model-callout strong { color: var(--white); }
+    .model-callout a { color: var(--spectrum-3); text-decoration: underline; text-underline-offset: 2px; }
+    .model-callout a:hover { color: var(--white); }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-card); margin: 1.5rem 0 0.75rem; }
+    .stat-item { padding: 1.75rem 1.25rem; border-right: 1px solid var(--border-light); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--signal); line-height: 1; font-variant-numeric: tabular-nums; }
+    .stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.6rem; line-height: 1.4; }
+
+    /* ===== TABLES ===== */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; margin: 1.25rem 0; border-radius: var(--radius-lg); border: 1px solid var(--border-light); }
+    .table-wrap:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+    table { width: 100%; border-collapse: collapse; background: var(--bg-card); font-size: var(--text-small); }
+    caption { text-align: left; font-family: var(--font-mono); font-size: var(--text-caption); color: var(--label-ink); padding: 0.75rem 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border-light); vertical-align: top; font-variant-numeric: tabular-nums; }
+    thead th { font-family: var(--font-mono); font-size: var(--text-micro); text-transform: uppercase; letter-spacing: 0.06em; color: var(--label-ink); background: var(--snow); }
+    tbody tr:last-child td { border-bottom: none; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .row-emph td { background: var(--signal-bg); font-weight: 600; color: var(--charcoal); }
+
+    /* ===== PROGRAM / MODEL LIST ===== */
+    .prog { list-style: none; margin: 1.25rem 0 0; padding: 0; }
+    .prog li { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 0.85rem; }
+    .prog h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .prog p { font-size: var(--text-sm); margin-bottom: 0; }
+    .prog .ptag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ===== GAP / CONTEXT CARDS (reusing crisis-grid shape) ===== */
+    .crisis-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .crisis { background: var(--bg-card); border: 1px solid var(--border-light); border-top: 3px solid var(--spectrum-1); border-radius: var(--radius-lg); padding: 1.5rem 1.6rem; }
+    .crisis .cyrtag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--graphite); letter-spacing: 0.08em; text-transform: uppercase; }
+    .crisis h3 { margin: 0.3rem 0 0.6rem; font-size: 1.08rem; }
+    .crisis p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== SW CARDS ===== */
+    .sw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.25rem; }
+    .sw-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem; }
+    .sw-card.weak { border-left: 3px solid var(--spectrum-2); }
+    .sw-card.strong { border-left: 3px solid var(--spectrum-4); }
+    .sw-card h3 { margin: 0 0 0.4rem; font-size: 1rem; }
+    .sw-card p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== LESSONS ===== */
+    .lessons { counter-reset: lesson; list-style: none; margin: 1.5rem 0 0; padding: 0; }
+    .lessons li { position: relative; padding: 1.25rem 1.5rem 1.25rem 3.5rem; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); margin-bottom: 0.85rem; }
+    .lessons li::before { counter-increment: lesson; content: counter(lesson); position: absolute; left: 1.25rem; top: 1.25rem; font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--signal); }
+    .lessons h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .lessons p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== CITATIONS (§5 inline tier) ===== */
+    .cite { font-size: 0.7em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem; }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-fine); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; max-width: var(--measure-ref); overflow-wrap: anywhere; }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs-note { font-size: var(--text-xs); color: var(--label-ink); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-sm); color: var(--label-ink); font-style: italic; max-width: var(--max-w-text); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .crisis-grid { grid-template-columns: 1fr; }
+      .sw-grid { grid-template-columns: 1fr; }
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2n) { border-right: none; }
+      .stat-item:nth-child(-n+2) { border-bottom: 1px solid var(--border-light); }
+    }
+    @media (max-width: 768px) {
+      nav.nav { padding: 1.2rem 1.5rem; padding-top: calc(1.2rem + env(safe-area-inset-top)); }
+      nav.nav.open { background: rgba(244,244,245,0.95); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-light); }
+      .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
+      .nav-toggle { display:block; }
+      .nav-mobile-brand { display:block; }
+      .nav-links { display:none; flex-direction:column; gap:0.75rem; margin-top:1rem; }
+      .nav-links.show { display:flex; }
+      .nav-links a { font-size: 0.85rem; }
+      main { padding: 0 1.5rem 3rem 1.5rem; }
+      .hero { padding-top: calc(7rem + env(safe-area-inset-top)); }
+      .hero h1 { font-size: clamp(2.4rem, 10.5vw, 3.4rem); }
+      .model-callout { padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
+    @media (max-width: 680px) {
+      p, .hero .subtitle, .refs li, .cite-help { max-width: none; }
+    }
+    @media (max-width: 480px) {
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+      .stat-item:last-child { border-bottom: none; }
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
+      table { font-size: 0.82rem; }
+      thead th { font-size: 0.6rem; }
+      th, td { padding: 0.5rem 0.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } nav.nav { transition: none; } }
+
+    /* ===== Scroll-reveal (R3.2 craft pass) ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ===== Related block (no dead-ends, R3.2) ===== */
+    .related-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-light); }
+    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--label-ink); margin-bottom: 0.6rem; }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a { font-family: var(--font-body); font-size: var(--text-sm); color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+  </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open');this.setAttribute('aria-expanded',o)">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+        <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="org-study.html" class="current" aria-current="page">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
+      <a href="field-news.html">FIELD NEWS</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- COVER -->
+    <section class="cover">
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="cover-inner">
+        <h1 class="cover-title">LARA BERLIN</h1>
+        <p class="cover-sub">Fachstelle gegen sexualisierte Gewalt an Frauen, trans*, inter* und nicht-binären Personen</p>
+        <p class="cover-line">Org Study · Est. 1992</p>
+      </div>
+      <span class="cover-hint" aria-hidden="true">↓ Scroll</span>
+    </section>
+
+    <!-- MODEL CALLOUT -->
+    <div class="model-callout">
+      <h2>One model, in one line</h2>
+      <p><a href="org-study-musicares.html">MusiCares</a> is a music-industry incumbent; the <a href="org-study-luebeck-musicians-health.html">Lübeck clinic</a> treats musicians' bodies; <a href="org-study-mim-verband.html">MiM-Verband</a> is a music-MH trade body. <strong>LARA is none of these — it is a general, Berlin-Senate-financed specialist crisis and counselling centre for women, trans*, inter* and non-binary people affected by sexualized violence.</strong> It is in this project's map for one honest reason: in the absence of a music-specific service, it is one of the general crisis safety-nets a Berlin-based (or, by analogy, a Taiwanese) musician who had survived rape, sexual assault or harassment would actually fall back on. The transferable lessons are structural — a <em>statutory public-funding</em> base, a specialist <em>referral</em> posture, and radically <em>low-barrier</em> access — not anything music-sector. The finding that matters is what LARA is <em>not</em>: it is the floor, not a music service.<sup class="cite"><a href="#lara-src-1" data-src="org-verein" data-tip="Identity, mission, founding 1992, Senate funding since 1995, memberships: LARA's own Verein page (German), cross-checked against the federal Gesundheitliche Chancengleichheit database, the bff, and the Berlin Senate.">1</a></sup></p>
+    </div>
+
+    <!-- 1. PROFILE -->
+    <section>
+      <div class="section-label">01 — Profile</div>
+      <h2>A specialist sexual-violence crisis centre, not a clinic<sup class="cite"><a href="#lara-src-1" data-src="org-verein" data-tip="LARA – Verein gegen sexuelle Gewalt an Frauen e.V., founded 1992; gemeinnützig und mildtätig; Amtsgericht Charlottenburg VR 12883B; board Anne Roth, Janna Gockel, Doris Ruemelin. LARA's own Verein page (German).">1</a></sup></h2>
+      <p>LARA is a <strong>Fachstelle</strong> (specialist centre) <strong>against sexualized violence</strong> — for <strong>women, girls, trans*, inter* and non-binary people from the age of 14</strong> who have experienced <strong>rape, sexual assault or sexual harassment</strong> (in partnerships, at the workplace, or by friends, acquaintances or strangers), and for their relatives. It is run by the registered non-profit association <strong>LARA – Verein gegen sexuelle Gewalt an Frauen e.V.</strong>, <strong>founded in 1992</strong>, recognised as charitable (<span class="cjk-inline">gemeinnützig und mildtätig</span>) and registered at the Amtsgericht Charlottenburg under VR 12883B.<sup class="cite"><a href="#lara-src-1" data-src="org-verein" data-tip="Founding 1992; charitable status; register number; board. LARA Verein page (German). Corroborated by the federal Gesundheitliche Chancengleichheit database.">1</a></sup><sup class="cite"><a href="#lara-src-3" data-src="gecha" data-tip="Target group (women/girls 14+ affected by sexualized violence) and full service taxonomy. Gesundheitliche Chancengleichheit federal practice database (Stand 2011), corroborated by the current LARA site.">3</a></sup></p>
+
+      <p>The single defining fact: <strong>since 1995 the association has been the <em>Träger</em> (operating body) of the project "LARA", financed by the Berlin Senate Department for Labour, Social Affairs, Equality, Integration, Diversity and Anti-Discrimination</strong> (Senatsverwaltung für Arbeit, Soziales, Gleichstellung, Integration, Vielfalt und Antidiskriminierung). LARA is therefore a <strong>publicly commissioned crisis service</strong> embedded in Berlin's statutory anti-violence system — not a grassroots line scraping by on donations. That sets it sharply apart from the donation-only model of <a href="org-study-samaritans-thailand.html">Samaritans of Thailand</a>.<sup class="cite"><a href="#lara-src-1" data-src="org-verein" data-tip="'Seit 1995 ist der Verein der Träger des von der Senatsverwaltung … finanzierten Projektes LARA.' LARA Verein page; corroborated by the Berlin Senate's own pages.">1</a></sup><sup class="cite"><a href="#lara-src-5" data-src="senate" data-tip="LARA listed by the Berlin Senate (Frauen) among specialist services against sexualized violence; hotline 030 216 88 88, Mon–Fri 9–18. berlin.de.">5</a></sup></p>
+
+      <div class="table-wrap" role="region" aria-label="Organization profile — LARA Berlin (scrollable table)" tabindex="0">
+        <table>
+          <caption>Organization profile — LARA Berlin (sources cited inline)</caption>
+          <tbody>
+            <tr><th scope="row">Full name</th><td>LARA – Fachstelle gegen sexualisierte Gewalt an Frauen, trans*, inter* und nicht-binären Personen</td></tr>
+            <tr><th scope="row">Legal entity</th><td>LARA – Verein gegen sexuelle Gewalt an Frauen e.V. (registered association)</td></tr>
+            <tr><th scope="row">Founded</th><td>1992 (e.V.); LARA project Senate-financed since 1995</td></tr>
+            <tr><th scope="row">Status</th><td>gemeinnützig und mildtätig · Amtsgericht Charlottenburg VR 12883B</td></tr>
+            <tr><th scope="row">Board (Vorständinnen)</th><td>Anne Roth, Janna Gockel, Doris Ruemelin</td></tr>
+            <tr><th scope="row">Location</th><td>Fuggerstraße 19, 3rd floor, 10777 Berlin-Schöneberg</td></tr>
+            <tr><th scope="row">Hotline</th><td>030 216 88 88 — Mon–Fri 9:00–18:00</td></tr>
+            <tr><th scope="row">Who it serves</th><td>Women, trans*, inter*, non-binary people aged 14+ affected by sexualized violence (+ relatives)</td></tr>
+            <tr><th scope="row">Cost</th><td>Free; can be used anonymously</td></tr>
+            <tr><th scope="row">Memberships</th><td>bff (Frauen gegen Gewalt) · Paritätischer Wohlfahrtsverband (since 2010)</td></tr>
+            <tr><th scope="row">Funding</th><td>Berlin Senate (ASGIVA)-financed project + membership fees + donations — ✅ (model); ❓ (amounts)</td></tr>
+            <tr><th scope="row">Music-specific?</th><td><strong>No</strong> — general specialist service; nothing for the music sector (§5)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>LARA belongs to two recognised structures: the national <strong>bff – Bundesverband Frauenberatungsstellen und Frauennotrufe</strong> (the umbrella "Frauen gegen Gewalt"), and, since 2010, the <strong>Deutscher Paritätischer Wohlfahrtsverband</strong> — one of Germany's six statutory welfare-umbrella associations. This is the German <em>Wohlfahrt</em> architecture in action: an independent non-profit delivers a specialised public service under a Senate contract, inside a national peer network that sets standards.<sup class="cite"><a href="#lara-src-1" data-src="org-verein" data-tip="bff membership and Paritätischer Wohlfahrtsverband membership (since 2010). LARA Verein page; logos displayed on the site.">1</a></sup><sup class="cite"><a href="#lara-src-4" data-src="bff" data-tip="LARA listed as a member counselling centre of the bff (Bundesverband Frauenberatungsstellen und Frauennotrufe). frauen-gegen-gewalt.de.">4</a></sup></p>
+    </section>
+
+    <!-- 2. THE MODEL -->
+    <section>
+      <div class="section-label">02 — The model</div>
+      <h2>Specialist counselling, with a referral hinge<sup class="cite"><a href="#lara-src-2" data-src="org-beratung" data-tip="Counselling formats, hotline, multilingual access, and the referral of acute crises to the Berliner Krisendienst/police/ER. LARA's own 'Beratung und Unterstützung' page (German).">2</a></sup></h2>
+      <p>LARA's distinctiveness is not breadth of programmes but <strong>depth on one harm</strong> and a clear <strong>referral posture</strong>. Its services, stated on its own site and in the German federal good-practice database:</p>
+      <ul class="prog">
+        <li><div class="ptag">Core · counselling</div><h3>Free, anonymous, multilingual counselling</h3><p>Telephone and in-person counselling is the core; the hotline (030 216 88 88, Mon–Fri 9–18) takes both appointment-booking and direct crisis calls, and walk-ins are possible during opening hours. Email counselling answers within ~3 working days; counselling materials are offered in <strong>nine languages</strong> (German, English, Turkish, Polish, French, Spanish, Russian, Arabic, Farsi), with <strong>language mediation and sign-language interpreting</strong> arranged on request. The service is <strong>free and can be used anonymously</strong>.<sup class="cite"><a href="#lara-src-2" data-src="org-beratung" data-tip="Phone/in-person/email counselling; nine-language materials; Sprachmittlung + sign-language on request; free/anonymous. LARA Beratung page.">2</a></sup><sup class="cite"><a href="#lara-src-3" data-src="gecha" data-tip="'Das Angebot ist kostenlos und kann anonym genutzt werden.' Gesundheitliche Chancengleichheit (Stand 2011), corroborated by the current site.">3</a></sup></p></li>
+        <li><div class="ptag">Specialist · depth</div><h3>Crisis intervention, short-term therapy, groups, legal &amp; court support</h3><p>Beyond counselling: <strong>crisis intervention</strong>, <strong>short-term therapy</strong> (Kurzzeittherapie), guided and self-help <strong>groups</strong>, <strong>free legal counselling</strong> by experienced lawyers every Tuesday 17:30–19:00 (including advice on filing charges and on the <em>Nebenklage</em>, joining a trial as co-plaintiff), and <strong>psychosocial court-process accompaniment</strong> (Psychosoziale Prozessbegleitung). It also runs a <strong>mobile counselling team for refugee women</strong> and provides <strong>training and supervision</strong> for professionals in schools, the police and public agencies.<sup class="cite"><a href="#lara-src-3" data-src="gecha" data-tip="Crisis intervention, short-term therapy, groups, legal counselling by lawyers, court preparation/accompaniment, plus training/supervision for professionals (schools, police, agencies). Gesundheitliche Chancengleichheit.">3</a></sup><sup class="cite"><a href="#lara-src-6" data-src="odabs" data-tip="Remit, free/anonymous access, telephone/in-person/video counselling, crisis intervention, short-term therapy, groups, legal counselling, court accompaniment, mobile counselling for refugee women. odabs.org + hilfe-in-berlin.de.">6</a></sup></p></li>
+        <li><div class="ptag">Referral · knows its edges</div><h3>Routes acute risk &amp; long-term therapy outward</h3><p>Unusually instructive: LARA <strong>refers acute risk outward rather than holding everything in-house</strong>. Its own "acute support" page tells people in acute crisis to <em>also</em> contact the <strong>Berliner Krisendienst</strong> (Berlin's 24/7 general psychiatric crisis service), the police, or a hospital emergency room; for long-term therapy it hands out a vetted trauma-therapist list and points to the Traumanetz Berlin rather than providing open-ended therapy itself. LARA knows exactly what it is — a specialist daytime counselling and court-support service — and routes everything outside that scope to the right partner. That referral discipline is the single most transferable thing on this page.<sup class="cite"><a href="#lara-src-2" data-src="org-beratung" data-tip="'In akuten Krisensituationen wenden Sie sich bitte außerdem an den Berliner Krisendienst, an die Polizei oder an eine Rettungsstelle…'; trauma-therapist list + Traumanetz Berlin for long-term therapy. LARA Beratung page.">2</a></sup></p></li>
+      </ul>
+    </section>
+
+    <!-- 3. FUNDING -->
+    <section>
+      <div class="section-label">03 — Funding &amp; sustainability</div>
+      <h2>A statutory floor, with donations at the margin<sup class="cite"><a href="#lara-src-1" data-src="org-verein" data-tip="Senate-financed project since 1995; e.V. relies on membership fees and donations for projects that get no public financing. LARA Verein page (German).">1</a></sup></h2>
+      <p>This is where LARA most usefully contrasts with the other general crisis services in this series. <strong>LARA's core "Fachstelle" work is financed by the Berlin Senate</strong> (Senatsverwaltung für Arbeit, Soziales, Gleichstellung, Integration, Vielfalt und Antidiskriminierung) — public, recurring funding under a service mandate the association has held since 1995. On top of that statutory base, the <strong>e.V. relies on membership fees and donations</strong> specifically to develop <em>new</em> projects and ideas "that receive no public financing." Donations fund the margin and the experiments, not the core service.<sup class="cite"><a href="#lara-src-1" data-src="org-verein" data-tip="'Hier werden neue Projekte entwickelt … die keine öffentliche Finanzierung bekommen. LARA e.V. ist auf Mitgliedsbeiträge und auf Spenden angewiesen.' LARA Verein page.">1</a></sup></p>
+      <p>That is the German model worth studying: a specialist NPO delivering a public service on a Senate contract, supplemented by donations for the parts the state will not fund, inside the Paritätischer/bff welfare-association architecture. It is <strong>structurally far more secure</strong> than a donation-only helpline — there is a statutory floor under it.<sup class="cite"><a href="#lara-src-4" data-src="bff" data-tip="Welfare-association embedding (bff + Paritätischer); standards and legitimacy via the national network. frauen-gegen-gewalt.de + LARA site.">4</a></sup></p>
+      <p><strong>Honest limitation (❓).</strong> The <em>fact</em> of Senate financing is sourced (LARA's own site and the Senate's pages); the <strong>amount</strong> is not public, and no audited LARA accounts surfaced. So on the Orgs Map, row #54's funding Basis can move from "❓ No source" to <strong>✅ Sourced</strong> for the <em>model</em> — public (Berlin Senate) + membership/donations — while any <em>figure</em> remains ❓. (This mirrors the Samaritans-of-Thailand caution in reverse: there the model was donation and the figures were stale; here the model is statutory and the figures are simply not published.)<sup class="cite"><a href="#lara-src-1" data-src="org-verein" data-tip="Model sourced (public Senate + donations); amounts not published. Basis upgrade ✅ for the model, ❓ for any figure. LARA Verein page.">1</a></sup></p>
+    </section>
+
+    <!-- 4. REACH -->
+    <section>
+      <div class="section-label">04 — Reach &amp; operating profile</div>
+      <h2>Single-site, daytime, capacity-bound — and largely unquantified<sup class="cite"><a href="#lara-src-2" data-src="org-beratung" data-tip="Single Schöneberg centre; Mon–Fri 9–18 hotline; 'hotline frequently busy.' No current public case numbers. LARA Beratung page.">2</a></sup></h2>
+      <p>LARA is a <strong>single-site, daytime, Berlin-wide</strong> service: one centre in Schöneberg, hotline and opening hours Monday–Friday 9–18, plus the mobile refugee-women outreach. Its own counselling page notes the <strong>hotline is frequently busy</strong> — a candid signal of demand outstripping a fixed-capacity, publicly funded team, and a reminder that even a statutorily funded service is capacity-bound.</p>
+      <p><strong>No current public statistics</strong> (annual case numbers, staffing, budget) surfaced in this research. Per Rule 4, that is an absence of <em>published figures</em>, not evidence of a small service: LARA is a long-established, Senate-funded Fachstelle inside the national bff network, which implies a professional standing team — but the specific operating numbers are <strong>❓ No source</strong>. The federal Gesundheitliche Chancengleichheit record is dated (Stand 2011) and is used here only for the <em>service taxonomy</em>, which LARA's current site fully corroborates, not for any current figure.<sup class="cite"><a href="#lara-src-3" data-src="gecha" data-tip="Dated 2011 record — used for the service taxonomy only, corroborated by the current site; not used for any current figure. Gesundheitliche Chancengleichheit.">3</a></sup></p>
+    </section>
+
+    <!-- 5. WHAT IT OFFERS MUSICIANS -->
+    <section>
+      <div class="section-label">05 — What it offers musicians</div>
+      <h2>Nothing music-specific — said plainly<sup class="cite"><a href="#lara-src-1" data-src="org-verein" data-tip="General specialist service for one harm (sexualized violence); no musician track, industry partnership, or occupational framing. LARA Verein page + service pages.">1</a></sup></h2>
+      <p>This must be said without hedging: <strong>LARA offers nothing designed for the music sector.</strong> There is no musician track, no industry partnership, no occupational-health or touring/gig framing, no music-industry-aware counsellors. It is a <strong>general specialist service</strong> for one category of harm — sexualized violence — open to anyone in its target groups. A musician who had been raped or sexually harassed would reach exactly the same counsellors, the same Tuesday legal clinic, the same daytime hotline, as any other person in Berlin.<sup class="cite"><a href="#lara-src-3" data-src="gecha" data-tip="General service for women/girls 14+ affected by sexualized violence; no occupational or sector-specific track. Gesundheitliche Chancengleichheit + LARA site.">3</a></sup></p>
+      <p>That is precisely why LARA sits in this project's map and in this study. Sexual violence and harassment are <strong>documented occupational risks in the music industry</strong> — backstage, on tour, in power-asymmetric professional relationships — yet there is no music-specific service that addresses them. In that gap, a survivor in the music world falls back on the <strong>general</strong> specialist centre. LARA's value to the music sector is therefore real but <strong>incidental</strong> — it is the floor a musician lands on, not a music-sector service. This is the same honest-scoping verdict as <a href="org-study-samaritans-thailand.html">Samaritans of Thailand</a>: the general crisis service is the <strong>nearest-available resource</strong>, and the music-specific layer is missing.</p>
+    </section>
+
+    <!-- 6. STRENGTHS / WEAKNESSES -->
+    <section>
+      <div class="section-label">06 — Strengths &amp; weaknesses</div>
+      <h2>What works, what to watch (as a musician's fallback)</h2>
+      <div class="sw-grid">
+        <div class="sw-card strong"><h3>Statutory funding floor</h3><p>A Berlin-Senate-financed mandate since 1995 — structurally secure in a way donation-only crisis lines are not. The public floor is exactly what fragile peers lack.</p></div>
+        <div class="sw-card strong"><h3>Specialist depth + referral hinge</h3><p>Deep expertise on one harm, paired with the discipline to route acute risk and long-term therapy to the Berliner Krisendienst, police, ERs and a vetted therapist list rather than over-reaching.</p></div>
+        <div class="sw-card strong"><h3>Radically low-barrier</h3><p>Free, anonymous, no referral, walk-in possible, nine-language counselling with interpreting and sign-language on request — every friction removed.</p></div>
+        <div class="sw-card strong"><h3>Embedded in a recognised network</h3><p>Member of the bff and the Paritätischer Wohlfahrtsverband — shared standards, legitimacy and a national peer structure.</p></div>
+        <div class="sw-card weak"><h3>General, not sector-specialised</h3><p>Serves everyone in its target groups, so serves no occupational group — including musicians — with anything tailored.</p></div>
+        <div class="sw-card weak"><h3>Narrow harm scope</h3><p>Only sexualized violence; a musician's burnout, depression, addiction or financial precarity is out of scope (LARA would refer those out too).</p></div>
+        <div class="sw-card weak"><h3>Daytime, single-site, capacity-bound</h3><p>Mon–Fri 9–18, one centre, a "frequently busy" hotline — not 24/7 and not city-saturating.</p></div>
+        <div class="sw-card weak"><h3>Opaque operating figures</h3><p>No current public case numbers or budget — the public evidence base on scale is thin (❓).</p></div>
+      </div>
+    </section>
+
+    <!-- 7. LESSONS -->
+    <section>
+      <div class="section-label">07 — Lessons for Taiwan</div>
+      <h2>What a Taiwan music mental health NPO should take</h2>
+      <ol class="lessons">
+        <li><h3>Anchor to a statutory funder first — LARA's real lesson</h3><p>LARA's security comes from a <em>public</em> mandate (the Berlin Senate), with donations funding only the margin. A Taiwan music-MH NPO should likewise anchor to a public base — the NT$5.63B national MH plan, Ministry of Culture, or local social-affairs budgets — and treat donations as the experiment-and-margin layer, not the foundation. This is the opposite of the donation-only posture that left Samaritans of Thailand fragile.<sup class="cite"><a href="#lara-src-1" data-src="org-verein" data-tip="Senate-financed core since 1995 + donations at the margin. LARA Verein page.">1</a></sup></p></li>
+        <li><h3>Be a specialist with a referral hinge, not a do-everything service</h3><p>LARA's most copyable design is <em>knowing its edges</em>: it goes deep on one harm and refers acute risk and long-term therapy to named partners (the Berliner Krisendienst, ERs, a vetted therapist list). A music-MH NPO should define a tight scope — the music-sector layer — and build <strong>referral relationships</strong> to general crisis lines and clinical services, adding the music-aware layer on top rather than rebuilding crisis infrastructure.<sup class="cite"><a href="#lara-src-2" data-src="org-beratung" data-tip="Referral of acute risk to the Berliner Krisendienst/police/ER and of long-term therapy to a vetted list. LARA Beratung page.">2</a></sup></p></li>
+        <li><h3>Engineer low-barrier access deliberately</h3><p>Free, anonymous, walk-in-possible, multilingual with interpreting — LARA removes every friction that keeps precarious people away. For a gig-economy, often-uninsured music workforce, the same design (no paperwork, no referral, language access) is what makes a service actually reachable.<sup class="cite"><a href="#lara-src-2" data-src="org-beratung" data-tip="Free/anonymous/walk-in/multilingual access with interpreting and sign-language on request. LARA Beratung page.">2</a></sup></p></li>
+        <li><h3>Join — or seed — a welfare / peer network</h3><p>LARA's standing rests partly on the bff and Paritätischer architecture: shared standards, legitimacy, statutory recognition. A Taiwan music-MH NPO benefits from being inside a recognised umbrella (an arts-welfare body, a mental-health association) rather than standing alone — for credibility with funders and for referral pathways.<sup class="cite"><a href="#lara-src-4" data-src="bff" data-tip="Membership of the bff network of women's counselling centres; legitimacy + shared standards. frauen-gegen-gewalt.de.">4</a></sup></p></li>
+        <li><h3>Name the sector-specific gap honestly — the floor is not the service</h3><p>LARA shows that even a well-funded, well-run <em>general</em> specialist service is, for a musician, only a fallback. Sexual harassment and assault are real occupational risks in music, yet no music-specific service addresses them. A Taiwan NPO should be explicit that the general safety-net (crisis lines, sexual-violence centres, the national MH plan) is the <strong>floor</strong>, and that the music-specific <strong>room</strong> — occupational framing, industry-aware staff, sector trust — is the distinct thing still missing. Don't assume an existing general or welfare body already covers it.</p></li>
+      </ol>
+    </section>
+
+    <!-- 8. METHOD + REFERENCES -->
+    <section>
+      <div class="section-label">08 — Methodology &amp; references</div>
+      <h2>Basis</h2>
+      <p class="cite-help">Every claim carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source; click to jump to the full reference. Identity, founding (1992), legal status, board, funding model (Berlin Senate since 1995 + membership/donations), memberships (bff, Paritätischer), services, contact and target groups are ✅ Sourced to LARA's own German-language website, cross-checked against the German federal Gesundheitliche Chancengleichheit practice database (Bundesinstitut für Öffentliche Gesundheit), the bff (Frauen gegen Gewalt e.V.), the Berlin Senate's own pages, and the federal odabs.org directory. The service taxonomy is corroborated across LARA's current site and the (dated, 2011) federal record; that record's addresses are partly historical and are not used as current. Current operating figures (case numbers, staffing, budget, the amount of Senate funding) are ❓ No source — none are published; per Rule 4 this is an absence of public figures, not evidence about scale. The scope finding — that LARA is a general (non-music) sexual-violence crisis service, not a music-sector organization — is ✅ Sourced and stated plainly.</p>
+
+      <div class="refs" id="refs-all" data-citation-registry="lara-all">
+        <div class="refs-title">References</div>
+        <ol>
+          <li id="lara-src-1" data-src="org-verein">LARA – Verein gegen sexuelle Gewalt an Frauen e.V. (n.d.). <em>LARA – Verein gegen sexuelle Gewalt an Frauen e.V.</em> [Association page]. Retrieved June 28, 2026, from <a href="https://lara-berlin.de/verein/lara-verein-gegen-sexuelle-gewalt-an-frauen-ev" target="_blank" rel="noopener">lara-berlin.de</a> — LARA's own primary site. Confirms: founded 1992; mission against sexualized violence toward women, girls, trans*, inter* and non-binary people; the e.V. relies on membership fees and donations for projects that receive no public financing; since 1995 the Verein is the <em>Träger</em> of the LARA project financed by the Senatsverwaltung für Arbeit, Soziales, Gleichstellung, Integration, Vielfalt und Antidiskriminierung; member of the bff and (since 2010) the Deutscher Paritätischer Wohlfahrtsverband; gemeinnützig und mildtätig, Amtsgericht Charlottenburg VR 12883B; board (Vorständinnen) Anne Roth, Janna Gockel, Doris Ruemelin; Fuggerstraße 19, 10777 Berlin-Schöneberg; hotline 030 216 88 88, Mon–Fri 9–18. <strong>Source · Method · Basis:</strong> organization primary site (German) · WebFetch (rendered cleanly) · ✅ Sourced.</li>
+          <li id="lara-src-2" data-src="org-beratung">LARA. (n.d.). <em>Telefonische und persönliche Beratungsgespräche</em> [Counselling &amp; support]. Retrieved June 28, 2026, from <a href="https://lara-berlin.de/angebote/beratung-und-unterstuetzung" target="_blank" rel="noopener">lara-berlin.de/angebote</a> — LARA's own site. Source for: phone/in-person/email counselling and access; hotline "frequently busy"; language mediation and sign-language interpreting on request; counselling materials in nine languages (DE/EN/TR/PL/FR/ES/RU/AR/FA); referral of acute crises to the Berliner Krisendienst, police, or hospital emergency rooms; trauma-therapist list + Traumanetz Berlin for long-term therapy; free legal counselling Tuesdays 17:30–19:00 (incl. Nebenklage). <strong>Source · Method · Basis:</strong> organization primary site (German) · WebFetch · ✅ Sourced.</li>
+          <li id="lara-src-3" data-src="gecha">Kooperationsverbund Gesundheitliche Chancengleichheit / Bundesinstitut für Öffentliche Gesundheit. (2011, October 10). <em>LARA-Krisen- und Beratungszentrum für vergewaltigte und sexuell belästigte Frauen</em> [Practice-database record]. Retrieved June 28, 2026, from <a href="https://www.gesundheitliche-chancengleichheit.de/praxisdatenbank/detailseite/lara-krisen-und-beratungszentrum-fuer-vergewaltigte-und-sexuell-belaestigte-frauen/" target="_blank" rel="noopener">gesundheitliche-chancengleichheit.de</a> — German federal good-practice database. Confirms the service taxonomy: women/girls 14+ affected by sexualized violence; telephone &amp; in-person counselling, crisis intervention, short-term therapy, information sessions, groups, legal counselling by lawyers, court-process preparation/accompaniment; free and anonymous; plus training and supervision for professionals (schools, police, agencies). Operating body: Lara – Verein gegen sexuelle Gewalt an Frauen e.V. <strong>Source · Method · Basis:</strong> federal government database · WebFetch · ✅ Sourced for the service taxonomy; record dated 2011 (⚠️ for any time-sensitive detail; addresses partly historical).</li>
+          <li id="lara-src-4" data-src="bff">bff: Bundesverband Frauenberatungsstellen und Frauennotrufe – Frauen gegen Gewalt e.V. (n.d.). <em>Lara e.V. – Fachstelle gegen sexualisierte Gewalt an Frauen</em>. Retrieved June 28, 2026, from <a href="https://www.frauen-gegen-gewalt.de/de/organisation/lara.html" target="_blank" rel="noopener">frauen-gegen-gewalt.de</a> — national umbrella-association directory. Confirms LARA's membership of the bff network of women's counselling centres and helplines. <strong>Source · Method · Basis:</strong> national umbrella-association primary listing · WebSearch + WebFetch · ✅ Sourced.</li>
+          <li id="lara-src-5" data-src="senate">Senatsverwaltung (Land Berlin). (n.d.). <em>Sexualisierte Gewalt</em> and district anti-violence help listings. Retrieved June 28, 2026, from <a href="https://www.berlin.de/sen/frauen/keine-gewalt/sexualisierte-gewalt/" target="_blank" rel="noopener">berlin.de</a> — Berlin Senate. Lists LARA among Berlin's specialist services against sexualized violence (hotline 030 216 88 88, Mon–Fri 9–18), corroborating its public-system role. <strong>Source · Method · Basis:</strong> Berlin state government · WebSearch · ✅ Sourced.</li>
+          <li id="lara-src-6" data-src="odabs">odabs.org – Online-Datenbank gegen sexuellen Missbrauch (federal directory) &amp; hilfe-in-berlin.de. (n.d.). <em>LARA e.V. – Fachstelle gegen sexualisierte Gewalt an Frauen</em>. Retrieved June 28, 2026, from <a href="https://www.odabs.org/en/details/beratungsstelle/lara-ev-fachstelle-gegen-sexualisierte-gewalt-an-frauen-145.html" target="_blank" rel="noopener">odabs.org</a> — confirms remit (women, trans*, inter*, non-binary, 14+; rape/sexual assault/harassment in partnerships, workplace, by acquaintances/strangers), free/anonymous, telephone+in-person+video counselling, crisis intervention, short-term therapy, groups, legal counselling, court accompaniment, and a mobile counselling team for refugee women. <strong>Source · Method · Basis:</strong> federal directory + Berlin help-finder · WebSearch · ✅ Sourced.</li>
+        </ol>
+        <p class="refs-note">Convention: every claim-bearing element carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above — machine-checkable before each deploy (§5.2 / §6 gate 1). The funding <em>model</em> is ✅ Sourced (Berlin Senate + donations); the funding <em>amount</em> and operating figures are ❓ (not published); the 2011 federal record is used for the service taxonomy only.</p>
+      </div>
+    </section>
+
+    <nav class="related-block" aria-label="Related on this site">
+      <p class="related-title">Related</p>
+      <ul>
+        <li><a href="org-study.html">&larr; Org Study (all organizations)</a></li>
+        <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+        <li><a href="policy-study.html">Policy Study &mdash; how jurisdictions protect music workers</a></li>
+        <li><a href="policy-study-germany.html">Policy Study &mdash; Germany (the companion policy scan)</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <script>
+  /* Scroll-reveal — R3.2 shared IntersectionObserver (normal-scroll page) */
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = 'section > h2, .stat-strip, figure, .table-wrap, .phases-grid, .sources-card, .refs';
+    var nodes = Array.prototype.slice.call(document.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, sibs, idx = 0;
+        if (p){ sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,6) * 60) + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
+
+  <!-- nav scroll-state: transparent over hero, blurred bar once scrolled -->
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden','true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>

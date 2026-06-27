@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>MITC · Org Study · MH&amp;W</title>
+  <meta name="description" content="The Music Industry Therapist Collective (MITC) is a multinational, music-specific therapist DIRECTORY founded by Tamsin Embleton in 2018 — UK-registered, a 'MITC CIC' now turning nonprofit. Not a clinic and not an employer: ~32 vetted music-literate private practitioners who set their own fees, with a 'Pay It Forward' subsidy pool. What its model and its 2-therapist Germany footprint show, and what a Taiwan music-MH NPO can copy from a low-infrastructure curated directory.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      /* ── DIA-GRADE READING SCALE (calibrated to Dia browser, serif-corrected) ── */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;--lh-prose:1.7;--wt-prose:440;--measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;--label-ink:var(--graphite);
+      --font-cjk:'Noto Serif TC',serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { overflow-x: hidden; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--black);
+      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      line-height: var(--lh-prose);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    a { color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    a:hover { color: var(--signal-dim); }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--signal); outline-offset: 3px; border-radius: var(--radius);
+    }
+
+    .skip-nav {
+      position: absolute; left: -9999px; top: 0; z-index: 200;
+      background: var(--signal); color: var(--white);
+      padding: 0.5rem 1rem; font-family: var(--font-mono);
+    }
+    .skip-nav:focus { left: 0; }
+
+    /* ===== NAVIGATION ===== */
+    nav.nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; flex-direction: column;
+      padding: 2rem 2.5rem;
+      padding-top: calc(2rem + env(safe-area-inset-top));
+      background: transparent;
+      transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    nav.nav.scrolled {
+      background: rgba(244, 244, 245, 0.45);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: var(--font-mono); font-size: 1.1rem; font-weight: 400;
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-topbar { display:none; }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; min-width:44px; min-height:44px; z-index:101; -webkit-tap-highlight-color:transparent; }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity:0; }
+    .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
+
+    /* ===== LAYOUT ===== */
+    main { max-width: var(--max-w); margin: 0 auto; padding: 0 2.5rem 5rem 2.5rem; }
+    section { margin-bottom: 4rem; }
+    .narrow { max-width: var(--max-w-text); }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding-top: calc(9rem + env(safe-area-inset-top));
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-light);
+      margin-bottom: 3rem;
+    }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.18em;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: var(--font-display); font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6.5rem);
+      font-weight: 800; line-height: 1.04; color: var(--black); letter-spacing: -0.01em;
+      overflow-wrap: break-word; hyphens: auto;
+    }
+    .hero h1 .tail { display:block; font-size: clamp(1.15rem, 2.6vw, 1.9rem); font-weight: 600; color: var(--signal); letter-spacing: 0; margin-top: 0.9rem; }
+    .hero .subtitle {
+      font-family: var(--font-body); font-size: clamp(1.25rem, 1.05rem + 1.4vw, 1.5rem);
+      color: var(--graphite); line-height: 1.55; margin-top: 1.5rem; max-width: 54ch;
+    }
+    .basis-badge {
+      display: inline-block; margin-top: 1.75rem;
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--graphite); background: var(--signal-bg);
+      border: 1px solid var(--signal-glow); border-radius: var(--radius);
+      padding: 0.5rem 0.85rem; line-height: 1.5;
+    }
+
+    /* ===== TWO-LINE COVER (R2.1, 2026-06-20) — width:100% inside main (no 100vw breakout → no x-overflow) ===== */
+    .cover {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;                /* clips the wash */
+      padding: 0 2rem;
+    }
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%,
+        var(--signal-glow) 0%,
+        rgba(102,103,171,0.06) 38%,
+        rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
+    }
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 1280px);
+    }
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin: 0;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+    .cover-line {
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--purple-deep);
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
+    }
+    .cover-sub {
+      display: block;
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 1rem + 1.4vw, 1.9rem);
+      font-weight: 500;
+      letter-spacing: 0;
+      line-height: 1.2;
+      color: var(--graphite);
+      margin: 1.1rem auto 0;
+      max-width: 18ch;
+      text-wrap: balance;
+    }
+    .cover-hint {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
+    }
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
+    }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-line  { animation-delay: 0.22s; }
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .cover-wash,
+      .cover-hint,
+      .cover-inner > * { animation: none; opacity: 1; transform: none; }
+    }
+    @media (max-width: 768px) {
+      .cover { padding: 0 1.25rem; }
+      .cover-title { font-size: clamp(1.7rem, 7.3vw, 2.4rem); }
+      .cover-line  { font-size: clamp(0.72rem, 3.2vw, 0.95rem); letter-spacing: 0.18em; }
+    }
+
+    /* ===== TYPE ===== */
+    h2 {
+      font-family: var(--font-display); font-size: var(--text-h2);
+      font-weight: 700; line-height: 1.1; color: var(--black);
+      margin-bottom: 1.25rem; letter-spacing: -0.01em;
+      text-wrap: balance; overflow-wrap: break-word;
+    }
+    h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem); line-height: 1.25; font-weight: 600; color: var(--charcoal); margin: 1.75rem 0 0.75rem; }
+    .section-label {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem;
+    }
+    p { color: var(--graphite); max-width: var(--measure-prose); margin-bottom: 1rem; line-height: 1.65; }
+    p.lead { font-size: 1.1rem; color: var(--charcoal); }
+    strong { color: var(--charcoal); font-weight: 600; }
+    em { color: var(--graphite); }
+
+    /* ===== MODEL CALLOUT ===== */
+    .model-callout { background: var(--bg-card-dark); color: var(--snow); border-radius: var(--radius-lg); padding: 2.25rem 2.5rem; margin-bottom: 3rem; }
+    .model-callout h2 { color: var(--white); margin-bottom: 1rem; }
+    .model-callout p { color: var(--silver); max-width: none; }
+    .model-callout strong { color: var(--white); }
+    .model-callout a { color: var(--spectrum-3); text-decoration: underline; text-underline-offset: 2px; }
+    .model-callout a:hover { color: var(--white); }
+
+    /* ===== THE FLYWHEEL (signature visual) ===== */
+    .flywheel-panel {
+      background: var(--bg-card-dark);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem 2rem 1.5rem;
+      margin: 1.5rem 0 1.75rem;
+      border: 1px solid var(--border-dark);
+    }
+    .flywheel-panel .fw-cap {
+      font-family: var(--font-mono); font-size: var(--text-xs); color: var(--spectrum-3);
+      text-transform: uppercase; letter-spacing: 0.16em; text-align: center; margin-bottom: 0.5rem;
+    }
+    .flywheel-panel svg { display: block; width: 100%; height: auto; max-width: 460px; margin: 0 auto; }
+    .fw-ring { fill: none; stroke: var(--border-dark); stroke-width: 1.5; stroke-dasharray: 3 6; }
+    .fw-arc { fill: none; stroke: var(--spectrum-3); stroke-width: 2.5; opacity: 0.85; stroke-dasharray: 4 7; animation: fw-flow 2.2s linear infinite; }
+    @keyframes fw-flow { to { stroke-dashoffset: -22; } }
+    .fw-node { fill: var(--charcoal); stroke: var(--spectrum-2); stroke-width: 2; }
+    .fw-hub { fill: var(--black); stroke: var(--spectrum-3); stroke-width: 1.5; }
+    .fw-num { fill: var(--spectrum-3); font-family: var(--font-mono); font-size: 13px; font-weight: 700; }
+    .fw-label { fill: var(--snow); font-family: var(--font-display); font-size: 15px; font-weight: 700; letter-spacing: 0.02em; }
+    .fw-sub { fill: var(--grey-light); font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.04em; }
+    .fw-hub-label { fill: var(--spectrum-3); font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.14em; }
+    .fw-hub-sub { fill: var(--grey-light); font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; }
+
+    .gear-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .gear {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-left: 3px solid var(--spectrum-2); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem;
+    }
+    .gear .gn { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); letter-spacing: 0.1em; }
+    .gear h3 { margin: 0.35rem 0 0.5rem; font-size: 1.08rem; }
+    .gear p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-card); margin: 1.5rem 0 0.75rem; }
+    .stat-item { padding: 1.75rem 1.25rem; border-right: 1px solid var(--border-light); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--signal); line-height: 1; font-variant-numeric: tabular-nums; }
+    .stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.6rem; line-height: 1.4; }
+
+    /* ===== COLUMN CHART (revenue trajectory) ===== */
+    figure.chart { margin: 1.5rem 0; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 2rem 1.75rem 1.25rem; }
+    figure.chart figcaption { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
+    .col-chart { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.6rem; align-items: end; }
+    .col { display: flex; flex-direction: column; align-items: center; }
+    .ctrack { position: relative; width: 100%; height: 190px; display: flex; align-items: flex-end; }
+    .cbar { width: 100%; max-width: 54px; margin: 0 auto; background: var(--signal); border-radius: var(--radius) var(--radius) 0 0; position: relative; transition: height var(--dur-slow) var(--ease); }
+    .cbar.peak { background: var(--spectrum-2); }
+    .cbar .cval { position: absolute; top: -1.35rem; left: -50%; right: -50%; text-align: center; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--charcoal); font-variant-numeric: tabular-nums; }
+    .cyr { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); margin-top: 0.55rem; letter-spacing: 0.02em; }
+    .chart-note { font-size: var(--text-xs); color: var(--label-ink); margin-top: 1rem; max-width: none; }
+    .chart-key { display: flex; gap: 1.25rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .chart-key span { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); display: inline-flex; align-items: center; gap: 0.4rem; }
+    .swatch { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+    .swatch.s-rev { background: var(--signal); }
+    .swatch.s-covid { background: var(--spectrum-2); }
+
+    /* ===== TABLES ===== */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; margin: 1.25rem 0; border-radius: var(--radius-lg); border: 1px solid var(--border-light); }
+    .table-wrap:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+    table { width: 100%; border-collapse: collapse; background: var(--bg-card); font-size: var(--text-small); }
+    caption { text-align: left; font-family: var(--font-mono); font-size: var(--text-caption); color: var(--label-ink); padding: 0.75rem 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border-light); vertical-align: top; font-variant-numeric: tabular-nums; }
+    thead th { font-family: var(--font-mono); font-size: var(--text-micro); text-transform: uppercase; letter-spacing: 0.06em; color: var(--label-ink); background: var(--snow); }
+    tbody tr:last-child td { border-bottom: none; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .row-emph td { background: var(--signal-bg); font-weight: 600; color: var(--charcoal); }
+    .row-covid td { background: rgba(232, 168, 124, 0.12); }
+
+    /* ===== CRISIS CARDS ===== */
+    .crisis-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .crisis { background: var(--bg-card); border: 1px solid var(--border-light); border-top: 3px solid var(--spectrum-1); border-radius: var(--radius-lg); padding: 1.5rem 1.6rem; }
+    .crisis .cyrtag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--graphite); letter-spacing: 0.08em; }
+    .crisis h3 { margin: 0.3rem 0 0.6rem; font-size: 1.08rem; }
+    .crisis .big { font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; color: var(--charcoal); line-height: 1; margin-bottom: 0.5rem; }
+    .crisis p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== PROGRAM LIST ===== */
+    .prog { list-style: none; margin: 1.25rem 0 0; padding: 0; }
+    .prog li { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 0.85rem; }
+    .prog h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .prog p { font-size: var(--text-sm); margin-bottom: 0; }
+    .prog .ptag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ===== SW CARDS ===== */
+    .sw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.25rem; }
+    .sw-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem; }
+    .sw-card.weak { border-left: 3px solid var(--spectrum-2); }
+    .sw-card.strong { border-left: 3px solid var(--spectrum-4); }
+    .sw-card h3 { margin: 0 0 0.4rem; font-size: 1rem; }
+    .sw-card p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== LESSONS ===== */
+    .lessons { counter-reset: lesson; list-style: none; margin: 1.5rem 0 0; padding: 0; }
+    .lessons li { position: relative; padding: 1.25rem 1.5rem 1.25rem 3.5rem; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); margin-bottom: 0.85rem; }
+    .lessons li::before { counter-increment: lesson; content: counter(lesson); position: absolute; left: 1.25rem; top: 1.25rem; font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--signal); }
+    .lessons h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .lessons p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== CITATIONS (§5 inline tier) ===== */
+    .cite { font-size: 0.7em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem; }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-fine); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; max-width: var(--measure-ref); overflow-wrap: anywhere; }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs-note { font-size: var(--text-xs); color: var(--label-ink); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-sm); color: var(--label-ink); font-style: italic; max-width: var(--max-w-text); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .gear-cards { grid-template-columns: 1fr; }
+      .crisis-grid { grid-template-columns: 1fr; }
+      .sw-grid { grid-template-columns: 1fr; }
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2n) { border-right: none; }
+      .stat-item:nth-child(-n+2) { border-bottom: 1px solid var(--border-light); }
+    }
+    @media (max-width: 768px) {
+      nav.nav { padding: 1.2rem 1.5rem; padding-top: calc(1.2rem + env(safe-area-inset-top)); }
+      nav.nav.open { background: rgba(244,244,245,0.95); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-light); }
+      .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
+      .nav-toggle { display:block; }
+      .nav-mobile-brand { display:block; }
+      .nav-links { display:none; flex-direction:column; gap:0.75rem; margin-top:1rem; }
+      .nav-links.show { display:flex; }
+      .nav-links a { font-size: 0.85rem; }
+      main { padding: 0 1.5rem 3rem 1.5rem; }
+      .hero { padding-top: calc(7rem + env(safe-area-inset-top)); }
+      .hero h1 { font-size: clamp(2.4rem, 10.5vw, 3.4rem); }
+      .model-callout, .flywheel-panel { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .col-chart { gap: 0.3rem; }
+      .ctrack { height: 150px; }
+      .cbar .cval { font-size: 0.62rem; }
+    }
+    @media (max-width: 680px) {
+      p, .hero .subtitle, .refs li, .cite-help { max-width: none; }
+    }
+    @media (max-width: 480px) {
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+      .stat-item:last-child { border-bottom: none; }
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
+      .cyr { font-size: 0.6rem; }
+      table { font-size: 0.82rem; }
+      thead th { font-size: 0.6rem; }
+      th, td { padding: 0.5rem 0.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } nav.nav, .cbar { transition: none; } .fw-arc { animation: none; } }
+
+    /* ===== Scroll-reveal (R3.2 craft pass) ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ===== Related block (no dead-ends, R3.2) ===== */
+    .related-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-light); }
+    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--label-ink); margin-bottom: 0.6rem; }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a { font-family: var(--font-body); font-size: var(--text-sm); color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+  </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open');this.setAttribute('aria-expanded',o)">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+        <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="org-study.html" class="current" aria-current="page">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
+      <a href="field-news.html">FIELD NEWS</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- COVER -->
+    <section class="cover">
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="cover-inner">
+        <h1 class="cover-title">MITC<span class="cover-sub">Music Industry Therapist Collective</span></h1>
+        <p class="cover-line">Org Study · Est. 2018</p>
+      </div>
+      <span class="cover-hint" aria-hidden="true">↓ Scroll</span>
+    </section>
+
+    <!-- MODEL CALLOUT -->
+    <div class="model-callout">
+      <h2>One model, in one line</h2>
+      <p><a href="org-study-musicares.html">MusiCares</a> is the incumbent that <em>delivers</em> US service; <a href="org-study-twloha.html">TWLOHA</a> is an awareness movement whose <em>reach</em> is the product. <strong>MITC is neither — it is a curated directory of independent, music-literate private therapists.</strong> It owns no clinic and employs no clinicians; it vets practitioners who are already registered <em>and</em> have worked in the music business, publishes their profiles, and either lets a musician book one directly or matches them. The care is real and genuinely music-specific; it is also, by default, <strong>paid private practice</strong> — with free access bolted on the side through a donate-a-session pool. Against Germany's statutory <strong>Künstlersozialkasse</strong> <em>floor</em> (rights and insurance), MITC is the opposite kind of thing: a borderless private-practitioner <em>room</em>. For a Taiwan NPO the question it answers is the cheapest one — what structure puts a musician in front of a clinician who speaks their language?</p>
+    </div>
+
+    <!-- 1. PROFILE -->
+    <section>
+      <div class="section-label">01 — Profile</div>
+      <h2>A collective of music-industry therapists<sup class="cite"><a href="#mitc-src-1" data-tip="Identity, founder, founding 2018, mission: MITC Home + About/Mission pages (musicindustrytherapists.com). Accessed 2026-06-28.">1</a></sup></h2>
+      <p>The Music Industry Therapist Collective is a "global collective of specialist psychotherapists, psychologists, counsellors and psychoanalysts" for people who work in music. Its defining feature is <em>who</em> its therapists are: practitioners who "have worked as artists and in areas like live, studios, artist management, record labels, broadcasting and promotion, <strong>prior to retraining</strong>." It was founded by psychotherapist and former venue/festival programmer <strong>Tamsin Embleton in 2018</strong>, who received the "Industry Recognition" award at the TPi Awards 2024.<sup class="cite"><a href="#mitc-src-1" data-tip="Founded by psychotherapist and former venue/festival programmer Tamsin Embleton, 2018; 'Industry Recognition' award, TPi Awards 2024. MITC, About.">1</a></sup></p>
+
+      <div class="table-wrap" role="region" aria-label="Organization profile — MITC (scrollable table)" tabindex="0">
+        <table>
+          <caption>Organization profile — Music Industry Therapist Collective (sources cited inline)</caption>
+          <tbody>
+            <tr><th scope="row">Founder</th><td>Tamsin Embleton (psychotherapist; former venue / festival programmer)</td></tr>
+            <tr><th scope="row">Founded</th><td>2018 (the collective) · UK company incorporated 18 September 2019</td></tr>
+            <tr><th scope="row">Legal entity</th><td>Music Industry Therapists Limited · UK Companies House 12214526 · Sheffield · private limited company (SIC 86900, "Other human health activities")</td></tr>
+            <tr><th scope="row">Status note</th><td>Branded "MITC CIC"; transition to nonprofit announced 13 January 2026</td></tr>
+            <tr><th scope="row">Scope</th><td>Multinational — members in the UK, USA, Germany, India, Italy, Spain (live directory)</td></tr>
+            <tr><th scope="row">Model</th><td>Curated <strong>directory</strong> of vetted music-literate private practitioners + B2B services — <strong>not</strong> an employer or clinic</td></tr>
+            <tr><th scope="row">Music-specific?</th><td><strong>Yes</strong> — every member is a music-industry-experienced therapist</td></tr>
+            <tr><th scope="row">Not</th><td>Not a crisis / emergency service ("We can't offer emergency support… we can point you in the right direction")</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>MITC is explicit about what it is <em>not</em>: it does not run a clinic, it does not employ the therapists it lists, and it does not offer emergency support — for a crisis it signposts external helplines.<sup class="cite"><a href="#mitc-src-1" data-tip="MITC is not a crisis service; signposts emergency helplines. MITC, Home/Contact.">1</a></sup> It also edits and publishes the field's reference text, <em>Touring &amp; Mental Health: The Music Industry Manual</em> (Omnibus Press, 2023).<sup class="cite"><a href="#mitc-src-8" data-tip="'Touring & Mental Health: The Music Industry Manual,' ed. Tamsin Embleton, Omnibus Press 2023. MITC, Publications.">8</a></sup></p>
+    </section>
+
+    <!-- 2. THE MODEL -->
+    <section>
+      <div class="section-label">02 — The model</div>
+      <h2>A vetted directory, not a clinic</h2>
+      <p>The structural fact about MITC is that it is a <strong>two-sided curator</strong>, not a provider. It assembles music-literate clinicians on one side and musicians on the other, and connects them — the therapeutic relationship is between the client and an independent practitioner. Four moving parts turn around one decision: MITC owns no clinic and employs no therapists.</p>
+
+      <div class="flywheel-panel">
+        <div class="fw-cap">The curated-directory model</div>
+        <svg viewBox="0 0 460 380" role="img" aria-label="A circular model with four parts around a core: a Directory of independent therapists, Vetting (registered plus music-industry experience), Pay (each therapist sets their own fees, with a Pay It Forward subsidy pool), and a B2B layer (welfare coaching and tour/festival care sold to organisations) — all turning around a core that is a curator, not a clinic.">
+          <circle class="fw-ring" cx="230" cy="190" r="130"/>
+          <defs>
+            <marker id="fwarrow" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M1,1 L8,4.5 L1,8" fill="none" stroke="var(--spectrum-3)" stroke-width="2"/></marker>
+          </defs>
+          <path class="fw-arc" marker-end="url(#fwarrow)" d="M 305 100 A 130 130 0 0 1 318 168"/>
+          <path class="fw-arc" marker-end="url(#fwarrow)" d="M 318 212 A 130 130 0 0 1 305 280"/>
+          <path class="fw-arc" marker-end="url(#fwarrow)" d="M 155 280 A 130 130 0 0 1 142 212"/>
+          <path class="fw-arc" marker-end="url(#fwarrow)" d="M 142 168 A 130 130 0 0 1 155 100"/>
+          <circle class="fw-hub" cx="230" cy="190" r="52"/>
+          <text class="fw-hub-label" x="230" y="186" text-anchor="middle">CURATOR,</text>
+          <text class="fw-hub-label" x="230" y="199" text-anchor="middle">NOT CLINIC</text>
+          <text class="fw-hub-sub" x="230" y="214" text-anchor="middle">no clinic · no employees</text>
+          <circle class="fw-node" cx="230" cy="60" r="44"/>
+          <text class="fw-num" x="230" y="48" text-anchor="middle">1</text>
+          <text class="fw-label" x="230" y="64" text-anchor="middle">DIRECTORY</text>
+          <text class="fw-sub" x="230" y="78" text-anchor="middle">~32 therapists</text>
+          <circle class="fw-node" cx="360" cy="190" r="44"/>
+          <text class="fw-num" x="360" y="178" text-anchor="middle">2</text>
+          <text class="fw-label" x="360" y="194" text-anchor="middle">VET</text>
+          <text class="fw-sub" x="360" y="208" text-anchor="middle">cred + industry</text>
+          <circle class="fw-node" cx="230" cy="320" r="44"/>
+          <text class="fw-num" x="230" y="308" text-anchor="middle">3</text>
+          <text class="fw-label" x="230" y="324" text-anchor="middle">PAY</text>
+          <text class="fw-sub" x="230" y="338" text-anchor="middle">own fees + pool</text>
+          <circle class="fw-node" cx="100" cy="190" r="44"/>
+          <text class="fw-num" x="100" y="178" text-anchor="middle">4</text>
+          <text class="fw-label" x="100" y="194" text-anchor="middle">B2B</text>
+          <text class="fw-sub" x="100" y="208" text-anchor="middle">tours · festivals</text>
+        </svg>
+      </div>
+
+      <div class="gear-cards">
+        <div class="gear">
+          <div class="gn">PART 01</div>
+          <h3>The directory</h3>
+          <p>~32 therapists are listed (counted live), each with a profile — location, languages, issues, fees, registrations. "You can contact any therapist directly via their profile… or [ask] MITC to match you." MITC is the curator and matching desk.<sup class="cite"><a href="#mitc-src-2" data-tip="Directory of ~32 therapists with per-profile detail; contact direct or be matched. MITC, Our therapists (counted 2026-06-28).">2</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">PART 02</div>
+          <h3>Vetting = credential + industry</h3>
+          <p>The bar is "a <strong>qualified practitioner with direct music industry experience</strong>." MITC curates already-registered clinicians who also know the business; each profile shows their own registrations (e.g. Berlin's Anne Löhr lists BDP, DGSF). No student placements.<sup class="cite"><a href="#mitc-src-2" data-tip="Membership bar = qualified practitioner + direct music-industry experience; no student placements. MITC, Contact.">2</a></sup><sup class="cite"><a href="#mitc-src-3" data-tip="Profiles display each therapist's own professional registrations (Anne Löhr: BDP, DGSF). MITC, therapist profile.">3</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">PART 03</div>
+          <h3>Pay — private fees + a subsidy pool</h3>
+          <p>Each therapist sets and collects their own fees (e.g. Anne Löhr €100–150 per individual session) — so the default is <strong>paid private practice</strong>. Free access is indirect: <strong>Pay It Forward</strong> redistributes <em>unused</em> booked coaching sessions to lower-budget tours, topped up by larger tours donating sessions.<sup class="cite"><a href="#mitc-src-3" data-tip="Therapists set own fees; €100–150/individual session example. MITC, therapist profile.">3</a></sup><sup class="cite"><a href="#mitc-src-4" data-tip="Pay It Forward: unused booked sessions + donated sessions fund free sessions for low-budget tours. MITC.">4</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">PART 04</div>
+          <h3>B2B — sold to organisations</h3>
+          <p>A 24/7 "welfare coaching" service is sold to <strong>tours, companies and organisations (not individuals)</strong> in blocks of 5/10/20; plus MITC Soundcheck / Backstage Therapy at festivals and on tour, and training/consultancy to labels, management and the live sector.<sup class="cite"><a href="#mitc-src-5" data-tip="24/7 welfare coaching sold to tours/orgs in blocks of 5/10/20, not individuals; Soundcheck/Backstage Therapy. MITC.">5</a></sup></p>
+        </div>
+      </div>
+
+      <p style="margin-top:1.75rem;">In 2025 MITC delivered welfare and consultation services to the tours of <strong>Radiohead, Dua Lipa, Tate McRae and The Last Dinner Party</strong>, alongside labels, promoters and conferences — the B2B side that the directory alone cannot generate.<sup class="cite"><a href="#mitc-src-7" data-tip="2025 tour clients: Radiohead, Dua Lipa, Tate McRae, The Last Dinner Party, plus labels/promoters/conferences. New Industry Focus (13 Jan 2026), from MITC press release.">7</a></sup></p>
+    </section>
+
+    <!-- 3. LEGAL STATUS & FUNDING -->
+    <section>
+      <div class="section-label">03 — Legal status &amp; funding</div>
+      <h2>A UK company, branded a collective, turning nonprofit<sup class="cite"><a href="#mitc-src-6" data-tip="UK Companies House: Music Industry Therapists Limited (12214526), incorporated 18 Sep 2019, Sheffield, private limited company, SIC 86900. Primary registry.">6</a></sup></h2>
+      <p>The registry primary source is unambiguous on the corporate vehicle. The trade press then reports a status change. The two do not perfectly line up — so this section reports the discrepancy rather than smoothing it over.</p>
+
+      <div class="stat-strip">
+        <div class="stat-item"><div class="stat-num">2018</div><div class="stat-label">Collective founded (company inc. 2019)</div></div>
+        <div class="stat-item"><div class="stat-num">12214526</div><div class="stat-label">UK Companies House no. (Sheffield)</div></div>
+        <div class="stat-item"><div class="stat-num">~32</div><div class="stat-label">Therapists listed (counted 2026-06-28)</div></div>
+        <div class="stat-item"><div class="stat-num">2026</div><div class="stat-label">Nonprofit transition announced (Jan)</div></div>
+      </div>
+
+      <div class="table-wrap" role="region" aria-label="MITC legal status and funding (scrollable table)" tabindex="0">
+        <table>
+          <caption>Legal entity &amp; funding — Music Industry Therapist Collective (sources cited inline)</caption>
+          <tbody>
+            <tr><th scope="row">Registered entity</th><td>Music Industry Therapists Limited — UK Companies House <strong>12214526</strong>, incorporated 18 September 2019; registered office Sheffield (S11 9PA); private limited company; SIC 86900 ("Other human health activities"); first named "The Music Industry Therapist Collective Limited."<sup class="cite"><a href="#mitc-src-6" data-tip="Companies House 12214526; inc. 18 Sep 2019; Sheffield; SIC 86900; renamed within weeks. Primary registry.">6</a></sup></td></tr>
+            <tr><th scope="row">Status change</th><td>Branded "MITC CIC"; on <strong>13 January 2026</strong> reported to have "transitioned to a nonprofit organization" to unlock funding and partnerships.<sup class="cite"><a href="#mitc-src-7" data-tip="MITC CIC → nonprofit, announced 13 Jan 2026. New Industry Focus, from MITC press release.">7</a></sup></td></tr>
+            <tr><th scope="row">Funding model</th><td>Per-therapist private fees (each sets their own) + B2B welfare-coaching blocks + sponsored / funded programmes + the donate-a-session Pay It Forward pool.<sup class="cite"><a href="#mitc-src-3" data-tip="Therapists set own fees. MITC, therapist profile.">3</a></sup><sup class="cite"><a href="#mitc-src-5" data-tip="B2B welfare-coaching blocks. MITC.">5</a></sup><sup class="cite"><a href="#mitc-src-4" data-tip="Pay It Forward subsidy pool. MITC.">4</a></sup></td></tr>
+            <tr><th scope="row">⚠️ Open detail</th><td>The exact CIC / nonprofit registration chain (and any charity number) was not separately filed-verified here; the founding <em>initiative</em> is 2018, the <em>company</em> 2019. Carried ❓ on that detail only.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>No public accounts figures are asserted on this page — none are required for the claims made, and inventing revenue or budget numbers would breach the project's no-fabrication rule. What is verifiable is the <em>shape</em> of the money: it is a fee-for-service directory with a sponsored / pooled subsidy layer and a B2B sales line, now restructuring to a nonprofit to widen its funding options.<sup class="cite"><a href="#mitc-src-7" data-tip="Restructuring to nonprofit to widen funding/partnerships. New Industry Focus.">7</a></sup></p>
+    </section>
+
+    <!-- 4. GERMANY FOOTPRINT -->
+    <section>
+      <div class="section-label">04 — Germany footprint &amp; the country list</div>
+      <h2>Two German therapists — and a map that overstates the reach<sup class="cite"><a href="#mitc-src-2" data-tip="Germany footprint = 2 therapists on the live directory; map's AU/FR coverage unmatched. MITC, Our therapists (2026-06-28).">2</a></sup></h2>
+      <p>Because MITC is the German batch's one music-specific org, its Germany footprint is the point of the study. It is genuine but small and entirely private-practitioner-based: <strong>exactly two German-based therapists</strong> on the live directory — no MITC clinic, office, or German legal entity.</p>
+
+      <div class="table-wrap" role="region" aria-label="MITC's Germany footprint (scrollable table)" tabindex="0">
+        <table>
+          <caption>MITC's Germany footprint — the two German members (MITC directory + Anne Löhr profile)</caption>
+          <thead><tr><th scope="col">Therapist</th><th scope="col">Location</th><th scope="col">Notes</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Anne Löhr</strong></td><td>Berlin</td><td>Psychologist &amp; systemic therapist; registrations BDP, DGSF; €100–150 / individual session; English + German; in-person Berlin + online (Europe). <strong>Also a co-founder of <a href="org-study-mim-verband.html">MiM-Verband</a> (2020)</strong> — the German music-MH network.<sup class="cite"><a href="#mitc-src-3" data-tip="Anne Löhr: BDP/DGSF; €100–150/session; co-founded MiM-Verband 2020. MITC profile.">3</a></sup></td></tr>
+            <tr><td><strong>Heather O'Donnell</strong></td><td>Köln &amp; Düsseldorf</td><td>Psychologist, Artist-Systemic Therapist.<sup class="cite"><a href="#mitc-src-2" data-tip="Heather O'Donnell, Köln &amp; Düsseldorf, listed on the directory. MITC, Our therapists.">2</a></sup></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>German</strong> is one of the languages spoken across the collective (with English, French, Hindi, Italian, Norwegian, Spanish). So the German "footprint" is two music-literate therapists you pay directly — one of whom also helped build Germany's main music-MH network. That overlap (an MITC member who co-founded <a href="org-study-mim-verband.html">MiM-Verband</a>) is itself the story of how thin and personal the German music-MH field is.<sup class="cite"><a href="#mitc-src-3" data-tip="German is a collective language; Anne Löhr bridges MITC and MiM-Verband. MITC profile.">3</a></sup></p>
+
+      <h3>The country-list discrepancy (be honest)</h3>
+      <p>The Orgs Map row lists "US, <strong>Australia</strong>, <strong>France</strong>, Germany, India, Italy, Spain, UK." Against the <em>live</em> directory (counted 2026-06-28), the therapist <em>locations</em> present are UK, USA, Germany, India (1), Italy (1: Milan/Como) and Spain (1: Madrid). <strong>No Australia-based therapist, and no France-<em>based</em> clinician on the current directory</strong> (MITC has had a Paris-linked member, and its one French psychologist practises in London) — so French reads more as a nationality/language than a France location, and "Europe" as an online region.<sup class="cite"><a href="#mitc-src-2" data-tip="Live directory: UK/USA/Germany/India/Italy/Spain locations; no AU and no currently-listed FR-based clinician (a French psychologist is London-based). MITC, Our therapists (2026-06-28).">2</a></sup> A directory is a moving target — members join and leave — so this is a point-in-time finding, not proof Australia and France were never represented. But as of this study the map's specific country set does not fully match the roster, and that is carried ⚠️.</p>
+    </section>
+
+    <!-- 5. STRENGTHS -->
+    <section>
+      <div class="section-label">05 — Strengths</div>
+      <h2>What works</h2>
+      <div class="sw-grid">
+        <div class="sw-card strong"><h3>Music-specific, at near-zero infrastructure</h3><p>It owns no clinic and employs no clinicians, yet every listed therapist <em>speaks the industry's language</em> — the rare combination of clinical registration <em>and</em> lived music-industry experience.<sup class="cite"><a href="#mitc-src-1" data-tip="Therapists have music-industry experience prior to retraining; no clinic/employees. MITC, About/Therapists.">1</a></sup><sup class="cite"><a href="#mitc-src-2" data-tip="Curated directory model. MITC, Our therapists.">2</a></sup></p></div>
+        <div class="sw-card strong"><h3>Vetting is legible</h3><p>Each profile shows the practitioner's own professional registrations and specialisms; the bar (qualified + industry experience) is stated. A client can see <em>why</em> a therapist is credible.<sup class="cite"><a href="#mitc-src-3" data-tip="Profiles show registrations (e.g. BDP, DGSF) + specialisms. MITC profile.">3</a></sup></p></div>
+        <div class="sw-card strong"><h3>An equity mechanism that isn't grant-dependent</h3><p>Pay It Forward funds free sessions from <em>unused paid bookings</em> and donated sessions — a self-replenishing subsidy pool rather than a fundraising line.<sup class="cite"><a href="#mitc-src-4" data-tip="Pay It Forward funded by unused + donated sessions. MITC.">4</a></sup></p></div>
+        <div class="sw-card strong"><h3>A real B2B base + a knowledge asset</h3><p>Selling welfare-coaching blocks and tour/festival care to labels and tours (Radiohead, Dua Lipa, Tate McRae, The Last Dinner Party in 2025) brings income the directory can't; the 2023 Omnibus manual gives clinical authority.<sup class="cite"><a href="#mitc-src-7" data-tip="2025 tour clients incl. Radiohead, Dua Lipa, Tate McRae, The Last Dinner Party. New Industry Focus.">7</a></sup><sup class="cite"><a href="#mitc-src-8" data-tip="Touring &amp; Mental Health manual, Omnibus 2023. MITC, Publications.">8</a></sup></p></div>
+      </div>
+    </section>
+
+    <!-- 6. WEAKNESSES -->
+    <section>
+      <div class="section-label">06 — Weaknesses &amp; risks</div>
+      <h2>What to watch</h2>
+      <div class="sw-grid">
+        <div class="sw-card weak"><h3>Default care is paid</h3><p>At the point of use MITC routes a musician to private therapy they pay for (e.g. €100–150/session); equity rests on the Pay It Forward pool and sponsors, which are finite and uneven.<sup class="cite"><a href="#mitc-src-3" data-tip="Therapists set own fees (€100–150 example). MITC profile.">3</a></sup><sup class="cite"><a href="#mitc-src-4" data-tip="Free access via finite Pay It Forward pool. MITC.">4</a></sup></p></div>
+        <div class="sw-card weak"><h3>Supply is the binding constraint</h3><p>A directory is only as deep as its vetted roster — ~32 globally, with single therapists in India, Italy and Spain and two in Germany. Thin coverage limits real access outside the UK/US cores.<sup class="cite"><a href="#mitc-src-2" data-tip="~32 therapists; single-therapist countries; 2 in Germany. MITC, Our therapists.">2</a></sup></p></div>
+        <div class="sw-card weak"><h3>Quiet curator liability</h3><p>Matching clients to independent practitioners (not employees) keeps overhead low but creates a curation duty; the strength (light structure) and the risk (who stands behind a bad match) are the same decision.<sup class="cite"><a href="#mitc-src-2" data-tip="Connect-direct model; therapists are independent, not employed. MITC, Our therapists.">2</a></sup></p></div>
+        <div class="sw-card weak"><h3>Map overstates reach + vehicle is foggy</h3><p>The "Australia / France" coverage isn't evidenced on the live directory, and the Ltd-vs-CIC-vs-nonprofit chain isn't fully filed-verified — small honesty and governance gaps around an otherwise clean profile.<sup class="cite"><a href="#mitc-src-2" data-tip="AU/FR coverage unmatched on the live directory. MITC, Our therapists.">2</a></sup><sup class="cite"><a href="#mitc-src-6" data-tip="Ltd (12214526) vs CIC vs nonprofit; chain not fully filed-verified. Companies House + press.">6</a></sup></p></div>
+      </div>
+    </section>
+
+    <!-- 7. LESSONS -->
+    <section>
+      <div class="section-label">07 — Lessons for Taiwan</div>
+      <h2>What a Taiwan music mental health NPO should take</h2>
+      <p>A curated therapist directory is one of the <strong>lowest-infrastructure entry models</strong> available — and the only one in this batch that is both cheap <em>and</em> music-specific. What transfers, and what to watch:</p>
+      <ol class="lessons">
+        <li><h3>Start as a curated directory, not a clinic</h3><p>Recruit and vet already-registered Taiwanese therapists who also have music-industry experience (or genuine fluency with musicians' working conditions). Publish honest profiles — credentials, fees, issues, languages, in-person/online — and let clients book directly or run a light matching desk. This puts musicians in front of music-literate clinicians without the cost, licensing, or liability of running a clinic.<sup class="cite"><a href="#mitc-src-2" data-tip="Curated directory; contact direct or be matched; no clinic. MITC, Our therapists.">2</a></sup></p></li>
+        <li><h3>Make the credential bar explicit — and verify it</h3><p>MITC's "vetting" is only as strong as "qualified practitioner with direct music industry experience," shown via each therapist's own registrations. A Taiwan org should define its bar (e.g. registered 諮商心理師／臨床心理師 + demonstrable music-scene experience) and actually check it — the directory's credibility <em>is</em> the product.<sup class="cite"><a href="#mitc-src-2" data-tip="Membership bar = qualified + industry experience. MITC, Contact.">2</a></sup></p></li>
+        <li><h3>Design the subsidy in from day one — it can be self-funded</h3><p>A pure directory delivers <em>paid</em> care. MITC's Pay It Forward funds free sessions from unused paid bookings and donated sessions — a subsidy pool that doesn't depend on winning grants. A Taiwan NPO can copy this structure to keep access equitable on a small budget.<sup class="cite"><a href="#mitc-src-4" data-tip="Pay It Forward = self-replenishing subsidy pool. MITC.">4</a></sup></p></li>
+        <li><h3>Sell to organisations, not just individuals</h3><p>MITC's B2B welfare-coaching blocks (and tour/festival care) are bought by labels, promoters and tours. In Taiwan the equivalent buyers — festivals, labels, agencies, 公部門 culture programmes — can fund blocks of sessions that both generate revenue and top up the free pool.<sup class="cite"><a href="#mitc-src-5" data-tip="B2B welfare-coaching blocks sold to orgs. MITC.">5</a></sup><sup class="cite"><a href="#mitc-src-7" data-tip="Tours/labels/promoters as buyers (2025 clients). New Industry Focus.">7</a></sup></p></li>
+        <li><h3>Expect supply, not demand, to be the bottleneck — so plan to train the roster</h3><p>MITC lists single therapists in whole countries. Taiwan's pool of <em>music-literate, registered</em> therapists may be tiny, so the org may have to <strong>build</strong> that pool (training, industry briefings for willing clinicians), not merely list whoever already exists. The footprint analysis <em>is</em> the lesson: a directory imports no clinicians a market doesn't already have.<sup class="cite"><a href="#mitc-src-2" data-tip="Single-therapist countries; thin roster. MITC, Our therapists.">2</a></sup></p></li>
+        <li><h3>Don't oversell the map</h3><p>MITC's own "country reach" is partly aspirational (no AU/FR therapist on the live list). A Taiwan org should count what it can actually deliver and label reach honestly — the discipline that keeps a curated brand trustworthy.<sup class="cite"><a href="#mitc-src-2" data-tip="Map AU/FR coverage unmatched; label reach honestly. MITC, Our therapists.">2</a></sup></p></li>
+      </ol>
+    </section>
+
+    <!-- 8. METHOD + REFERENCES -->
+    <section>
+      <div class="section-label">08 — Methodology &amp; references</div>
+      <h2>Basis</h2>
+      <p class="cite-help">Every claim carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source; click to jump to the full reference. Identity, the model, the directory roster, the vetting language, per-therapist fees, Pay It Forward, the B2B service, and the Germany footprint come directly from MITC's own website (a JS-light site captured via Chrome on the live pages, 2026-06-28). The corporate vehicle is verified against UK Companies House (the primary registry). The CIC→nonprofit transition and the 2025 tour-client list come from credible music-trade press. The therapist count (~32) is a point-in-time directory snapshot and will drift. Where the Orgs Map's country list (Australia/France) could not be matched on the live directory it is carried ⚠️ (absence found ≠ non-existence); the exact CIC/nonprofit registration chain is carried ❓. No person, partner, therapist name, or figure is asserted without a traceable primary source; <strong>no therapist names beyond those published on MITC's own directory are used, and none are invented.</strong></p>
+
+      <div class="refs" id="refs-all" data-citation-registry="mitc-all">
+        <div class="refs-title">References</div>
+        <ol>
+          <li id="mitc-src-1">Music Industry Therapist Collective. (n.d.). <em>Home</em> &amp; <em>About (mission)</em>. Retrieved June 28, 2026, from <a href="https://www.musicindustrytherapists.com/" target="_blank" rel="noopener">musicindustrytherapists.com</a> and <a href="https://www.musicindustrytherapists.com/mission/" target="_blank" rel="noopener">/mission</a> — "global collective" of music-experienced psychotherapists/psychologists/counsellors/psychoanalysts; founded by psychotherapist and former venue/festival programmer <strong>Tamsin Embleton in 2018</strong>; "Industry Recognition" award, TPi Awards 2024; mission/vision (trauma-informed; reduce stigma; research/guides/workshops); explicit "We can't offer emergency support." <strong>Source · Method · Basis:</strong> organization primary site · web (Chrome) · ✅ Sourced.</li>
+          <li id="mitc-src-2">Music Industry Therapist Collective. (n.d.). <em>Our therapists</em> (directory) &amp; <em>Contact</em>. Retrieved June 28, 2026, from <a href="https://www.musicindustrytherapists.com/therapists/" target="_blank" rel="noopener">musicindustrytherapists.com/therapists</a> and <a href="https://www.musicindustrytherapists.com/contact/" target="_blank" rel="noopener">/contact</a> — directory of <strong>32 therapists</strong> (counted live 2026-06-28) with per-profile location/languages/issues/fees/registrations; "having worked as artists and in areas like live, studios, artist management, record labels, broadcasting and promotion, prior to retraining"; "contact any therapist directly… or… MITC to match you"; live location set = UK, USA, Germany, India, Italy (Milan/Como), Spain (Madrid); <strong>no Australia-based location, and no France-based clinician on the current directory</strong> (a Paris-linked member appears on a legacy profile; the French psychologist listed practises in London); "Europe" = online region; membership bar "a qualified practitioner with direct music industry experience" (no student placements). <strong>Source · Method · Basis:</strong> organization primary · web (Chrome) · ✅ Sourced for the model and roster; ⚠️ count is a point-in-time snapshot and the map's AU/FR coverage is unmatched here.</li>
+          <li id="mitc-src-3">Music Industry Therapist Collective. (n.d.). <em>Anne Löhr</em> (therapist profile) [+ German directory entries]. Retrieved June 28, 2026, from <a href="https://www.musicindustrytherapists.com/therapist/anne-lohr/" target="_blank" rel="noopener">musicindustrytherapists.com/therapist/anne-lohr</a> — Berlin psychologist &amp; systemic therapist; professional registrations <strong>BDP, DGSF</strong>; session fees <strong>€100–150 (individuals)</strong>, €50 initial consultation, "prices vary in relation to income"; in-person Berlin + online (Europe); English/German; states she was "Co-founding MiM-Verband (GER) in 2020." Second German member per directory: <strong>Heather O'Donnell</strong> (Psychologist, Artist-Systemic Therapist, Köln &amp; Düsseldorf). <strong>Source · Method · Basis:</strong> organization primary · web (Chrome) · ✅ Sourced.</li>
+          <li id="mitc-src-4">Music Industry Therapist Collective. (n.d.). <em>Pay It Forward initiative</em>. Retrieved June 28, 2026, from <a href="https://www.musicindustrytherapists.com/pay-it-forward-initiative/" target="_blank" rel="noopener">musicindustrytherapists.com/pay-it-forward-initiative</a> — free sessions for independent artists/crew on lower-budget tours, funded by redistributing <em>unused</em> booked coaching sessions and by larger tours donating extra sessions into the pool; "mental health support should be available to everyone, not just those with the budget to afford it." <strong>Source · Method · Basis:</strong> organization primary · web (Chrome) · ✅ Sourced.</li>
+          <li id="mitc-src-5">Music Industry Therapist Collective. (n.d.). <em>24/7 Mental Health Support for the Live Music Industry</em> (Welfare Coaching). Retrieved June 28, 2026, from <a href="https://www.musicindustrytherapists.com/24-7-mental-health-support-for-the-live-music-industry/" target="_blank" rel="noopener">musicindustrytherapists.com/24-7-mental-health-support…</a> — confidential drop-in "welfare coaching," short-notice/around-the-clock, therapists worldwide, up to 50-min sessions; <strong>"only available to tours, companies and organisations, not individuals"</strong>; sold in blocks of 5/10/20 with per-member codes; "removes the financial barriers to accessing care – improving health inequity"; individuals matched 1:1 by email. Corroborated by Pollstar (2025-06-13). <strong>Source · Method · Basis:</strong> organization primary (+ trade press) · web · ✅ Sourced.</li>
+          <li id="mitc-src-6">UK Companies House. (2019–2026). <em>Music Industry Therapists Limited</em> — company no. 12214526. Retrieved June 28, 2026, from <a href="https://find-and-update.company-information.service.gov.uk/company/12214526" target="_blank" rel="noopener">find-and-update.company-information.service.gov.uk/company/12214526</a> — <strong>incorporated 18 September 2019</strong>; registered office The Old Workshop, 1 Ecclesall Road South, Sheffield S11 9PA; private limited company; SIC <strong>86900</strong> ("Other human health activities"); status Active; previous name "The Music Industry Therapist Collective Limited" (18 Sep–8 Oct 2019); last accounts to 30 Sep 2025. <strong>Source · Method · Basis:</strong> government registry (primary) · web · ✅ Sourced.</li>
+          <li id="mitc-src-7">Yates, R. (2026, January 13). <em>The Music Industry Therapist Collective becomes a nonprofit</em>. New Industry Focus / ROSTR. <a href="https://newindustryfocus.com/articles/the-music-industry-therapist-collective-becomes-a-nonprofit" target="_blank" rel="noopener">newindustryfocus.com</a> — "Music Industry Therapist Collective CIC (MITC CIC) has transitioned to a <strong>nonprofit</strong> organization" (unlocking funding/partnerships; removing financial barriers); operates "in the UK, US, Europe and India"; in <strong>2025</strong> delivered services to the tours of Radiohead, Dua Lipa, Tate McRae, The Last Dinner Party, plus labels/promoters/conferences; quote from founder Tamsin Embleton; written from MITC's press release. <strong>Source · Method · Basis:</strong> music-trade press (from org press release) · web · ✅ Sourced.</li>
+          <li id="mitc-src-8">Music Industry Therapist Collective. (n.d.). <em>Publications</em>. Retrieved June 28, 2026, from <a href="https://www.musicindustrytherapists.com/publications/" target="_blank" rel="noopener">musicindustrytherapists.com/publications</a> — <em>Touring &amp; Mental Health: The Music Industry Manual</em>, edited by Tamsin Embleton, published by <strong>Omnibus Press, 2023</strong> (mental health, performance anxiety, addiction, group dynamics, physical health, crisis management, post-tour recovery). Corroborated by The Violin Channel. <strong>Source · Method · Basis:</strong> organization primary (+ trade press) · web · ✅ Sourced.</li>
+        </ol>
+        <p class="refs-note">Convention: every claim-bearing element carries a numbered marker matching an entry above — machine-checkable before each deploy (§5.2 / §6 gate 1). The therapist count is a dated snapshot, not a quoted constant.</p>
+      </div>
+    </section>
+
+    <nav class="related-block" aria-label="Related on this site">
+      <p class="related-title">Related</p>
+      <ul>
+        <li><a href="org-study.html">&larr; Org Study (all organizations)</a></li>
+        <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+        <li><a href="policy-study.html">Policy Study &mdash; how jurisdictions protect music workers</a></li>
+        <li><a href="policy-study-germany.html">Policy Study: Germany &mdash; the KSK statutory <em>floor</em> MITC's private-practitioner <em>room</em> sits beside</a></li>
+        <li><a href="policy-study-eu.html">Policy Study: EU &mdash; covering France, Italy &amp; Spain, where MITC also lists therapists</a></li>
+        <li><a href="org-study-mim-verband.html">Org Study: MiM-Verband &mdash; the German network co-founded by MITC's Berlin therapist</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <script>
+  /* Scroll-reveal — R3.2 shared IntersectionObserver (normal-scroll page) */
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = 'section > h2, .stat-strip, figure, .table-wrap, .phases-grid, .sources-card, .refs';
+    var nodes = Array.prototype.slice.call(document.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, sibs, idx = 0;
+        if (p){ sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,6) * 60) + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
+
+  <!-- nav scroll-state: transparent over hero, blurred bar once scrolled -->
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden','true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>
