@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>MiM-Verband · Org Study · MH&amp;W</title>
+  <meta name="description" content="MiM (Mental Health in Music) is Germany's music mental-health 'Verband' — but the primary record shows a small collective of music-literate psychologists, not a registered association. It organizes the field (awareness, referral, network) and delivers low-threshold counseling through other people's funded pools. What a Taiwan music mental health NPO can borrow, and the legal-form caution.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      /* ── DIA-GRADE READING SCALE (calibrated to Dia browser, serif-corrected) ── */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;--lh-prose:1.7;--wt-prose:440;--measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;--label-ink:var(--graphite);
+      --font-cjk:'Noto Serif TC',serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { overflow-x: hidden; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--black);
+      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      line-height: var(--lh-prose);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    a { color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    a:hover { color: var(--signal-dim); }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--signal); outline-offset: 3px; border-radius: var(--radius);
+    }
+
+    .skip-nav {
+      position: absolute; left: -9999px; top: 0; z-index: 200;
+      background: var(--signal); color: var(--white);
+      padding: 0.5rem 1rem; font-family: var(--font-mono);
+    }
+    .skip-nav:focus { left: 0; }
+
+    /* ===== NAVIGATION ===== */
+    nav.nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; flex-direction: column;
+      padding: 2rem 2.5rem;
+      padding-top: calc(2rem + env(safe-area-inset-top));
+      background: transparent;
+      transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    nav.nav.scrolled {
+      background: rgba(244, 244, 245, 0.45);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: var(--font-mono); font-size: 1.1rem; font-weight: 400;
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-topbar { display:none; }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; min-width:44px; min-height:44px; z-index:101; -webkit-tap-highlight-color:transparent; }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity:0; }
+    .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
+
+    /* ===== LAYOUT ===== */
+    main { max-width: var(--max-w); margin: 0 auto; padding: 0 2.5rem 5rem 2.5rem; }
+    section { margin-bottom: 4rem; }
+    .narrow { max-width: var(--max-w-text); }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding-top: calc(9rem + env(safe-area-inset-top));
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-light);
+      margin-bottom: 3rem;
+    }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.18em;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: var(--font-display); font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6.5rem);
+      font-weight: 800; line-height: 1.04; color: var(--black); letter-spacing: -0.01em;
+      overflow-wrap: break-word; hyphens: auto;
+    }
+    .hero h1 .tail { display:block; font-size: clamp(1.15rem, 2.6vw, 1.9rem); font-weight: 600; color: var(--signal); letter-spacing: 0; margin-top: 0.9rem; }
+    .hero .subtitle {
+      font-family: var(--font-body); font-size: clamp(1.25rem, 1.05rem + 1.4vw, 1.5rem);
+      color: var(--graphite); line-height: 1.55; margin-top: 1.5rem; max-width: 54ch;
+    }
+    .basis-badge {
+      display: inline-block; margin-top: 1.75rem;
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--graphite); background: var(--signal-bg);
+      border: 1px solid var(--signal-glow); border-radius: var(--radius);
+      padding: 0.5rem 0.85rem; line-height: 1.5;
+    }
+
+    /* ===== TWO-LINE COVER (R2.1, 2026-06-20) — width:100% inside main (no 100vw breakout → no x-overflow) ===== */
+    .cover {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;                /* clips the wash */
+      padding: 0 2rem;
+    }
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%,
+        var(--signal-glow) 0%,
+        rgba(102,103,171,0.06) 38%,
+        rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
+    }
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 1280px);
+    }
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin: 0;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+    .cover-title .cover-sub { display:block; font-family: var(--font-display); font-size: clamp(1.1rem, 2.8vw, 1.9rem); font-weight: 500; font-style: italic; color: var(--purple-deep); letter-spacing: 0; margin-top: 1rem; }
+    .cover-line {
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--purple-deep);
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
+    }
+    .cover-hint {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
+    }
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
+    }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-line  { animation-delay: 0.22s; }
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .cover-wash,
+      .cover-hint,
+      .cover-inner > * { animation: none; opacity: 1; transform: none; }
+    }
+    @media (max-width: 768px) {
+      .cover { padding: 0 1.25rem; }
+      .cover-title { font-size: clamp(1.7rem, 7.3vw, 2.4rem); }
+      .cover-line  { font-size: clamp(0.72rem, 3.2vw, 0.95rem); letter-spacing: 0.18em; }
+    }
+
+    /* ===== TYPE ===== */
+    h2 {
+      font-family: var(--font-display); font-size: var(--text-h2);
+      font-weight: 700; line-height: 1.1; color: var(--black);
+      margin-bottom: 1.25rem; letter-spacing: -0.01em;
+      text-wrap: balance; overflow-wrap: break-word;
+    }
+    h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem); line-height: 1.25; font-weight: 600; color: var(--charcoal); margin: 1.75rem 0 0.75rem; }
+    .section-label {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem;
+    }
+    p { color: var(--graphite); max-width: var(--measure-prose); margin-bottom: 1rem; line-height: 1.65; }
+    p.lead { font-size: 1.1rem; color: var(--charcoal); }
+    strong { color: var(--charcoal); font-weight: 600; }
+    em { color: var(--graphite); }
+
+    /* ===== MODEL CALLOUT ===== */
+    .model-callout { background: var(--bg-card-dark); color: var(--snow); border-radius: var(--radius-lg); padding: 2.25rem 2.5rem; margin-bottom: 3rem; }
+    .model-callout h2 { color: var(--white); margin-bottom: 1rem; }
+    .model-callout p { color: var(--silver); max-width: none; }
+    .model-callout strong { color: var(--white); }
+    .model-callout a { color: var(--spectrum-3); text-decoration: underline; text-underline-offset: 2px; }
+    .model-callout a:hover { color: var(--white); }
+
+    /* ===== FLOOR / ROOM SIGNATURE VISUAL (reuses flywheel-panel chrome) ===== */
+    .flywheel-panel {
+      background: var(--bg-card-dark);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem 2rem 1.5rem;
+      margin: 1.5rem 0 1.75rem;
+      border: 1px solid var(--border-dark);
+    }
+    .flywheel-panel .fw-cap {
+      font-family: var(--font-mono); font-size: var(--text-xs); color: var(--spectrum-3);
+      text-transform: uppercase; letter-spacing: 0.16em; text-align: center; margin-bottom: 0.5rem;
+    }
+    .flywheel-panel svg { display: block; width: 100%; height: auto; max-width: 540px; margin: 0 auto; }
+    .fw-ring { fill: none; stroke: var(--border-dark); stroke-width: 1.5; stroke-dasharray: 3 6; }
+    .fw-arc { fill: none; stroke: var(--spectrum-3); stroke-width: 2.5; opacity: 0.85; stroke-dasharray: 4 7; animation: fw-flow 2.2s linear infinite; }
+    @keyframes fw-flow { to { stroke-dashoffset: -22; } }
+    .fw-node { fill: var(--charcoal); stroke: var(--spectrum-2); stroke-width: 2; }
+    .fw-hub { fill: var(--black); stroke: var(--spectrum-3); stroke-width: 1.5; }
+    .fw-num { fill: var(--spectrum-3); font-family: var(--font-mono); font-size: 13px; font-weight: 700; }
+    .fw-label { fill: var(--snow); font-family: var(--font-display); font-size: 15px; font-weight: 700; letter-spacing: 0.02em; }
+    .fw-sub { fill: var(--grey-light); font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.04em; }
+    .fw-hub-label { fill: var(--spectrum-3); font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.14em; }
+    .fw-hub-sub { fill: var(--grey-light); font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; }
+
+    .gear-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .gear {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-left: 3px solid var(--spectrum-2); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem;
+    }
+    .gear .gn { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); letter-spacing: 0.1em; }
+    .gear h3 { margin: 0.35rem 0 0.5rem; font-size: 1.08rem; }
+    .gear p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-card); margin: 1.5rem 0 0.75rem; }
+    .stat-item { padding: 1.75rem 1.25rem; border-right: 1px solid var(--border-light); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--signal); line-height: 1; font-variant-numeric: tabular-nums; }
+    .stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.6rem; line-height: 1.4; }
+
+    /* ===== TABLES ===== */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; margin: 1.25rem 0; border-radius: var(--radius-lg); border: 1px solid var(--border-light); }
+    .table-wrap:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+    table { width: 100%; border-collapse: collapse; background: var(--bg-card); font-size: var(--text-small); }
+    caption { text-align: left; font-family: var(--font-mono); font-size: var(--text-caption); color: var(--label-ink); padding: 0.75rem 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border-light); vertical-align: top; font-variant-numeric: tabular-nums; }
+    thead th { font-family: var(--font-mono); font-size: var(--text-micro); text-transform: uppercase; letter-spacing: 0.06em; color: var(--label-ink); background: var(--snow); }
+    tbody tr:last-child td { border-bottom: none; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .row-emph td { background: var(--signal-bg); font-weight: 600; color: var(--charcoal); }
+
+    /* ===== PROGRAM / SERVICE LIST ===== */
+    .prog { list-style: none; margin: 1.25rem 0 0; padding: 0; }
+    .prog li { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 0.85rem; }
+    .prog h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .prog p { font-size: var(--text-sm); margin-bottom: 0; }
+    .prog .ptag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ===== SW CARDS ===== */
+    .sw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.25rem; }
+    .sw-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem; }
+    .sw-card.weak { border-left: 3px solid var(--spectrum-2); }
+    .sw-card.strong { border-left: 3px solid var(--spectrum-4); }
+    .sw-card h3 { margin: 0 0 0.4rem; font-size: 1rem; }
+    .sw-card p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== LESSONS ===== */
+    .lessons { counter-reset: lesson; list-style: none; margin: 1.5rem 0 0; padding: 0; }
+    .lessons li { position: relative; padding: 1.25rem 1.5rem 1.25rem 3.5rem; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); margin-bottom: 0.85rem; }
+    .lessons li::before { counter-increment: lesson; content: counter(lesson); position: absolute; left: 1.25rem; top: 1.25rem; font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--signal); }
+    .lessons h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .lessons p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== ACCURACY FLAG CALLOUT ===== */
+    .flag { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--spectrum-1); border-radius: var(--radius-lg); padding: 1.4rem 1.6rem; margin: 1.5rem 0; }
+    .flag .flag-tag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--spectrum-1); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.5rem; }
+    .flag p { font-size: var(--text-sm); margin-bottom: 0; max-width: none; }
+
+    /* ===== CITATIONS (§5 inline tier) ===== */
+    .cite { font-size: 0.7em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem; }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-fine); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; max-width: var(--measure-ref); overflow-wrap: anywhere; }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs-note { font-size: var(--text-xs); color: var(--label-ink); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-sm); color: var(--label-ink); font-style: italic; max-width: var(--max-w-text); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .gear-cards { grid-template-columns: 1fr; }
+      .sw-grid { grid-template-columns: 1fr; }
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2n) { border-right: none; }
+      .stat-item:nth-child(-n+2) { border-bottom: 1px solid var(--border-light); }
+    }
+    @media (max-width: 768px) {
+      nav.nav { padding: 1.2rem 1.5rem; padding-top: calc(1.2rem + env(safe-area-inset-top)); }
+      nav.nav.open { background: rgba(244,244,245,0.95); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-light); }
+      .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
+      .nav-toggle { display:block; }
+      .nav-mobile-brand { display:block; }
+      .nav-links { display:none; flex-direction:column; gap:0.75rem; margin-top:1rem; }
+      .nav-links.show { display:flex; }
+      .nav-links a { font-size: 0.85rem; }
+      main { padding: 0 1.5rem 3rem 1.5rem; }
+      .hero { padding-top: calc(7rem + env(safe-area-inset-top)); }
+      .hero h1 { font-size: clamp(2.4rem, 10.5vw, 3.4rem); }
+      .model-callout, .flywheel-panel { padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
+    @media (max-width: 680px) {
+      p, .hero .subtitle, .refs li, .cite-help { max-width: none; }
+    }
+    @media (max-width: 480px) {
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+      .stat-item:last-child { border-bottom: none; }
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
+      table { font-size: 0.82rem; }
+      thead th { font-size: 0.6rem; }
+      th, td { padding: 0.5rem 0.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } nav.nav { transition: none; } .fw-arc { animation: none; } }
+
+    /* ===== Scroll-reveal (R3.2 craft pass) ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ===== Related block (no dead-ends, R3.2) ===== */
+    .related-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-light); }
+    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--label-ink); margin-bottom: 0.6rem; }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a { font-family: var(--font-body); font-size: var(--text-sm); color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+  </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open');this.setAttribute('aria-expanded',o)">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+        <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="org-study.html" class="current" aria-current="page">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
+      <a href="field-news.html">FIELD NEWS</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- COVER -->
+    <section class="cover">
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="cover-inner">
+        <h1 class="cover-title">MIM-VERBAND<span class="cover-sub">Mental Health in Music</span></h1>
+        <p class="cover-line">Org Study · Est. 2019</p>
+      </div>
+      <span class="cover-hint" aria-hidden="true">↓ Scroll</span>
+    </section>
+
+    <!-- MODEL CALLOUT -->
+    <div class="model-callout">
+      <h2>One model, in one line</h2>
+      <p>The U.S. answer to musician mental health is a <a href="org-study-musicares.html">charity</a>; Japan's is a <a href="org-study-musicians-union-japan.html">union welfare floor</a>; Germany's <em>statutory</em> answer is the <a href="policy-study-germany.html">Künstlersozialkasse</a> that folds freelance musicians into social insurance. <strong>MiM is none of these. It is a small collective of music-literate psychologists who put a "Verband" name on a field-building function</strong> — they raise awareness, curate the German-language knowledge base, knit a nationwide referral network, and deliver low-threshold counseling, much of it through <em>other people's</em> funded pools. It is the clearest case in this series of the <strong>"room" (service) built thin, federated, and on a shoestring</strong>, sitting on top of Germany's statutory floor. The honest finding: the room here is mostly plumbing and a few practitioners — no membership, no clinic, no reserve, and, on the public record, not even a registered association.</p>
+    </div>
+
+    <!-- 1. PROFILE -->
+    <section>
+      <div class="section-label">01 — Profile</div>
+      <h2>A "Verband" that may not be a Verein<sup class="cite"><a href="#mim-src-2" data-tip="Legal-form evidence: MiM Impressum names a private individual (Michael Wecker, Dipl.-Psych.); no e.V., no Vereinsregister number, no registration court, no Vorstand; site copyright '© Lauter, Wecker'. mim-verband.de/newpage, accessed 2026-06-28.">2</a></sup><sup class="cite"><a href="#mim-src-3" data-tip="No Vereinsregister entry for MiM found via handelsregister.de / Northdata, though other Berlin music-industry e.V.s do appear with VR numbers. Rule 4: absence ≠ proof.">3</a></sup></h2>
+      <p>MiM presents as the <strong>"MiM-Verband — Verband zur Förderung der mentalen Gesundheit in der Musikbranche,"</strong> the self-described "central contact point for everyone in the music and creative industries with an interest in mental health."<sup class="cite"><a href="#mim-src-1" data-tip="Self-description &amp; mission. MiM homepage (DE), accessed 2026-06-28.">1</a></sup> But the legal substance does not match the label — and that gap is the single most important fact on this page.</p>
+
+      <div class="flag">
+        <div class="flag-tag">Accuracy flag — legal form ⚠️</div>
+        <p>The site's Impressum names a <strong>private individual</strong> — "Michael Wecker, Diplom-Psychologe" (Berlin) — as operator, with no <strong>e.V.</strong> in any legal name, <strong>no Vereinsregister (VR) number, no registration court, no Vorstand, and no Gemeinnützigkeit statement</strong> — all of which a registered association must publish under § 5 DDG. Every page reads "© Lauter, Wecker." A Vereinsregister search via handelsregister.de and Northdata returns <strong>no MiM entry</strong>, although the same searches surface other Berlin music-industry associations with their VR numbers. Combined, this indicates MiM is <strong>most likely an informal practitioner collective, not a registered Verein</strong> — a "Verband" in branding, not in law. (Absence of a registry hit is not proof of non-registration; we label this ⚠️, not a refutation.)<sup class="cite"><a href="#mim-src-2" data-tip="Impressum: private-person operator; no e.V./VR/Vorstand markers. mim-verband.de/newpage.">2</a></sup><sup class="cite"><a href="#mim-src-3" data-tip="handelsregister.de / Northdata: no MiM Vereinsregister entry located.">3</a></sup></p>
+      </div>
+
+      <div class="table-wrap" role="region" aria-label="Organization profile — MiM-Verband (scrollable table)" tabindex="0">
+        <table>
+          <caption>Organization profile — MiM (Mental Health in Music) (sources cited inline)</caption>
+          <tbody>
+            <tr><th scope="row">Name as used</th><td>MiM — Mental Health in Music · "MiM-Verband"</td></tr>
+            <tr><th scope="row">Self-description</th><td>"Verband zur Förderung der mentalen Gesundheit in der Musikbranche" — central contact point for the music &amp; creative industries</td></tr>
+            <tr class="row-emph"><th scope="row">Legal form</th><td>⚠️ Not evidenced as an e.V. — Impressum names a private person; no VR number / court / Vorstand; no Vereinsregister hit. Most likely an informal collective trading as "Verband."</td></tr>
+            <tr><th scope="row">Founded</th><td>Late 2019 / early 2020 (the org's own pages disagree — see below)</td></tr>
+            <tr><th scope="row">Founders</th><td>Psychologists Michael Wecker, Franziska Lauter, Anne Löhr (Löhr active 2019–June 2023); one page adds a fourth, Tanja Queckenstedt, and dates it 2020</td></tr>
+            <tr><th scope="row">Leads</th><td>Franziska Lauter &amp; Michael Wecker</td></tr>
+            <tr><th scope="row">Counseling pool</th><td>~5 psychologists (Wecker, Lauter, Tobias Dolle, Jason Bartsch, Melissa Salinas Rannenberg; Nathalie Mong also listed) — all are also musicians</td></tr>
+            <tr><th scope="row">Members</th><td>None — no membership scheme anywhere on the site<sup class="cite"><a href="#mim-src-6" data-tip="No membership-join scheme present anywhere on the site (contact routes only). mim-verband.de/kontakt, accessed 2026-06-28.">6</a></sup></td></tr>
+            <tr><th scope="row">Seat</th><td>Gormannstr. 14, 10119 Berlin; counseling delivered Germany-wide by video/phone</td></tr>
+            <tr><th scope="row">Funding</th><td>Fee-for-service (€50 first / €100 follow-up) + partner-funded subsidized pools; no dues, no published budget</td></tr>
+            <tr><th scope="row">Scope</th><td>Germany (deutschlandweit network; regional subsidized counseling in 5 cities)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>The founding story is <strong>internally inconsistent</strong>, and we report it rather than resolve it. The homepage says MiM "wurde <strong>Ende 2019</strong>" by Michael Wecker, Franziska Lauter and Anne Löhr; the Beratung page's own metadata says "<strong>2020</strong>" and names a <strong>fourth</strong> founder, Tanja Queckenstedt.<sup class="cite"><a href="#mim-src-1" data-tip="Homepage: 'Ende 2019', three founders. Beratung page metadata: '2020', four founders incl. Tanja Queckenstedt. mim-verband.de.">1</a></sup> German press follows the homepage's "Ende 2019," three founders.<sup class="cite"><a href="#mim-src-4" data-tip="stageaid.de (16 Feb 2025): founded 'Ende 2019' by Wecker, Lauter, Löhr; calls MiM a 'Verband'/'StartUp', states no legal form.">4</a></sup> The honest statement: <strong>founded late 2019 / early 2020 by a small group of music-literate psychologists</strong>, with co-founder Anne Löhr active until June 2023.</p>
+    </section>
+
+    <!-- 2. THE MODEL -->
+    <section>
+      <div class="section-label">02 — The model</div>
+      <h2>Organize the field, deliver thinly, broker the rest</h2>
+      <p>MiM's own three-verb mission is the map: <strong>Sensibilisieren &amp; Informieren</strong> (awareness + knowledge), <strong>Netzwerken</strong> (a Germany-wide network of experts, affected people and institutions), and <strong>Beraten</strong> (counseling, coaching, workshops, training).<sup class="cite"><a href="#mim-src-1" data-tip="Three stated goals: Sensibilisieren &amp; Informieren / Netzwerken / Beraten. MiM homepage.">1</a></sup> German press states the operating reality plainly: "Der MiM-Verband <strong>organisiert vor allem</strong> psychologische Einzel- und Teamberatung, engagiert sich in Vorträgen als Speaker*innen und bietet auch Workshops und Seminare."<sup class="cite"><a href="#mim-src-4" data-tip="'Der MiM-Verband organisiert vor allem psychologische Einzel- und Teamberatung … Workshops und Seminare.' stageaid.de.">4</a></sup> The structure is a four-part field-building loop with <strong>no clinic and no fund at its center</strong>.</p>
+
+      <div class="flywheel-panel">
+        <div class="fw-cap">The field-building loop — service at the edge, no clinic at the center</div>
+        <svg viewBox="0 0 460 380" role="img" aria-label="A circular loop with four nodes that feed one another: Awareness (talks, panels, curated library), Network (a Germany-wide web of music-literate psychologists and institutions), Refer (a published directory of counseling and crisis services), and Deliver (low-threshold counseling by a small pool, much of it through partner-funded slots) — all turning around a deliberately capital-light core that owns no clinic and holds no fund.">
+          <circle class="fw-ring" cx="230" cy="190" r="130"/>
+          <defs>
+            <marker id="fwarrow" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M1,1 L8,4.5 L1,8" fill="none" stroke="var(--spectrum-3)" stroke-width="2"/></marker>
+          </defs>
+          <path class="fw-arc" marker-end="url(#fwarrow)" d="M 305 100 A 130 130 0 0 1 318 168"/>
+          <path class="fw-arc" marker-end="url(#fwarrow)" d="M 318 212 A 130 130 0 0 1 305 280"/>
+          <path class="fw-arc" marker-end="url(#fwarrow)" d="M 155 280 A 130 130 0 0 1 142 212"/>
+          <path class="fw-arc" marker-end="url(#fwarrow)" d="M 142 168 A 130 130 0 0 1 155 100"/>
+          <circle class="fw-hub" cx="230" cy="190" r="52"/>
+          <text class="fw-hub-label" x="230" y="186" text-anchor="middle">NO CLINIC,</text>
+          <text class="fw-hub-label" x="230" y="199" text-anchor="middle">NO FUND</text>
+          <text class="fw-hub-sub" x="230" y="214" text-anchor="middle">capital-light by design</text>
+          <circle class="fw-node" cx="230" cy="60" r="44"/>
+          <text class="fw-num" x="230" y="48" text-anchor="middle">1</text>
+          <text class="fw-label" x="230" y="64" text-anchor="middle">AWARENESS</text>
+          <text class="fw-sub" x="230" y="78" text-anchor="middle">talks · panels · library</text>
+          <circle class="fw-node" cx="360" cy="190" r="44"/>
+          <text class="fw-num" x="360" y="178" text-anchor="middle">2</text>
+          <text class="fw-label" x="360" y="194" text-anchor="middle">NETWORK</text>
+          <text class="fw-sub" x="360" y="208" text-anchor="middle">deutschlandweit</text>
+          <circle class="fw-node" cx="230" cy="320" r="44"/>
+          <text class="fw-num" x="230" y="308" text-anchor="middle">3</text>
+          <text class="fw-label" x="230" y="324" text-anchor="middle">REFER</text>
+          <text class="fw-sub" x="230" y="338" text-anchor="middle">MiM-Liste directory</text>
+          <circle class="fw-node" cx="100" cy="190" r="44"/>
+          <text class="fw-num" x="100" y="178" text-anchor="middle">4</text>
+          <text class="fw-label" x="100" y="194" text-anchor="middle">DELIVER</text>
+          <text class="fw-sub" x="100" y="208" text-anchor="middle">counseling pool</text>
+        </svg>
+      </div>
+
+      <div class="gear-cards">
+        <div class="gear">
+          <div class="gn">MOVE 01</div>
+          <h3>Awareness</h3>
+          <p>Talks, panels, and a curated German-language library so the field has somewhere to point. The lowest-cost, most reusable thing MiM does.<sup class="cite"><a href="#mim-src-7" data-tip="Curated 'Wissenswertes' library: directory, brochures, peer orgs, survey reading list. mim-verband.de/wissenswertes.">7</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">MOVE 02</div>
+          <h3>Network</h3>
+          <p>A deutschlandweit web linking music-literate psychologists, scenes and institutions. The founders teach as guest lecturers at hdpk Berlin, BIMM Berlin, SAE Berlin, Music Pool Berlin and the Institut für Systemisches Arbeiten — seeding the network from inside music education.<sup class="cite"><a href="#mim-src-4" data-tip="Founders teach as guest lecturers at hdpk Berlin, BIMM Berlin, SAE Berlin, Music Pool Berlin, Institut für Systemisches Arbeiten. stageaid.de.">4</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">MOVE 03</div>
+          <h3>Refer</h3>
+          <p>A published "MiM-Liste" of counseling and outpatient-psychotherapy addresses, plus pointers to general services and peer initiatives (MITC, Help Musicians UK, Music Minds Matter, MusiCares).<sup class="cite"><a href="#mim-src-7" data-tip="MiM-Liste directory + links to BPtK, MindDoc, HelloBetter, Deutsche DepressionsLiga, MITC, Help Musicians UK, Music Minds Matter, MusiCares. mim-verband.de/wissenswertes.">7</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">MOVE 04</div>
+          <h3>Deliver (lightly)</h3>
+          <p>Actual music-aware counseling by a small pool, priced low and often paid for by partners. Service that scales with practitioner hours — the opposite of the awareness layer.<sup class="cite"><a href="#mim-src-5" data-tip="Counseling by ~5 psychologists; €50 first / €100 follow-up; subsidized via regional partner pools. mim-verband.de/beratung.">5</a></sup></p>
+        </div>
+      </div>
+
+      <p style="margin-top:1.75rem;">The thing that makes this transferable is the same thing that makes it fragile: <strong>almost none of it requires scale or capital.</strong> No building to staff, no endowment to raise, no membership to administer. That is also why it is exposed — the "Verband" is, in substance, a handful of practitioners and a well-kept link list.</p>
+    </section>
+
+    <!-- 3. WHAT IT DELIVERS -->
+    <section>
+      <div class="section-label">03 — What it delivers</div>
+      <h2>Music-literate counseling, priced low, brokered wide<sup class="cite"><a href="#mim-src-5" data-tip="Counseling model, prices, team, and the five city subsidized pools. mim-verband.de/beratung, accessed 2026-06-28.">5</a></sup></h2>
+      <p>The core deliverable is <strong>one-to-one (and team) psychological counseling</strong> by video call or phone, Germany-wide, from a pool of ~5 psychologists who are <em>also</em> musicians — trumpet/jazz, tour/studio, voice — so the counselor "understands your passion, your path and your environment." Self-pay pricing is explicit and modest.</p>
+
+      <div class="stat-strip">
+        <div class="stat-item"><div class="stat-num">€50</div><div class="stat-label">first counseling session, self-pay (flat)</div></div>
+        <div class="stat-item"><div class="stat-num">€100</div><div class="stat-label">each follow-up session (per GOP schedule)</div></div>
+        <div class="stat-item"><div class="stat-num">~€10–30</div><div class="stat-label">co-pay where a regional partner funds the slot</div></div>
+        <div class="stat-item"><div class="stat-num">5 cities</div><div class="stat-label">subsidized counseling: Berlin · Hamburg · München · Bremen · Mannheim</div></div>
+      </div>
+
+      <p><strong>Subsidized counseling runs on partners' money, not MiM's.</strong> For residents of Berlin, Hamburg, Bayern (München), Bremen and Mannheim, the same counseling is available at a low co-pay — but the subsidy comes from <strong>regional partner programmes</strong>: MusicPool Berlin, RockCity Hamburg, Feierwerk Fachstelle Pop (Munich, funded by Kreativ München), Pop Office Bremen, and Next Mannheim's "Creative Care." MiM supplies the music-literate practitioner; the partner supplies the funded slot. A standing "solidarity" action also offers pay-what-you-can sessions (€25 / €40 / €55).<sup class="cite"><a href="#mim-src-5" data-tip="Subsidized pools: MusicPool Berlin, RockCity Hamburg, Feierwerk/Kreativ München, Pop Office Bremen, Next Mannheim; solidarity €25/€40/€55. mim-verband.de/beratung.">5</a></sup></p>
+
+      <ul class="prog">
+        <li><div class="ptag">Core</div><h3>Psychological counseling</h3><p>Individual and team sessions, video/phone, Germany-wide. Themes: stage fright, burnout/stress, addiction, tour health, depression, self-management, handling public criticism, sexism/diversity, team conflict. The counselor is matched from the pool by topic.<sup class="cite"><a href="#mim-src-5" data-tip="Counseling themes &amp; matching from the pool. mim-verband.de/beratung.">5</a></sup></p></li>
+        <li><div class="ptag">Workshops</div><h3>Sessions, workshops &amp; panels</h3><p>Named formats include "Resilient durch die Krise," "Mental Health in der Musikbranche," "Stress lass nach," and "Homeoffice ohne Dachschaden," plus panel and keynote inputs across the industry.<sup class="cite"><a href="#mim-src-1" data-tip="Workshop/session formats + panels. MiM homepage / workshops.">1</a></sup></p></li>
+        <li><div class="ptag">New · 2026</div><h3>The PRO MUSIK cooperation</h3><p>From 2026, MiM runs regular counseling with <strong>PRO MUSIK – Verband freier Musikschaffender e.V.</strong>: one-to-one counseling free to PRO MUSIK members, plus an open moderated group format ("Resonanzraum") ~every six weeks, in German and English. The model's natural growth path — plugging the practitioner pool into a <em>real</em> membership trade body that has the dues, the members, and the legal form MiM lacks.<sup class="cite"><a href="#mim-src-8" data-tip="2026 PRO MUSIK × MiM cooperation; PRO MUSIK = 'Verband freier Musikschaffender e.V.' (registered, dues-funded, Lobbyregister R004702). promusikverband.de.">8</a></sup></p></li>
+      </ul>
+    </section>
+
+    <!-- 4. WHAT IT ORGANIZES BUT DOES NOT DELIVER -->
+    <section>
+      <div class="section-label">04 — Advocacy &amp; field-building</div>
+      <h2>Infrastructure for a field, not a caseload<sup class="cite"><a href="#mim-src-7" data-tip="The 'Wissenswertes' clearinghouse — directory, brochures, peer orgs, surveys. mim-verband.de/wissenswertes, accessed 2026-06-28.">7</a></sup></h2>
+      <p>MiM's larger footprint is <strong>infrastructure for a field, not a caseload.</strong> Its "Wissenswertes" pages are a deliberately curated German-language clearinghouse: a downloadable directory of counseling/therapy addresses; the federal psychotherapy chamber's "Wege zur Psychotherapie" brochure (DE/EN/TR); general digital-care routes (MindDoc, HelloBetter); peer organizations at home and abroad (MITC, Help Musicians UK, Music Minds Matter, MusiCares); and a reading list of the field's key surveys (Record Union's <em>73 %</em>, Help Musicians' <em>Can Music Make You Sick?</em>, the Tour Health Research Initiative).<sup class="cite"><a href="#mim-src-7" data-tip="Curated directory, BPtK brochure, MindDoc/HelloBetter, peer orgs, survey reading list. mim-verband.de/wissenswertes.">7</a></sup> The stated long-term goal is cultural: that "mentale Gesundheit im Denken und Handeln der Musikbranche fest verankert ist."<sup class="cite"><a href="#mim-src-1" data-tip="Long-term goal: mental health firmly anchored in the music industry's thinking and action. MiM homepage.">1</a></sup></p>
+      <p>In this project's terms, this is <strong>room-building by curation and convening</strong> — making the existing care landscape navigable and music-aware, rather than standing up new clinical capacity. It is the German analogue to MusiCares' wellness survey or the Musicians' Union of Japan's published benefit schedule: the cheapest, most reusable asset an organization can leave behind.</p>
+    </section>
+
+    <!-- 5. STRENGTHS -->
+    <section>
+      <div class="section-label">05 — Strengths</div>
+      <h2>What works</h2>
+      <div class="sw-grid">
+        <div class="sw-card strong"><h3>Music literacy as the product</h3><p>Every counselor is also a musician; the whole pitch is "someone who understands the scene." For a population that distrusts generic services, <em>who</em> delivers the care is the differentiator — and it costs nothing but recruitment.</p></div>
+        <div class="sw-card strong"><h3>Capital-light and fast</h3><p>No clinic, no endowment, no staff to speak of — three psychologists stood it up in 2019/2020. The whole model is reproducible by a small founding team.</p></div>
+        <div class="sw-card strong"><h3>Federated funding through partners</h3><p>By plugging into MusicPool Berlin, RockCity, Feierwerk, Pop Office Bremen, Next Mannheim and now PRO MUSIK, MiM gets <em>subsidized</em> reach without raising the subsidy itself.</p></div>
+        <div class="sw-card strong"><h3>A field-building asset, not just a service</h3><p>The curated knowledge base and referral list are the lowest-cost, most reusable thing it does — and exactly what a new market most lacks.</p></div>
+      </div>
+    </section>
+
+    <!-- 6. WEAKNESSES -->
+    <section>
+      <div class="section-label">06 — Weaknesses &amp; risks</div>
+      <h2>What to watch</h2>
+      <div class="sw-grid">
+        <div class="sw-card weak"><h3>Legal-form opacity</h3><p>Calling itself a "Verband" while showing no Vereinsregister entry and a private-person Impressum is a governance and trust risk — and a liability question for an org delivering psychological services.</p></div>
+        <div class="sw-card weak"><h3>Key-person fragility</h3><p>A pool of ~5 (effectively led by 2), with the original third founder gone in 2023 and one lead "not taking new clients." There is no institutional body beneath the founders; the "Verband" is the people.</p></div>
+        <div class="sw-card weak"><h3>No independent funding</h3><p>Revenue is fee-for-service plus other people's subsidies. No dues, no reserve, no published budget — capacity rises and falls with partner programmes MiM does not control.</p></div>
+        <div class="sw-card weak"><h3>Reach bounded by the pool</h3><p>Subsidized counseling exists only where a regional partner funds it (five cities); elsewhere it is €50/€100 self-pay. Service that scales linearly with practitioner hours.</p></div>
+      </div>
+    </section>
+
+    <!-- 7. LESSONS -->
+    <section>
+      <div class="section-label">07 — Lessons for Taiwan</div>
+      <h2>What a Taiwan music mental health NPO should take</h2>
+      <ol class="lessons">
+        <li><h3>Lead with music-literate clinicians — the cheapest, highest-leverage move</h3><p>MiM's whole advantage is that its counselors are musicians. A Taiwan NPO can replicate this immediately: recruit a small pool of Mandarin-speaking, music-literate counselors and make "we understand the scene" the entire promise. No building required.<sup class="cite"><a href="#mim-src-5" data-tip="Counselors are all also musicians; music-literacy is the differentiator. mim-verband.de/beratung.">5</a></sup></p></li>
+        <li><h3>Build the referral map before the caseload</h3><p>The single most reusable thing MiM does is curate a navigable, music-aware list of who-helps-with-what. For Taiwan — where no such map exists — this is the first deliverable, and it doubles as evidence for funders.<sup class="cite"><a href="#mim-src-7" data-tip="The MiM-Liste / Wissenswertes clearinghouse is the lowest-cost reusable asset. mim-verband.de/wissenswertes.">7</a></sup></p></li>
+        <li><h3>Broker funded slots; don't try to fund them yourself</h3><p>MiM's subsidized counseling runs on partners' money (city pop offices, RockCity, PRO MUSIK). Look for the Taiwan analogue — a Ministry of Culture programme, a music-city office, a union — and supply the practitioner into <em>their</em> funded pool rather than raising the subsidy alone.<sup class="cite"><a href="#mim-src-8" data-tip="2026 PRO MUSIK cooperation = the broker-into-a-membership-body upgrade path. promusikverband.de.">8</a></sup></p></li>
+        <li><h3>Decide your legal form on purpose — and state it</h3><p>MiM's "Verband"-without-a-Verein is a cautionary tale: the name implies a membership body and a governance structure it does not have, a trust and liability risk for clinical work. In Taiwan, choose deliberately between a 協會 and a 基金會, register it, and put the registration on the page from day one — "we are a real, accountable body" is part of the service.<sup class="cite"><a href="#mim-src-2" data-tip="The legal-form opacity is the caution: register, and state it. MiM Impressum.">2</a></sup><sup class="cite"><a href="#mim-src-3" data-tip="No Vereinsregister entry found — the gap a Taiwan NPO should not replicate.">3</a></sup></p></li>
+        <li><h3>Pair the room with the floor</h3><p>Germany has the strongest statutory floor in the cycle (the KSK folds freelance musicians into social insurance), and MiM deliberately builds <em>only</em> the music-aware care layer on top. Taiwan's lesson is the same from the opposite direction: don't try to be both the rights/welfare body and the service — partner with a labour/rights body (the 藝創工會 analogue) and own the <strong>care</strong> layer.<sup class="cite"><a href="#mim-src-9" data-tip="The KSK is Germany's statutory 'floor'; MiM builds only the 'room' on top. See the Germany policy scan.">9</a></sup></p></li>
+        <li><h3>Grow by docking onto a real membership body</h3><p>MiM's 2026 PRO MUSIK cooperation shows the upgrade path: a thin practitioner collective becomes durable by plugging its pool into an established, dues-funded trade body. A Taiwan NPO can start thin and aim to become the standing mental-health service <em>for</em> an existing music membership organization.<sup class="cite"><a href="#mim-src-8" data-tip="Dock a thin practitioner pool onto a dues-funded membership body to gain durability. promusikverband.de.">8</a></sup></p></li>
+      </ol>
+    </section>
+
+    <!-- 8. METHOD + REFERENCES -->
+    <section>
+      <div class="section-label">08 — Methodology &amp; references</div>
+      <h2>Basis</h2>
+      <p class="cite-help">Every claim carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source; click to jump to the full reference. All sources are German-language and were captured 2026-06-28: the Verband's own site (mim-verband.de, which renders to readable HTML via WebFetch — not a hard JS wall), cross-checked against German press (stageaid.de) and the German company/association registry portals (handelsregister.de / Northdata). The legal-form finding is deliberately labeled ⚠️ Inferred — "no e.V. registration was found and the Impressum names a private person," not "MiM is definitely not a Verein" (Rule 4: absence ≠ non-existence). The earlier internal note "MiM e.V., 2019" in the Germany policy scan is corrected here.</p>
+
+      <div class="refs" id="refs-all" data-citation-registry="mim-all">
+        <div class="refs-title">References</div>
+        <ol>
+          <li id="mim-src-1" data-src="mim-home">MiM – Mental Health in Music. (n.d.). <em>Der MiM-Verband</em> [Homepage — idea, founders, goals]. Retrieved June 28, 2026, from <a href="https://www.mim-verband.de/" target="_blank" rel="noopener">mim-verband.de</a> — founding "Ende 2019" by Michael Wecker, Franziska Lauter and Anne Löhr (Löhr active 2019–June 2023); three goals (Sensibilisieren &amp; Informieren / Netzwerken / Beraten); Leitungsteam Lauter &amp; Wecker. The <a href="https://www.mim-verband.de/beratung" target="_blank" rel="noopener">Beratung page</a> metadata gives a conflicting "2020" founding and a fourth founder, Tanja Queckenstedt. <strong>Source · Method · Basis:</strong> organization primary site · WebFetch (DE) · ✅ Sourced (founding year/founder-set internally inconsistent — flagged).</li>
+          <li id="mim-src-2" data-src="mim-impressum">MiM – Mental Health in Music. (n.d.). <em>Impressum &amp; Datenschutz</em>. Retrieved June 28, 2026, from <a href="https://www.mim-verband.de/newpage" target="_blank" rel="noopener">mim-verband.de/newpage</a> — operator "Michael Wecker, Diplom-Psychologe, Adolfstraße 35, 12621 Berlin"; § 55 RStV responsibility "M. Wecker, A. Löhr, T. Queckenstedt, F. Lauter, Gormannstr. 14, 10119 Berlin"; no e.V., no VR number, no registration court, no Vorstand; site copyright "© Lauter, Wecker 2025." <strong>Source · Method · Basis:</strong> organization primary (legal notice) · WebFetch (DE) · ✅ Sourced (the <em>absence</em> of e.V. markers is the datum).</li>
+          <li id="mim-src-3" data-src="vereinsregister">Registerportal der Länder (handelsregister.de) &amp; Northdata company/association index. (n.d.). Retrieved June 28, 2026, from <a href="https://www.handelsregister.de/" target="_blank" rel="noopener">handelsregister.de</a> and <a href="https://www.northdata.de/" target="_blank" rel="noopener">northdata.de</a> — no Vereinsregister entry for "Mental Health in Music" / "MiM-Verband" located; comparison searches return other Berlin music-industry associations with VR numbers (e.g. <em>Interessenverband Musikmanager und Consultants e.V., Amtsgericht Charlottenburg VR 22091 B</em>). <strong>Source · Method · Basis:</strong> official registry portal · WebSearch + portal (DE) · ⚠️ Inferred (no registration found → legal form not an evidenced e.V.; Rule 4 — absence ≠ proof).</li>
+          <li id="mim-src-4" data-src="stageaid">Cattarius, A. (2025, February 16). <em>Mental Health in der Musikbranche – Der MiM-Verband im Fokus</em>. stageaid.de. <a href="https://www.stageaid.de/mental-health-in-music-ein-wichtiger-beitrag-fuer-die-gesundheit-in-der-veranstaltungsbranche/" target="_blank" rel="noopener">stageaid.de</a> — independent German feature: founding "Ende 2019" by Wecker, Lauter, Löhr; "Der MiM-Verband organisiert vor allem psychologische Einzel- und Teamberatung, engagiert sich in Vorträgen als Speaker*innen und bietet auch Workshops und Seminare"; goal to "sensibilisieren" and build a deutschlandweit network; calls MiM a "Verband"/"StartUp" but states no legal form; founders teach as guest lecturers at hdpk Berlin, BIMM Berlin, SAE Berlin, Music Pool Berlin, Institut für Systemisches Arbeiten. <strong>Source · Method · Basis:</strong> named industry outlet · WebFetch (DE) · ✅ Sourced (secondary corroboration).</li>
+          <li id="mim-src-5" data-src="mim-beratung">MiM – Mental Health in Music. (n.d.). <em>Beratung</em> [Counseling — prices, team, subsidized pools]. Retrieved June 28, 2026, from <a href="https://www.mim-verband.de/beratung" target="_blank" rel="noopener">mim-verband.de/beratung</a> — individual/team counseling by video/phone Germany-wide; self-pay €50 first session / €100 follow-up (per GOP); subsidized counseling (~€10–30 co-pay) for residents of Berlin (MusicPool Berlin), Hamburg (RockCity), Bayern/München (Feierwerk Fachstelle Pop), Bremen (Pop Office Bremen), Mannheim (Next Mannheim "Creative Care," contingent closed); solidarity action €25/€40/€55; counseling team Wecker, Lauter, Dolle, Bartsch, Salinas Rannenberg (all also musicians). <strong>Source · Method · Basis:</strong> organization primary · WebFetch (DE) · ✅ Sourced.</li>
+          <li id="mim-src-6" data-src="mim-kontakt">MiM – Mental Health in Music. (n.d.). <em>Kontakt</em>. Retrieved June 28, 2026, from <a href="https://www.mim-verband.de/kontakt" target="_blank" rel="noopener">mim-verband.de/kontakt</a> — contact routes only (book counseling / request workshop, session or talk; info@ and beratung@ mim-verband.de); no membership-join scheme present anywhere on the site. <strong>Source · Method · Basis:</strong> organization primary · WebFetch (DE) · ✅ Sourced (no membership = verified across the site, not assumed).</li>
+          <li id="mim-src-7" data-src="mim-wissenswertes">MiM – Mental Health in Music. (n.d.). <em>Wissenswertes</em> [Resource library]. Retrieved June 28, 2026, from <a href="https://www.mim-verband.de/wissenswertes" target="_blank" rel="noopener">mim-verband.de/wissenswertes</a> — curated German-language clearinghouse: "MiM-Liste" of counseling/outpatient-therapy addresses; BPtK "Wege zur Psychotherapie" (DE/EN/TR); MindDoc, HelloBetter, Deutsche DepressionsLiga; peer field initiatives (MITC, Help Musicians UK, Music Minds Matter, MusiCares); survey reading list (Record Union <em>73 %</em>, Help Musicians <em>Can Music Make You Sick?</em>, Tour Health Research Initiative). <strong>Source · Method · Basis:</strong> organization primary · WebFetch (DE) · ✅ Sourced.</li>
+          <li id="mim-src-8" data-src="promusik">PRO MUSIK Verband. (2026, February 17). <em>PRO MUSIK × MiM – Psychologische Beratung für Musikschaffende</em> [News]. <a href="https://www.promusikverband.de/post/pro-musik-x-mim-psychologische-beratung-fuer-musikschaffende/" target="_blank" rel="noopener">promusikverband.de</a> — 2026 cooperation: psychological one-to-one counseling free to PRO MUSIK members + open moderated group format "Resonanzraum" (~every 6 weeks, DE/EN, digital); PRO MUSIK = "Verband freier Musikschaffender e.V." (a registered, dues-funded trade body; Bundestag Lobbyregister R004702). <strong>Source · Method · Basis:</strong> partner organization primary · WebFetch (DE) · ✅ Sourced.</li>
+          <li id="mim-src-9" data-src="ksk">Künstlersozialkasse &amp; Bundesministerium für Arbeit und Soziales. (2025–2026). Künstlersozialversicherungsgesetz (KSVG) &amp; KSK statistics — see the project's Germany policy scan, <a href="policy-study-germany.html">policy-study-germany.html</a>, and <a href="https://www.kuenstlersozialkasse.de/" target="_blank" rel="noopener">kuenstlersozialkasse.de</a>. The KSVG (in force 1982; KSK from 1983) folds self-employed musicians into statutory pension/health/long-term-care insurance; the KSK is "kein Leistungsträger" and runs no music-specific MH programme — the statutory <strong>floor</strong> beneath MiM's <strong>room</strong>. <strong>Source · Method · Basis:</strong> statute + agency (via project policy scan) · ✅ Sourced.</li>
+        </ol>
+        <p class="refs-note">Convention: every claim-bearing element carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above — machine-checkable before each deploy (§5.2 / §6 gate 1). The legal-form finding is labeled ⚠️ Inferred (absence of registration), not a refutation.</p>
+      </div>
+    </section>
+
+    <nav class="related-block" aria-label="Related on this site">
+      <p class="related-title">Related</p>
+      <ul>
+        <li><a href="org-study.html">&larr; Org Study (all organizations)</a></li>
+        <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+        <li><a href="policy-study.html">Policy Study &mdash; how jurisdictions protect music workers</a></li>
+        <li><a href="policy-study-germany.html">Policy Study: Germany &mdash; the Künstlersozialkasse floor</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <script>
+  /* Scroll-reveal — R3.2 shared IntersectionObserver (normal-scroll page) */
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = 'section > h2, .stat-strip, figure, .table-wrap, .phases-grid, .sources-card, .refs, .flag, .gear-cards, .sw-grid';
+    var nodes = Array.prototype.slice.call(document.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, sibs, idx = 0;
+        if (p){ sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,6) * 60) + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
+
+  <!-- nav scroll-state: transparent over hero, blurred bar once scrolled -->
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden','true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>

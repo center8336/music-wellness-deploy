@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Musicians' Health · Lübeck · Org Study · MH&amp;W</title>
+  <meta name="description" content="The 'Musicians' Health Center' at Musikhochschule Lübeck is not an NPO — it is a single endowed professorship jointly run by a conservatory and a medical university, and the only German musicians'-medicine unit led on mental health. What a university-anchored direct-care model costs and covers, for the Taiwan 'room' question.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      /* ── DIA-GRADE READING SCALE (calibrated to Dia browser, serif-corrected) ── */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;--lh-prose:1.7;--wt-prose:440;--measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;--label-ink:var(--graphite);
+      --font-cjk:'Noto Serif TC',serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { overflow-x: hidden; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--black);
+      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      line-height: var(--lh-prose);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    a { color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    a:hover { color: var(--signal-dim); }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--signal); outline-offset: 3px; border-radius: var(--radius);
+    }
+
+    .skip-nav {
+      position: absolute; left: -9999px; top: 0; z-index: 200;
+      background: var(--signal); color: var(--white);
+      padding: 0.5rem 1rem; font-family: var(--font-mono);
+    }
+    .skip-nav:focus { left: 0; }
+
+    /* ===== NAVIGATION ===== */
+    nav.nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; flex-direction: column;
+      padding: 2rem 2.5rem;
+      padding-top: calc(2rem + env(safe-area-inset-top));
+      background: transparent;
+      transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    nav.nav.scrolled {
+      background: rgba(244, 244, 245, 0.45);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: var(--font-mono); font-size: 1.1rem; font-weight: 400;
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-topbar { display:none; }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; min-width:44px; min-height:44px; z-index:101; -webkit-tap-highlight-color:transparent; }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity:0; }
+    .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
+
+    /* ===== LAYOUT ===== */
+    main { max-width: var(--max-w); margin: 0 auto; padding: 0 2.5rem 5rem 2.5rem; }
+    section { margin-bottom: 4rem; }
+    .narrow { max-width: var(--max-w-text); }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding-top: calc(9rem + env(safe-area-inset-top));
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-light);
+      margin-bottom: 3rem;
+    }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.18em;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: var(--font-display); font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6.5rem);
+      font-weight: 800; line-height: 1.04; color: var(--black); letter-spacing: -0.01em;
+      overflow-wrap: break-word; hyphens: auto;
+    }
+    .hero h1 .tail { display:block; font-size: clamp(1.15rem, 2.6vw, 1.9rem); font-weight: 600; color: var(--signal); letter-spacing: 0; margin-top: 0.9rem; }
+    .hero .subtitle {
+      font-family: var(--font-body); font-size: clamp(1.25rem, 1.05rem + 1.4vw, 1.5rem);
+      color: var(--graphite); line-height: 1.55; margin-top: 1.5rem; max-width: 54ch;
+    }
+    .basis-badge {
+      display: inline-block; margin-top: 1.75rem;
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--graphite); background: var(--signal-bg);
+      border: 1px solid var(--signal-glow); border-radius: var(--radius);
+      padding: 0.5rem 0.85rem; line-height: 1.5;
+    }
+
+    /* ===== TWO-LINE COVER (R2.1, 2026-06-20) ===== */
+    .cover {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      padding: 0 2rem;
+    }
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%,
+        var(--signal-glow) 0%,
+        rgba(102,103,171,0.06) 38%,
+        rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
+    }
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 1280px);
+    }
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 6.4vw, 5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin: 0;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+    .cover-sub {
+      font-family: var(--font-display);
+      font-size: clamp(1.05rem, 2.4vw, 1.6rem);
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: 0;
+      color: var(--graphite);
+      margin: 1.1rem auto 0;
+      max-width: 30ch;
+      text-wrap: balance;
+    }
+    .cover-line {
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--purple-deep);
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
+    }
+    .cover-hint {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
+    }
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
+    }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-sub   { animation-delay: 0.18s; }
+    .cover-inner > .cover-line  { animation-delay: 0.30s; }
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .cover-wash,
+      .cover-hint,
+      .cover-inner > * { animation: none; opacity: 1; transform: none; }
+    }
+    @media (max-width: 768px) {
+      .cover { padding: 0 1.25rem; }
+      .cover-title { font-size: clamp(1.7rem, 8vw, 2.5rem); }
+      .cover-sub   { font-size: clamp(0.95rem, 4vw, 1.15rem); }
+      .cover-line  { font-size: clamp(0.72rem, 3.2vw, 0.95rem); letter-spacing: 0.18em; }
+    }
+
+    /* ===== TYPE ===== */
+    h2 {
+      font-family: var(--font-display); font-size: var(--text-h2);
+      font-weight: 700; line-height: 1.1; color: var(--black);
+      margin-bottom: 1.25rem; letter-spacing: -0.01em;
+      text-wrap: balance; overflow-wrap: break-word;
+    }
+    h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem); line-height: 1.25; font-weight: 600; color: var(--charcoal); margin: 1.75rem 0 0.75rem; }
+    .section-label {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem;
+    }
+    p { color: var(--graphite); max-width: var(--measure-prose); margin-bottom: 1rem; line-height: 1.65; }
+    p.lead { font-size: 1.1rem; color: var(--charcoal); }
+    strong { color: var(--charcoal); font-weight: 600; }
+    em { color: var(--graphite); }
+
+    /* ===== MODEL CALLOUT ===== */
+    .model-callout { background: var(--bg-card-dark); color: var(--snow); border-radius: var(--radius-lg); padding: 2.25rem 2.5rem; margin-bottom: 3rem; }
+    .model-callout h2 { color: var(--white); margin-bottom: 1rem; }
+    .model-callout p { color: var(--silver); max-width: none; }
+    .model-callout strong { color: var(--white); }
+    .model-callout a { color: var(--spectrum-3); text-decoration: underline; text-underline-offset: 2px; }
+    .model-callout a:hover { color: var(--white); }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-card); margin: 1.5rem 0 0.75rem; }
+    .stat-item { padding: 1.75rem 1.25rem; border-right: 1px solid var(--border-light); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--signal); line-height: 1; font-variant-numeric: tabular-nums; }
+    .stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.6rem; line-height: 1.4; }
+
+    /* ===== TABLES ===== */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; margin: 1.25rem 0; border-radius: var(--radius-lg); border: 1px solid var(--border-light); }
+    .table-wrap:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+    table { width: 100%; border-collapse: collapse; background: var(--bg-card); font-size: var(--text-small); }
+    caption { text-align: left; font-family: var(--font-mono); font-size: var(--text-caption); color: var(--label-ink); padding: 0.75rem 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border-light); vertical-align: top; font-variant-numeric: tabular-nums; }
+    thead th { font-family: var(--font-mono); font-size: var(--text-micro); text-transform: uppercase; letter-spacing: 0.06em; color: var(--label-ink); background: var(--snow); }
+    tbody tr:last-child td { border-bottom: none; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .row-emph td { background: var(--signal-bg); font-weight: 600; color: var(--charcoal); }
+    th[scope="row"] { font-family: var(--font-mono); font-size: var(--text-micro); text-transform: uppercase; letter-spacing: 0.04em; color: var(--label-ink); font-weight: 400; white-space: nowrap; }
+
+    /* ===== PROGRAM LIST ===== */
+    .prog { list-style: none; margin: 1.25rem 0 0; padding: 0; }
+    .prog li { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 0.85rem; }
+    .prog h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .prog p { font-size: var(--text-sm); margin-bottom: 0; }
+    .prog .ptag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ===== SCOPE CARDS (basis-tagged) ===== */
+    .scope-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .scope { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--spectrum-4); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem; }
+    .scope.unknown { border-left-color: var(--spectrum-2); }
+    .scope .stag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--graphite); letter-spacing: 0.06em; }
+    .scope h3 { margin: 0.3rem 0 0.5rem; font-size: 1.05rem; }
+    .scope p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== SW CARDS ===== */
+    .sw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.25rem; }
+    .sw-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem; }
+    .sw-card.weak { border-left: 3px solid var(--spectrum-2); }
+    .sw-card.strong { border-left: 3px solid var(--spectrum-4); }
+    .sw-card h3 { margin: 0 0 0.4rem; font-size: 1rem; }
+    .sw-card p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== LESSONS ===== */
+    .lessons { counter-reset: lesson; list-style: none; margin: 1.5rem 0 0; padding: 0; }
+    .lessons li { position: relative; padding: 1.25rem 1.5rem 1.25rem 3.5rem; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); margin-bottom: 0.85rem; }
+    .lessons li::before { counter-increment: lesson; content: counter(lesson); position: absolute; left: 1.25rem; top: 1.25rem; font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--signal); }
+    .lessons h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .lessons p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== CITATIONS (§5 inline tier) ===== */
+    .cite { font-size: 0.7em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem; }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-fine); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; max-width: var(--measure-ref); overflow-wrap: anywhere; }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs-note { font-size: var(--text-xs); color: var(--label-ink); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-sm); color: var(--label-ink); font-style: italic; max-width: var(--max-w-text); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .scope-grid { grid-template-columns: 1fr; }
+      .sw-grid { grid-template-columns: 1fr; }
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2n) { border-right: none; }
+      .stat-item:nth-child(-n+2) { border-bottom: 1px solid var(--border-light); }
+    }
+    @media (max-width: 768px) {
+      nav.nav { padding: 1.2rem 1.5rem; padding-top: calc(1.2rem + env(safe-area-inset-top)); }
+      nav.nav.open { background: rgba(244,244,245,0.95); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-light); }
+      .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
+      .nav-toggle { display:block; }
+      .nav-mobile-brand { display:block; }
+      .nav-links { display:none; flex-direction:column; gap:0.75rem; margin-top:1rem; }
+      .nav-links.show { display:flex; }
+      .nav-links a { font-size: 0.85rem; }
+      main { padding: 0 1.5rem 3rem 1.5rem; }
+      .hero { padding-top: calc(7rem + env(safe-area-inset-top)); }
+      .hero h1 { font-size: clamp(2.4rem, 10.5vw, 3.4rem); }
+      .model-callout { padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
+    @media (max-width: 680px) {
+      p, .hero .subtitle, .refs li, .cite-help { max-width: none; }
+    }
+    @media (max-width: 480px) {
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+      .stat-item:last-child { border-bottom: none; }
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
+      table { font-size: 0.82rem; }
+      thead th { font-size: 0.6rem; }
+      th, td { padding: 0.5rem 0.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } nav.nav { transition: none; } }
+
+    /* ===== Scroll-reveal (R3.2 craft pass) ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ===== Related block (no dead-ends, R3.2) ===== */
+    .related-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-light); }
+    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--label-ink); margin-bottom: 0.6rem; }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a { font-family: var(--font-body); font-size: var(--text-sm); color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+  </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open');this.setAttribute('aria-expanded',o)">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+        <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="org-study.html" class="current" aria-current="page">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
+      <a href="field-news.html">FIELD NEWS</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- COVER -->
+    <section class="cover">
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="cover-inner">
+        <h1 class="cover-title">MUSICIANS' HEALTH · LÜBECK</h1>
+        <p class="cover-sub">The Musicians' Health Working Group at the Musikhochschule Lübeck &amp; Universität zu Lübeck</p>
+        <p class="cover-line">Org Study · Est. 2022</p>
+      </div>
+      <span class="cover-hint" aria-hidden="true">↓ Scroll</span>
+    </section>
+
+    <!-- MODEL CALLOUT -->
+    <div class="model-callout">
+      <h2>One model, in one line</h2>
+      <p><a href="org-study-musicares.html">MusiCares</a> shows an incumbent's ceiling; <a href="org-study-music-minds-matter.html">Music Minds Matter</a> shows how to incubate a charity inside a benevolent fund. <strong>Lübeck asks a smaller, sharper question: what does music-specific mental-health <em>care</em> cost and cover when it is not an NPO at all, but a single endowed chair shared by a conservatory and a medical university?</strong> The "Musicians' Health Center" on this project's Orgs Map turns out to be the <strong>Working Group "Musicians' Health" (AG Musizierendengesundheit)</strong> — one professorship, a small counselling office, and a research programme, and the only German musicians'-medicine unit led on <em>mental</em> health. It is the "room" question in its most institutionally embedded form.</p>
+    </div>
+
+    <!-- 1. PROFILE -->
+    <section>
+      <div class="section-label">01 — Profile</div>
+      <h2>A bridge professorship, not a charity<sup class="cite"><a href="#lmh-src-1" data-src="mhl-musicians-health" data-tip="The unit is named on the MHL's own English page as 'Musicians' Health at the MHL' / 'Musicians' Health Working Group', part of UzL's Institute of Medical Psychology. MHL, Musicians' Health (English).">1</a></sup></h2>
+      <p>The honest first correction is about what this is. There is <strong>no independent "Musicians' Health Center" with its own legal personality.</strong> The entity is an academic unit — the <strong>Professur für Musizierendengesundheit</strong> (Professorship for Musicians' Health) and its <strong>Arbeitsgruppe (AG) Musizierendengesundheit</strong> — created jointly by the Musikhochschule Lübeck (MHL) and the Universität zu Lübeck (UzL), and structurally located <strong>inside the University of Lübeck's Institute of Medical Psychology (IMP)</strong>. The map's "Center" label is a loose rendering of the universities' own phrase, "a centre for medical counselling and treatment" — a described capability, not a registered organisation.<sup class="cite"><a href="#lmh-src-1" data-src="mhl-musicians-health" data-tip="'A new centre for medical counselling and treatment for music professionals…' — describing the capability, not a legal entity. MHL, Musicians' Health (English).">1</a></sup><sup class="cite"><a href="#lmh-src-4" data-src="imp-ag" data-tip="The AG Musizierendengesundheit is part of the Institut für Medizinische Psychologie (IMP) of the UzL, led by Prof. Scholz. IMP, AG Musizierendengesundheit.">4</a></sup></p>
+
+      <div class="table-wrap" role="region" aria-label="Organization profile — Musicians' Health at Lübeck (scrollable table)" tabindex="0">
+        <table>
+          <caption>Profile — Musicians' Health Working Group, Lübeck (sources cited inline)</caption>
+          <tbody>
+            <tr><th scope="row">Formal entity</th><td>Professorship + Working Group "Musizierendengesundheit" (Musicians' Health) — <strong>not an NPO / Verein</strong></td></tr>
+            <tr><th scope="row">Parents</th><td>Joint institution of Musikhochschule Lübeck (MHL) + Universität zu Lübeck (UzL) — the first joint "bridge" professorship of the two</td></tr>
+            <tr><th scope="row">Structural home</th><td>Part of UzL's Institut für Medizinische Psychologie (IMP); research tied to UzL Neurology at the CBBM</td></tr>
+            <tr><th scope="row">Professorship announced</th><td>2021-02-17 (first joint MHL+UzL chair advertised)</td></tr>
+            <tr><th scope="row">Chair filled / office opened</th><td>Winter semester 2022/23 · counselling office (Beratungsstelle) opened October 2022</td></tr>
+            <tr><th scope="row">Director</th><td>Prof. Dr. Daniel Sebastian Scholz — neuroscientist, Diplom-Psychologe, behavioural therapist (licensed psychotherapist since 2021), musician</td></tr>
+            <tr><th scope="row">Named team</th><td>Christine Sickert (psychologist) · Dr. Stine Alpheis</td></tr>
+            <tr><th scope="row">Location</th><td>Tesdorpfhaus, Mengstraße 66–70, 23552 Lübeck</td></tr>
+            <tr><th scope="row">Funding</th><td>~€600,000 start-up from the Possehl-Stiftung Lübeck, initial 5 years; intended permanent funding by MHL + UzL after evaluation</td></tr>
+            <tr><th scope="row">Scope served</th><td>MHL + UzL students <strong>and</strong> music professionals and amateurs from the North-German region</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Sources for the rows are cited section by section below. The director and team are named exactly as the institutions' own pages list them; no staff, partner, or figure here goes beyond a cited source.<sup class="cite"><a href="#lmh-src-3" data-src="uzl-appointment" data-tip="Scholz takes the joint chair from WS 2022/23; biography and mental-health focus. UzL news, 2022-10-06.">3</a></sup><sup class="cite"><a href="#lmh-src-4" data-src="imp-ag" data-tip="Team members Christine Sickert and Stine Alpheis listed under 'Musizierendengesundheit'. IMP, AG Musizierendengesundheit.">4</a></sup></p>
+    </section>
+
+    <!-- 2. THE MODEL -->
+    <section>
+      <div class="section-label">02 — The model</div>
+      <h2>Two universities, one bridge chair<sup class="cite"><a href="#lmh-src-2" data-src="uzl-founding" data-tip="The 'Lübecker Modell zur Musikergesundheit', built on close cooperation of MHL, UzL and the UKSH university hospital. UzL press release, 2021-02-17.">2</a></sup></h2>
+      <p>The structural distinction of Lübeck is the <strong>Brückenprofessur</strong> — a single professorship that "bridges" a conservatory (MHL) and a medical university (UzL). At the founding in February 2021 the two universities jointly advertised what they called the <strong>"Lübecker Modell zur Musikergesundheit"</strong> (Lübeck Model for Musicians' Health), built on a close cooperation of MHL, UzL and the <strong>UKSH</strong> university hospital and its clinics. Named cultural partners include the Lübeck music schools and the Philharmonic Orchestra of the Hanseatic City of Lübeck.</p>
+      <p>What makes the model distinctive, in the universities' own framing, is <strong>who it reaches</strong>: it is explicitly <em>not</em> limited to university members. From the start it was designed to serve, through counselling and continuing education, <strong>music-school teachers, freelance music instructors, orchestra musicians, and singing/music-making amateurs</strong> — and, on the prevention side, children and young people. A public consultation (<em>Sprechstunde</em>) at UzL, a teaching offer in musicians' health at MHL, and research at both were the founding pillars.<sup class="cite"><a href="#lmh-src-2" data-src="uzl-founding" data-tip="Scope explicitly beyond university members: music-school teachers, freelance instructors, orchestra musicians, amateurs, children/youth. UzL press release, 2021-02-17.">2</a></sup></p>
+      <p>The funder's own reason, quoted at founding: Max Schön of the Possehl-Stiftung said it funds the chair because the two universities "cooperate for the good of those working in culture in our city," adding that the new services will benefit not only students but also amateur musicians. UzL's president called the joint professorship "unique in the state"; MHL's president framed the goal as helping musicians manage difficulties "and preventing serious disorders from arising in the first place."<sup class="cite"><a href="#lmh-src-2" data-src="uzl-founding" data-tip="Quotes from Max Schön (Possehl-Stiftung), Pres. Gillessen-Kaesbach (UzL, 'landesweit einmalig'), Pres. Rico Gubler (MHL). UzL press release, 2021-02-17.">2</a></sup></p>
+    </section>
+
+    <!-- 3. SCOPE -->
+    <section>
+      <div class="section-label">03 — Scope, honestly</div>
+      <h2>Mental health is the differentiator<sup class="cite"><a href="#lmh-src-3" data-src="uzl-appointment" data-tip="Of ~10 German musicians'-medical facilities, Lübeck is the only one specialised in neurological/psychological/psychotherapeutic topics — i.e. the mental health of musicians. UzL news, 2022-10-06.">3</a></sup></h2>
+      <p>This is the finding to be precise about, and it cuts the other way from most musicians'-medicine centres. Germany has, in the institutions' own count, <strong>around ten musicians'-medical facilities</strong> — the best known being the Institute for Music Physiology and Musicians' Medicine (IMMM) in Hannover, where Scholz spent eleven years. <strong>Lübeck is the only one specialised in neurological, psychological and psychotherapeutic topics</strong> — i.e. in the <em>mental</em> health of musicians. The others are physiology- and physical-medicine-led; Lübeck's stated focus is "prevention and the psychological health of musicians."<sup class="cite"><a href="#lmh-src-3" data-src="uzl-appointment" data-tip="Scholz: 'Our focus will be on prevention and the psychological health of musicians.' Prior 11 years at IMMM Hannover. UzL news, 2022-10-06.">3</a></sup><sup class="cite"><a href="#lmh-src-7" data-src="miz" data-tip="Corroborated by the German national Music Information Centre (miz.org): mental-health specialisation unique in Germany among ~10 facilities. miz.org news, 2022-10-06.">7</a></sup></p>
+
+      <div class="scope-grid">
+        <div class="scope">
+          <div class="stag">✅ Sourced</div>
+          <h3>Genuinely music-specific</h3>
+          <p>Its entire remit is musicians and music students — not a general university counselling service. The niche is exact.</p>
+        </div>
+        <div class="scope">
+          <div class="stag">✅ Sourced</div>
+          <h3>Mental-health-led, not -only</h3>
+          <p>The office addresses "mental <em>and</em> physical" health in music-making; the founding model also lists tension, restricted movement, tinnitus, stage fright. What is distinctive is that the <em>lead</em> specialisation is psychological/psychotherapeutic, not orthopaedic.</p>
+        </div>
+        <div class="scope">
+          <div class="stag">✅ Sourced</div>
+          <h3>Students <em>and</em> outside professionals</h3>
+          <p>Serves MHL + UzL students and music professionals and amateurs — but "from the North-German region." A regional clinic-plus-research unit, not a national programme.</p>
+        </div>
+        <div class="scope unknown">
+          <div class="stag">❓ No source</div>
+          <h3>Fees, intake, case volumes</h3>
+          <p>Whether counselling is free, how one registers, and how many people are seen are not published. Marked "not found," not "absent" (Rule 4) — and a real limit on assessing service capacity.</p>
+        </div>
+      </div>
+      <p style="margin-top:1.5rem;">A third strand, <strong>hearing health (Hörgesundheit)</strong>, is pursued interdisciplinarily across Lübeck's three universities and the HörHanse network on the Hanse Innovation Campus.<sup class="cite"><a href="#lmh-src-4" data-src="imp-ag" data-tip="Hörgesundheit: interdisciplinary across the three Lübeck universities and the HörHanse network. IMP, AG Musizierendengesundheit.">4</a></sup></p>
+    </section>
+
+    <!-- 4. WHAT IT DOES -->
+    <section>
+      <div class="section-label">04 — What it does</div>
+      <h2>Four strands<sup class="cite"><a href="#lmh-src-4" data-src="imp-ag" data-tip="Beratung, Lehre, Forschung, Hörgesundheit — the four strands listed on the working group's own page. IMP, AG Musizierendengesundheit.">4</a></sup></h2>
+      <ul class="prog">
+        <li><div class="ptag">Since Oct 2022</div><h3>Beratung — counselling</h3><p>A counselling office (Beratungsstelle) for music students, professionals and amateurs from the North-German region, offering individual consultation on mental and physical health in music-making, at the Tesdorpfhaus.</p></li>
+        <li><div class="ptag">Teaching</div><h3>Lehre — for all Lübeck students</h3><p>Lectures on the fundamentals of healthy music-making and the neuroscience of music for MHL <em>and</em> UzL students, plus a stage-fright seminar (Lampenfieberseminar) and a "Music &amp; the Brain" seminar.</p></li>
+        <li><div class="ptag">Research</div><h3>Forschung — with UzL Neurology</h3><p>In close cooperation with UzL Neurology at the CBBM, research on mental load (mentale Belastung) and the neuronal plasticity of music students. Stated priority: prevention and psychological health.<sup class="cite"><a href="#lmh-src-3" data-src="uzl-appointment" data-tip="Research at the CBBM on mental load and neuronal plasticity of music students. UzL news, 2022-10-06.">3</a></sup></p></li>
+        <li><div class="ptag">Interdisciplinary</div><h3>Hörgesundheit — hearing health</h3><p>Work on the psychology and hearing health of musicians, embedded in the HörHanse network with TH Lübeck and UKSH audiology/acoustics.</p></li>
+      </ul>
+    </section>
+
+    <!-- 5. LIMIT -->
+    <section>
+      <div class="section-label">05 — The visible output</div>
+      <h2>LIMIT — a measurement instrument, free to adopt<sup class="cite"><a href="#lmh-src-5" data-src="limit-kk" data-tip="The 'Lübeck Inventory on Musicians' Psychological Stress' (LIMIT), an open-access self-screening questionnaire by Sickert, Alpheis, Scholz + Obleser. Kulturkanal.sh, 2026-02-11, citing the MHL.">5</a></sup></h2>
+      <p>The clearest tangible product to date is a <strong>measurement instrument</strong>. In early 2026 the working group (Christine Sickert, Dr. Stine Alpheis, Prof. Daniel S. Scholz, with Prof. Dr. Jonas Obleser of UzL's Institute of Psychology) published the <strong>"Lübeck Inventory on Musicians' Psychological Stress" (LIMIT)</strong> — an <strong>open-access</strong>, self-administered screening questionnaire designed specifically for music students and professional musicians.<sup class="cite"><a href="#lmh-src-6" data-src="limit-uzl" data-tip="Corroborated by the university's own research news on the LIMIT questionnaire. UzL research news, 2026.">6</a></sup></p>
+      <p>LIMIT exists because conventional psychological questionnaires capture musicians' lives poorly. It combines, in one instrument, <strong>existential worries about a small and fiercely competitive labour market, financial insecurity, performance anxiety, physical complaints from playing, and social strain</strong> — neglected friendships and family from freelance/project work, the former hobby become a profession with no compensating leisure. It is explicitly <strong>not diagnostic</strong>: it is for long-term <strong>self-monitoring</strong>, so changes are caught early and preventive support sought. MHL plans to introduce LIMIT in 2026, recommended at the start of each semester.<sup class="cite"><a href="#lmh-src-5" data-src="limit-kk" data-tip="Non-diagnostic, for self-monitoring; covers existential/financial/performance/physical/social stressors; MHL plans 2026 rollout. Kulturkanal.sh, 2026-02-11.">5</a></sup></p>
+      <p>LIMIT matters for this study because it is the <strong>lowest-cost, most transferable thing the unit makes</strong> — a validated, open instrument any other institution can adopt at near-zero cost. It is the same lesson <a href="org-study-musicares.html">MusiCares</a> teaches with its Wellness in Music Survey: the cheapest measurement asset, not the expensive service, is the part that travels.</p>
+    </section>
+
+    <!-- 6. FUNDING -->
+    <section>
+      <div class="section-label">06 — Funding</div>
+      <h2>Philanthropic seed inside a public university<sup class="cite"><a href="#lmh-src-2" data-src="uzl-founding" data-tip="~€600,000 Anschubfinanzierung from the Possehl-Stiftung for an initial 5 years; an endowed bridge professorship (Stiftungsprofessur). UzL press release, 2021-02-17.">2</a></sup></h2>
+      <p>The funding model is the heart of the "what it costs" question, and it reads cleanly because this is an endowed professorship, not a fundraising charity.</p>
+
+      <div class="stat-strip">
+        <div class="stat-item"><div class="stat-num">€600k</div><div class="stat-label">Possehl-Stiftung start-up funding</div></div>
+        <div class="stat-item"><div class="stat-num">5 yrs</div><div class="stat-label">initial endowed term, then intended permanence</div></div>
+        <div class="stat-item"><div class="stat-num">1 of ~10</div><div class="stat-label">German musicians'-medicine units — the only mental-health-led one</div></div>
+        <div class="stat-item"><div class="stat-num">2022</div><div class="stat-label">counselling office opened (Oct)</div></div>
+      </div>
+
+      <p style="margin-top:1.25rem;"><strong>Start-up:</strong> ~€600,000 from the <strong>Possehl-Stiftung Lübeck</strong>, a large Lübeck civic foundation, covering an initial five years — a <em>Stiftungsprofessur</em> (philanthropically endowed chair), including a scientific-staff post to help build the music-medicine capability at UzL.<sup class="cite"><a href="#lmh-src-8" data-src="possehl" data-tip="The Possehl-Stiftung Lübeck is a large Lübeck civic foundation active in art and science. Possehl-Stiftung, Kunst & Wissenschaft.">8</a></sup> <strong>Intended steady state:</strong> after a five-year evaluation, the professorship is to be made permanent (<em>verstetigt</em>) and financed onward by MHL and UzL — converting from philanthropic seed to public-university line funding. Whether that conversion has been confirmed is not public (❓).<sup class="cite"><a href="#lmh-src-2" data-src="uzl-founding" data-tip="After evaluation the chair is to be made permanent and continued-funded by MHL/UzL; confirmation of Verstetigung not found publicly. UzL press release, 2021-02-17.">2</a></sup></p>
+      <p><strong>Implication:</strong> the unit does <em>not</em> run on donations, galas, membership dues, or service fees. Its sustainability rests on a host institution absorbing it — exactly the trade a university-embedded model makes: low fundraising overhead and clinical legitimacy, in exchange for dependence on two institutions' budgets and one foundation's initial bet. For this project's thesis, Lübeck is <strong>room (a direct service)</strong> built on an institutional foundation rather than a statutory one — closer to a hospital outpatient clinic than to Germany's Künstlersozialkasse (the statutory <em>floor</em>). It shows "room" can be durable without a charity wrapper, if a public institution will own it.</p>
+    </section>
+
+    <!-- 7. STRENGTHS -->
+    <section>
+      <div class="section-label">07 — Strengths</div>
+      <h2>What works</h2>
+      <div class="sw-grid">
+        <div class="sw-card strong"><h3>Legitimacy by construction</h3><p>A chair in a medical-psychology institute, tied to neurology and a university hospital, gives the service credibility and a research pipeline a standalone NPO would spend years building.</p></div>
+        <div class="sw-card strong"><h3>A real differentiator</h3><p>Of ~10 German musicians'-medicine centres, the only one led on mental health — a clear, defensible niche, not a me-too clinic.</p></div>
+        <div class="sw-card strong"><h3>Low overhead, no fundraising treadmill</h3><p>No gala, no donor cultivation. One foundation grant seeds it; the intended steady state is institutional line funding.</p></div>
+        <div class="sw-card strong"><h3>Reach beyond the campus</h3><p>By design it serves regional professionals and amateurs, not only enrolled students — unusual for a university unit.</p></div>
+        <div class="sw-card strong"><h3>A transferable artefact</h3><p>LIMIT is an open-access instrument the rest of the field can adopt at near-zero cost.</p></div>
+      </div>
+    </section>
+
+    <!-- 8. WEAKNESSES -->
+    <section>
+      <div class="section-label">08 — Weaknesses &amp; risks</div>
+      <h2>What to watch</h2>
+      <div class="sw-grid">
+        <div class="sw-card weak"><h3>Key-person concentration</h3><p>Essentially one professor plus a two-person counselling/teaching team. Identity, clinical authority and research direction rest on Daniel Scholz — a single point of failure a charity board would diversify.</p></div>
+        <div class="sw-card weak"><h3>Funding cliff / unconfirmed permanence</h3><p>The €600k covers five years; permanent funding is an intention, contingent on evaluation and two universities' budgets. No public confirmation of <em>Verstetigung</em> was found.</p></div>
+        <div class="sw-card weak"><h3>Regionally bounded</h3><p>"North-German region" is the stated catchment — local infrastructure, not a national programme. It does not scale by design.</p></div>
+        <div class="sw-card weak"><h3>Opaque service metrics</h3><p>No public case volumes, waiting times, fees, or intake process — so actual service capacity cannot be assessed from outside.</p></div>
+        <div class="sw-card weak"><h3>Embedded, not independent</h3><p>The institutional home that grants legitimacy also removes autonomy: priorities, survival and growth are decided above the unit, by the two universities.</p></div>
+      </div>
+    </section>
+
+    <!-- 9. LESSONS -->
+    <section>
+      <div class="section-label">09 — Lessons for Taiwan</div>
+      <h2>What a Taiwan music mental-health NPO should take</h2>
+      <ol class="lessons">
+        <li><h3>A university can be the cheapest, most credible host for music-specific care</h3><p>The most legitimate way to stand up clinical musicians'-mental-health services is to attach them to an institution that already has clinicians, ethics oversight, and research. For Taiwan, the analogue is a partnership with a <strong>music conservatory and/or a university psychology/psychiatry department</strong> — buying credibility and a research engine an NPO cannot quickly replicate.<sup class="cite"><a href="#lmh-src-1" data-src="mhl-musicians-health" data-tip="The unit's legitimacy comes from being embedded in a medical-psychology institute with a university hospital. MHL, Musicians' Health.">1</a></sup></p></li>
+        <li><h3>Pick a defensible specialisation; don't be a me-too clinic</h3><p>Lübeck's whole identity is "the mental-health one" among general musicians'-medicine centres. A Taiwan org should choose a niche the existing system does not cover — and for Taiwan, <em>any</em> music-specific mental-health service currently is that niche — and own it explicitly.<sup class="cite"><a href="#lmh-src-3" data-src="uzl-appointment" data-tip="Lübeck's defensible niche: the only mental-health-led musicians'-medicine unit in Germany. UzL news, 2022-10-06.">3</a></sup></p></li>
+        <li><h3>Seed with one anchor funder — but plan the hand-off from day one</h3><p>The Possehl model — a single civic foundation funds five years, then the universities take over — is a realistic Taiwan path: a major foundation or the Ministry of Culture seeds a fixed term, with a pre-agreed plan for who absorbs the running cost. Lübeck's open risk (permanence still unconfirmed) is the caution: <strong>secure the hand-off in writing before the seed runs out.</strong><sup class="cite"><a href="#lmh-src-2" data-src="uzl-founding" data-tip="Five-year Possehl seed, intended conversion to MHL/UzL funding after evaluation. UzL press release, 2021-02-17.">2</a></sup></p></li>
+        <li><h3>Build a measurement instrument early — it is the cheapest thing that travels</h3><p>LIMIT, like MusiCares' survey, is low-cost and high-leverage: a validated, <em>open</em> Taiwan-specific screening tool for music students and professionals would create baseline data where none exists, give the org a reason to be in every conservatory each semester, and be adoptable by others at no marginal cost. The single most copyable element here.<sup class="cite"><a href="#lmh-src-5" data-src="limit-kk" data-tip="LIMIT is an open-access, self-monitoring instrument adoptable at near-zero cost. Kulturkanal.sh, 2026-02-11.">5</a></sup></p></li>
+        <li><h3>Design reach beyond the campus from the start</h3><p>Lübeck deliberately serves freelancers, orchestra players, teachers and amateurs, not just enrolled students. A Taiwan unit hosted by a conservatory should write external professionals into its remit from day one, or it will only reach the people already inside the building.<sup class="cite"><a href="#lmh-src-2" data-src="uzl-founding" data-tip="Scope designed beyond university members from founding. UzL press release, 2021-02-17.">2</a></sup></p></li>
+        <li><h3>Mind the key-person and capacity risks an NPO would hedge</h3><p>The flip side of a lean university chair is fragility: one departure can hollow it out, and service capacity is invisible. A Taiwan org borrowing the model should pair the academic anchor with a <strong>succession plan and published service metrics</strong> — the governance hygiene a standalone charity brings that a single professorship does not.<sup class="cite"><a href="#lmh-src-4" data-src="imp-ag" data-tip="The unit is one professor plus a two-person team; service metrics are not public. IMP, AG Musizierendengesundheit.">4</a></sup></p></li>
+      </ol>
+    </section>
+
+    <!-- 10. METHOD + REFERENCES -->
+    <section>
+      <div class="section-label">10 — Methodology &amp; references</div>
+      <h2>Basis</h2>
+      <p class="cite-help">Every claim carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source; click to jump to the full reference. Sources are the working group's and its two parent institutions' own German-language pages and press releases (and the MHL English page where available). Where a fact is not publicly stated — fees, intake, case volumes, confirmation of permanent funding — it is marked ❓ per Rule 4: "not found," not "does not exist." No people, partners, or figures are stated beyond what a cited source supports.</p>
+
+      <div class="refs" id="refs-all" data-citation-registry="lmh-all">
+        <div class="refs-title">References</div>
+        <ol>
+          <li id="lmh-src-1" data-src="mhl-musicians-health">Musikhochschule Lübeck. (n.d.). <em>Musicians' health</em> [English]. Retrieved June 28, 2026, from <a href="https://www.mh-luebeck.de/en/research/research-at-the-mhl/musicians-health/" target="_blank" rel="noopener">mh-luebeck.de</a> — names the unit ("Musicians' Health at the MHL" / "Musicians' Health Working Group"), its place in UzL's Institute of Medical Psychology, the €600,000 Possehl start-up funding, Prof. Dr. Daniel S. Scholz, the CBBM cooperation, and the Tesdorpfhaus counselling office. <strong>Source · Method · Basis:</strong> organisation's own page (English) · WebFetch · ✅ Sourced.</li>
+          <li id="lmh-src-2" data-src="uzl-founding">Universität zu Lübeck. (2021, February 17). <em>Erste gemeinsame Lübecker Professur für Musikergesundheit</em> [Press release]. <a href="https://www.uni-luebeck.de/aktuelles/pressemitteilung/artikel/erste-gemeinsame-luebecker-professur-fuer-musikergesundheit.html" target="_blank" rel="noopener">uni-luebeck.de</a> — founding announcement of the first joint MHL+UzL bridge professorship; the "Lübecker Modell zur Musikergesundheit"; ~€600,000 Possehl-Stiftung start-up funding for an initial 5 years with intended permanent financing by MHL/UzL after evaluation; scope beyond university members (music-school teachers, freelance instructors, orchestra musicians, amateurs, children/youth); UKSH, Lübeck music schools and the Philharmonic Orchestra as partners; quotes from Max Schön (Possehl-Stiftung), Pres. Gillessen-Kaesbach (UzL), Pres. Rico Gubler (MHL). <strong>Source · Method · Basis:</strong> university press release (primary) · WebFetch · ✅ Sourced.</li>
+          <li id="lmh-src-3" data-src="uzl-appointment">Universität zu Lübeck. (2022, October 6). <em>Daniel Sebastian Scholz ist Professor für Musizierendengesundheit</em> [News]. <a href="https://www.uni-luebeck.de/aktuelles/nachricht/artikel/daniel-sebastian-scholz-ist-professor-fuer-musizierendengesundheit.html" target="_blank" rel="noopener">uni-luebeck.de</a> — Scholz takes the joint chair from winter semester 2022/23; focus on the mental health of musicians, "unique in Germany"; ~10 musicians'-medical facilities nationwide, Lübeck the only one specialised in neurological/psychological/psychotherapeutic topics; €600,000 Possehl start-up funding; CBBM research on mental load and neuronal plasticity; counselling office at the Tesdorpfhaus from October 2022; Scholz biography (b. 1983 Tübingen; 11 yrs at IMMM Hannover; licensed behavioural-therapy psychotherapist since May 2021); quote from Vice-President Medicine Prof. Thomas Münte. <strong>Source · Method · Basis:</strong> university news release (primary) · WebFetch · ✅ Sourced.</li>
+          <li id="lmh-src-4" data-src="imp-ag">Institut für Medizinische Psychologie, Universität zu Lübeck. (n.d.). <em>AG Musizierendengesundheit</em>. Retrieved June 28, 2026, from <a href="https://www.imp.uni-luebeck.de/institut/ag-musizierendengesundheit" target="_blank" rel="noopener">imp.uni-luebeck.de</a> — current structure: the working group as part of the IMP, led by Prof. Scholz; the four strands (Beratung, Lehre, Forschung, Hörgesundheit); named team members Christine Sickert and Stine Alpheis; counselling for students and North-German-region professionals since October 2022; HörHanse network. <strong>Source · Method · Basis:</strong> institute's own page (primary) · WebFetch · ✅ Sourced.</li>
+          <li id="lmh-src-5" data-src="limit-kk">Kulturkanal.sh. (2026, February 11). <em>Stress durch psychische Belastungen bei Musizierenden – Präventionshilfe „LIMIT" kommt aus Lübeck</em>. <a href="https://www.kulturkanal.sh/2026/02/11/stress-durch-psychische-belastungen-bei-musizierenden-praeventionshilfe-limit-kommt-aus-luebeck" target="_blank" rel="noopener">kulturkanal.sh</a> — the "Lübeck Inventory on Musicians' Psychological Stress" (LIMIT) self-screening questionnaire by Sickert, Alpheis, Scholz (AG Musizierendengesundheit) with Prof. Jonas Obleser (UzL Psychology); covers existential/financial/performance/physical/social stressors specific to musicians; non-diagnostic, for long-term self-monitoring and prevention; open-access publication (PDF linked); MHL plans introduction in 2026; sourced "Quelle: Musikhochschule Lübeck." <strong>Source · Method · Basis:</strong> regional cultural outlet citing the MHL (grey literature) · WebFetch · ✅ Sourced.</li>
+          <li id="lmh-src-6" data-src="limit-uzl">Universität zu Lübeck. (2026). <em>Fragebogen zu psychischen Belastungen bei Musizierenden</em> [Research news]. <a href="https://www.uni-luebeck.de/forschung/aktuelles-zur-forschung/aktuelles-zur-forschung/artikel/fragebogen-zu-psychischen-belastungen-bei-musizierenden.html" target="_blank" rel="noopener">uni-luebeck.de</a> — the university's own announcement of the LIMIT questionnaire developed by the Musicians' Health working group; corroborates authorship, purpose (self-monitoring not diagnosis), and target group. <strong>Source · Method · Basis:</strong> university research news (primary) · WebFetch · ✅ Sourced.</li>
+          <li id="lmh-src-7" data-src="miz">miz.org (Deutsches Musikinformationszentrum). (2022, October 6). <em>Lübecker Musikhochschule und Universität richten neue Professur für Musizierendengesundheit ein</em>. <a href="https://miz.org/de/nachrichten/luebecker-musik-hoch-schule-und-universitaet-richten-neue-professur-fuer-musizierenden-gesundheit-ein" target="_blank" rel="noopener">miz.org</a> — the German national Music Information Centre's notice corroborating the joint professorship, the mental-health specialisation as unique in Germany, the ~10 facilities figure, and the €600,000 Possehl funding. <strong>Source · Method · Basis:</strong> national music-information body (grey literature, corroborating) · web search · ✅ Sourced.</li>
+          <li id="lmh-src-8" data-src="possehl">Possehl-Stiftung Lübeck. (n.d.). <em>Kunst &amp; Wissenschaft</em>. <a href="https://www.possehl-stiftung.de/de/kunst--wissenschaft/kunst--wissenschaft" target="_blank" rel="noopener">possehl-stiftung.de</a> — context for the funder: the Possehl-Stiftung is a large Lübeck civic foundation active in art and science. <strong>Source · Method · Basis:</strong> funder's own page · web search · ✅ Sourced (funder identity/context).</li>
+        </ol>
+        <p class="refs-note">Convention: every claim-bearing element carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above — machine-checkable before each deploy (§5.2 / §6 gate 1). German-language sources unless marked English; ❓ marks facts not publicly stated (Rule 4).</p>
+      </div>
+    </section>
+
+    <nav class="related-block" aria-label="Related on this site">
+      <p class="related-title">Related</p>
+      <ul>
+        <li><a href="org-study.html">&larr; Org Study (all organizations)</a></li>
+        <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+        <li><a href="policy-study.html">Policy Study &mdash; how jurisdictions protect music workers</a></li>
+        <li><a href="policy-study-germany.html">Policy Study &mdash; Germany (the Künstlersozialkasse floor)</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <script>
+  /* Scroll-reveal — R3.2 shared IntersectionObserver (normal-scroll page) */
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = 'section > h2, .stat-strip, figure, .table-wrap, .scope-grid, .sw-grid, .prog, .lessons, .refs';
+    var nodes = Array.prototype.slice.call(document.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, sibs, idx = 0;
+        if (p){ sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,6) * 60) + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
+
+  <!-- nav scroll-state: transparent over hero, blurred bar once scrolled -->
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden','true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>

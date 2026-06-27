@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>TGR The Green Room · Org Study · MH&amp;W</title>
+  <meta name="description" content="TGR The Green Room is a German non-profit (gUG, Cologne, 2020) running donation-based psychological counseling &amp; coaching for performing artists on a ~€80k micro-budget — the smallest viable shape of a music-mental-health care service, founder-built by a pianist-psychologist. What it shows a Taiwan NPO about a direct-care 'room'.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      /* ── DIA-GRADE READING SCALE (calibrated to Dia browser, serif-corrected) ── */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;--lh-prose:1.7;--wt-prose:440;--measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;--label-ink:var(--graphite);
+      --font-cjk:'Noto Serif TC',serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { overflow-x: hidden; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--black);
+      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      line-height: var(--lh-prose);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    a { color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    a:hover { color: var(--signal-dim); }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--signal); outline-offset: 3px; border-radius: var(--radius);
+    }
+
+    .skip-nav {
+      position: absolute; left: -9999px; top: 0; z-index: 200;
+      background: var(--signal); color: var(--white);
+      padding: 0.5rem 1rem; font-family: var(--font-mono);
+    }
+    .skip-nav:focus { left: 0; }
+
+    /* ===== NAVIGATION ===== */
+    nav.nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; flex-direction: column;
+      padding: 2rem 2.5rem;
+      padding-top: calc(2rem + env(safe-area-inset-top));
+      background: transparent;
+      transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    nav.nav.scrolled {
+      background: rgba(244, 244, 245, 0.45);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: var(--font-mono); font-size: 1.1rem; font-weight: 400;
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-topbar { display:none; }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; min-width:44px; min-height:44px; z-index:101; -webkit-tap-highlight-color:transparent; }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity:0; }
+    .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
+
+    /* ===== LAYOUT ===== */
+    main { max-width: var(--max-w); margin: 0 auto; padding: 0 2.5rem 5rem 2.5rem; }
+    section { margin-bottom: 4rem; }
+    .narrow { max-width: var(--max-w-text); }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding-top: calc(9rem + env(safe-area-inset-top));
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-light);
+      margin-bottom: 3rem;
+    }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.18em;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: var(--font-display); font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6.5rem);
+      font-weight: 800; line-height: 1.04; color: var(--black); letter-spacing: -0.01em;
+      overflow-wrap: break-word; hyphens: auto;
+    }
+    .hero h1 .tail { display:block; font-size: clamp(1.15rem, 2.6vw, 1.9rem); font-weight: 600; color: var(--signal); letter-spacing: 0; margin-top: 0.9rem; }
+    .hero .subtitle {
+      font-family: var(--font-body); font-size: clamp(1.25rem, 1.05rem + 1.4vw, 1.5rem);
+      color: var(--graphite); line-height: 1.55; margin-top: 1.5rem; max-width: 54ch;
+    }
+    .basis-badge {
+      display: inline-block; margin-top: 1.75rem;
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--graphite); background: var(--signal-bg);
+      border: 1px solid var(--signal-glow); border-radius: var(--radius);
+      padding: 0.5rem 0.85rem; line-height: 1.5;
+    }
+
+    /* ===== TWO-LINE COVER (R2.1, 2026-06-20) — width:100% inside main (no 100vw breakout → no x-overflow) ===== */
+    .cover {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;                /* clips the wash */
+      padding: 0 2rem;
+    }
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%,
+        var(--signal-glow) 0%,
+        rgba(102,103,171,0.06) 38%,
+        rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
+    }
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 1280px);
+    }
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin: 0;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+    .cover-line {
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--purple-deep);
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
+    }
+    .cover-hint {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
+    }
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
+    }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-line  { animation-delay: 0.22s; }
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .cover-wash,
+      .cover-hint,
+      .cover-inner > * { animation: none; opacity: 1; transform: none; }
+    }
+    @media (max-width: 768px) {
+      .cover { padding: 0 1.25rem; }
+      .cover-title { font-size: clamp(1.7rem, 7.3vw, 2.4rem); }
+      .cover-line  { font-size: clamp(0.72rem, 3.2vw, 0.95rem); letter-spacing: 0.18em; }
+    }
+
+    /* ===== TYPE ===== */
+    h2 {
+      font-family: var(--font-display); font-size: var(--text-h2);
+      font-weight: 700; line-height: 1.1; color: var(--black);
+      margin-bottom: 1.25rem; letter-spacing: -0.01em;
+      text-wrap: balance; overflow-wrap: break-word;
+    }
+    h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem); line-height: 1.25; font-weight: 600; color: var(--charcoal); margin: 1.75rem 0 0.75rem; }
+    .section-label {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem;
+    }
+    p { color: var(--graphite); max-width: var(--measure-prose); margin-bottom: 1rem; line-height: 1.65; }
+    p.lead { font-size: 1.1rem; color: var(--charcoal); }
+    strong { color: var(--charcoal); font-weight: 600; }
+    em { color: var(--graphite); }
+
+    /* ===== MODEL CALLOUT ===== */
+    .model-callout { background: var(--bg-card-dark); color: var(--snow); border-radius: var(--radius-lg); padding: 2.25rem 2.5rem; margin-bottom: 3rem; }
+    .model-callout h2 { color: var(--white); margin-bottom: 1rem; }
+    .model-callout p { color: var(--silver); max-width: none; }
+    .model-callout strong { color: var(--white); }
+    .model-callout a { color: var(--spectrum-3); text-decoration: underline; text-underline-offset: 2px; }
+    .model-callout a:hover { color: var(--white); }
+
+    /* ===== THE FLYWHEEL (signature visual) ===== */
+    .flywheel-panel {
+      background: var(--bg-card-dark);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem 2rem 1.5rem;
+      margin: 1.5rem 0 1.75rem;
+      border: 1px solid var(--border-dark);
+    }
+    .flywheel-panel .fw-cap {
+      font-family: var(--font-mono); font-size: var(--text-xs); color: var(--spectrum-3);
+      text-transform: uppercase; letter-spacing: 0.16em; text-align: center; margin-bottom: 0.5rem;
+    }
+    .flywheel-panel svg { display: block; width: 100%; height: auto; max-width: 460px; margin: 0 auto; }
+    .fw-ring { fill: none; stroke: var(--border-dark); stroke-width: 1.5; stroke-dasharray: 3 6; }
+    .fw-arc { fill: none; stroke: var(--spectrum-3); stroke-width: 2.5; opacity: 0.85; stroke-dasharray: 4 7; animation: fw-flow 2.2s linear infinite; }
+    @keyframes fw-flow { to { stroke-dashoffset: -22; } }
+    .fw-node { fill: var(--charcoal); stroke: var(--spectrum-2); stroke-width: 2; }
+    .fw-hub { fill: var(--black); stroke: var(--spectrum-3); stroke-width: 1.5; }
+    .fw-num { fill: var(--spectrum-3); font-family: var(--font-mono); font-size: 13px; font-weight: 700; }
+    .fw-label { fill: var(--snow); font-family: var(--font-display); font-size: 15px; font-weight: 700; letter-spacing: 0.02em; }
+    .fw-sub { fill: var(--grey-light); font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.04em; }
+    .fw-hub-label { fill: var(--spectrum-3); font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.14em; }
+    .fw-hub-sub { fill: var(--grey-light); font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; }
+
+    .gear-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .gear {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-left: 3px solid var(--spectrum-2); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem;
+    }
+    .gear .gn { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); letter-spacing: 0.1em; }
+    .gear h3 { margin: 0.35rem 0 0.5rem; font-size: 1.08rem; }
+    .gear p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-card); margin: 1.5rem 0 0.75rem; }
+    .stat-item { padding: 1.75rem 1.25rem; border-right: 1px solid var(--border-light); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--signal); line-height: 1; font-variant-numeric: tabular-nums; }
+    .stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.6rem; line-height: 1.4; }
+
+    /* ===== COLUMN CHART (revenue trajectory) ===== */
+    figure.chart { margin: 1.5rem 0; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 2rem 1.75rem 1.25rem; }
+    figure.chart figcaption { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
+    .col-chart { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.6rem; align-items: end; }
+    .col { display: flex; flex-direction: column; align-items: center; }
+    .ctrack { position: relative; width: 100%; height: 190px; display: flex; align-items: flex-end; }
+    .cbar { width: 100%; max-width: 54px; margin: 0 auto; background: var(--signal); border-radius: var(--radius) var(--radius) 0 0; position: relative; transition: height var(--dur-slow) var(--ease); }
+    .cbar.peak { background: var(--spectrum-2); }
+    .cbar .cval { position: absolute; top: -1.35rem; left: -50%; right: -50%; text-align: center; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--charcoal); font-variant-numeric: tabular-nums; }
+    .cyr { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); margin-top: 0.55rem; letter-spacing: 0.02em; }
+    .chart-note { font-size: var(--text-xs); color: var(--label-ink); margin-top: 1rem; max-width: none; }
+    .chart-key { display: flex; gap: 1.25rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .chart-key span { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); display: inline-flex; align-items: center; gap: 0.4rem; }
+    .swatch { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+    .swatch.s-rev { background: var(--signal); }
+    .swatch.s-covid { background: var(--spectrum-2); }
+
+    /* ===== TABLES ===== */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; margin: 1.25rem 0; border-radius: var(--radius-lg); border: 1px solid var(--border-light); }
+    .table-wrap:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+    table { width: 100%; border-collapse: collapse; background: var(--bg-card); font-size: var(--text-small); }
+    caption { text-align: left; font-family: var(--font-mono); font-size: var(--text-caption); color: var(--label-ink); padding: 0.75rem 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border-light); vertical-align: top; font-variant-numeric: tabular-nums; }
+    thead th { font-family: var(--font-mono); font-size: var(--text-micro); text-transform: uppercase; letter-spacing: 0.06em; color: var(--label-ink); background: var(--snow); }
+    tbody tr:last-child td { border-bottom: none; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .row-emph td { background: var(--signal-bg); font-weight: 600; color: var(--charcoal); }
+    .row-covid td { background: rgba(232, 168, 124, 0.12); }
+
+    /* ===== CRISIS CARDS ===== */
+    .crisis-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .crisis { background: var(--bg-card); border: 1px solid var(--border-light); border-top: 3px solid var(--spectrum-1); border-radius: var(--radius-lg); padding: 1.5rem 1.6rem; }
+    .crisis .cyrtag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--graphite); letter-spacing: 0.08em; }
+    .crisis h3 { margin: 0.3rem 0 0.6rem; font-size: 1.08rem; }
+    .crisis .big { font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; color: var(--charcoal); line-height: 1; margin-bottom: 0.5rem; }
+    .crisis p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== PROGRAM LIST ===== */
+    .prog { list-style: none; margin: 1.25rem 0 0; padding: 0; }
+    .prog li { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 0.85rem; }
+    .prog h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .prog p { font-size: var(--text-sm); margin-bottom: 0; }
+    .prog .ptag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ===== SW CARDS ===== */
+    .sw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.25rem; }
+    .sw-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem; }
+    .sw-card.weak { border-left: 3px solid var(--spectrum-2); }
+    .sw-card.strong { border-left: 3px solid var(--spectrum-4); }
+    .sw-card h3 { margin: 0 0 0.4rem; font-size: 1rem; }
+    .sw-card p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== LESSONS ===== */
+    .lessons { counter-reset: lesson; list-style: none; margin: 1.5rem 0 0; padding: 0; }
+    .lessons li { position: relative; padding: 1.25rem 1.5rem 1.25rem 3.5rem; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); margin-bottom: 0.85rem; }
+    .lessons li::before { counter-increment: lesson; content: counter(lesson); position: absolute; left: 1.25rem; top: 1.25rem; font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--signal); }
+    .lessons h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .lessons p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== CITATIONS (§5 inline tier) ===== */
+    .cite { font-size: 0.7em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem; }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-fine); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; max-width: var(--measure-ref); overflow-wrap: anywhere; }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs-note { font-size: var(--text-xs); color: var(--label-ink); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-sm); color: var(--label-ink); font-style: italic; max-width: var(--max-w-text); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .gear-cards { grid-template-columns: 1fr; }
+      .crisis-grid { grid-template-columns: 1fr; }
+      .sw-grid { grid-template-columns: 1fr; }
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2n) { border-right: none; }
+      .stat-item:nth-child(-n+2) { border-bottom: 1px solid var(--border-light); }
+    }
+    @media (max-width: 768px) {
+      nav.nav { padding: 1.2rem 1.5rem; padding-top: calc(1.2rem + env(safe-area-inset-top)); }
+      nav.nav.open { background: rgba(244,244,245,0.95); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-light); }
+      .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
+      .nav-toggle { display:block; }
+      .nav-mobile-brand { display:block; }
+      .nav-links { display:none; flex-direction:column; gap:0.75rem; margin-top:1rem; }
+      .nav-links.show { display:flex; }
+      .nav-links a { font-size: 0.85rem; }
+      main { padding: 0 1.5rem 3rem 1.5rem; }
+      .hero { padding-top: calc(7rem + env(safe-area-inset-top)); }
+      .hero h1 { font-size: clamp(2.4rem, 10.5vw, 3.4rem); }
+      .model-callout, .flywheel-panel { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .col-chart { gap: 0.3rem; }
+      .ctrack { height: 150px; }
+      .cbar .cval { font-size: 0.62rem; }
+    }
+    @media (max-width: 680px) {
+      p, .hero .subtitle, .refs li, .cite-help { max-width: none; }
+    }
+    @media (max-width: 480px) {
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+      .stat-item:last-child { border-bottom: none; }
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
+      .cyr { font-size: 0.6rem; }
+      table { font-size: 0.82rem; }
+      thead th { font-size: 0.6rem; }
+      th, td { padding: 0.5rem 0.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } nav.nav, .cbar { transition: none; } .fw-arc { animation: none; } }
+
+    /* ===== Scroll-reveal (R3.2 craft pass) ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ===== Related block (no dead-ends, R3.2) ===== */
+    .related-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-light); }
+    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--label-ink); margin-bottom: 0.6rem; }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a { font-family: var(--font-body); font-size: var(--text-sm); color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+  </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open');this.setAttribute('aria-expanded',o)">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+        <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="org-study.html" class="current" aria-current="page">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
+      <a href="field-news.html">FIELD NEWS</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- COVER -->
+    <section class="cover">
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="cover-inner">
+        <h1 class="cover-title">THE GREEN ROOM</h1>
+        <p class="cover-line">Org Study · Est. 2020</p>
+      </div>
+      <span class="cover-hint" aria-hidden="true">↓ Scroll</span>
+    </section>
+
+    <!-- MODEL CALLOUT -->
+    <div class="model-callout">
+      <h2>One model, in one line</h2>
+      <p>Germany's <strong>MiM-Verband</strong> is an advocacy trade body, and the <strong>Künstlersozialkasse</strong> is a statutory rights <em>floor</em>. TGR The Green Room is neither — it is the <strong>direct-care, founder-built, micro-budget "room."</strong> One classical-pianist-turned-psychologist, a roster of part-time artist-practitioners, and a single room in Cologne, delivering <strong>donation-based psychological counseling and coaching</strong> plus body-based workshops to performing artists, on roughly <strong>€80,000 a year</strong>. It holds no endowment, runs no helpline, and bills no insurance. For a Taiwan music mental-health NPO it answers a different question from the big funds: not "what does the ceiling look like?" but <em>"what is the smallest credible shape a care service can take — and what breaks when it is built around one person?"</em></p>
+    </div>
+
+    <!-- 1. PROFILE -->
+    <section>
+      <div class="section-label">01 — Profile</div>
+      <h2>A care centre built by an artist, for artists<sup class="cite"><a href="#tgr-src-5" data-src="register" data-tip="Identity, legal form, founding, managing director, capital: German commercial register (Amtsgericht Köln HRB 103802) via Northdata. Read via Claude-in-Chrome.">5</a></sup></h2>
+      <p>TGR The Green Room is a <strong>non-profit social enterprise</strong> founded in <strong>October 2020 in Cologne, Germany</strong>, by classical-pianist-turned-psychologist Heather O'Donnell, to support the psychosocial and somatic health of performing artists — especially musicians, dancers and theatre-makers. It describes itself as "a space for reflection, support and reorientation — created by artists for artists."<sup class="cite"><a href="#tgr-src-1" data-src="about" data-tip="'A space for reflection, support and reorientation — created by artists for artists'; psychological counseling for cultural workers. TGR, Über uns.">1</a></sup><sup class="cite"><a href="#tgr-src-6" data-src="cultureforhealth" data-tip="Non-profit social enterprise founded Oct 2020 in Cologne for artists, esp. musicians/dancers/theatre. CultureForHealth mapping.">6</a></sup></p>
+
+      <div class="table-wrap" role="region" aria-label="Organization profile — TGR The Green Room (scrollable table)" tabindex="0">
+        <table>
+          <caption>Organization profile — TGR The Green Room (sources cited inline)</caption>
+          <tbody>
+            <tr><th scope="row">Legal name</th><td>TGR The Green Room gemeinnützige UG (haftungsbeschränkt)</td></tr>
+            <tr><th scope="row">Legal form</th><td>gUG — non-profit entrepreneurial company (limited liability); the charitable "mini-GmbH" variant</td></tr>
+            <tr><th scope="row">Register</th><td>Amtsgericht Köln (District Court of Cologne) HRB 103802 · EUID DER3306.HRB103802</td></tr>
+            <tr><th scope="row">Founded</th><td>October 2020 (statute dated 5 Oct 2020; registered 27 Nov 2020)</td></tr>
+            <tr><th scope="row">Share capital</th><td>€1,000.00</td></tr>
+            <tr><th scope="row">Charitable purpose</th><td>Promotion of art &amp; culture (§52(2)1 no.5 AO) and of popular / vocational education (no.7 AO)</td></tr>
+            <tr><th scope="row">Founder &amp; Managing Director</th><td>Heather O'Donnell — M.Sc. Psychology, M.M. Piano Performance, Artistic-Systemic Therapist (DGSF)</td></tr>
+            <tr><th scope="row">Location</th><td>Cologne; from autumn 2025 at the Alte Feuerwache, Agnesviertel (previously the Clouth-Werke / Nippes site)</td></tr>
+            <tr><th scope="row">Scope</th><td>Germany-based; counseling live in Cologne or online; workshops travel internationally</td></tr>
+            <tr><th scope="row">Target group</th><td>Performing artists (musicians, dancers, theatre-makers), cultural workers, arts students; "we have never turned anyone away"</td></tr>
+            <tr><th scope="row">Networks</th><td>Member of the European Network of Cultural Centres (ENCC) — and on its Board of Directors; also IETM and On The Move</td></tr>
+            <tr><th scope="row">Recognition</th><td>Patronage of the German Commission for UNESCO (GreenHaven residency program)</td></tr>
+            <tr><th scope="row">Website</th><td><a href="https://www.thegreenroomforartists.de" target="_blank" rel="noopener">thegreenroomforartists.de</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>A note on the name.</strong> "The Green Room" is one of the most common names in the performing-arts and wellness worlds, so identification matters. The organization profiled here is <strong>TGR The Green Room gUG of Cologne</strong> (domain <em>thegreenroomforartists.de</em>, register HRB 103802, founder Heather O'Donnell) — the entity the Orgs Map lists at row #108. It is <strong>not</strong> Backline's "Green Room" peer-support program (USA; a separate Orgs Map row), nor "The Green Room Coaching", nor the US "Green Room Counseling / Psychology" practices that share the name.<sup class="cite"><a href="#tgr-src-5" data-src="register" data-tip="Disambiguating fingerprints: thegreenroomforartists.de, Cologne, gUG (HRB 103802), founder O'Donnell, UNESCO patronage. Register via Northdata.">5</a></sup></p>
+
+      <p><strong>On the founder.</strong> Heather O'Donnell is an American classical pianist who built a substantial concert and new-music career — premieres of works by Berio, Tenney, Finnissy and Rzewski — before transitioning to psychology after career-disrupting injuries. She holds an M.Sc. in (Health &amp; Prevention) Psychology and is an Artistic-Systemic Therapist accredited by the DGSF (the German Society for Systemic Therapy); she is TGR's founding and managing director. The dependence of the whole organization on this single founder-practitioner is the central fact of its risk profile (§6).<sup class="cite"><a href="#tgr-src-8" data-src="odonnell" data-tip="O'Donnell: American classical pianist; M.Sc. Psychology; Artistic-Systemic Therapist (DGSF); founding director of TGR (2020); came to psychology after career-disrupting injuries. Her professional site + Wikipedia.">8</a></sup><sup class="cite"><a href="#tgr-src-5" data-src="register" data-tip="O'Donnell is the sole registered managing director (Geschäftsführerin). Register via Northdata.">5</a></sup></p>
+    </section>
+
+    <!-- 2. THE DISTINCTIVE MODEL -->
+    <section>
+      <div class="section-label">02 — The distinctive model</div>
+      <h2>Practitioner-built, donation-based, scoped to care not crisis</h2>
+      <p>Three structural choices define TGR and separate it from both the advocacy bodies and the larger endowed funds in this series.</p>
+
+      <div class="gear-cards">
+        <div class="gear">
+          <div class="gn">CHOICE 01</div>
+          <h3>Practitioner-built, not institution-built</h3>
+          <p>TGR was created by a working psychologist who is also a working artist, and every counselor, mentor and teacher on its roster "combines well-founded psychological knowledge with lived experience in the performing arts." Counseling is "trauma-sensitive, artist-centred", delivered by people who have themselves performed — its explicit differentiator.<sup class="cite"><a href="#tgr-src-1" data-src="about" data-tip="Counseling 'trauma-sensitive, artist-centred'; all counselors/mentors combine psychological knowledge with lived performing-arts experience. TGR, Über uns.">1</a></sup><sup class="cite"><a href="#tgr-src-7" data-src="encc" data-tip="'All counselling or teaching staff, including founder Heather O'Donnell, are active or former performing artists.' ENCC member profile.">7</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">CHOICE 02</div>
+          <h3>Donation-based access, with a means-tested top-up</h3>
+          <p>TGR's core service is explicitly <strong>"Donation-Based Psychological Counseling &amp; Coaching for Artists and Cultural Workers"</strong> — neither free-at-point-of-use nor a fixed fee nor insurance-billed. On top of it, the FAQ confirms a <strong>means-based financial-support application</strong> ("Is there financial support…? Yes. Please fill out this form"), reviewed case by case. Access is designed around affordability for a precarious clientele.<sup class="cite"><a href="#tgr-src-2" data-src="offerings" data-tip="'Donation-Based Psychological Counseling &amp; Coaching for Artists and Cultural Workers.' TGR, Offerings.">2</a></sup><sup class="cite"><a href="#tgr-src-1" data-src="about" data-tip="FAQ: 'Is there financial support for programs at TGR? Yes. Please fill out this form' — means-based, reviewed case by case. TGR, Über uns.">1</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">CHOICE 03</div>
+          <h3>Scoped to prevention &amp; transition, not crisis</h3>
+          <p>TGR sits at the <em>preventive and rehabilitative</em> layer. O'Donnell frames the gap it fills as "preventive measures as well as rehabilitative supports" that artists "sorely miss"; the catalogue is built around performance anxiety, burnout, creative blocks, injury recovery, career transitions and resilience — <strong>not</strong> acute psychiatric crisis. A counseling-and-coaching centre, not an emergency or inpatient service.<sup class="cite"><a href="#tgr-src-4" data-src="home" data-tip="O'Donnell: artists miss 'preventive measures as well as rehabilitative supports'; TGR places its offers there. Kölner Stadt-Anzeiger via TGR Home.">4</a></sup></p>
+        </div>
+      </div>
+    </section>
+    <!-- 3. FINANCIAL -->
+    <section>
+      <div class="section-label">03 — Funding &amp; finances</div>
+      <h2>A micro-budget, grant-and-donation operation<sup class="cite"><a href="#tgr-src-6" data-src="cultureforhealth" data-tip="Budget €80,000; funding sources 'MRI, BAMF, Goethe-Institut, a.o.' CultureForHealth mapping.">6</a></sup></h2>
+      <p>TGR is, financially, <strong>very small</strong> — and transparent about being so. There is no endowment, no statutory funding stream, and no audited accounts on the website. Two independent sources triangulate the picture.</p>
+
+      <div class="stat-strip" role="group" aria-label="TGR funding profile at a glance">
+        <div class="stat-item"><div class="stat-num">€80k</div><div class="stat-label">Annual budget (CultureForHealth)</div></div>
+        <div class="stat-item"><div class="stat-num">€1,000</div><div class="stat-label">Share capital (gUG)</div></div>
+        <div class="stat-item"><div class="stat-num">200+</div><div class="stat-label">Artists assisted since 2020</div></div>
+        <div class="stat-item"><div class="stat-num">€35,264</div><div class="stat-label">One-off mutual-aid fundraiser (Beirach)</div></div>
+      </div>
+
+      <h3>What the two sources show</h3>
+      <ul class="prog">
+        <li><h3>The EU mapping: €80k budget, grant-funded</h3><p>The <strong>CultureForHealth</strong> database (an EU-cofunded project) records TGR's <strong>budget as €80,000</strong> and its <strong>sources of funding as "MRI, BAMF, Goethe-Institut, a.o."</strong> — a mix of foundation and institutional grants tied largely to its residency and refugee-artist work, not a single core grant.<sup class="cite"><a href="#tgr-src-6" data-src="cultureforhealth" data-tip="Budget €80,000; funding sources 'MRI, BAMF, Goethe-Institut, a.o.'; partners Goethe-Institut, Artists-at-Risk, BAMF. CultureForHealth mapping.">6</a></sup></p></li>
+        <li><h3>The register: a €1,000 non-profit shell, tiny turnover</h3><p>The <strong>German commercial register (via Northdata)</strong> shows a <strong>gUG with €1,000 share capital</strong> and a revenue figure in the <strong>low single-digit thousands of euros</strong> for the latest filed year (the register's automated chart plots 2024 revenue at roughly €2k–€14k against a near-zero 2023; an annual report for the year ending 31 Dec 2024 was published 18 May 2026). That is consistent with a micro-entity funded largely through restricted project grants and donations rather than commercial turnover. <strong>⚠️ The register revenue number is an automated approximation, not a stated figure.</strong><sup class="cite"><a href="#tgr-src-5" data-src="register" data-tip="gUG, €1,000 capital; annual report for FY ending 31 Dec 2024 published 18 May 2026; automated revenue chart ≈ €2k–€14k for 2024 vs near-zero 2023. Register via Northdata.">5</a></sup></p></li>
+      </ul>
+      <p>What is solid: this is an <strong>€80k-budget-class organization</strong> running on <strong>grants (BAMF, Goethe-Institut, MRI), donations, and donation-based service income</strong>, behind a €1,000-capitalised non-profit shell. The exact composition is <strong>⚠️ not fully public</strong> — TGR publishes no audited statements, and the register's headline number is an approximation.<sup class="cite"><a href="#tgr-src-5" data-src="register" data-tip="No audited accounts published; only an automated register revenue approximation. Register via Northdata.">5</a></sup><sup class="cite"><a href="#tgr-src-6" data-src="cultureforhealth" data-tip="Budget €80k; grants + donations + donation-based fees. CultureForHealth mapping.">6</a></sup></p>
+
+      <h3>A concrete mutual-aid event</h3>
+      <p>One sourced funding episode shows TGR also acting as a small hub of practical support: in the final months of jazz pianist <strong>Richie Beirach</strong> (1947–2026), TGR "helped coordinate support" and ran a <strong>GoFundMe campaign that raised €35,264</strong> for his care and living expenses; Beirach died on 26 January 2026. This is distinct from its core counseling services — one-off solidarity fundraising — but it illustrates the organization functioning as a node of community support.<sup class="cite"><a href="#tgr-src-2" data-src="offerings" data-tip="TGR coordinated support and ran a GoFundMe raising €35,264 for jazz pianist Richie Beirach (1947–2026), d. 26 Jan 2026. TGR, Offerings.">2</a></sup></p>
+
+      <div class="model-callout">
+        <h2>Funding-Basis note for the Orgs Map</h2>
+        <p>Map row #108 currently carries funding <strong>"❓ No source."</strong> This study establishes a sourced funding picture — <strong>grants (BAMF, Goethe-Institut, MRI) + donations + donation-based fees; gUG, ~€80k budget</strong> — supporting an upgrade of that row's funding Basis label to <strong>⚠️ Inferred</strong> (the components are sourced to CultureForHealth and the commercial register, but no audited breakdown is public). The map edit is handled in the integration step, not on this page.</p>
+      </div>
+    </section>
+
+    <!-- 4. PROGRAMS & DELIVERY -->
+    <section>
+      <div class="section-label">04 — Services &amp; programs</div>
+      <h2>Counseling, coaching, workshops, residencies<sup class="cite"><a href="#tgr-src-2" data-src="offerings" data-tip="Service lines: donation-based individual counseling, life/performance coaching, workshops, transition groups, residencies, resource library. TGR, Offerings.">2</a></sup></h2>
+      <p>TGR delivers four core service lines plus a residency strand and a free resource library, all aimed at performing artists and cultural workers.</p>
+
+      <div class="table-wrap" role="region" aria-label="TGR The Green Room — service lines (scrollable table)" tabindex="0">
+        <table>
+          <caption>The service catalogue — TGR The Green Room (sources cited inline)</caption>
+          <thead><tr><th scope="col">Service line</th><th scope="col">What it is</th><th scope="col">Delivered by / format</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Individual Counseling</th><td>Confidential, trauma-sensitive, artist-centred psychological counseling for personal, creative or professional issues; <strong>donation-based</strong></td><td>Heather O'Donnell (M.Sc. Psychology, Artistic-Systemic Therapist DGSF); Cologne or online</td></tr>
+            <tr><th scope="row">Life &amp; Performance Coaching</th><td>Systemic life and performance coaching for artists</td><td>Brigitte Schreiner (Systemic Life &amp; Performance Coach; former solo flutist, WDR Funkhausorchester Cologne)</td></tr>
+            <tr><th scope="row">Workshops &amp; Events</th><td>Group classes blending psychosocial + somatic / performance-medicine methods — performance anxiety, resilience, mindfulness, Feldenkrais, Alexander Technique, Pilates, yoga, Qi Gong, music physiology</td><td>Roster of part-time artist-practitioners; weekend group formats for out-of-region participants; travelling keynotes (Berlin, Salzburg, NYC, Montenegro, Poland)</td></tr>
+            <tr><th scope="row">Transition Groups</th><td>Career-change / professional-restructuring support groups for performers (since Feb 2022)</td><td>O'Donnell (online, English-speaking, monthly); Dagmar Regorsek, psychological/career counselor &amp; sociologist (in-person, Cologne)</td></tr>
+            <tr><th scope="row">GreenHaven Artist Residencies</th><td>Small, needs-based short-term residencies for artists in acute distress — from 2022 initially for artists fleeing the war in Ukraine, now broader international artists; run "when resources allow"</td><td>With partners Goethe-Institut, Artists-at-Risk (Finland), BAMF; under UNESCO-Commission patronage</td></tr>
+            <tr><th scope="row">Resource Library</th><td>Free online psychoeducation — ACT for Artists, performance anxiety, perfectionism, imposter syndrome, artistic identity, precarity, narcissism in the arts, creative career management</td><td>Self-serve web resource</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The method signature — repeatedly described by third parties (DOV Magazine, Pianist Magazine) — is the <strong>interface of artistic practice with psychosocial and body / performance-medicine methods</strong>, delivered mostly as <strong>group classes</strong> plus <strong>confidential individual counseling and coaching</strong>, live in Cologne or online.<sup class="cite"><a href="#tgr-src-4" data-src="home" data-tip="DOV-Magazin and Pianist Magazine: meditative, body-related, performance-medicine methods; group classes + confidential 1:1 counseling/coaching, live or online. TGR Home.">4</a></sup><sup class="cite"><a href="#tgr-src-3" data-src="staff" data-tip="Roster incl. Feldenkrais, Alexander Technique, Pilates, yoga, Qi Gong, Musikermedizin/Musikphysiologie practitioners. TGR, Mitarbeiter.">3</a></sup></p>
+
+      <h3>Who delivers it</h3>
+      <p>TGR's assurance is assembled from a <strong>founder-psychologist plus a roster of named part-time practitioners</strong>, not a salaried clinical department. Counseling and the online transition group are led by <strong>Heather O'Donnell</strong> (M.Sc. Psychology, Artistic-Systemic Therapist DGSF); coaching by <strong>Brigitte Schreiner</strong> (systemic coach, flutist); the in-person transition group by <strong>Dagmar Regorsek</strong> (psychological/career counselor, sociologist). Workshop leaders cover Feldenkrais, Alexander Technique, Pilates, yoga, Qi Gong, Vipassana meditation, PEP/self-worth training, and music physiology / musicians' medicine (including physician <strong>Ulrike Kaltenbrunner</strong> and violinist-physiologist <strong>Christoph Mayer</strong>). The unifying hiring rule: every counselor and teacher is an active or former performing artist.<sup class="cite"><a href="#tgr-src-3" data-src="staff" data-tip="Named roster: O'Donnell (Leitung), Regorsek, von Leliwa, Schreiner, Kaltenbrunner (physician, musicians' medicine), Mayer (music-physiology), plus Feldenkrais/Alexander/yoga/Qi Gong leaders. TGR, Mitarbeiter.">3</a></sup><sup class="cite"><a href="#tgr-src-7" data-src="encc" data-tip="'All counselling or teaching staff, including founder Heather O'Donnell, are active or former performing artists.' ENCC.">7</a></sup></p>
+
+      <h3>Reach — organization-reported</h3>
+      <p>Per the CultureForHealth mapping, since founding in 2020 TGR has <strong>assisted over 200 artists</strong> and <strong>held over 60 performances</strong> showcasing resident artists for a <strong>collective audience of ~2,000</strong>. These are TGR's own reported activity counts (not independently audited outcomes), but they are consistent with the scale of a single Cologne centre. The <strong>GreenHaven residency strand</strong> — under UNESCO-Commission patronage, with named institutional partners — is the most externally validated part of the program. <strong>⚠️ Reach figures are org-reported, as-reported.</strong><sup class="cite"><a href="#tgr-src-6" data-src="cultureforhealth" data-tip="Since 2020: 200+ artists assisted, 60+ performances, ~2,000 audience; UNESCO patronage of GreenHaven; partners Goethe-Institut, Artists-at-Risk, BAMF. CultureForHealth (org-reported).">6</a></sup></p>
+    </section>
+
+    <!-- 5. RECOGNITION & NETWORKS -->
+    <section>
+      <div class="section-label">05 — Recognition &amp; networks</div>
+      <h2>Small budget, outsized validation<sup class="cite"><a href="#tgr-src-6" data-src="cultureforhealth" data-tip="UNESCO-Commission patronage; partners Goethe-Institut, Artists-at-Risk, BAMF; member of ENCC, IETM, On The Move. CultureForHealth mapping.">6</a></sup></h2>
+      <p>For an organization this small, TGR carries an unusual amount of institutional validation — concentrated around the GreenHaven residency / artists-at-risk strand, which is also where most of its grant funding flows.</p>
+      <p><strong>UNESCO patronage.</strong> The GreenHaven residency program holds a <strong>patronage of the German Commission for UNESCO</strong>; its Secretary-General, Roman Luckscheiter, is quoted that the program "makes a fundamental contribution to the protection of human rights and artistic freedom." This is a credibility marker no marketing budget buys.<sup class="cite"><a href="#tgr-src-6" data-src="cultureforhealth" data-tip="Patronage of the German Commission for UNESCO for GreenHaven; Roman Luckscheiter (Secretary-General) quoted. CultureForHealth + TGR Home.">6</a></sup><sup class="cite"><a href="#tgr-src-4" data-src="home" data-tip="Luckscheiter (Secretary-General, German Commission for UNESCO) quote on GreenHaven and human rights/artistic freedom. TGR Home.">4</a></sup></p>
+      <p><strong>Institutional partners.</strong> The residency and refugee-artist work is delivered with named partners — the <strong>Goethe-Institut</strong>, <strong>Artists-at-Risk (Finland)</strong>, and the German <strong>Federal Office for Migration and Refugees (BAMF)</strong> — the same bodies that appear in its funding line.<sup class="cite"><a href="#tgr-src-6" data-src="cultureforhealth" data-tip="Partners Goethe-Institut, Artists-at-Risk (Finland), BAMF; funding 'MRI, BAMF, Goethe-Institut, a.o.' CultureForHealth.">6</a></sup></p>
+      <p><strong>European networks.</strong> TGR is an <strong>Associate member of the European Network of Cultural Centres (ENCC)</strong> — and, per its own site, serves on the ENCC <strong>Board of Directors</strong> — and is a member of <strong>IETM</strong> and <strong>On The Move</strong>. It has lectured to the Gürzenich Orchestra, the ENCC and the Performing Arts Medical Association on artists' mental and physical health.<sup class="cite"><a href="#tgr-src-7" data-src="encc" data-tip="ENCC Associate member; member of IETM and On The Move; topic — working conditions of cultural professionals / labour rights. ENCC.">7</a></sup><sup class="cite"><a href="#tgr-src-4" data-src="home" data-tip="'TGR is a member and serves on the Board of Directors of the European Network of Cultural Centres (ENCC).' TGR Home.">4</a></sup></p>
+    </section>
+
+    <!-- 6. STRENGTHS -->
+    <section>
+      <div class="section-label">06 — Strengths</div>
+      <h2>What works</h2>
+      <div class="sw-grid">
+        <div class="sw-card strong"><h3>A genuinely tiny, credible care service</h3><p>A real, recognised music-MH counseling centre — UNESCO-patronised, ENCC board member — running on an ~€80k budget and a €1,000-capitalised non-profit shell. Proof that "a room" can be stood up by a practitioner without an endowment, a hotline, or an institutional parent.<sup class="cite"><a href="#tgr-src-5" data-src="register" data-tip="gUG, €1,000 capital, no endowment. Register via Northdata.">5</a></sup><sup class="cite"><a href="#tgr-src-6" data-src="cultureforhealth" data-tip="~€80k budget; UNESCO patronage; ENCC. CultureForHealth.">6</a></sup></p></div>
+        <div class="sw-card strong"><h3>The donation-based + means-tested access model</h3><p>Pay-what-you-can counseling plus a case-by-case financial-support application is well-matched to a precarious clientele — avoiding both the "free-but-unfunded" and "fee-but-exclusionary" traps.<sup class="cite"><a href="#tgr-src-2" data-src="offerings" data-tip="'Donation-Based Psychological Counseling &amp; Coaching.' TGR, Offerings.">2</a></sup><sup class="cite"><a href="#tgr-src-1" data-src="about" data-tip="Means-based financial-support application (FAQ). TGR, Über uns.">1</a></sup></p></div>
+        <div class="sw-card strong"><h3>Practitioner credibility ("by artists, for artists")</h3><p>Every counselor and teacher is an active or former performing artist with psychological/somatic training; the founder is herself a concert pianist who became a psychologist after injury. This buys trust and relevance in the exact community served.<sup class="cite"><a href="#tgr-src-7" data-src="encc" data-tip="All staff active/former performing artists. ENCC.">7</a></sup><sup class="cite"><a href="#tgr-src-8" data-src="odonnell" data-tip="O'Donnell: pianist → psychologist after injury. Her professional site.">8</a></sup></p></div>
+        <div class="sw-card strong"><h3>Method breadth from a part-time roster</h3><p>A wide catalogue (counseling, coaching, performance medicine, Feldenkrais, Alexander Technique, ACT, mindfulness) assembled from named part-time practitioners rather than a salaried clinical department.<sup class="cite"><a href="#tgr-src-3" data-src="staff" data-tip="Named part-time roster across psychosocial + somatic methods. TGR, Mitarbeiter.">3</a></sup></p></div>
+        <div class="sw-card strong"><h3>Grant leverage through a sharp niche</h3><p>The artists-at-risk / refugee-artist residency strand attracted UNESCO patronage and partnerships with the Goethe-Institut, BAMF and Artists-at-Risk — turning a sharply-defined cause into institutional grant support.<sup class="cite"><a href="#tgr-src-6" data-src="cultureforhealth" data-tip="Residency/refugee-artist niche → UNESCO patronage + Goethe-Institut/BAMF/Artists-at-Risk partners + funding. CultureForHealth.">6</a></sup></p></div>
+        <div class="sw-card strong"><h3>A new institutional home</h3><p>From autumn 2025 TGR is hosted at Cologne's Alte Feuerwache in a cooperation project — physical anchoring and a partner institution that a one-room operation otherwise lacks.<sup class="cite"><a href="#tgr-src-4" data-src="home" data-tip="From autumn 2025 based at the Alte Feuerwache, Agnesviertel, in a cooperation project with Alte Feuerwache Köln. TGR Home.">4</a></sup></p></div>
+      </div>
+    </section>
+
+    <!-- 7. WEAKNESSES -->
+    <section>
+      <div class="section-label">07 — Weaknesses &amp; risks</div>
+      <h2>What to watch</h2>
+      <div class="sw-grid">
+        <div class="sw-card weak"><h3>Extreme founder-concentration</h3><p>TGR is, to a first approximation, Heather O'Donnell plus a part-time roster — sole managing director, lead (and often the named) counselor, and public face. For a clinical-adjacent care service this key-person risk is the dominant one. A documented succession plan was <strong>not found</strong>. ❓ Unverified.<sup class="cite"><a href="#tgr-src-5" data-src="register" data-tip="Sole registered managing director; no succession plan located. Register via Northdata.">5</a></sup><sup class="cite"><a href="#tgr-src-3" data-src="staff" data-tip="Founder-led; roster is part-time. TGR, Mitarbeiter.">3</a></sup></p></div>
+        <div class="sw-card weak"><h3>Micro-scale &amp; grant-dependence</h3><p>An ~€80k budget funded substantially by restricted project grants (BAMF, Goethe-Institut, MRI) and donations is fragile: loss of the residency-linked grants would hit hard, and there is no reserve or statutory stream.<sup class="cite"><a href="#tgr-src-6" data-src="cultureforhealth" data-tip="~€80k, grants + donations; no reserve/statutory stream. CultureForHealth.">6</a></sup><sup class="cite"><a href="#tgr-src-5" data-src="register" data-tip="€1,000 capital; no endowment. Register via Northdata.">5</a></sup></p></div>
+        <div class="sw-card weak"><h3>Financial opacity</h3><p>No audited accounts are published on the website; the only public financials are an automated register approximation. Normal for a gUG this size, but it limits external scrutiny and would flag for institutional funders. ⚠️<sup class="cite"><a href="#tgr-src-5" data-src="register" data-tip="No audited accounts published; only automated register approximation. Register via Northdata.">5</a></sup></p></div>
+        <div class="sw-card weak"><h3>Definitional drift: artists' health, not music-MH</h3><p>TGR serves <em>performing artists</em> (dancers, theatre, performers) as much as musicians, and blends mental health with somatic / performance-medicine and human-rights residency work. Good for grant-raising, but it is not a pure music-mental-health service — a Taiwan borrower must decide how tightly to scope.<sup class="cite"><a href="#tgr-src-1" data-src="about" data-tip="Serves performing artists broadly; blends psychosocial + somatic + advocacy. TGR, Über uns.">1</a></sup><sup class="cite"><a href="#tgr-src-6" data-src="cultureforhealth" data-tip="Cultural fields: dance, music, theatre, multimedia, other. CultureForHealth.">6</a></sup></p></div>
+        <div class="sw-card weak"><h3>Scope boundary not foregrounded</h3><p>TGR is a counseling-and-coaching centre pitched at prevention/rehabilitation/transition — <strong>not</strong> a crisis line or clinical-treatment provider. Acute-risk users need routing elsewhere, but the public materials do not foreground a crisis-scope disclaimer the way some peers do. ⚠️<sup class="cite"><a href="#tgr-src-4" data-src="home" data-tip="Preventive/rehabilitative framing; not a crisis service, but no prominent crisis-scope disclaimer. TGR Home.">4</a></sup><sup class="cite"><a href="#tgr-src-2" data-src="offerings" data-tip="Counseling/coaching centre, not crisis/clinical treatment. TGR, Offerings.">2</a></sup></p></div>
+        <div class="sw-card weak"><h3>Reach unaudited</h3><p>The 200+ artists / 60+ performances / ~2,000 audience figures and the €80k budget are organization-reported via a third-party mapping, not independently audited. Directionally credible for a single centre, but not verified outcome measures. ⚠️<sup class="cite"><a href="#tgr-src-6" data-src="cultureforhealth" data-tip="Reach/budget org-reported via CultureForHealth, not independently audited. CultureForHealth.">6</a></sup></p></div>
+      </div>
+    </section>
+
+    <!-- 8. LESSONS -->
+    <section>
+      <div class="section-label">08 — Lessons for Taiwan</div>
+      <h2>What a Taiwan music mental health NPO should take</h2>
+      <ol class="lessons">
+        <li><h3>This is the floor-of-the-floor for "a room": a service one practitioner can start</h3><p>Of the organizations in this series, TGR is the smallest viable shape of a <em>care</em> service — a single qualified practitioner, a part-time roster, one room, ~€80k/yr. For a Taiwan founder who is themselves a clinician-musician, it is proof you can begin with counseling + workshops and grow, without a hotline or an endowment.<sup class="cite"><a href="#tgr-src-5" data-src="register" data-tip="gUG, €1,000 capital, founder-led. Register via Northdata.">5</a></sup><sup class="cite"><a href="#tgr-src-6" data-src="cultureforhealth" data-tip="~€80k budget; one Cologne centre. CultureForHealth.">6</a></sup></p></li>
+        <li><h3>Adopt the donation-based + means-tested access model</h3><p>Offer counseling/coaching on a <strong>pay-what-you-can</strong> basis with a <strong>simple case-by-case financial-support application</strong> on top. It fits precarious music incomes (in Taiwan: freelance gig workers, 接案 musicians) better than either a flat fee or an unfunded "free" promise, and lets income scale with ability to pay.<sup class="cite"><a href="#tgr-src-2" data-src="offerings" data-tip="Donation-based counseling/coaching. TGR, Offerings.">2</a></sup><sup class="cite"><a href="#tgr-src-1" data-src="about" data-tip="Means-based financial-support application. TGR, Über uns.">1</a></sup></p></li>
+        <li><h3>Make "by artists, for artists" a hiring rule, not a slogan</h3><p>TGR's credibility comes from staffing exclusively with practitioners who are both <strong>psychologically/somatically trained and active/former performers</strong>. In Taiwan, recruit <strong>諮商心理師 / 臨床心理師</strong> who are also musicians (or pair clinicians with musician co-facilitators) so the service speaks the community's language.<sup class="cite"><a href="#tgr-src-7" data-src="encc" data-tip="All staff active/former performing artists. ENCC.">7</a></sup><sup class="cite"><a href="#tgr-src-1" data-src="about" data-tip="Counselors combine psychological knowledge with lived performing-arts experience. TGR, Über uns.">1</a></sup></p></li>
+        <li><h3>Assemble breadth from a part-time roster; don't build a department</h3><p>Stand up a wide catalogue — counseling, performance-anxiety and resilience workshops, body / performance-medicine practices — by contracting <strong>named part-time practitioners</strong>, the way TGR amortises Feldenkrais, Alexander Technique, ACT and music-physiology across freelancers.<sup class="cite"><a href="#tgr-src-3" data-src="staff" data-tip="Named part-time roster across psychosocial + somatic methods. TGR, Mitarbeiter.">3</a></sup></p></li>
+        <li><h3>Anchor institutional grants to one sharply-defined cause</h3><p>TGR turned <em>artists at risk / refugee artists</em> into UNESCO patronage and Goethe-Institut/BAMF partnerships. A Taiwan NPO should identify an analogous fundable niche (e.g. MH support for a specific at-risk music population) to unlock <strong>文化部</strong> / foundation / corporate grants alongside its general service.<sup class="cite"><a href="#tgr-src-6" data-src="cultureforhealth" data-tip="Sharp niche (artists-at-risk) → UNESCO patronage + institutional grants. CultureForHealth.">6</a></sup></p></li>
+        <li><h3>Fix the two things TGR has not: succession and transparency</h3><p>Build the service so it is <strong>not one person</strong> — co-leads, a real (even small) board, documented clinical supervision — and <strong>publish reach and (eventually) audited finances</strong> early. TGR's founder-concentration and financial opacity are exactly what Taiwanese funders and partners will probe; cheap to design in at the start, expensive to retrofit.<sup class="cite"><a href="#tgr-src-3" data-src="staff" data-tip="Founder-concentration; build co-leads + a board. TGR, Mitarbeiter.">3</a></sup><sup class="cite"><a href="#tgr-src-5" data-src="register" data-tip="No audited accounts public; publish reach/finances early. Register via Northdata.">5</a></sup></p></li>
+        <li><h3>Name the scope boundary explicitly</h3><p>TGR is preventive/rehabilitative, not crisis care. A Taiwan service should state plainly it is <strong>not an emergency service</strong>, set an intake boundary, and route acute risk to the national line (<strong>1925 安心專線</strong>) — protecting a light-touch counseling service from being treated as crisis care.<sup class="cite"><a href="#tgr-src-2" data-src="offerings" data-tip="Counseling/coaching, not crisis. State the boundary; route to 1925 安心專線. TGR, Offerings.">2</a></sup><sup class="cite"><a href="#tgr-src-4" data-src="home" data-tip="Preventive/rehabilitative scope. TGR Home.">4</a></sup></p></li>
+      </ol>
+    </section>
+
+    <!-- 10. METHOD + REFERENCES -->
+    <section>
+      <div class="section-label">09 — Methodology &amp; references</div>
+      <h2>Basis</h2>
+      <p class="cite-help">Every figure carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source; click to jump to the full reference. Identity and legal form come from the German commercial register (Amtsgericht Köln HRB 103802) via Northdata, read via Claude-in-Chrome. Mission, services, the donation-based access model, named practitioners, the new Cologne location, the Richie Beirach fundraiser and the financial-support route come from TGR's own website (thegreenroomforartists.de). Reach, budget, funding sources, founding month, UNESCO patronage and network memberships are corroborated by two independent third-party databases — the EU-cofunded CultureForHealth mapping and the ENCC member directory. Founder credentials are corroborated across her professional site, the org site and the two databases. No people, dates or figures are asserted that are not on one of these sources; unsourced items (e.g. a succession plan) are marked ❓ and not asserted. The org was disambiguated explicitly from same-named entities (Backline's Green Room, The Green Room Coaching, US Green Room Counseling/Psychology).</p>
+
+      <div class="table-wrap" role="region" aria-label="Methodology — sources, methods and basis (scrollable table)" tabindex="0">
+        <table>
+          <caption>Methodology — sources, methods and basis</caption>
+          <thead><tr><th scope="col">Source</th><th scope="col">Method</th><th scope="col">Basis</th></tr></thead>
+          <tbody>
+            <tr><td>German commercial register / Northdata — HRB 103802 (legal form, founding, MD, capital, purpose, revenue)</td><td>Claude-in-Chrome <code>get_page_text</code></td><td>✅ Sourced — authoritative primary register (revenue ⚠️ automated approximation)</td></tr>
+            <tr><td>thegreenroomforartists.de — Home, Über uns, Mitarbeiter, Offerings</td><td>Claude-in-Chrome <code>get_page_text</code> (JS-influenced site)</td><td>✅ Sourced — organization-published primary</td></tr>
+            <tr><td>CultureForHealth mapping (EU-cofunded project database)</td><td>WebFetch</td><td>✅ Sourced — third-party database (org-reported reach/budget ⚠️ as-reported)</td></tr>
+            <tr><td>ENCC member directory</td><td>WebFetch</td><td>✅ Sourced — named network (corroborates founding &amp; model)</td></tr>
+            <tr><td>Heather O'Donnell professional site + Wikipedia</td><td>WebSearch + WebFetch</td><td>✅ Sourced — founder credentials</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Limitations.</strong> (1) No audited financial statements are public; the only register revenue figure is an automated approximation (§3, ⚠️). (2) Reach counts (200+ artists, 60+ performances, ~2,000 audience) and the €80k budget are organization-reported via CultureForHealth, not independently audited (§4, ⚠️). (3) Named practitioners' individual qualifications are listed on the org's own staff page and taken as stated, not independently re-verified. (4) Succession / bench depth is not in the public record (§7, ❓). (5) No direct organizational contact; all data from public primary and third-party sources.</p>
+
+      <div class="refs" id="refs-all" data-citation-registry="tgr-all">
+        <div class="refs-title">References</div>
+        <ol>
+          <li id="tgr-src-1" data-src="about">Mission, target group, who-we-are, services overview and the means-based financial-support FAQ: TGR The Green Room. (n.d.). <em>Über uns</em> [About us]. Retrieved June 28, 2026, from <a href="https://www.thegreenroomforartists.de/ueber-uns" target="_blank" rel="noopener">thegreenroomforartists.de/ueber-uns</a> ("a space for reflection, support and reorientation — created by artists for artists"; psychological counseling, advocacy &amp; information, workshops &amp; cooperations, GreenHaven residencies; "we have never turned anyone away"; FAQ — "Is there financial support for programs at TGR? Yes. Please fill out this form"; counseling and courses at the Cologne centre or, if needed, online). <strong>Source · Method · Basis:</strong> organization website · Claude-in-Chrome · ✅ Sourced.</li>
+          <li id="tgr-src-2" data-src="offerings">Donation-based counseling &amp; coaching, named providers, transition groups, resource-library themes and the Richie Beirach fundraiser: TGR The Green Room. (n.d.). <em>Offerings / Program</em>. Retrieved June 28, 2026, from <a href="https://www.thegreenroomforartists.de/offerings" target="_blank" rel="noopener">thegreenroomforartists.de/offerings</a> ("Donation-Based Psychological Counseling &amp; Coaching for Artists and Cultural Workers"; Individual Counseling — Heather O'Donnell, M.Sc. Psychology, M.M. Piano Performance, Artistic-Systemic Therapist (DGSF); Life &amp; Performance Coaching — Brigitte Schreiner, former solo flutist WDR Funkhausorchester Cologne; Resources — ACT for Artists, Performance Anxiety, Imposter Syndrome, Perfectionism, Precarity, Creative Career Management; Transition Groups since Feb 2022; GoFundMe for jazz pianist Richie Beirach (1947–2026) raised €35,264, d. 26 Jan 2026). <strong>Source · Method · Basis:</strong> organization website · Claude-in-Chrome · ✅ Sourced.</li>
+          <li id="tgr-src-3" data-src="staff">Practitioner roster: TGR The Green Room. (n.d.). <em>Mitarbeiter*innen</em> [Staff]. Retrieved June 28, 2026, from <a href="https://www.thegreenroomforartists.de/mitarbeiter" target="_blank" rel="noopener">thegreenroomforartists.de/mitarbeiter</a> (Leitung — Heather O'Donnell, Gründerin, Psychologin, Pianistin; counselors incl. Dagmar Regorsek (Diplom-Sozialwissenschaftlerin, psychoanalytisch-systemisches Coaching) and Elisabeth von Leliwa (systemic coach, musicologist, formerly Tonhalle Düsseldorf); workshop leaders for Feldenkrais, Alexander-Technik, Pilates, Yoga, Qi Gong, Vipassana, Musikermedizin/Musikphysiologie, PEP, incl. Ulrike Kaltenbrunner (physician, osteopathic &amp; musicians' medicine) and Christoph Mayer (violinist, music-physiology specialist)). <strong>Source · Method · Basis:</strong> organization website · Claude-in-Chrome · ✅ Sourced.</li>
+          <li id="tgr-src-4" data-src="home">New Cologne location, ENCC board role, founder framing and the method signature via press quotes: TGR The Green Room. (n.d.). <em>Home</em>. Retrieved June 28, 2026, from <a href="https://www.thegreenroomforartists.de/" target="_blank" rel="noopener">thegreenroomforartists.de</a> (from autumn/September 2025 based at the Alte Feuerwache, Agnesviertel, Cologne, in a cooperation project with Alte Feuerwache Köln; "TGR is a member and serves on the Board of Directors of the European Network of Cultural Centres (ENCC)"; O'Donnell on artists missing "preventive measures as well as rehabilitative supports"; DOV-Magazin (German Association of Orchestras) and Pianist Magazine describing meditative, body-related and performance-medicine methods as group classes plus confidential individual counseling and coaching, live or online; Roman Luckscheiter, Secretary-General of the German Commission for UNESCO, quoted on GreenHaven). <strong>Source · Method · Basis:</strong> organization website (incl. quoted DOV-Magazin, Pianist Magazine, Kölner Stadt-Anzeiger) · Claude-in-Chrome · ✅ Sourced.</li>
+          <li id="tgr-src-5" data-src="register">Legal form, registration, founding, managing director, capital, charitable purpose and revenue: Northdata. (2026). <em>TGR The Green Room gemeinnützige UG, Cologne — District Court of Cologne HRB 103802</em> [Company register record]. Retrieved June 28, 2026, from <a href="https://www.northdata.com/TGR+The+Green+Room+gemeinn%C3%BCtzige+UG,+K%C3%B6ln/HRB+103802" target="_blank" rel="noopener">northdata.com (HRB 103802)</a> (gemeinnützige UG; EUID DER3306.HRB103802; statute/Gesellschaftsvertrag dated 5 Oct 2020; registered 27 Nov 2020 with Managing Director Heather O'Donnell and capital €1,000.00; corporate purpose — charitable promotion of art &amp; culture per §52(2)1 no.5 AO and of popular/vocational education per no.7 AO; annual report for FY ending 31 Dec 2024 published 18 May 2026; automated revenue chart ≈ €2k–€14k for 2024 vs near-zero 2023). <strong>Source · Method · Basis:</strong> German commercial register via Northdata · Claude-in-Chrome · ✅ Sourced (revenue ⚠️ automated approximation, not a stated figure).</li>
+          <li id="tgr-src-6" data-src="cultureforhealth">Founding month, reach, budget, funding sources, residencies, UNESCO patronage, partners and networks: CultureForHealth. (n.d.). <em>TGR The Green Room</em> [Mapping &amp; database entry]. Retrieved June 28, 2026, from <a href="https://www.cultureforhealth.eu/mapping/tgr-the-green-rom/" target="_blank" rel="noopener">cultureforhealth.eu/mapping/tgr-the-green-rom</a> (non-profit social enterprise founded October 2020 in Cologne for artists, especially musicians/dancers/theatre; performance research, somatic training, psychological &amp; professional counseling, performance coaching; since 2020 assisted 200+ artists and held 60+ performances for ~2,000 audience; residencies since 2022, initially for artists fleeing the war in Ukraine; patronage of the German Commission for UNESCO; partners incl. Goethe-Institut, Artists-at-Risk (Finland), BAMF; member of ENCC, IETM, On The Move; budget €80,000; sources of funding "MRI, BAMF, Goethe-Institut, a.o."; timeframe 2020–2030). <strong>Source · Method · Basis:</strong> EU-cofunded third-party database (org-reported) · WebFetch · ✅ Sourced (reach/budget ⚠️ as-reported).</li>
+          <li id="tgr-src-7" data-src="encc">Independent confirmation of founding, music-specific scope, staffing principle and service model: European Network of Cultural Centres (ENCC). (n.d.). <em>TGR The Green Room</em> [Associate member profile]. Retrieved June 28, 2026, from <a href="https://encc.eu/members/tgr-the-green-room" target="_blank" rel="noopener">encc.eu/members/tgr-the-green-room</a> (centre founded in Cologne in October 2020 for the comprehensive support of performing artists, especially musicians/dancers/actors, in challenging career phases; artistic residencies, performance training, somatic work, psychosocial counselling, professional coaching; "All counselling or teaching staff, including founder Heather O'Donnell, are active or former performing artists"; offers mostly in group classes plus individualised confidential psychological counselling and coaching; topic — working conditions of cultural professionals / labour rights). <strong>Source · Method · Basis:</strong> named European network directory · WebFetch · ✅ Sourced.</li>
+          <li id="tgr-src-8" data-src="odonnell">Founder credentials: O'Donnell, H. (n.d.). <em>Biography / About</em> [Professional website]. Retrieved June 28, 2026, from <a href="https://www.heatherodonnell.info/" target="_blank" rel="noopener">heatherodonnell.info</a> (American classical pianist; M.Sc. Psychology; Artistic-Systemic Therapist (DGSF); founding director of TGR The Green Room (2020); transitioned to psychology after career-disrupting injuries; works with performing artists on health recovery, injury prevention/rehabilitation and career transitions); corroborated by Wikipedia, <em>Heather O'Donnell</em> (American classical pianist, b. 1973; premieres of works by Berio, Tenney, Finnissy, Rzewski; Steinway Artist) — note the Wikipedia article predates and does not mention TGR. <strong>Source · Method · Basis:</strong> founder's professional site + encyclopaedia · WebSearch + WebFetch · ✅ Sourced.</li>
+        </ol>
+        <p class="refs-note">Convention: every claim-bearing element carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above — machine-checkable before each deploy (§5.2 / §6 gate 1). Derived ratios are marked computed, not quoted. Citation source of truth: <span style="font-family:var(--font-mono);">2026-06-28_Report_Org_Study_TGR_Green_Room.md</span>.</p>
+      </div>
+    </section>
+
+    <nav class="related-block" aria-label="Related on this site">
+      <p class="related-title">Related</p>
+      <ul>
+        <li><a href="org-study.html">&larr; Org Study (all organizations)</a></li>
+        <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+        <li><a href="policy-study-germany.html">Policy Study &mdash; Germany (the rights floor: Künstlersozialkasse)</a></li>
+        <li><a href="policy-study.html">Policy Study &mdash; how jurisdictions protect music workers</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <script>
+  /* Scroll-reveal — R3.2 shared IntersectionObserver (normal-scroll page) */
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = 'section > h2, .stat-strip, figure, .table-wrap, .phases-grid, .sources-card, .refs';
+    var nodes = Array.prototype.slice.call(document.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, sibs, idx = 0;
+        if (p){ sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,6) * 60) + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
+
+  <!-- nav scroll-state: transparent over hero, blurred bar once scrolled -->
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden','true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>
