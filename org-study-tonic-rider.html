@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Tonic Rider · Org Study · MH&amp;W</title>
+  <meta name="description" content="Tonic Rider is a lean (~£0.5M/yr, 10 staff), clinically-facilitated peer-support &amp; psychoeducation programme — gate, modular catalogue, partner-funded strands — the most directly copyable service design in the series for a small-budget Taiwan startup.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      /* ── DIA-GRADE READING SCALE (calibrated to Dia browser, serif-corrected) ── */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;--lh-prose:1.7;--wt-prose:440;--measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;--label-ink:var(--graphite);
+      --font-cjk:'Noto Serif TC',serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { overflow-x: hidden; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--black);
+      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      line-height: var(--lh-prose);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    a { color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    a:hover { color: var(--signal-dim); }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--signal); outline-offset: 3px; border-radius: var(--radius);
+    }
+
+    .skip-nav {
+      position: absolute; left: -9999px; top: 0; z-index: 200;
+      background: var(--signal); color: var(--white);
+      padding: 0.5rem 1rem; font-family: var(--font-mono);
+    }
+    .skip-nav:focus { left: 0; }
+
+    /* ===== NAVIGATION ===== */
+    nav.nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; flex-direction: column;
+      padding: 2rem 2.5rem;
+      padding-top: calc(2rem + env(safe-area-inset-top));
+      background: transparent;
+      transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    nav.nav.scrolled {
+      background: rgba(244, 244, 245, 0.45);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: var(--font-mono); font-size: 1.1rem; font-weight: 400;
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-topbar { display:none; }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; min-width:44px; min-height:44px; z-index:101; -webkit-tap-highlight-color:transparent; }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity:0; }
+    .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
+
+    /* ===== LAYOUT ===== */
+    main { max-width: var(--max-w); margin: 0 auto; padding: 0 2.5rem 5rem 2.5rem; }
+    section { margin-bottom: 4rem; }
+    .narrow { max-width: var(--max-w-text); }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding-top: calc(9rem + env(safe-area-inset-top));
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-light);
+      margin-bottom: 3rem;
+    }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.18em;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: var(--font-display); font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6.5rem);
+      font-weight: 800; line-height: 1.04; color: var(--black); letter-spacing: -0.01em;
+      overflow-wrap: break-word; hyphens: auto;
+    }
+    .hero h1 .tail { display:block; font-size: clamp(1.15rem, 2.6vw, 1.9rem); font-weight: 600; color: var(--signal); letter-spacing: 0; margin-top: 0.9rem; }
+    .hero .subtitle {
+      font-family: var(--font-body); font-size: clamp(1.25rem, 1.05rem + 1.4vw, 1.5rem);
+      color: var(--graphite); line-height: 1.55; margin-top: 1.5rem; max-width: 54ch;
+    }
+    .basis-badge {
+      display: inline-block; margin-top: 1.75rem;
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--graphite); background: var(--signal-bg);
+      border: 1px solid var(--signal-glow); border-radius: var(--radius);
+      padding: 0.5rem 0.85rem; line-height: 1.5;
+    }
+
+    /* ===== TWO-LINE COVER (R2.1, 2026-06-20) — width:100% inside main (no 100vw breakout → no x-overflow) ===== */
+    .cover {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;                /* clips the wash */
+      padding: 0 2rem;
+    }
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%,
+        var(--signal-glow) 0%,
+        rgba(102,103,171,0.06) 38%,
+        rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
+    }
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 1280px);
+    }
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin: 0;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+    .cover-line {
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--purple-deep);
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
+    }
+    .cover-hint {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
+    }
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
+    }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-line  { animation-delay: 0.22s; }
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .cover-wash,
+      .cover-hint,
+      .cover-inner > * { animation: none; opacity: 1; transform: none; }
+    }
+    @media (max-width: 768px) {
+      .cover { padding: 0 1.25rem; }
+      .cover-title { font-size: clamp(1.7rem, 7.3vw, 2.4rem); }
+      .cover-line  { font-size: clamp(0.72rem, 3.2vw, 0.95rem); letter-spacing: 0.18em; }
+    }
+
+    /* ===== TYPE ===== */
+    h2 {
+      font-family: var(--font-display); font-size: var(--text-h2);
+      font-weight: 700; line-height: 1.1; color: var(--black);
+      margin-bottom: 1.25rem; letter-spacing: -0.01em;
+      text-wrap: balance; overflow-wrap: break-word;
+    }
+    h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem); line-height: 1.25; font-weight: 600; color: var(--charcoal); margin: 1.75rem 0 0.75rem; }
+    .section-label {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem;
+    }
+    p { color: var(--graphite); max-width: var(--measure-prose); margin-bottom: 1rem; line-height: 1.65; }
+    p.lead { font-size: 1.1rem; color: var(--charcoal); }
+    strong { color: var(--charcoal); font-weight: 600; }
+    em { color: var(--graphite); }
+
+    /* ===== MODEL CALLOUT ===== */
+    .model-callout { background: var(--bg-card-dark); color: var(--snow); border-radius: var(--radius-lg); padding: 2.25rem 2.5rem; margin-bottom: 3rem; }
+    .model-callout h2 { color: var(--white); margin-bottom: 1rem; }
+    .model-callout p { color: var(--silver); max-width: none; }
+    .model-callout strong { color: var(--white); }
+    .model-callout a { color: var(--spectrum-3); text-decoration: underline; text-underline-offset: 2px; }
+    .model-callout a:hover { color: var(--white); }
+
+    /* ===== THE FLYWHEEL (signature visual) ===== */
+    .flywheel-panel {
+      background: var(--bg-card-dark);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem 2rem 1.5rem;
+      margin: 1.5rem 0 1.75rem;
+      border: 1px solid var(--border-dark);
+    }
+    .flywheel-panel .fw-cap {
+      font-family: var(--font-mono); font-size: var(--text-xs); color: var(--spectrum-3);
+      text-transform: uppercase; letter-spacing: 0.16em; text-align: center; margin-bottom: 0.5rem;
+    }
+    .flywheel-panel svg { display: block; width: 100%; height: auto; max-width: 460px; margin: 0 auto; }
+    .fw-ring { fill: none; stroke: var(--border-dark); stroke-width: 1.5; stroke-dasharray: 3 6; }
+    .fw-arc { fill: none; stroke: var(--spectrum-3); stroke-width: 2.5; opacity: 0.85; stroke-dasharray: 4 7; animation: fw-flow 2.2s linear infinite; }
+    @keyframes fw-flow { to { stroke-dashoffset: -22; } }
+    .fw-node { fill: var(--charcoal); stroke: var(--spectrum-2); stroke-width: 2; }
+    .fw-hub { fill: var(--black); stroke: var(--spectrum-3); stroke-width: 1.5; }
+    .fw-num { fill: var(--spectrum-3); font-family: var(--font-mono); font-size: 13px; font-weight: 700; }
+    .fw-label { fill: var(--snow); font-family: var(--font-display); font-size: 15px; font-weight: 700; letter-spacing: 0.02em; }
+    .fw-sub { fill: var(--grey-light); font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.04em; }
+    .fw-hub-label { fill: var(--spectrum-3); font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.14em; }
+    .fw-hub-sub { fill: var(--grey-light); font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; }
+
+    .gear-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .gear {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-left: 3px solid var(--spectrum-2); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem;
+    }
+    .gear .gn { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); letter-spacing: 0.1em; }
+    .gear h3 { margin: 0.35rem 0 0.5rem; font-size: 1.08rem; }
+    .gear p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-card); margin: 1.5rem 0 0.75rem; }
+    .stat-item { padding: 1.75rem 1.25rem; border-right: 1px solid var(--border-light); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--signal); line-height: 1; font-variant-numeric: tabular-nums; }
+    .stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.6rem; line-height: 1.4; }
+
+    /* ===== COLUMN CHART (revenue trajectory) ===== */
+    figure.chart { margin: 1.5rem 0; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 2rem 1.75rem 1.25rem; }
+    figure.chart figcaption { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
+    .col-chart { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.6rem; align-items: end; }
+    .col { display: flex; flex-direction: column; align-items: center; }
+    .ctrack { position: relative; width: 100%; height: 190px; display: flex; align-items: flex-end; }
+    .cbar { width: 100%; max-width: 54px; margin: 0 auto; background: var(--signal); border-radius: var(--radius) var(--radius) 0 0; position: relative; transition: height var(--dur-slow) var(--ease); }
+    .cbar.peak { background: var(--spectrum-2); }
+    .cbar .cval { position: absolute; top: -1.35rem; left: -50%; right: -50%; text-align: center; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--charcoal); font-variant-numeric: tabular-nums; }
+    .cyr { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); margin-top: 0.55rem; letter-spacing: 0.02em; }
+    .chart-note { font-size: var(--text-xs); color: var(--label-ink); margin-top: 1rem; max-width: none; }
+    .chart-key { display: flex; gap: 1.25rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .chart-key span { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); display: inline-flex; align-items: center; gap: 0.4rem; }
+    .swatch { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+    .swatch.s-rev { background: var(--signal); }
+    .swatch.s-covid { background: var(--spectrum-2); }
+
+    /* ===== TABLES ===== */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; margin: 1.25rem 0; border-radius: var(--radius-lg); border: 1px solid var(--border-light); }
+    .table-wrap:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+    table { width: 100%; border-collapse: collapse; background: var(--bg-card); font-size: var(--text-small); }
+    caption { text-align: left; font-family: var(--font-mono); font-size: var(--text-caption); color: var(--label-ink); padding: 0.75rem 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border-light); vertical-align: top; font-variant-numeric: tabular-nums; }
+    thead th { font-family: var(--font-mono); font-size: var(--text-micro); text-transform: uppercase; letter-spacing: 0.06em; color: var(--label-ink); background: var(--snow); }
+    tbody tr:last-child td { border-bottom: none; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .row-emph td { background: var(--signal-bg); font-weight: 600; color: var(--charcoal); }
+    .row-covid td { background: rgba(232, 168, 124, 0.12); }
+
+    /* ===== CRISIS CARDS ===== */
+    .crisis-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .crisis { background: var(--bg-card); border: 1px solid var(--border-light); border-top: 3px solid var(--spectrum-1); border-radius: var(--radius-lg); padding: 1.5rem 1.6rem; }
+    .crisis .cyrtag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--graphite); letter-spacing: 0.08em; }
+    .crisis h3 { margin: 0.3rem 0 0.6rem; font-size: 1.08rem; }
+    .crisis .big { font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; color: var(--charcoal); line-height: 1; margin-bottom: 0.5rem; }
+    .crisis p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== PROGRAM LIST ===== */
+    .prog { list-style: none; margin: 1.25rem 0 0; padding: 0; }
+    .prog li { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 0.85rem; }
+    .prog h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .prog p { font-size: var(--text-sm); margin-bottom: 0; }
+    .prog .ptag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ===== SW CARDS ===== */
+    .sw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.25rem; }
+    .sw-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem; }
+    .sw-card.weak { border-left: 3px solid var(--spectrum-2); }
+    .sw-card.strong { border-left: 3px solid var(--spectrum-4); }
+    .sw-card h3 { margin: 0 0 0.4rem; font-size: 1rem; }
+    .sw-card p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== LESSONS ===== */
+    .lessons { counter-reset: lesson; list-style: none; margin: 1.5rem 0 0; padding: 0; }
+    .lessons li { position: relative; padding: 1.25rem 1.5rem 1.25rem 3.5rem; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); margin-bottom: 0.85rem; }
+    .lessons li::before { counter-increment: lesson; content: counter(lesson); position: absolute; left: 1.25rem; top: 1.25rem; font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--signal); }
+    .lessons h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .lessons p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== CITATIONS (§5 inline tier) ===== */
+    .cite { font-size: 0.7em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem; }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-fine); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; max-width: var(--measure-ref); overflow-wrap: anywhere; }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs-note { font-size: var(--text-xs); color: var(--label-ink); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-sm); color: var(--label-ink); font-style: italic; max-width: var(--max-w-text); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .gear-cards { grid-template-columns: 1fr; }
+      .crisis-grid { grid-template-columns: 1fr; }
+      .sw-grid { grid-template-columns: 1fr; }
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2n) { border-right: none; }
+      .stat-item:nth-child(-n+2) { border-bottom: 1px solid var(--border-light); }
+    }
+    @media (max-width: 768px) {
+      nav.nav { padding: 1.2rem 1.5rem; padding-top: calc(1.2rem + env(safe-area-inset-top)); }
+      nav.nav.open { background: rgba(244,244,245,0.95); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-light); }
+      .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
+      .nav-toggle { display:block; }
+      .nav-mobile-brand { display:block; }
+      .nav-links { display:none; flex-direction:column; gap:0.75rem; margin-top:1rem; }
+      .nav-links.show { display:flex; }
+      .nav-links a { font-size: 0.85rem; }
+      main { padding: 0 1.5rem 3rem 1.5rem; }
+      .hero { padding-top: calc(7rem + env(safe-area-inset-top)); }
+      .hero h1 { font-size: clamp(2.4rem, 10.5vw, 3.4rem); }
+      .model-callout, .flywheel-panel { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .col-chart { gap: 0.3rem; }
+      .ctrack { height: 150px; }
+      .cbar .cval { font-size: 0.62rem; }
+    }
+    @media (max-width: 680px) {
+      p, .hero .subtitle, .refs li, .cite-help { max-width: none; }
+    }
+    @media (max-width: 480px) {
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+      .stat-item:last-child { border-bottom: none; }
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
+      .cyr { font-size: 0.6rem; }
+      table { font-size: 0.82rem; }
+      thead th { font-size: 0.6rem; }
+      th, td { padding: 0.5rem 0.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } nav.nav, .cbar { transition: none; } .fw-arc { animation: none; } }
+
+    /* ===== Scroll-reveal (R3.2 craft pass) ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ===== Related block (no dead-ends, R3.2) ===== */
+    .related-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-light); }
+    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--label-ink); margin-bottom: 0.6rem; }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a { font-family: var(--font-body); font-size: var(--text-sm); color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+  </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open');this.setAttribute('aria-expanded',o)">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+        <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="org-study.html" class="current" aria-current="page">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
+      <a href="field-news.html">FIELD NEWS</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- COVER -->
+    <section class="cover">
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="cover-inner">
+        <h1 class="cover-title">TONIC RIDER</h1>
+        <p class="cover-line">Org Study · Est. 2012</p>
+      </div>
+      <span class="cover-hint" aria-hidden="true">↓ Scroll</span>
+    </section>
+
+    <!-- MODEL CALLOUT -->
+    <div class="model-callout">
+      <h2>Why this case is different</h2>
+      <p><a href="org-study-backline.html">Backline</a> (USA) was a cold-start crisis directory; <a href="org-study-musicares.html">MusiCares</a> (USA) is a large endowed fund inside the Recording Academy; <a href="org-study-music-minds-matter.html">Music Minds Matter</a> (UK) is a helpline-led charity spun out of a £48M benevolent fund. Tonic Rider is the fourth pattern, and the smallest: a <strong>lean, clinically-facilitated peer-support and psychoeducation <em>programme</em></strong> run on roughly half a million pounds a year by a team of ten. It does not operate a 24/7 helpline, hold an endowment, or employ a large clinical workforce. Instead it puts a <strong>mandatory consultation/triage gate</strong> in front of a <strong>catalogue of short, repeatable, theme-based groups, workshops and accredited courses</strong>, delivered by qualified practitioners and <strong>paid for strand-by-strand by named referral partners</strong>. For a Taiwan startup that must launch on a modest budget, this is the most <em>directly copyable service design</em> in the series — a programme you could stand up without a fortune, a hotline, or a hundred-year-old parent.</p>
+    </div>
+
+    <!-- 1. PROFILE -->
+    <section>
+      <div class="section-label">01 — Profile</div>
+      <h2>From a Portsmouth gig charity to a national music-industry programme<sup class="cite"><a href="#tr-src-1" data-src="register" data-tip="Identity, registration, finances, trustees, governance: Charity Commission register for Tonic Music for Mental Health Ltd (#1189913). Read via Claude-in-Chrome. Accessed 2026-06-27.">1</a></sup></h2>
+      <p>Tonic Rider is the music-industry programme of <strong>Tonic Music for Mental Health Ltd</strong>, a small Portsmouth charity founded in 2012 on the belief that participation in music is good for mental health. Of the four organisations in this series it is the smallest and the leanest — and, for that reason, the most directly copyable.</p>
+
+      <div class="table-wrap" role="region" aria-label="Organization profile — Tonic Rider / Tonic Music for Mental Health (scrollable table)" tabindex="0">
+        <table>
+          <caption>Organization profile — Tonic Rider / Tonic Music for Mental Health (sources cited inline)</caption>
+          <tbody>
+            <tr><th scope="row">Programme brand</th><td>Tonic Rider (the music-industry programme)</td></tr>
+            <tr><th scope="row">Parent charity</th><td>Tonic Music for Mental Health Ltd</td></tr>
+            <tr><th scope="row">Charity number</th><td>1189913 (England &amp; Wales)</td></tr>
+            <tr><th scope="row">Company number</th><td>08093898 (charitable company / limited by guarantee)</td></tr>
+            <tr><th scope="row">Charity registered</th><td>12 June 2020 (standard registration)</td></tr>
+            <tr><th scope="row">Charity founded</th><td>2012 (Portsmouth)</td></tr>
+            <tr><th scope="row">Tonic Rider launched</th><td>16 February 2021 (pandemic-response digital programme)<sup class="cite"><a href="#tr-src-3" data-src="musicweek" data-tip="Tonic Rider launch 16 Feb 2021; patrons; CEO. Homewood, B. (2021), Music Week.">3</a></sup></td></tr>
+            <tr><th scope="row">HQ</th><td>Southsea / Portsmouth, UK; services UK-wide, in-person + online</td></tr>
+            <tr><th scope="row">Founder &amp; CEO</th><td>Steph Langan</td></tr>
+            <tr><th scope="row">Founding Patron</th><td>Terry Hall (The Specials) — <em>in memoriam; d. December 2022</em></td></tr>
+            <tr><th scope="row">Patrons</th><td>Barry Ashworth (Dub Pistols); Kevin Cummins (per the FY2025 annual report)</td></tr>
+            <tr><th scope="row">Registered trustees</th><td>3 (Dr John Stephen Barnes, David Mark Dearman, Richard Thomas Walters)</td></tr>
+            <tr><th scope="row">Staff / volunteers</th><td>10 employees · 8 volunteers (FY2025)</td></tr>
+            <tr><th scope="row">Regulator</th><td>Charity Commission; registered with the Fundraising Regulator</td></tr>
+            <tr><th scope="row">Website</th><td><a href="https://www.tonicmusic.co.uk" target="_blank" rel="noopener">tonicmusic.co.uk</a></td></tr>
+            <tr><th scope="row">Mission (Commission wording)</th><td>"Promotes good mental health in the music industry and in the community … by providing mental health education, advice and support, both remotely and at events, and by providing opportunities to participate in music and the arts."</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Tonic Music for Mental Health was founded in 2012 in Portsmouth; in its early years it raised funds and awareness through gigs and ran music/art workshops for people living with mental illness, before "developing into a registered charity operating across the UK" and formally registering with the Charity Commission on <strong>12 June 2020</strong>.<sup class="cite"><a href="#tr-src-1" data-src="register" data-tip="Registered 12 June 2020 as a charitable company; company 08093898. Charity Commission register #1189913.">1</a></sup><sup class="cite"><a href="#tr-src-2" data-src="about" data-tip="Founded 2012, Portsmouth; UK-wide; developed into a registered charity. Tonic Music, About.">2</a></sup></p>
+      <p><strong>Tonic Rider</strong> — the strand aimed at people <em>professionally</em> engaged in music — launched on <strong>16 February 2021</strong> as a digital support programme, a direct response to the pandemic's devastation of the live sector: free virtual peer groups (originally delivered by Babyshambles' Dr Adam Ficek, a psychotherapist and researcher) plus digital workshops on performance anxiety, acceptance and commitment therapy, emotional coping skills, mental-health first aid and suicide prevention. Founding patron <strong>Terry Hall</strong> of The Specials and patron <strong>Barry Ashworth</strong> of Dub Pistols fronted the launch; CEO <strong>Steph Langan</strong> framed it as a way "to reach the people who need our support the most."<sup class="cite"><a href="#tr-src-3" data-src="musicweek" data-tip="Launch 16 Feb 2021; virtual peer groups by Dr Adam Ficek; patrons Terry Hall and Barry Ashworth; CEO Steph Langan. Music Week.">3</a></sup> Tonic now runs three parallel programmes — Tonic Rider (music industry), Never Mind The Stigma (music fans) and Tonic Futures (18–25s) — but Tonic Rider is the one this study examines, because it is the music-occupational-health service.<sup class="cite"><a href="#tr-src-2" data-src="about" data-tip="Three programmes — Tonic Rider, Never Mind The Stigma, Tonic Futures. Tonic Music, About.">2</a></sup></p>
+    </section>
+
+    <!-- 2. THE DISTINCTIVE MODEL -->
+    <section>
+      <div class="section-label">02 — The distinctive model</div>
+      <h2>Gate, catalogue, partner-fund</h2>
+      <p>Three structural choices define Tonic Rider and separate it from the helpline-and-endowment pattern of the other UK case.</p>
+
+      <div class="gear-cards">
+        <div class="gear">
+          <div class="gn">CHOICE 01</div>
+          <h3>A mandatory consultation gate</h3>
+          <p>No one drops into a group cold. Every participant first completes a registration form (contact, health and wellbeing, demographics, <strong>emergency contact and GP details</strong>) and then attends an <strong>up-to-one-hour online consultation</strong> whose explicit purpose is "to identify any risks / concerns and address additional / unmet needs … a safe and positive experience." A deliberate clinical-safety and triage device — and cheap, because it is a single structured conversation, not an assessment clinic.<sup class="cite"><a href="#tr-src-4" data-src="support-gate" data-tip="Registration + up-to-1-hour online consultation required before participation; collects emergency-contact and GP details; identifies risks/unmet needs. Tonic Music, Support.">4</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">CHOICE 02</div>
+          <h3>A catalogue of short, repeatable units</h3>
+          <p>Rather than open-ended therapy, Tonic Rider offers a <strong>modular menu</strong> on a rolling calendar: 6-week peer-support groups, 12-week group therapy, 2-hour workshops, and accredited day/half-day courses (§4). The same workshop — "Music Performance Anxiety," "Emotional Resilience," "Substance Use Awareness" — runs again and again for different sub-audiences. Content built once and amortised across many cohorts.<sup class="cite"><a href="#tr-src-5" data-src="programme" data-tip="Four support types: courses, groups, workshops, one-to-one. Modular catalogue. Tonic Music, Our Programme of Support.">5</a></sup><sup class="cite"><a href="#tr-src-6" data-src="schedule" data-tip="6-week peer groups; 12-week group therapy; 2-hour workshops; sub-audiences. Tonic Music, Support (2026 calendar).">6</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">CHOICE 03</div>
+          <h3>Funding stitched strand-by-strand</h3>
+          <p>Tonic Rider does not rely on one income source; specific strands are underwritten by specific funders. On the 2026 schedule, peer-support groups and accredited courses are largely <strong>"Supported by The Christopher Meredith Foundation,"</strong> the workshop series by <strong>"PPL Giving,"</strong> and 12-week Group Therapy by <strong>"The Royal Society of Musicians."</strong> A small charity expands by signing a partner to fund a named strand, not by winning one large unrestricted grant.<sup class="cite"><a href="#tr-src-6" data-src="schedule" data-tip="Strands 'Supported by' The Christopher Meredith Foundation, PPL Giving, The Royal Society of Musicians. Tonic Music, Support (2026 calendar).">6</a></sup></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. FINANCIAL -->
+    <section>
+      <div class="section-label">03 — Financial profile</div>
+      <h2>A small, roughly break-even, fast-growing operation<sup class="cite"><a href="#tr-src-7" data-src="financials" data-tip="All financial figures from the Charity Commission register (financial history) for #1189913 + the filed FY2025 accounts. FY ends 30 June; latest FY2025. Read 2026-06-27.">7</a></sup></h2>
+      <p>Tonic Rider is the opposite of Music Minds Matter's planned-deficit, reserve-funded model — it runs on money raised and spent in-year, with no endowment and no investment income. The figures below come from the Charity Commission register and the filed FY2025 accounts. The fiscal year ends 30 June; the latest filed return is FY2025.</p>
+
+      <h3>Income and expenditure, year ending 30 June 2025</h3>
+      <div class="table-wrap" role="region" aria-label="Tonic Music for Mental Health — income and expenditure FY2025 (scrollable table)" tabindex="0">
+        <table>
+          <caption>Income &amp; expenditure, FY ending 30 June 2025 — Charity Commission register #1189913</caption>
+          <thead><tr><th scope="col">Metric</th><th scope="col" class="num">FY2025</th></tr></thead>
+          <tbody>
+            <tr class="row-emph"><th scope="row">Total income</th><td class="num">£556,908</td></tr>
+            <tr><th scope="row">— Donations and legacies</th><td class="num">£439.10k</td></tr>
+            <tr><th scope="row">— Other trading activities</th><td class="num">£117.81k</td></tr>
+            <tr><th scope="row">— Charitable activities / Investments</th><td class="num">£0</td></tr>
+            <tr class="row-emph"><th scope="row">Total expenditure</th><td class="num">£505,512</td></tr>
+            <tr><th scope="row">— Charitable activities</th><td class="num">£472.41k (93% of spend)</td></tr>
+            <tr><th scope="row">— Raising funds</th><td class="num">£33.10k</td></tr>
+            <tr><th scope="row">— Governance</th><td class="num">£19.77k</td></tr>
+            <tr class="row-emph"><th scope="row">Net surplus / retained for future use</th><td class="num">£51.40k</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The shape is healthy for a young charity: <strong>93% of expenditure goes to charitable activities</strong>, fundraising costs are low (£33k), and the year closed with a modest surplus rather than a draw-down. There is <strong>no endowment and no investment income</strong> — Tonic runs on money raised and spent in-year.<sup class="cite"><a href="#tr-src-7" data-src="financials" data-tip="FY2025: income £556,908 (donations &amp; legacies £439.10k; other trading £117.81k); expenditure £505,512 (charitable £472.41k; fundraising £33.10k; governance £19.77k); retained £51.40k. Charity Commission register.">7</a></sup></p>
+
+      <h3>Five years of roughly-tripling income<sup class="cite"><a href="#tr-src-7" data-src="financials" data-tip="Income series FY2021–FY2025: £165.49k / £224.36k / £396.49k / £462.88k / £556.91k. Charity Commission financial history.">7</a></sup></h3>
+      <figure class="chart">
+        <figcaption>Total income by fiscal year (£k, FY end 30 Jun) — about 3.4× growth since the Tonic Rider launch</figcaption>
+        <div class="col-chart" role="img" style="grid-template-columns:repeat(5,1fr)" aria-label="Total income columns: FY2021 £165.49k, FY2022 £224.36k, FY2023 £396.49k, FY2024 £462.88k, FY2025 £556.91k (highest).">
+          <div class="col"><div class="ctrack"><div class="cbar" style="height:27%"><span class="cval">£165k</span></div></div><span class="cyr">FY21</span></div>
+          <div class="col"><div class="ctrack"><div class="cbar" style="height:37%"><span class="cval">£224k</span></div></div><span class="cyr">FY22</span></div>
+          <div class="col"><div class="ctrack"><div class="cbar" style="height:65%"><span class="cval">£396k</span></div></div><span class="cyr">FY23</span></div>
+          <div class="col"><div class="ctrack"><div class="cbar" style="height:76%"><span class="cval">£463k</span></div></div><span class="cyr">FY24</span></div>
+          <div class="col"><div class="ctrack"><div class="cbar peak" style="height:92%"><span class="cval">£557k</span></div></div><span class="cyr">FY25</span></div>
+        </div>
+        <div class="chart-key">
+          <span><span class="swatch s-rev"></span> Total income</span>
+          <span><span class="swatch s-covid"></span> Latest year (FY2025)</span>
+        </div>
+        <p class="chart-note">Income grew about 3.4× in four years (£165k → £557k), tracking the build-out of the Tonic Rider programme from its February-2021 launch.</p>
+      </figure>
+
+      <div class="table-wrap" role="region" aria-label="Tonic Music for Mental Health — income and expenditure history FY2021–FY2025 (scrollable table)" tabindex="0">
+        <table>
+          <caption>Income &amp; expenditure history, FY2021–FY2025 — Charity Commission financial history</caption>
+          <thead><tr><th scope="col">FY end</th><th scope="col" class="num">Total income</th><th scope="col" class="num">Total expenditure</th></tr></thead>
+          <tbody>
+            <tr><td>30 Jun 2021</td><td class="num">£165.49k</td><td class="num">£139.73k</td></tr>
+            <tr><td>30 Jun 2022</td><td class="num">£224.36k</td><td class="num">£230.28k</td></tr>
+            <tr><td>30 Jun 2023</td><td class="num">£396.49k</td><td class="num">£284.79k</td></tr>
+            <tr><td>30 Jun 2024</td><td class="num">£462.88k</td><td class="num">£465.57k</td></tr>
+            <tr class="row-emph"><td>30 Jun 2025</td><td class="num">£556.91k</td><td class="num">£505.51k</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Expenditure has run close to income throughout — small surpluses in 2021, 2023 and 2025; small deficits in 2022 and 2024 — i.e. a charity that <strong>spends what it raises</strong>, with no large reserve cushion to fall back on. Government money has been negligible (£3.17k in FY2021, £2.00k in FY2023; nothing since).<sup class="cite"><a href="#tr-src-7" data-src="financials" data-tip="Expenditure FY2021–FY2025: £139.73k / £230.28k / £284.79k / £465.57k / £505.51k; government grants £3.17k FY2021, £2.00k FY2023. Charity Commission financial history.">7</a></sup></p>
+
+      <h3>What the figures do — and don't — break down</h3>
+      <p>The public register itemises income composition only for FY2025, so the donations-vs-trading split for earlier years is not visible (<strong>⚠️ register-unavailable</strong>). The <strong>"other trading activities" of £117.81k</strong> (21% of FY2025 income) is, however, itemised in <strong>Note 3 of the FY2025 audited accounts</strong>: it is mostly <strong>merchandise sales (£85,821)</strong>, plus <strong>fundraising events (£19,870)</strong> and <strong>other income (£12,116)</strong> — the three lines sum exactly to the £117,807 total. This <strong>corrects an earlier surmise</strong> that the line was commissioned-training and event work: commissioned training was delivered (to several organisations), but <strong>merchandise is the dominant component</strong>.<sup class="cite"><a href="#tr-src-7" data-src="financials" data-tip="'Other trading activities' £117.81k itemised in Note 3 of the FY2025 accounts: merchandise £85,821; fundraising events £19,870; other £12,116 = £117,807. Corrects earlier commissioned-training surmise. Charity Commission + filed accounts.">7</a></sup></p>
+    </section>
+
+    <!-- 4. PROGRAMS & DELIVERY -->
+    <section>
+      <div class="section-label">04 — Programs &amp; delivery</div>
+      <h2>A modular, clinically-governed catalogue<sup class="cite"><a href="#tr-src-5" data-src="programme" data-tip="Four support types — courses, groups, workshops, one-to-one — all free to UK music professionals 18+. Tonic Music, Our Programme of Support.">5</a></sup></h2>
+      <p>Tonic Rider delivers four kinds of support, all <strong>free to UK-resident music professionals aged 18+</strong>.</p>
+
+      <div class="table-wrap" role="region" aria-label="Tonic Rider support types (scrollable table)" tabindex="0">
+        <table>
+          <caption>The support catalogue — Tonic Rider (free to UK music professionals 18+)</caption>
+          <thead><tr><th scope="col">Type</th><th scope="col">Format</th><th scope="col">Notes</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Peer Support Groups</th><td>6-week facilitated groups</td><td>Open strand plus specialist strands: Suicide Bereavement, Neurodiversity, LGBTQIA+, Women, Menopause, Music Performance Anxiety</td></tr>
+            <tr><th scope="row">Group Therapy</th><td>12-week groups</td><td>Run by <strong>two psychotherapists</strong>; therapeutic (not peer) register</td></tr>
+            <tr><th scope="row">Preventative Workshops</th><td>2-hour single sessions</td><td>Music Performance Anxiety, Emotional Resilience, ACT Skills, Substance Use Awareness, Navigating Identity, Managing Neurodiversity, Intro to Mental Health, Understanding Wellbeing</td></tr>
+            <tr><th scope="row">Training Courses (accredited)</th><td>2-day / half-day</td><td><strong>Mental Health First Aid</strong> (MHFA England accredited); <strong>Suicide First Aid Lite</strong> (Royal Society for Public Health accredited)</td></tr>
+            <tr><th scope="row">1:1 Sessions</th><td>6 × 2-hr counselling, or support sessions</td><td>Counselling by an <strong>MBACP-registered humanistic counsellor</strong>; Support Sessions by a psychodynamic therapist-in-training. 1:1 access "may be subject to previous participation … and funding being granted by our referral partners"</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The performance-anxiety and resilience strands the project flagged as the borrowable core are present at <strong>two depths</strong>: a 2-hour preventative workshop <em>and</em> a 6-week peer-support group dedicated to Music Performance Anxiety — a useful "light-touch then deeper" progression.<sup class="cite"><a href="#tr-src-6" data-src="schedule" data-tip="Music Performance Anxiety offered as both a 2-hour workshop and a 6-week peer-support group. Tonic Music, Support (2026 calendar).">6</a></sup></p>
+
+      <h3>Clinical governance</h3>
+      <p>Tonic Rider's clinical assurance is built three ways, none of which requires a large in-house clinical department:</p>
+      <ul class="prog">
+        <li><h3>Qualified-practitioner delivery</h3><p>Tonic states its team "includes qualified mental health practitioners." Named on-site: Mental Health Lead <strong>Jade Hughes</strong>, psychotherapist <strong>Dr Claire Bloxsom</strong>, Programmes Lead <strong>Jeordie Shenton</strong>, and adviser/facilitator <strong>Dr Adam Ficek</strong>; group therapy is run by two psychotherapists and 1:1 counselling by an MBACP-registered counsellor.<sup class="cite"><a href="#tr-src-2" data-src="about" data-tip="Team incl. Steph Langan; Jade Hughes (Mental Health Lead); Dr Claire Bloxsom; Jeordie Shenton; Stanley Iampietro (Governance/Risk/Compliance Lead). Tonic Music, About.">2</a></sup><sup class="cite"><a href="#tr-src-6" data-src="schedule" data-tip="Group therapy by two psychotherapists; 1:1 counselling by MBACP-registered counsellor. Tonic Music, Support.">6</a></sup></p></li>
+        <li><h3>A dedicated governance function</h3><p>The team includes a <strong>Governance, Risk &amp; Compliance Lead</strong> (Stanley Iampietro) — unusual and notable for a ten-person charity — and the Charity Commission record lists a full policy suite: safeguarding, safeguarding vulnerable beneficiaries, serious-incident reporting, risk management, and internal financial controls.<sup class="cite"><a href="#tr-src-2" data-src="about" data-tip="Governance, Risk &amp; Compliance Lead (Stanley Iampietro). Tonic Music, About.">2</a></sup><sup class="cite"><a href="#tr-src-1" data-src="register" data-tip="Full policy suite: safeguarding, serious-incident reporting, risk management, internal financial controls. Charity Commission register #1189913.">1</a></sup></p></li>
+        <li><h3>The consultation gate as front-line screen</h3><p>The §2 gate is the front-line safety screen, plus explicit, repeated framing that <strong>"Tonic Music is not a crisis service"</strong> with sign-posting to NHS 111 — a clean scope boundary that keeps a light-touch service from being treated as emergency care.<sup class="cite"><a href="#tr-src-4" data-src="support-gate" data-tip="'Tonic Music is not a crisis service'; sign-posts NHS 111; 18+. Tonic Music, Support / About.">4</a></sup></p></li>
+      </ul>
+
+      <h3>Impact metrics — found in the filed annual report</h3>
+      <p>Tonic Rider does <strong>not</strong> publish headline impact metrics on its public website, but the <strong>FY2025 Trustees' Annual Report filed with the Charity Commission does</strong> — closing the gap the prior pass left open. For the year to 30 June 2025 the charity reports (across its programmes): <strong>317 newly registered participants</strong> (+17% year on year), <strong>225 consultation appointments</strong> (+32%), <strong>469 hours of 1-to-1 therapy</strong> (+36%), <strong>312 hours of peer-support groups</strong> (+70%), <strong>28 hours of skills workshops</strong> (+56%) and <strong>52 hours of accredited training</strong> (+30%); on outreach, <strong>414 posters to 79 venues</strong>, <strong>188 mental-health lounges/stands</strong> at events (+86%) delivering <strong>5,000+ interventions</strong>, and <strong>22 Tonic Talks</strong>. Cumulative active participants are reported as <strong>926 for Tonic Rider</strong> and 308 for Never Mind The Stigma. These are the charity's own reported activity counts (✅ sourced to the filed annual report; org-reported, not independently audited outcome measures). The remaining genuine gap is <strong>website-level transparency</strong> — the numbers exist in the filed report but are not surfaced where most readers or funders would look.<sup class="cite"><a href="#tr-src-8" data-src="annual-report" data-tip="FY2025 Trustees' Annual Report: 317 newly registered (+17%); 225 consultations (+32%); 469h 1-to-1; 312h peer groups; 28h workshops; 52h accredited training; 414 posters/79 venues; 188 lounges (+86%) with 5,000+ interventions; 22 Tonic Talks; cumulative Tonic Rider 926, Never Mind The Stigma 308. Filed with the Charity Commission.">8</a></sup></p>
+    </section>
+
+    <!-- 5. REACH -->
+    <section>
+      <div class="section-label">05 — Reach</div>
+      <h2>Through partners and patrons, not payroll<sup class="cite"><a href="#tr-src-6" data-src="schedule" data-tip="Partner network — Help Musicians, NTIA, Music Venue Trust, MU, MMF, FAC, BAPAM, Music Support, Royal Society of Musicians, PPL, Christopher Meredith Foundation, Baring Foundation and venues/festivals. Tonic Music, Support / Programme.">6</a></sup></h2>
+      <p>Tonic Rider's reach multiplies through two near-zero-cost channels rather than headcount.</p>
+      <p><strong>Referral &amp; funder partners.</strong> The published schedule names a wide partner network — <strong>Help Musicians, the Night Time Industries Association (NTIA), Music Venue Trust, the Musicians' Union, Music Managers Forum, Featured Artists Coalition, BAPAM, Music Support, the Royal Society of Musicians, PPL, the Christopher Meredith Foundation, the Baring Foundation</strong> and many venues and festivals. Some are <em>funders</em> of named strands; others are <em>referral routes</em> that channel their members and audiences into the programme. The same organisation often does both — e.g. a foundation that funds the peer-support groups while a union refers members to them.<sup class="cite"><a href="#tr-src-6" data-src="schedule" data-tip="Funders of named strands + referral routes; the same organisation often does both. Tonic Music, Support.">6</a></sup></p>
+      <p><strong>Patrons and the live circuit.</strong> Tonic's identity is woven through the UK alternative-music scene: founding patron <strong>Terry Hall</strong> (The Specials), patron <strong>Barry Ashworth</strong> (Dub Pistols), and a long roster of musician ambassadors, plus a touring "Tonic on Tour" presence (the Libertines, the Specials, festivals such as Mucky Weekender) that carries information stands front-of-house and backstage. This buys credibility and access in the exact community the programme serves — at the cost of a stall and some volunteer time, not a marketing budget.<sup class="cite"><a href="#tr-src-2" data-src="about" data-tip="Patrons Terry Hall, Barry Ashworth; musician ambassadors; 'Tonic on Tour' presence. Tonic Music, About.">2</a></sup><sup class="cite"><a href="#tr-src-3" data-src="musicweek" data-tip="Patrons Terry Hall and Barry Ashworth fronted the launch; partnership with NTIA. Music Week.">3</a></sup></p>
+    </section>
+
+    <!-- 6. GOVERNANCE -->
+    <section>
+      <div class="section-label">06 — Governance</div>
+      <h2>A thin, very new board<sup class="cite"><a href="#tr-src-1" data-src="register" data-tip="Three registered trustees, all appointed 2024–2025; no trustee remuneration; founder/CEO Steph Langan is staff, not a trustee. Charity Commission register #1189913.">1</a></sup></h2>
+      <p>Tonic Music for Mental Health is governed by a <strong>board of three registered trustees</strong>, all appointed recently.</p>
+      <div class="table-wrap" role="region" aria-label="Tonic Music for Mental Health — registered trustees (scrollable table)" tabindex="0">
+        <table>
+          <caption>Registered trustees — Charity Commission register #1189913</caption>
+          <thead><tr><th scope="col">Trustee</th><th scope="col">Role</th><th scope="col">Appointed</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Richard Thomas Walters</th><td>Trustee</td><td>11 September 2024</td></tr>
+            <tr><th scope="row">David Mark Dearman</th><td>Trustee</td><td>15 October 2024</td></tr>
+            <tr><th scope="row">Dr John Stephen Barnes</th><td>Trustee</td><td>21 August 2025</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>No trustee receives remuneration or benefits, and no employee has total benefits over £60k. <strong>Founder and CEO Steph Langan runs the charity as staff, not as a registered trustee</strong> — a clean executive/board separation, accurate on both the register and the org's own site.<sup class="cite"><a href="#tr-src-1" data-src="register" data-tip="No trustee remuneration; no employee over £60k benefits; Steph Langan is staff (Founder &amp; CEO), not a trustee. Charity Commission register.">1</a></sup><sup class="cite"><a href="#tr-src-2" data-src="about" data-tip="Steph Langan listed as Founder &amp; CEO (staff). Tonic Music, About.">2</a></sup></p>
+      <p>Two governance observations follow honestly from the record. First, a <strong>three-person board, all appointed in 2024–2025</strong>, is a thin and very new board for a charity with ten employees and half a million pounds of turnover — the kind of structure funders and a future merger/expansion would want to see deepened. Second, against that, the charity has invested in a <strong>dedicated Governance, Risk &amp; Compliance function</strong> and a complete written policy suite (§4), which is more governance infrastructure than many charities this size carry. The picture is of an operationally careful organisation whose <em>board</em> has not yet scaled to match its operations.<sup class="cite"><a href="#tr-src-1" data-src="register" data-tip="Three-trustee board (2024–2025) for 10 employees and ~£0.5M turnover; full policy suite on the register. Charity Commission register.">1</a></sup></p>
+    </section>
+
+    <!-- 7. STRENGTHS -->
+    <section>
+      <div class="section-label">07 — Strengths</div>
+      <h2>What works</h2>
+      <div class="sw-grid">
+        <div class="sw-card strong"><h3>A genuinely lean, copyable service</h3><p>The whole programme runs on ~£0.5M a year with ten staff, 93% of spend on charitable activity, and low fundraising cost — proof that a credible music-industry mental-health service does not require an endowment or a 24/7 helpline.<sup class="cite"><a href="#tr-src-7" data-src="financials" data-tip="~£0.5M/yr, 10 staff, 93% charitable spend, low fundraising cost. Charity Commission register.">7</a></sup></p></div>
+        <div class="sw-card strong"><h3>The consultation gate</h3><p>A single, up-to-one-hour screening conversation in front of all provision delivers risk triage, scope-setting and routing cheaply — a safety mechanism a small org can actually staff.<sup class="cite"><a href="#tr-src-4" data-src="support-gate" data-tip="Up-to-1-hour consultation = risk triage + scope-setting + routing, cheaply. Tonic Music, Support.">4</a></sup></p></div>
+        <div class="sw-card strong"><h3>A modular, amortised catalogue</h3><p>Short, theme-based groups and 2-hour workshops, built once and re-run for many cohorts and sub-audiences, give wide coverage (performance anxiety, resilience, substance use, neurodiversity, identity, bereavement) without bespoke design each time.<sup class="cite"><a href="#tr-src-6" data-src="schedule" data-tip="Modular catalogue re-run for many cohorts/sub-audiences. Tonic Music, Support.">6</a></sup></p></div>
+        <div class="sw-card strong"><h3>Clinical rigour without a clinical payroll</h3><p>Qualified practitioners, two-psychotherapist group therapy, MBACP-registered counselling, MHFA/RSPH-accredited courses, a Governance/Risk/Compliance lead and a full policy suite — assurance assembled from named people and accreditations rather than a large salaried clinical department.<sup class="cite"><a href="#tr-src-2" data-src="about" data-tip="Qualified practitioners + accreditations + Governance/Risk/Compliance lead + policy suite. Tonic Music, About.">2</a></sup><sup class="cite"><a href="#tr-src-1" data-src="register" data-tip="Full policy suite on the register. Charity Commission register #1189913.">1</a></sup></p></div>
+        <div class="sw-card strong"><h3>Strand-by-strand partner funding</h3><p>Expansion by signing a funder to a named strand (CMF → peer groups, PPL → workshops, RSM → group therapy) diversifies income and lets the programme grow one fundable unit at a time.<sup class="cite"><a href="#tr-src-6" data-src="schedule" data-tip="CMF → peer groups; PPL → workshops; RSM → group therapy. Tonic Music, Support.">6</a></sup></p></div>
+        <div class="sw-card strong"><h3>Fast, organic growth</h3><p>Income tripled in four years (£165k → £557k) while staying near break-even — growth funded by demand and partnerships, not by drawing down capital.<sup class="cite"><a href="#tr-src-7" data-src="financials" data-tip="Income £165k → £557k in four years, near break-even. Charity Commission financial history.">7</a></sup></p></div>
+      </div>
+    </section>
+
+    <!-- 8. WEAKNESSES -->
+    <section>
+      <div class="section-label">08 — Weaknesses &amp; risks</div>
+      <h2>What to watch</h2>
+      <div class="sw-grid">
+        <div class="sw-card weak"><h3>No reserve cushion</h3><p>Tonic spends close to what it raises and holds no endowment or investment income; a single lost major funder (e.g. the Christopher Meredith Foundation, which underwrites much of the peer-support and training calendar) would hit the programme directly. Small surpluses are accumulating but slowly.<sup class="cite"><a href="#tr-src-7" data-src="financials" data-tip="No endowment/investment income; spends near income; major-funder loss would hit directly. Charity Commission register.">7</a></sup></p></div>
+        <div class="sw-card weak"><h3>Funder concentration in the calendar</h3><p>The 2026 schedule leans heavily on a small number of named funders for whole strands. Diversified in principle, but in practice the loss of one would visibly thin the menu.<sup class="cite"><a href="#tr-src-6" data-src="schedule" data-tip="Whole strands lean on a few named funders; loss of one thins the menu. Tonic Music, Support.">6</a></sup></p></div>
+        <div class="sw-card weak"><h3>A thin, very new board</h3><p>Three trustees, all seated in 2024–2025, is light governance for the scale and risk profile of clinical mental-health delivery, and a likely flag for institutional funders.<sup class="cite"><a href="#tr-src-1" data-src="register" data-tip="Three trustees, all 2024–2025; light governance for clinical delivery. Charity Commission register.">1</a></sup></p></div>
+        <div class="sw-card weak"><h3>Impact data filed but not surfaced</h3><p>Reach/activity metrics exist in the FY2025 annual report filed with the Charity Commission (§4) but are absent from the public website, where funders and participants are most likely to look — a communications gap rather than a measurement one. Publishing them on-site would strengthen the fundraising case.<sup class="cite"><a href="#tr-src-8" data-src="annual-report" data-tip="Metrics in the filed FY2025 report but not on the public website — a communications gap. Filed annual report.">8</a></sup></p></div>
+        <div class="sw-card weak"><h3>Capacity, not crisis</h3><p>By design Tonic Rider is "not a crisis service," 18+, and UK-only; participants in acute risk must be routed elsewhere (NHS 111). That is the correct and safe scope, but it means the model covers prevention and peer support, not the acute end.<sup class="cite"><a href="#tr-src-4" data-src="support-gate" data-tip="'Not a crisis service'; 18+; UK-only; acute risk routed to NHS 111. Tonic Music, Support / About.">4</a></sup></p></div>
+        <div class="sw-card weak"><h3>Key-person and founder dependence</h3><p>A ten-person charity built around a founder-CEO and a handful of named facilitators carries real key-person risk; succession and bench depth are not visible in the public record. ❓ Unverified.</p></div>
+      </div>
+    </section>
+
+    <!-- 9. LESSONS -->
+    <section>
+      <div class="section-label">09 — Lessons for Taiwan</div>
+      <h2>What a Taiwan music mental health NPO should take</h2>
+      <ol class="lessons">
+        <li><h3>This is the model to copy first — it fits a small budget</h3><p>Of the organisations in this series, Tonic Rider is the one a Taiwan startup could most realistically build in year one: a <strong>half-million-pound (NT$ low-double-digit-million) programme, ten people, near break-even, no endowment, no hotline</strong>. The lesson is that a credible service can start small and grow with demand.<sup class="cite"><a href="#tr-src-7" data-src="financials" data-tip="~£0.5M, 10 people, near break-even, no endowment, no hotline — buildable in year one. Charity Commission register.">7</a></sup></p></li>
+        <li><h3>Put a consultation/triage gate in front of everything</h3><p>Adopt Tonic's <strong>mandatory registration + up-to-one-hour online consultation</strong> before anyone joins a group or workshop. It is the single most transferable safety device here: it screens risk, captures GP/emergency-contact details, routes people correctly, and is cheap because it is one structured conversation — not a clinic.<sup class="cite"><a href="#tr-src-4" data-src="support-gate" data-tip="Mandatory registration + up-to-1-hour consultation = the most transferable safety device. Tonic Music, Support.">4</a></sup></p></li>
+        <li><h3>Build a modular catalogue, not bespoke therapy</h3><p>Design a fixed menu of <strong>6-week peer groups, 12-week group therapy, and 2-hour workshops</strong> (performance anxiety, emotional resilience, substance use, identity, neurodiversity) and re-run them for different sub-audiences (artists, crew, 18–25s, managers, venue staff). Build the content once; amortise it across cohorts.<sup class="cite"><a href="#tr-src-6" data-src="schedule" data-tip="Fixed modular menu re-run for sub-audiences; build once, amortise. Tonic Music, Support.">6</a></sup></p></li>
+        <li><h3>Fund strand-by-strand from named partners</h3><p>Rather than chasing one large grant, sign <strong>specific funders to specific strands</strong> — a foundation to underwrite the peer-support groups, a collecting society or rights body (the PPL analogue in Taiwan would be a body like a local music-rights or broadcasting fund) to underwrite the workshop series, a musicians' benevolent body to underwrite group therapy. Each fundable unit can be added as a partner is secured.<sup class="cite"><a href="#tr-src-6" data-src="schedule" data-tip="Sign specific funders to specific strands; add fundable units as partners are secured. Tonic Music, Support.">6</a></sup></p></li>
+        <li><h3>Borrow clinical assurance; don't build a clinical department</h3><p>Staff with <strong>qualified, accredited practitioners</strong> (in Taiwan: 諮商心理師 / 臨床心理師-registered counsellors and psychotherapists), use <strong>internationally recognised accredited courses</strong> (MHFA-equivalent, suicide-first-aid), and appoint an explicit <strong>governance/risk/safeguarding lead</strong> even at ten people. Assurance comes from named, registered people and a written policy suite — not headcount.<sup class="cite"><a href="#tr-src-2" data-src="about" data-tip="Qualified accredited practitioners + accredited courses + governance/risk lead + policy suite. Tonic Music, About.">2</a></sup><sup class="cite"><a href="#tr-src-1" data-src="register" data-tip="Written policy suite on the register. Charity Commission register #1189913.">1</a></sup></p></li>
+        <li><h3>Name a crisp scope boundary and sign-post out</h3><p>State plainly "we are not a crisis service," set an age floor (18+, with a youth strand if resourced), and route acute risk to the national emergency/mental-health line (the 1925 安心專線 in Taiwan, as NHS 111 is for Tonic). This protects a light-touch service from being mistaken for emergency care.<sup class="cite"><a href="#tr-src-4" data-src="support-gate" data-tip="State 'not a crisis service'; 18+; route acute risk to the national line (1925 安心專線). Tonic Music, Support.">4</a></sup></p></li>
+        <li><h3>Use patrons and the live circuit for reach</h3><p>Tonic's credibility comes from being embedded in its own music scene via patrons, ambassadors and a touring information-stand presence — near-zero-cost reach. A Taiwan NPO should recruit respected local artists as patrons and take a backstage/front-of-house presence to festivals and venues rather than buying advertising.<sup class="cite"><a href="#tr-src-2" data-src="about" data-tip="Patrons + ambassadors + touring stands = near-zero-cost reach. Tonic Music, About.">2</a></sup><sup class="cite"><a href="#tr-src-3" data-src="musicweek" data-tip="Patrons fronted the launch; embedded in the live scene. Music Week.">3</a></sup></p></li>
+        <li><h3>Seat a real board and publish impact from day one</h3><p>Learn from Tonic's two visible gaps: build a <strong>board deeper than three people</strong> and <strong>publish reach and outcome metrics</strong> early. Both are cheap to do at the start and expensive to retrofit, and both are exactly what Taiwanese funders (文化部, corporate sponsors) will ask for.<sup class="cite"><a href="#tr-src-1" data-src="register" data-tip="Build a board deeper than three; the thin board is a visible gap. Charity Commission register.">1</a></sup><sup class="cite"><a href="#tr-src-8" data-src="annual-report" data-tip="Publish reach/outcome metrics early; Tonic files them but doesn't surface them. Filed annual report.">8</a></sup></p></li>
+      </ol>
+    </section>
+
+    <!-- 10. METHOD + REFERENCES -->
+    <section>
+      <div class="section-label">10 — Methodology &amp; references</div>
+      <h2>Basis</h2>
+      <p class="cite-help">Every figure carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source; click to jump to the full reference. Identity, registration, finances, trustees and governance come from the UK Charity Commission register entry for Tonic Music for Mental Health Ltd (#1189913) — the authoritative primary record, read via Claude-in-Chrome because the register is JavaScript-rendered. Programme design, the support catalogue, the consultation gate, named practitioners and funders come from the charity's own website (tonicmusic.co.uk); the founding chronology and Tonic Rider launch date are corroborated by Music Week. No people, dates or figures are asserted that are not on one of these primary sources; items that could not be sourced are marked ❓ and not asserted.</p>
+
+      <div class="table-wrap" role="region" aria-label="Methodology — sources, methods and basis (scrollable table)" tabindex="0">
+        <table>
+          <caption>Methodology — sources, methods and basis</caption>
+          <thead><tr><th scope="col">Source</th><th scope="col">Method</th><th scope="col">Basis</th></tr></thead>
+          <tbody>
+            <tr><td>Charity Commission register — Tonic Music for Mental Health Ltd #1189913 (overview, financial history, trustees, governance)</td><td>Claude-in-Chrome <code>get_page_text</code> (register is JS-rendered; WebFetch returns no data)</td><td>✅ Sourced — authoritative primary register</td></tr>
+            <tr><td>tonicmusic.co.uk — Home, About, Programme (<code>/prog</code>), Support (<code>/support</code>)</td><td>WebFetch (Wix site returns clean rendered text)</td><td>✅ Sourced — organisation-published primary</td></tr>
+            <tr><td>Music Week, "Tonic Rider scheme launches…" (16 Feb 2021)</td><td>WebFetch + WebSearch</td><td>✅ Sourced — named trade outlet (corroborates launch date, patrons, founder/CEO)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Limitations.</strong> (1) The register itemises income composition only for FY2025; pre-2025 donations-vs-trading splits are not public (§3, ⚠️). (2) The register does not break down "other trading activities" by line, but Note 3 of the FY2025 audited accounts does (merchandise £85,821; fundraising events £19,870; other £12,116 — resolved this pass). (3) Programme impact metrics were retrieved this pass from the FY2025 Trustees' Annual Report (§4); they are the charity's own reported activity counts and are not surfaced on the public website. (4) Named facilitators/advisers are listed on the org's own site; their individual qualifications were taken as stated and not independently re-verified. (5) Succession/key-person depth is not in the public record (§8, ❓). (6) No direct organisational contact; all data from public primary sources.</p>
+
+      <div class="refs" id="refs-all" data-citation-registry="tr-all">
+        <div class="refs-title">References</div>
+        <ol>
+          <li id="tr-src-1" data-src="register">Identity, registration, finances, trustees, governance and policies: Charity Commission for England and Wales. (2026). <em>Tonic Music for Mental Health Ltd — registered charity 1189913</em> [Register entry]. Retrieved June 27, 2026, from <a href="https://register-of-charities.charitycommission.gov.uk/en/charity-search/-/charity-details/5153221/charity-overview" target="_blank" rel="noopener">register-of-charities.charitycommission.gov.uk</a> (registered 12 June 2020; company 08093898; 3 trustees — Walters, Dearman, Barnes; 10 employees, 8 volunteers; no trustee remuneration; full safeguarding/risk/serious-incident policy suite). <strong>Source · Method · Basis:</strong> Charity Commission register · Claude-in-Chrome · ✅ Sourced.</li>
+          <li id="tr-src-2" data-src="about">History, programmes, support types, team and clinical staffing: Tonic Music for Mental Health. (n.d.). <em>About</em>. Retrieved June 27, 2026, from <a href="https://www.tonicmusic.co.uk/about" target="_blank" rel="noopener">tonicmusic.co.uk/about</a> (founded 2012, Portsmouth; UK-wide; three programmes — Tonic Rider, Never Mind The Stigma, Tonic Futures; four support types; 18+; team incl. Steph Langan, Founder &amp; CEO; Jade Hughes, Mental Health Lead; Dr Claire Bloxsom; Jeordie Shenton; Stanley Iampietro, Governance/Risk/Compliance Lead). <strong>Source · Method · Basis:</strong> organisation website · WebFetch · ✅ Sourced.</li>
+          <li id="tr-src-3" data-src="musicweek">Tonic Rider launch, patrons and CEO: Homewood, B. (2021, February 16). <em>Tonic Rider scheme launches to support mental health in music</em>. Music Week. <a href="https://www.musicweek.com/live/read/tonic-rider-scheme-launches-to-support-mental-health-in-music/082622" target="_blank" rel="noopener">musicweek.com</a> (launch 16 Feb 2021; virtual peer groups by Dr Adam Ficek; workshops on performance anxiety, ACT, MHFA, suicide prevention; patrons Terry Hall and Barry Ashworth; CEO Steph Langan; partnership with NTIA; research study led by Jeordie Shenton and Adam Ficek). <strong>Source · Method · Basis:</strong> trade press · WebFetch + WebSearch · ✅ Sourced.</li>
+          <li id="tr-src-4" data-src="support-gate">The registration + consultation gate, scope boundary and 18+ rule: Tonic Music for Mental Health. (n.d.). <em>Mental Health Support</em>. Retrieved June 27, 2026, from <a href="https://www.tonicmusic.co.uk/support" target="_blank" rel="noopener">tonicmusic.co.uk/support</a> ("Initial registration and an online consultation appointment is required before you can participate"; consultation up to 1 hour, identifies risks/concerns and unmet needs; registration collects health, demographic, emergency-contact and GP details under UK GDPR); and Tonic Music for Mental Health. (n.d.). <em>About</em> ("Tonic Music is not a crisis service … aged 18 years or older"). <strong>Source · Method · Basis:</strong> organisation website · WebFetch · ✅ Sourced.</li>
+          <li id="tr-src-5" data-src="programme">The four support types and modular catalogue: Tonic Music for Mental Health. (n.d.). <em>Our Programme of Support</em>. Retrieved June 27, 2026, from <a href="https://www.tonicmusic.co.uk/prog" target="_blank" rel="noopener">tonicmusic.co.uk/prog</a> (Courses — MHFA, Suicide First Aid Lite; Groups — Peer Support, Group Therapy, Healthy Thinking Series, specialist strands; Workshops — Intro to MH, Understanding Wellbeing, Music Performance Anxiety, Substance Use Awareness, Emotional Resilience, ACT Skills, Navigating Identity, Managing Neurodiversity; One-to-One — Counselling by MBACP-registered humanistic counsellor, Support Sessions by psychodynamic therapist-in-training). <strong>Source · Method · Basis:</strong> organisation website · WebFetch · ✅ Sourced.</li>
+          <li id="tr-src-6" data-src="schedule">Current programme schedule, sub-audiences, accreditations and named funders: Tonic Music for Mental Health. (n.d.). <em>Mental Health Support</em> (2026 calendar). Retrieved June 27, 2026, from <a href="https://www.tonicmusic.co.uk/support" target="_blank" rel="noopener">tonicmusic.co.uk/support</a> (6-week peer-support groups; 12-week group therapy with two psychotherapists; 2-hour workshops; MHFA England- and RSPH-accredited courses; sub-audiences — All Music Professionals, Futures 18–25, Agents x Managers, Music Venues, Music Youth Project Staff; strands "Supported by" The Christopher Meredith Foundation, PPL Giving, The Royal Society of Musicians); partner list (Help Musicians, NTIA, Music Venue Trust, BAPAM, Music Support, MU, MMF, FAC, Baring Foundation and others) from <em>Our Programme of Support</em> and <em>About</em>. <strong>Source · Method · Basis:</strong> organisation website · WebFetch · ✅ Sourced.</li>
+          <li id="tr-src-7" data-src="financials">Income, expenditure, five-year history and people: Charity Commission for England and Wales. (2026). <em>Tonic Music for Mental Health Ltd — financial history</em> [Register entry]. Retrieved June 27, 2026, from <a href="https://register-of-charities.charitycommission.gov.uk/en/charity-search/-/charity-details/5153221/financial-history" target="_blank" rel="noopener">register-of-charities.charitycommission.gov.uk</a> (FY ending 30 June 2025: income £556,908 — donations &amp; legacies £439.10k, other trading £117.81k; expenditure £505,512 — charitable activities £472.41k, raising funds £33.10k, governance £19.77k; retained £51.40k. Income series FY2021–FY2025: £165.49k / £224.36k / £396.49k / £462.88k / £556.91k; expenditure £139.73k / £230.28k / £284.79k / £465.57k / £505.51k; government grants £3.17k FY2021 and £2.00k FY2023). Percentages (93% charitable; ~3.4× growth) computed from these totals, not quoted. The line-by-line FY2025 figures were re-verified to the pound against the register on 2026-06-27; the composition of "other trading activities" is itemised in Note 3 of the filed FY2025 accounts (merchandise £85,821; fundraising events £19,870; other £12,116 = £117,807). <strong>Source · Method · Basis:</strong> Charity Commission register + filed FY2025 accounts · Claude-in-Chrome / WebFetch · ✅ Sourced.</li>
+          <li id="tr-src-8" data-src="annual-report">Programme impact metrics: Tonic Music for Mental Health Ltd. (2026). <em>Trustees' annual report and financial statements, year ended 30 June 2025</em> [Filed accounts, registered charity 1189913]. Retrieved June 27, 2026, from the Charity Commission register (<a href="https://register-of-charities.charitycommission.gov.uk/en/charity-search/-/charity-details/5153221/accounts-and-annual-returns" target="_blank" rel="noopener">accounts-and-annual-returns</a>). "Key achievements in 2024–25": 317 newly registered participants (+17%); 225 consultation appointments (+32%); 469 hours 1-to-1 therapy; 312 hours peer-support groups; 28 hours skills workshops; 52 hours accredited training; 414 posters to 79 venues; 188 mental-health lounges/stands (+86%) with 5,000+ interventions; 22 Tonic Talks; cumulative active participants Tonic Rider 926 and Never Mind The Stigma 308. These figures appear in the filed annual report but <strong>not</strong> on the public website. <strong>Source · Method · Basis:</strong> filed annual report (primary) · Claude-in-Chrome · ✅ Sourced (charity-reported activity counts, not independently audited outcome measures).</li>
+        </ol>
+        <p class="refs-note">Convention: every claim-bearing element carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above — machine-checkable before each deploy (§5.2 / §6 gate 1). Derived ratios are marked computed, not quoted. Citation source of truth: <span style="font-family:var(--font-mono);">2026-06-27_Report_Org_Study_Tonic_Rider.md</span>.</p>
+      </div>
+    </section>
+
+    <nav class="related-block" aria-label="Related on this site">
+      <p class="related-title">Related</p>
+      <ul>
+        <li><a href="org-study.html">&larr; Org Study (all organizations)</a></li>
+        <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+        <li><a href="policy-study.html">Policy Study &mdash; how jurisdictions protect music workers</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <script>
+  /* Scroll-reveal — R3.2 shared IntersectionObserver (normal-scroll page) */
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = 'section > h2, .stat-strip, figure, .table-wrap, .phases-grid, .sources-card, .refs';
+    var nodes = Array.prototype.slice.call(document.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, sibs, idx = 0;
+        if (p){ sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,6) * 60) + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
+
+  <!-- nav scroll-state: transparent over hero, blurred bar once scrolled -->
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden','true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>

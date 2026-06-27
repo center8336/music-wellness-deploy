@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>SADEM / OSDEM · Org Study · MH&amp;W</title>
+  <meta name="description" content="SADEM is an 80-year-old Argentine musicians' union that uniquely owns and runs its members' health fund (OSDEM) — the deepest welfare-into-membership integration in the series, and a cautionary tale on sustaining it.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      /* ── DIA-GRADE READING SCALE (calibrated to Dia browser, serif-corrected) ── */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;--lh-prose:1.7;--wt-prose:440;--measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;--label-ink:var(--graphite);
+      --font-cjk:'Noto Serif TC',serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { overflow-x: hidden; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--black);
+      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      line-height: var(--lh-prose);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    a { color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    a:hover { color: var(--signal-dim); }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--signal); outline-offset: 3px; border-radius: var(--radius);
+    }
+
+    .skip-nav {
+      position: absolute; left: -9999px; top: 0; z-index: 200;
+      background: var(--signal); color: var(--white);
+      padding: 0.5rem 1rem; font-family: var(--font-mono);
+    }
+    .skip-nav:focus { left: 0; }
+
+    /* ===== NAVIGATION ===== */
+    nav.nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; flex-direction: column;
+      padding: 2rem 2.5rem;
+      padding-top: calc(2rem + env(safe-area-inset-top));
+      background: transparent;
+      transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    nav.nav.scrolled {
+      background: rgba(244, 244, 245, 0.45);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: var(--font-mono); font-size: 1.1rem; font-weight: 400;
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-topbar { display:none; }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; min-width:44px; min-height:44px; z-index:101; -webkit-tap-highlight-color:transparent; }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity:0; }
+    .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
+
+    /* ===== LAYOUT ===== */
+    main { max-width: var(--max-w); margin: 0 auto; padding: 0 2.5rem 5rem 2.5rem; }
+    section { margin-bottom: 4rem; }
+    .narrow { max-width: var(--max-w-text); }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding-top: calc(9rem + env(safe-area-inset-top));
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-light);
+      margin-bottom: 3rem;
+    }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.18em;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: var(--font-display); font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6.5rem);
+      font-weight: 800; line-height: 1.04; color: var(--black); letter-spacing: -0.01em;
+      overflow-wrap: break-word; hyphens: auto;
+    }
+    .hero h1 .tail { display:block; font-size: clamp(1.15rem, 2.6vw, 1.9rem); font-weight: 600; color: var(--signal); letter-spacing: 0; margin-top: 0.9rem; }
+    .hero .subtitle {
+      font-family: var(--font-body); font-size: clamp(1.25rem, 1.05rem + 1.4vw, 1.5rem);
+      color: var(--graphite); line-height: 1.55; margin-top: 1.5rem; max-width: 54ch;
+    }
+    .basis-badge {
+      display: inline-block; margin-top: 1.75rem;
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--graphite); background: var(--signal-bg);
+      border: 1px solid var(--signal-glow); border-radius: var(--radius);
+      padding: 0.5rem 0.85rem; line-height: 1.5;
+    }
+
+    /* ===== TWO-LINE COVER (R2.1, 2026-06-20) — width:100% inside main (no 100vw breakout → no x-overflow) ===== */
+    .cover {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;                /* clips the wash */
+      padding: 0 2rem;
+    }
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%,
+        var(--signal-glow) 0%,
+        rgba(102,103,171,0.06) 38%,
+        rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
+    }
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 1280px);
+    }
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin: 0;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+    .cover-line {
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--purple-deep);
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
+    }
+    .cover-hint {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
+    }
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
+    }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-line  { animation-delay: 0.22s; }
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .cover-wash,
+      .cover-hint,
+      .cover-inner > * { animation: none; opacity: 1; transform: none; }
+    }
+    @media (max-width: 768px) {
+      .cover { padding: 0 1.25rem; }
+      .cover-title { font-size: clamp(1.7rem, 7.3vw, 2.4rem); }
+      .cover-line  { font-size: clamp(0.72rem, 3.2vw, 0.95rem); letter-spacing: 0.18em; }
+    }
+
+    /* ===== TYPE ===== */
+    h2 {
+      font-family: var(--font-display); font-size: var(--text-h2);
+      font-weight: 700; line-height: 1.1; color: var(--black);
+      margin-bottom: 1.25rem; letter-spacing: -0.01em;
+      text-wrap: balance; overflow-wrap: break-word;
+    }
+    h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem); line-height: 1.25; font-weight: 600; color: var(--charcoal); margin: 1.75rem 0 0.75rem; }
+    .section-label {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem;
+    }
+    p { color: var(--graphite); max-width: var(--measure-prose); margin-bottom: 1rem; line-height: 1.65; }
+    p.lead { font-size: 1.1rem; color: var(--charcoal); }
+    strong { color: var(--charcoal); font-weight: 600; }
+    em { color: var(--graphite); }
+
+    /* ===== MODEL CALLOUT ===== */
+    .model-callout { background: var(--bg-card-dark); color: var(--snow); border-radius: var(--radius-lg); padding: 2.25rem 2.5rem; margin-bottom: 3rem; }
+    .model-callout h2 { color: var(--white); margin-bottom: 1rem; }
+    .model-callout p { color: var(--silver); max-width: none; }
+    .model-callout strong { color: var(--white); }
+    .model-callout a { color: var(--spectrum-3); text-decoration: underline; text-underline-offset: 2px; }
+    .model-callout a:hover { color: var(--white); }
+
+    /* ===== THE FLYWHEEL (signature visual) ===== */
+    .flywheel-panel {
+      background: var(--bg-card-dark);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem 2rem 1.5rem;
+      margin: 1.5rem 0 1.75rem;
+      border: 1px solid var(--border-dark);
+    }
+    .flywheel-panel .fw-cap {
+      font-family: var(--font-mono); font-size: var(--text-xs); color: var(--spectrum-3);
+      text-transform: uppercase; letter-spacing: 0.16em; text-align: center; margin-bottom: 0.5rem;
+    }
+    .flywheel-panel svg { display: block; width: 100%; height: auto; max-width: 460px; margin: 0 auto; }
+    .fw-ring { fill: none; stroke: var(--border-dark); stroke-width: 1.5; stroke-dasharray: 3 6; }
+    .fw-arc { fill: none; stroke: var(--spectrum-3); stroke-width: 2.5; opacity: 0.85; stroke-dasharray: 4 7; animation: fw-flow 2.2s linear infinite; }
+    @keyframes fw-flow { to { stroke-dashoffset: -22; } }
+    .fw-node { fill: var(--charcoal); stroke: var(--spectrum-2); stroke-width: 2; }
+    .fw-hub { fill: var(--black); stroke: var(--spectrum-3); stroke-width: 1.5; }
+    .fw-num { fill: var(--spectrum-3); font-family: var(--font-mono); font-size: 13px; font-weight: 700; }
+    .fw-label { fill: var(--snow); font-family: var(--font-display); font-size: 15px; font-weight: 700; letter-spacing: 0.02em; }
+    .fw-sub { fill: var(--grey-light); font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.04em; }
+    .fw-hub-label { fill: var(--spectrum-3); font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.14em; }
+    .fw-hub-sub { fill: var(--grey-light); font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; }
+
+    .gear-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .gear {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-left: 3px solid var(--spectrum-2); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem;
+    }
+    .gear .gn { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); letter-spacing: 0.1em; }
+    .gear h3 { margin: 0.35rem 0 0.5rem; font-size: 1.08rem; }
+    .gear p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-card); margin: 1.5rem 0 0.75rem; }
+    .stat-item { padding: 1.75rem 1.25rem; border-right: 1px solid var(--border-light); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--signal); line-height: 1; font-variant-numeric: tabular-nums; }
+    .stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.6rem; line-height: 1.4; }
+
+    /* ===== COLUMN CHART (revenue trajectory) ===== */
+    figure.chart { margin: 1.5rem 0; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 2rem 1.75rem 1.25rem; }
+    figure.chart figcaption { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
+    .col-chart { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.6rem; align-items: end; }
+    .col { display: flex; flex-direction: column; align-items: center; }
+    .ctrack { position: relative; width: 100%; height: 190px; display: flex; align-items: flex-end; }
+    .cbar { width: 100%; max-width: 54px; margin: 0 auto; background: var(--signal); border-radius: var(--radius) var(--radius) 0 0; position: relative; transition: height var(--dur-slow) var(--ease); }
+    .cbar.peak { background: var(--spectrum-2); }
+    .cbar .cval { position: absolute; top: -1.35rem; left: -50%; right: -50%; text-align: center; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--charcoal); font-variant-numeric: tabular-nums; }
+    .cyr { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); margin-top: 0.55rem; letter-spacing: 0.02em; }
+    .chart-note { font-size: var(--text-xs); color: var(--label-ink); margin-top: 1rem; max-width: none; }
+    .chart-key { display: flex; gap: 1.25rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .chart-key span { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); display: inline-flex; align-items: center; gap: 0.4rem; }
+    .swatch { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+    .swatch.s-rev { background: var(--signal); }
+    .swatch.s-covid { background: var(--spectrum-2); }
+
+    /* ===== TABLES ===== */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; margin: 1.25rem 0; border-radius: var(--radius-lg); border: 1px solid var(--border-light); }
+    .table-wrap:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+    table { width: 100%; border-collapse: collapse; background: var(--bg-card); font-size: var(--text-small); }
+    caption { text-align: left; font-family: var(--font-mono); font-size: var(--text-caption); color: var(--label-ink); padding: 0.75rem 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border-light); vertical-align: top; font-variant-numeric: tabular-nums; }
+    thead th { font-family: var(--font-mono); font-size: var(--text-micro); text-transform: uppercase; letter-spacing: 0.06em; color: var(--label-ink); background: var(--snow); }
+    tbody tr:last-child td { border-bottom: none; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .row-emph td { background: var(--signal-bg); font-weight: 600; color: var(--charcoal); }
+    .row-covid td { background: rgba(232, 168, 124, 0.12); }
+
+    /* ===== CRISIS CARDS ===== */
+    .crisis-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .crisis { background: var(--bg-card); border: 1px solid var(--border-light); border-top: 3px solid var(--spectrum-1); border-radius: var(--radius-lg); padding: 1.5rem 1.6rem; }
+    .crisis .cyrtag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--graphite); letter-spacing: 0.08em; }
+    .crisis h3 { margin: 0.3rem 0 0.6rem; font-size: 1.08rem; }
+    .crisis .big { font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; color: var(--charcoal); line-height: 1; margin-bottom: 0.5rem; }
+    .crisis p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== PROGRAM LIST ===== */
+    .prog { list-style: none; margin: 1.25rem 0 0; padding: 0; }
+    .prog li { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 0.85rem; }
+    .prog h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .prog p { font-size: var(--text-sm); margin-bottom: 0; }
+    .prog .ptag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ===== SW CARDS ===== */
+    .sw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.25rem; }
+    .sw-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem; }
+    .sw-card.weak { border-left: 3px solid var(--spectrum-2); }
+    .sw-card.strong { border-left: 3px solid var(--spectrum-4); }
+    .sw-card h3 { margin: 0 0 0.4rem; font-size: 1rem; }
+    .sw-card p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== LESSONS ===== */
+    .lessons { counter-reset: lesson; list-style: none; margin: 1.5rem 0 0; padding: 0; }
+    .lessons li { position: relative; padding: 1.25rem 1.5rem 1.25rem 3.5rem; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); margin-bottom: 0.85rem; }
+    .lessons li::before { counter-increment: lesson; content: counter(lesson); position: absolute; left: 1.25rem; top: 1.25rem; font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--signal); }
+    .lessons h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .lessons p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== CITATIONS (§5 inline tier) ===== */
+    .cite { font-size: 0.7em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem; }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-fine); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; max-width: var(--measure-ref); overflow-wrap: anywhere; }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs-note { font-size: var(--text-xs); color: var(--label-ink); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-sm); color: var(--label-ink); font-style: italic; max-width: var(--max-w-text); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .gear-cards { grid-template-columns: 1fr; }
+      .crisis-grid { grid-template-columns: 1fr; }
+      .sw-grid { grid-template-columns: 1fr; }
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2n) { border-right: none; }
+      .stat-item:nth-child(-n+2) { border-bottom: 1px solid var(--border-light); }
+    }
+    @media (max-width: 768px) {
+      nav.nav { padding: 1.2rem 1.5rem; padding-top: calc(1.2rem + env(safe-area-inset-top)); }
+      nav.nav.open { background: rgba(244,244,245,0.95); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-light); }
+      .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
+      .nav-toggle { display:block; }
+      .nav-mobile-brand { display:block; }
+      .nav-links { display:none; flex-direction:column; gap:0.75rem; margin-top:1rem; }
+      .nav-links.show { display:flex; }
+      .nav-links a { font-size: 0.85rem; }
+      main { padding: 0 1.5rem 3rem 1.5rem; }
+      .hero { padding-top: calc(7rem + env(safe-area-inset-top)); }
+      .hero h1 { font-size: clamp(2.4rem, 10.5vw, 3.4rem); }
+      .model-callout, .flywheel-panel { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .col-chart { gap: 0.3rem; }
+      .ctrack { height: 150px; }
+      .cbar .cval { font-size: 0.62rem; }
+    }
+    @media (max-width: 680px) {
+      p, .hero .subtitle, .refs li, .cite-help { max-width: none; }
+    }
+    @media (max-width: 480px) {
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+      .stat-item:last-child { border-bottom: none; }
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
+      .cyr { font-size: 0.6rem; }
+      table { font-size: 0.82rem; }
+      thead th { font-size: 0.6rem; }
+      th, td { padding: 0.5rem 0.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } nav.nav, .cbar { transition: none; } .fw-arc { animation: none; } }
+
+    /* ===== Scroll-reveal (R3.2 craft pass) ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ===== Related block (no dead-ends, R3.2) ===== */
+    .related-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-light); }
+    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--label-ink); margin-bottom: 0.6rem; }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a { font-family: var(--font-body); font-size: var(--text-sm); color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+  </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open');this.setAttribute('aria-expanded',o)">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+        <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="org-study.html" class="current" aria-current="page">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
+      <a href="field-news.html">FIELD NEWS</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- COVER -->
+    <section class="cover">
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="cover-inner">
+        <h1 class="cover-title">SADEM</h1>
+        <p class="cover-line">Org Study · Est. 1945</p>
+      </div>
+      <span class="cover-hint" aria-hidden="true">↓ Scroll</span>
+    </section>
+
+    <!-- MODEL CALLOUT -->
+    <div class="model-callout">
+      <h2>Why this case is different</h2>
+      <p><a href="org-study-backline.html">Backline</a> was bootstrapped in a 2019 crisis; <a href="org-study-musicares.html">MusiCares</a> was built inside the Recording Academy; <a href="org-study-music-minds-matter.html">Music Minds Matter</a> was incubated inside a century-old benevolent fund and spun out. SADEM is a fourth pattern entirely: not a mental-health NPO at all, but an <strong>80-year-old trade union</strong> that, alone among the cases, <strong>owns and runs its members' health fund</strong> — OSDEM, the <em>Obra Social de los Músicos</em> — and claims to be "the only union in the world with its own health service." ⚠️ It is the deepest welfare-into-membership integration in this series. It is also the only case where the primary sources include a government regulator placing the health fund in formal financial "crisis." For a Taiwan startup, SADEM is the model of <strong>bundling health coverage into union membership</strong> — and the clearest cautionary tale about what that costs to sustain.<sup class="cite"><a href="#sa-src-1" data-src="sadem-home" data-tip="SADEM home: founding 1945, &quot;transformamos el arte en derechos,&quot; &quot;más de 25.000 afiliados&quot; (⚠️ self-reported), &quot;la única organización que gestiona su propia obra social.&quot; sadem.org.ar.">1</a></sup></p>
+    </div>
+
+    <!-- 1. PROFILE -->
+    <section>
+      <div class="section-label">01 — Profile</div>
+      <h2>A musicians' union with its own health fund<sup class="cite"><a href="#sa-src-1" data-src="sadem-home" data-tip="Identity, founding (1945), and the &quot;own obra social&quot; framing: SADEM home page. sadem.org.ar.">1</a></sup></h2>
+      <p>SADEM — the Sindicato Argentino de Músicos — is a labour union for Argentina's music workers, founded on 21 December 1945. Its single distinguishing feature is OSDEM, the <em>Obra Social de los Músicos</em>: SADEM does not refer members to a health service, it owns and runs one. That one fact explains everything else on this page.</p>
+
+      <div class="table-wrap" role="region" aria-label="Organization profile — SADEM / OSDEM (scrollable table)" tabindex="0">
+        <table>
+          <caption>Organization profile — SADEM / OSDEM (sources cited inline)</caption>
+          <tbody>
+            <tr><th scope="row">Union name</th><td>SADEM — Sindicato Argentino de Músicos</td></tr>
+            <tr><th scope="row">Health fund (obra social)</th><td>OSDEM — Obra Social de los Músicos</td></tr>
+            <tr><th scope="row">Founded (union)</th><td>21 December 1945</td></tr>
+            <tr><th scope="row">Union legal status</th><td>Personería Gremial N° 12</td></tr>
+            <tr><th scope="row">OSDEM registry</th><td>RNOS (Registro Nacional de Obras Sociales) N° 1-1280-6<sup class="cite"><a href="#sa-src-5" data-src="boletin" data-tip="RNOS N° 1-1280-6 named verbatim in the Boletín Oficial (official gazette). Resolución SSS 1439/2023.">5</a></sup></td></tr>
+            <tr><th scope="row">OSDEM origins</th><td>1953 (Centro de Asistencia Médica Integral) → 1955 (Farmacia Social) → 1992 (first Estatuto) → 1993 (first Directorio)<sup class="cite"><a href="#sa-src-3" data-src="osdem" data-tip="OSDEM lineage and the &quot;only union in the world&quot; claim: OSDEM, Nosotros. osdem.org.ar.">3</a></sup></td></tr>
+            <tr><th scope="row">Members (self-reported)</th><td>"más de 25.000 afiliados" ⚠️</td></tr>
+            <tr><th scope="row">HQ</th><td>Av. Belgrano 3655, C.A.B.A. (C1210AAE), Buenos Aires</td></tr>
+            <tr><th scope="row">Federation / affiliations</th><td>FIM — Federación Internacional de Músicos (Executive Committee <em>per the union's own description</em> — not on FIM's current public roster, so ⚠️ self-reported); CGT; COSITMECOS<sup class="cite"><a href="#sa-src-2" data-src="about" data-tip="Affiliations and the FIM Executive Committee claim (cross-checked against FIM's own roster, which does not name SADEM → ⚠️ self-reported): SADEM, Sobre el SADEM + FIM primary.">2</a></sup></td></tr>
+            <tr><th scope="row">Collective agreements</th><td>CCT 112/90; CCT 113/90</td></tr>
+            <tr><th scope="row">Websites</th><td><a href="https://sadem.org.ar" target="_blank" rel="noopener">sadem.org.ar</a> · <a href="https://www.osdem.org.ar" target="_blank" rel="noopener">osdem.org.ar</a></td></tr>
+            <tr><th scope="row">Mission (union)</th><td>Represent, defend and protect Argentina's music workers — "transformar el arte en derechos"</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>A union, not a charity</h3>
+      <p>SADEM is a labour union for <em>music workers</em> — instrumentalists, singers, conductors, arrangers, copyists and music teachers — founded on 21 December 1945 and holding Personería Gremial N° 12. It is explicit that it is <em>not</em> SADAIC, Argentina's authors'-rights collecting society: SADAIC manages royalties; SADEM "pelea por tu salario y condiciones" — it bargains wages and working conditions. It publishes binding minimum salary scales for live, TV, advertising and recording work, runs a legal department, and — by its own account — sits on the Executive Committee of the <strong>Federación Internacional de Músicos (FIM)</strong>. FIM's current public Executive Committee roster and member list do not name SADEM, so this is carried as ⚠️ self-reported — documented historically, not confirmed current. It holds national affiliations to the CGT and COSITMECOS.<sup class="cite"><a href="#sa-src-2" data-src="about" data-tip="Personería Gremial N° 12; SADAIC distinction; CGT/COSITMECOS; CCT 112/90; the FIM-EC claim downgraded to ⚠️ against FIM's own roster. SADEM, Sobre el SADEM + FIM.">2</a></sup></p>
+      <p>The union states it has <strong>"más de 25.000 afiliados."</strong> This figure appears on the homepage and the "Sobre el SADEM" page, but it is self-reported, round, and not independently audited; it is carried here as ⚠️ as-reported, not asserted as fact.<sup class="cite"><a href="#sa-src-1" data-src="sadem-home" data-tip="&quot;más de 25.000 afiliados&quot; — a self-reported, round, unaudited figure (⚠️). SADEM home + Sobre el SADEM.">1</a></sup></p>
+    </section>
+
+    <!-- 2. THE DISTINCTIVE MODEL -->
+    <section>
+      <div class="section-label">02 — The distinctive model</div>
+      <h2>A union that owns its health fund<sup class="cite"><a href="#sa-src-3" data-src="osdem" data-tip="OSDEM is SADEM's own obra social (RNOS 1-1280-6); the &quot;only union in the world with its own health service&quot; (⚠️ self-description); 1953→1993 lineage. OSDEM, Nosotros.">3</a></sup></h2>
+      <p>The single feature that sets SADEM apart from every other organization in this series is that it does not <em>refer</em> members to health services — it <strong>owns and runs</strong> one. <strong>OSDEM (Obra Social de los Músicos)</strong> is SADEM's own <em>obra social</em>, a regulated health-insurance agent (<em>agente del seguro de salud</em>) under the national Superintendencia de Servicios de Salud, carrying RNOS N° 1-1280-6. The union advertises this as a world-first: <em>"el único sindicato del mundo que cuenta con su propio servicio de salud"</em> — "the only union in the world with its own health service." ⚠️</p>
+      <p>That claim is a self-description and cannot be independently verified here (it is recorded ⚠️), but the <em>existence and operation</em> of the fund are well documented on OSDEM's own site and in the government gazette. The lineage is long: SADEM opened a <strong>Centro de Asistencia Médica Integral</strong> (clinic and dental rooms) in <strong>1953</strong> — described as the "germen" of the obra social — and a <strong>Farmacia Social</strong> in <strong>1955</strong>. OSDEM formally approved its first <strong>Estatuto in 1992</strong> and named its first <strong>Directorio in 1993</strong>.</p>
+      <p>This is structurally the inverse of the Anglo-American cases. MusiCares and Music Minds Matter are <em>grant-and-service charities</em> layered on top of a public or private health system. SADEM/OSDEM <strong>is</strong> the health system for its members: contributions flow in through the obra-social channel (monotributistas or salaried musicians redirect their statutory health contributions to OSDEM via the <em>opción de cambio</em>), and benefits flow out as the legally mandated PMO package.<sup class="cite"><a href="#sa-src-4" data-src="afiliaciones" data-tip="Affiliation routes (monotributista / relación de dependencia) and PMO/Ley 26.657 framing: OSDEM, Afiliaciones, + Argentine obra-social/PMO legal framework. ⚠️ Inferred where noted.">4</a></sup></p>
+    </section>
+
+    <!-- 3. FINANCING, GOVERNANCE & REGULATORY STANDING -->
+    <section>
+      <div class="section-label">03 — Financing, governance &amp; regulatory standing</div>
+      <h2>Contribution-financed, regulator-backstopped</h2>
+
+      <h3>How OSDEM is financed</h3>
+      <p>OSDEM is funded the way every Argentine obra social is: through the <strong>solidarity contributions</strong> of its affiliates — a percentage of earnings (or the health component of the monotributo for self-employed musicians) channelled into the fund rather than into a generic obra social. Members join via two routes the site names explicitly: <strong>monotributista</strong> and <strong>relación de dependencia</strong> (salaried). Services carry <strong>copays</strong> (paid to a published CBU) and require <strong>medical authorization</strong> subject to <em>auditoría médica</em>. This is contribution-financed insurance, not philanthropy — there is no gala, no endowment, no artist-campaign income in this model.<sup class="cite"><a href="#sa-src-4" data-src="afiliaciones" data-tip="Affiliation routes, copays and PMO mechanics: OSDEM, Afiliaciones + obra-social/PMO framework.">4</a></sup></p>
+      <p>A specific, checkable financial figure (annual income, reserves, per-capita spend) is <strong>not published</strong> on either site; OSDEM does not put out a public annual report comparable to a UK charity's audited accounts. That absence is itself informative and is flagged as a limitation (§10).</p>
+
+      <h3>Regulatory standing — a documented crisis and recovery<sup class="cite"><a href="#sa-src-5" data-src="boletin" data-tip="Boletín Oficial — Resolución SSS 1439/2023, recounting the 2022 crisis (RESOL-2022-1426; factor 0.6875 at 31-Aug-2021), the Plan de Contingencia (DI-2022-19), and the 31-Jul-2023 reversal. ✅ Government primary.">5</a></sup></h3>
+      <p>The most consequential primary-source finding in this case is in the <strong>Boletín Oficial</strong>. In 2022 the <strong>Superintendencia de Servicios de Salud placed OSDEM in a formal "situación de crisis"</strong> under Decreto 1400/2001 (RESOL-2022-1426-APN-SSS#MS): at 31 August 2021 the fund showed a <em>factor de criticidad</em> of <strong>0.6875</strong>, failing requirements across economic-financial control (financial statements, budgets, source-and-application-of-funds) and the membership <em>padrón</em> (registry), plus further criteria. OSDEM filed a <strong>Plan de Contingencia</strong> (approved by Disposición DI-2022-19-APN-GCEF#SSS), and on <strong>31 July 2023</strong> the Superintendencia declared the crisis <strong>reverted</strong> (RESOL-2023-1439-APN-SSS#MS, published 02/08/2023).</p>
+
+      <div class="crisis-grid">
+        <div class="crisis">
+          <div class="cyrtag">2022 · placed in crisis</div>
+          <h3>Situación de crisis</h3>
+          <div class="big">0.6875</div>
+          <p>The <em>factor de criticidad</em> at 31 Aug 2021. The regulator (RESOL-2022-1426) cited failed requirements on financial statements, budgets, source-and-application-of-funds, and the membership padrón — independent, government-verified evidence that a small single-sector obra social runs close to the edge of solvency.</p>
+        </div>
+        <div class="crisis">
+          <div class="cyrtag">2023 · crisis reverted</div>
+          <h3>Plan de Contingencia → recovery</h3>
+          <div class="big">31 Jul 2023</div>
+          <p>OSDEM's contingency plan (DI-2022-19) was approved and the crisis declared reverted (RESOL-2023-1439, published 02 Aug 2023). The system worked as a backstop: the national regulator caught the deterioration, forced a plan, and the fund recovered.</p>
+        </div>
+      </div>
+      <p style="margin-top:1.5rem;">This matters for two reasons. First, it is independent, government-verified evidence — not a self-report — that a small single-sector obra social runs close to the edge of solvency. Second, it shows the system <em>worked as a backstop</em>: the national regulator caught the deterioration, forced a contingency plan, and the fund recovered. Both halves of that are lessons for anyone copying the model (§9).</p>
+
+      <h3>Governance</h3>
+      <p>OSDEM is governed by a Directorio that is institutionally tied to SADEM's leadership: the union's officers populate the fund's board. The clearest documented illustration is the archival account by <strong>María Laura Vigliecca</strong>, identified on SADEM's own site as <em>presidenta de la OSDEM y Secretaria de Organización del SAdeM</em>, who (with then-Secretary-General <strong>Ricardo Vernazza</strong>) described leading OSDEM's 2009–2016 reconstruction.<sup class="cite"><a href="#sa-src-6" data-src="vigliecca" data-tip="Archival SADEM article by María Laura Vigliecca (~2016) on the 2009–2016 reconstruction and the planned salud-mental area. ⚠️ a dated plan, not a current standing service.">6</a></sup> Current named office-holders are <strong>not</strong> cleanly published on the present site and are therefore left ❓ rather than asserted — the fabrication guard applies to people above all. The structural point holds regardless of who currently sits: the health fund is run <em>by the union</em>, for the union's members.</p>
+    </section>
+
+    <!-- 4. WHAT MEMBERS RECEIVE -->
+    <section>
+      <div class="section-label">04 — What members receive</div>
+      <h2>The PMO, plus a deep welfare bundle<sup class="cite"><a href="#sa-src-7" data-src="servicios" data-tip="Service menu (Discapacidad/CUD; Enfermedades crónicas) and the absence of a named MH category: OSDEM, Servicios Médicos / Preguntas frecuentes.">7</a></sup></h2>
+      <p>OSDEM delivers the <strong>PMO (Programa Médico Obligatorio)</strong> — Argentina's legally mandated minimum benefit package — to affiliates <strong>and their families</strong>, through a provider-and-pharmacy network ("cartilla") in <strong>CABA, Gran Buenos Aires, Córdoba, Santa Fe and Tierra del Fuego</strong>, described as "en constante expansión."</p>
+
+      <p>The site organizes services into two menus:</p>
+      <ul class="prog">
+        <li><div class="ptag">Servicios Médicos</div><h3>Discapacidad (disability)</h3><p>Built around the <strong>CUD</strong> (Certificado Único de Discapacidad): 100% coverage of rehabilitation, therapies, medication and prostheses; transport passes; family allowances; and guidance through the ANDIS evaluation process.</p></li>
+        <li><div class="ptag">Servicios Médicos</div><h3>Enfermedades crónicas (chronic disease)</h3><p>Standing coverage for the management of chronic conditions across the provider network.</p></li>
+        <li><div class="ptag">Prevención</div><h3>Prevention programs<sup class="cite"><a href="#sa-src-8" data-src="prevencion" data-tip="Prevention programs: cáncer, celiaquía, diabetes, hipertensión, tabaquismo, vacunación — no MH program listed. OSDEM, Prevención.">8</a></sup></h3><p>Cancer, celiac disease, diabetes, hypertension, <strong>smoking-cessation (tabaquismo)</strong>, and <strong>vaccination</strong> programs.</p></li>
+      </ul>
+
+      <p style="margin-top:1.5rem;">Operationally: a 24-hour <em>urgencias/emergencias</em> line, WhatsApp-based authorizations, a published copay CBU, and a 24h national gender-violence referral line (#144) on the homepage.<sup class="cite"><a href="#sa-src-3" data-src="osdem" data-tip="24h urgencias line, WhatsApp authorizations, #144 gender-violence referral on the homepage. OSDEM, Inicio / Nosotros.">3</a></sup></p>
+
+      <p>Beyond OSDEM, SADEM itself bundles a wide <strong>welfare package</strong> into membership: free <strong>legal and IP/contract counsel</strong> (a standout in an informal industry), notary services, registration help with the authors'/performers' societies (DNDA, SADAIC, AADI-CAPIF), <strong>tourism and recreation</strong> via a reciprocity deal with the Sindicato de Luz y Fuerza (hotels and day-clubs), <strong>luthier-repair discounts</strong>, and <strong>annual school kits</strong> for members' children.<sup class="cite"><a href="#sa-src-9" data-src="beneficios" data-tip="Welfare bundle: legal/IP counsel, notary, registration help, tourism via Luz y Fuerza, luthier discounts, school kits. SADEM, Beneficios de afiliación.">9</a></sup></p>
+    </section>
+
+    <!-- 5. MENTAL HEALTH: THE DIRECT VERIFICATION -->
+    <section>
+      <div class="section-label">05 — Mental health: the direct verification</div>
+      <h2>No standing music-specific MH service<sup class="cite"><a href="#sa-src-7" data-src="servicios" data-tip="No salud-mental / psychology category appears in OSDEM's medical menu — the absence is itself ✅ Sourced. OSDEM, Servicios Médicos.">7</a></sup></h2>
+      <p>The wiki flagged the standing-mental-health question as ❓ and asked for verification on the primary source rather than assumption. The verification result is clear and worth stating precisely.</p>
+      <p><strong>There is no standing, music-specific mental-health or counselling service advertised on either the SADEM or the OSDEM site as of June 2026.</strong> OSDEM's medical menu is disability and chronic disease; its prevention menu is cancer, celiac, diabetes, hypertension, smoking-cessation and vaccination. Psychology, psychiatry, "salud mental," counselling, or a helpline appear <strong>nowhere</strong> as a named service. The only mental-health-adjacent items are <strong>external referral pointers</strong>: the national gender-violence line <strong>#144</strong> and IVE/ILE (pregnancy-termination) information on the OSDEM homepage.<sup class="cite"><a href="#sa-src-8" data-src="prevencion" data-tip="Prevention menu names cancer/celiac/diabetes/hypertension/tabaquismo/vacunación — no MH program. OSDEM, Prevención.">8</a></sup></p>
+
+      <p>Two important qualifications keep this honest, in both directions:</p>
+      <ul class="prog">
+        <li><div class="ptag">Qualification 1 · ⚠️ dated aspiration</div><h3>A dated aspiration existed</h3><p>An archival SADEM article (~2016) by María Laura Vigliecca states the 2009–2016 leadership intended, from <strong>March 2017</strong>, to finish <em>"el área de salud mental destinada a atender fundamentalmente adicciones y violencia de género"</em> — a mental-health area focused chiefly on <strong>addictions and gender violence</strong> — staffed by specialists who "conozcan nuestra profesión," as part of building <em>centros de derivación</em>. This is a real, music-aware mental-health <em>intention</em>, and it is sourced. But it is a <strong>plan from a prior leadership a decade ago</strong>; no primary source confirms it became a standing service, and the current site does not name it. It is recorded ⚠️ as-reported/dated, not asserted as a live service.<sup class="cite"><a href="#sa-src-6" data-src="vigliecca" data-tip="The ~2016 plan for a salud-mental area (addictions + gender violence) from prior leadership — ⚠️ dated, not a current standing service. Vigliecca, SADEM archival article.">6</a></sup></p></li>
+        <li><div class="ptag">Qualification 2 · ⚠️ inferred</div><h3>Coverage exists by law, even if unnamed</h3><p>As an obra social, OSDEM is legally bound to deliver the PMO, which <strong>includes</strong> mental-health coverage under Argentina's Ley Nacional de Salud Mental (26.657) and the PMO itself. So an OSDEM member almost certainly <em>can</em> access psychological care through the fund — but as a generic legal entitlement, not a profession-specific program the union markets or designs. That distinction is ⚠️ Inferred, and it is the crux of the lesson in §9.<sup class="cite"><a href="#sa-src-4" data-src="afiliaciones" data-tip="PMO + Ley 26.657 make MH coverage a legal entitlement — ⚠️ Inferred that it is therefore available, not a marketed profession-specific program. OSDEM, Afiliaciones + legal framework.">4</a></sup></p></li>
+      </ul>
+
+      <p style="margin-top:1.5rem;"><strong>Net reading:</strong> SADEM/OSDEM is a deep <em>health-and-welfare</em> integration that has <strong>not</strong> (visibly, currently) built the profession-specific <em>mental-health</em> layer that this project is studying. The "only union with its own health service" is, on mental health, no further along than a generic obra social.</p>
+    </section>
+
+    <!-- 6. STRENGTHS -->
+    <section>
+      <div class="section-label">06 — Strengths</div>
+      <h2>What works</h2>
+      <div class="sw-grid">
+        <div class="sw-card strong"><h3>Health coverage bundled into membership</h3><p>The defining strength: joining the union <em>is</em> joining a health fund. A music worker who affiliates gains PMO-level medical cover for themselves and their family, financed through their own statutory contributions — no separate insurer, no means test, no charity application.<sup class="cite"><a href="#sa-src-3" data-src="osdem" data-tip="Membership = a health fund; PMO cover for affiliates and families. OSDEM, Nosotros.">3</a></sup></p></div>
+        <div class="sw-card strong"><h3>Profession-specific by design</h3><p>OSDEM exists to study and treat "las patologías que afectan a nuestra profesión." Even where the catalogue is conventional, the <em>intent</em> is occupational — a health fund that understands musicians, not a generic one a musician happens to use.<sup class="cite"><a href="#sa-src-6" data-src="vigliecca" data-tip="The occupational intent — &quot;las patologías que afectan a nuestra profesión.&quot; Vigliecca, SADEM archival article.">6</a></sup></p></div>
+        <div class="sw-card strong"><h3>Welfare depth far beyond health</h3><p>Free legal/IP counsel, registration help, tourism, luthier discounts, and school kits make membership a genuine welfare bundle. In a highly informal industry, the legal department alone is a major draw.<sup class="cite"><a href="#sa-src-9" data-src="beneficios" data-tip="Legal/IP counsel, registration help, tourism, luthier discounts, school kits. SADEM, Beneficios de afiliación.">9</a></sup></p></div>
+        <div class="sw-card strong"><h3>Regulated and backstopped</h3><p>Because OSDEM is a registered obra social, it sits inside the national Superintendencia's oversight — which, as the 2022–2023 episode shows, actually catches and corrects financial distress rather than letting a member fund quietly fail.<sup class="cite"><a href="#sa-src-5" data-src="boletin" data-tip="The 2022–2023 crisis-and-recovery episode shows the regulator catching and correcting distress. Boletín Oficial, RESOL-2023-1439.">5</a></sup></p></div>
+        <div class="sw-card strong"><h3>Longevity and federation reach</h3><p>An 80-year-old union with provincial seccionales and a reported tie to the Federación Internacional de Músicos (FIM) carries institutional weight a new NPO cannot manufacture.<sup class="cite"><a href="#sa-src-2" data-src="about" data-tip="80-year-old union, provincial seccionales, reported FIM tie (⚠️ self-reported). SADEM, Sobre el SADEM + FIM.">2</a></sup></p></div>
+      </div>
+    </section>
+
+    <!-- 7. WEAKNESSES & RISKS -->
+    <section>
+      <div class="section-label">07 — Weaknesses &amp; risks</div>
+      <h2>What to watch</h2>
+      <div class="sw-grid">
+        <div class="sw-card weak"><h3>No standing mental-health program</h3><p>For this project's purpose, the central gap: the "only union with its own health service" markets <strong>no</strong> profession-specific mental-health service, and its one documented MH intention is a decade-old, unconfirmed plan. Mental-health provision is, at best, the generic PMO entitlement.<sup class="cite"><a href="#sa-src-7" data-src="servicios" data-tip="No profession-specific MH service in the menu; the one MH intention is dated. OSDEM, Servicios Médicos + Vigliecca.">7</a></sup></p></div>
+        <div class="sw-card weak"><h3>Documented financial fragility</h3><p>A government regulator formally declared OSDEM in "crisis" in 2022 over failed financial and registry requirements. It recovered — but a single-sector obra social financing health entirely from one profession's contributions is structurally thin, and the gazette proves it.<sup class="cite"><a href="#sa-src-5" data-src="boletin" data-tip="2022 government-declared crisis over failed financial/registry requirements. Boletín Oficial.">5</a></sup></p></div>
+        <div class="sw-card weak"><h3>Opaque finances</h3><p>No public annual report, income figure, reserve level, or membership audit is available; the headline "25.000 afiliados" is self-reported. Outsiders cannot independently size or stress-test the fund.<sup class="cite"><a href="#sa-src-1" data-src="sadem-home" data-tip="No public financials; &quot;25.000 afiliados&quot; is the union's own self-reported figure. SADEM home.">1</a></sup></p></div>
+        <div class="sw-card weak"><h3>Governance not transparently published</h3><p>Current board members and office-holders are not cleanly listed on the present site, limiting accountability visibility (and forcing this report to leave names ❓).<sup class="cite"><a href="#sa-src-3" data-src="osdem" data-tip="Current board/office-holders not cleanly published; names left ❓ (fabrication guard). OSDEM site.">3</a></sup></p></div>
+        <div class="sw-card weak"><h3>Geographically partial</h3><p>The provider network covers five jurisdictions (CABA, GBA, Córdoba, Santa Fe, Tierra del Fuego) — meaningful but not nationwide, despite the federal ambition.</p></div>
+        <div class="sw-card weak"><h3>Model is regime-dependent</h3><p>OSDEM only works <em>because</em> Argentina's obra-social system lets a union channel members' statutory health contributions into its own fund. That legal scaffolding does not exist in most countries — including Taiwan — so the model is not portable wholesale (§9).<sup class="cite"><a href="#sa-src-4" data-src="afiliaciones" data-tip="The model depends on Argentina's obra-social channel; not portable wholesale. OSDEM, Afiliaciones + framework.">4</a></sup></p></div>
+      </div>
+    </section>
+
+    <!-- 8. THE WIDER LATIN-AMERICAN PATTERN -->
+    <section>
+      <div class="section-label">08 — The wider Latin-American pattern</div>
+      <h2>Welfare runs through unions, not charities<sup class="cite"><a href="#sa-src-10" data-src="latam-welfare" data-tip="The regional pattern of music-specific unions (SADEM, SindMusi, SUTM) carrying welfare vs. the Taiwan-specific gap: project wiki concept article (traces to primary org sites). ⚠️ synthesis.">10</a></sup></h2>
+      <p>SADEM is not an outlier in its region but the deepest example of a regional pattern: in Latin America, music-worker welfare runs through <strong>music-specific unions</strong>, not US/UK-style mental-health charities. SADEM (Argentina, own health fund), SindMusi (Brazil, legal counsel + health-plan brokerage) and SUTM (Mexico, a social-welfare secretariat) all attach welfare to <em>labour</em> membership. This sharpens the gap this project tracks: the missing layer in Taiwan is not "a music charity" but a <strong>music-specific worker body</strong> doing occupational welfare at all — a gap that is Taiwan-specific, not Asia- or Latin-America-wide.</p>
+    </section>
+
+    <!-- 9. LESSONS -->
+    <section>
+      <div class="section-label">09 — Lessons for Taiwan</div>
+      <h2>What a Taiwan music mental health NPO should take</h2>
+      <ol class="lessons">
+        <li><h3>The union-owned-health-fund model is powerful but largely non-portable — copy the <em>bundling logic</em>, not the <em>mechanism</em></h3><p>OSDEM works because Argentine law lets a union redirect members' statutory health contributions into its own obra social. Taiwan has National Health Insurance, not a union-channelled obra-social system, so a Taiwan NPO <strong>cannot</strong> replicate the fund itself. What it <em>can</em> borrow is the underlying insight: <strong>make membership the carrier of welfare.</strong> Bundle services into affiliation with a music body so that one act — joining — delivers a package.<sup class="cite"><a href="#sa-src-4" data-src="afiliaciones" data-tip="The mechanism (obra-social channel) is non-portable; the bundling logic transfers. OSDEM, Afiliaciones + framework.">4</a></sup></p></li>
+        <li><h3>Do not assume "has a health fund" means "has a mental-health service"</h3><p>The headline lesson from the verification: the world's most health-integrated music union still markets <strong>no</strong> standing mental-health program. A Taiwan NPO should therefore treat profession-specific mental health as a <strong>deliberate, separately built layer</strong> — it does not emerge automatically from owning health infrastructure. This is precisely the white space.<sup class="cite"><a href="#sa-src-7" data-src="servicios" data-tip="Owning health infrastructure did not produce a standing MH program — MH is a separately built layer. OSDEM, Servicios Médicos.">7</a></sup></p></li>
+        <li><h3>Heed the solvency warning</h3><p>OSDEM's government-documented 2022 "crisis" is a gift of a cautionary tale: a single-profession fund is financially thin and can deteriorate fast. A Taiwan NPO should not finance ongoing clinical services from one narrow contribution base; it needs diversified income (Ministry of Culture grants, corporate partners, events) and conservative reserves before promising standing services.<sup class="cite"><a href="#sa-src-5" data-src="boletin" data-tip="The 2022 government-documented crisis warns against financing standing services from one narrow contribution base. Boletín Oficial.">5</a></sup></p></li>
+        <li><h3>The legal-counsel bundle is the most immediately copyable benefit</h3><p>SADEM's free contract/IP legal advice is a high-value, low-clinical-risk service that builds membership and trust in an informal industry — and Taiwan's indie-music scene is comparably informal. This is a faster, safer first offering than standing up clinical care.<sup class="cite"><a href="#sa-src-9" data-src="beneficios" data-tip="Free contract/IP legal advice: high-value, low-clinical-risk, immediately copyable. SADEM, Beneficios de afiliación.">9</a></sup></p></li>
+        <li><h3>Build governance and reporting transparency from day one</h3><p>OSDEM's opacity (no public accounts, unlisted board, self-reported membership) is a weakness a new organization can simply <em>not</em> inherit. Publishing audited figures and a named board is cheap early and very hard to retrofit — and it is exactly what funders and members will trust.<sup class="cite"><a href="#sa-src-5" data-src="boletin" data-tip="Transparency is cheap early, hard to retrofit; OSDEM's opacity is the contrast. Boletín Oficial + SADEM home.">5</a></sup></p></li>
+        <li><h3>Partner with the regulator's logic, not around it</h3><p>The Argentine episode shows external oversight is a feature, not a burden: it caught OSDEM's distress and forced recovery. A Taiwan NPO should welcome equivalent external audit/oversight as a credibility asset rather than treat compliance as overhead.</p></li>
+        <li><h3>Frame mental health as occupational health</h3><p>Where SADEM's <em>intent</em> was sharpest — treating "las patologías que afectan a nuestra profesión," with the 2016 plan naming addictions and the industry's precarity — is exactly the right frame. A Taiwan music-MH NPO should position mental health as part of <strong>occupational</strong> health for a precarious profession, which is both more fundable and more accurate than a generic wellness pitch.<sup class="cite"><a href="#sa-src-6" data-src="vigliecca" data-tip="The occupational frame — &quot;las patologías que afectan a nuestra profesión&quot; — is the right pitch. Vigliecca, SADEM archival article.">6</a></sup></p></li>
+      </ol>
+    </section>
+
+    <!-- 10. METHOD + REFERENCES -->
+    <section>
+      <div class="section-label">10 — Methodology &amp; references</div>
+      <h2>Basis</h2>
+      <p class="cite-help">Every claim carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source; click to jump to the full reference. Identity, structure, history and the service menu are sourced to SADEM's and OSDEM's own sites (sadem.org.ar, osdem.org.ar), read in Spanish. The RNOS registry number and the 2022–2023 regulatory crisis-and-recovery episode are sourced to the Boletín Oficial, Argentina's official gazette (government primary). The membership figure (25,000+) is self-reported and round (⚠️). No standing music-specific mental-health service is advertised on either current site (❓ central finding); the 2016 plan to build one is a dated aspiration, not a confirmed standing service. Current named office-holders are left ❓ rather than asserted — the fabrication guard applies to people above all.</p>
+
+      <div class="table-wrap" role="region" aria-label="Methodology and basis — sources and methods (scrollable table)" tabindex="0">
+        <table>
+          <caption>Methodology &amp; basis — sources, methods, and evidence grade</caption>
+          <thead><tr><th scope="col">Source</th><th scope="col">Method</th><th scope="col">Basis</th></tr></thead>
+          <tbody>
+            <tr><td>SADEM own site (home, "Sobre el SADEM", "Beneficios de afiliación", "Consultorios de derivación")</td><td>WebFetch (server-rendered; full text in Spanish)</td><td>✅ Sourced (org-published primary)</td></tr>
+            <tr><td>OSDEM own site (home, "Nosotros", "Servicios Médicos", "Prevención", "Preguntas frecuentes", "Afiliaciones")</td><td>WebFetch (server-rendered; full text in Spanish)</td><td>✅ Sourced (org-published primary)</td></tr>
+            <tr><td>Boletín Oficial — Resolución SSS 1439/2023 (and the 2022 crisis resolution it cites)</td><td>WebFetch (official-gazette PDF)</td><td>✅ Sourced — government primary (RNOS 1-1280-6; crisis + recovery)</td></tr>
+            <tr><td>Superintendencia de Servicios de Salud — agente-del-seguro registry</td><td>WebFetch + Chrome (JS-rendered table did not populate)</td><td>⚠️ Not captured — RNOS confirmed via Boletín Oficial instead</td></tr>
+            <tr><td>WebSearch corroboration (founding, FIM, membership)</td><td>WebSearch</td><td>⚠️ Secondary; used only to triangulate org-published facts</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>Limitations.</strong> (1) <strong>No public financials.</strong> OSDEM publishes no annual report; income, reserves and per-capita spend are unavailable, so the fund cannot be independently sized. (2) <strong>Membership is self-reported.</strong> "25.000 afiliados" is the union's own round figure, uncorroborated. (3) <strong>Current governance is not cleanly published</strong>; named office-holders are left ❓ rather than asserted (fabrication guard). (4) <strong>The Superintendencia registry table is JS-rendered</strong> and did not return data via WebFetch or a static Chrome read; the RNOS number rests on the Boletín Oficial, which is the stronger primary source in any case. (5) <strong>The 2016 mental-health plan</strong> is a dated aspiration from prior leadership, not evidence of a current standing service. (6) <strong>The FIM Executive Committee membership</strong> is a SADEM self-claim; FIM's current public Executive Committee roster and member list (2026) do not name SADEM, so it is carried as ⚠️ self-reported (the tie is documented historically but not confirmed current). (7) No direct organizational contact; all data from public primary sources, read in Spanish.</p>
+
+      <div class="refs" id="refs-all" data-citation-registry="sa-all">
+        <div class="refs-title">References</div>
+        <ol>
+          <li id="sa-src-1" data-src="sadem-home">Sindicato Argentino de Músicos. (2026). <em>Inicio</em> [Home]. <a href="https://sadem.org.ar/" target="_blank" rel="noopener">https://sadem.org.ar/</a> — founding (1945), "transformamos el arte en derechos," "más de 25.000 afiliados," "la única organización que gestiona su propia obra social." <strong>Source · Method · Basis:</strong> org-published site · WebFetch (Spanish) · ✅ Sourced; membership figure ⚠️ self-reported. Accessed June 27, 2026.</li>
+          <li id="sa-src-2" data-src="about">Sindicato Argentino de Músicos. (2026). <em>Sobre el SADEM</em> [About SADEM]. <a href="https://sadem.org.ar/sobre-el-sadem/" target="_blank" rel="noopener">https://sadem.org.ar/sobre-el-sadem/</a> — Personería Gremial N° 12; representation of instrumentalists, conductors, arrangers and teachers; CGT and COSITMECOS affiliation; distinction from SADAIC; CCT 112/90; provincial seccionales (Córdoba, Santa Fe, Entre Ríos, Jujuy). The <strong>FIM Executive Committee</strong> membership is a SADEM self-description: cross-checked against the Federación Internacional de Músicos [International Federation of Musicians]. (2026). <em>Executive Committee</em> and <em>Member organisations</em>. <a href="https://www.fim-musicians.org/about-fim/executive-committee/" target="_blank" rel="noopener">https://www.fim-musicians.org/about-fim/executive-committee/</a> — neither FIM's current public EC roster nor its member list names SADEM, so that specific claim is downgraded to ⚠️ self-reported (documented historically, not confirmed current). <strong>Source · Method · Basis:</strong> org-published site + FIM primary · WebFetch · ✅ Sourced (FIM-EC claim ⚠️ self-reported). Accessed June 27, 2026.</li>
+          <li id="sa-src-3" data-src="osdem">Obra Social de los Músicos. (2026). <em>Nosotros</em> [About us]. <a href="https://www.osdem.org.ar/nosotros/" target="_blank" rel="noopener">https://www.osdem.org.ar/nosotros/</a> — "el único sindicato del mundo que cuenta con su propio servicio de salud"; OSDEM history (1953 Centro de Asistencia Médica Integral; 1955 Farmacia Social; 1992 first Estatuto; 1993 first Directorio); network in CABA, GBA, Córdoba, Santa Fe and Tierra del Fuego; PMO cobertura médica integral for affiliates and families. See also Obra Social de los Músicos. (2026). <em>Inicio</em> [Home]. <a href="https://www.osdem.org.ar/" target="_blank" rel="noopener">https://www.osdem.org.ar/</a> — 24h urgencias line, WhatsApp authorizations, #144 gender-violence referral. <strong>Source · Method · Basis:</strong> org-published site · WebFetch (Spanish) · ✅ Sourced; "only union in the world" claim ⚠️ self-description. Accessed June 27, 2026.</li>
+          <li id="sa-src-4" data-src="afiliaciones">Financing of an Argentine obra social via affiliates' statutory health contributions and the <em>opción de cambio</em>, delivering the PMO (Programa Médico Obligatorio); the PMO and Ley Nacional de Salud Mental 26.657 make mental-health coverage a legal entitlement. Mechanics evidenced by OSDEM. (2026). <em>Afiliaciones</em> (monotributista / relación de dependencia). <a href="https://www.osdem.org.ar/afiliaciones/" target="_blank" rel="noopener">https://www.osdem.org.ar/afiliaciones/</a> . <strong>Source · Method · Basis:</strong> org page + Argentine obra-social/PMO legal framework · WebFetch · ✅ Sourced for the affiliation routes; ⚠️ Inferred that PMO-mandated MH coverage is therefore available. Accessed June 27, 2026.</li>
+          <li id="sa-src-5" data-src="boletin">Superintendencia de Servicios de Salud. (2023, August 2). <em>Resolución 1439/2023</em> (RESOL-2023-1439-APN-SSS#MS) [Boletín Oficial de la República Argentina, N° 59555/23]. <a href="https://www.boletinoficial.gob.ar/pdf/aviso/primera/291400/20230802" target="_blank" rel="noopener">https://www.boletinoficial.gob.ar/pdf/aviso/primera/291400/20230802</a> — names "OBRA SOCIAL DE MÚSICOS – OSDEM (R.N.O.S. N° 1-1280-6)"; recounts the 2022 <em>situación de crisis</em> (RESOL-2022-1426-APN-SSS#MS; factor de criticidad 0.6875 at 31 Aug 2021; failed requirements on financial statements, budgets, source-and-application-of-funds, and the padrón), the approved Plan de Contingencia (DI-2022-19-APN-GCEF#SSS), and the reversal of the crisis on 31 July 2023. <strong>Source · Method · Basis:</strong> government official gazette · WebFetch (PDF) · ✅ Sourced (primary). Accessed June 27, 2026.</li>
+          <li id="sa-src-6" data-src="vigliecca">Vigliecca, M. L. (n.d., ~2016). <em>Consultorios de derivación, el logro más reciente de la Obra Social de Músicos</em> [Article]. Sindicato Argentino de Músicos. <a href="https://sadem.org.ar/consultorios-derivacion-logro-mas-reciente-la-obra-social-musicos/" target="_blank" rel="noopener">https://sadem.org.ar/consultorios-derivacion-logro-mas-reciente-la-obra-social-musicos/</a> — by María Laura Vigliecca, presidenta de la OSDEM y Secretaria de Organización del SADEM (with Secretary-General Ricardo Vernazza); describes the 2009–2016 reconstruction, OSDEM "quebrada" in 2009, national personería, Rosario and Córdoba delegations, and the plan to finish from March 2017 an "área de salud mental destinada a atender fundamentalmente adicciones y violencia de género." <strong>Source · Method · Basis:</strong> org-published archival article · WebFetch · ✅ Sourced for the historical/quoted content; ⚠️ the MH area is a dated plan, not evidence of a current standing service. Accessed June 27, 2026.</li>
+          <li id="sa-src-7" data-src="servicios">Obra Social de los Músicos. (2026). <em>Servicios Médicos</em> / <em>Preguntas frecuentes</em>. <a href="https://www.osdem.org.ar/servicios-medicos/" target="_blank" rel="noopener">https://www.osdem.org.ar/servicios-medicos/</a> ; <a href="https://www.osdem.org.ar/preguntas-frecuentes/" target="_blank" rel="noopener">https://www.osdem.org.ar/preguntas-frecuentes/</a> — service menu (Discapacidad, Enfermedades crónicas); CUD (Certificado Único de Discapacidad) pathway and benefits; no salud-mental/psychology category present. <strong>Source · Method · Basis:</strong> org page · WebFetch · ✅ Sourced (including the absence of a named MH service). Accessed June 27, 2026.</li>
+          <li id="sa-src-8" data-src="prevencion">Obra Social de los Músicos. (2026). <em>Prevención</em>. <a href="https://www.osdem.org.ar/prevencion/" target="_blank" rel="noopener">https://www.osdem.org.ar/prevencion/</a> — prevention programs: cáncer, celiaquía, diabetes, hipertensión, tabaquismo, vacunación (no mental-health program listed). <strong>Source · Method · Basis:</strong> org page · WebFetch · ✅ Sourced. Accessed June 27, 2026.</li>
+          <li id="sa-src-9" data-src="beneficios">Sindicato Argentino de Músicos. (2026). <em>Beneficios de afiliación</em>. <a href="https://sadem.org.ar/beneficios-de-afiliacion/" target="_blank" rel="noopener">https://sadem.org.ar/beneficios-de-afiliacion/</a> — legal &amp; IP counsel (Departamento de Asuntos Legales; notary); registration help (DNDA, SADAIC, AADI-CAPIF); tourism/recreation via Sindicato de Luz y Fuerza; Asociación Argentina de Luthiers discounts; school kits; OSDEM and BAMÚSICA. <strong>Source · Method · Basis:</strong> org page · WebFetch · ✅ Sourced. Accessed June 27, 2026.</li>
+          <li id="sa-src-10" data-src="latam-welfare">Music &amp; Mental Health NPO Research Project. (2026). <em>Latin America music welfare</em> [Wiki concept article]. <span style="font-family:var(--font-mono);">wiki/concepts/latin_america_music_welfare.md</span> — the regional pattern of music-specific unions (SADEM, SindMusi, SUTM) carrying welfare, contrasted with the Taiwan-specific gap. <strong>Source · Method · Basis:</strong> internal compiled wiki (traces to primary org sites) · file · ⚠️ synthesis, not a primary source. Compiled 2026-06-20.</li>
+        </ol>
+        <p class="refs-note">Source of truth for these citations: the report file <span style="font-family:var(--font-mono);">2026-06-27_Report_Org_Study_SADEM.md</span>. Every claim-bearing element carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above — machine-checkable before each deploy (§5.2 / §6 gate 1).</p>
+      </div>
+    </section>
+
+    <nav class="related-block" aria-label="Related on this site">
+      <p class="related-title">Related</p>
+      <ul>
+        <li><a href="org-study.html">&larr; Org Study (all organizations)</a></li>
+        <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+        <li><a href="policy-study.html">Policy Study &mdash; how jurisdictions protect music workers</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <script>
+  /* Scroll-reveal — R3.2 shared IntersectionObserver (normal-scroll page) */
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = 'section > h2, .stat-strip, figure, .table-wrap, .phases-grid, .sources-card, .refs';
+    var nodes = Array.prototype.slice.call(document.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, sibs, idx = 0;
+        if (p){ sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,6) * 60) + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
+
+  <!-- nav scroll-state: transparent over hero, blurred bar once scrolled -->
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden','true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>

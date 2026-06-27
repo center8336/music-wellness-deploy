@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>The Unison Fund · Org Study · MH&amp;W</title>
+  <meta name="description" content="The Unison Fund is a national, industry-created Canadian music safety-net charity that pairs an outsourced 24/7 EAP with crisis-gated cash relief paid straight to creditors, blended-funded with no endowment — and the closest analogue for what a Taiwan music mental health NPO would build from scratch.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      /* ── DIA-GRADE READING SCALE (calibrated to Dia browser, serif-corrected) ── */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;--lh-prose:1.7;--wt-prose:440;--measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;--label-ink:var(--graphite);
+      --font-cjk:'Noto Serif TC',serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { overflow-x: hidden; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--black);
+      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      line-height: var(--lh-prose);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    a { color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    a:hover { color: var(--signal-dim); }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--signal); outline-offset: 3px; border-radius: var(--radius);
+    }
+
+    .skip-nav {
+      position: absolute; left: -9999px; top: 0; z-index: 200;
+      background: var(--signal); color: var(--white);
+      padding: 0.5rem 1rem; font-family: var(--font-mono);
+    }
+    .skip-nav:focus { left: 0; }
+
+    /* ===== NAVIGATION ===== */
+    nav.nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; flex-direction: column;
+      padding: 2rem 2.5rem;
+      padding-top: calc(2rem + env(safe-area-inset-top));
+      background: transparent;
+      transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    nav.nav.scrolled {
+      background: rgba(244, 244, 245, 0.45);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: var(--font-mono); font-size: 1.1rem; font-weight: 400;
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-topbar { display:none; }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; min-width:44px; min-height:44px; z-index:101; -webkit-tap-highlight-color:transparent; }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity:0; }
+    .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
+
+    /* ===== LAYOUT ===== */
+    main { max-width: var(--max-w); margin: 0 auto; padding: 0 2.5rem 5rem 2.5rem; }
+    section { margin-bottom: 4rem; }
+    .narrow { max-width: var(--max-w-text); }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding-top: calc(9rem + env(safe-area-inset-top));
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-light);
+      margin-bottom: 3rem;
+    }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.18em;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: var(--font-display); font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6.5rem);
+      font-weight: 800; line-height: 1.04; color: var(--black); letter-spacing: -0.01em;
+      overflow-wrap: break-word; hyphens: auto;
+    }
+    .hero h1 .tail { display:block; font-size: clamp(1.15rem, 2.6vw, 1.9rem); font-weight: 600; color: var(--signal); letter-spacing: 0; margin-top: 0.9rem; }
+    .hero .subtitle {
+      font-family: var(--font-body); font-size: clamp(1.25rem, 1.05rem + 1.4vw, 1.5rem);
+      color: var(--graphite); line-height: 1.55; margin-top: 1.5rem; max-width: 54ch;
+    }
+    .basis-badge {
+      display: inline-block; margin-top: 1.75rem;
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--graphite); background: var(--signal-bg);
+      border: 1px solid var(--signal-glow); border-radius: var(--radius);
+      padding: 0.5rem 0.85rem; line-height: 1.5;
+    }
+
+    /* ===== TWO-LINE COVER (R2.1, 2026-06-20) — width:100% inside main (no 100vw breakout → no x-overflow) ===== */
+    .cover {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;                /* clips the wash */
+      padding: 0 2rem;
+    }
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%,
+        var(--signal-glow) 0%,
+        rgba(102,103,171,0.06) 38%,
+        rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
+    }
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 1280px);
+    }
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin: 0;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+    .cover-line {
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--purple-deep);
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
+    }
+    .cover-hint {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
+    }
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
+    }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-line  { animation-delay: 0.22s; }
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .cover-wash,
+      .cover-hint,
+      .cover-inner > * { animation: none; opacity: 1; transform: none; }
+    }
+    @media (max-width: 768px) {
+      .cover { padding: 0 1.25rem; }
+      .cover-title { font-size: clamp(1.7rem, 7.3vw, 2.4rem); }
+      .cover-line  { font-size: clamp(0.72rem, 3.2vw, 0.95rem); letter-spacing: 0.18em; }
+    }
+
+    /* ===== TYPE ===== */
+    h2 {
+      font-family: var(--font-display); font-size: var(--text-h2);
+      font-weight: 700; line-height: 1.1; color: var(--black);
+      margin-bottom: 1.25rem; letter-spacing: -0.01em;
+      text-wrap: balance; overflow-wrap: break-word;
+    }
+    h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem); line-height: 1.25; font-weight: 600; color: var(--charcoal); margin: 1.75rem 0 0.75rem; }
+    .section-label {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem;
+    }
+    p { color: var(--graphite); max-width: var(--measure-prose); margin-bottom: 1rem; line-height: 1.65; }
+    p.lead { font-size: 1.1rem; color: var(--charcoal); }
+    strong { color: var(--charcoal); font-weight: 600; }
+    em { color: var(--graphite); }
+
+    /* ===== MODEL CALLOUT ===== */
+    .model-callout { background: var(--bg-card-dark); color: var(--snow); border-radius: var(--radius-lg); padding: 2.25rem 2.5rem; margin-bottom: 3rem; }
+    .model-callout h2 { color: var(--white); margin-bottom: 1rem; }
+    .model-callout p { color: var(--silver); max-width: none; }
+    .model-callout strong { color: var(--white); }
+    .model-callout a { color: var(--spectrum-3); text-decoration: underline; text-underline-offset: 2px; }
+    .model-callout a:hover { color: var(--white); }
+
+    /* ===== THE FLYWHEEL (signature visual) ===== */
+    .flywheel-panel {
+      background: var(--bg-card-dark);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem 2rem 1.5rem;
+      margin: 1.5rem 0 1.75rem;
+      border: 1px solid var(--border-dark);
+    }
+    .flywheel-panel .fw-cap {
+      font-family: var(--font-mono); font-size: var(--text-xs); color: var(--spectrum-3);
+      text-transform: uppercase; letter-spacing: 0.16em; text-align: center; margin-bottom: 0.5rem;
+    }
+    .flywheel-panel svg { display: block; width: 100%; height: auto; max-width: 460px; margin: 0 auto; }
+    .fw-ring { fill: none; stroke: var(--border-dark); stroke-width: 1.5; stroke-dasharray: 3 6; }
+    .fw-arc { fill: none; stroke: var(--spectrum-3); stroke-width: 2.5; opacity: 0.85; stroke-dasharray: 4 7; animation: fw-flow 2.2s linear infinite; }
+    @keyframes fw-flow { to { stroke-dashoffset: -22; } }
+    .fw-node { fill: var(--charcoal); stroke: var(--spectrum-2); stroke-width: 2; }
+    .fw-hub { fill: var(--black); stroke: var(--spectrum-3); stroke-width: 1.5; }
+    .fw-num { fill: var(--spectrum-3); font-family: var(--font-mono); font-size: 13px; font-weight: 700; }
+    .fw-label { fill: var(--snow); font-family: var(--font-display); font-size: 15px; font-weight: 700; letter-spacing: 0.02em; }
+    .fw-sub { fill: var(--grey-light); font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.04em; }
+    .fw-hub-label { fill: var(--spectrum-3); font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.14em; }
+    .fw-hub-sub { fill: var(--grey-light); font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; }
+
+    .gear-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .gear {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-left: 3px solid var(--spectrum-2); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem;
+    }
+    .gear .gn { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); letter-spacing: 0.1em; }
+    .gear h3 { margin: 0.35rem 0 0.5rem; font-size: 1.08rem; }
+    .gear p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-card); margin: 1.5rem 0 0.75rem; }
+    .stat-item { padding: 1.75rem 1.25rem; border-right: 1px solid var(--border-light); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--signal); line-height: 1; font-variant-numeric: tabular-nums; }
+    .stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.6rem; line-height: 1.4; }
+
+    /* ===== COLUMN CHART (revenue trajectory) ===== */
+    figure.chart { margin: 1.5rem 0; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 2rem 1.75rem 1.25rem; }
+    figure.chart figcaption { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
+    .col-chart { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.6rem; align-items: end; }
+    .col { display: flex; flex-direction: column; align-items: center; }
+    .ctrack { position: relative; width: 100%; height: 190px; display: flex; align-items: flex-end; }
+    .cbar { width: 100%; max-width: 54px; margin: 0 auto; background: var(--signal); border-radius: var(--radius) var(--radius) 0 0; position: relative; transition: height var(--dur-slow) var(--ease); }
+    .cbar.peak { background: var(--spectrum-2); }
+    .cbar .cval { position: absolute; top: -1.35rem; left: -50%; right: -50%; text-align: center; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--charcoal); font-variant-numeric: tabular-nums; }
+    .cyr { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); margin-top: 0.55rem; letter-spacing: 0.02em; }
+    .chart-note { font-size: var(--text-xs); color: var(--label-ink); margin-top: 1rem; max-width: none; }
+    .chart-key { display: flex; gap: 1.25rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .chart-key span { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); display: inline-flex; align-items: center; gap: 0.4rem; }
+    .swatch { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+    .swatch.s-rev { background: var(--signal); }
+    .swatch.s-covid { background: var(--spectrum-2); }
+
+    /* ===== TABLES ===== */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; margin: 1.25rem 0; border-radius: var(--radius-lg); border: 1px solid var(--border-light); }
+    .table-wrap:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+    table { width: 100%; border-collapse: collapse; background: var(--bg-card); font-size: var(--text-small); }
+    caption { text-align: left; font-family: var(--font-mono); font-size: var(--text-caption); color: var(--label-ink); padding: 0.75rem 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border-light); vertical-align: top; font-variant-numeric: tabular-nums; }
+    thead th { font-family: var(--font-mono); font-size: var(--text-micro); text-transform: uppercase; letter-spacing: 0.06em; color: var(--label-ink); background: var(--snow); }
+    tbody tr:last-child td { border-bottom: none; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .row-emph td { background: var(--signal-bg); font-weight: 600; color: var(--charcoal); }
+    .row-covid td { background: rgba(232, 168, 124, 0.12); }
+
+    /* ===== CRISIS CARDS ===== */
+    .crisis-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .crisis { background: var(--bg-card); border: 1px solid var(--border-light); border-top: 3px solid var(--spectrum-1); border-radius: var(--radius-lg); padding: 1.5rem 1.6rem; }
+    .crisis .cyrtag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--graphite); letter-spacing: 0.08em; }
+    .crisis h3 { margin: 0.3rem 0 0.6rem; font-size: 1.08rem; }
+    .crisis .big { font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; color: var(--charcoal); line-height: 1; margin-bottom: 0.5rem; }
+    .crisis p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== PROGRAM LIST ===== */
+    .prog { list-style: none; margin: 1.25rem 0 0; padding: 0; }
+    .prog li { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 0.85rem; }
+    .prog h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .prog p { font-size: var(--text-sm); margin-bottom: 0; }
+    .prog .ptag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ===== SW CARDS ===== */
+    .sw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.25rem; }
+    .sw-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem; }
+    .sw-card.weak { border-left: 3px solid var(--spectrum-2); }
+    .sw-card.strong { border-left: 3px solid var(--spectrum-4); }
+    .sw-card h3 { margin: 0 0 0.4rem; font-size: 1rem; }
+    .sw-card p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== LESSONS ===== */
+    .lessons { counter-reset: lesson; list-style: none; margin: 1.5rem 0 0; padding: 0; }
+    .lessons li { position: relative; padding: 1.25rem 1.5rem 1.25rem 3.5rem; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); margin-bottom: 0.85rem; }
+    .lessons li::before { counter-increment: lesson; content: counter(lesson); position: absolute; left: 1.25rem; top: 1.25rem; font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--signal); }
+    .lessons h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .lessons p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== CITATIONS (§5 inline tier) ===== */
+    .cite { font-size: 0.7em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem; }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-fine); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; max-width: var(--measure-ref); overflow-wrap: anywhere; }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs-note { font-size: var(--text-xs); color: var(--label-ink); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-sm); color: var(--label-ink); font-style: italic; max-width: var(--max-w-text); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .gear-cards { grid-template-columns: 1fr; }
+      .crisis-grid { grid-template-columns: 1fr; }
+      .sw-grid { grid-template-columns: 1fr; }
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2n) { border-right: none; }
+      .stat-item:nth-child(-n+2) { border-bottom: 1px solid var(--border-light); }
+    }
+    @media (max-width: 768px) {
+      nav.nav { padding: 1.2rem 1.5rem; padding-top: calc(1.2rem + env(safe-area-inset-top)); }
+      nav.nav.open { background: rgba(244,244,245,0.95); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-light); }
+      .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
+      .nav-toggle { display:block; }
+      .nav-mobile-brand { display:block; }
+      .nav-links { display:none; flex-direction:column; gap:0.75rem; margin-top:1rem; }
+      .nav-links.show { display:flex; }
+      .nav-links a { font-size: 0.85rem; }
+      main { padding: 0 1.5rem 3rem 1.5rem; }
+      .hero { padding-top: calc(7rem + env(safe-area-inset-top)); }
+      .hero h1 { font-size: clamp(2.4rem, 10.5vw, 3.4rem); }
+      .model-callout, .flywheel-panel { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .col-chart { gap: 0.3rem; }
+      .ctrack { height: 150px; }
+      .cbar .cval { font-size: 0.62rem; }
+    }
+    @media (max-width: 680px) {
+      p, .hero .subtitle, .refs li, .cite-help { max-width: none; }
+    }
+    @media (max-width: 480px) {
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+      .stat-item:last-child { border-bottom: none; }
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
+      .cyr { font-size: 0.6rem; }
+      table { font-size: 0.82rem; }
+      thead th { font-size: 0.6rem; }
+      th, td { padding: 0.5rem 0.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } nav.nav, .cbar { transition: none; } .fw-arc { animation: none; } }
+
+    /* ===== Scroll-reveal (R3.2 craft pass) ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ===== Related block (no dead-ends, R3.2) ===== */
+    .related-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-light); }
+    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--label-ink); margin-bottom: 0.6rem; }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a { font-family: var(--font-body); font-size: var(--text-sm); color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+  </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open');this.setAttribute('aria-expanded',o)">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+        <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="org-study.html" class="current" aria-current="page">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
+      <a href="field-news.html">FIELD NEWS</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- COVER -->
+    <section class="cover">
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="cover-inner">
+        <h1 class="cover-title">THE UNISON FUND</h1>
+        <p class="cover-line">Org Study · Est. 2011</p>
+      </div>
+      <span class="cover-hint" aria-hidden="true">↓ Scroll</span>
+    </section>
+
+    <!-- MODEL CALLOUT -->
+    <div class="model-callout">
+      <h2>Why this case matters</h2>
+      <p><a href="org-study-backline.html">Backline</a> was a 2019 cold start; <a href="org-study-musicares.html">MusiCares</a> was built inside the Recording Academy; <a href="org-study-music-minds-matter.html">Music Minds Matter</a> was incubated inside a century-old benevolent fund. <strong>Unison is a fourth pattern — and arguably the closest structural analogue to what a Taiwan NPO would have to build from scratch</strong>: a national, industry-created safety-net charity that pairs an outsourced 24/7 counselling EAP with emergency cash relief paid straight to creditors, funded by a deliberate three-way blend of major-label money, foundation philanthropy, and government grants — and without a large endowment. It is the "national music-charity" model (alongside MusiCares in the US, Support Act in Australia, MusicHelps in New Zealand, Help Musicians in the UK) executed in a mid-sized market that, like Taiwan, has no domestic music endowment to draw on.<sup class="cite"><a href="#uf-src-1" data-src="identity" data-tip="Identity, mission, and the national-music-charity framing: The Unison Fund (homepage &amp; Our History); CRA registration (Unison Benevolent Fund, BN 807414057RR0001) via CanadaHelps.">1</a></sup></p>
+    </div>
+
+    <!-- 1. PROFILE -->
+    <section>
+      <div class="section-label">01 — Profile</div>
+      <h2>The heartbeat of the Canadian music community<sup class="cite"><a href="#uf-src-1" data-src="identity" data-tip="Operating/registered name, status, founders, address, mission, tagline: The Unison Fund (homepage &amp; Our History); CRA BN 807414057RR0001 and registered office via CanadaHelps charity profile.">1</a></sup></h2>
+      <p>Unison is an independent national Canadian charity, created by the music industry for the industry, to ensure that "the people who make up the Canadian music business never face times of crisis alone." It is the brainchild of Jodie Ferneyhough and Catharine Saxberg, who set out to convert ad-hoc benefit-concert charity into a permanent, professionalized fund. A board was assembled in 2010, the fund was formed in 2011, and two service lines followed in sequence — counselling in 2012 and a financial-assistance program in 2015.<sup class="cite"><a href="#uf-src-2" data-src="history" data-tip="Founders Jodie Ferneyhough &amp; Catharine Saxberg; board 2010; org 2011; July 2011 $250k from Music Canada and Slaight Music; $100k publisher collective 2012; Counselling 2012; Financial Assistance 2015. The Unison Fund, Our History.">2</a></sup></p>
+
+      <div class="table-wrap" role="region" aria-label="Organization profile — The Unison Fund (scrollable table)" tabindex="0">
+        <table>
+          <caption>Organization profile — The Unison Fund (sources cited inline)</caption>
+          <tbody>
+            <tr><th scope="row">Operating name</th><td>The Unison Fund</td></tr>
+            <tr><th scope="row">Registered name</th><td>Unison Benevolent Fund</td></tr>
+            <tr><th scope="row">Legal status</th><td>Registered Canadian charity (CRA) · BN 807414057RR0001</td></tr>
+            <tr><th scope="row">Registered office</th><td>49 Spadina Avenue, Suite 303, Toronto, ON M5V 2J1</td></tr>
+            <tr><th scope="row">Founders</th><td>Jodie Ferneyhough and Catharine Saxberg</td></tr>
+            <tr><th scope="row">Key dates</th><td>Board formed 2010 · organization formed 2011 · counselling 2012 · Financial Assistance Program 2015</td></tr>
+            <tr><th scope="row">Executive Director</th><td>Alex Johnson (succeeded Amanda Power)</td></tr>
+            <tr><th scope="row">Board Chair</th><td>Brian Huston (Co-Founder &amp; CEO, SoundsUnite)</td></tr>
+            <tr><th scope="row">Board Vice Chair</th><td>Sarah Kilpatrick (VP, Corporate Affairs, Music Canada)</td></tr>
+            <tr><th scope="row">Crisis line</th><td>1-855-9UNISON (1-855-986-4766), 24/7/365</td></tr>
+            <tr><th scope="row">Tagline</th><td>"The heartbeat of the Canadian music community"</td></tr>
+            <tr><th scope="row">Scope</th><td>Canada only</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="margin-top:1.5rem;"><strong>Name-collision guard (read first).</strong> Three unrelated charities share the "Unison" name and must not be conflated with this one: <strong>"Unison" (formerly Kerby Centre)</strong>, an Alberta seniors' charity (CRA BN 118979947RR0001), which has its own Charity Intelligence profile and financials; the UK trade union <strong>UNISON</strong> and its "There for You" welfare charity; and <strong>Unison</strong> the US home-equity company. The subject here is the <strong>music</strong> charity — Unison Benevolent Fund, CRA BN <strong>807414057RR0001</strong>, Toronto. Every financial and impact figure below is traced to that entity only.<sup class="cite"><a href="#uf-src-7" data-src="t3010" data-tip="Name-collision and the Alberta seniors' charity (BN 118979947RR0001) excluded; CRA BN 807414057RR0001 confirmed via CanadaHelps. The Unison Fund T3010 / fabrication-guard reference.">7</a></sup></p>
+    </section>
+
+    <!-- 2. THE DISTINCTIVE MODEL -->
+    <section>
+      <div class="section-label">02 — The distinctive model</div>
+      <h2>Industry-created, outsourced, crisis-gated</h2>
+      <p>Four structural choices define Unison and set it apart from the other organizations in this series.</p>
+      <div class="gear-cards">
+        <div class="gear">
+          <div class="gn">CHOICE 01</div>
+          <h3>Created by the industry, as a standing institution</h3>
+          <p>Unlike a label-internal program (MusiCares inside the Recording Academy) or a spin-out from an old benevolent fund (Music Minds Matter from Help Musicians), Unison was purpose-built in 2010–11 as an <em>independent</em> national charity the whole Canadian industry funds collectively. Its founding capital came from a trade body (Music Canada) and a label/foundation (Slaight) — not from one company's marketing budget.<sup class="cite"><a href="#uf-src-2" data-src="history" data-tip="Purpose-built 2010–11 as an independent national charity; founding capital from Music Canada + Slaight Music. The Unison Fund, Our History.">2</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">CHOICE 02</div>
+          <h3>Counselling is outsourced wholesale to a commercial EAP</h3>
+          <p>Unison does not employ a clinical workforce. It buys a seat at <strong>TELUS Health</strong> (the former LifeWorks / Morneau Shepell EAP) and extends that corporate Employee Assistance Program — 24/7, multilingual, phone/in-person/virtual — to every registered member as if Unison were their employer. A small charity delivers enterprise-grade clinical access by <em>renting</em> it.<sup class="cite"><a href="#uf-src-3" data-src="telus-eap" data-tip="TELUS Health (formerly LifeWorks) EAP extended to members; 24/7, multilingual, phone/in-person/virtual. The Unison Fund, Counselling &amp; Health Solutions.">3</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">CHOICE 03</div>
+          <h3>Emergency cash is crisis-gated and paid to creditors</h3>
+          <p>The Emergency Financial Support Program is deliberately narrow: crisis only, medical/rent/basic-living priorities, ≥5 consecutive years in the industry, and — critically — "all approved support will be paid directly to a creditor/third party … Financial support will NOT be sent directly to applicants." A fraud- and dignity-control design choice a startup can copy verbatim.<sup class="cite"><a href="#uf-src-4" data-src="emergency" data-tip="Crisis only; medical/rent/basics priority; ≥5 consecutive years; paid directly to a creditor/third party, never to applicants. The Unison Fund, Emergency Financial Support.">4</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">CHOICE 04</div>
+          <h3>A blended, endowment-free funding base</h3>
+          <p>Unison runs on three legs — major-label/industry money, foundation philanthropy, and government grants — rather than on investment income from a reserve (the Help Musicians model) or artist-led galas alone (the MusiCares model). It has no large endowment to spend down; it must re-raise its operating base each year.<sup class="cite"><a href="#uf-src-5" data-src="major-labels" data-tip="Three-leg base; no endowment. Major-label direct support (Sony/Universal/Warner Canada, 2020) per Music Canada; federal grants per The Unison Fund, Funding.">5</a></sup></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. FINANCIAL PROFILE -->
+    <section>
+      <div class="section-label">03 — Financial profile</div>
+      <h2>Cumulative impact, with the annual filing flagged pending<sup class="cite"><a href="#uf-src-2" data-src="history" data-tip="Cumulative totals are organization-stated (⚠️ as-reported): over $24M distributed since 2015; over 10,000 supported; $3.5M+ disbursed and 3,000% application increase in 2020. The Unison Fund, Our History.">2</a></sup></h2>
+      <p>Unison publishes cumulative impact figures rather than a posted annual report. On its own history page it states that <strong>over $24 million</strong> has been distributed since 2015 (the majority between 2020 and 2023), and that it has financially supported <strong>over 10,000 music professionals</strong>. During COVID-19 it recorded a <strong>3,000% increase in applications</strong> in 2020 and disbursed <strong>more than $3.5 million</strong>, helping more than 3,500 Canadians through 2021. These are organization-stated cumulative totals — ⚠️ org-stated, useful for scale but not a substitute for audited annual statements.<sup class="cite"><a href="#uf-src-2" data-src="history" data-tip="All cumulative impact totals are organization-stated and not independently audited here (⚠️). The Unison Fund, Our History.">2</a></sup></p>
+
+      <div class="stat-strip">
+        <div class="stat-item"><div class="stat-num">$24M+</div><div class="stat-label">funds distributed since 2015 ⚠️ org-stated</div></div>
+        <div class="stat-item"><div class="stat-num">10,000+</div><div class="stat-label">music professionals supported ⚠️ org-stated</div></div>
+        <div class="stat-item"><div class="stat-num">$3.5M+</div><div class="stat-label">disbursed in the 2020 pandemic spike ⚠️ org-stated</div></div>
+        <div class="stat-item"><div class="stat-num">3,000%</div><div class="stat-label">rise in applications, 2020 ⚠️ org-stated</div></div>
+      </div>
+
+      <h3>The CRA T3010 — flagged, not estimated<sup class="cite"><a href="#uf-src-7" data-src="t3010" data-tip="As a registered charity (BN 807414057RR0001), Unison files an annual T3010 with the CRA. Registry returned 503 (maintenance window); charitydata.ca mirror is JS/API-gated. Line-item financials pending re-pull. CanadaHelps + attempted CRA retrieval.">7</a></sup></h3>
+      <p>As a registered Canadian charity (BN 807414057RR0001), Unison files an annual <strong>T3010 information return</strong> with the CRA Charities Directorate — the authoritative primary source for its annual revenue, expenditure, government-funding share, salaries and reserves. <strong>This pass could not retrieve it, and a second attempt on 2026-06-27 failed the same way:</strong> the CRA charity registry was inside its scheduled 02:00–06:00 EST maintenance window and returned a 503 service-unavailable page, and the third-party mirror charitydata.ca returned an empty JavaScript shell with no figures. Per the project's no-fabrication rule, "I did not retrieve X" is not "X does not exist": the line-item T3010 financials are marked <strong>❓ Unverified this pass / pending re-pull during CRA business hours</strong>, and are deliberately <em>not</em> filled with an estimate.</p>
+      <p style="margin-top:1.25rem;"><strong>Fabrication guard, documented.</strong> During collection, Charity Intelligence's profile titled simply "Unison" returned a full, tidy financial table — revenues of ~$7.7M, $3.8M government funding, 64 staff, $8.1M reserves. <strong>Those figures belong to a different charity</strong>: "Unison" formerly the <strong>Kerby Centre</strong>, an Alberta seniors' social-services charity (CRA BN 118979947RR0001, Calgary), with programs for elder abuse and Meals on Wheels. They are <strong>not</strong> the music fund's numbers and have been excluded. This is exactly the name-collision trap the project's fabrication discipline exists to catch.<sup class="cite"><a href="#uf-src-7" data-src="t3010" data-tip="Charity Intelligence 'Unison' (≈$7.7M rev, $3.8M gov funding, 64 staff, $8.1M reserves) = the Alberta seniors' charity, BN 118979947RR0001 — excluded. The Unison Fund, fabrication-guard note.">7</a></sup></p>
+
+      <h3>Funding mix — three legs</h3>
+      <p>Even without the T3010 split, the <em>composition</em> of Unison's funding is well evidenced from primary and press sources. The strategic point: all three legs are active simultaneously, and none is an endowment — Unison is structurally dependent on re-raising its base every year.</p>
+      <div class="table-wrap" role="region" aria-label="Unison funding mix — three legs (scrollable table)" tabindex="0">
+        <table>
+          <caption>Funding mix — three legs (✅ sourced; sources cited inline)</caption>
+          <thead><tr><th scope="col">Leg</th><th scope="col">Evidence</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Industry / major labels</th><td>Founding commitments from Music Canada and Slaight Music ($250k, 2011) and a music-publisher collective ($100k, 2012);<sup class="cite"><a href="#uf-src-2" data-src="history" data-tip="July 2011 $250k Music Canada + Slaight Music; $100k publisher collective 2012. The Unison Fund, Our History.">2</a></sup> Sony, Universal and Warner Music Canada announced direct financial support (2020);<sup class="cite"><a href="#uf-src-5" data-src="major-labels" data-tip="Sony Music Entertainment Canada, Universal Music Canada and Warner Music Canada — direct support, 2020. Music Canada news.">5</a></sup> an annual Charity Golf Classic and gala circuit with industry corporate partners.<sup class="cite"><a href="#uf-src-8" data-src="events" data-tip="Charity Golf Classic and gala circuit with corporate partners (Anthem, Cadence, CMRRA, Live Nation, MLSE, SOCAN, Ticketmaster, etc.). The Unison Fund, Events; Samaritanmag.">8</a></sup></td></tr>
+            <tr><th scope="row">Philanthropy / foundations</th><td>The Slaight Family Foundation underwrites the Legacy Program;<sup class="cite"><a href="#uf-src-9" data-src="legacy" data-tip="Slaight Family Foundation Legacy Program (veterans ≥10 years; over 60 and/or chronic illness). The Unison Fund, Financial Support.">9</a></sup> RBC Foundation and The Azrieli Foundation support the Counselling &amp; Health Solutions program.<sup class="cite"><a href="#uf-src-3" data-src="telus-eap" data-tip="Counselling &amp; Health Solutions supported by RBC Foundation and The Azrieli Foundation. The Unison Fund.">3</a></sup></td></tr>
+            <tr><th scope="row">Government</th><td>Federal — recipient of the Canada Performing Arts Workers Resilience Fund (announced 2 May 2022, Department of Canadian Heritage), powering the Live Music Workers Fund;<sup class="cite"><a href="#uf-src-6" data-src="funding" data-tip="Canada Performing Arts Workers Resilience Fund (May 2, 2022, Dept. of Canadian Heritage). The Unison Fund, Funding.">6</a></sup><sup class="cite"><a href="#uf-src-10" data-src="live-music-fund" data-tip="Live Music Workers Fund scope and federal commitment (feds provide nearly $17M to independent &amp; self-employed live-music workers). Canadian Musician, 2022.">10</a></sup> provincial — direct funding from the Province of Ontario (with the Canadian Live Music Association and Music Canada).<sup class="cite"><a href="#uf-src-11" data-src="ontario" data-tip="Direct funding from the Province of Ontario, with the Canadian Live Music Association and Music Canada. Music Canada news.">11</a></sup></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 4. PROGRAMS & IMPACT -->
+    <section>
+      <div class="section-label">04 — Programs &amp; impact</div>
+      <h2>Rented clinic, creditor-paid relief, and built-in evidence</h2>
+      <ul class="prog">
+        <li><div class="ptag">The 24/7 EAP</div><h3>Counselling &amp; Health Solutions</h3><p>Registered members get free access to <strong>TELUS Health</strong> (formerly LifeWorks): 24/7 support for mental, financial, physical and emotional wellbeing — by phone, in person, or online — with crisis callers reaching a counsellor immediately on 1-855-9UNISON. Service is in English and French plus 250 additional languages via LanguageLine, with TTY, an online portal, and the TELUS Health One app; eligible dependent family members can be invited on. Registration is free, with no dues or fees. Supported by RBC Foundation and The Azrieli Foundation.<sup class="cite"><a href="#uf-src-3" data-src="telus-eap" data-tip="24/7 TELUS Health; 1-855-9UNISON; English/French + 250 languages via LanguageLine; TTY; lifeworks portal; TELUS Health One app; family invitable; free registration. The Unison Fund, Counselling &amp; Health Solutions.">3</a></sup></p></li>
+        <li><div class="ptag">Crisis relief</div><h3>Emergency Financial Support Program</h3><p>For applicants with ≥5 consecutive years in the industry facing an emergency; prioritises medical support, basic living expenses, and rent. Crisis only — explicitly <strong>not</strong> for unemployment, ongoing debt, recurring/long-term situations, or business expenses. All approved support is paid directly to a creditor/third party (landlord, medical supplier), <strong>never to the applicant</strong>. Multiple applications are allowed; annual funding limits apply. A baseline test requires ≥55% of income from music plus Canadian status, residency, banking and tax.<sup class="cite"><a href="#uf-src-4" data-src="emergency" data-tip="≥5 consecutive years; medical/rent/basics; not for unemployment/ongoing debt; paid to creditor, never applicant; ≥55% income from music; annual limits. The Unison Fund, Emergency Financial Support / Financial Support.">4</a></sup></p></li>
+        <li><div class="ptag">Veterans</div><h3>The Slaight Family Foundation Legacy Program</h3><p>For veterans contributing ≥10 years who are over 60 and/or coping with unexpected or chronic illness — targeted at those struggling to maintain an adequate standard of living, needing medical intervention, or living with mental-health issues. A separate Grocery Gift Card Support Program addresses food insecurity for music workers in unemployment or underemployment.<sup class="cite"><a href="#uf-src-9" data-src="legacy" data-tip="Veterans ≥10 years; over 60 and/or unexpected/chronic illness; adequate-living, medical, and mental-health need. The Unison Fund, Financial Support.">9</a></sup></p></li>
+        <li><div class="ptag">Sept 2024</div><h3>Soundcheck — the field-evidence partnership</h3><p>Unison, <strong>SOCAN</strong> and <strong>Revelios</strong> launched <em>Soundcheck: Mental Health in the Canadian Music Industry</em>, described as the first national study of its kind. Its widely-reported finding — that over half of respondents (52%) had felt life wasn't worth living — came from the study's 2025 preliminary release; the final national report, with 1,250+ participants, followed in early 2026. For this project, Soundcheck matters because it is an industry-funded charity generating the demand evidence that justifies its own services — a feedback loop a Taiwan NPO should design in from the start.<sup class="cite"><a href="#uf-src-12" data-src="soundcheck" data-tip="Unison + SOCAN + Revelios, Soundcheck; 52% 'felt life wasn't worth living' from the 2025 preliminary release; final report (1,250+ participants) early 2026. SOCAN; CBC Music; Revelios.">12</a></sup></p></li>
+      </ul>
+
+      <div class="table-wrap" role="region" aria-label="Unison impact metrics, organization-stated (scrollable table)" tabindex="0">
+        <table>
+          <caption>Impact metrics — organization-stated (⚠️ org-stated throughout)</caption>
+          <thead><tr><th scope="col">Metric</th><th scope="col">Figure</th><th scope="col">Period</th><th scope="col">Basis</th></tr></thead>
+          <tbody>
+            <tr><td>Funds distributed</td><td>Over $24 million</td><td>since 2015 (most 2020–2023)</td><td>⚠️ org-stated</td></tr>
+            <tr><td>Music professionals financially supported</td><td>Over 10,000</td><td>since 2015</td><td>⚠️ org-stated</td></tr>
+            <tr><td>Emergency disbursement (pandemic)</td><td>More than $3.5 million</td><td>2020</td><td>⚠️ org-stated</td></tr>
+            <tr><td>Applications increase (pandemic)</td><td>3,000%</td><td>2020</td><td>⚠️ org-stated</td></tr>
+            <tr><td>Canadians helped (pandemic)</td><td>More than 3,500</td><td>2020–2021</td><td>⚠️ org-stated</td></tr>
+            <tr><td>Counselling recipients</td><td>Over 400 people</td><td>2022–2023</td><td>⚠️ org-stated</td></tr>
+            <tr><td>Risk-intervention (urgent MH)</td><td>Nearly 100 people</td><td>2022–2023</td><td>⚠️ org-stated</td></tr>
+            <tr><td>Total counselling users to date</td><td>Over 1,700 people</td><td>cumulative</td><td>⚠️ org-stated</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>These are the figures Unison publishes about itself — credible scale signals, but not audited here, hence ⚠️. The pandemic spike (3,000% in applications) is the clearest demand signal in the dataset and the reason government money flowed in 2020–2022.<sup class="cite"><a href="#uf-src-2" data-src="history" data-tip="Impact metrics are organization-stated (over 400 counselled and nearly 100 risk-intervention 2022–2023; over 1,700 counselled to date). The Unison Fund, Our History.">2</a></sup></p>
+    </section>
+
+    <!-- 5. THE OUTSOURCED-EAP MODEL -->
+    <section>
+      <div class="section-label">05 — The outsourced-EAP model</div>
+      <h2>Clinical reach without a clinical payroll</h2>
+      <p>Unison's most replicable idea is that <strong>it does not build a clinical service; it rents one.</strong> By extending TELUS Health's corporate EAP to all registered members, a small charity offers genuine 24/7, multilingual, family-inclusive counselling and crisis support across an entire country — coverage a charity its size could never staff directly. The trade-off is real (no proprietary clinical model, dependence on a commercial vendor's quality and pricing), but the capital efficiency is decisive for a launch-stage organization: clinical access becomes a <em>procurement</em> decision, not a <em>hiring</em> one.<sup class="cite"><a href="#uf-src-3" data-src="telus-eap" data-tip="The capital-efficient core: enterprise-grade 24/7 multilingual clinical access by renting TELUS Health rather than hiring a clinical workforce. The Unison Fund, Counselling &amp; Health Solutions.">3</a></sup></p>
+      <p>The same logic runs through the cash program. By paying approved relief <strong>directly to creditors</strong> and gating it to genuine crises with documentary proof, Unison keeps administrative discretion tight and fraud exposure low without a large caseworker team. The model is "thin charity, rented capacity" — the opposite of an institution-heavy welfare body.<sup class="cite"><a href="#uf-src-4" data-src="emergency" data-tip="Pay-to-creditor + documented-crisis gating keeps administrative discretion tight and fraud exposure low without a large caseworker team. The Unison Fund, Emergency Financial Support.">4</a></sup></p>
+    </section>
+
+    <!-- 6. GOVERNANCE -->
+    <section>
+      <div class="section-label">06 — Governance</div>
+      <h2>Industry-embedded, lean-staffed<sup class="cite"><a href="#uf-src-13" data-src="governance" data-tip="Board re-verified against the live Meet the Team page on 2026-06-27: Chair Brian Huston; Vice Chair Sarah Kilpatrick; directors incl. Derrick Ross (Slaight), Rupa Biswas (RBC); ED Alex Johnson. The Unison Fund, Meet the Team; ED transition per Billboard Canada.">13</a></sup></h2>
+      <p>Unison's board is deeply <strong>industry-embedded</strong>, pairing label/trade-body executives with finance and live-sector leaders — governance designed to keep the fund tethered to the industry that pays for it.</p>
+
+      <div class="table-wrap" role="region" aria-label="Unison board of directors (scrollable table)" tabindex="0">
+        <table>
+          <caption>Board of directors — as of 2026-06-27 (re-pulled from the live "Meet the Team" page)</caption>
+          <thead><tr><th scope="col">Role</th><th scope="col">Person</th><th scope="col">Affiliation</th></tr></thead>
+          <tbody>
+            <tr><td>Chair</td><td>Brian Huston</td><td>Co-Founder &amp; CEO, SoundsUnite</td></tr>
+            <tr><td>Vice Chair</td><td>Sarah Kilpatrick</td><td>VP, Corporate Affairs, Music Canada</td></tr>
+            <tr><td>Treasurer</td><td>Donald MacGillivray</td><td>CPA, CGA</td></tr>
+            <tr><td>Secretary</td><td>Michelle Allman-Esdaille</td><td>CEO, The HOOK &amp; Company</td></tr>
+            <tr><td>Director</td><td>Bronwin Parks</td><td>Feisty Creative</td></tr>
+            <tr><td>Director</td><td>Carlos Pineda</td><td>MCMXVI Inc.</td></tr>
+            <tr><td>Director</td><td>Derrick Ross</td><td>President, Slaight Music</td></tr>
+            <tr><td>Director</td><td>Louis Bellavance</td><td>BLEUFEU</td></tr>
+            <tr><td>Director</td><td>Mark Russell</td><td>Live Nation</td></tr>
+            <tr><td>Director</td><td>Rupa Biswas</td><td>RBC</td></tr>
+            <tr><td>Director</td><td>Shawn Hook</td><td>Artist</td></tr>
+            <tr><td>Director</td><td>Spencer Mussellam</td><td>Believe Digital</td></tr>
+            <tr><td>Director</td><td>Steve Kane</td><td>Music industry professional</td></tr>
+            <tr><td>Director</td><td>Tennille Jago</td><td>Live Nation Canada</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Two governance signals stand out. First, the board <strong>seats its three funding legs</strong>: Music Canada (Vice Chair Sarah Kilpatrick), RBC (Rupa Biswas) and Slaight Music (President Derrick Ross) — industry, bank-foundation philanthropy, and the Slaight family all hold seats. Second, the <strong>Chair, Brian Huston, comes from the live-music sector</strong> (SoundsUnite), keeping the leadership rooted in the working industry rather than tethered to any single funder. Staff leadership is lean: <strong>Alex Johnson (ED)</strong> leads a small team — Phil Gumbley (Operations &amp; Innovation), Jennifer Hardy and Kathryn Hummel (Programs &amp; Services), Stephanie Finanders (Marketing &amp; Communications). Johnson succeeded Amanda Power and is now listed as ED on the org's own <em>Meet the Team</em> page; the transition itself was reported by Billboard Canada (2025) and is ⚠️ not pinned to a dated primary org statement.<sup class="cite"><a href="#uf-src-13" data-src="governance" data-tip="Board seats Music Canada, RBC and Slaight; Chair from the live sector. Lean staff under ED Alex Johnson (succeeded Amanda Power; ED transition per Billboard Canada, ⚠️ exact date as-reported). The Unison Fund, Meet the Team.">13</a></sup></p>
+    </section>
+
+    <!-- 7. STRENGTHS -->
+    <section>
+      <div class="section-label">07 — Strengths</div>
+      <h2>What works</h2>
+      <div class="sw-grid">
+        <div class="sw-card strong"><h3>Capital-efficient clinical reach</h3><p>Renting TELUS Health's 24/7 multilingual EAP gives a small charity national, enterprise-grade counselling and crisis access without a clinical payroll — the single most copyable element of the model.<sup class="cite"><a href="#uf-src-3" data-src="telus-eap" data-tip="National 24/7 multilingual EAP without a clinical payroll — the most copyable element. The Unison Fund, Counselling &amp; Health Solutions.">3</a></sup></p></div>
+        <div class="sw-card strong"><h3>Genuinely blended, government-validated base</h3><p>Three active legs — major labels, foundations, and federal + provincial government — mean no single funder failure is fatal, and the government grants are external validation that the need is real.<sup class="cite"><a href="#uf-src-6" data-src="funding" data-tip="Performing Arts Workers Resilience Fund + Ontario direct funding validate the need; no single-funder failure is fatal. The Unison Fund, Funding.">6</a></sup></p></div>
+        <div class="sw-card strong"><h3>Fraud- and dignity-controlled relief</h3><p>Paying approved aid directly to creditors, gating to documented crises, and capping annual funding keeps administration lean and misuse low — a design a startup can adopt on day one.<sup class="cite"><a href="#uf-src-4" data-src="emergency" data-tip="Pay-to-creditor, documented-crisis gating, annual caps — lean administration, low misuse. The Unison Fund, Emergency Financial Support.">4</a></sup></p></div>
+        <div class="sw-card strong"><h3>Industry-embedded governance</h3><p>A board chaired from the live sector and seating RBC and Slaight ties the fund's leadership to its money and its constituency, easing fundraising and legitimacy.<sup class="cite"><a href="#uf-src-13" data-src="governance" data-tip="Board ties leadership to its money and constituency, easing fundraising and legitimacy. The Unison Fund, Meet the Team.">13</a></sup></p></div>
+        <div class="sw-card strong"><h3>Evidence generation built in</h3><p>The Soundcheck partnership turns the charity into a producer of national mental-health data, strengthening both its case for funding and the field's understanding of need.<sup class="cite"><a href="#uf-src-12" data-src="soundcheck" data-tip="Soundcheck makes Unison a producer of national MH data — strengthening its funding case and the field. SOCAN; CBC Music.">12</a></sup></p></div>
+        <div class="sw-card strong"><h3>Scale relative to market</h3><p>Over $24M distributed and 10,000+ workers supported since 2015 is meaningful penetration of a mid-sized national music workforce — proof the model works at country scale outside the US.<sup class="cite"><a href="#uf-src-2" data-src="history" data-tip="Over $24M distributed and 10,000+ supported since 2015 — meaningful penetration of a mid-sized market (⚠️ org-stated). The Unison Fund, Our History.">2</a></sup></p></div>
+      </div>
+    </section>
+
+    <!-- 8. WEAKNESSES -->
+    <section>
+      <div class="section-label">08 — Weaknesses &amp; risks</div>
+      <h2>What to watch</h2>
+      <div class="sw-grid">
+        <div class="sw-card weak"><h3>No endowment — perpetual re-raising</h3><p>Unison must rebuild its operating base every year; it has no investment reserve to smooth income shocks the way Help Musicians can. This is the price of the blended model.<sup class="cite"><a href="#uf-src-2" data-src="history" data-tip="No investment reserve to smooth income shocks; base re-raised annually. The Unison Fund, Our History.">2</a></sup></p></div>
+        <div class="sw-card weak"><h3>Government dependence is cyclical</h3><p>A large share of the 2020–2023 surge was pandemic-era government money. As emergency programs wind down, the structural question is whether industry and philanthropy can sustain the elevated demand the pandemic exposed.<sup class="cite"><a href="#uf-src-6" data-src="funding" data-tip="Much of 2020–2023 scale was pandemic-era government money (Resilience Fund; Live Music Workers Fund); sustainability question as it winds down. The Unison Fund, Funding.">6</a></sup></p></div>
+        <div class="sw-card weak"><h3>Vendor dependence for the core service</h3><p>Outsourcing counselling to TELUS Health means service quality, pricing, and continuity sit with a commercial vendor Unison does not control — efficient, but a single point of dependency for the program members value most.<sup class="cite"><a href="#uf-src-3" data-src="telus-eap" data-tip="Quality, pricing and continuity sit with a commercial vendor Unison does not control — a single point of dependency. The Unison Fund, Counselling &amp; Health Solutions.">3</a></sup></p></div>
+        <div class="sw-card weak"><h3>Thin public financial transparency</h3><p>Unison publishes a periodic Impact Report (cumulative figures) but no audited annual financial statements, and the authoritative T3010 could not be retrieved this pass (CRA maintenance window; mirror JS-gated). Self-reported totals are not a substitute for posted audited accounts.<sup class="cite"><a href="#uf-src-7" data-src="t3010" data-tip="Impact Report (cumulative) but no audited annual statements; T3010 not retrieved this pass — a transparency gap relative to MMM. CanadaHelps + attempted CRA retrieval.">7</a></sup></p></div>
+        <div class="sw-card weak"><h3>Narrow eligibility excludes the most precarious</h3><p>The ≥5-years-in-industry / ≥55%-income-from-music gates, and the explicit exclusion of unemployment and "recurring" hardship, mean the newest and most casual workers — often the most precarious — may fall outside the emergency program.<sup class="cite"><a href="#uf-src-4" data-src="emergency" data-tip="≥5-years / ≥55%-income gates and exclusion of unemployment/recurring hardship leave the newest, most casual workers outside the program. The Unison Fund, Emergency Financial Support.">4</a></sup></p></div>
+        <div class="sw-card weak"><h3>Name-collision and brand confusion</h3><p>Sharing "Unison" with an Alberta seniors' charity, a UK union, and a US fintech created a real fabrication hazard in this very study and dilutes searchability — a cautionary tale for any new org choosing a name.<sup class="cite"><a href="#uf-src-7" data-src="t3010" data-tip="The 'Unison' name collides with an Alberta seniors' charity, a UK union, and a US fintech — a fabrication hazard and a searchability problem. Fabrication-guard note.">7</a></sup></p></div>
+        <div class="sw-card weak"><h3>No Asia-Pacific footprint</h3><p>Like MusiCares, Help Musicians and Music Minds Matter, Unison is single-country (Canada) — the field-wide gap this project tracks.<sup class="cite"><a href="#uf-src-1" data-src="identity" data-tip="Single-country (Canada); the field-wide Asia-Pacific gap this project tracks. The Unison Fund, identity / comparators.">1</a></sup></p></div>
+      </div>
+    </section>
+
+    <!-- 9. LESSONS -->
+    <section>
+      <div class="section-label">09 — Lessons for Taiwan</div>
+      <h2>What a Taiwan music mental health NPO should take</h2>
+      <ol class="lessons">
+        <li><h3>Rent the clinic; don't build it</h3><p>This is the headline lesson. Unison delivers national 24/7, multilingual counselling by extending a commercial EAP (TELUS Health) to its members. A Taiwan NPO should likewise <em>procure</em> clinical capacity — contract an established EAP or counselling provider and extend it to registered music workers — rather than hire a clinical team. It converts the hardest, most expensive part of the service into a vendor contract a small org can manage.<sup class="cite"><a href="#uf-src-3" data-src="telus-eap" data-tip="Procure clinical capacity (an EAP/counselling provider) rather than hire a clinical team. The Unison Fund, Counselling &amp; Health Solutions.">3</a></sup></p></li>
+        <li><h3>Build the funding base on three legs from day one</h3><p>Unison runs on industry money + foundation philanthropy + government grants, with no endowment — precisely the situation a Taiwan startup faces. The replicable sequence is Unison's own: seed with trade-body + patron commitments (Music Canada + Slaight, 2011), add foundation program-sponsors (RBC, Azrieli), and pursue government cultural-sector grants (the Taiwan Ministry of Culture is the analogue to Canadian Heritage). Seat each funder's representative on the board to lock in the relationship.<sup class="cite"><a href="#uf-src-5" data-src="major-labels" data-tip="Three legs from day one: trade-body + patron seed, foundation sponsors, government grants; seat funders on the board. Music Canada; The Unison Fund, Funding; Meet the Team.">5</a></sup></p></li>
+        <li><h3>Copy the crisis-gated, pay-the-creditor relief design verbatim</h3><p>Unison's emergency program — documented crisis only, prioritised to medical/rent/basics, capped annually, and paid directly to landlords and suppliers rather than to applicants — is a ready-made template that controls fraud and administrative load without a large team. A Taiwan NPO can adopt this rulebook on launch.<sup class="cite"><a href="#uf-src-4" data-src="emergency" data-tip="Adopt the crisis-gated, pay-the-creditor, annually-capped rulebook verbatim on launch. The Unison Fund, Emergency Financial Support.">4</a></sup></p></li>
+        <li><h3>Distinguish "register" from "apply," and make registration free</h3><p>Unison's two-tier access — free registration unlocks counselling and the mailing list; financial aid is a separate, evidenced application — lowers the barrier to the help most people actually need (someone to talk to) while keeping cash disbursement disciplined.<sup class="cite"><a href="#uf-src-3" data-src="telus-eap" data-tip="Two-tier access: free registration unlocks counselling; financial aid is a separate evidenced application. The Unison Fund, Counselling / Financial Support.">3</a></sup></p></li>
+        <li><h3>Generate your own demand evidence early</h3><p>Unison co-produced the first national mental-health study of Canada's music industry, which both justifies its services and advances the field. A Taiwan NPO should partner with a local university or research firm to run an equivalent baseline survey — it is the strongest possible grant-application, and the field has none yet for Taiwan.<sup class="cite"><a href="#uf-src-12" data-src="soundcheck" data-tip="Partner with a university/research firm to run a baseline survey (a Soundcheck of your own) — the strongest grant application. SOCAN; CBC Music.">12</a></sup></p></li>
+        <li><h3>Don't rely on a pandemic-style government windfall as the base case</h3><p>Much of Unison's 2020–2023 scale was emergency government money. A Taiwan org should treat one-off government relief as a bonus, not the foundation, and plan a sustainable mix it can hold when emergency programs end.<sup class="cite"><a href="#uf-src-6" data-src="funding" data-tip="Treat one-off government relief as a bonus, not the base case; plan a mix that survives the wind-down. The Unison Fund, Funding.">6</a></sup></p></li>
+        <li><h3>Choose a distinctive, unambiguous name</h3><p>Unison's brand collides with a seniors' charity, a union, and a fintech — a hazard that nearly caused a financial-figure error in this study. A Taiwan NPO should pick a name with no domestic collision so funders, applicants, and researchers can find it cleanly.<sup class="cite"><a href="#uf-src-7" data-src="t3010" data-tip="Pick a name with no domestic collision; the 'Unison' name nearly caused a financial-figure error here. Fabrication-guard note.">7</a></sup></p></li>
+        <li><h3>Publish audited annual accounts even when not strictly required</h3><p>Unison's reliance on cumulative self-reported totals, with no posted annual report, is a transparency gap. A new org that posts audited statements from year one builds the funder trust that a blended, re-raised-annually model depends on.<sup class="cite"><a href="#uf-src-7" data-src="t3010" data-tip="Post audited statements from year one to build the funder trust a blended, re-raised-annually model depends on. CanadaHelps + attempted CRA retrieval.">7</a></sup></p></li>
+      </ol>
+    </section>
+
+    <!-- 10. METHOD + REFERENCES -->
+    <section>
+      <div class="section-label">10 — Methodology &amp; references</div>
+      <h2>Basis</h2>
+      <p class="cite-help">Every figure carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source; click to jump to the full reference. Identity, history, services, governance and the funding mix are traced to the organization's own pages, the CanadaHelps charity profile (CRA BN 807414057RR0001), and corroborating Canadian press. Cumulative impact figures are organization-stated (⚠️ as-reported) and not independently audited here. The line-item CRA T3010 annual financials are ❓ Unverified this pass: the CRA registry returned a 503 inside its overnight maintenance window and the charitydata.ca mirror is JavaScript/API-gated — so they are flagged pending re-pull, not estimated, and no invented revenue/expenditure figure is printed. The Charity Intelligence "Unison" table (Alberta seniors' charity, BN 118979947RR0001) was excluded as a different charity.</p>
+
+      <div class="table-wrap" role="region" aria-label="Methodology and basis (scrollable table)" tabindex="0">
+        <table>
+          <caption>Methodology &amp; basis — by source</caption>
+          <thead><tr><th scope="col">Source</th><th scope="col">Method</th><th scope="col">Basis</th></tr></thead>
+          <tbody>
+            <tr><td>The Unison Fund — Our History, Financial Support, Emergency Financial Support, Counselling &amp; Health Solutions, Funding, Meet the Team (unisonfund.ca)</td><td>Claude-in-Chrome (navigate + get_page_text)</td><td>✅ Sourced (org-published primary)</td></tr>
+            <tr><td>CanadaHelps charity profile — CRA BN 807414057RR0001; registered name &amp; address</td><td>Claude-in-Chrome</td><td>✅ Sourced (registry mirror; BN confirmed)</td></tr>
+            <tr><td>CRA Charities Directorate T3010 (apps.cra-arc.gc.ca)</td><td>Attempted Claude-in-Chrome</td><td>❓ Unverified this pass — 503 maintenance window; pending re-pull</td></tr>
+            <tr><td>charitydata.ca T3010 mirror</td><td>Attempted JS fetch</td><td>❓ Unverified — API key-gated</td></tr>
+            <tr><td>Music Canada; SOCAN; Billboard Canada; CBC Music; Canadian Musician; Samaritanmag</td><td>WebSearch</td><td>✅ Sourced (named Canadian outlets / trade body)</td></tr>
+            <tr><td>Charity Intelligence "Unison" profile</td><td>Claude-in-Chrome</td><td>⛔ Excluded — different charity (Alberta seniors', BN 118979947RR0001); used only as a documented fabrication-guard example</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="refs" id="refs-all" data-citation-registry="uf-all">
+        <div class="refs-title">References</div>
+        <ol>
+          <li id="uf-src-1" data-src="identity">Identity, founders, mission, and the national-music-charity framing: The Unison Fund. (n.d.). <em>Homepage</em> and <em>Our history</em>. Retrieved June 27, 2026, from <a href="https://unisonfund.ca/" target="_blank" rel="noopener">https://unisonfund.ca/</a> and <a href="https://unisonfund.ca/our-history/" target="_blank" rel="noopener">https://unisonfund.ca/our-history/</a>; CRA registration (Unison Benevolent Fund, BN 807414057RR0001) and registered address via CanadaHelps. (n.d.). <em>Unison Benevolent Fund [Charity profile]</em>. Retrieved June 27, 2026, from <a href="https://www.canadahelps.org/en/charities/unison-benevolent-fund/" target="_blank" rel="noopener">canadahelps.org</a>. Comparators (MusiCares, Support Act, MusicHelps, Help Musicians) per the project's prior org studies. <strong>Source · Method · Basis:</strong> org pages + registry mirror · Chrome · ✅ Sourced.</li>
+          <li id="uf-src-2" data-src="history">History, founding commitments, program launch sequence, and cumulative impact totals: The Unison Fund. (n.d.). <em>Our history</em>. Retrieved June 27, 2026, from <a href="https://unisonfund.ca/our-history/" target="_blank" rel="noopener">unisonfund.ca/our-history</a> (founders Jodie Ferneyhough &amp; Catharine Saxberg; board formed 2010; org formed 2011; July 2011 $250,000 from Music Canada and Slaight Music; $100,000 publisher collective 2012; Counselling program 2012; Financial Assistance Program 2015; "over 10,000 music professionals" supported; "over $24 million … distributed since 2015"; 2020 "3,000% increase" and "more than $3.5 million" disbursed; "more than 3,500 Canadians" helped 2020–2021; "over 400 people" counselled and "nearly 100" risk-intervention 2022–2023; "over 1,700 people" counselled to date). <strong>Source · Method · Basis:</strong> org-published primary · Chrome · ✅ Sourced for the statements; the impact totals are organization-stated, ⚠️ as-reported (not independently audited here).</li>
+          <li id="uf-src-3" data-src="telus-eap">Counselling &amp; Health Solutions / TELUS Health EAP, funders, and access channels: The Unison Fund. (n.d.). <em>Counselling &amp; health solutions supported by RBC Foundation and The Azrieli Foundation</em>. Retrieved June 27, 2026, from <a href="https://unisonfund.ca/services/counselling-health-solutions-supported-by-rbc-foundation/" target="_blank" rel="noopener">unisonfund.ca</a> (24/7 TELUS Health; 1-855-9UNISON; English/French + 250 languages via LanguageLine; TTY; the-unison-fund.lifeworks.com portal; TELUS Health One app; family members invitable; free registration). <strong>Source · Method · Basis:</strong> org page · Chrome · ✅ Sourced.</li>
+          <li id="uf-src-4" data-src="emergency">Emergency Financial Support Program — eligibility, crisis-gating, pay-to-creditor rule, and exclusions: The Unison Fund. (n.d.). <em>Emergency financial support</em> and <em>Financial support</em>. Retrieved June 27, 2026, from <a href="https://unisonfund.ca/emergencyfinancialsupport/" target="_blank" rel="noopener">unisonfund.ca/emergencyfinancialsupport</a> and <a href="https://unisonfund.ca/financialsupport/" target="_blank" rel="noopener">/financialsupport</a> (≥5 consecutive years; medical/rent/basics priority; "paid directly to a creditor/third party … NOT … directly to applicants"; ≥55% income from music; Canadian status/residency/banking/tax tests; multiple applications with annual limits; Grocery Gift Card program). <strong>Source · Method · Basis:</strong> org pages · Chrome · ✅ Sourced.</li>
+          <li id="uf-src-5" data-src="major-labels">Major-label direct support: Music Canada. (2020). <em>Canada's major record companies announce support for Unison Benevolent Fund</em> [News]. <a href="https://musiccanada.com/news/canadas-major-record-companies-announce-support-for-unison-benevolent-fund/" target="_blank" rel="noopener">musiccanada.com</a> (Sony Music Entertainment Canada, Universal Music Canada, Warner Music Canada). <strong>Source · Method · Basis:</strong> trade-body news · WebSearch · ✅ Sourced.</li>
+          <li id="uf-src-6" data-src="funding">Federal government funding: The Unison Fund. (n.d.). <em>Funding</em>. Retrieved June 27, 2026, from <a href="https://unisonfund.ca/funding/" target="_blank" rel="noopener">unisonfund.ca/funding</a> (Canada Performing Arts Workers Resilience Fund, announced May 2, 2022, via the Department of Canadian Heritage; the Live Music Workers Fund); Canadian Musician. (2022). <em>Unison Fund launches "The Live Music Workers Fund"; feds provide nearly $17 million to aid independent &amp; self-employed workers in the live music sector</em>. <a href="https://canadianmusician.com/post/unison-fund-launches-the-live-music-workers-fund" target="_blank" rel="noopener">canadianmusician.com</a>. <strong>Source · Method · Basis:</strong> org page + trade press · Chrome + WebSearch · ✅ Sourced.</li>
+          <li id="uf-src-7" data-src="t3010">CRA registration and the T3010 gap: CanadaHelps. (n.d.). <em>Unison Benevolent Fund [Charity profile]</em> (BN 807414057RR0001; 49 Spadina Ave, Suite 303, Toronto). Retrieved June 27, 2026, from <a href="https://www.canadahelps.org/en/charities/unison-benevolent-fund/" target="_blank" rel="noopener">canadahelps.org</a>. The CRA Charities Directorate registry (<a href="https://apps.cra-arc.gc.ca/ebci/hacc/srch/pub/dsplyBscSrch" target="_blank" rel="noopener">apps.cra-arc.gc.ca</a>) returned a 503 maintenance page (02:00–06:00 EST window) and charitydata.ca's T3010 mirror is API key-gated, so the line-item annual financials are <strong>❓ Unverified this pass / pending</strong>. <strong>Fabrication-guard note:</strong> the Charity Intelligence profile titled "Unison" (<a href="https://www.charityintelligence.ca/charity-details/1034-unison" target="_blank" rel="noopener">charityintelligence.ca</a>) reports a <em>different</em> charity — "Unison" formerly the Kerby Centre, an Alberta seniors' social-services charity, CRA BN 118979947RR0001 — whose financials (≈$7.7M revenue, $3.8M government funding, 64 staff, $8.1M reserves) were <strong>excluded</strong> from this study. <strong>Source · Method · Basis:</strong> registry mirror + attempted CRA retrieval · Chrome · ✅ Sourced for BN/registration; ❓ for annual T3010 figures.</li>
+          <li id="uf-src-8" data-src="events">Industry gala/golf-classic partners and event fundraising: The Unison Fund. (n.d.). <em>Events</em>. <a href="https://unisonfund.ca/events/" target="_blank" rel="noopener">unisonfund.ca/events</a>; Samaritanmag. (n.d.). <em>Unison Benevolent Fund events raise $75,000 for musicians and industry members</em>. <a href="https://www.samaritanmag.com/news/unison-benevolent-fund-events-raise-75000-musicians-and-industry-members" target="_blank" rel="noopener">samaritanmag.com</a>. <strong>Source · Method · Basis:</strong> org page + press · WebSearch · ✅ Sourced.</li>
+          <li id="uf-src-9" data-src="legacy">Slaight Family Foundation Legacy Program: The Unison Fund. (n.d.). <em>Financial support</em>. Retrieved June 27, 2026, from <a href="https://unisonfund.ca/financialsupport/" target="_blank" rel="noopener">unisonfund.ca/financialsupport</a> (veterans contributing ≥10 years; over age 60 and/or coping with unexpected or chronic illness; targeted at adequate-standard-of-living, medical-intervention, and mental-health need). <strong>Source · Method · Basis:</strong> org page · Chrome · ✅ Sourced.</li>
+          <li id="uf-src-10" data-src="live-music-fund">Live Music Workers Fund scope and federal commitment: Canadian Musician. (2022). <em>Unison Fund launches "The Live Music Workers Fund."</em> <a href="https://canadianmusician.com/post/unison-fund-launches-the-live-music-workers-fund" target="_blank" rel="noopener">canadianmusician.com</a>. <strong>Source · Method · Basis:</strong> trade press · WebSearch · ✅ Sourced.</li>
+          <li id="uf-src-11" data-src="ontario">Provincial (Ontario) direct funding: Music Canada. (n.d.). <em>The Unison Fund, the Canadian Live Music Association and Music Canada welcome direct funding from the Province of Ontario</em> [News]. <a href="https://musiccanada.com/news/the-unison-fund-the-canadian-live-music-association-and-music-canada-welcome-direct-funding-from-the-province-of-ontario/" target="_blank" rel="noopener">musiccanada.com</a>. <strong>Source · Method · Basis:</strong> trade-body news · WebSearch · ✅ Sourced.</li>
+          <li id="uf-src-12" data-src="soundcheck">Soundcheck national mental-health study: SOCAN. (2024). <em>The Unison Fund, SOCAN, and Revelios launch groundbreaking study on mental health in the Canadian music industry</em>. <a href="https://www.socan.com/the-unison-fund-socan-and-revelios-launch-groundbreaking-study-on-mental-health-in-the-canadian-music-industry/" target="_blank" rel="noopener">socan.com</a> (Catherine Harrison, President and founder of Revelios — a study partner, <strong>not</strong> a Unison board member); CBC Music. (2026). <em>1st-ever report on mental health in the Canadian music industry shows dire need for change</em>. <a href="https://www.cbc.ca/music/mental-health-national-study-canada-soundcheck-9.7115972" target="_blank" rel="noopener">cbc.ca</a>; Revelios. (2026). <em>Soundcheck: Mental health in the Canadian music industry — National report</em>. <a href="https://www.revelios.com/wp-content/uploads/2026/02/Soundcheck-Final-Report-1.pdf" target="_blank" rel="noopener">revelios.com</a>. The "52% had felt life wasn't worth living" figure is from the study's 2025 <strong>preliminary</strong> release (SOCAN Magazine, May 27, 2025); the <strong>final</strong> national report (early 2026) carries the 1,250+ participant total. <strong>Source · Method · Basis:</strong> org/partner + named outlet · WebSearch · ✅ Sourced; the headline statistic is study-reported (⚠️ as-reported).</li>
+          <li id="uf-src-13" data-src="governance">Governance and staff leadership: The Unison Fund. (n.d.). <em>Meet the team</em>. Retrieved June 27, 2026, from <a href="https://unisonfund.ca/meet-the-team/" target="_blank" rel="noopener">unisonfund.ca/meet-the-team</a> — board re-verified against the live page on 2026-06-27: Chair Brian Huston (Co-Founder &amp; CEO, SoundsUnite); Vice Chair Sarah Kilpatrick (Music Canada); Treasurer Donald MacGillivray (CPA, CGA); Secretary Michelle Allman-Esdaille (The HOOK &amp; Company); Directors Bronwin Parks, Carlos Pineda, Derrick Ross (President, Slaight Music), Louis Bellavance, Mark Russell (Live Nation), Rupa Biswas (RBC), Shawn Hook, Spencer Mussellam (Believe Digital), Steve Kane, Tennille Jago (Live Nation Canada); ED Alex Johnson with staff Phil Gumbley, Jennifer Hardy, Kathryn Hummel, Stephanie Finanders. ED transition from Amanda Power per Billboard Canada. (2025). <em>Alex Johnson named executive director at The Unison Fund</em>. <a href="https://ca.billboard.com/business/business-news/alex-johnson-unison-fund" target="_blank" rel="noopener">ca.billboard.com</a>. <strong>Source · Method · Basis:</strong> org page + named outlet · WebFetch (re-pull) + WebSearch · ✅ Sourced for the current roster; ⚠️ as-reported for the exact transition date.</li>
+        </ol>
+        <p class="refs-note">Convention: every claim-bearing element carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above — machine-checkable before each deploy (§5.2 / §6 gate 1). The source of truth for these citations is the report <span style="font-family:var(--font-mono);">2026-06-27_Report_Org_Study_Unison_Fund.md</span>. The CRA T3010 line-item financials are flagged ❓ pending re-pull during CRA business hours; no figure is invented.</p>
+      </div>
+    </section>
+
+
+    <nav class="related-block" aria-label="Related on this site">
+      <p class="related-title">Related</p>
+      <ul>
+        <li><a href="org-study.html">&larr; Org Study (all organizations)</a></li>
+        <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+        <li><a href="policy-study.html">Policy Study &mdash; how jurisdictions protect music workers</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <script>
+  /* Scroll-reveal — R3.2 shared IntersectionObserver (normal-scroll page) */
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = 'section > h2, .stat-strip, figure, .table-wrap, .phases-grid, .sources-card, .refs';
+    var nodes = Array.prototype.slice.call(document.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, sibs, idx = 0;
+        if (p){ sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,6) * 60) + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
+
+  <!-- nav scroll-state: transparent over hero, blurred bar once scrolled -->
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden','true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>
