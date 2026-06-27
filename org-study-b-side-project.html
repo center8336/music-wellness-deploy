@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>The B-Side Project · Org Study · MH&amp;W</title>
+  <meta name="description" content="'B-side' is Sony Music Entertainment (Japan)'s in-house mental-health programme for artists, creators and the staff around them — free counselling, a 24/7 medical-chat line, even a dystonia clinic. The catch: it is gated to people under Sony's exclusive contracts. This study verifies who runs it, who pays, who can actually enter, and the 2024 move to open it to the wider industry through the 音制連 trade body — a 'room' that, for now, most Japanese musicians still cannot walk into.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      /* ── DIA-GRADE READING SCALE (calibrated to Dia browser, serif-corrected) ── */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;--lh-prose:1.7;--wt-prose:440;--measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;--label-ink:var(--graphite);
+      --font-cjk:'Noto Serif TC',serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { overflow-x: hidden; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--black);
+      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      line-height: var(--lh-prose);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    a { color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    a:hover { color: var(--signal-dim); }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--signal); outline-offset: 3px; border-radius: var(--radius);
+    }
+
+    .skip-nav {
+      position: absolute; left: -9999px; top: 0; z-index: 200;
+      background: var(--signal); color: var(--white);
+      padding: 0.5rem 1rem; font-family: var(--font-mono);
+    }
+    .skip-nav:focus { left: 0; }
+
+    /* ===== NAVIGATION ===== */
+    nav.nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; flex-direction: column;
+      padding: 2rem 2.5rem;
+      padding-top: calc(2rem + env(safe-area-inset-top));
+      background: transparent;
+      transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    nav.nav.scrolled {
+      background: rgba(244, 244, 245, 0.45);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: var(--font-mono); font-size: 1.1rem; font-weight: 400;
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-topbar { display:none; }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; min-width:44px; min-height:44px; z-index:101; -webkit-tap-highlight-color:transparent; }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity:0; }
+    .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
+
+    /* ===== LAYOUT ===== */
+    main { max-width: var(--max-w); margin: 0 auto; padding: 0 2.5rem 5rem 2.5rem; }
+    section { margin-bottom: 4rem; }
+    .narrow { max-width: var(--max-w-text); }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding-top: calc(9rem + env(safe-area-inset-top));
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-light);
+      margin-bottom: 3rem;
+    }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.18em;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: var(--font-display); font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6.5rem);
+      font-weight: 800; line-height: 1.04; color: var(--black); letter-spacing: -0.01em;
+      overflow-wrap: break-word; hyphens: auto;
+    }
+    .hero h1 .tail { display:block; font-size: clamp(1.15rem, 2.6vw, 1.9rem); font-weight: 600; color: var(--signal); letter-spacing: 0; margin-top: 0.9rem; }
+    .hero .subtitle {
+      font-family: var(--font-body); font-size: clamp(1.25rem, 1.05rem + 1.4vw, 1.5rem);
+      color: var(--graphite); line-height: 1.55; margin-top: 1.5rem; max-width: 54ch;
+    }
+    .basis-badge {
+      display: inline-block; margin-top: 1.75rem;
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--graphite); background: var(--signal-bg);
+      border: 1px solid var(--signal-glow); border-radius: var(--radius);
+      padding: 0.5rem 0.85rem; line-height: 1.5;
+    }
+
+    /* ===== TWO-LINE COVER (R2.1, 2026-06-20) — width:100% inside main (no 100vw breakout → no x-overflow) ===== */
+    .cover {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;                /* clips the wash */
+      padding: 0 2rem;
+    }
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%,
+        var(--signal-glow) 0%,
+        rgba(102,103,171,0.06) 38%,
+        rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
+    }
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 1280px);
+    }
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin: 0;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+    .cover-cjk {
+      font-family: var(--font-cjk);
+      font-size: clamp(1rem, 2.6vw, 1.6rem);
+      font-weight: 600;
+      color: var(--graphite);
+      margin: 1rem 0 0;
+      letter-spacing: 0.04em;
+    }
+    .cover-line {
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--purple-deep);
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
+    }
+    .cover-hint {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
+    }
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
+    }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-cjk   { animation-delay: 0.18s; }
+    .cover-inner > .cover-line  { animation-delay: 0.28s; }
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .cover-wash,
+      .cover-hint,
+      .cover-inner > * { animation: none; opacity: 1; transform: none; }
+    }
+    @media (max-width: 768px) {
+      .cover { padding: 0 1.25rem; }
+      .cover-title { font-size: clamp(1.7rem, 7.3vw, 2.4rem); }
+      .cover-line  { font-size: clamp(0.72rem, 3.2vw, 0.95rem); letter-spacing: 0.18em; }
+    }
+
+    /* ===== TYPE ===== */
+    h2 {
+      font-family: var(--font-display); font-size: var(--text-h2);
+      font-weight: 700; line-height: 1.1; color: var(--black);
+      margin-bottom: 1.25rem; letter-spacing: -0.01em;
+      text-wrap: balance; overflow-wrap: break-word;
+    }
+    h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem); line-height: 1.25; font-weight: 600; color: var(--charcoal); margin: 1.75rem 0 0.75rem; }
+    .section-label {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem;
+    }
+    p { color: var(--graphite); max-width: var(--measure-prose); margin-bottom: 1rem; line-height: 1.65; }
+    p.lead { font-size: 1.1rem; color: var(--charcoal); }
+    strong { color: var(--charcoal); font-weight: 600; }
+    em { color: var(--graphite); }
+
+    /* ===== MODEL CALLOUT ===== */
+    .model-callout { background: var(--bg-card-dark); color: var(--snow); border-radius: var(--radius-lg); padding: 2.25rem 2.5rem; margin-bottom: 3rem; }
+    .model-callout h2 { color: var(--white); margin-bottom: 1rem; }
+    .model-callout p { color: var(--silver); max-width: none; }
+    .model-callout strong { color: var(--white); }
+    .model-callout a { color: var(--spectrum-3); text-decoration: underline; text-underline-offset: 2px; }
+    .model-callout a:hover { color: var(--white); }
+
+    /* ===== THE GATE (signature visual) — reuses flywheel-panel chrome ===== */
+    .flywheel-panel {
+      background: var(--bg-card-dark);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem 2rem 1.5rem;
+      margin: 1.5rem 0 1.75rem;
+      border: 1px solid var(--border-dark);
+    }
+    .flywheel-panel .fw-cap {
+      font-family: var(--font-mono); font-size: var(--text-xs); color: var(--spectrum-3);
+      text-transform: uppercase; letter-spacing: 0.16em; text-align: center; margin-bottom: 0.5rem;
+    }
+    .flywheel-panel svg { display: block; width: 100%; height: auto; max-width: 520px; margin: 0 auto; }
+    .gate-room { fill: none; stroke: var(--spectrum-4); stroke-width: 2; }
+    .gate-wall { fill: none; stroke: var(--border-dark); stroke-width: 1.5; stroke-dasharray: 3 6; }
+    .gate-bar { stroke: var(--spectrum-2); stroke-width: 2.5; }
+    .gate-node { fill: var(--charcoal); stroke: var(--spectrum-2); stroke-width: 2; }
+    .gate-in { fill: var(--off-black); stroke: var(--spectrum-4); stroke-width: 1.5; }
+    .gate-label { fill: var(--snow); font-family: var(--font-display); font-size: 14px; font-weight: 700; letter-spacing: 0.02em; }
+    .gate-sub { fill: var(--grey-light); font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.03em; }
+    .gate-tag { fill: var(--spectrum-3); font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; }
+    .gate-out { fill: var(--grey-light); font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.03em; }
+
+    .gear-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .gear {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-left: 3px solid var(--spectrum-2); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem;
+    }
+    .gear .gn { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); letter-spacing: 0.1em; }
+    .gear h3 { margin: 0.35rem 0 0.5rem; font-size: 1.08rem; }
+    .gear p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-card); margin: 1.5rem 0 0.75rem; }
+    .stat-item { padding: 1.75rem 1.25rem; border-right: 1px solid var(--border-light); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--signal); line-height: 1; font-variant-numeric: tabular-nums; }
+    .stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.6rem; line-height: 1.4; }
+
+    /* ===== TABLES ===== */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; margin: 1.25rem 0; border-radius: var(--radius-lg); border: 1px solid var(--border-light); }
+    .table-wrap:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+    table { width: 100%; border-collapse: collapse; background: var(--bg-card); font-size: var(--text-small); }
+    caption { text-align: left; font-family: var(--font-mono); font-size: var(--text-caption); color: var(--label-ink); padding: 0.75rem 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border-light); vertical-align: top; font-variant-numeric: tabular-nums; }
+    thead th { font-family: var(--font-mono); font-size: var(--text-micro); text-transform: uppercase; letter-spacing: 0.06em; color: var(--label-ink); background: var(--snow); }
+    tbody tr:last-child td { border-bottom: none; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .row-emph td { background: var(--signal-bg); font-weight: 600; color: var(--charcoal); }
+
+    /* ===== PROGRAM LIST ===== */
+    .prog { list-style: none; margin: 1.25rem 0 0; padding: 0; }
+    .prog li { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 0.85rem; }
+    .prog h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .prog p { font-size: var(--text-sm); margin-bottom: 0; }
+    .prog .ptag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ===== SW CARDS ===== */
+    .sw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.25rem; }
+    .sw-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem; }
+    .sw-card.weak { border-left: 3px solid var(--spectrum-2); }
+    .sw-card.strong { border-left: 3px solid var(--spectrum-4); }
+    .sw-card h3 { margin: 0 0 0.4rem; font-size: 1rem; }
+    .sw-card p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== LESSONS ===== */
+    .lessons { counter-reset: lesson; list-style: none; margin: 1.5rem 0 0; padding: 0; }
+    .lessons li { position: relative; padding: 1.25rem 1.5rem 1.25rem 3.5rem; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); margin-bottom: 0.85rem; }
+    .lessons li::before { counter-increment: lesson; content: counter(lesson); position: absolute; left: 1.25rem; top: 1.25rem; font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--signal); }
+    .lessons h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .lessons p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== CITATIONS (§5 inline tier) ===== */
+    .cite { font-size: 0.7em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem; }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-fine); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; max-width: var(--measure-ref); overflow-wrap: anywhere; }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs-note { font-size: var(--text-xs); color: var(--label-ink); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-sm); color: var(--label-ink); font-style: italic; max-width: var(--max-w-text); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .gear-cards { grid-template-columns: 1fr; }
+      .sw-grid { grid-template-columns: 1fr; }
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2n) { border-right: none; }
+      .stat-item:nth-child(-n+2) { border-bottom: 1px solid var(--border-light); }
+    }
+    @media (max-width: 768px) {
+      nav.nav { padding: 1.2rem 1.5rem; padding-top: calc(1.2rem + env(safe-area-inset-top)); }
+      nav.nav.open { background: rgba(244,244,245,0.95); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-light); }
+      .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
+      .nav-toggle { display:block; }
+      .nav-mobile-brand { display:block; }
+      .nav-links { display:none; flex-direction:column; gap:0.75rem; margin-top:1rem; }
+      .nav-links.show { display:flex; }
+      .nav-links a { font-size: 0.85rem; }
+      main { padding: 0 1.5rem 3rem 1.5rem; }
+      .hero { padding-top: calc(7rem + env(safe-area-inset-top)); }
+      .hero h1 { font-size: clamp(2.4rem, 10.5vw, 3.4rem); }
+      .model-callout, .flywheel-panel { padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
+    @media (max-width: 680px) {
+      p, .hero .subtitle, .refs li, .cite-help { max-width: none; }
+    }
+    @media (max-width: 480px) {
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+      .stat-item:last-child { border-bottom: none; }
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
+      table { font-size: 0.82rem; }
+      thead th { font-size: 0.6rem; }
+      th, td { padding: 0.5rem 0.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } nav.nav { transition: none; } }
+
+    /* ===== Scroll-reveal (R3.2 craft pass) ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ===== Related block (no dead-ends, R3.2) ===== */
+    .related-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-light); }
+    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--label-ink); margin-bottom: 0.6rem; }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a { font-family: var(--font-body); font-size: var(--text-sm); color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+  </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open');this.setAttribute('aria-expanded',o)">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+        <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="org-study.html" class="current" aria-current="page">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
+      <a href="field-news.html">FIELD NEWS</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- COVER -->
+    <section class="cover">
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="cover-inner">
+        <h1 class="cover-title">THE B-SIDE PROJECT</h1>
+        <p class="cover-cjk cjk">「B-side」&middot; ソニー・ミュージックエンタテインメント</p>
+        <p class="cover-line">Org Study &middot; Est. 2021</p>
+      </div>
+      <span class="cover-hint" aria-hidden="true">↓ Scroll</span>
+    </section>
+
+    <!-- MODEL CALLOUT -->
+    <div class="model-callout">
+      <h2>One model, in one line</h2>
+      <p>Japan's union <a href="org-study.html">floor</a> protects musicians as <em>workers</em> — it sets a baseline of rights for anyone in the trade. <strong>B-side does the opposite: it is a <em>room</em>, not a floor.</strong> It is a corporate welfare programme built inside Sony Music Entertainment (Japan) — free counselling, a 24/7 medical-chat line, periodic check-ups, even a dystonia clinic — that is genuinely good and genuinely well-run. The catch is on the door: for most of its life you could only enter if you were under an <strong>exclusive management contract with a Sony Music Group company</strong>, or one of the staff working beside them. This study verifies who runs it, who pays, and who can actually walk in — and tracks the 2024 move to unlock the door for the wider industry through the <span class="cjk">音制連</span> producers' federation, which is real, deliberate, and still only a trial. It also matters because it is one of the very few music-industry-specific mental-health initiatives anywhere in East Asia — which is exactly why a label-gated room leaves so much of the regional need unmet.<sup class="cite"><a href="#bsp-src-10" data-tip="B-side is among the few music-industry-specific MH initiatives in East Asia; its label-gated scope leaves the broader regional need unmet. This project's Orgs Map / Backline Asia snapshot.">10</a></sup></p>
+    </div>
+
+    <!-- 1. PROFILE -->
+    <section>
+      <div class="section-label">01 — Profile</div>
+      <h2>A label's in-house care programme<sup class="cite"><a href="#bsp-src-1" data-tip="Identity, operator, launch date, name meaning: Sony Music Entertainment (Japan) press release, 2021-09-30 (Japanese). Corroborated by the English release and the project's own site.">1</a></sup></h2>
+      <p>The Orgs Map lists this organisation as "The B-Side Project." Its own name is simply <strong>"B-side"</strong>, and it is not an independent NPO at all — it is a project of <strong>Sony Music Entertainment (Japan) Inc.</strong> (SMEJ), operated across the wider Sony Music Group (Japan). The project's public site carries the line <em>"© 2026 Sony Music Entertainment (Japan) Inc."</em> and the English handle "the B-side project" only as the address of its website.<sup class="cite"><a href="#bsp-src-5" data-tip="Operator and current copyright line: b-sideproject.jp, the project's own site (© 2026 Sony Music Entertainment (Japan) Inc.). Accessed 2026-06-28.">5</a></sup></p>
+
+      <p>The name carries a deliberate double meaning that doubles as the mission: care for not only the public self that stands on stage (the "A-side") but the everyday self behind it (the "B-side"); and a promise that Sony Music's people will always stand "<em>Be-side</em>" their artists and creators.<sup class="cite"><a href="#bsp-src-1" data-tip="'A-side / B-side / Beside' name meaning, verbatim. Sony Music Entertainment (Japan) press release, 2021-09-30.">1</a></sup> The English tagline on the live site is "Standing by Your Side."<sup class="cite"><a href="#bsp-src-5" data-tip="Tagline 'Standing by Your Side' on the homepage. b-sideproject.jp. Accessed 2026-06-28.">5</a></sup></p>
+
+      <div class="table-wrap" role="region" aria-label="Organization profile — B-side (scrollable table)" tabindex="0">
+        <table>
+          <caption>Organization profile — "B-side" (sources cited inline)</caption>
+          <tbody>
+            <tr><th scope="row">Project name</th><td>「B-side」 (site: b-sideproject.jp) — listed on the Orgs Map as "The B-Side Project"</td></tr>
+            <tr><th scope="row">Operator / parent</th><td>Sony Music Entertainment (Japan) Inc. (SMEJ), across Sony Music Group (Japan)</td></tr>
+            <tr><th scope="row">Type</th><td>Corporate in-house welfare / CSR programme — <strong>not</strong> an independent charity or NPO</td></tr>
+            <tr><th scope="row">Launched</th><td>Announced 30 September 2021 (internal rollout ~August 2021 across ~20 group companies)</td></tr>
+            <tr><th scope="row">Originator</th><td>Eri Tokudome (徳留愛理), Sony Music artist manager; began as a volunteer ("手弁当") project</td></tr>
+            <tr><th scope="row">Leadership (signatory)</th><td>Launched under SMEJ President &amp; CEO Shunsuke Muramatsu (村松俊亮)</td></tr>
+            <tr><th scope="row">Leadership (current)</th><td>From 1 April 2026: Atsuhiro Iwagami (岩上敦宏), President &amp; Group CEO; Muramatsu → Chairman<sup class="cite"><a href="#bsp-src-7" data-tip="Leadership change effective 1 April 2026: Muramatsu → Chairman; Iwagami → President &amp; Group CEO. Sony Music Entertainment (Japan) press release (PDF), 2026-02-16.">7</a></sup></td></tr>
+            <tr><th scope="row">Funding</th><td>Funded by SMEJ; services provided free (無償) to eligible users; no public budget figure</td></tr>
+            <tr><th scope="row">Scope</th><td>Japan. Eligibility gated to Sony-contracted creators &amp; their staff; 2024 trial extension to the wider industry via the 音制連 producers' federation</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>A correction for anyone reading the older stub on this site: the project's site is <strong>b-sideproject.jp</strong>, not a "sonymusic.co.jp/bside" page, and the public announcement date is <strong>30 September 2021</strong> — some retrospective Japanese coverage dates the internal start to August 2021 with roughly 20 group companies, which is the rollout, not the announcement.<sup class="cite"><a href="#bsp-src-4" data-tip="'~20 group companies, August 2021' framing and the expansion narrative. Newsweek Japan SDGs feature, 2024-12-10.">4</a></sup></p>
+    </section>
+
+    <!-- 2. THE GATE -->
+    <section>
+      <div class="section-label">02 — The model</div>
+      <h2>A good room behind a closed door</h2>
+      <p>The defining fact about B-side is not what it offers — the offer is strong — but <strong>who is allowed in</strong>. Both the Japanese and English launch releases define eligibility identically: the services are for artists, actors, talents, songwriters and character-business creators who are <strong>under exclusive management contracts (専属マネジメント契約) with Sony Music Group (Japan)</strong>, together with the staff who work directly with them.<sup class="cite"><a href="#bsp-src-1" data-tip="Eligibility defined as those under exclusive management contracts with Sony Music Group (Japan) + their direct staff. Sony Music Entertainment (Japan) press release, 2021-09-30 (Japanese).">1</a></sup><sup class="cite"><a href="#bsp-src-2" data-tip="English-language confirmation of the same eligibility wording ('under exclusive management contracts'). Sony Music Entertainment (Japan) press release, 2021-09-30 (English).">2</a></sup> The counselling and dystonia pages on the live site sit behind a login/registration wall, consistent with a closed, members-only service.<sup class="cite"><a href="#bsp-src-5" data-tip="The 'カウンセリング相談' / 'ジストニア相談' pages redirect to a login/registration screen — a members-only gate. b-sideproject.jp/login.php. Accessed 2026-06-28.">5</a></sup></p>
+
+      <div class="flywheel-panel">
+        <div class="fw-cap">The eligibility gate</div>
+        <svg viewBox="0 0 520 300" role="img" aria-label="A diagram of a well-equipped 'room' of services — counselling, a 24/7 medical-chat line, check-ups, a dystonia clinic and workshops — entered through a gate marked 'exclusive Sony contract'. Inside stand Sony-contracted creators and their staff; outside stand most independent Japanese musicians, with a dotted 2024 path through the 音制連 trade body just beginning to open the gate.">
+          <!-- the room -->
+          <rect class="gate-room" x="250" y="40" width="240" height="220" rx="8"/>
+          <text class="gate-tag" x="370" y="64" text-anchor="middle">THE ROOM — B-SIDE SERVICES</text>
+          <circle class="gate-in" cx="300" cy="100" r="20"/><text class="gate-sub" x="300" y="103" text-anchor="middle">counsel</text>
+          <circle class="gate-in" cx="370" cy="100" r="20"/><text class="gate-sub" x="370" y="103" text-anchor="middle">24/7 line</text>
+          <circle class="gate-in" cx="440" cy="100" r="20"/><text class="gate-sub" x="440" y="103" text-anchor="middle">check-up</text>
+          <circle class="gate-in" cx="320" cy="160" r="20"/><text class="gate-sub" x="320" y="163" text-anchor="middle">dystonia</text>
+          <circle class="gate-in" cx="395" cy="160" r="20"/><text class="gate-sub" x="395" y="163" text-anchor="middle">workshop</text>
+          <text class="gate-label" x="370" y="215" text-anchor="middle">Sony-contracted</text>
+          <text class="gate-label" x="370" y="233" text-anchor="middle">creators &amp; staff</text>
+          <!-- the gate -->
+          <line class="gate-bar" x1="250" y1="40" x2="250" y2="120"/>
+          <line class="gate-bar" x1="250" y1="180" x2="250" y2="260"/>
+          <text class="gate-tag" x="250" y="155" text-anchor="middle">GATE</text>
+          <text class="gate-sub" x="250" y="170" text-anchor="middle" transform="rotate(0 250 170)">専属契約</text>
+          <!-- outside -->
+          <text class="gate-out" x="120" y="96" text-anchor="middle">Most independent</text>
+          <text class="gate-out" x="120" y="110" text-anchor="middle">Japanese musicians</text>
+          <text class="gate-out" x="120" y="124" text-anchor="middle">— outside —</text>
+          <!-- 2024 dotted path through 音制連 -->
+          <path class="gate-wall" d="M 120 150 Q 185 150 185 110 L 248 110" marker-end=""/>
+          <text class="gate-tag" x="150" y="178" text-anchor="middle">2024:</text>
+          <text class="gate-out" x="150" y="192" text-anchor="middle">音制連 trial path</text>
+          <text class="gate-out" x="150" y="206" text-anchor="middle">(~230 firms, beginning)</text>
+        </svg>
+      </div>
+
+      <p>What sits inside the room is a genuinely complete care stack, offered <strong>free of charge</strong> and staffed by professionals — not a hotline-and-T-shirt model. The four founding services, plus a fifth added in 2024, are below.</p>
+
+      <ul class="prog">
+        <li><span class="ptag">Service 01 · online medical chat</span><h3>"first call" — 24/7, anonymous</h3><p>Anonymous, round-the-clock access to "first call", an online medical consultation app where a doctor responds by chat to physical or mental concerns. The app is operated by a third party, <strong>Mediplat Inc.</strong>, and provided to eligible creators and their direct staff.<sup class="cite"><a href="#bsp-src-1" data-tip="'first call' 24/7 anonymous online medical consultation, operated by Mediplat Inc. Sony Music Entertainment (Japan) press release, 2021-09-30.">1</a></sup><sup class="cite"><a href="#bsp-src-6" data-tip="'first call' adoption by the B-side project, operator Mediplat Inc. (a MedPeer group company). Mediplat / PR TIMES release, 2021.">6</a></sup></p></li>
+        <li><span class="ptag">Service 02 · professional counselling</span><h3>Sessions with licensed psychologists</h3><p>Counselling by certified clinical psychologists (臨床心理士) and nationally certified public psychologists (公認心理師), available to eligible creators and to the staff working directly with them. This is the clinical-grade core — peer support it is not.<sup class="cite"><a href="#bsp-src-1" data-tip="Counselling by 臨床心理士 / 公認心理師 (certified clinical / certified public psychologists). Sony Music Entertainment (Japan) press release, 2021-09-30.">1</a></sup></p></li>
+        <li><span class="ptag">Service 03 · periodic check-up</span><h3>Voluntary mental &amp; physical check-ups</h3><p>An optional mind-and-body check-up, offered within the health-screening cycle to eligible creators who want it — a preventive-maintenance posture rather than a crisis-only one.<sup class="cite"><a href="#bsp-src-1" data-tip="Voluntary periodic mental &amp; physical check-up for those who want it. Sony Music Entertainment (Japan) press release, 2021-09-30.">1</a></sup><sup class="cite"><a href="#bsp-src-3" data-tip="Tokudome describes the four core services and the 'go to the dentist before the cavity' preventive framing. ORICON NEWS interview, 2024-04-04.">3</a></sup></p></li>
+        <li><span class="ptag">Service 04 · workshops</span><h3>Internal mental-health workshops</h3><p>Regular workshops on mental wellness and self-care for Sony Music Group staff — sometimes with experts, artists or talents speaking about their own experience — to build literacy among the managers who are usually the first line of support.<sup class="cite"><a href="#bsp-src-1" data-tip="Internal workshops on mental wellness / self-care for group staff. Sony Music Entertainment (Japan) press release, 2021-09-30.">1</a></sup><sup class="cite"><a href="#bsp-src-3" data-tip="Workshops featuring experts / artists sharing experience; internal newsletter. ORICON NEWS interview, 2024-04-04.">3</a></sup></p></li>
+        <li><span class="ptag">Service 05 · added Feb 2024</span><h3>Dystonia consultation — a musician-specific clinic</h3><p>From February 2024 a specialist in <strong>dystonia (ジストニア)</strong> — the focal movement disorder that can end an instrumentalist's career — joined as one of the counsellors, with online consultation. This is the one piece of B-side that is unmistakably occupational and musician-specific, and it now appears as its own "ジストニア相談" channel on the site.<sup class="cite"><a href="#bsp-src-3" data-tip="A dystonia specialist joined as a counsellor from February 2024, available for online consultation. ORICON NEWS interview, 2024-04-04.">3</a></sup><sup class="cite"><a href="#bsp-src-5" data-tip="'ジストニア相談' (dystonia consultation) appears as a dedicated user-menu item on the live site. b-sideproject.jp. Accessed 2026-06-28.">5</a></sup></p></li>
+      </ul>
+
+      <p style="margin-top:1.75rem;">Alongside the gated services, B-side runs a deliberately <em>open</em> awareness arm: the casual podcast / YouTube show <strong>"B-side Talk ～心の健康ケアしてる？"</strong> (running since October 2022), and public World Mental Health Day events — the 2024 edition featured artist Takanori Nishikawa (西川貴教). Anyone can listen; only the contracted can be treated.<sup class="cite"><a href="#bsp-src-9" data-tip="'B-side Talk' podcast/YouTube since Oct 2022; World Mental Health Day 2024 public event with Takanori Nishikawa. Sony Music press release &amp; event listing.">9</a></sup></p>
+    </section>
+
+    <!-- 3. FUNDING -->
+    <section>
+      <div class="section-label">03 — Funding &amp; structure</div>
+      <h2>Who pays, and how it is run</h2>
+      <p>B-side has no donations page, no membership dues, no grant line, and publishes no budget — because it does not need one in the way an NPO does. It is a <strong>cost centre inside a profitable record company</strong>: SMEJ funds it, and the services reach eligible users at no charge to them.<sup class="cite"><a href="#bsp-src-1" data-tip="Services provided 'free of charge' (無償) by SMEJ; no external funding model. Sony Music Entertainment (Japan) press release, 2021-09-30.">1</a></sup> That is the structural inverse of the donation-and-merch charities elsewhere in this Org Study — and the reason no fundraising flywheel appears on this page.</p>
+
+      <p>Operationally it is run by a cross-company team: members are seconded from the Sony Music Group companies whose creators are covered, each doing B-side work <em>alongside</em> their day jobs (兼務). The originator, artist manager <strong>Eri Tokudome</strong>, has described it growing from a hand-to-mouth volunteer effort into an organised function once leadership assigned dedicated headcount.<sup class="cite"><a href="#bsp-src-3" data-tip="Run by seconded members from covered group companies on a dual-role (兼務) basis; grew from a volunteer project after leadership assigned headcount. Tokudome, ORICON NEWS interview, 2024-04-04.">3</a></sup> There is a clear business logic underneath the welfare language: as 音制連 chair Tatsuya Nomura put it, when an artist's mental health fails, "the production company's economic activity simply stops" — prevention protects people and revenue at once.<sup class="cite"><a href="#bsp-src-3" data-tip="Nomura: when an artist's mental health fails, the production company's economic activity stops; prevention protects both. ORICON NEWS interview, 2024-04-04.">3</a></sup></p>
+
+      <div class="stat-strip" role="group" aria-label="Key figures for B-side">
+        <div class="stat-item"><div class="stat-num">2021</div><div class="stat-label">Launched (announced 30 Sep)</div></div>
+        <div class="stat-item"><div class="stat-num">4&nbsp;+&nbsp;1</div><div class="stat-label">Core services + dystonia clinic (2024)</div></div>
+        <div class="stat-item"><div class="stat-num">~20</div><div class="stat-label">Sony group companies at launch</div></div>
+        <div class="stat-item"><div class="stat-num">~230</div><div class="stat-label">Industry firms in the 音制連 trial target</div></div>
+      </div>
+      <p class="chart-note" style="font-size:var(--text-xs); color:var(--label-ink); max-width:none;">Figures are organisation-reported. "~20 companies" and "~230 firms" are stated in interviews/coverage, not in an audited filing — corporate programmes file no Form 990 equivalent. Basis: ✅ Sourced (organisation-reported); no independent budget figure is public (❓).</p>
+    </section>
+
+    <!-- 4. THE 2024 OPENING -->
+    <section>
+      <div class="section-label">04 — The 2024 opening</div>
+      <h2>Unlocking the door — via the trade body<sup class="cite"><a href="#bsp-src-3" data-tip="The 2024 partnership with the Federation of Music Producers Japan (音制連) and the ~230-firm trial. ORICON NEWS interview, 2024-04-04.">3</a></sup></h2>
+      <p>The most important update to the old "Sony-only" framing is this: in 2024, B-side began extending beyond Sony's own roster. The <strong>Federation of Music Producers Japan</strong> (日本音楽制作者連盟, "音制連") — a trade body whose ~230 member companies include much of the independent live and management sector — proposed turning B-side into an industry-level scheme. Tokudome joined the 音制連 board in June 2023 to drive it, and a <strong>trial rollout</strong> to member firms was targeted for around spring 2024.<sup class="cite"><a href="#bsp-src-3" data-tip="音制連 proposed an industry-level scheme; Tokudome joined the 音制連 board June 2023; trial rollout targeted ~spring 2024. ORICON NEWS interview, 2024-04-04.">3</a></sup><sup class="cite"><a href="#bsp-src-8" data-tip="音制連 (Federation of Music Producers Japan) is the trade body hosting the industry extension. 音制連 / coverage context.">8</a></sup></p>
+
+      <p>Two honest qualifications keep this from being over-read. First, the project's leads stress it was <em>always</em> meant to reach beyond Sony — but because the material is so sensitive, expansion proceeds slowly, with confidentiality safeguards and education sessions for participating firms before they adopt it.<sup class="cite"><a href="#bsp-src-4" data-tip="The project was 'always intended' to extend beyond Sony but proceeds cautiously for confidentiality reasons. Newsweek Japan, 2024-12-10.">4</a></sup> Second, as of the latest verifiable reporting it is a <strong>trial</strong>, not a completed national rollout — the ~230 figure is a target population, not a served one.<sup class="cite"><a href="#bsp-src-3" data-tip="As of the 2024-04 interview it was a trial-preparation stage; ~230 is the target, not the served count. ORICON NEWS interview, 2024-04-04.">3</a></sup> The door is being unlocked, deliberately and slowly. It is not yet open.</p>
+    </section>
+
+    <!-- 5. STRENGTHS & WEAKNESSES -->
+    <section>
+      <div class="section-label">05 — Appraisal</div>
+      <h2>What works, and what to watch</h2>
+      <div class="sw-grid">
+        <div class="sw-card strong"><h3>Clinical-grade, not peer-grade</h3><p>Licensed psychologists, a doctor-staffed 24/7 line, and a dystonia specialist. This is real care, free at the point of use — well above the awareness-and-referral tier common in the field.</p></div>
+        <div class="sw-card strong"><h3>Staff are covered too</h3><p>Eligibility explicitly includes the managers and crew around artists — the people who otherwise absorb the strain invisibly. Few programmes anywhere extend care to the support layer.</p></div>
+        <div class="sw-card strong"><h3>Prevention by design</h3><p>Voluntary check-ups, workshops and the "dentist before the cavity" framing push toward maintenance, not just crisis — a healthier posture than reactive aid.</p></div>
+        <div class="sw-card strong"><h3>A funding model that cannot run dry</h3><p>Bankrolled by a profitable parent, it carries none of the donation-volatility risk that destabilises independent charities. Stability is its quiet superpower.</p></div>
+        <div class="sw-card weak"><h3>Eligibility is the whole story</h3><p>For most of its life, only Sony-contracted creators and their staff could enter. A Japanese musician on an indie label, self-released, or freelance was simply outside the room.</p></div>
+        <div class="sw-card weak"><h3>Not independent, not accountable to the public</h3><p>As a corporate cost centre it files no public accounts, publishes no budget or outcome data, and answers to a label, not to a membership or a regulator.</p></div>
+        <div class="sw-card weak"><h3>The opening is still a trial</h3><p>The 音制連 extension is promising but unfinished; "~230 firms" is a target, and confidentiality concerns keep the pace slow. Reach beyond Sony should not be assumed.</p></div>
+        <div class="sw-card weak"><h3>Tied to one company's priorities</h3><p>What B-side does, and whether it keeps growing outward, depends on SMEJ's continued will — including through leadership change. A corporate room can be re-scoped from above.</p></div>
+      </div>
+    </section>
+
+    <!-- 6. LESSONS -->
+    <section>
+      <div class="section-label">06 — Lessons for Taiwan</div>
+      <h2>What a Taiwan music mental health NPO should take</h2>
+      <ol class="lessons">
+        <li><h3>The "room" is excellent; the locked door is the warning</h3><p>B-side proves that a well-run, clinical-grade care room for music workers is buildable and sustainable. But a room only one label's roster can enter leaves the freelance and indie majority — exactly the group a Taiwan NPO would exist to serve — outside. Design for the people <em>without</em> a major-label contract from day one.</p></li>
+        <li><h3>Cover the staff, not just the artists</h3><p>The single most copyable idea here costs little and is rare: extend support to managers, crew and the people working beside artists. They carry the load and burn out quietly. An NPO can make "the people around the musician" eligible on principle, where a label does it as employee welfare.<sup class="cite"><a href="#bsp-src-1" data-tip="Eligibility explicitly includes the staff working directly with creators. Sony Music Entertainment (Japan) press release, 2021-09-30.">1</a></sup></p></li>
+        <li><h3>Borrow the occupational angle — including dystonia</h3><p>B-side's dystonia clinic is the part that is genuinely <em>music</em>-specific, not generic mental health. A Taiwan org can differentiate from general counselling services by owning the occupational conditions of the trade — performance anxiety, hearing, focal dystonia — that no general clinic addresses well.<sup class="cite"><a href="#bsp-src-3" data-tip="The dystonia specialist / clinic as the musician-specific differentiator. ORICON NEWS interview, 2024-04-04.">3</a></sup></p></li>
+        <li><h3>Lead with the trade body, not a single label</h3><p>The most strategic move B-side made was letting a <em>federation</em> (音制連) carry it industry-wide. A Taiwan NPO should anchor to a neutral host — a musicians' union, the Recording Academy-equivalent, or a producers' association — so access is defined by being in the trade, not by an employer. That is how a "room" starts to behave like a "floor."<sup class="cite"><a href="#bsp-src-3" data-tip="音制連 carrying B-side industry-wide is the route from employer-gated to trade-wide access. ORICON NEWS interview, 2024-04-04.">3</a></sup></p></li>
+        <li><h3>Pair a casual front door with the clinical back room</h3><p>"B-side Talk" lowers the stigma threshold in public while the real care stays private and professional. A Taiwan org can run a light, open, de-stigmatising media channel and a confidential clinical service in parallel — the open part recruits, the closed part treats.<sup class="cite"><a href="#bsp-src-9" data-tip="The open 'B-side Talk' awareness channel sitting beside the closed clinical service. Sony Music press release / event listing.">9</a></sup></p></li>
+        <li><h3>Watch the accountability gap you can close</h3><p>B-side publishes no budget or outcome data because, as a corporate programme, it need not. An NPO's disadvantage — having to fundraise — is also its advantage: publishing usage, outcomes and finances builds the public trust a label never has to earn. Make transparency a feature.</p></li>
+      </ol>
+    </section>
+
+    <!-- 7. METHOD + REFERENCES -->
+    <section>
+      <div class="section-label">07 — Methodology &amp; references</div>
+      <h2>Basis</h2>
+      <p class="cite-help">Every claim-bearing statement carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source; click to jump to the full reference. Sources are Japanese-language primary documents (Sony Music's own press releases, the project's own site) and credible Japanese music-industry press (ORICON, Newsweek Japan). Because B-side is a corporate programme, there is no charity filing, audited budget, or membership register to cite; figures such as "~20 companies" and "~230 firms" are organisation-reported in interviews and coverage (✅ Sourced as reported, not independently audited), and no public budget figure exists (marked ❓, not invented). Eligibility, services, dates and operator are confirmed against Sony's own releases and the live site (✅ Sourced).</p>
+
+      <div class="refs" id="refs-all" data-citation-registry="bsp-all">
+        <div class="refs-title">References</div>
+        <ol>
+          <li id="bsp-src-1" data-src="sony-pr-jp-launch">Sony Music Entertainment (Japan) Inc. (2021, September 30). <em>アーティストやクリエイターを心と身体の両面からサポートするプロジェクト「B-side」始動</em> [Press release]. <a href="https://www.sme.co.jp/pressrelease/news/detail/NEWS001675.html" target="_blank" rel="noopener">sme.co.jp</a> — operator (SMEJ); launch; name meaning (A-side/B-side/Beside); four founding services; eligibility "専属マネジメント契約のある…アーティスト・俳優・タレント・作家…およびこれらのクリエイターと直接仕事をするスタッフ"; services 無償; "first call" operated by 株式会社Mediplat; President &amp; CEO 村松俊亮 comment. <strong>Source · Method · Basis:</strong> organisation primary (press release) · web (Japanese) · ✅ Sourced.</li>
+          <li id="bsp-src-2" data-src="sony-pr-en-launch">Sony Music Entertainment (Japan) Inc. (2021, September 30). <em>Sony Music Entertainment (Japan) Inc. to launch "B-side" project, to provide mental and physical support for artists and creators</em> [Press release]. <a href="https://www.sme.co.jp/en/pressrelease/news/detail/NEWS001672.html" target="_blank" rel="noopener">sme.co.jp/en</a> — English-language confirmation of the same eligibility ("under exclusive management contracts with Sony Music Group (Japan)"), the four services, and the operator. <strong>Source · Method · Basis:</strong> organisation primary (press release) · web (English) · ✅ Sourced.</li>
+          <li id="bsp-src-3" data-src="oricon-interview">ORICON NEWS. (2024, April 4). <em>アーティストやスタッフのメンタルヘルスケアに乗り出す音楽業界　サポート体制構築へ</em> [Interview with Tatsuya Nomura (野村達矢), Chair, Federation of Music Producers Japan, &amp; Eri Tokudome (徳留愛理), board member / Sony Music Labels]. <a href="https://www.oricon.co.jp/news/2321089/full/" target="_blank" rel="noopener">oricon.co.jp</a> — origin story (volunteer beginnings; founded Sept 2021); the four services; dystonia specialist added as counsellor from February 2024; 音制連 partnership; ~230-firm trial targeted ~spring 2024; Tokudome joined 音制連 board June 2023; the "prevention protects revenue" and "dentist before the cavity" framing. <strong>Source · Method · Basis:</strong> credible industry press (named principals) · web (Japanese) · ✅ Sourced.</li>
+          <li id="bsp-src-4" data-src="newsweek-sdgs">ニューズウィーク日本版編集部SDGs室. (2024, December 10). <em>音楽業界全体でアーティストのメンタルサポートを強化…ソニー・ミュージックエンタテインメントが進める「B-side」</em>. <a href="https://www.newsweekjapan.jp/stories/sdgs/2024/12/527689_1.php" target="_blank" rel="noopener">newsweekjapan.jp</a> — "約20社" Sony group companies and August 2021 internal-start framing; that the project "もともと…広く利用される事業を目指して" (always intended to reach beyond Sony) but proceeds cautiously; expansion narrative. <strong>Source · Method · Basis:</strong> credible press (brand-story / SDGs feature) · web (Japanese) · ✅ Sourced (note: sponsored SDGs series).</li>
+          <li id="bsp-src-5" data-src="bside-site">B-side (Sony Music Entertainment (Japan) Inc.). (n.d.). <em>B-side</em> [Official site]. Retrieved June 28, 2026, from <a href="https://www.b-sideproject.jp/" target="_blank" rel="noopener">b-sideproject.jp</a> — copyright line "© 2026 Sony Music Entertainment (Japan) Inc."; tagline "Standing by Your Side"; user-menu items カウンセリング相談 / ジストニア相談 / WORKSHOP / Q&amp;A; service pages redirect to a login/registration wall (members-only gate, <a href="https://www.b-sideproject.jp/login.php" target="_blank" rel="noopener">login.php</a>). <strong>Source · Method · Basis:</strong> organisation primary (own site, JS-rendered) · web (Japanese) · ✅ Sourced.</li>
+          <li id="bsp-src-6" data-src="mediplat-firstcall">Mediplat, Inc. (2021). <em>ソニーミュージックグループが新たに開始するプロジェクト「B-side」に「first call」のオンライン医療相談サービスが採用</em> [Press release]. <a href="https://prtimes.jp/main/html/rd/p/000000369.000010134.html" target="_blank" rel="noopener">PR TIMES</a> — confirms "first call" (operated by Mediplat Inc., a MedPeer group company) as the online medical-consultation service adopted by B-side. <strong>Source · Method · Basis:</strong> vendor primary (press release) · web (Japanese) · ✅ Sourced.</li>
+          <li id="bsp-src-7" data-src="sony-exec-2026">Sony Music Entertainment (Japan) Inc. (2026, February 16). <em>役員人事について</em> [Press release, PDF]. <a href="https://www.sme.co.jp/pressrelease/information/pdf/20260216.pdf" target="_blank" rel="noopener">sme.co.jp</a> — effective 1 April 2026: 村松俊亮 (Muramatsu) → 代表取締役会長 (Chairman); 岩上敦宏 (Atsuhiro Iwagami) → 代表取締役社長 / Group CEO. (Release notes formal institutional confirmation to follow.) <strong>Source · Method · Basis:</strong> organisation primary (press release) · web (Japanese) · ✅ Sourced.</li>
+          <li id="bsp-src-8" data-src="onseiren">Federation of Music Producers Japan (日本音楽制作者連盟 / 音制連). (n.d.). <em>音制連について</em>. <a href="https://www.fmp.or.jp/" target="_blank" rel="noopener">fmp.or.jp</a> — identity of the trade body (a federation of music-management/production companies) that proposed and now hosts the industry-wide extension of B-side. <strong>Source · Method · Basis:</strong> organisation context · web (Japanese) · ⚠️ Inferred role (membership scale "~230" sourced from ORICON above, not a roster count).</li>
+          <li id="bsp-src-9" data-src="bside-talk">Sony Music Entertainment (Japan) Inc. (2024 et seq.). <em>「B-side Talk～心の健康ケアしてる？」配信</em> &amp; <em>B-side Special Talk Event ～世界メンタルヘルスデー</em> [Press release &amp; event listing]. <a href="https://www.sme.co.jp/pressrelease/news/detail/NEWS001738.html" target="_blank" rel="noopener">sme.co.jp</a>; <a href="https://www.b-sideproject.jp/wmhd2024/" target="_blank" rel="noopener">b-sideproject.jp/wmhd2024</a> — the open podcast/YouTube awareness channel (since October 2022) and the public World Mental Health Day 2024 event featuring Takanori Nishikawa (西川貴教). <strong>Source · Method · Basis:</strong> organisation primary · web (Japanese) · ✅ Sourced.</li>
+          <li id="bsp-src-10" data-src="map-context">Backline (Asia directory snapshot) &amp; this project's Orgs Map. (2026). <em>Global NPO landscape — Asia-Pacific gap</em>. See <a href="report-global-npo-landscape.html" target="_blank" rel="noopener">report-global-npo-landscape.html</a> — context that B-side is among the very few music-industry-specific mental-health initiatives in East Asia, and that its label-gated scope leaves the broader regional need unmet. <strong>Source · Method · Basis:</strong> internal landscape (derived) · web · ⚠️ Inferred (gap framing, not a head-count).</li>
+        </ol>
+        <p class="refs-note">Convention: every claim-bearing element carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above — machine-checkable before each deploy (§5.2 / §6 gate 1). Corporate programmes file no public accounts; reported figures are labelled as organisation-reported, and the absence of a public budget is marked ❓ rather than guessed (Rule 4: absence found ≠ non-existence).</p>
+      </div>
+    </section>
+
+    <nav class="related-block" aria-label="Related on this site">
+      <p class="related-title">Related</p>
+      <ul>
+        <li><a href="org-study.html">&larr; Org Study (all organizations)</a></li>
+        <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+        <li><a href="policy-study.html">Policy Study &mdash; how jurisdictions protect music workers</a></li>
+        <li><a href="policy-study-japan.html">Policy Study: Japan &mdash; the rights "floor" behind this services "room"</a></li>
+        <li><a href="org-study-twloha.html">Org Study: TWLOHA &mdash; the multinational whose "presence in Japan" is a link, not a clinic</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <script>
+  /* Scroll-reveal — R3.2 shared IntersectionObserver (normal-scroll page) */
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = 'section > h2, .stat-strip, figure, .table-wrap, .phases-grid, .sources-card, .refs';
+    var nodes = Array.prototype.slice.call(document.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, sibs, idx = 0;
+        if (p){ sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,6) * 60) + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
+
+  <!-- nav scroll-state: transparent over hero, blurred bar once scrolled -->
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden','true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>

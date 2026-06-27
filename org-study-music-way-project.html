@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>MUSIC WAY PROJECT · Org Study · MH&amp;W</title>
+  <meta name="description" content="MUSIC WAY PROJECT is a CEIPA × TOYOTA GROUP initiative to globalize the Japanese music industry by developing talent and creating opportunities. This study's honest finding: it is a career-development engine with no mental-health remit at all — a clean boundary case for a Taiwan music mental health NPO.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      /* ── DIA-GRADE READING SCALE (calibrated to Dia browser, serif-corrected) ── */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;--lh-prose:1.7;--wt-prose:440;--measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;--label-ink:var(--graphite);
+      --font-cjk:'Noto Serif TC',serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { overflow-x: hidden; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--black);
+      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      line-height: var(--lh-prose);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    a { color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    a:hover { color: var(--signal-dim); }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--signal); outline-offset: 3px; border-radius: var(--radius);
+    }
+
+    .skip-nav {
+      position: absolute; left: -9999px; top: 0; z-index: 200;
+      background: var(--signal); color: var(--white);
+      padding: 0.5rem 1rem; font-family: var(--font-mono);
+    }
+    .skip-nav:focus { left: 0; }
+
+    /* ===== NAVIGATION ===== */
+    nav.nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; flex-direction: column;
+      padding: 2rem 2.5rem;
+      padding-top: calc(2rem + env(safe-area-inset-top));
+      background: transparent;
+      transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    nav.nav.scrolled {
+      background: rgba(244, 244, 245, 0.45);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: var(--font-mono); font-size: 1.1rem; font-weight: 400;
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-topbar { display:none; }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; min-width:44px; min-height:44px; z-index:101; -webkit-tap-highlight-color:transparent; }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity:0; }
+    .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
+
+    /* ===== LAYOUT ===== */
+    main { max-width: var(--max-w); margin: 0 auto; padding: 0 2.5rem 5rem 2.5rem; }
+    section { margin-bottom: 4rem; }
+    .narrow { max-width: var(--max-w-text); }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding-top: calc(9rem + env(safe-area-inset-top));
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-light);
+      margin-bottom: 3rem;
+    }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.18em;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: var(--font-display); font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6.5rem);
+      font-weight: 800; line-height: 1.04; color: var(--black); letter-spacing: -0.01em;
+      overflow-wrap: break-word; hyphens: auto;
+    }
+    .hero h1 .tail { display:block; font-size: clamp(1.15rem, 2.6vw, 1.9rem); font-weight: 600; color: var(--signal); letter-spacing: 0; margin-top: 0.9rem; }
+    .hero .subtitle {
+      font-family: var(--font-body); font-size: clamp(1.25rem, 1.05rem + 1.4vw, 1.5rem);
+      color: var(--graphite); line-height: 1.55; margin-top: 1.5rem; max-width: 54ch;
+    }
+    .basis-badge {
+      display: inline-block; margin-top: 1.75rem;
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--graphite); background: var(--signal-bg);
+      border: 1px solid var(--signal-glow); border-radius: var(--radius);
+      padding: 0.5rem 0.85rem; line-height: 1.5;
+    }
+
+    /* ===== TWO-LINE COVER (R2.1, 2026-06-20) — width:100% inside main (no 100vw breakout → no x-overflow) ===== */
+    .cover {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;                /* clips the wash */
+      padding: 0 2rem;
+    }
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%,
+        var(--signal-glow) 0%,
+        rgba(102,103,171,0.06) 38%,
+        rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
+    }
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 1280px);
+    }
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin: 0;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+    .cover-line {
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--purple-deep);
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
+    }
+    .cover-hint {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
+    }
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
+    }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-line  { animation-delay: 0.22s; }
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .cover-wash,
+      .cover-hint,
+      .cover-inner > * { animation: none; opacity: 1; transform: none; }
+    }
+    @media (max-width: 768px) {
+      .cover { padding: 0 1.25rem; }
+      .cover-title { font-size: clamp(1.7rem, 7.3vw, 2.4rem); }
+      .cover-line  { font-size: clamp(0.72rem, 3.2vw, 0.95rem); letter-spacing: 0.18em; }
+    }
+
+    /* ===== TYPE ===== */
+    h2 {
+      font-family: var(--font-display); font-size: var(--text-h2);
+      font-weight: 700; line-height: 1.1; color: var(--black);
+      margin-bottom: 1.25rem; letter-spacing: -0.01em;
+      text-wrap: balance; overflow-wrap: break-word;
+    }
+    h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem); line-height: 1.25; font-weight: 600; color: var(--charcoal); margin: 1.75rem 0 0.75rem; }
+    .section-label {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem;
+    }
+    p { color: var(--graphite); max-width: var(--measure-prose); margin-bottom: 1rem; line-height: 1.65; }
+    p.lead { font-size: 1.1rem; color: var(--charcoal); }
+    strong { color: var(--charcoal); font-weight: 600; }
+    em { color: var(--graphite); }
+
+    /* ===== MODEL CALLOUT ===== */
+    .model-callout { background: var(--bg-card-dark); color: var(--snow); border-radius: var(--radius-lg); padding: 2.25rem 2.5rem; margin-bottom: 3rem; }
+    .model-callout h2 { color: var(--white); margin-bottom: 1rem; }
+    .model-callout p { color: var(--silver); max-width: none; }
+    .model-callout strong { color: var(--white); }
+    .model-callout a { color: var(--spectrum-3); text-decoration: underline; text-underline-offset: 2px; }
+    .model-callout a:hover { color: var(--white); }
+
+    /* ===== THE FLYWHEEL (signature visual) ===== */
+    .flywheel-panel {
+      background: var(--bg-card-dark);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem 2rem 1.5rem;
+      margin: 1.5rem 0 1.75rem;
+      border: 1px solid var(--border-dark);
+    }
+    .flywheel-panel .fw-cap {
+      font-family: var(--font-mono); font-size: var(--text-xs); color: var(--spectrum-3);
+      text-transform: uppercase; letter-spacing: 0.16em; text-align: center; margin-bottom: 0.5rem;
+    }
+    .flywheel-panel svg { display: block; width: 100%; height: auto; max-width: 460px; margin: 0 auto; }
+    .fw-ring { fill: none; stroke: var(--border-dark); stroke-width: 1.5; stroke-dasharray: 3 6; }
+    .fw-arc { fill: none; stroke: var(--spectrum-3); stroke-width: 2.5; opacity: 0.85; stroke-dasharray: 4 7; animation: fw-flow 2.2s linear infinite; }
+    @keyframes fw-flow { to { stroke-dashoffset: -22; } }
+    .fw-node { fill: var(--charcoal); stroke: var(--spectrum-2); stroke-width: 2; }
+    .fw-hub { fill: var(--black); stroke: var(--spectrum-3); stroke-width: 1.5; }
+    .fw-num { fill: var(--spectrum-3); font-family: var(--font-mono); font-size: 13px; font-weight: 700; }
+    .fw-label { fill: var(--snow); font-family: var(--font-display); font-size: 15px; font-weight: 700; letter-spacing: 0.02em; }
+    .fw-sub { fill: var(--grey-light); font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.04em; }
+    .fw-hub-label { fill: var(--spectrum-3); font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.14em; }
+    .fw-hub-sub { fill: var(--grey-light); font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; }
+
+    .gear-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .gear {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-left: 3px solid var(--spectrum-2); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem;
+    }
+    .gear .gn { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); letter-spacing: 0.1em; }
+    .gear h3 { margin: 0.35rem 0 0.5rem; font-size: 1.08rem; }
+    .gear p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-card); margin: 1.5rem 0 0.75rem; }
+    .stat-item { padding: 1.75rem 1.25rem; border-right: 1px solid var(--border-light); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--signal); line-height: 1; font-variant-numeric: tabular-nums; }
+    .stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.6rem; line-height: 1.4; }
+
+    /* ===== COLUMN CHART (revenue trajectory) ===== */
+    figure.chart { margin: 1.5rem 0; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 2rem 1.75rem 1.25rem; }
+    figure.chart figcaption { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
+    .col-chart { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.6rem; align-items: end; }
+    .col { display: flex; flex-direction: column; align-items: center; }
+    .ctrack { position: relative; width: 100%; height: 190px; display: flex; align-items: flex-end; }
+    .cbar { width: 100%; max-width: 54px; margin: 0 auto; background: var(--signal); border-radius: var(--radius) var(--radius) 0 0; position: relative; transition: height var(--dur-slow) var(--ease); }
+    .cbar.peak { background: var(--spectrum-2); }
+    .cbar .cval { position: absolute; top: -1.35rem; left: -50%; right: -50%; text-align: center; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--charcoal); font-variant-numeric: tabular-nums; }
+    .cyr { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); margin-top: 0.55rem; letter-spacing: 0.02em; }
+    .chart-note { font-size: var(--text-xs); color: var(--label-ink); margin-top: 1rem; max-width: none; }
+    .chart-key { display: flex; gap: 1.25rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .chart-key span { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); display: inline-flex; align-items: center; gap: 0.4rem; }
+    .swatch { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+    .swatch.s-rev { background: var(--signal); }
+    .swatch.s-covid { background: var(--spectrum-2); }
+
+    /* ===== TABLES ===== */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; margin: 1.25rem 0; border-radius: var(--radius-lg); border: 1px solid var(--border-light); }
+    .table-wrap:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+    table { width: 100%; border-collapse: collapse; background: var(--bg-card); font-size: var(--text-small); }
+    caption { text-align: left; font-family: var(--font-mono); font-size: var(--text-caption); color: var(--label-ink); padding: 0.75rem 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border-light); vertical-align: top; font-variant-numeric: tabular-nums; }
+    thead th { font-family: var(--font-mono); font-size: var(--text-micro); text-transform: uppercase; letter-spacing: 0.06em; color: var(--label-ink); background: var(--snow); }
+    tbody tr:last-child td { border-bottom: none; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .row-emph td { background: var(--signal-bg); font-weight: 600; color: var(--charcoal); }
+    .row-covid td { background: rgba(232, 168, 124, 0.12); }
+
+    /* ===== CRISIS CARDS ===== */
+    .crisis-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .crisis { background: var(--bg-card); border: 1px solid var(--border-light); border-top: 3px solid var(--spectrum-1); border-radius: var(--radius-lg); padding: 1.5rem 1.6rem; }
+    .crisis .cyrtag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--graphite); letter-spacing: 0.08em; }
+    .crisis h3 { margin: 0.3rem 0 0.6rem; font-size: 1.08rem; }
+    .crisis .big { font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; color: var(--charcoal); line-height: 1; margin-bottom: 0.5rem; }
+    .crisis p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== PROGRAM LIST ===== */
+    .prog { list-style: none; margin: 1.25rem 0 0; padding: 0; }
+    .prog li { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 0.85rem; }
+    .prog h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .prog p { font-size: var(--text-sm); margin-bottom: 0; }
+    .prog .ptag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ===== SW CARDS ===== */
+    .sw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.25rem; }
+    .sw-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem; }
+    .sw-card.weak { border-left: 3px solid var(--spectrum-2); }
+    .sw-card.strong { border-left: 3px solid var(--spectrum-4); }
+    .sw-card h3 { margin: 0 0 0.4rem; font-size: 1rem; }
+    .sw-card p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== LESSONS ===== */
+    .lessons { counter-reset: lesson; list-style: none; margin: 1.5rem 0 0; padding: 0; }
+    .lessons li { position: relative; padding: 1.25rem 1.5rem 1.25rem 3.5rem; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); margin-bottom: 0.85rem; }
+    .lessons li::before { counter-increment: lesson; content: counter(lesson); position: absolute; left: 1.25rem; top: 1.25rem; font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--signal); }
+    .lessons h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .lessons p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== CITATIONS (§5 inline tier) ===== */
+    .cite { font-size: 0.7em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem; }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-fine); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; max-width: var(--measure-ref); overflow-wrap: anywhere; }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs-note { font-size: var(--text-xs); color: var(--label-ink); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-sm); color: var(--label-ink); font-style: italic; max-width: var(--max-w-text); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .gear-cards { grid-template-columns: 1fr; }
+      .crisis-grid { grid-template-columns: 1fr; }
+      .sw-grid { grid-template-columns: 1fr; }
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2n) { border-right: none; }
+      .stat-item:nth-child(-n+2) { border-bottom: 1px solid var(--border-light); }
+    }
+    @media (max-width: 768px) {
+      nav.nav { padding: 1.2rem 1.5rem; padding-top: calc(1.2rem + env(safe-area-inset-top)); }
+      nav.nav.open { background: rgba(244,244,245,0.95); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-light); }
+      .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
+      .nav-toggle { display:block; }
+      .nav-mobile-brand { display:block; }
+      .nav-links { display:none; flex-direction:column; gap:0.75rem; margin-top:1rem; }
+      .nav-links.show { display:flex; }
+      .nav-links a { font-size: 0.85rem; }
+      main { padding: 0 1.5rem 3rem 1.5rem; }
+      .hero { padding-top: calc(7rem + env(safe-area-inset-top)); }
+      .hero h1 { font-size: clamp(2.4rem, 10.5vw, 3.4rem); }
+      .model-callout, .flywheel-panel { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .col-chart { gap: 0.3rem; }
+      .ctrack { height: 150px; }
+      .cbar .cval { font-size: 0.62rem; }
+    }
+    @media (max-width: 680px) {
+      p, .hero .subtitle, .refs li, .cite-help { max-width: none; }
+    }
+    @media (max-width: 480px) {
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+      .stat-item:last-child { border-bottom: none; }
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
+      .cyr { font-size: 0.6rem; }
+      table { font-size: 0.82rem; }
+      thead th { font-size: 0.6rem; }
+      th, td { padding: 0.5rem 0.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } nav.nav, .cbar { transition: none; } .fw-arc { animation: none; } }
+
+    /* ===== Scroll-reveal (R3.2 craft pass) ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ===== Related block (no dead-ends, R3.2) ===== */
+    .related-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-light); }
+    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--label-ink); margin-bottom: 0.6rem; }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a { font-family: var(--font-body); font-size: var(--text-sm); color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+  </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open');this.setAttribute('aria-expanded',o)">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+        <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="org-study.html" class="current" aria-current="page">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
+      <a href="field-news.html">FIELD NEWS</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- COVER -->
+    <section class="cover">
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="cover-inner">
+        <h1 class="cover-title">MUSIC WAY PROJECT</h1>
+        <p class="cover-line">Org Study · Est. 2025</p>
+      </div>
+      <span class="cover-hint" aria-hidden="true">↓ Scroll</span>
+    </section>
+
+    <!-- MODEL CALLOUT -->
+    <div class="model-callout">
+      <h2>One finding, in one line</h2>
+      <p>The Orgs Map lists this as a Japan "Career Development" entry, and the honest question a study has to ask is whether its remit touches mental health or wellbeing at all. It does not. <strong>MUSIC WAY PROJECT is a <a href="https://www.ceipa.net/" target="_blank" rel="noopener">CEIPA</a> × TOYOTA GROUP initiative to push Japanese music onto the global stage</strong> — developing talent and creating opportunities — launched in February 2025. There is no wellbeing layer bundled into its career services, and no welfare, counseling, or crisis programming beside them. So this page does the one useful thing such a case allows: it documents what the organization actually <em>is</em>, and reads it as a clean boundary marker — the music-mental-health "room" left empty next to a fully built career "room." It stays a map entry; it is not a music-MH org, and the study says so plainly.</p>
+    </div>
+
+    <!-- 1. PROFILE -->
+    <section>
+      <div class="section-label">01 — Profile</div>
+      <h2>A project, not an independent NPO<sup class="cite"><a href="#mwp-src-1" data-src="toyota-launch" data-tip="Founding, promoting bodies, aim, and CEIPA composition: Toyota Global Newsroom launch release (2025-02-25).">1</a></sup></h2>
+      <p>MUSIC WAY PROJECT is a co-creation project run by <strong>CEIPA</strong> — the Japan Culture and Entertainment Industry Promotion Association, a general incorporated association formed at the end of 2023 by Japan's five major music-industry bodies — together with the <strong>TOYOTA GROUP</strong> as co-creating supporter and sponsor.<sup class="cite"><a href="#mwp-src-1" data-src="toyota-launch" data-tip="CEIPA's five member bodies: RIAJ; Japan Association of Music Enterprises; Federation of Music Producers Japan; Music Publishers Association of Japan; All Japan Concert and Live Entertainment Promoters Conference. Toyota Global Newsroom (2025-02-25).">1</a></sup> It is not a standalone charity, and it is not a service provider. Announced at a Tokyo press conference on February 25, 2025 and rolled out at MUSIC AWARDS JAPAN Award Week that May, its single stated aim is "to support and promote the fundamental globalization and sustainable growth of the Japanese music industry," under the slogan "Japanese Music Drives the World."<sup class="cite"><a href="#mwp-src-1" data-src="toyota-launch" data-tip="Aim verbatim + slogan + Feb 25 2025 launch. Toyota Global Newsroom.">1</a></sup></p>
+
+      <div class="table-wrap" role="region" aria-label="Organization profile — MUSIC WAY PROJECT (scrollable table)" tabindex="0">
+        <table>
+          <caption>Organization profile — MUSIC WAY PROJECT (sources cited inline)</caption>
+          <tbody>
+            <tr><th scope="row">Name</th><td>MUSIC WAY PROJECT (CEIPA × TOYOTA GROUP)</td></tr>
+            <tr><th scope="row">Type</th><td>Public–private collaborative initiative — run by CEIPA (a 一般社団法人 / general incorporated association); TOYOTA GROUP as co-creator &amp; sponsor. <strong>Not an independent NPO.</strong></td></tr>
+            <tr><th scope="row">Launched</th><td>February 25, 2025 (Tokyo press conference); public rollout May 2025, Kyoto</td></tr>
+            <tr><th scope="row">Concept</th><td>"日本の音楽が世界をドライブする / Japanese Music Drives the World"</td></tr>
+            <tr><th scope="row">Run by</th><td>CEIPA (formed end-2023 by 5 music-industry bodies) + TOYOTA GROUP (Akio Toyoda)</td></tr>
+            <tr><th scope="row">CEIPA leadership</th><td>Chairman Tatsumi Yoda; Chair of the Board Shunsuke Muramatsu (RIAJ President)</td></tr>
+            <tr><th scope="row">Sibling project</th><td>MUSIC AWARDS JAPAN (1st edition May 2025 Kyoto; 2026 in Tokyo)</td></tr>
+            <tr><th scope="row">Reach</th><td>Japan-based; overseas bases in Los Angeles, London, Bangkok</td></tr>
+            <tr><th scope="row">Map profile</th><td>Career Development (confirmed by this study)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>The two CEIPA projects work as a pair, in the organization's own framing: MUSIC WAY PROJECT is the year-round engine that develops talent and opportunities, and MUSIC AWARDS JAPAN is the showcase for what that engine produces — "two wheels of the same vehicle."<sup class="cite"><a href="#mwp-src-5" data-src="toyota-times" data-tip="Two-wheels framing; CEIPA formed end-2023; market context. Toyota Times interview with CEIPA Board Member Yutaka Inaba (2026-06-11).">5</a></sup> A naming note for anyone re-searching: the Orgs Map calls it "The Music Way Project," but the organization styles itself "MUSIC WAY PROJECT" with no article. Because "music way" is generic, searches should always pair it with "CEIPA" or "Toyota" to stay on the right entity.</p>
+    </section>
+
+    <!-- 2. PROGRAMS -->
+    <section>
+      <div class="section-label">02 — What it does</div>
+      <h2>Two pillars, six programs — all career and export<sup class="cite"><a href="#mwp-src-2" data-src="mwp-site" data-tip="Program taxonomy (two pillars + six programs + two 'Other'): MUSIC WAY PROJECT official site, Project pages. Retrieved 2026-06-28.">2</a></sup></h2>
+      <p>The official site organizes the entire project under exactly two pillars, mirrored verbatim in the launch release: <strong>人づくり (developing people)</strong> and <strong>場づくり (developing places)</strong>.<sup class="cite"><a href="#mwp-src-2" data-src="mwp-site" data-tip="人づくり / 場づくり pillars. MUSIC WAY PROJECT official site.">2</a></sup><sup class="cite"><a href="#mwp-src-1" data-src="toyota-launch" data-tip="Same two-pillar structure in the project-overview table. Toyota Global Newsroom.">1</a></sup> Every one of its programs is a talent-development or market-access activity. None is a wellbeing program.</p>
+
+      <h3>人づくり — developing people (talent / career)</h3>
+      <ul class="prog">
+        <li><div class="ptag">#01 · Academia</div><h3>Academia Collaboration</h3><p>University-linked student courses and joint research (産学連携).<sup class="cite"><a href="#mwp-src-2" data-src="mwp-site" data-tip="#01 Academia Collaboration. MUSIC WAY PROJECT site.">2</a></sup></p></li>
+        <li><div class="ptag">#02 · Seminars</div><h3>Professional Seminars</h3><p>Courses and workshops for working industry professionals, delivered with <strong>Berklee College of Music</strong> (Valencia). 2026 seminars are themed on overseas markets — Korea, Thailand, Indonesia, and an India seminar co-hosted with JETRO.<sup class="cite"><a href="#mwp-src-4" data-src="otomo" data-tip="Berklee Professional Seminar keynote. OTOMO / CEIPA media (2025-06-03).">4</a></sup><sup class="cite"><a href="#mwp-src-6" data-src="mwp-india" data-tip="India seminar co-hosted with JETRO, announced 2026-06-23. MUSIC WAY PROJECT site.">6</a></sup></p></li>
+        <li><div class="ptag">#03 · Co-writing</div><h3>Global Co-writing Camp</h3><p>The "SONG BRIDGE" retreat-style camp (2025 across historic Kyoto venues; SONG BRIDGE 2026 announced June 2026), pairing emerging Japanese creators with global writers and producers.<sup class="cite"><a href="#mwp-src-4" data-src="otomo" data-tip="SONG BRIDGE 2025 co-writing camp across Kyoto venues. OTOMO / CEIPA media.">4</a></sup></p></li>
+      </ul>
+
+      <h3>場づくり — developing places (opportunity / export)</h3>
+      <ul class="prog">
+        <li><div class="ptag">#04 · Showcase</div><h3>Global Showcase Live</h3><p>Showcase stages across Asia, Europe and the US (SXSW, TOKYO CALLING, Matsuri '25 in Los Angeles).<sup class="cite"><a href="#mwp-src-1" data-src="toyota-launch" data-tip="Global showcase live; LA/Europe/Asia. Toyota Global Newsroom.">1</a></sup></p></li>
+        <li><div class="ptag">#05 · Export</div><h3>Music Export</h3><p>B2B business-matching events connecting Japanese music to overseas industry (音楽輸出ミッション).<sup class="cite"><a href="#mwp-src-2" data-src="mwp-site" data-tip="#05 Music Export — B2B business matching. MUSIC WAY PROJECT site.">2</a></sup></p></li>
+        <li><div class="ptag">#06 · Bases</div><h3>Global Bases</h3><p>Three overseas footholds — <strong>Los Angeles, London, Bangkok</strong> — plus use of TOYOTA ARENA TOKYO (opened autumn 2025).<sup class="cite"><a href="#mwp-src-1" data-src="toyota-launch" data-tip="Three overseas bases LA/London/Thailand + TOYOTA ARENA TOKYO. Toyota Global Newsroom.">1</a></sup></p></li>
+      </ul>
+
+      <p style="margin-top:1.5rem;">The About page's own mission prose confirms the boundary. It offers learning "open to everyone who aspires to music" — student courses, <strong>study-abroad support (留学支援)</strong>, and creator workshops — to "refine the talent needed to succeed overseas," and runs overseas bases to give young artists "a stage to take flight."<sup class="cite"><a href="#mwp-src-3" data-src="mwp-about" data-tip="Mission prose: 人づくり = student courses, study-abroad support, workshops; 場づくり = bases + showcases. MUSIC WAY PROJECT About.">3</a></sup> The vocabulary is entirely developmental and commercial. There is no welfare, support, or health register anywhere in it.</p>
+    </section>
+
+    <!-- 3. SCOPE FINDING -->
+    <section>
+      <div class="section-label">03 — The scope finding</div>
+      <h2>Career development, mental health absent<sup class="cite"><a href="#mwp-src-3" data-src="mwp-about" data-tip="Scope grounded in the org's own complete program taxonomy + mission prose. MUSIC WAY PROJECT site/About.">3</a></sup></h2>
+      <p>This is the deliverable, stated plainly. <strong>MUSIC WAY PROJECT has no mental-health or wellbeing remit at all.</strong> It is a pure career-development and industry-globalization initiative. Wellbeing is neither bundled into its career services nor present as a side program — it is simply not there.</p>
+
+      <div class="stat-strip" role="img" aria-label="Across four primary sources, the count of mental-health, wellbeing, welfare, counseling, crisis, and occupational-health programs is zero; the project has six career and export programs.">
+        <div class="stat-item"><div class="stat-num">0</div><div class="stat-label">mental-health / wellbeing programs</div></div>
+        <div class="stat-item"><div class="stat-num">0</div><div class="stat-label">counseling, crisis, or welfare services</div></div>
+        <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">programs — all career &amp; export</div></div>
+        <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">primary sources, in agreement</div></div>
+      </div>
+
+      <h3>The basis for the finding</h3>
+      <p>The conclusion rests on four primary sources that independently agree: the organization's own complete program taxonomy (Home, About, and all six Project descriptions),<sup class="cite"><a href="#mwp-src-2" data-src="mwp-site" data-tip="Full program taxonomy. MUSIC WAY PROJECT official site.">2</a></sup> the Toyota Global Newsroom launch release and its project-overview table,<sup class="cite"><a href="#mwp-src-1" data-src="toyota-launch" data-tip="Launch release + project-overview table. Toyota Global Newsroom.">1</a></sup> CEIPA's own OTOMO media report,<sup class="cite"><a href="#mwp-src-4" data-src="otomo" data-tip="Launch report. OTOMO / CEIPA media.">4</a></sup> and the Toyota Times status interview a year later.<sup class="cite"><a href="#mwp-src-5" data-src="toyota-times" data-tip="Status interview, 2026. Toyota Times.">5</a></sup> None contains any reference to musician mental health, wellbeing, welfare, counseling, crisis support, occupational health, or artists' rights. A targeted Japanese-language search pairing the project name with メンタルヘルス / ウェルビーイング / 心のケア (mental health / wellbeing / emotional care) returned only unrelated music-therapy and corporate-wellness pages — so the absence was actively searched for, not merely assumed.<sup class="cite"><a href="#mwp-src-7" data-src="map-row" data-tip="Negative Japanese-language search for any MH component (Rule 4: absence searched for, not assumed). + Orgs Map row #84.">7</a></sup></p>
+
+      <h3>Where wellbeing sits relative to the "room"</h3>
+      <p>It does not sit anywhere. The project answers a different question than the rest of this org-study series. <a href="org-study-musicares.html">MusiCares</a>, <a href="org-study-backline.html">Backline</a>, and the national funds ask "how do we keep music workers well?"; MUSIC WAY PROJECT asks "how do we make Japanese music globally competitive?" The two can share a beneficiary — a young Japanese artist — and never touch the same need. For this project's <strong>"floor (rights) vs room (services)"</strong> thesis, MUSIC WAY PROJECT is neither: it is a third thing, <strong>career infrastructure</strong>, that a music ecosystem can build entirely independently of any mental-health provision. That is exactly what makes it a useful boundary marker.</p>
+
+      <h3>Could it be positively identified?</h3>
+      <p>Yes. The name, country, and "Career Development" profile in the Orgs Map map cleanly onto the single CEIPA × TOYOTA GROUP entity; the official site, two Toyota properties, CEIPA's own media, and Billboard all describe the same project.<sup class="cite"><a href="#mwp-src-1" data-src="toyota-launch" data-tip="Identity confirmed across Toyota Global Newsroom + official site + OTOMO + Billboard.">1</a></sup> No competing similarly-named Japanese organization surfaced.</p>
+    </section>
+
+    <!-- 4. FUNDING -->
+    <section>
+      <div class="section-label">04 — Funding</div>
+      <h2>Industry bodies and a corporate sponsor<sup class="cite"><a href="#mwp-src-1" data-src="toyota-launch" data-tip="Funded by CEIPA (the 5 trade bodies) + TOYOTA GROUP sponsorship. Toyota Global Newsroom.">1</a></sup></h2>
+      <p>The Orgs Map records funding as "No public funding info · ❓ No source."<sup class="cite"><a href="#mwp-src-7" data-src="map-row" data-tip="Orgs Map row #84: 'No public funding info · ❓ No source.'">7</a></sup> This study upgrades the <strong>source type</strong> while leaving the <strong>amount</strong> genuinely unknown. The project is funded by <strong>CEIPA</strong> — that is, by the five music-industry trade bodies behind it — together with <strong>TOYOTA GROUP sponsorship</strong>, with public-sector touchpoints (the Agency for Cultural Affairs policy context that motivated CEIPA's founding, and JETRO co-hosting a 2026 seminar).<sup class="cite"><a href="#mwp-src-5" data-src="toyota-times" data-tip="CEIPA founding policy context (then-Commissioner for Cultural Affairs). Toyota Times.">5</a></sup><sup class="cite"><a href="#mwp-src-6" data-src="mwp-india" data-tip="JETRO co-hosting the India seminar (public-sector touchpoint). MUSIC WAY PROJECT site.">6</a></sup> No budget, grant, or sponsorship figure is disclosed anywhere public. So the honest label is <strong>industry-institution / corporate-sponsor (trade-body) funding, amount undisclosed</strong> — sourced on the <em>kind</em> of money, still unknown on the <em>quantum</em>. In the project's own thesis terms, this is a "room" built by incumbents, not a statutory "floor."</p>
+    </section>
+
+    <!-- 5. LESSONS -->
+    <section>
+      <div class="section-label">05 — Lessons for Taiwan</div>
+      <h2>A boundary case, not a model<sup class="cite"><a href="#mwp-src-3" data-src="mwp-about" data-tip="Lessons drawn from the org's documented remit (career/talent, no MH). MUSIC WAY PROJECT site/About.">3</a></sup></h2>
+      <p>MUSIC WAY PROJECT is not a template a Taiwan music-MH NPO should copy — it is a useful contrast that sharpens what such an NPO would and would not be.</p>
+      <ol class="lessons">
+        <li><h3>It marks the edge of "career help" — and shows where MH is left out</h3><p>This is the cleanest example in the series of a well-resourced, industry-backed program that supports musicians' <em>careers</em> comprehensively while doing nothing for their <em>wellbeing</em>. For Taiwan it is a reminder that career-development infrastructure and mental-health infrastructure are separate builds; one does not deliver the other by accident. A Taiwan org positioning itself in the MH "room" should not assume an existing career body covers wellbeing — typically it does not.<sup class="cite"><a href="#mwp-src-3" data-src="mwp-about" data-tip="Remit is talent/opportunity, no wellbeing register. MUSIC WAY PROJECT About.">3</a></sup></p></li>
+        <li><h3>The transferable idea is the consortium, not the content</h3><p>The genuinely portable element is CEIPA's <em>form</em>: five rival trade bodies crossing organizational boundaries to act jointly, with a flagship corporate sponsor (Toyota) supplying reach and legitimacy. A Taiwan music-MH NPO seeking durable backing could study how an industry consortium plus a marquee corporate partner is assembled — while keeping its own mission (wellbeing) distinct from this project's (export).<sup class="cite"><a href="#mwp-src-1" data-src="toyota-launch" data-tip="CEIPA = five bodies acting jointly + Toyota as sponsor. Toyota Global Newsroom.">1</a></sup></p></li>
+        <li><h3>A potential partner, not a competitor or a peer</h3><p>Because its remit is orthogonal to mental health, MUSIC WAY PROJECT (and CEIPA) is a body a Taiwan music-MH org could one day <em>partner with</em> — wellbeing content inside professional-development seminars, or tour-health support attached to global showcases — rather than something to emulate or compete against. The boundary it draws is also the seam where a wellbeing offering could attach.</p></li>
+        <li><h3>Watch the gap it leaves</h3><p>Japan now has a richly funded engine pushing artists onto bigger global stages — more touring, more pressure, more exposure — with, on the evidence here, no wellbeing layer attached. That widening gap, career ambition scaling faster than care, is exactly the field condition this project tracks, and a reason the music-MH "room" matters even in a market with strong career infrastructure.<sup class="cite"><a href="#mwp-src-5" data-src="toyota-times" data-tip="Year-round talent/opportunity engine scaling global activity; no wellbeing layer. Toyota Times.">5</a></sup></p></li>
+      </ol>
+    </section>
+
+    <!-- 6. METHOD + REFERENCES -->
+    <section>
+      <div class="section-label">06 — Methodology &amp; references</div>
+      <h2>Basis</h2>
+      <p class="cite-help">Every claim carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source; click to jump to the full reference. Sources are the organization's own site (Japanese; treated as JS-rendered but fully returned by WebFetch — navigation, program taxonomy, and About prose all captured), the Toyota Motor Corporation Global Newsroom launch release (primary), CEIPA's own OTOMO media outlet, the Toyota Times status interview, and Billboard for independent corroboration. All four substantive sources independently agree on the project's remit and on the absence of any mental-health component; the absence was additionally confirmed by a negative Japanese-language search (Rule 4: absence searched for, not assumed). Funding <em>type</em> is ✅ Sourced; funding <em>amount</em> is ❓ (undisclosed in all public sources).</p>
+
+      <div class="refs" id="refs-all" data-citation-registry="mwp-all">
+        <div class="refs-title">References</div>
+        <ol>
+          <li id="mwp-src-1" data-src="toyota-launch">Toyota Motor Corporation, &amp; Japan Culture and Entertainment Industry Promotion Association. (2025, February 25). <em>A collaborative CEIPA and TOYOTA GROUP project to drive the Japanese music industry's globalization and growth and create a path to take on the world: CEIPA and the TOYOTA GROUP launch the MUSIC WAY PROJECT</em> [Press release]. Toyota Global Newsroom. <a href="https://global.toyota/en/newsroom/corporate/42248259.html" target="_blank" rel="noopener">global.toyota</a> — founding date, promoting bodies (CEIPA + TOYOTA GROUP), aim, the project-overview table (developing people / developing places; LA–London–Thailand bases), and CEIPA's five member organizations and leadership. <strong>Source · Method · Basis:</strong> organization/sponsor primary press release · WebFetch (EN) · ✅ Sourced.</li>
+          <li id="mwp-src-2" data-src="mwp-site">MUSIC WAY PROJECT. (n.d.). <em>Home / Project</em> [Official website]. Retrieved June 28, 2026, from <a href="https://musicwayproject.net/" target="_blank" rel="noopener">musicwayproject.net</a> — the current program taxonomy: two pillars (人づくり / 場づくり) and six numbered programs + two "Other" (Academia Collaboration, Professional Seminars, Global Co-writing Camp, Global Showcase Live, Music Export, Global Bases; J-WAVE GARAGE COLLECTIVE; Music Creator Bridge). <strong>Source · Method · Basis:</strong> organization's own site · WebFetch (JS-rendered; full nav + content returned) · ✅ Sourced.</li>
+          <li id="mwp-src-3" data-src="mwp-about">MUSIC WAY PROJECT. (n.d.). <em>About</em> [Official website]. Retrieved June 28, 2026, from <a href="https://musicwayproject.net/feature/about" target="_blank" rel="noopener">musicwayproject.net/feature/about</a> — mission prose (人づくり = student courses, study-abroad support, creator workshops; 場づくり = overseas bases + showcases); confirms the remit is talent/opportunity development with no wellbeing/MH register. <strong>Source · Method · Basis:</strong> organization's own site · WebFetch · ✅ Sourced (primary leg of the scope finding).</li>
+          <li id="mwp-src-4" data-src="otomo">OTOMO (CEIPA / MUSIC AWARDS JAPAN official media). (2025, June 3). <em>MUSIC WAY PROJECT: CEIPA and TOYOTA GROUP launch new global initiative for Japanese music at MUSIC AWARDS JAPAN</em>. <a href="https://otomo.net/contents/941687?locale=en" target="_blank" rel="noopener">otomo.net</a> — documents SONG BRIDGE 2025 (Global Co-writing Camp) and the Berklee-collaboration Professional Seminar keynote; corroborates remit and the absence of any MH component. <strong>Source · Method · Basis:</strong> organization-affiliated media · WebFetch · ✅ Sourced.</li>
+          <li id="mwp-src-5" data-src="toyota-times">Toyota Times. (2026, June 11). <em>Taking Japanese music global: Where the MUSIC WAY PROJECT stands now</em>. <a href="https://toyotatimes.jp/en/toyota_news/1108.html" target="_blank" rel="noopener">toyotatimes.jp</a> — interview with CEIPA Board Member Yutaka Inaba: CEIPA formed end of 2023; Japan's music-market context (METI; world's second-largest); MUSIC WAY PROJECT as year-round talent/opportunity engine vs MUSIC AWARDS JAPAN as showcase; 2026 status. <strong>Source · Method · Basis:</strong> sponsor-owned editorial · WebFetch · ✅ Sourced.</li>
+          <li id="mwp-src-6" data-src="mwp-india">MUSIC WAY PROJECT. (2026, June 23). <em>CEIPA × TOYOTA GROUP "MUSIC WAY PROJECT" to co-host an India-themed seminar for music-industry professionals with JETRO</em> [News item]. <a href="https://musicwayproject.net/news/detail/80" target="_blank" rel="noopener">musicwayproject.net</a> — illustrates the Professional Seminars / Music Export activity (industry/business development), confirming current (2026) programming remains career/market-access, not wellbeing. <strong>Source · Method · Basis:</strong> organization's own site · WebFetch · ✅ Sourced.</li>
+          <li id="mwp-src-7" data-src="map-row">Orgs Map row #84 ("The Music Way Project / Japan / Career Development / No public funding info / ❓ No source"), <em>Global NPO landscape</em> (<a href="report-global-npo-landscape.html">report-global-npo-landscape.html</a>), cross-referenced with a negative Japanese-language search for any mental-health/wellbeing component ("MUSIC WAY PROJECT" + メンタルヘルス / ウェルビーイング / 心のケア), which returned only unrelated music-therapy and corporate-wellness results. <strong>Source · Method · Basis:</strong> internal map entry + negative web search (Rule 4: absence searched for, not assumed) · web search · ❓ No source for any MH remit (none exists in public sources); funding <em>type</em> ✅ Sourced via refs 1 / 5.</li>
+        </ol>
+        <p class="refs-note">Convention: every claim-bearing element carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above — machine-checkable before each deploy (§5.2 / §6 gate 1). The scope finding rests on four agreeing primary sources plus a negative in-language search.</p>
+      </div>
+    </section>
+
+    <nav class="related-block" aria-label="Related on this site">
+      <p class="related-title">Related</p>
+      <ul>
+        <li><a href="org-study.html">&larr; Org Study (all organizations)</a></li>
+        <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+        <li><a href="policy-study.html">Policy Study &mdash; how jurisdictions protect music workers</a></li>
+        <li><a href="policy-study-japan.html">Policy Study: Japan &mdash; the floor &amp; room for music workers</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <script>
+  /* Scroll-reveal — R3.2 shared IntersectionObserver (normal-scroll page) */
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = 'section > h2, .stat-strip, figure, .table-wrap, .phases-grid, .sources-card, .refs';
+    var nodes = Array.prototype.slice.call(document.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, sibs, idx = 0;
+        if (p){ sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,6) * 60) + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
+
+  <!-- nav scroll-state: transparent over hero, blurred bar once scrolled -->
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden','true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>

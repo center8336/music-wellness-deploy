@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Musicians' Union of Japan · Org Study · MH&amp;W</title>
+  <meta name="description" content="The Musicians' Union of Japan (日本音楽家ユニオン) runs a self-financed mutual-aid fund, a health-checkup subsidy, brokered National Health Insurance, and free legal counsel — a disciplined welfare floor for music workers that pointedly runs no mental-health service. What a Taiwan music mental health NPO can borrow, and where the 'room' gap is.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      /* ── DIA-GRADE READING SCALE (calibrated to Dia browser, serif-corrected) ── */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;--lh-prose:1.7;--wt-prose:440;--measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;--label-ink:var(--graphite);
+      --font-cjk:'Noto Serif TC',serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { overflow-x: hidden; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--black);
+      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      line-height: var(--lh-prose);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    a { color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    a:hover { color: var(--signal-dim); }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--signal); outline-offset: 3px; border-radius: var(--radius);
+    }
+
+    .skip-nav {
+      position: absolute; left: -9999px; top: 0; z-index: 200;
+      background: var(--signal); color: var(--white);
+      padding: 0.5rem 1rem; font-family: var(--font-mono);
+    }
+    .skip-nav:focus { left: 0; }
+
+    /* ===== NAVIGATION ===== */
+    nav.nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; flex-direction: column;
+      padding: 2rem 2.5rem;
+      padding-top: calc(2rem + env(safe-area-inset-top));
+      background: transparent;
+      transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    nav.nav.scrolled {
+      background: rgba(244, 244, 245, 0.45);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: var(--font-mono); font-size: 1.1rem; font-weight: 400;
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-topbar { display:none; }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; min-width:44px; min-height:44px; z-index:101; -webkit-tap-highlight-color:transparent; }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity:0; }
+    .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
+
+    /* ===== LAYOUT ===== */
+    main { max-width: var(--max-w); margin: 0 auto; padding: 0 2.5rem 5rem 2.5rem; }
+    section { margin-bottom: 4rem; }
+    .narrow { max-width: var(--max-w-text); }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding-top: calc(9rem + env(safe-area-inset-top));
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-light);
+      margin-bottom: 3rem;
+    }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.18em;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: var(--font-display); font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6.5rem);
+      font-weight: 800; line-height: 1.04; color: var(--black); letter-spacing: -0.01em;
+      overflow-wrap: break-word; hyphens: auto;
+    }
+    .hero h1 .tail { display:block; font-size: clamp(1.15rem, 2.6vw, 1.9rem); font-weight: 600; color: var(--signal); letter-spacing: 0; margin-top: 0.9rem; }
+    .hero .subtitle {
+      font-family: var(--font-body); font-size: clamp(1.25rem, 1.05rem + 1.4vw, 1.5rem);
+      color: var(--graphite); line-height: 1.55; margin-top: 1.5rem; max-width: 54ch;
+    }
+    .basis-badge {
+      display: inline-block; margin-top: 1.75rem;
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--graphite); background: var(--signal-bg);
+      border: 1px solid var(--signal-glow); border-radius: var(--radius);
+      padding: 0.5rem 0.85rem; line-height: 1.5;
+    }
+
+    /* ===== TWO-LINE COVER (R2.1, 2026-06-20) — width:100% inside main (no 100vw breakout → no x-overflow) ===== */
+    .cover {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;                /* clips the wash */
+      padding: 0 2rem;
+    }
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%,
+        var(--signal-glow) 0%,
+        rgba(102,103,171,0.06) 38%,
+        rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
+    }
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 1280px);
+    }
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin: 0;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+    .cover-title .cover-cjk { display:block; font-family: var(--font-cjk); font-size: clamp(1.3rem, 3.4vw, 2.4rem); font-weight: 700; color: var(--purple-deep); letter-spacing: 0.04em; margin-top: 1rem; }
+    .cover-line {
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--purple-deep);
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
+    }
+    .cover-hint {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
+    }
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
+    }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-line  { animation-delay: 0.22s; }
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .cover-wash,
+      .cover-hint,
+      .cover-inner > * { animation: none; opacity: 1; transform: none; }
+    }
+    @media (max-width: 768px) {
+      .cover { padding: 0 1.25rem; }
+      .cover-title { font-size: clamp(1.7rem, 7.3vw, 2.4rem); }
+      .cover-line  { font-size: clamp(0.72rem, 3.2vw, 0.95rem); letter-spacing: 0.18em; }
+    }
+
+    /* ===== TYPE ===== */
+    h2 {
+      font-family: var(--font-display); font-size: var(--text-h2);
+      font-weight: 700; line-height: 1.1; color: var(--black);
+      margin-bottom: 1.25rem; letter-spacing: -0.01em;
+      text-wrap: balance; overflow-wrap: break-word;
+    }
+    h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem); line-height: 1.25; font-weight: 600; color: var(--charcoal); margin: 1.75rem 0 0.75rem; }
+    .section-label {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem;
+    }
+    p { color: var(--graphite); max-width: var(--measure-prose); margin-bottom: 1rem; line-height: 1.65; }
+    p.lead { font-size: 1.1rem; color: var(--charcoal); }
+    strong { color: var(--charcoal); font-weight: 600; }
+    em { color: var(--graphite); }
+
+    /* ===== MODEL CALLOUT ===== */
+    .model-callout { background: var(--bg-card-dark); color: var(--snow); border-radius: var(--radius-lg); padding: 2.25rem 2.5rem; margin-bottom: 3rem; }
+    .model-callout h2 { color: var(--white); margin-bottom: 1rem; }
+    .model-callout p { color: var(--silver); max-width: none; }
+    .model-callout strong { color: var(--white); }
+    .model-callout a { color: var(--spectrum-3); text-decoration: underline; text-underline-offset: 2px; }
+    .model-callout a:hover { color: var(--white); }
+
+    /* ===== FLOOR / ROOM SIGNATURE VISUAL (reuses flywheel-panel chrome) ===== */
+    .flywheel-panel {
+      background: var(--bg-card-dark);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem 2rem 1.5rem;
+      margin: 1.5rem 0 1.75rem;
+      border: 1px solid var(--border-dark);
+    }
+    .flywheel-panel .fw-cap {
+      font-family: var(--font-mono); font-size: var(--text-xs); color: var(--spectrum-3);
+      text-transform: uppercase; letter-spacing: 0.16em; text-align: center; margin-bottom: 0.5rem;
+    }
+    .flywheel-panel svg { display: block; width: 100%; height: auto; max-width: 540px; margin: 0 auto; }
+    .fl-floor { fill: var(--charcoal); stroke: var(--spectrum-4); stroke-width: 2; }
+    .fl-room { fill: none; stroke: var(--spectrum-1); stroke-width: 2; stroke-dasharray: 5 6; opacity: 0.9; }
+    .fl-brick { fill: var(--off-black); stroke: var(--spectrum-2); stroke-width: 1.4; }
+    .fl-label { fill: var(--snow); font-family: var(--font-display); font-size: 14px; font-weight: 700; }
+    .fl-sub { fill: var(--grey-light); font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.03em; }
+    .fl-cap-floor { fill: var(--spectrum-4); font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; }
+    .fl-cap-room { fill: var(--spectrum-1); font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; }
+    .fl-gap { fill: var(--grey-light); font-family: var(--font-mono); font-size: 9.5px; font-style: italic; }
+
+    .gear-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .gear {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-left: 3px solid var(--spectrum-2); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem;
+    }
+    .gear .gn { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); letter-spacing: 0.1em; }
+    .gear h3 { margin: 0.35rem 0 0.5rem; font-size: 1.08rem; }
+    .gear p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-card); margin: 1.5rem 0 0.75rem; }
+    .stat-item { padding: 1.75rem 1.25rem; border-right: 1px solid var(--border-light); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--signal); line-height: 1; font-variant-numeric: tabular-nums; }
+    .stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.6rem; line-height: 1.4; }
+
+    /* ===== TABLES ===== */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; margin: 1.25rem 0; border-radius: var(--radius-lg); border: 1px solid var(--border-light); }
+    .table-wrap:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+    table { width: 100%; border-collapse: collapse; background: var(--bg-card); font-size: var(--text-small); }
+    caption { text-align: left; font-family: var(--font-mono); font-size: var(--text-caption); color: var(--label-ink); padding: 0.75rem 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border-light); vertical-align: top; font-variant-numeric: tabular-nums; }
+    thead th { font-family: var(--font-mono); font-size: var(--text-micro); text-transform: uppercase; letter-spacing: 0.06em; color: var(--label-ink); background: var(--snow); }
+    tbody tr:last-child td { border-bottom: none; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .row-emph td { background: var(--signal-bg); font-weight: 600; color: var(--charcoal); }
+
+    /* ===== PROGRAM / SERVICE LIST ===== */
+    .prog { list-style: none; margin: 1.25rem 0 0; padding: 0; }
+    .prog li { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 0.85rem; }
+    .prog h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .prog p { font-size: var(--text-sm); margin-bottom: 0; }
+    .prog .ptag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ===== SW CARDS ===== */
+    .sw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.25rem; }
+    .sw-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem; }
+    .sw-card.weak { border-left: 3px solid var(--spectrum-2); }
+    .sw-card.strong { border-left: 3px solid var(--spectrum-4); }
+    .sw-card h3 { margin: 0 0 0.4rem; font-size: 1rem; }
+    .sw-card p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== LESSONS ===== */
+    .lessons { counter-reset: lesson; list-style: none; margin: 1.5rem 0 0; padding: 0; }
+    .lessons li { position: relative; padding: 1.25rem 1.5rem 1.25rem 3.5rem; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); margin-bottom: 0.85rem; }
+    .lessons li::before { counter-increment: lesson; content: counter(lesson); position: absolute; left: 1.25rem; top: 1.25rem; font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--signal); }
+    .lessons h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .lessons p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== ACCURACY FLAG CALLOUT ===== */
+    .flag { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--spectrum-1); border-radius: var(--radius-lg); padding: 1.4rem 1.6rem; margin: 1.5rem 0; }
+    .flag .flag-tag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--spectrum-1); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.5rem; }
+    .flag p { font-size: var(--text-sm); margin-bottom: 0; max-width: none; }
+
+    /* ===== CITATIONS (§5 inline tier) ===== */
+    .cite { font-size: 0.7em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem; }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-fine); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; max-width: var(--measure-ref); overflow-wrap: anywhere; }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs-note { font-size: var(--text-xs); color: var(--label-ink); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-sm); color: var(--label-ink); font-style: italic; max-width: var(--max-w-text); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .gear-cards { grid-template-columns: 1fr; }
+      .sw-grid { grid-template-columns: 1fr; }
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2n) { border-right: none; }
+      .stat-item:nth-child(-n+2) { border-bottom: 1px solid var(--border-light); }
+    }
+    @media (max-width: 768px) {
+      nav.nav { padding: 1.2rem 1.5rem; padding-top: calc(1.2rem + env(safe-area-inset-top)); }
+      nav.nav.open { background: rgba(244,244,245,0.95); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-light); }
+      .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
+      .nav-toggle { display:block; }
+      .nav-mobile-brand { display:block; }
+      .nav-links { display:none; flex-direction:column; gap:0.75rem; margin-top:1rem; }
+      .nav-links.show { display:flex; }
+      .nav-links a { font-size: 0.85rem; }
+      main { padding: 0 1.5rem 3rem 1.5rem; }
+      .hero { padding-top: calc(7rem + env(safe-area-inset-top)); }
+      .hero h1 { font-size: clamp(2.4rem, 10.5vw, 3.4rem); }
+      .model-callout, .flywheel-panel { padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
+    @media (max-width: 680px) {
+      p, .hero .subtitle, .refs li, .cite-help { max-width: none; }
+    }
+    @media (max-width: 480px) {
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+      .stat-item:last-child { border-bottom: none; }
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
+      table { font-size: 0.82rem; }
+      thead th { font-size: 0.6rem; }
+      th, td { padding: 0.5rem 0.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } nav.nav { transition: none; } }
+
+    /* ===== Scroll-reveal (R3.2 craft pass) ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ===== Related block (no dead-ends, R3.2) ===== */
+    .related-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-light); }
+    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--label-ink); margin-bottom: 0.6rem; }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a { font-family: var(--font-body); font-size: var(--text-sm); color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+  </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open');this.setAttribute('aria-expanded',o)">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+        <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="org-study.html" class="current" aria-current="page">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
+      <a href="field-news.html">FIELD NEWS</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- COVER -->
+    <section class="cover">
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="cover-inner">
+        <h1 class="cover-title">MUSICIANS' UNION OF JAPAN<span class="cover-cjk">日本音楽家ユニオン</span></h1>
+        <p class="cover-line">Org Study · Est. 1983</p>
+      </div>
+      <span class="cover-hint" aria-hidden="true">↓ Scroll</span>
+    </section>
+
+    <!-- MODEL CALLOUT -->
+    <div class="model-callout">
+      <h2>One model, in one line</h2>
+      <p><a href="org-study-musicares.html">MusiCares</a> and the national funds are charities that raise money to deliver service. <strong>The Musicians' Union of Japan is neither a charity nor a mental-health body — it is a labour union whose welfare arm is a self-financed mutual-aid fund (自主共済).</strong> It pays small, fixed lump sums when a member is hospitalised, dies, marries, has a child, or loses a home to fire or flood, subsidises health check-ups, brokers entertainers' National Health Insurance, and gives free legal and tax counsel. That is a textbook <em>floor</em>: rights and welfare for everyone who pays in. What it pointedly does <strong>not</strong> run is a counselling line, a clinic, or any mental-health programme. This study asks the question a "floor" invites — what does a disciplined music-worker safety net look like, and where does it stop? The answer is: it stops exactly where the <em>room</em> (the service) would begin.</p>
+    </div>
+
+    <!-- 1. PROFILE -->
+    <section>
+      <div class="section-label">01 — Profile</div>
+      <h2>A union, not a charity<sup class="cite"><a href="#muj-src-1" data-tip="Founding (Oct 1983, merger of 日本演奏家協会 + 日本音楽家労働組合), individual-membership labour union, ~5,200 members, four-field breakdown, FIM role. MUJ About page (JA) via Wayback.">1</a></sup></h2>
+      <p>The Musicians' Union of Japan was formed in <strong>October 1983</strong> through the merger of two predecessor bodies — the Japan Performers' Association (日本演奏家協会) and the Japan Musicians' Labour Union (日本音楽家労働組合). Counting from those 1970s predecessors, MUJ describes about <strong>50 years</strong> of work on behalf of Japanese musicians. It holds the legal personality of a <strong>labour union</strong>, and musicians join it <strong>as individuals</strong>, not through an employer.<sup class="cite"><a href="#muj-src-1" data-tip="Individual-membership national labour union; ~50 years counting predecessors. MUJ About (JA) via Wayback.">1</a></sup><sup class="cite"><a href="#muj-src-9" data-tip="October 1983 merger of the two predecessor unions, individual-membership labour union, FIM's sole Japanese affiliate, MIC constituent — independently corroborated. Japanese Wikipedia / Weblio.">9</a></sup></p>
+      <p>That single fact separates MUJ from every U.S. organisation in this series: it is a <em>union</em>, and its welfare programmes are an extension of collective labour representation, not philanthropy. MUJ negotiates performance fees with NHK, commercial broadcasters, and the recording industry; works on orchestra working conditions; and pursues secondary-use royalties. The welfare benefits sit on top of that bargaining identity.<sup class="cite"><a href="#muj-src-2" data-tip="Fee negotiation with broadcasters/record industry (grew 5–8× over 25 yrs), orchestra work, neighbouring rights, Japan Arts Fund. MUJ About (EN) via Wayback.">2</a></sup></p>
+
+      <div class="table-wrap" role="region" aria-label="Organization profile — Musicians' Union of Japan (scrollable table)" tabindex="0">
+        <table>
+          <caption>Organization profile — Musicians' Union of Japan (sources cited inline)</caption>
+          <tbody>
+            <tr><th scope="row">Legal name</th><td>日本音楽家ユニオン (Musicians' Union of Japan; abbrev. 音楽ユニオン / MUJ)</td></tr>
+            <tr><th scope="row">Legal status</th><td>Labour union (労働組合) with legal personality; individual-membership national organisation</td></tr>
+            <tr><th scope="row">Founded</th><td>October 1983 — merger of 日本演奏家協会 + 日本音楽家労働組合 (predecessors organised in the 1970s)</td></tr>
+            <tr><th scope="row">Members</th><td>~5,200</td></tr>
+            <tr><th scope="row">Head office</th><td>芸能花伝舎 2F, 6-12-30 Nishi-Shinjuku, Shinjuku-ku, Tokyo</td></tr>
+            <tr><th scope="row">Branches</th><td>7 regional (Hokkaido, Tohoku, Kanto, Chubu, Kansai, Chugoku-Shikoku, Kyushu)</td></tr>
+            <tr><th scope="row">Representative officer</th><td>代表運営委員 Manabu Tsuchiya (土屋 学), per the 2021/2023-term roster</td></tr>
+            <tr><th scope="row">International</th><td>FIM (International Federation of Musicians) — Japanese affiliate, "executive committee member country (執行委員国)"</td></tr>
+            <tr><th scope="row">Domestic affiliations</th><td>GEIDANKYO (芸団協); MIC (日本マスコミ文化情報労組会議)</td></tr>
+            <tr><th scope="row">Funding</th><td>Membership dues + member contributions to the mutual-aid fund</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>MUJ's own about-page divides the ~5,200 members into four fields. (A note on the numbers: the union's <em>English</em> page transposes the Classical and Jazz figures and mislabels a row; the <strong>Japanese</strong> page is used here as authoritative, and both agree on the ~5,200 total.)<sup class="cite"><a href="#muj-src-1" data-tip="Japanese About page sub-counts: Classical ~1,000; Jazz/Popular ~2,600; Other ~200; Miscellaneous ~1,400.">1</a></sup><sup class="cite"><a href="#muj-src-2" data-tip="English About page transposes Classical (~1,400) and Jazz (~2,200) and mislabels Miscellaneous — flagged as a garbled translation; Japanese authoritative.">2</a></sup></p>
+
+      <div class="table-wrap" role="region" aria-label="MUJ membership composition (scrollable table)" tabindex="0">
+        <table>
+          <caption>Membership composition (~5,200) — MUJ Japanese about page</caption>
+          <thead><tr><th scope="col">Field</th><th scope="col">Who</th><th scope="col" class="num">Members</th></tr></thead>
+          <tbody>
+            <tr><td>Classical</td><td>Members of nearly all Japanese orchestras; conductors; soloists; freelance classical players</td><td class="num">~1,000</td></tr>
+            <tr><td>Jazz / Popular</td><td>Main big bands, jazz groups, solo musicians, freelance instrumentalists</td><td class="num">~2,600</td></tr>
+            <tr><td>Other genres</td><td>Composers, arrangers, studio musicians, vocalists, hotel/club musicians, educators, private instructors</td><td class="num">~200</td></tr>
+            <tr><td>Miscellaneous</td><td>Copyists (写譜業), orchestra clerical staff, others in music-related work</td><td class="num">~1,400</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 2. THE FLOOR VS ROOM -->
+    <section>
+      <div class="section-label">02 — Floor vs room</div>
+      <h2>A floor that stops where the room begins</h2>
+      <p>The structural distinction of MUJ is not any single benefit. It is that the union builds a <strong>floor</strong> — a self-financed welfare base of rights and lump-sum benefits every dues-paying member stands on — and deliberately goes no further. There is no counselling service, no clinic, no mental-health programme above the floor. The diagram makes the shape literal: a solid welfare base, and an empty "room" where a service would sit.</p>
+
+      <div class="flywheel-panel">
+        <div class="fw-cap">The welfare floor — and the empty service room above it</div>
+        <svg viewBox="0 0 540 320" role="img" aria-label="A diagram of a solid welfare floor made of four bricks — mutual-aid lump sums, health-checkup subsidy, brokered National Health Insurance, and free legal and tax counsel — with a dashed, empty outline of a 'room' above it labelled mental-health service, marked as not provided by the union.">
+          <!-- empty room (dashed) -->
+          <path class="fl-room" d="M 90 150 L 90 40 L 450 40 L 450 150"/>
+          <text class="fl-cap-room" x="270" y="70" text-anchor="middle">THE &#8220;ROOM&#8221; &#8212; SERVICE</text>
+          <text class="fl-label" x="270" y="98" text-anchor="middle" style="fill:var(--spectrum-1);">Mental-health / counselling</text>
+          <text class="fl-gap" x="270" y="120" text-anchor="middle">not provided by the union &#8212; the open lane</text>
+          <!-- floor slab -->
+          <rect class="fl-floor" x="70" y="150" width="400" height="18" rx="3"/>
+          <text class="fl-cap-floor" x="270" y="187" text-anchor="middle">THE FLOOR &#8212; RIGHTS &amp; WELFARE</text>
+          <!-- four bricks -->
+          <rect class="fl-brick" x="74" y="205" width="92" height="74" rx="4"/>
+          <text class="fl-label" x="120" y="232" text-anchor="middle">自主共済</text>
+          <text class="fl-sub" x="120" y="249" text-anchor="middle">lump-sum</text>
+          <text class="fl-sub" x="120" y="261" text-anchor="middle">benefits</text>
+          <rect class="fl-brick" x="172" y="205" width="92" height="74" rx="4"/>
+          <text class="fl-label" x="218" y="232" text-anchor="middle">健康診断</text>
+          <text class="fl-sub" x="218" y="249" text-anchor="middle">checkup</text>
+          <text class="fl-sub" x="218" y="261" text-anchor="middle">subsidy</text>
+          <rect class="fl-brick" x="270" y="205" width="92" height="74" rx="4"/>
+          <text class="fl-label" x="316" y="232" text-anchor="middle">国保</text>
+          <text class="fl-sub" x="316" y="249" text-anchor="middle">brokered</text>
+          <text class="fl-sub" x="316" y="261" text-anchor="middle">health ins.</text>
+          <rect class="fl-brick" x="368" y="205" width="92" height="74" rx="4"/>
+          <text class="fl-label" x="414" y="232" text-anchor="middle">法律相談</text>
+          <text class="fl-sub" x="414" y="249" text-anchor="middle">free legal</text>
+          <text class="fl-sub" x="414" y="261" text-anchor="middle">&amp; tax help</text>
+        </svg>
+      </div>
+
+      <p>Everything that follows is one of the four bricks in that floor — and the conspicuous absence above them is the subject of §4 and the lesson of §7.</p>
+    </section>
+
+    <!-- 3. THE MUTUAL-AID FUND -->
+    <section>
+      <div class="section-label">03 — The mutual-aid fund</div>
+      <h2>自主共済 — the self-financed core<sup class="cite"><a href="#muj-src-3" data-tip="Full 自主共済 benefit schedule; ≥6-month membership, 1-year claim window, lifetime-member eligibility distinctions. MUJ 自主共済 page (JA) via Wayback.">3</a></sup></h2>
+      <p>The core of the floor is MUJ's <strong>self-run mutual-aid fund (自主共済)</strong> — a member-financed pool that pays <strong>fixed lump sums</strong>, not health services, when a defined life event occurs. Benefits apply to members with at least <strong>six months' continuous membership</strong>, and a claim must be filed within one year. The union's English summary puts the mutual-aid (plus a financial-assist system) at a budget of about <strong>¥40 million a year</strong>.<sup class="cite"><a href="#muj-src-2" data-tip="&#8220;Made a mutual aid system and a financial assist system for our members. (The budget of 40 million Yen is granted a year.)&#8221; MUJ About (EN) via Wayback.">2</a></sup></p>
+
+      <div class="stat-strip">
+        <div class="stat-item"><div class="stat-num">¥10k</div><div class="stat-label">injury / illness consolation, hospitalisation ≥7 days</div></div>
+        <div class="stat-item"><div class="stat-num">¥50k</div><div class="stat-label">death condolence (member)</div></div>
+        <div class="stat-item"><div class="stat-num">¥120k</div><div class="stat-label">housing disaster — total loss by fire</div></div>
+        <div class="stat-item"><div class="stat-num">~¥40M</div><div class="stat-label">annual mutual-aid + assist budget, whole membership</div></div>
+      </div>
+
+      <div class="table-wrap" role="region" aria-label="MUJ self-run mutual-aid benefit schedule (scrollable table)" tabindex="0">
+        <table>
+          <caption>自主共済 benefit schedule — MUJ (≥6 months' membership; claim within 1 year)</caption>
+          <thead><tr><th scope="col">Benefit</th><th scope="col" class="num">Amount</th><th scope="col">Conditions</th></tr></thead>
+          <tbody>
+            <tr><td>Injury/illness consolation (傷病見舞)</td><td class="num">¥10,000</td><td>Hospitalisation ≥7 consecutive days</td></tr>
+            <tr><td>Convalescence — hospital (傷病療養)</td><td class="num">¥2,000/day</td><td>≥7 days; 5-day deductible; cap 90 days/admission; 180 days over 5 years</td></tr>
+            <tr><td>Death condolence — member (死亡弔慰)</td><td class="num">¥50,000</td><td>Some categories excluded</td></tr>
+            <tr><td>Death condolence — spouse</td><td class="num">¥30,000</td><td>—</td></tr>
+            <tr><td>Death condolence — parent / child</td><td class="num">¥10,000</td><td>—</td></tr>
+            <tr><td>Marriage gift (結婚祝)</td><td class="num">¥10,000</td><td>—</td></tr>
+            <tr><td>Childbirth gift (子の出生祝)</td><td class="num">¥10,000</td><td>—</td></tr>
+            <tr><td>Housing disaster — fire (火災)</td><td class="num">¥120k / 60k / 25k</td><td>Total / half / partial loss or flooding</td></tr>
+            <tr><td>Housing disaster — wind &amp; flood (風水害)</td><td class="num">¥50k / 30k / 10k</td><td>Total / half / partial; ¥10k floor-level flooding (disaster fund)</td></tr>
+            <tr><td>Retirement gift (廃業餞別)</td><td class="num">¥30,000</td><td>≥10 years' continuous membership</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The death, marriage, and childbirth benefits extend to lifetime full members (終身正会員); the income-replacement-style benefits are for active general members. The amounts are deliberately modest — this is a solidarity top-up, not insurance. Its purpose is to make membership tangibly worth paying for and to soften the sharpest financial shocks of a freelance career.<sup class="cite"><a href="#muj-src-3" data-tip="Lifetime-member vs general-member eligibility distinctions; modest fixed sums by design. MUJ 自主共済 page (JA) via Wayback.">3</a></sup></p>
+    </section>
+
+    <!-- 4. HEALTH + NO MH -->
+    <section>
+      <div class="section-label">04 — Health (and what is missing)</div>
+      <h2>A checkup subsidy and brokered insurance — but no clinic, and no mental health</h2>
+      <p>MUJ's health offer has two real parts, both <strong>welfare-broker</strong> functions rather than care delivery.</p>
+
+      <h3>Health-checkup subsidy (健康診断)<sup class="cite"><a href="#muj-src-4" data-tip="Tiered checkup subsidy by exam-fee band: member ¥1,500–3,500, family ¥1,000–3,000. MUJ 健康診断 page (JA) via Wayback.">4</a></sup></h3>
+      <p>When a regional branch organises a health check-up, MUJ subsidises the member's and family's cost on a tiered scale.</p>
+      <div class="table-wrap" role="region" aria-label="MUJ health-checkup subsidy tiers (scrollable table)" tabindex="0">
+        <table>
+          <caption>健康診断 subsidy — by exam-fee band</caption>
+          <thead><tr><th scope="col">Exam fee</th><th scope="col" class="num">Member subsidy</th><th scope="col" class="num">Family subsidy</th></tr></thead>
+          <tbody>
+            <tr><td>¥2,000–4,000</td><td class="num">¥1,500</td><td class="num">¥1,000</td></tr>
+            <tr><td>¥4,000–6,000</td><td class="num">¥2,000</td><td class="num">¥1,000</td></tr>
+            <tr><td>¥6,000–8,000</td><td class="num">¥2,500</td><td class="num">¥2,000</td></tr>
+            <tr><td>¥8,000–10,000</td><td class="num">¥3,000</td><td class="num">¥2,000</td></tr>
+            <tr class="row-emph"><td>¥10,000+</td><td class="num">¥3,500</td><td class="num">¥3,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Brokered entertainers' National Health Insurance (国民健康保険)<sup class="cite"><a href="#muj-src-5" data-tip="Brokered entry to 東京芸能人国保 (est. 1952) and 大阪文化芸能国保: 70% coverage + enhanced childbirth/childcare/funeral/human-dock benefits + free screenings. MUJ 国民健康保険 page (JA) via Wayback.">5</a></sup></h3>
+      <p>MUJ is the route into two arts-sector National Health Insurance societies — the <strong>Tokyo Entertainers' National Health Insurance Society</strong> (東京芸能人国民健康保険組合, established 1952) and the <strong>Osaka Culture &amp; Arts National Health Insurance Society</strong> (大阪文化芸能国民健康保険組合). These give the same statutory 70% coverage as municipal NHI but with more favourable childbirth, childcare, funeral, and human-dock (comprehensive checkup) benefits, plus free general and adult-disease screenings; members pay premiums through the union. Alongside these, the member-services menu lists labour-bank loans, cooperative insurance, instrument insurance, and <strong>free legal and tax consultation</strong>.<sup class="cite"><a href="#muj-src-6" data-tip="Full member-services menu (自主共済, 国保, 健康診断, こくみん共済, 楽器保険, 法律相談・税務相談…). No mental-health/counselling service listed anywhere. MUJ member-services nav (JA) via Wayback.">6</a></sup></p>
+
+      <div class="flag">
+        <div class="flag-tag">No MH service — verified, not assumed</div>
+        <p>A complete read of MUJ's member-services menu and activity pages finds welfare, insurance-broking, and rights/contract help — and <strong>nothing branded as mental health, counselling (カウンセリング), or psychological support</strong>. The only "consultation (相談)" offers are <strong>labour consultation (労働相談)</strong> — for sudden dismissal, unpaid performance fees, and contract breaches, handled by a desk plus a network of advisory lawyers, confidentiality assured<sup class="cite"><a href="#muj-src-7" data-tip="労働相談: sudden dismissal, unpaid fees, contract breaches; consultation desk + advisory-lawyer network; confidentiality. MUJ 労働相談 page (JA) via Wayback.">7</a></sup> — and the free legal/tax consultation above. There is no clinical or emotional-support arm.</p>
+      </div>
+
+      <div class="flag">
+        <div class="flag-tag">Accuracy flag — the &#8220;24-hour MH helpline&#8221; is refuted</div>
+        <p>A claim circulating on secondary blogs that MUJ operates a 24-hour mental-health / こころ helpline is <strong>not supported by any MUJ primary source</strong>. No such line appears anywhere on muj.or.jp, and no MH / こころ / メンタル page exists in the site's archived URL inventory. The 24-hour こころ / 電話健康相談 lines that exist in Japan belong to <em>unrelated</em> health-insurance societies (健康保険組合) and public mutual-aid funds — not to MUJ. MUJ should not be cited as running a mental-health helpline.<sup class="cite"><a href="#muj-src-6" data-tip="Verified across the full member-services menu and archived URL inventory: no MH page. MUJ (JA) via Wayback.">6</a></sup></p>
+      </div>
+    </section>
+
+    <!-- 5. INTERNATIONAL -->
+    <section>
+      <div class="section-label">05 — International standing</div>
+      <h2>FIM's Japanese affiliate<sup class="cite"><a href="#muj-src-8" data-tip="FIM membership directory lists MUJ under Asia and Pacific → Japan → MUJ; same group also lists Australia (MEAA), India (MFI), Iran (IMU). FIM Membership page via Wayback.">8</a></sup></h2>
+      <p>MUJ is the <strong>Japanese affiliate of the International Federation of Musicians (FIM)</strong>. The union's own about-page describes joining FIM "as the sole organisation representing Asia (アジアを代表する唯一の団体)" and serving as an <strong>executive-committee member country (執行委員国)</strong>.<sup class="cite"><a href="#muj-src-1" data-tip="MUJ's self-description: joined FIM as &#8220;the sole organisation representing Asia&#8221;, executive committee member country. MUJ About (JA) via Wayback.">1</a></sup> FIM's own membership directory independently lists MUJ under "Asia and Pacific → Japan → MUJ," and one of MUJ's listed advisers is John Smith, then FIM President — underscoring the depth of the tie.<sup class="cite"><a href="#muj-src-2" data-tip="Adviser John Smith (FIM President) listed on MUJ's About page. MUJ About (EN) via Wayback.">2</a></sup></p>
+      <div class="flag">
+        <div class="flag-tag">One claim phrased carefully</div>
+        <p>"Sole organisation representing Asia" is the <strong>union's own framing</strong> and reflects its historical position. FIM's <em>current</em> directory groups several unions under "Asia and Pacific" — Australia (MEAA), India (MFI), and Iran (IMU) alongside Japan (MUJ). So the accurate statement is that MUJ is <strong>FIM's Japanese affiliate and a longstanding Asian member sitting as an executive-committee member country</strong> — how the union itself describes its role — not, in the present tense, the only Asian union in FIM. The bare membership and Asia-Pacific grouping are confirmed by FIM directly.<sup class="cite"><a href="#muj-src-8" data-tip="FIM directory: Asia and Pacific group also includes MEAA (Australia), MFI (India), IMU (Iran). FIM Membership page via Wayback.">8</a></sup></p>
+      </div>
+    </section>
+
+    <!-- 6. APPRAISAL -->
+    <section>
+      <div class="section-label">06 — Appraisal</div>
+      <h2>What works, and where it stops</h2>
+      <div class="sw-grid">
+        <div class="sw-card strong"><h3>A genuine self-financed floor</h3><p>The mutual-aid fund is funded by members for members — no celebrity gala, no wealthy parent body, no grant cycle. A union dues base is about as durable a funding engine as music-worker welfare gets.</p></div>
+        <div class="sw-card strong"><h3>Welfare bundled with bargaining power</h3><p>Because MUJ is a union, benefits ride on real leverage: fee agreements with broadcasters and the record industry, orchestra working-condition work, neighbouring-rights royalties. Members get a safety net <em>and</em> a negotiator.</p></div>
+        <div class="sw-card strong"><h3>Breadth of practical help</h3><p>Checkup subsidy, brokered NHI, loans, instrument insurance, free legal/tax counsel — an unglamorous but coherent stack of things a freelance musician actually needs.</p></div>
+        <div class="sw-card strong"><h3>Institutional embeddedness</h3><p>Affiliation with GEIDANKYO and MIC, and an executive role in FIM, give MUJ cultural-policy standing well beyond its ~5,200 members.</p></div>
+        <div class="sw-card weak"><h3>No &#8220;room&#8221; — no MH service at all</h3><p>The benefits are financial and procedural. A member in psychological distress finds labour consultation and a lawyer network, not a counsellor or a clinic. This is the central gap for a project about <em>mental</em> health.</p></div>
+        <div class="sw-card weak"><h3>Lump sums are small, and gated</h3><p>¥10,000 for a hospitalisation, ¥50,000 for a death — solidarity gestures on a ~¥40M/year budget — and benefits require 6 months' (some 10 years') continuous membership, protecting dues-payers rather than the broader precariat.</p></div>
+      </div>
+    </section>
+
+    <!-- 7. LESSONS -->
+    <section>
+      <div class="section-label">07 — Lessons for Taiwan</div>
+      <h2>What a Taiwan music mental health NPO should take</h2>
+      <ol class="lessons">
+        <li><h3>A membership mutual-aid fund is a credible, self-renewing floor — copy the structure, not the amounts</h3><p>MUJ shows that even modest, fixed lump-sum benefits, financed by members, create durable value and a concrete reason to join. A Taiwan music body could run a comparable solidarity fund (hospitalisation, bereavement, disaster) on a transparent published schedule — funding that does not hinge on a gala or a grant cycle.<sup class="cite"><a href="#muj-src-3" data-tip="The 自主共済 schedule is the transferable artifact: small fixed sums, member-financed, published. MUJ 自主共済 page (JA) via Wayback.">3</a></sup></p></li>
+        <li><h3>But a floor is not a room — the MH service is exactly what MUJ does <em>not</em> provide, so it is the open lane</h3><p>MUJ proves a well-run welfare/rights body can exist for decades with no MH offer. A Taiwan NPO should not assume the union/welfare layer will grow a counselling arm on its own; the "room" — counselling, referral, peer support, crisis help — is a distinct build, and the unmet need is visible precisely because the floor stops short of it.<sup class="cite"><a href="#muj-src-6" data-tip="No MH service anywhere in MUJ's menu; only labour/legal/tax consultation. MUJ (JA) via Wayback.">6</a></sup></p></li>
+        <li><h3>Bundle welfare with rights — or partner with a body that already does</h3><p>MUJ's benefits work because the union also bargains fees and fights unpaid-wage and dismissal cases. In Taiwan — where the nearest analogue is the broad-arts <a href="org-study-arts-creators-union.html">藝創工會</a> rather than a music-specific union — a music-MH NPO might partner with a labour/rights body so members get both representation and care, rather than trying to be both at once.<sup class="cite"><a href="#muj-src-7" data-tip="MUJ's welfare rides on labour consultation + advisory-lawyer network. MUJ 労働相談 page (JA) via Wayback.">7</a></sup></p></li>
+        <li><h3>Broker, don't build, where a statutory system already exists</h3><p>MUJ does not run hospitals; it brokers entry into arts-sector National Health Insurance and subsidises check-ups. A lean NPO adds the most value by <em>connecting</em> musicians to Taiwan's National Health Insurance and existing mental-health resources (and subsidising access) rather than duplicating clinical infrastructure.<sup class="cite"><a href="#muj-src-5" data-tip="MUJ brokers entertainers' NHI + subsidises checkups rather than delivering care. MUJ 国民健康保険 / 健康診断 pages (JA) via Wayback.">5</a></sup></p></li>
+        <li><h3>Name the eligibility floor deliberately</h3><p>MUJ's 6-month / 10-year continuity gates suit a stable dues-paying union but exclude the newest and most precarious. A Taiwan MH NPO that wants to reach emerging and part-time musicians should set inclusion criteria around <em>recent music-related activity</em>, not tenure.<sup class="cite"><a href="#muj-src-3" data-tip="Benefit eligibility gates: ≥6 months, some ≥10 years' continuous membership. MUJ 自主共済 page (JA) via Wayback.">3</a></sup></p></li>
+        <li><h3>Use international standing as leverage</h3><p>MUJ's FIM executive role gives a small union outsized policy voice. A Taiwan music-MH body should seek analogous network membership — regional or international music-welfare and mental-health coalitions — early; credibility and comparative evidence travel through those ties.<sup class="cite"><a href="#muj-src-8" data-tip="MUJ's FIM membership / executive-committee role amplifies a ~5,200-member union. FIM Membership page via Wayback.">8</a></sup></p></li>
+      </ol>
+    </section>
+
+    <!-- 8. METHOD + REFERENCES -->
+    <section>
+      <div class="section-label">08 — Methodology &amp; references</div>
+      <h2>Basis</h2>
+      <p class="cite-help">Every figure carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source; click to jump to the full reference. Primary sourcing is MUJ's own website (muj.or.jp). The live site 403-blocks automated access (confirmed: it returns an XSERVER 403 page to non-browser requests), so pages were retrieved through the Internet Archive Wayback Machine and cross-checked against FIM's own site and credible Japanese third parties. All searches were conducted in Japanese. The one transposed sub-figure (English vs Japanese about-page) and the "sole Asian member" framing are flagged in-text. No mental-health service is claimed: its absence was verified across the full member-services menu, not assumed.</p>
+
+      <div class="refs" id="refs-all" data-citation-registry="muj-all">
+        <div class="refs-title">References</div>
+        <ol>
+          <li id="muj-src-1" data-src="about-ja">Musicians' Union of Japan. (n.d.). <em>日本音楽家ユニオンとは</em> [About MUJ]. Retrieved via the Internet Archive Wayback Machine (capture 2025-01-15), <a href="https://web.archive.org/web/20250115000000*/https://www.muj.or.jp/aboutmuj" target="_blank" rel="noopener">web.archive.org → muj.or.jp/aboutmuj</a> — founding October 1983 by merger of 日本演奏家協会 + 日本音楽家労働組合; individual-membership labour union (~50 years counting predecessors); ~5,200 members (Classical ~1,000; Jazz/Popular ~2,600; Other ~200; Miscellaneous ~1,400); FIM "executive committee member country / アジアを代表する唯一の団体"; officers; GEIDANKYO &amp; MIC affiliations. The live site 403-blocks automated access. <strong>Source · Method · Basis:</strong> organization primary site (JA) via Wayback · web (archived) · ✅ Sourced.</li>
+          <li id="muj-src-2" data-src="about-en">Musicians' Union of Japan. (n.d.). <em>About MUJ (English)</em>. Retrieved via the Internet Archive Wayback Machine (capture 2025-01-15), <a href="https://web.archive.org/web/20250115000000*/https://www.muj.or.jp/aboutmuj/aboutmuj-english" target="_blank" rel="noopener">web.archive.org → muj.or.jp/aboutmuj/aboutmuj-english</a> — "labour union represents 5,200 Musicians"; established 1983 with two 1970s predecessor unions; mutual-aid + financial-assist budget "¥40 million a year"; fee negotiation with TV/record companies ("grew 5–8 times during these 25 years"); friendship agreements (UK, Australia, South Korea, Hungary, USA); adviser John Smith (FIM President). NOTE: transposes the Classical/Jazz sub-figures vs the Japanese page and mislabels a row — treated as a garbled older translation; the Japanese page is authoritative. <strong>Source · Method · Basis:</strong> organization primary site (EN) via Wayback · web (archived) · ⚠️ Sourced (internal EN/JA inconsistency on sub-counts, flagged).</li>
+          <li id="muj-src-3" data-src="kyosai">Musicians' Union of Japan. (n.d.). <em>自主共済</em> [Self-run mutual aid]. Retrieved via the Internet Archive Wayback Machine (capture 2016-04-08), <a href="https://web.archive.org/web/20160408002824/https://www.muj.or.jp/information/memberservices/service01" target="_blank" rel="noopener">web.archive.org → muj.or.jp/…/service01</a> — full benefit schedule (傷病見舞 ¥10,000; 傷病療養 ¥2,000/day; 死亡弔慰 ¥50,000/¥30,000/¥10,000; 結婚祝・出生祝 ¥10,000; 住宅災害 fire ¥120,000/¥60,000/¥25,000, wind-flood ¥50,000/¥30,000/¥10,000; 廃業餞別 ¥30,000); ≥6-month membership, 1-year claim window, 終身正会員 eligibility distinctions. <strong>Source · Method · Basis:</strong> organization primary site (JA) via Wayback · web (archived) · ✅ Sourced.</li>
+          <li id="muj-src-4" data-src="kenshin">Musicians' Union of Japan. (n.d.). <em>健康診断</em> [Health checkup]. Retrieved via the Internet Archive Wayback Machine (capture 2017-04-01), <a href="https://web.archive.org/web/20170401034018/https://www.muj.or.jp/information/memberservices/service05" target="_blank" rel="noopener">web.archive.org → muj.or.jp/…/service05</a> — tiered checkup subsidy: member ¥1,500–3,500, family ¥1,000–3,000 by exam-fee band; Kanto provider named (Shiba Hospital Screening Center). <strong>Source · Method · Basis:</strong> organization primary site (JA) via Wayback · web (archived) · ✅ Sourced.</li>
+          <li id="muj-src-5" data-src="kokuho">Musicians' Union of Japan. (n.d.). <em>国民健康保険</em> [National Health Insurance]. Retrieved via the Internet Archive Wayback Machine (capture 2016-04-08), <a href="https://web.archive.org/web/20160408004243/https://www.muj.or.jp/information/memberservices/service04" target="_blank" rel="noopener">web.archive.org → muj.or.jp/…/service04</a> — brokered entry to 東京芸能人国民健康保険組合 (est. 1952) and 大阪文化芸能国民健康保険組合; 70% statutory coverage plus enhanced childbirth/childcare/funeral/human-dock benefits and free screenings; premiums paid through the union. <strong>Source · Method · Basis:</strong> organization primary site (JA) via Wayback · web (archived) · ✅ Sourced.</li>
+          <li id="muj-src-6" data-src="services-menu">Musicians' Union of Japan. (n.d.). <em>会員サービス</em> [Member-services menu] (自主共済, 国民健康保険, 健康診断, こくみん共済, 楽器保険, 法律相談・税務相談, 中央ろうきん, etc.), member-services navigation. Retrieved via the Internet Archive Wayback Machine (captures 2016–2025) — full service inventory; free legal/tax consultation present; no mental-health/counselling service listed anywhere on the menu or in the archived URL inventory (absence verified, not assumed). <strong>Source · Method · Basis:</strong> organization primary site (JA) via Wayback · web (archived) · ✅ Sourced.</li>
+          <li id="muj-src-7" data-src="roudou">Musicians' Union of Japan. (n.d.). <em>労働相談</em> [Labour consultation]. Retrieved via the Internet Archive Wayback Machine (capture 2017-04-02), <a href="https://web.archive.org/web/20170402015833/https://www.muj.or.jp/ouractivity/consultation" target="_blank" rel="noopener">web.archive.org → muj.or.jp/ouractivity/consultation</a> — labour consultation for sudden dismissal, unpaid performance fees, and contract breaches; consultation desk + network of advisory lawyers; confidentiality assured. Characterises MUJ's only "consultation" offer as labour/legal, not mental-health. <strong>Source · Method · Basis:</strong> organization primary site (JA) via Wayback · web (archived) · ✅ Sourced.</li>
+          <li id="muj-src-8" data-src="fim">International Federation of Musicians (FIM). (n.d.). <em>Membership</em>. Retrieved via the Internet Archive Wayback Machine (capture 2026-02-01), <a href="https://web.archive.org/web/20260201092442/https://www.fim-musicians.org/en/about-fim/membership/" target="_blank" rel="noopener">web.archive.org → fim-musicians.org/en/about-fim/membership</a> — MUJ listed under "Asia and Pacific → Japan → MUJ"; the same group also lists Australia (MEAA), India (MFI), and Iran (IMU), which is why MUJ's "sole Asian member" self-description is flagged as the union's own framing. Live FIM site 403-blocks automated access; retrieved via Wayback. <strong>Source · Method · Basis:</strong> federation primary site via Wayback · web (archived) · ✅ Sourced (independent corroboration of FIM membership).</li>
+          <li id="muj-src-9" data-src="wiki-xcheck">Cross-checks (founding year, union status, MIC affiliation): <em>日本音楽家ユニオン</em> and <em>日本マスコミ文化情報労組会議</em>, Japanese Wikipedia / Weblio, retrieved June 2026 — independently corroborate October 1983 formation by merger of 日本演奏家協会 + 日本音楽家労働組合, individual-membership labour union, FIM's sole Japanese affiliate, and MUJ as a constituent union of MIC. Used only to corroborate the primary-sourced facts above; note these encyclopaedic entries give a rounder ~5,500-member figure, whereas MUJ's own ~5,200 (About page, muj-src-1) is used as authoritative for the count. <strong>Source · Method · Basis:</strong> third-party reference (JA) · web · ⚠️ corroborating (encyclopaedic; not the primary basis for any figure).</li>
+        </ol>
+        <p class="refs-note">Convention: every claim-bearing element carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above — machine-checkable before each deploy (§5.2 / §6 gate 1). The live MUJ and FIM sites 403-block automated access; all primary captures are via the Internet Archive Wayback Machine.</p>
+      </div>
+    </section>
+
+    <nav class="related-block" aria-label="Related on this site">
+      <p class="related-title">Related</p>
+      <ul>
+        <li><a href="org-study.html">&larr; Org Study (all organizations)</a></li>
+        <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+        <li><a href="policy-study.html">Policy Study &mdash; how jurisdictions protect music workers</a></li>
+        <li><a href="policy-study-japan.html">Policy Study &mdash; Japan (companion to this org study)</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <script>
+  /* Scroll-reveal — R3.2 shared IntersectionObserver (normal-scroll page) */
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = 'section > h2, .stat-strip, figure, .table-wrap, .phases-grid, .sources-card, .refs';
+    var nodes = Array.prototype.slice.call(document.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, sibs, idx = 0;
+        if (p){ sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,6) * 60) + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
+
+  <!-- nav scroll-state: transparent over hero, blurred bar once scrolled -->
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden','true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>
