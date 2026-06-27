@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>TWLOHA · Org Study · MH&amp;W</title>
+  <meta name="description" content="To Write Love On Her Arms is a US mental-health awareness and referral movement, not a clinic — funded ~82% by donations and ~18% by 'wearable hope' merch. What its IRS 990 shows, what its 'presence in 27 countries' really is (a directory of other people's helplines), and what a Taiwan music-MH NPO can and can't copy.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      /* ── DIA-GRADE READING SCALE (calibrated to Dia browser, serif-corrected) ── */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;--lh-prose:1.7;--wt-prose:440;--measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;--label-ink:var(--graphite);
+      --font-cjk:'Noto Serif TC',serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { overflow-x: hidden; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--black);
+      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      line-height: var(--lh-prose);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    a { color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    a:hover { color: var(--signal-dim); }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--signal); outline-offset: 3px; border-radius: var(--radius);
+    }
+
+    .skip-nav {
+      position: absolute; left: -9999px; top: 0; z-index: 200;
+      background: var(--signal); color: var(--white);
+      padding: 0.5rem 1rem; font-family: var(--font-mono);
+    }
+    .skip-nav:focus { left: 0; }
+
+    /* ===== NAVIGATION ===== */
+    nav.nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; flex-direction: column;
+      padding: 2rem 2.5rem;
+      padding-top: calc(2rem + env(safe-area-inset-top));
+      background: transparent;
+      transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    nav.nav.scrolled {
+      background: rgba(244, 244, 245, 0.45);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: var(--font-mono); font-size: 1.1rem; font-weight: 400;
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-topbar { display:none; }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; min-width:44px; min-height:44px; z-index:101; -webkit-tap-highlight-color:transparent; }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity:0; }
+    .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
+
+    /* ===== LAYOUT ===== */
+    main { max-width: var(--max-w); margin: 0 auto; padding: 0 2.5rem 5rem 2.5rem; }
+    section { margin-bottom: 4rem; }
+    .narrow { max-width: var(--max-w-text); }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding-top: calc(9rem + env(safe-area-inset-top));
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-light);
+      margin-bottom: 3rem;
+    }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.18em;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: var(--font-display); font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6.5rem);
+      font-weight: 800; line-height: 1.04; color: var(--black); letter-spacing: -0.01em;
+      overflow-wrap: break-word; hyphens: auto;
+    }
+    .hero h1 .tail { display:block; font-size: clamp(1.15rem, 2.6vw, 1.9rem); font-weight: 600; color: var(--signal); letter-spacing: 0; margin-top: 0.9rem; }
+    .hero .subtitle {
+      font-family: var(--font-body); font-size: clamp(1.25rem, 1.05rem + 1.4vw, 1.5rem);
+      color: var(--graphite); line-height: 1.55; margin-top: 1.5rem; max-width: 54ch;
+    }
+    .basis-badge {
+      display: inline-block; margin-top: 1.75rem;
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--graphite); background: var(--signal-bg);
+      border: 1px solid var(--signal-glow); border-radius: var(--radius);
+      padding: 0.5rem 0.85rem; line-height: 1.5;
+    }
+
+    /* ===== TWO-LINE COVER (R2.1, 2026-06-20) — width:100% inside main (no 100vw breakout → no x-overflow) ===== */
+    .cover {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;                /* clips the wash */
+      padding: 0 2rem;
+    }
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%,
+        var(--signal-glow) 0%,
+        rgba(102,103,171,0.06) 38%,
+        rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
+    }
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 1280px);
+    }
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin: 0;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+    .cover-line {
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--purple-deep);
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
+    }
+    .cover-hint {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
+    }
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
+    }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-line  { animation-delay: 0.22s; }
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .cover-wash,
+      .cover-hint,
+      .cover-inner > * { animation: none; opacity: 1; transform: none; }
+    }
+    @media (max-width: 768px) {
+      .cover { padding: 0 1.25rem; }
+      .cover-title { font-size: clamp(1.7rem, 7.3vw, 2.4rem); }
+      .cover-line  { font-size: clamp(0.72rem, 3.2vw, 0.95rem); letter-spacing: 0.18em; }
+    }
+
+    /* ===== TYPE ===== */
+    h2 {
+      font-family: var(--font-display); font-size: var(--text-h2);
+      font-weight: 700; line-height: 1.1; color: var(--black);
+      margin-bottom: 1.25rem; letter-spacing: -0.01em;
+      text-wrap: balance; overflow-wrap: break-word;
+    }
+    h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem); line-height: 1.25; font-weight: 600; color: var(--charcoal); margin: 1.75rem 0 0.75rem; }
+    .section-label {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem;
+    }
+    p { color: var(--graphite); max-width: var(--measure-prose); margin-bottom: 1rem; line-height: 1.65; }
+    p.lead { font-size: 1.1rem; color: var(--charcoal); }
+    strong { color: var(--charcoal); font-weight: 600; }
+    em { color: var(--graphite); }
+
+    /* ===== MODEL CALLOUT ===== */
+    .model-callout { background: var(--bg-card-dark); color: var(--snow); border-radius: var(--radius-lg); padding: 2.25rem 2.5rem; margin-bottom: 3rem; }
+    .model-callout h2 { color: var(--white); margin-bottom: 1rem; }
+    .model-callout p { color: var(--silver); max-width: none; }
+    .model-callout strong { color: var(--white); }
+    .model-callout a { color: var(--spectrum-3); text-decoration: underline; text-underline-offset: 2px; }
+    .model-callout a:hover { color: var(--white); }
+
+    /* ===== THE FLYWHEEL (signature visual) ===== */
+    .flywheel-panel {
+      background: var(--bg-card-dark);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem 2rem 1.5rem;
+      margin: 1.5rem 0 1.75rem;
+      border: 1px solid var(--border-dark);
+    }
+    .flywheel-panel .fw-cap {
+      font-family: var(--font-mono); font-size: var(--text-xs); color: var(--spectrum-3);
+      text-transform: uppercase; letter-spacing: 0.16em; text-align: center; margin-bottom: 0.5rem;
+    }
+    .flywheel-panel svg { display: block; width: 100%; height: auto; max-width: 460px; margin: 0 auto; }
+    .fw-ring { fill: none; stroke: var(--border-dark); stroke-width: 1.5; stroke-dasharray: 3 6; }
+    .fw-arc { fill: none; stroke: var(--spectrum-3); stroke-width: 2.5; opacity: 0.85; stroke-dasharray: 4 7; animation: fw-flow 2.2s linear infinite; }
+    @keyframes fw-flow { to { stroke-dashoffset: -22; } }
+    .fw-node { fill: var(--charcoal); stroke: var(--spectrum-2); stroke-width: 2; }
+    .fw-hub { fill: var(--black); stroke: var(--spectrum-3); stroke-width: 1.5; }
+    .fw-num { fill: var(--spectrum-3); font-family: var(--font-mono); font-size: 13px; font-weight: 700; }
+    .fw-label { fill: var(--snow); font-family: var(--font-display); font-size: 15px; font-weight: 700; letter-spacing: 0.02em; }
+    .fw-sub { fill: var(--grey-light); font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.04em; }
+    .fw-hub-label { fill: var(--spectrum-3); font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.14em; }
+    .fw-hub-sub { fill: var(--grey-light); font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.06em; }
+
+    .gear-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .gear {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-left: 3px solid var(--spectrum-2); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem;
+    }
+    .gear .gn { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); letter-spacing: 0.1em; }
+    .gear h3 { margin: 0.35rem 0 0.5rem; font-size: 1.08rem; }
+    .gear p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-card); margin: 1.5rem 0 0.75rem; }
+    .stat-item { padding: 1.75rem 1.25rem; border-right: 1px solid var(--border-light); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--signal); line-height: 1; font-variant-numeric: tabular-nums; }
+    .stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.6rem; line-height: 1.4; }
+
+    /* ===== COLUMN CHART (revenue trajectory) ===== */
+    figure.chart { margin: 1.5rem 0; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 2rem 1.75rem 1.25rem; }
+    figure.chart figcaption { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
+    .col-chart { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.6rem; align-items: end; }
+    .col { display: flex; flex-direction: column; align-items: center; }
+    .ctrack { position: relative; width: 100%; height: 190px; display: flex; align-items: flex-end; }
+    .cbar { width: 100%; max-width: 54px; margin: 0 auto; background: var(--signal); border-radius: var(--radius) var(--radius) 0 0; position: relative; transition: height var(--dur-slow) var(--ease); }
+    .cbar.peak { background: var(--spectrum-2); }
+    .cbar .cval { position: absolute; top: -1.35rem; left: -50%; right: -50%; text-align: center; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--charcoal); font-variant-numeric: tabular-nums; }
+    .cyr { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); margin-top: 0.55rem; letter-spacing: 0.02em; }
+    .chart-note { font-size: var(--text-xs); color: var(--label-ink); margin-top: 1rem; max-width: none; }
+    .chart-key { display: flex; gap: 1.25rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .chart-key span { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); display: inline-flex; align-items: center; gap: 0.4rem; }
+    .swatch { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+    .swatch.s-rev { background: var(--signal); }
+    .swatch.s-covid { background: var(--spectrum-2); }
+
+    /* ===== TABLES ===== */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; margin: 1.25rem 0; border-radius: var(--radius-lg); border: 1px solid var(--border-light); }
+    .table-wrap:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+    table { width: 100%; border-collapse: collapse; background: var(--bg-card); font-size: var(--text-small); }
+    caption { text-align: left; font-family: var(--font-mono); font-size: var(--text-caption); color: var(--label-ink); padding: 0.75rem 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border-light); vertical-align: top; font-variant-numeric: tabular-nums; }
+    thead th { font-family: var(--font-mono); font-size: var(--text-micro); text-transform: uppercase; letter-spacing: 0.06em; color: var(--label-ink); background: var(--snow); }
+    tbody tr:last-child td { border-bottom: none; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .row-emph td { background: var(--signal-bg); font-weight: 600; color: var(--charcoal); }
+    .row-covid td { background: rgba(232, 168, 124, 0.12); }
+
+    /* ===== CRISIS CARDS ===== */
+    .crisis-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .crisis { background: var(--bg-card); border: 1px solid var(--border-light); border-top: 3px solid var(--spectrum-1); border-radius: var(--radius-lg); padding: 1.5rem 1.6rem; }
+    .crisis .cyrtag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--graphite); letter-spacing: 0.08em; }
+    .crisis h3 { margin: 0.3rem 0 0.6rem; font-size: 1.08rem; }
+    .crisis .big { font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; color: var(--charcoal); line-height: 1; margin-bottom: 0.5rem; }
+    .crisis p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== PROGRAM LIST ===== */
+    .prog { list-style: none; margin: 1.25rem 0 0; padding: 0; }
+    .prog li { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 0.85rem; }
+    .prog h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .prog p { font-size: var(--text-sm); margin-bottom: 0; }
+    .prog .ptag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ===== SW CARDS ===== */
+    .sw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.25rem; }
+    .sw-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem; }
+    .sw-card.weak { border-left: 3px solid var(--spectrum-2); }
+    .sw-card.strong { border-left: 3px solid var(--spectrum-4); }
+    .sw-card h3 { margin: 0 0 0.4rem; font-size: 1rem; }
+    .sw-card p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== LESSONS ===== */
+    .lessons { counter-reset: lesson; list-style: none; margin: 1.5rem 0 0; padding: 0; }
+    .lessons li { position: relative; padding: 1.25rem 1.5rem 1.25rem 3.5rem; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); margin-bottom: 0.85rem; }
+    .lessons li::before { counter-increment: lesson; content: counter(lesson); position: absolute; left: 1.25rem; top: 1.25rem; font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--signal); }
+    .lessons h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .lessons p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== CITATIONS (§5 inline tier) ===== */
+    .cite { font-size: 0.7em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem; }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-fine); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; max-width: var(--measure-ref); overflow-wrap: anywhere; }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs-note { font-size: var(--text-xs); color: var(--label-ink); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-sm); color: var(--label-ink); font-style: italic; max-width: var(--max-w-text); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .gear-cards { grid-template-columns: 1fr; }
+      .crisis-grid { grid-template-columns: 1fr; }
+      .sw-grid { grid-template-columns: 1fr; }
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2n) { border-right: none; }
+      .stat-item:nth-child(-n+2) { border-bottom: 1px solid var(--border-light); }
+    }
+    @media (max-width: 768px) {
+      nav.nav { padding: 1.2rem 1.5rem; padding-top: calc(1.2rem + env(safe-area-inset-top)); }
+      nav.nav.open { background: rgba(244,244,245,0.95); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-light); }
+      .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
+      .nav-toggle { display:block; }
+      .nav-mobile-brand { display:block; }
+      .nav-links { display:none; flex-direction:column; gap:0.75rem; margin-top:1rem; }
+      .nav-links.show { display:flex; }
+      .nav-links a { font-size: 0.85rem; }
+      main { padding: 0 1.5rem 3rem 1.5rem; }
+      .hero { padding-top: calc(7rem + env(safe-area-inset-top)); }
+      .hero h1 { font-size: clamp(2.4rem, 10.5vw, 3.4rem); }
+      .model-callout, .flywheel-panel { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .col-chart { gap: 0.3rem; }
+      .ctrack { height: 150px; }
+      .cbar .cval { font-size: 0.62rem; }
+    }
+    @media (max-width: 680px) {
+      p, .hero .subtitle, .refs li, .cite-help { max-width: none; }
+    }
+    @media (max-width: 480px) {
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+      .stat-item:last-child { border-bottom: none; }
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
+      .cyr { font-size: 0.6rem; }
+      table { font-size: 0.82rem; }
+      thead th { font-size: 0.6rem; }
+      th, td { padding: 0.5rem 0.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } nav.nav, .cbar { transition: none; } .fw-arc { animation: none; } }
+
+    /* ===== Scroll-reveal (R3.2 craft pass) ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ===== Related block (no dead-ends, R3.2) ===== */
+    .related-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-light); }
+    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--label-ink); margin-bottom: 0.6rem; }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a { font-family: var(--font-body); font-size: var(--text-sm); color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+  </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open');this.setAttribute('aria-expanded',o)">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+        <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="org-study.html" class="current" aria-current="page">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
+      <a href="field-news.html">FIELD NEWS</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- COVER -->
+    <section class="cover">
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="cover-inner">
+        <h1 class="cover-title">TO WRITE LOVE ON HER ARMS</h1>
+        <p class="cover-line">Org Study · Est. 2006</p>
+      </div>
+      <span class="cover-hint" aria-hidden="true">↓ Scroll</span>
+    </section>
+
+    <!-- MODEL CALLOUT -->
+    <div class="model-callout">
+      <h2>One model, in one line</h2>
+      <p><a href="org-study-musicares.html">MusiCares</a> and the national funds treat reach as a means to deliver service. <strong>TWLOHA inverts that: the reach <em>is</em> the product.</strong> It is a US <em>general</em> mental-health movement — not a clinic, not a music charity — that builds an audience through story and "wearable hope," then refers people to treatment others provide and funds a slice of it directly. On roughly $3M a year it reaches, by its own count, over a hundred million people online. The Orgs Map lists it as a multinational "in 27 countries incl. India, Japan, Thailand." This study asks the only honest question that label invites — <strong>what is actually <em>there</em>?</strong> — and finds the answer is a directory of other people's helplines and a T-shirt, not infrastructure.</p>
+    </div>
+
+    <!-- 1. PROFILE -->
+    <section>
+      <div class="section-label">01 — Profile</div>
+      <h2>A movement built from one essay<sup class="cite"><a href="#tw-src-1" data-tip="Identity &amp; legal status: TWLOHA About + ProPublica (EIN 26-0789229), corroborated by Wikipedia for the founding chronology.">1</a></sup><sup class="cite"><a href="#tw-src-6" data-tip="Founding chronology &amp; identity: Wikipedia (citing the IRS determination letter and TWLOHA's own pages), corroborated by ProPublica (EIN 26-0789229).">6</a></sup></h2>
+      <p>To Write Love On Her Arms began in 2006 as a short essay by Jamie Tworkowski about five days he spent helping a 19-year-old named Renee Yohe before she entered rehab. He printed T-shirts to pay for her treatment and posted the story on MySpace; bands wore the shirts on stage, and a movement formed around them. It is, by origin, a music-scene story — but it has never been scoped to musicians. TWLOHA is a <strong>general</strong> mental-health organization for anyone struggling with depression, addiction, self-injury, or thoughts of suicide.<sup class="cite"><a href="#tw-src-5" data-tip="Origin with Renee Yohe (2006); editorial footnote confirming 501(c)(3) formed 2007, not faith-based. TWLOHA founding essay.">5</a></sup></p>
+
+      <div class="table-wrap" role="region" aria-label="Organization profile — TWLOHA (scrollable table)" tabindex="0">
+        <table>
+          <caption>Organization profile — TWLOHA, Inc. (sources cited inline)</caption>
+          <tbody>
+            <tr><th scope="row">Legal name</th><td>TWLOHA, Inc. ("To Write Love On Her Arms")</td></tr>
+            <tr><th scope="row">Legal status</th><td>U.S. 501(c)(3) public charity · NTEE: Mental Health, Crisis Intervention / Hot Line</td></tr>
+            <tr><th scope="row">EIN</th><td>26-0789229</td></tr>
+            <tr><th scope="row">Founded</th><td>March 2006 (founding essay February 2006)</td></tr>
+            <tr><th scope="row">501(c)(3) granted</th><td>March 6, 2009 (effective Aug 28, 2007); ran under Fireproof Ministries Oct 2006 → independent 2007</td></tr>
+            <tr><th scope="row">HQ · Fiscal year</th><td>Melbourne, Florida · year ending December 31</td></tr>
+            <tr><th scope="row">Founder</th><td>Jamie Tworkowski (left the organization entirely on July 7, 2021)</td></tr>
+            <tr><th scope="row">Executive Director</th><td>Lindsay Kolsch (Co-ED with Jessica Haley through FY2024; sole ED as of 2025)</td></tr>
+            <tr><th scope="row">Board (FY2024)</th><td>Stephan Monteserin (Pres.); Morgan Harper Nichols (VP); James Inks (Treas.); Drew Rector (Sec.); Joél L. Daniels, Tianna Soto</td></tr>
+            <tr><th scope="row">Direct-service scope</th><td>United States (treatment directory + therapy scholarship); online community global; merch ships to 50+ countries</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>One sentence from TWLOHA's own About page contains the entire model: it exists "to encourage, inform, inspire, and <strong>invest directly into treatment and recovery</strong>."<sup class="cite"><a href="#tw-src-2" data-tip="Mission verbatim and program list. TWLOHA, About (page modified 2026-06-16).">2</a></sup> It does not <em>deliver</em> treatment — it invests in and refers to treatment that licensed providers deliver. Its Find Help disclaimer says so directly: "you are responsible for selecting the provider… TWLOHA cannot accept responsibility for any of the services provided."<sup class="cite"><a href="#tw-src-4" data-tip="FIND HELP / International Resources: US-only tool; third-party helpline directory; provider disclaimer. TWLOHA.">4</a></sup></p>
+    </section>
+
+    <!-- 2. THE MODEL -->
+    <section>
+      <div class="section-label">02 — The model</div>
+      <h2>Awareness → referral → fund — with no clinic in the loop</h2>
+      <p>The clearest way to read TWLOHA is as a four-move loop. What matters as much as the four moves is what is deliberately absent from them: TWLOHA never employs a therapist, never runs its own crisis line, never operates a facility. That is precisely why it can claim global reach on a small budget — and precisely why reach and service must not be confused.</p>
+
+      <div class="flywheel-panel">
+        <div class="fw-cap">The awareness → referral → fund loop</div>
+        <svg viewBox="0 0 460 380" role="img" aria-label="A circular loop with four nodes that feed one another: Awareness (story + merch + social), Referral (the US-only Find Help directory and an international helpline list), Funding (therapy scholarships paid to licensed providers), and Light-touch support (peer groups, toolkit, app) — all turning around a deliberately liability-light core that owns no clinic.">
+          <circle class="fw-ring" cx="230" cy="190" r="130"/>
+          <defs>
+            <marker id="fwarrow" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M1,1 L8,4.5 L1,8" fill="none" stroke="var(--spectrum-3)" stroke-width="2"/></marker>
+          </defs>
+          <path class="fw-arc" marker-end="url(#fwarrow)" d="M 305 100 A 130 130 0 0 1 318 168"/>
+          <path class="fw-arc" marker-end="url(#fwarrow)" d="M 318 212 A 130 130 0 0 1 305 280"/>
+          <path class="fw-arc" marker-end="url(#fwarrow)" d="M 155 280 A 130 130 0 0 1 142 212"/>
+          <path class="fw-arc" marker-end="url(#fwarrow)" d="M 142 168 A 130 130 0 0 1 155 100"/>
+          <circle class="fw-hub" cx="230" cy="190" r="52"/>
+          <text class="fw-hub-label" x="230" y="186" text-anchor="middle">NO CLINIC</text>
+          <text class="fw-hub-label" x="230" y="199" text-anchor="middle">OF ITS OWN</text>
+          <text class="fw-hub-sub" x="230" y="214" text-anchor="middle">liability-light by design</text>
+          <circle class="fw-node" cx="230" cy="60" r="44"/>
+          <text class="fw-num" x="230" y="48" text-anchor="middle">1</text>
+          <text class="fw-label" x="230" y="64" text-anchor="middle">AWARENESS</text>
+          <text class="fw-sub" x="230" y="78" text-anchor="middle">story · merch · social</text>
+          <circle class="fw-node" cx="360" cy="190" r="44"/>
+          <text class="fw-num" x="360" y="178" text-anchor="middle">2</text>
+          <text class="fw-label" x="360" y="194" text-anchor="middle">REFERRAL</text>
+          <text class="fw-sub" x="360" y="208" text-anchor="middle">Find Help (US)</text>
+          <circle class="fw-node" cx="230" cy="320" r="44"/>
+          <text class="fw-num" x="230" y="308" text-anchor="middle">3</text>
+          <text class="fw-label" x="230" y="324" text-anchor="middle">FUND</text>
+          <text class="fw-sub" x="230" y="338" text-anchor="middle">therapy scholarship</text>
+          <circle class="fw-node" cx="100" cy="190" r="44"/>
+          <text class="fw-num" x="100" y="178" text-anchor="middle">4</text>
+          <text class="fw-label" x="100" y="194" text-anchor="middle">SUPPORT</text>
+          <text class="fw-sub" x="100" y="208" text-anchor="middle">groups · toolkit · app</text>
+        </svg>
+      </div>
+
+      <div class="gear-cards">
+        <div class="gear">
+          <div class="gn">MOVE 01</div>
+          <h3>Awareness — the front door</h3>
+          <p>Storytelling (blog, podcast, social) reaching, by the org's own figure, <strong>103.9M people online a year</strong>, plus "wearable hope" merch that makes a T-shirt a conversation. Awareness is the product TWLOHA actually manufactures.<sup class="cite"><a href="#tw-src-2" data-tip="103.9M reached online/year; storytelling + merch model. TWLOHA, About.">2</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">MOVE 02</div>
+          <h3>Referral — the hand-off</h3>
+          <p>The FIND HELP Tool is a US treatment directory — "only currently available in the U.S." Everyone else gets the International Resources list of third-party national helplines. TWLOHA connects; others treat.<sup class="cite"><a href="#tw-src-4" data-tip="FIND HELP Tool is US-only; International Resources is a third-party helpline directory. TWLOHA.">4</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">MOVE 03</div>
+          <h3>Fund — the one tangible service</h3>
+          <p>The Treatment &amp; Recovery Scholarship pays licensed providers directly. Cumulatively the org reports <strong>$4.7M invested</strong> and <strong>35,000 therapy hours funded</strong> — the single place money lands on the ground, and shown <strong>CLOSED</strong> at the time of writing.<sup class="cite"><a href="#tw-src-2" data-tip="$4.7M invested; 35,000 therapy hours funded. TWLOHA, About.">2</a></sup><sup class="cite"><a href="#tw-src-4" data-tip="Therapy Scholarship marked CLOSED on the Find Help page. TWLOHA.">4</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">MOVE 04</div>
+          <h3>Support — the supplements</h3>
+          <p>Free virtual Peer Support Groups, a Mental Health Toolkit, a high-school curriculum, and The Hopeful app — all low-cost, self-serve, scalable, none clinical.<sup class="cite"><a href="#tw-src-2" data-tip="Peer Support Groups, Mental Health Toolkit, student resources, The Hopeful app. TWLOHA, About.">2</a></sup></p>
+        </div>
+      </div>
+
+      <p style="margin-top:1.75rem;">It even outsources crisis: the "text TWLOHA to 741741" line routes to <strong>Crisis Text Line</strong>, a separate organization.<sup class="cite"><a href="#tw-src-4" data-tip="Crisis Text Line ('text TWLOHA to 741741') is a separate organization. TWLOHA, Find Help.">4</a></sup> The whole design is built to be cheap to scale and impossible to be liable for — the strength and the limit in one decision.</p>
+    </section>
+
+    <!-- 3. FINANCIAL -->
+    <section>
+      <div class="section-label">03 — Funding &amp; financials</div>
+      <h2>Three deficit years, drawing the reserve down<sup class="cite"><a href="#tw-src-3" data-tip="All financials from TWLOHA Form 990 (FY2017–FY2024) via ProPublica (EIN 26-0789229). FY ends Dec 31; latest filed FY2024. Year-over-year deltas computed, not quoted.">3</a></sup></h2>
+      <p>All figures below come directly from TWLOHA, Inc.'s IRS Form 990 filings as digitized by ProPublica. The fiscal year ends December 31; the latest filed return is FY2024 (filed November 5, 2025).</p>
+
+      <figure class="chart">
+        <figcaption>Net assets by fiscal year ($M) — a 41% drawdown across three deficit years</figcaption>
+        <div class="col-chart" role="img" aria-label="Net assets columns: FY2019 $1.97M, FY2020 $2.68M, FY2021 $3.58M (peak), FY2022 $2.79M, FY2023 $2.11M, FY2024 $1.64M.">
+          <div class="col"><div class="ctrack"><div class="cbar" style="height:55%"><span class="cval">$1.97M</span></div></div><span class="cyr">FY19</span></div>
+          <div class="col"><div class="ctrack"><div class="cbar" style="height:75%"><span class="cval">$2.68M</span></div></div><span class="cyr">FY20</span></div>
+          <div class="col"><div class="ctrack"><div class="cbar peak" style="height:100%"><span class="cval">$3.58M</span></div></div><span class="cyr">FY21</span></div>
+          <div class="col"><div class="ctrack"><div class="cbar" style="height:78%"><span class="cval">$2.79M</span></div></div><span class="cyr">FY22</span></div>
+          <div class="col"><div class="ctrack"><div class="cbar" style="height:59%"><span class="cval">$2.11M</span></div></div><span class="cyr">FY23</span></div>
+          <div class="col"><div class="ctrack"><div class="cbar" style="height:46%"><span class="cval">$1.64M</span></div></div><span class="cyr">FY24</span></div>
+        </div>
+        <div class="chart-key">
+          <span><span class="swatch s-rev"></span> Net assets</span>
+          <span><span class="swatch s-covid"></span> Peak (FY2021)</span>
+        </div>
+        <p class="chart-note">Net assets peaked at $3.58M at end-2021 (COVID-era surpluses) then fell every year since to $1.64M — a ~41% drawdown as FY2022–FY2024 each spent more than they raised. Not a crisis, but the defining fact of the current period.</p>
+      </figure>
+
+      <div class="table-wrap" role="region" aria-label="TWLOHA financials, FY2020–FY2024 (scrollable table)" tabindex="0">
+        <table>
+          <caption>TWLOHA financials, FY2020–FY2024 — IRS Form 990 via ProPublica</caption>
+          <thead><tr><th scope="col">FY (end Dec)</th><th scope="col" class="num">Revenue</th><th scope="col" class="num">Expenses</th><th scope="col" class="num">Net income</th><th scope="col" class="num">Net assets</th></tr></thead>
+          <tbody>
+            <tr><td>2020</td><td class="num">$3.09M</td><td class="num">$2.38M</td><td class="num">+$0.71M</td><td class="num">$2.68M</td></tr>
+            <tr><td>2021</td><td class="num">$3.92M</td><td class="num">$3.02M</td><td class="num">+$0.90M</td><td class="num">$3.58M</td></tr>
+            <tr><td>2022</td><td class="num">$2.92M</td><td class="num">$3.70M</td><td class="num">−$0.79M</td><td class="num">$2.79M</td></tr>
+            <tr><td>2023</td><td class="num">$3.85M</td><td class="num">$4.53M</td><td class="num">−$0.68M</td><td class="num">$2.11M</td></tr>
+            <tr class="row-emph"><td>2024</td><td class="num">$3.10M</td><td class="num">$3.58M</td><td class="num">−$0.47M</td><td class="num">$1.64M</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Where the money comes from — donations plus a real merch line<sup class="cite"><a href="#tw-src-3" data-tip="FY2024 revenue mix: contributions $2,542,338 (81.9%); net inventory sales $569,798 (18.4%); investment $21,464; royalties $6,099. Form 990 via ProPublica.">3</a></sup></h3>
+      <p>In FY2024, <strong>contributions were $2.54M (81.9%)</strong> and <strong>net merchandise sales $570K (18.4%)</strong>. The merch share is not incidental — it is how the movement was built (bands in T-shirts) and a meaningful, mission-aligned revenue stream most charities don't have. There is <strong>no endowment, no large institutional backer, and no government funding</strong> in the mix. Expenses of $3.58M run roughly half on people (executive compensation $379,754; other salaries $1.33M), normal for an awareness- and communications-led organization. Every board member is unpaid; senior staff each earned about $102K–$112K — all disclosed in the filing, with no hidden-pay structure.</p>
+    </section>
+
+    <!-- 4. THE FOOTPRINT QUESTION -->
+    <section>
+      <div class="section-label">04 — The footprint question</div>
+      <h2>What "27 countries incl. India, Japan, Thailand" really is<sup class="cite"><a href="#tw-src-4" data-tip="The international 'presence' = merch to 50+ countries + a directory linking to third-party national helplines (US tool is US-only). TWLOHA, Find Help / International Resources.">4</a></sup></h2>
+      <p>This is the heart of the study. The project's Orgs Map lists TWLOHA as a multinational "in 27 countries incl. India, Japan, Thailand." Against TWLOHA's own primary sources, that "presence" resolves into <strong>two things, neither of which is on-the-ground service</strong>.</p>
+
+      <h3>(a) A merchandise shipping footprint</h3>
+      <p>TWLOHA reports its "missional merchandise reaches more than <strong>52 countries</strong>," ~20,000 pieces a year.<sup class="cite"><a href="#tw-src-6" data-tip="Merch reaches 52+ countries (~20,000 pieces/yr). TWLOHA store 'Your Impact' page (primary).">6</a></sup> That is a shipping footprint, not a programmatic one — and note the org's own number is <em>52</em>, not 27, so the map's specific figure isn't even TWLOHA's claim. It is carried ⚠️.</p>
+
+      <h3>(b) A directory of <em>other organizations'</em> helplines</h3>
+      <p>The International Resources page is a table that, for each country, links to an <strong>independent, locally-run helpline TWLOHA neither owns nor funds</strong>.<sup class="cite"><a href="#tw-src-4" data-tip="International Resources is a third-party helpline directory; disclaimer disclaims responsibility. TWLOHA.">4</a></sup> For the project's jurisdictions:</p>
+
+      <div class="table-wrap" role="region" aria-label="What TWLOHA presence means in each jurisdiction (scrollable table)" tabindex="0">
+        <table>
+          <caption>What "TWLOHA presence" actually is — by jurisdiction (TWLOHA International Resources page)</caption>
+          <thead><tr><th scope="col">Country</th><th scope="col">What the "presence" is</th><th scope="col">Who actually runs it</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Thailand</strong> (Bangkok)</td><td>A link to Samaritans of Thailand</td><td>A separate Thai NGO, founded 1978; part of the Befrienders network. No TWLOHA involvement.</td></tr>
+            <tr><td><strong>Japan</strong> (Tokyo)</td><td>A link to Befrienders Worldwide (Tokyo)</td><td>A separate Japanese befriending service. No TWLOHA involvement.</td></tr>
+            <tr><td><strong>Taiwan</strong></td><td>A link to Taiwan Lifeline Int'l (生命線) "1995"</td><td>Taiwan's own national lifeline. No TWLOHA involvement.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>And critically: the FIND HELP Tool — the one piece of genuine TWLOHA infrastructure — <strong>states it is "only currently available in the U.S."</strong><sup class="cite"><a href="#tw-src-4" data-tip="'The FIND HELP Tool is only currently available in the U.S.' TWLOHA, Find Help.">4</a></sup> Outside the US, TWLOHA is a <strong>signpost to local services, plus a T-shirt</strong>. Its <em>reach</em> (awareness, merch, social) is genuinely global; its <em>service</em> is US-only; and its "presence" in Thailand, Japan, or Taiwan is a hyperlink to an organization that existed independently and would exist without it. For a country with little local music-MH infrastructure, that is the crux: a borderless awareness movement imports no infrastructure — at best it points you to whatever already exists.</p>
+    </section>
+
+    <!-- 5. STRENGTHS -->
+    <section>
+      <div class="section-label">05 — Strengths</div>
+      <h2>What works</h2>
+      <div class="sw-grid">
+        <div class="sw-card strong"><h3>An original funding engine</h3><p>Merch as ~18% of revenue is a real, mission-aligned, non-grant income stream born from the music scene. Most MH charities cannot turn their brand into a product people <em>want</em> to wear.<sup class="cite"><a href="#tw-src-3" data-tip="Net inventory sales $569,798 = 18.4% of FY2024 revenue. Form 990 via ProPublica.">3</a></sup></p></div>
+        <div class="sw-card strong"><h3>Liability-light by design</h3><p>By referring rather than treating, TWLOHA scales awareness globally without the cost or risk of clinical operations — the reason a small org can claim nine-figure reach.<sup class="cite"><a href="#tw-src-2" data-tip="Model is awareness + referral, not direct treatment. TWLOHA, About.">2</a></sup></p></div>
+        <div class="sw-card strong"><h3>One concrete, honest service</h3><p>Paying licensed providers directly through the Therapy Scholarship is where the model converts brand into care, and it is auditable in spirit.<sup class="cite"><a href="#tw-src-2" data-tip="$4.7M invested in treatment; 35,000 hours funded. TWLOHA, About.">2</a></sup></p></div>
+        <div class="sw-card strong"><h3>Cultural fluency &amp; durability</h3><p>Two decades meeting young people at concerts, on campuses, in social feeds, and via an app — and it survived its charismatic founder's complete 2021 exit under professional co-EDs.<sup class="cite"><a href="#tw-src-6" data-tip="Tworkowski departed entirely July 7, 2021; co-EDs continued. Wikipedia.">6</a></sup></p></div>
+      </div>
+    </section>
+
+    <!-- 6. WEAKNESSES -->
+    <section>
+      <div class="section-label">06 — Weaknesses &amp; risks</div>
+      <h2>What to watch</h2>
+      <div class="sw-grid">
+        <div class="sw-card weak"><h3>Three straight deficit years</h3><p>A 41% reserve drawdown FY2022→FY2024 is the defining current risk; the model must re-find surplus or shrink.<sup class="cite"><a href="#tw-src-3" data-tip="Net assets $3.58M (FY2021) → $1.64M (FY2024); three deficit years. Form 990 via ProPublica.">3</a></sup></p></div>
+        <div class="sw-card weak"><h3>Reach ≠ service</h3><p>"103.9M reached" is impressions; "$4.7M invested / 35,000 hours" over ~18 years is the actual care. Both are real; conflating them is the trap.<sup class="cite"><a href="#tw-src-2" data-tip="Reach vs. invested-care figures both org-reported. TWLOHA, About.">2</a></sup></p></div>
+        <div class="sw-card weak"><h3>The one service is intermittent</h3><p>The Therapy Scholarship — the single tangible offer — was shown <strong>CLOSED</strong> at the time of writing, gated by funding. A structural fragility, not a one-off.<sup class="cite"><a href="#tw-src-4" data-tip="Therapy Scholarship marked CLOSED on the Find Help page. TWLOHA.">4</a></sup></p></div>
+        <div class="sw-card weak"><h3>General, not music-specific + a thin footprint</h3><p>Nothing in the program is scoped to musicians (the musical heritage is brand, not service), and the international "presence" is a directory of other people's helplines — the weakest claim to a country footprint.<sup class="cite"><a href="#tw-src-4" data-tip="No music-specific program; international presence = third-party directory. TWLOHA.">4</a></sup></p></div>
+      </div>
+    </section>
+
+    <!-- 7. LESSONS -->
+    <section>
+      <div class="section-label">07 — Lessons for Taiwan</div>
+      <h2>What a Taiwan music mental health NPO should take</h2>
+      <ol class="lessons">
+        <li><h3>Build awareness cheaply — but name it honestly</h3><p>TWLOHA proves a small org can earn enormous reach through story + merch + social with no clinical overhead. A Taiwan music-MH NPO can do the same on a small budget. But label it as <em>awareness and referral</em>, never as <em>treatment</em> — TWLOHA's own disclaimers model the honesty that keeps an awareness brand credible.<sup class="cite"><a href="#tw-src-4" data-tip="Provider disclaimer + US-only tool; honest scoping. TWLOHA.">4</a></sup></p></li>
+        <li><h3>Treat merch as mission revenue, not a gift-shop afterthought</h3><p>~18% of TWLOHA's income is "wearable hope." In a market with no music endowment and limited grant culture, a well-designed product line tied to the cause is one of the few non-grant revenue options a Taiwan startup actually controls.<sup class="cite"><a href="#tw-src-3" data-tip="Merch = 18.4% of FY2024 revenue. Form 990 via ProPublica.">3</a></sup></p></li>
+        <li><h3>Referral alone is not enough — in Taiwan there is little music-specific service to refer to</h3><p>TWLOHA's whole international model is "point people to the local helpline." That works where one already exists. Taiwan has general lines (1995, 1925, 1980) but essentially no <em>musician-specific</em> MH service — so a Taiwan org cannot just be a signpost; it has to build the thing it would otherwise refer to. The footprint analysis <em>is</em> the lesson: a borderless awareness movement leaves an under-served country as under-served as it found it.<sup class="cite"><a href="#tw-src-4" data-tip="International model = referral to existing local helplines. TWLOHA, International Resources.">4</a></sup></p></li>
+        <li><h3>Fund treatment directly before delivering it</h3><p>The Therapy Scholarship — paying licensed local providers so clients can afford care — is the most transferable, lowest-risk piece of the model. A Taiwan NPO could fund sessions with vetted Mandarin-speaking therapists for musicians long before it could responsibly run its own clinic.<sup class="cite"><a href="#tw-src-2" data-tip="Therapy scholarship pays licensed providers directly. TWLOHA, About.">2</a></sup></p></li>
+        <li><h3>Plan for surplus from day one</h3><p>TWLOHA's three-year drawdown is the cautionary half: an awareness-led, donation-heavy org with thin reserves is one bad fundraising year from cuts. Build the boring discipline — a reserve target, a surplus in normal years — that the famous part of the model tends to neglect.<sup class="cite"><a href="#tw-src-3" data-tip="Three deficit years, 41% reserve drawdown. Form 990 via ProPublica.">3</a></sup></p></li>
+        <li><h3>Institutionalize early so the movement outlives its founder</h3><p>TWLOHA professionalized into a staffed org with co-EDs and an unpaid board, which is why it survived Tworkowski's 2021 exit. A Taiwan founder should design for succession from the start, not build a cult of personality.<sup class="cite"><a href="#tw-src-6" data-tip="Survived founder's complete 2021 departure under co-EDs. Wikipedia.">6</a></sup></p></li>
+      </ol>
+    </section>
+
+    <!-- 8. METHOD + REFERENCES -->
+    <section>
+      <div class="section-label">08 — Methodology &amp; references</div>
+      <h2>Basis</h2>
+      <p class="cite-help">Every figure carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source; click to jump to the full reference. Financial figures come directly from TWLOHA, Inc.'s IRS Form 990 filings as digitized by ProPublica (the authoritative primary source); identity, programs, and the footprint mechanism come from TWLOHA's own website; Wikipedia is used only as a corroborating secondary source that itself cites the IRS determination letter and the org's pages. The footprint reframing rests on TWLOHA's own statement that the FIND HELP Tool is US-only and on the International Resources page being, verifiably, a directory of third-party helplines. The reserve-drawdown percentage and the deficit observation are computed from filed totals, not quoted. Cumulative impact totals are organization-reported and not externally auditable. No person, partner, board member, or figure is asserted without a traceable source; where the international "presence" could not be substantiated as service, it is labeled ⚠️ rather than inflated.</p>
+
+      <div class="refs" id="refs-all" data-citation-registry="tw-all">
+        <div class="refs-title">References</div>
+        <ol>
+          <li id="tw-src-1">To Write Love on Her Arms. (n.d.). <em>About</em>. Retrieved June 28, 2026, from <a href="https://twloha.com/about/" target="_blank" rel="noopener">twloha.com/about</a> — mission, model, and impact figures; corroborated by <a href="https://projects.propublica.org/nonprofits/organizations/260789229" target="_blank" rel="noopener">ProPublica</a> (EIN 26-0789229) for legal status and by <a href="https://en.wikipedia.org/wiki/To_Write_Love_on_Her_Arms" target="_blank" rel="noopener">Wikipedia</a> for the founding chronology. <strong>Source · Method · Basis:</strong> organization primary site + IRS data · web · ✅ Sourced.</li>
+          <li id="tw-src-2">To Write Love on Her Arms. (n.d.). <em>About</em>. Retrieved June 28, 2026, from <a href="https://twloha.com/about/" target="_blank" rel="noopener">twloha.com/about</a> — mission verbatim ("encourage, inform, inspire, and invest directly into treatment and recovery"); cumulative impact ($4.7M invested in treatment &amp; recovery; 35,000 hours of therapy funded; 217,000 FIND HELP searches; 103.9M reached online/year); program list (Therapy Scholarship, FIND HELP Tool, Peer Support Groups, Mental Health Toolkit, student resources, The Hopeful app). Page modified 2026-06-16. <strong>Source · Method · Basis:</strong> organization primary · web · ✅ Sourced for the claims; ⚠️ cumulative impact totals are organization-reported and not externally auditable.</li>
+          <li id="tw-src-3">TWLOHA, Inc. <em>IRS Form 990</em> (FY2017–FY2024), via ProPublica Nonprofit Explorer (EIN 26-0789229). <a href="https://projects.propublica.org/nonprofits/organizations/260789229" target="_blank" rel="noopener">projects.propublica.org</a> — FY2024 (filed 2025-11-05): revenue $3,102,478; expenses $3,576,821; net income −$474,343; net assets $1,638,390; total assets $2,614,285; total liabilities $975,895; contributions $2,542,338 (81.9%); net inventory sales $569,798 (18.4%); executive compensation $379,754; other salaries &amp; wages $1,327,764. Prior years: FY2023 net assets $2.11M; FY2022 $2.79M; FY2021 peak $3.58M. The three-year reserve-drawdown percentage and the deficit observation are computed from these totals, not quoted. <strong>Source · Method · Basis:</strong> IRS Form 990 (primary) via ProPublica · web · ✅ Sourced.</li>
+          <li id="tw-src-4">To Write Love on Her Arms. (n.d.). <em>Find Help</em> &amp; <em>International Resources</em>. Retrieved June 28, 2026, from <a href="https://twloha.com/find-help/" target="_blank" rel="noopener">twloha.com/find-help</a> and <a href="https://twloha.com/find-help/international-resources/" target="_blank" rel="noopener">/international-resources</a> — FIND HELP Tool "only currently available in the U.S."; International Resources is a table of third-party national helplines (Thailand → Samaritans of Thailand, Bangkok; Japan → Befrienders Worldwide, Tokyo; Taiwan → Taiwan Lifeline International "1995"); Crisis Text Line ("text TWLOHA to 741741") is a separate organization; provider disclaimer; Therapy Scholarship shown CLOSED. <strong>Source · Method · Basis:</strong> organization primary · web · ✅ Sourced.</li>
+          <li id="tw-src-5">To Write Love on Her Arms. (2006). <em>To Write Love on Her Arms</em> [Founding essay, with 2007/501(c)(3) editorial footnote]. Retrieved June 28, 2026, from <a href="https://twloha.com/learn/story/" target="_blank" rel="noopener">twloha.com/learn/story</a> — origin with Renee Yohe (2006); explicit note that TWLOHA "was officially formed as a 501(c)(3) non-profit organization in 2007 and is not a religious or faith-based organization." <strong>Source · Method · Basis:</strong> organization primary · web · ✅ Sourced.</li>
+          <li id="tw-src-6">Wikipedia contributors. (2026). <em>To Write Love on Her Arms</em>. Wikipedia. Retrieved June 28, 2026, from <a href="https://en.wikipedia.org/wiki/To_Write_Love_on_Her_Arms" target="_blank" rel="noopener">en.wikipedia.org</a> — founding March 2006 (essay Feb 2006); Fireproof Ministries umbrella (Oct 2006) → independent 2007 → IRS 501(c)(3) granted March 6, 2009 (effective Aug 28, 2007); EIN 26-0789229; Melbourne, FL; founder Jamie Tworkowski departed entirely July 7, 2021; Lindsay Kolsch sole ED as of 2025; ~20 staff; bands (Switchfoot, Anberlin, Paramore et al.) as early amplifiers. The missional-merchandise footprint ("reaches more than 52 countries," ~20,000 pieces/yr) is from TWLOHA's store <a href="https://store.twloha.com/pages/your-impact" target="_blank" rel="noopener">"Your Impact" page</a> (primary); Wikipedia is a secondary source citing the IRS determination letter and TWLOHA's own pages for the chronology. <strong>Source · Method · Basis:</strong> org primary (merch) + secondary (chronology) · web · ✅ Sourced (merch) / ⚠️ corroborating (chronology).</li>
+        </ol>
+        <p class="refs-note">Convention: every claim-bearing element carries a numbered marker matching an entry above — machine-checkable before each deploy (§5.2 / §6 gate 1). Derived ratios are marked computed, not quoted.</p>
+      </div>
+    </section>
+
+    <nav class="related-block" aria-label="Related on this site">
+      <p class="related-title">Related</p>
+      <ul>
+        <li><a href="org-study.html">&larr; Org Study (all organizations)</a></li>
+        <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+        <li><a href="policy-study.html">Policy Study &mdash; how jurisdictions protect music workers</a></li>
+        <li><a href="policy-study-thailand.html">Policy Study: Thailand &mdash; where TWLOHA's "presence" is a link to Samaritans of Thailand</a></li>
+        <li><a href="policy-study-japan.html">Policy Study: Japan &mdash; where TWLOHA's "presence" is a link to Befrienders Tokyo</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <script>
+  /* Scroll-reveal — R3.2 shared IntersectionObserver (normal-scroll page) */
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = 'section > h2, .stat-strip, figure, .table-wrap, .phases-grid, .sources-card, .refs';
+    var nodes = Array.prototype.slice.call(document.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, sibs, idx = 0;
+        if (p){ sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,6) * 60) + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
+
+  <!-- nav scroll-state: transparent over hero, blurred bar once scrolled -->
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden','true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>

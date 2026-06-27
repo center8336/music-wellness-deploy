@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Samaritans of Thailand · Org Study · MH&amp;W</title>
+  <meta name="description" content="Samaritans of Thailand is a volunteer-run, donation-funded suicide-prevention helpline in the Befrienders Worldwide lineage — general mental health, nothing music-specific. Studied as the nearest resource a Thai musician would actually reach, plus the finding that Thailand has a policy layer but no music-specific mental-health organization.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      /* ── DIA-GRADE READING SCALE (calibrated to Dia browser, serif-corrected) ── */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;--lh-prose:1.7;--wt-prose:440;--measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;--label-ink:var(--graphite);
+      --font-cjk:'Noto Serif TC',serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { overflow-x: hidden; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--black);
+      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      line-height: var(--lh-prose);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    a { color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    a:hover { color: var(--signal-dim); }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--signal); outline-offset: 3px; border-radius: var(--radius);
+    }
+
+    .skip-nav {
+      position: absolute; left: -9999px; top: 0; z-index: 200;
+      background: var(--signal); color: var(--white);
+      padding: 0.5rem 1rem; font-family: var(--font-mono);
+    }
+    .skip-nav:focus { left: 0; }
+
+    /* ===== NAVIGATION ===== */
+    nav.nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; flex-direction: column;
+      padding: 2rem 2.5rem;
+      padding-top: calc(2rem + env(safe-area-inset-top));
+      background: transparent;
+      transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    nav.nav.scrolled {
+      background: rgba(244, 244, 245, 0.45);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: var(--font-mono); font-size: 1.1rem; font-weight: 400;
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-topbar { display:none; }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; min-width:44px; min-height:44px; z-index:101; -webkit-tap-highlight-color:transparent; }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity:0; }
+    .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
+
+    /* ===== LAYOUT ===== */
+    main { max-width: var(--max-w); margin: 0 auto; padding: 0 2.5rem 5rem 2.5rem; }
+    section { margin-bottom: 4rem; }
+    .narrow { max-width: var(--max-w-text); }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding-top: calc(9rem + env(safe-area-inset-top));
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-light);
+      margin-bottom: 3rem;
+    }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.18em;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: var(--font-display); font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6.5rem);
+      font-weight: 800; line-height: 1.04; color: var(--black); letter-spacing: -0.01em;
+      overflow-wrap: break-word; hyphens: auto;
+    }
+    .hero h1 .tail { display:block; font-size: clamp(1.15rem, 2.6vw, 1.9rem); font-weight: 600; color: var(--signal); letter-spacing: 0; margin-top: 0.9rem; }
+    .hero .subtitle {
+      font-family: var(--font-body); font-size: clamp(1.25rem, 1.05rem + 1.4vw, 1.5rem);
+      color: var(--graphite); line-height: 1.55; margin-top: 1.5rem; max-width: 54ch;
+    }
+    .basis-badge {
+      display: inline-block; margin-top: 1.75rem;
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--graphite); background: var(--signal-bg);
+      border: 1px solid var(--signal-glow); border-radius: var(--radius);
+      padding: 0.5rem 0.85rem; line-height: 1.5;
+    }
+
+    /* ===== TWO-LINE COVER (R2.1, 2026-06-20) — width:100% inside main (no 100vw breakout → no x-overflow) ===== */
+    .cover {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;                /* clips the wash */
+      padding: 0 2rem;
+    }
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%,
+        var(--signal-glow) 0%,
+        rgba(102,103,171,0.06) 38%,
+        rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
+    }
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 1280px);
+    }
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin: 0;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+    .cover-sub-cjk {
+      font-family: var(--font-cjk);
+      font-size: clamp(1rem, 2.6vw, 1.6rem);
+      font-weight: 600;
+      color: var(--graphite);
+      margin: 1rem 0 0;
+      letter-spacing: 0.02em;
+    }
+    .cover-line {
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--purple-deep);
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
+    }
+    .cover-hint {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
+    }
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
+    }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-sub-cjk { animation-delay: 0.16s; }
+    .cover-inner > .cover-line  { animation-delay: 0.24s; }
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .cover-wash,
+      .cover-hint,
+      .cover-inner > * { animation: none; opacity: 1; transform: none; }
+    }
+    @media (max-width: 768px) {
+      .cover { padding: 0 1.25rem; }
+      .cover-title { font-size: clamp(1.7rem, 7.3vw, 2.4rem); }
+      .cover-line  { font-size: clamp(0.72rem, 3.2vw, 0.95rem); letter-spacing: 0.18em; }
+    }
+
+    /* ===== TYPE ===== */
+    h2 {
+      font-family: var(--font-display); font-size: var(--text-h2);
+      font-weight: 700; line-height: 1.1; color: var(--black);
+      margin-bottom: 1.25rem; letter-spacing: -0.01em;
+      text-wrap: balance; overflow-wrap: break-word;
+    }
+    h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem); line-height: 1.25; font-weight: 600; color: var(--charcoal); margin: 1.75rem 0 0.75rem; }
+    .section-label {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem;
+    }
+    p { color: var(--graphite); max-width: var(--measure-prose); margin-bottom: 1rem; line-height: 1.65; }
+    p.lead { font-size: 1.1rem; color: var(--charcoal); }
+    strong { color: var(--charcoal); font-weight: 600; }
+    em { color: var(--graphite); }
+
+    /* ===== MODEL CALLOUT ===== */
+    .model-callout { background: var(--bg-card-dark); color: var(--snow); border-radius: var(--radius-lg); padding: 2.25rem 2.5rem; margin-bottom: 3rem; }
+    .model-callout h2 { color: var(--white); margin-bottom: 1rem; }
+    .model-callout p { color: var(--silver); max-width: none; }
+    .model-callout strong { color: var(--white); }
+    .model-callout a { color: var(--spectrum-3); text-decoration: underline; text-underline-offset: 2px; }
+    .model-callout a:hover { color: var(--white); }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-card); margin: 1.5rem 0 0.75rem; }
+    .stat-item { padding: 1.75rem 1.25rem; border-right: 1px solid var(--border-light); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--signal); line-height: 1; font-variant-numeric: tabular-nums; }
+    .stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.6rem; line-height: 1.4; }
+
+    /* ===== TABLES ===== */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; margin: 1.25rem 0; border-radius: var(--radius-lg); border: 1px solid var(--border-light); }
+    .table-wrap:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+    table { width: 100%; border-collapse: collapse; background: var(--bg-card); font-size: var(--text-small); }
+    caption { text-align: left; font-family: var(--font-mono); font-size: var(--text-caption); color: var(--label-ink); padding: 0.75rem 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border-light); vertical-align: top; font-variant-numeric: tabular-nums; }
+    thead th { font-family: var(--font-mono); font-size: var(--text-micro); text-transform: uppercase; letter-spacing: 0.06em; color: var(--label-ink); background: var(--snow); }
+    tbody tr:last-child td { border-bottom: none; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .row-emph td { background: var(--signal-bg); font-weight: 600; color: var(--charcoal); }
+
+    /* ===== PROGRAM / MODEL LIST ===== */
+    .prog { list-style: none; margin: 1.25rem 0 0; padding: 0; }
+    .prog li { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 0.85rem; }
+    .prog h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .prog p { font-size: var(--text-sm); margin-bottom: 0; }
+    .prog .ptag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ===== GAP CARDS (reusing crisis-grid shape) ===== */
+    .crisis-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .crisis { background: var(--bg-card); border: 1px solid var(--border-light); border-top: 3px solid var(--spectrum-1); border-radius: var(--radius-lg); padding: 1.5rem 1.6rem; }
+    .crisis .cyrtag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--graphite); letter-spacing: 0.08em; text-transform: uppercase; }
+    .crisis h3 { margin: 0.3rem 0 0.6rem; font-size: 1.08rem; }
+    .crisis p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== SW CARDS ===== */
+    .sw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.25rem; }
+    .sw-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem; }
+    .sw-card.weak { border-left: 3px solid var(--spectrum-2); }
+    .sw-card.strong { border-left: 3px solid var(--spectrum-4); }
+    .sw-card h3 { margin: 0 0 0.4rem; font-size: 1rem; }
+    .sw-card p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== LESSONS ===== */
+    .lessons { counter-reset: lesson; list-style: none; margin: 1.5rem 0 0; padding: 0; }
+    .lessons li { position: relative; padding: 1.25rem 1.5rem 1.25rem 3.5rem; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); margin-bottom: 0.85rem; }
+    .lessons li::before { counter-increment: lesson; content: counter(lesson); position: absolute; left: 1.25rem; top: 1.25rem; font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--signal); }
+    .lessons h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .lessons p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== CITATIONS (§5 inline tier) ===== */
+    .cite { font-size: 0.7em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem; }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-fine); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; max-width: var(--measure-ref); overflow-wrap: anywhere; }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs-note { font-size: var(--text-xs); color: var(--label-ink); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-sm); color: var(--label-ink); font-style: italic; max-width: var(--max-w-text); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .crisis-grid { grid-template-columns: 1fr; }
+      .sw-grid { grid-template-columns: 1fr; }
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2n) { border-right: none; }
+      .stat-item:nth-child(-n+2) { border-bottom: 1px solid var(--border-light); }
+    }
+    @media (max-width: 768px) {
+      nav.nav { padding: 1.2rem 1.5rem; padding-top: calc(1.2rem + env(safe-area-inset-top)); }
+      nav.nav.open { background: rgba(244,244,245,0.95); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-light); }
+      .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
+      .nav-toggle { display:block; }
+      .nav-mobile-brand { display:block; }
+      .nav-links { display:none; flex-direction:column; gap:0.75rem; margin-top:1rem; }
+      .nav-links.show { display:flex; }
+      .nav-links a { font-size: 0.85rem; }
+      main { padding: 0 1.5rem 3rem 1.5rem; }
+      .hero { padding-top: calc(7rem + env(safe-area-inset-top)); }
+      .hero h1 { font-size: clamp(2.4rem, 10.5vw, 3.4rem); }
+      .model-callout { padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
+    @media (max-width: 680px) {
+      p, .hero .subtitle, .refs li, .cite-help { max-width: none; }
+    }
+    @media (max-width: 480px) {
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+      .stat-item:last-child { border-bottom: none; }
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
+      table { font-size: 0.82rem; }
+      thead th { font-size: 0.6rem; }
+      th, td { padding: 0.5rem 0.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } nav.nav { transition: none; } }
+
+    /* ===== Scroll-reveal (R3.2 craft pass) ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ===== Related block (no dead-ends, R3.2) ===== */
+    .related-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-light); }
+    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--label-ink); margin-bottom: 0.6rem; }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a { font-family: var(--font-body); font-size: var(--text-sm); color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+  </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open');this.setAttribute('aria-expanded',o)">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+        <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="org-study.html" class="current" aria-current="page">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
+      <a href="field-news.html">FIELD NEWS</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- COVER -->
+    <section class="cover">
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="cover-inner">
+        <h1 class="cover-title">SAMARITANS OF THAILAND</h1>
+        <p class="cover-sub-cjk cjk">สมาคมสะมาริตันส์แห่งประเทศไทย</p>
+        <p class="cover-line">Org Study · Est. 1978</p>
+      </div>
+      <span class="cover-hint" aria-hidden="true">↓ Scroll</span>
+    </section>
+
+    <!-- MODEL CALLOUT -->
+    <div class="model-callout">
+      <h2>One model, in one line</h2>
+      <p><a href="org-study-musicares.html">MusiCares</a> is a music-industry incumbent; <a href="org-study-sadem.html">SADEM</a> is a musicians' union that owns a health fund. <strong>Samaritans of Thailand is neither music-specific nor a service this project would normally profile — it is a general, volunteer-run, donation-funded suicide-prevention helpline.</strong> It is here for one reason: in the <strong>absence of any Thai music-specific mental-health organization</strong>, it is the nearest resource a Thai musician in distress would actually reach. The transferable lesson is the cheap, trainable <em>befriending-helpline</em> method — and its funding fragility — not anything music-sector. The finding that matters is what is <em>missing</em> around it.<sup class="cite"><a href="#sam-src-1" data-src="org-site" data-tip="Identity, model, founding 1978, languages, hours: Samaritans of Thailand own site (Thai), cross-checked Befrienders Worldwide + Find A Helpline.">1</a></sup></p>
+    </div>
+
+    <!-- 1. PROFILE -->
+    <section>
+      <div class="section-label">01 — Profile</div>
+      <h2>A befriending helpline, not a clinic<sup class="cite"><a href="#sam-src-1" data-src="org-site" data-tip="Founded 1978 (พ.ศ. 2521) by Prof. Dr. Udomsilp Srisangnam with ~40 volunteers; registered สมาคม (association); non-religious/political stance. Samaritans of Thailand, About page (Thai).">1</a></sup></h2>
+      <p>Samaritans of Thailand is a registered <strong>association</strong> (<span class="cjk cjk-inline">สมาคม</span>) that runs a telephone listening service. Its model is <em>befriending</em>: trained lay volunteers — not psychiatrists or psychologists — listen with what the organization calls <span class="cjk cjk-inline">ฟังด้วยใจ</span> ("listening with the heart"), without giving advice, diagnosis, or solutions, and keep every call confidential. It was founded in <strong>1978</strong> by the Thai physician <strong>Prof. Dr. Udomsilp Srisangnam</strong>, after the British Samaritans model, with about 40 Thai and foreign volunteers. It is explicitly <strong>non-religious, non-political, and non-philosophical</strong>; its volunteers are unpaid and drawn from many professions.<sup class="cite"><a href="#sam-src-1" data-src="org-site" data-tip="Founder, founding cohort of ~40, befriending mission, non-religious/political/philosophical stance: Samaritans of Thailand, About (Thai). Corroborated by Find A Helpline (org-verified record).">1</a></sup><sup class="cite"><a href="#sam-src-3" data-src="findahelpline" data-tip="Established 1978 by Dr. Udomsilp Srisangnam, 40 founding volunteers; volunteers (not clinicians); topics anxiety/depression/loneliness/stress/suicide. Find A Helpline, record marked 'verified by this helpline'.">3</a></sup></p>
+
+      <div class="table-wrap" role="region" aria-label="Organization profile — Samaritans of Thailand (scrollable table)" tabindex="0">
+        <table>
+          <caption>Organization profile — Samaritans of Thailand (sources cited inline)</caption>
+          <tbody>
+            <tr><th scope="row">Name (Thai)</th><td><span class="cjk">สมาคมสะมาริตันส์แห่งประเทศไทย</span></td></tr>
+            <tr><th scope="row">Legal form</th><td>Registered association (สมาคม)</td></tr>
+            <tr><th scope="row">Founded</th><td>1978 (พ.ศ. 2521)</td></tr>
+            <tr><th scope="row">Founder</th><td>Prof. Dr. Udomsilp Srisangnam, with ~40 founding volunteers</td></tr>
+            <tr><th scope="row">Model</th><td>Volunteer telephone <em>befriending</em> · suicide prevention / emotional support</td></tr>
+            <tr><th scope="row">Affiliation</th><td>Member of Befrienders Worldwide (UK Samaritans lineage, est. 1953)</td></tr>
+            <tr><th scope="row">Centres</th><td>Bangkok (Sukhumvit 38, Klongtoey) · Chiang Mai</td></tr>
+            <tr><th scope="row">Helpline (Bangkok)</th><td>02-113-6789 — press 1 (Thai), 2 (English call-back), 3 (office); daily 12:00–22:00</td></tr>
+            <tr><th scope="row">Helpline (Chiang Mai)</th><td>098-815-9011 — daily 19:00–22:00</td></tr>
+            <tr><th scope="row">Languages</th><td>Thai and English</td></tr>
+            <tr><th scope="row">Funding</th><td>Donations (no sustained government funding) — ⚠️/❓</td></tr>
+            <tr><th scope="row">Music-specific?</th><td><strong>No</strong> — general service; nothing for the music sector (§5)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Critically for this project, the service is <strong>general</strong>: anyone in emotional distress can call. The verified Find A Helpline record lists its focus topics as anxiety, depression, loneliness, stress and suicide, and "also helps with" a long list including relationships, family, abuse, grief and substance use — <strong>no occupational or sector-specific track of any kind</strong>, and nothing for musicians.<sup class="cite"><a href="#sam-src-3" data-src="findahelpline" data-tip="Topics anxiety/depression/loneliness/stress/suicide + general list; no occupational or music-specific track. Find A Helpline (org-verified).">3</a></sup></p>
+    </section>
+
+    <!-- 2. THE MODEL -->
+    <section>
+      <div class="section-label">02 — The model</div>
+      <h2>Volunteer befriending, in the Befrienders lineage<sup class="cite"><a href="#sam-src-4" data-src="befrienders" data-tip="Bangkok + Chiang Mai listed members of Befrienders Worldwide (charity reg. England &amp; Wales no. 1146717), which sets befriending standards and a global directory but does not fund local centres.">4</a></sup></h2>
+      <p>The distinctive thing about Samaritans of Thailand is not any program — it runs essentially one service, a phone line — but the <strong>method</strong> and the <strong>lineage</strong>.</p>
+      <ul class="prog">
+        <li><div class="ptag">Method · befriending</div><h3>Listen and ask — never advise</h3><p>Volunteers are trained to listen and ask, never to suggest. Advice is prohibited (it "increases the dependence of callers," and "right and wrong do not depend on our standards"); volunteers ask directly whether a caller has suicidal thoughts and an actual plan, and in an active crisis ask the caller to stop. Becoming a volunteer is deliberately hard: a multi-day workshop, ~3 weeks of general training, then <strong>4–6 months (up to 12) of one-on-one mentoring</strong> before handling real calls.<sup class="cite"><a href="#sam-src-2" data-src="bangkok-post" data-tip="Training discipline (no advice; ask about plan; crisis 'stop'; 4–6 up to 12 months mentoring); 75% female, half 30–45. Bangkok Post / Spectrum, 2015 — ⚠️ as-of-2015.">2</a></sup></p></li>
+        <li><div class="ptag">Lineage · Befrienders Worldwide</div><h3>Recognized method, on its own financially</h3><p>The Bangkok and Chiang Mai centres are listed members of Befrienders Worldwide (formerly Befrienders International; UK Samaritans founded 1953 by Rev. Chad Varah). Befrienders supplies shared befriending standards and a global "find a centre" directory — but it does <strong>not fund</strong> local centres. So Samaritans of Thailand carries an internationally recognized method and brand while being financially on its own.<sup class="cite"><a href="#sam-src-1" data-src="org-site" data-tip="UK 1953 / Rev. Chad Varah origin; Befrienders International→Worldwide renamed 2000; 400+ centres in 39 countries. Samaritans of Thailand, About (Thai).">1</a></sup><sup class="cite"><a href="#sam-src-4" data-src="befrienders" data-tip="Befrienders Worldwide membership of both Thai centres; parent is a UK charity that sets standards/directory, not a funder. Befrienders Worldwide listing.">4</a></sup></p></li>
+        <li><div class="ptag">Languages &amp; reach</div><h3>Thai + English, two cities, not 24/7</h3><p>The line runs in Thai and English. The Thai line operates daily 12:00–22:00; the <strong>English service was added in 2007</strong> and still runs as a <strong>call-back</strong> line (historically ~100 calls/year), not a live 24-hour line. A Thai caller and an English-speaking expatriate both have somewhere to call — but neither has the 24/7 coverage of the UK or Singapore Samaritans.<sup class="cite"><a href="#sam-src-2" data-src="bangkok-post" data-tip="English line set up 2007, call-back only, ~100 calls/yr; Thai line noon–10pm. Bangkok Post / Spectrum, 2015 — ⚠️ as-of-2015.">2</a></sup></p></li>
+      </ul>
+    </section>
+
+    <!-- 3. FUNDING -->
+    <section>
+      <div class="section-label">03 — Funding &amp; sustainability</div>
+      <h2>Donation-dependent, thinly resourced<sup class="cite"><a href="#sam-src-2" data-src="bangkok-post" data-tip="Donation-only funding vs UK government-funded counterpart; ~500,000 baht/yr running cost; Rotary 1M-baht grant; last DMH grant 100,000 baht in 2011. Bangkok Post / Spectrum, 2015 — ⚠️ as-of-2015. No audited accounts public.">2</a></sup></h2>
+      <p>This is the part most relevant to a startup — and the part where the sources are weakest. Thai associations of this size do not publish audited accounts, and none were found; <strong>every monetary figure here is a dated journalist estimate or a single grant, never a filing</strong> (❓).</p>
+      <ul class="prog">
+        <li><div class="ptag">Base</div><h3>Donation-funded</h3><p>Unlike its UK counterpart — which receives British-government support — Samaritans of Thailand <strong>"depends solely on donations."</strong> Its current site solicits donations to a Bangkok Bank (Siam Paragon branch) account in the association's name.<sup class="cite"><a href="#sam-src-2" data-src="bangkok-post" data-tip="'Depends solely on donations' vs UK government-funded counterpart. Bangkok Post / Spectrum, 2015.">2</a></sup><sup class="cite"><a href="#sam-src-1" data-src="org-site" data-tip="Donation solicitation to Bangkok Bank (Siam Paragon) account in the association's name. Samaritans of Thailand, Contact (Thai).">1</a></sup></p></li>
+        <li><div class="ptag">Cost</div><h3>~500,000 baht/year to run</h3><p>The then-director estimated about 500,000 baht/year to run operations (electricity, phone, rent). ⚠️ as-of-2015.<sup class="cite"><a href="#sam-src-2" data-src="bangkok-post" data-tip="~500,000 baht/yr running cost (electricity/phone/rent). Bangkok Post / Spectrum, 2015.">2</a></sup></p></li>
+        <li><div class="ptag">Grants</div><h3>Episodic, not a base</h3><p>Rotary International gave a one-million-baht goal-specific grant (recruitment / outreach) around 2014, which boosted volunteer numbers. The <strong>last government grant</strong> was a <strong>100,000-baht</strong> grant from the Department of Mental Health in <strong>2011</strong> — the director said the DMH "saw it as something abstract rather than concrete," unable to measure a listening service's success rate. Public money has been occasional and small, never a sustaining base.<sup class="cite"><a href="#sam-src-2" data-src="bangkok-post" data-tip="Rotary 1M-baht grant; last DMH grant 100,000 baht in 2011; DMH 'abstract rather than concrete' quote. Bangkok Post / Spectrum, 2015.">2</a></sup></p></li>
+        <li><div class="ptag">Peers</div><h3>Less equipped than regional neighbours</h3><p>The Samaritans of Singapore and Befrienders Malaysia both run <strong>24-hour</strong> lines with larger volunteer corps and <strong>national-government support</strong>; Samaritans of Thailand, by contrast, is "less equipped in terms of manpower," and was constrained from growing its lines from four to ten by volunteers and funding.<sup class="cite"><a href="#sam-src-2" data-src="bangkok-post" data-tip="Singapore/Malaysia peers run 24h govt-supported lines; SoT less equipped; wanted 4→10 lines. Bangkok Post / Spectrum, 2015.">2</a></sup></p></li>
+      </ul>
+      <p><strong>Honest limitation.</strong> Every figure above is a decade-old estimate or a one-off grant. On the Orgs Map, this org's funding Basis can move from "❓ No source" to <strong>⚠️ Inferred (donation-funded)</strong> — the donation model is stated on the org's own current site and corroborated by the Bangkok Post — but it should <strong>not</strong> be ✅, because there is no published filing or audited account to verify any amount.<sup class="cite"><a href="#sam-src-1" data-src="org-site" data-tip="Donation model stated on the current org site. Basis upgrade ⚠️ Inferred, not ✅ — no filing exists to verify amounts.">1</a></sup></p>
+    </section>
+
+    <!-- 4. REACH -->
+    <section>
+      <div class="section-label">04 — Reach &amp; operating profile</div>
+      <h2>A few thousand calls a year — mostly in distress<sup class="cite"><a href="#sam-src-2" data-src="bangkok-post" data-tip="All reach figures from Bangkok Post / Spectrum, 2015 — ⚠️ as-of-2015 (a decade old; included to characterize kind/scale, not as current performance).">2</a></sup></h2>
+      <p>The figures below are the only concrete reach numbers available, and they are <strong>a decade old</strong> (⚠️ as-of-2015). They are included to characterize the <em>kind and scale</em> of the service — a few thousand calls a year, the majority in emotional distress, run by dozens not hundreds of volunteers — not as current performance.</p>
+
+      <div class="stat-strip">
+        <div class="stat-item"><div class="stat-num">~7,000</div><div class="stat-label">calls per year on average (≈9,000 in the peak year cited)</div></div>
+        <div class="stat-item"><div class="stat-num">60–70%</div><div class="stat-label">of callers express suicidal feelings</div></div>
+        <div class="stat-item"><div class="stat-num">~500</div><div class="stat-label">volunteers recruited over its first 36 years (~60 active)</div></div>
+        <div class="stat-item"><div class="stat-num">2007</div><div class="stat-label">English line added — call-back only, ~100 calls/yr</div></div>
+      </div>
+
+      <p>About 75% of callers are female and roughly half are aged 30–45. The COVID-19 period interrupted operations — the centre <strong>closed and then re-opened in November 2021</strong> with a <strong>new phone number (02-113-6789)</strong> — which is itself evidence of fragility: a thinly funded volunteer line could not stay open through the pandemic.<sup class="cite"><a href="#sam-src-2" data-src="bangkok-post" data-tip="75% female; half 30–45. Bangkok Post / Spectrum, 2015.">2</a></sup><sup class="cite"><a href="#sam-src-1" data-src="org-site" data-tip="COVID closure and Nov 2021 re-open with new number 02-113-6789. Samaritans of Thailand, news posts (Thai).">1</a></sup></p>
+    </section>
+
+    <!-- 5. WHAT IT OFFERS MUSICIANS -->
+    <section>
+      <div class="section-label">05 — What it offers musicians</div>
+      <h2>Nothing music-specific — said plainly<sup class="cite"><a href="#sam-src-3" data-src="findahelpline" data-tip="General service; no occupational or music-specific track. Find A Helpline (org-verified record).">3</a></sup></h2>
+      <p>This must be said without hedging: <strong>Samaritans of Thailand offers nothing designed for the music sector.</strong> There is no musician track, no industry partnership, no occupational-health framing, no touring or gig-economy content, no music-industry-aware volunteers. It is a <strong>general</strong> emotional-support and suicide-prevention line. A Thai musician in crisis would reach exactly the same volunteers, the same noon–10pm Thai line or the call-back English line, as any other caller.</p>
+      <p>That is precisely why it appears in this project's map and in this study: in the <strong>absence</strong> of any Thai music-specific mental-health organization (§6), the general crisis line is the <strong>nearest-available resource</strong> a musician would actually use. Its value to the music sector is real but <strong>incidental</strong> — it is the floor, not a music-sector service.</p>
+    </section>
+
+    <!-- 6. GAP FINDING -->
+    <section>
+      <div class="section-label">06 — The gap finding</div>
+      <h2>A policy layer and a general helpline — but no music-specific mental-health organization<sup class="cite"><a href="#sam-src-8" data-src="gap-search" data-tip="Thai-language search (มูลนิธิ / นักดนตรี / สุขภาพจิตนักดนตรี / อุตสาหกรรมดนตรี / สหภาพนักดนตรี) run 2026-06-28: no music-specific MH org surfaced. Documents an absence per Rule 4, not a non-existence claim.">8</a></sup></h2>
+      <p>This is the point of the Thailand parity study. Before concluding the music-MH <strong>org</strong> layer is empty, I ran a genuine <strong>Thai-language</strong> search (Rule 4: absence found ≠ non-existence) using the prescribed terms — <span class="cjk cjk-inline">มูลนิธิ</span> (foundation), <span class="cjk cjk-inline">นักดนตรี</span> (musician), <span class="cjk cjk-inline">สุขภาพจิตนักดนตรี</span> (musician mental health), <span class="cjk cjk-inline">อุตสาหกรรมดนตรี</span> (music industry), <span class="cjk cjk-inline">สหภาพนักดนตรี / สมาคมนักดนตรี</span> (musicians' union / association). What it surfaced, and why none of it closes the gap:</p>
+
+      <div class="crisis-grid">
+        <div class="crisis">
+          <div class="cyrtag">Found · not music-MH</div>
+          <h3>LOVEiS Music Foundation</h3>
+          <p>A registered foundation (<span class="cjk cjk-inline">มูลนิธิ เลิฟ อิส มิวสิค</span>) founded to carry out the vision of the CEO of the LOVEiS Entertainment label. Music-specific — but its purpose is music <strong>education and industry development</strong>: free classes, conservatory scholarships, instrument donation. No mental-health service, no welfare for working musicians.<sup class="cite"><a href="#sam-src-9" data-src="loveis" data-tip="LOVEiS Music Foundation: free music classes, scholarships (Mahidol/Silpakorn), instrument donation; no MH/welfare. loveisfoundation.or.th + Thai press.">9</a></sup></p>
+        </div>
+        <div class="crisis">
+          <div class="cyrtag">Found · welfare, not MH</div>
+          <h3>Music Association of Thailand (Royal Patronage)</h3>
+          <p>The closest music-worker <strong>welfare</strong> body. It runs ad-hoc charity concerts (<span class="cjk cjk-inline">"ด้วยใจ"</span>) raising relief funds for <strong>ill and deceased musician members</strong>, and acts as a government-recognized certifying body for the COVID-era 5,000-baht relief payment to musicians. Episodic welfare — <strong>not a standing mental-health service</strong> (the same welfare-not-MH pattern as SADEM in Argentina).<sup class="cite"><a href="#sam-src-10" data-src="music-assoc" data-tip="Music Association of Thailand: 'ด้วยใจ' charity concert for ill/deceased members; certifier for 5,000-baht relief. Episodic welfare, not MH. musicassocth.com + Thai press.">10</a></sup></p>
+        </div>
+        <div class="crisis">
+          <div class="cyrtag">Exists · general / government</div>
+          <h3>The policy layer</h3>
+          <p>Thailand has a national <strong>Mental Health Hotline 1323</strong> (DMH), the multi-stakeholder <strong>HOPE Taskforce</strong> (est. 2019, with the Royal Thai Police and social-media influencers), and a <strong>national suicide-prevention plan to 2030</strong> aligned to WHO's LIVE LIFE package. The policy layer exists — but it is general-population, not music-sector.<sup class="cite"><a href="#sam-src-12" data-src="who" data-tip="DMH Hotline 1323; HOPE Taskforce (2019); national suicide-prevention plan to 2030 (WHO LIVE LIFE). Thailand suicide mortality +32% 2017→2022; 31,402 attempts in 2023. WHO, 2024.">12</a></sup></p>
+        </div>
+        <div class="crisis">
+          <div class="cyrtag">Confirms the gap</div>
+          <h3>Backline's directory: zero Thailand orgs</h3>
+          <p>Backline — the US hub that aggregates music-industry mental-health resources worldwide (now with Spotify) — lists organizations for other countries (e.g. Japan, New Zealand) but <strong>nothing for Thailand</strong>. A Thai music worker searching the field's main directory finds no Thai music-MH org to reach.<sup class="cite"><a href="#sam-src-13" data-src="backline" data-tip="Backline global directory lists other countries (e.g. Japan, New Zealand) but no Thailand-based organization. backline.care global resources.">13</a></sup></p>
+        </div>
+      </div>
+
+      <p style="margin-top:1.75rem;"><strong>The comparison case the Taiwan opportunity rests on.</strong> Thailand has (a) a <strong>policy layer</strong> for suicide prevention, (b) a <strong>general</strong> emotional-support helpline a musician would actually reach (Samaritans of Thailand), and (c) an <strong>ad-hoc music-welfare body</strong> — but <strong>no music-specific mental-health organization</strong>. That is exactly the structure behind the project's "floor (rights) vs room (services)" thesis: Thailand has <em>some floor</em> and <em>some general room</em>, but the <strong>music-specific room is empty</strong>. It mirrors Taiwan, where <span class="cjk cjk-inline">藝創工會</span> supplies a broad-arts floor and the national plan supplies general counseling, but no music-specific MH body exists.<sup class="cite"><a href="#sam-src-8" data-src="gap-search" data-tip="Synthesis of the Thai-language search: policy layer + general helpline + ad-hoc music welfare, but no music-specific MH org. Filed as wiki/concepts/thailand_music_mh_gap.md.">8</a></sup></p>
+    </section>
+
+    <!-- 7. STRENGTHS / WEAKNESSES -->
+    <section>
+      <div class="section-label">07 — Strengths &amp; weaknesses</div>
+      <h2>What works, what to watch</h2>
+      <div class="sw-grid">
+        <div class="sw-card strong"><h3>Proven, recognized method</h3><p>40+ years of befriending in the Befrienders Worldwide lineage; rigorous volunteer screening and training. The model travels well and is cheap to run relative to clinical care.</p></div>
+        <div class="sw-card strong"><h3>Bilingual, multi-city</h3><p>Thai + English, Bangkok + Chiang Mai — broader reach than a single-language, single-city line.</p></div>
+        <div class="sw-card strong"><h3>Low barrier to access</h3><p>Free, anonymous, confidential, no diagnosis or paperwork — the opposite of the eligibility gates that exclude precarious workers from grant-based bodies.</p></div>
+        <div class="sw-card strong"><h3>Trusted, neutral brand</h3><p>Explicitly non-religious / non-political; a name a distressed person can call without fear of judgment.</p></div>
+        <div class="sw-card weak"><h3>Donation-dependent, fragile</h3><p>~500k baht/year on donations, only episodic grants, no government base — structurally fragile, as the COVID closure showed.</p></div>
+        <div class="sw-card weak"><h3>Not 24/7</h3><p>Thai line noon–10pm; English line call-back only — coverage gaps exactly when crises peak overnight, unlike the Singapore/Malaysia peers.</p></div>
+        <div class="sw-card weak"><h3>Capacity-bound &amp; stale reporting</h3><p>Service scale is capped by volunteer supply (busy signals were a stated problem), and there is no recent annual report — the public evidence base is a decade old.</p></div>
+        <div class="sw-card weak"><h3>General, not specialized</h3><p>It serves everyone, so it serves no occupational group — including musicians — with anything tailored.</p></div>
+      </div>
+    </section>
+
+    <!-- 8. LESSONS -->
+    <section>
+      <div class="section-label">08 — Lessons for Taiwan</div>
+      <h2>What a Taiwan music mental health NPO should take</h2>
+      <ol class="lessons">
+        <li><h3>Borrow the befriending method, not the funding</h3><p>A confidential, non-judgmental listening line staffed by trained lay volunteers (not clinicians) is the most cost-effective crisis-support primitive in this whole series. A Taiwan music-MH NPO could stand up a Mandarin befriending line for music workers far more cheaply than a clinical service. The method is the asset.<sup class="cite"><a href="#sam-src-2" data-src="bangkok-post" data-tip="The befriending model and its volunteer-training discipline. Bangkok Post / Spectrum, 2015.">2</a></sup></p></li>
+        <li><h3>Do not rely on donations alone — it is the failure mode</h3><p>Samaritans of Thailand's donation-only base left it thinly resourced, not 24/7, and unable to stay open through COVID. Taiwan's NT$5.63B national MH plan and Ministry of Culture funding are a base a startup should anchor to <em>first</em>, with donations as a supplement — the opposite of the Thai funding posture.<sup class="cite"><a href="#sam-src-2" data-src="bangkok-post" data-tip="Donation-only base → thin resourcing, not 24/7, COVID closure. Bangkok Post / Spectrum, 2015.">2</a></sup></p></li>
+        <li><h3>Specialize where the general system is general</h3><p>Samaritans is valuable precisely because it is the floor — but it serves no occupational group with anything tailored. The Taiwan opportunity is the <strong>music-specific room</strong> that Thailand (and Taiwan) lacks: industry-aware volunteers, occupational-health framing, gig/touring content. Build the thing the general line cannot be.</p></li>
+        <li><h3>Partner with the general line; don't rebuild it</h3><p>The right relationship to a body like Samaritans (or Taiwan's general counseling lines) is <strong>referral</strong>, not duplication — a music-MH NPO refers acute crises to the trained crisis line and adds the music-sector layer on top. Befrienders' model shows the value of a shared standard plus a referral directory.<sup class="cite"><a href="#sam-src-4" data-src="befrienders" data-tip="Befrienders Worldwide = shared befriending standard + global referral directory, not a funder. Befrienders Worldwide.">4</a></sup></p></li>
+        <li><h3>A welfare body is not a mental-health body</h3><p>Thailand's Music Association does music <strong>welfare</strong> (illness/death relief), not MH; Argentina's SADEM does health <strong>insurance</strong>, not standing MH. Across the region, music-specific <em>welfare</em> exists more often than music-specific <em>MH</em>. A Taiwan NPO should be explicit that mental-health support is the distinct, missing layer — not assume an existing welfare or union body already covers it.<sup class="cite"><a href="#sam-src-10" data-src="music-assoc" data-tip="The Music Association's relief is welfare (illness/death), not MH — the same welfare-not-MH distinction as SADEM. musicassocth.com + Thai press.">10</a></sup></p></li>
+      </ol>
+    </section>
+
+    <!-- 9. METHOD + REFERENCES -->
+    <section>
+      <div class="section-label">09 — Methodology &amp; references</div>
+      <h2>Basis</h2>
+      <p class="cite-help">Every claim carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source; click to jump to the full reference. Identity, model, founding (1978), languages and contact are ✅ Sourced to the organization's own Thai-language site, cross-checked against the Befrienders Worldwide listing and the org-verified Find A Helpline record. Operating figures (call volume, volunteers, donation-only funding, running cost) are ⚠️ as-of-2015, drawn from a Bangkok Post long-read — they characterize the kind and scale of the service, not current performance. No audited financials exist publicly (❓): every monetary figure is a dated estimate or a single grant, never a filing. The gap finding rests on an original Thai-language search; per Rule 4 it documents an absence, not a non-existence claim.</p>
+
+      <div class="refs" id="refs-all" data-citation-registry="sam-all">
+        <div class="refs-title">References</div>
+        <ol>
+          <li id="sam-src-1" data-src="org-site">Samaritans of Thailand. (n.d.). <em>About Samaritans</em> (เกี่ยวกับสะมาริตันส์) &amp; <em>Contact us</em> (ติดต่อเรา). Retrieved June 28, 2026, from <a href="https://www.samaritansthai.com/aboutus/" target="_blank" rel="noopener">samaritansthai.com/aboutus</a> and <a href="https://www.samaritansthai.com/contactus/" target="_blank" rel="noopener">/contactus</a> — organization's own Thai-language pages. Confirms: founded 1978 (พ.ศ. 2521) by Prof. Dr. Udomsilp Srisangnam with ~40 volunteers; legal form สมาคม; befriending mission; non-religious/political/philosophical stance; Befrienders International→Worldwide (2000) lineage and UK 1953 / Rev. Chad Varah origin; current Bangkok line 02-113-6789 (press 1 Thai / 2 English / 3 office), daily 12:00–22:00; Chiang Mai 098-815-9011, 19:00–22:00; donations to Bangkok Bank (Siam Paragon); COVID closure → Nov 2021 re-open with the new number. <strong>Source · Method · Basis:</strong> organization primary site (Thai) · web (rendered cleanly) · ✅ Sourced (identity/model/contact); ❓ for financial amounts and current leadership (not on site).</li>
+          <li id="sam-src-2" data-src="bangkok-post">Bangkok Post / <em>Spectrum</em>. (2015). <em>The need for compassion when lives are on the line</em>. <a href="https://www.bangkokpost.com/thailand/special-reports/463072/the-need-for-compassion-when-lives-are-on-the-line" target="_blank" rel="noopener">bangkokpost.com</a> — long-read on Samaritans of Thailand. Source for: ~7,000 calls/yr (≈9,000 peak); 60–70% express suicidal feelings; &lt;10 on-the-spot attempts; ~500 volunteers over 36 yrs (~60 active); 75% female / half 30–45; English line added 2007 (call-back, ~100 calls/yr); donation-only funding vs UK government-funded counterpart; ~500,000 baht/yr running cost; Rotary International 1M-baht grant; last DMH grant 100,000 baht in 2011; Singapore/Malaysia peers run 24h government-supported lines; then-director Trakarn Chensy. <strong>Source · Method · Basis:</strong> credible national press (long-form) · web · ⚠️ <strong>as-of-2015</strong> (figures a decade old; carried as characterizing, not current). NOTE: this 2015 article prints the <em>old</em> phone numbers (02-713-679x), superseded by 02-113-6789 since Oct 2021 — current number per ref 1; old numbers not used here.</li>
+          <li id="sam-src-3" data-src="findahelpline">ThroughLine — Find A Helpline. (2026). <em>The Samaritans of Thailand สมาคมสะมาริตันส์แห่งประเทศไทย in Thailand</em> (record marked "verified by this helpline"). <a href="https://findahelpline.com/organizations/the-samaritans-of-thailand" target="_blank" rel="noopener">findahelpline.com</a> — confirms: established 1978 by Dr. Udomsilp Srisangnam, 40 founding volunteers; volunteers (not clinicians); topics anxiety/depression/loneliness/stress/suicide + general list; languages Thai/English; <strong>no occupational or music-specific track</strong>. <strong>Source · Method · Basis:</strong> vetted global helpline directory (org-verified record) · web · ✅ Sourced.</li>
+          <li id="sam-src-4" data-src="befrienders">Befrienders Worldwide. (2026). <em>Samaritans of Thailand (Bangkok Centre)</em> &amp; <em>Samaritans of Chiang Mai</em> support listings. <a href="https://befrienders.org/find-support-now/samaritans-of-thailand-bangkok-centre/" target="_blank" rel="noopener">befrienders.org</a> — confirms Befrienders Worldwide membership; Bangkok drop-in address (40 The Pharmaceutical Association of Thailand Under Royal Patronage Building, Sukhumvit 38, Klongtoey, Bangkok 10110); call line +66 (0) 2 113 6789, daily 12:00–22:00, English+Thai; Chiang Mai +66 (0) 98 815 9011, 19:00–22:00; Befrienders Worldwide = charity reg. England &amp; Wales no. 1146717 (sets standards/directory, does not fund centres). <strong>Source · Method · Basis:</strong> international parent-network primary listing · web · ✅ Sourced.</li>
+          <li id="sam-src-8" data-src="gap-search">Thai-language gap search (method note). Searches run June 28, 2026 via web search in Thai using มูลนิธิ, นักดนตรี, สุขภาพจิตนักดนตรี, อุตสาหกรรมดนตรี, สหภาพนักดนตรี / สมาคมนักดนตรี, plus artist-burnout/depression queries. Result: <strong>no music-specific mental-health organization</strong> surfaced — only a music-education foundation (ref 9), an ad-hoc music-welfare association (ref 10), and general/government MH channels (ref 12). Filed as <em>wiki/concepts/thailand_music_mh_gap.md</em>. <strong>Source · Method · Basis:</strong> original in-language search · web · ✅ Sourced (search executed; documents an absence per Rule 4, not a non-existence claim).</li>
+          <li id="sam-src-9" data-src="loveis">LOVEiS Music Foundation (มูลนิธิ เลิฟ อิส มิวสิค). <a href="https://loveisfoundation.or.th/" target="_blank" rel="noopener">loveisfoundation.or.th</a>; profile via <a href="https://www.flexconnect.net/article/news/loveis-music-foundation/" target="_blank" rel="noopener">FlexConnect</a> — registered foundation founded by Tep-arj Kawin-anan (CEO, LOVEiS Entertainment); purpose = music <strong>education</strong> (free classes in guitar/bass/keys/drums/voice; scholarships to Mahidol &amp; Silpakorn music colleges; instrument donation) and <strong>industry development</strong>. No mental-health or music-worker-welfare service. <strong>Source · Method · Basis:</strong> org site + Thai press · web · ✅ Sourced (confirms it is <em>not</em> a music-MH org).</li>
+          <li id="sam-src-10" data-src="music-assoc">Music Association of Thailand under Royal Patronage (สมาคมดนตรีแห่งประเทศไทยในพระบรมราชูปถัมภ์). <a href="https://musicassocth.com/" target="_blank" rel="noopener">musicassocth.com</a>; coverage: <a href="https://mgronline.com/entertainment/detail/9640000026224" target="_blank" rel="noopener">MGR Online</a> (online "ด้วยใจ" charity concert raising relief funds for ill/deceased musician members); <a href="https://www.thairath.co.th/money/economics/thailand_econ/2267235" target="_blank" rel="noopener">Thairath</a> &amp; <a href="https://www.thansettakij.com/economy/507793" target="_blank" rel="noopener">Thansettakij</a> (association named as a certifying body for the government 5,000-baht relief payment to singers/musicians). Provides <strong>episodic welfare / financial relief</strong>, not a standing mental-health service. <strong>Source · Method · Basis:</strong> org site + Thai press · web · ✅ Sourced (confirms music <em>welfare</em>, not music-MH).</li>
+          <li id="sam-src-12" data-src="who">World Health Organization. (2024, September 10). <em>Suicide prevention in Thailand: A whole-of-society approach</em>. <a href="https://www.who.int/news-room/feature-stories/detail/suicide-prevention-in-thailand--a-whole-of-society-approach" target="_blank" rel="noopener">who.int</a> — Thailand suicide mortality +32% (2017→2022); 31,402 suicide attempts in 2023; Department of Mental Health <strong>Mental Health Hotline 1323</strong>; <strong>HOPE Taskforce</strong> (est. 2019, with Royal Thai Police + social-media influencers); national suicide-prevention plan to 2030 aligned to WHO LIVE LIFE. Establishes the <strong>policy layer</strong>. <strong>Source · Method · Basis:</strong> WHO primary · web · ✅ Sourced.</li>
+          <li id="sam-src-13" data-src="backline">Backline. (2026). <em>Mental Health and Wellness Resources for the Global Music Industry</em> (global directory). <a href="https://backline.care/th/global-resources/" target="_blank" rel="noopener">backline.care/global-resources</a> — the field's main global music-MH directory (with Spotify); it lists organizations for other countries (e.g. Japan, New Zealand) but <strong>no Thailand-based organization</strong>. Confirms a Thai music worker has no music-specific MH org in the field's directory. <strong>Source · Method · Basis:</strong> sector directory primary · web · ✅ Sourced (documents absence of a Thai music-MH listing).</li>
+        </ol>
+        <p class="refs-note">Convention: every claim-bearing element carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above — machine-checkable before each deploy (§5.2 / §6 gate 1). Operating figures are marked ⚠️ as-of-2015; the gap finding documents an absence per Rule 4.</p>
+      </div>
+    </section>
+
+    <nav class="related-block" aria-label="Related on this site">
+      <p class="related-title">Related</p>
+      <ul>
+        <li><a href="org-study.html">&larr; Org Study (all organizations)</a></li>
+        <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+        <li><a href="policy-study.html">Policy Study &mdash; how jurisdictions protect music workers</a></li>
+        <li><a href="policy-study-thailand.html">Policy Study &mdash; Thailand (the companion policy scan)</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <script>
+  /* Scroll-reveal — R3.2 shared IntersectionObserver (normal-scroll page) */
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = 'section > h2, .stat-strip, figure, .table-wrap, .phases-grid, .sources-card, .refs';
+    var nodes = Array.prototype.slice.call(document.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, sibs, idx = 0;
+        if (p){ sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,6) * 60) + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
+
+  <!-- nav scroll-state: transparent over hero, blurred bar once scrolled -->
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden','true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>
