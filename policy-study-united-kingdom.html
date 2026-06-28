@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Policy study: United Kingdom — a universal health floor, a charitable care room · MH&amp;W Policy Study">
+  <title>Policy: United Kingdom · MH&amp;W</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font-cjk: 'Noto Serif TC', serif;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1.3rem, 1.1rem + 1vw, 1.65rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      /* ── DIA-GRADE READING SCALE (calibrated to Dia browser, serif-corrected) ── */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;
+      --lh-prose:1.7;--wt-prose:440;
+      --measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;
+      --label-ink:var(--graphite);
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--charcoal);
+      line-height: var(--lh-prose);
+      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    /* ===== SITE NAVIGATION ===== */
+    nav.nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem 2.5rem;
+      padding-top: calc(1.5rem + env(safe-area-inset-top));
+      background: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--label-ink);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      transition: color var(--dur) var(--ease);
+    }
+
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      z-index: 101;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--charcoal);
+      margin: 5px 0;
+      transition: all 0.3s var(--ease);
+    }
+    .nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(4px,-5px); }
+
+    /* Mobile nav brand */
+    .nav-topbar { display: none; }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
+
+    /* ===== PAGE SIDEBAR ===== */
+    .page-sidebar {
+      position: fixed;
+      left: 2.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+    }
+
+    .page-nums {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+    }
+
+    .page-num {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      cursor: pointer;
+      padding: 0.2rem 0;
+      transition: color var(--dur) var(--ease);
+      letter-spacing: 0.05em;
+      user-select: none;
+    }
+
+    .page-num:hover { color: var(--label-ink); }
+    .page-num.active { color: var(--black); font-weight: 700; }
+
+    .page-arrows {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+    }
+
+    .arrow-btn {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--silver);
+      border-radius: 50%;
+      background: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--label-ink);
+      font-size: 0.7rem;
+      transition: all var(--dur) var(--ease);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .arrow-btn:hover {
+      border-color: var(--signal);
+      color: var(--signal);
+    }
+
+    .arrow-btn:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+
+    .arrow-btn svg {
+      width: 12px;
+      height: 12px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ===== PAGES CONTAINER (scroll-snap) ===== */
+    .pages-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow-y: auto;
+      scroll-snap-type: y proximity;
+      scroll-behavior: smooth;
+      overscroll-behavior-y: contain;
+    }
+
+    .page {
+      min-height: 100vh;
+      scroll-snap-align: start;
+      padding: 5rem 2.5rem 3rem 6.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page-inner {
+      max-width: var(--max-w-text);
+      width: 100%;
+      margin: 0 auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== COVER PAGE — TWO-LINE MINIMAL (R2.1, decided 2026-06-20) ===== */
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;            /* clips the wash */
+      padding: 0 2rem;
+    }
+
+    /* one soft radial purple wash — the single dia accent */
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%, var(--signal-glow) 0%, rgba(102,103,171,0.06) 38%, rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
+    }
+
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 1280px);
+    }
+
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6rem);
+      font-weight: 900;
+      line-height: 1.04;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin: 0;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+
+    .cover-line {
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--purple-deep);            /* 4.92:1 AA */
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
+    }
+
+    .cover-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
+    }
+
+    /* entrance — soft fade + rise, one time */
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
+    }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-line  { animation-delay: 0.22s; }
+
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+    /* reduced-motion: no entrance, no drift, no pulse — everything static & visible */
+    @media (prefers-reduced-motion: reduce) {
+      .cover-inner > *,
+      .cover-wash,
+      .cover-hint { animation: none; opacity: 1; transform: none; }
+    }
+
+    /* ===== CONTENT PAGES ===== */
+    .page-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--purple-deep);
+      margin-bottom: 1rem;
+    }
+
+    .page-title {
+      font-family: var(--font-display);
+      font-size: var(--text-h1);
+      font-weight: 700;
+      line-height: 1.1;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 2rem;
+      letter-spacing: 0.01em;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+    }
+
+    .content-block {
+      margin-bottom: 1.75rem;
+    }
+
+    .content-block h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-h3);
+      line-height: 1.25;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+
+    .content-block p {
+      margin-bottom: 0.75rem;
+      color: var(--graphite);
+      max-width: var(--measure-prose);
+      line-height: 1.65;
+    }
+    .content-block p + p { margin-top: 0.9em; }
+
+    .content-block strong {
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    .content-block em {
+      font-style: italic;
+      color: var(--graphite);
+    }
+
+    .content-block ul, .content-block ol {
+      margin-left: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .content-block li {
+      margin-bottom: 0.4rem;
+      line-height: 1.65;
+      color: var(--graphite);
+    }
+
+    /* ===== LEAD / FRAMING QUOTE ===== */
+    .lead-quote {
+      border-left: 3px solid var(--signal);
+      background: var(--signal-bg);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 1rem 0 0;
+    }
+    .lead-quote p {
+      font-size: clamp(1.1875rem, 1rem + 1.1vw, 1.3125rem);
+      line-height: 1.62;
+      color: var(--charcoal);
+      max-width: var(--measure-prose);
+      margin-bottom: 0.75rem;
+    }
+    .lead-quote p:last-child { margin-bottom: 0; }
+
+    /* ===== REFORM ITEMS ===== */
+    .reform-item {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .reform-item:last-child { border-bottom: none; }
+    .reform-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .reform-num {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--purple-deep);
+      flex-shrink: 0;
+    }
+    .reform-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      line-height: 1.25;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+    .reform-year {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--label-ink);
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+    .reform-body {
+      padding-left: 2.25rem;
+      color: var(--graphite);
+      max-width: calc(var(--measure-prose) + 2.25rem);
+    }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin: 1rem 0 1.25rem;
+      background: var(--bg-card);
+    }
+    .stat-item {
+      padding: 1.1rem 1rem;
+      border-right: 1px solid var(--border-light);
+      text-align: center;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.6rem;
+      color: var(--purple-deep);
+      line-height: 1.1;
+      font-variant-numeric: tabular-nums;
+    }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-micro);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--label-ink);
+      margin-top: 0.35rem;
+    }
+
+    /* ===== APPRAISAL / VERDICT ===== */
+    .appraise-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .appraise-item:last-child { border-bottom: none; }
+    .appraise-item h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-h3);
+      line-height: 1.25;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 0.35rem;
+    }
+    .appraise-item p { color: var(--graphite); max-width: var(--measure-prose); }
+
+    .verdict {
+      background: var(--off-black);
+      color: var(--snow);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .verdict .verdict-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--purple-light);
+      margin-bottom: 0.5rem;
+    }
+    .verdict p { color: var(--snow); line-height: 1.7; margin: 0; }
+    .verdict strong { color: var(--white); font-weight: 600; }
+
+    /* ===== LESSON ITEMS ===== */
+    .lesson-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .lesson-item:last-child { border-bottom: none; }
+    .lesson-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      margin-bottom: 0.35rem;
+    }
+    .lesson-num {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--purple-deep);
+      flex-shrink: 0;
+    }
+    .lesson-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      line-height: 1.25;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+    .lesson-body {
+      padding-left: 2.25rem;
+      line-height: 1.7;
+      color: var(--graphite);
+      max-width: calc(var(--measure-prose) + 2.25rem);
+    }
+
+    /* ===== METHOD TABLE ===== */
+    .method-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--text-small);
+      margin: 1rem 0;
+    }
+    .method-table thead {
+      background: var(--purple-deep);
+      color: var(--white);
+    }
+    .method-table th {
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: var(--text-micro);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
+    .table-scroll:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; border-radius: var(--radius); }
+    .method-table td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid var(--border-light);
+      vertical-align: top;
+      font-variant-numeric: tabular-nums;
+    }
+    .method-table tbody tr:nth-child(odd) { background: var(--white); }
+    .method-table tbody tr:nth-child(even) { background: var(--snow); }
+
+    /* ===== SOURCE FOOTER ===== */
+    .source-info {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-light);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--label-ink);
+      line-height: 1.8;
+    }
+
+    .source-info code {
+      font-family: var(--font-mono);
+      background: var(--white);
+      padding: 0.1rem 0.3rem;
+      border-radius: var(--radius);
+      font-size: inherit;
+      color: var(--label-ink);
+    }
+
+    /* ===== SECTION DIVIDER ===== */
+    .part-divider {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--purple-light);
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--purple-light);
+      margin-bottom: 1.5rem;
+      display: inline-block;
+    }
+
+    /* ===== CITATIONS (§5 inline tier) — pattern: policy-study-japan.html ===== */
+    .cite { font-size: 0.72em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a:focus-visible { outline: 2px solid var(--signal); outline-offset: 1px; border-radius: 2px; }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 1.5rem; max-width: var(--measure-ref); }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-fine); color: var(--graphite); line-height: 1.7; margin-bottom: 0.6rem; overflow-wrap: anywhere; }
+    .refs li a { color: var(--signal); }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs-note { font-size: var(--text-xs); color: var(--label-ink); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-fine); color: var(--label-ink); font-style: italic; margin-bottom: 0.5rem; }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 768px) {
+      nav.nav {
+        padding: 1rem 1.25rem;
+        padding-top: calc(1rem + env(safe-area-inset-top));
+        right: 0;
+        background: none;
+        border-bottom: none;
+      }
+      nav.nav.open {
+        background: rgba(244, 244, 245, 0.9);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+      .nav-toggle { display: block; }
+      .nav-topbar { display: flex; align-items: center; gap: 0.75rem; }
+      .nav-mobile-brand { display:block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 0.6rem;
+        margin-top: 0.75rem;
+      }
+      .nav-links.show { display: flex; }
+      .nav-links a { font-size: 0.85rem; }
+
+      .page-sidebar {
+        left: auto;
+        right: 1.25rem;
+        top: auto;
+        bottom: 1.5rem;
+        transform: none;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(244, 244, 245, 0.9);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        padding: 0.5rem 0.75rem;
+        border-radius: 20px;
+        border: 1px solid var(--border-light);
+      }
+
+      .page-nums {
+        flex-direction: row;
+        gap: 0.3rem;
+      }
+
+      .page-num {
+        font-size: 0.6rem;
+        padding: 0.15rem 0.2rem;
+      }
+
+      .page-arrows {
+        flex-direction: row;
+        margin-top: 0;
+        margin-left: 0.25rem;
+      }
+
+      .arrow-btn {
+        width: 24px;
+        height: 24px;
+      }
+
+      .arrow-btn svg {
+        width: 10px;
+        height: 10px;
+      }
+
+      .page {
+        padding: 4.5rem 1.25rem 5rem 1.25rem;
+      }
+
+      .cover-title {
+        font-size: clamp(1.9rem, 8.5vw, 2.6rem);
+      }
+
+      .cover-line {
+        font-size: clamp(0.72rem, 3.2vw, 0.95rem);
+        letter-spacing: 0.18em;
+      }
+
+      .cover-wash {
+        width: 150vw;
+        height: 150vw;
+      }
+
+      .page-title {
+        font-size: var(--text-h2);
+      }
+
+      .reform-body, .lesson-body {
+        padding-left: 0;
+      }
+
+      .reform-header {
+        flex-wrap: wrap;
+      }
+
+      .reform-year {
+        margin-left: 0;
+        margin-top: 0.15rem;
+      }
+
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+      .stat-item:last-child { border-bottom: none; }
+
+      .method-table { font-size: 0.7rem; }
+      .method-table th, .method-table td { padding: 0.4rem 0.5rem; }
+    }
+
+    /* ── Reading env: phone measure release ── */
+    @media (max-width: 680px) {
+      .content-block p, .content-block p + p, .lead-quote p, .appraise-item p,
+      .reform-body, .lesson-body, .refs, .content-block li { max-width: none; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
+      /* table stays ≥13px, not 0.7rem; tighten padding instead */
+      .method-table { font-size: 0.82rem; }
+      .method-table th { font-size: var(--text-micro); }
+      .method-table th, .method-table td { padding: 0.4rem 0.45rem; }
+      /* pager controls reach a 44px tap target */
+      .arrow-btn { width: 44px; height: 44px; }
+    }
+
+    /* Scrollbar styling */
+    .pages-container::-webkit-scrollbar { width: 3px; }
+    .pages-container::-webkit-scrollbar-track { background: transparent; }
+    .pages-container::-webkit-scrollbar-thumb { background: var(--silver); border-radius: 3px; }
+    .pages-container::-webkit-scrollbar-thumb:hover { background: var(--grey-light); }
+
+    /* ===== DISCOVERABILITY: related block (closing page) ===== */
+    .related-block {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-light);
+    }
+    .related-title {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--label-ink);
+      margin-bottom: 0.6rem;
+    }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--signal);
+      text-decoration: none;
+      transition: color var(--dur) var(--ease);
+    }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+    .related-block .related-note { color: var(--graphite); }
+
+    /* ===== Scroll-reveal (R3.2, paged-safe) ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <!-- Site Navigation -->
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="this.classList.toggle('open');var x=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',!x);document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+        <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="org-study.html">ORG STUDY</a>
+      <a href="policy-study.html" class="current" aria-current="page">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
+      <a href="field-news.html">FIELD NEWS</a>
+    </div>
+  </nav>
+
+  <!-- Page Sidebar Navigation -->
+  <div class="page-sidebar">
+    <div class="page-nums">
+      <span class="page-num active" data-page="0">01</span>
+      <span class="page-num" data-page="1">02</span>
+      <span class="page-num" data-page="2">03</span>
+      <span class="page-num" data-page="3">04</span>
+      <span class="page-num" data-page="4">05</span>
+      <span class="page-num" data-page="5">06</span>
+      <span class="page-num" data-page="6">07</span>
+      <span class="page-num" data-page="7">08</span>
+      <span class="page-num" data-page="8">09</span>
+      <span class="page-num" data-page="9">10</span>
+    </div>
+    <div class="page-arrows">
+      <button class="arrow-btn" aria-label="Previous page" onclick="prevPage()">
+        <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+      </button>
+      <button class="arrow-btn" aria-label="Next page" onclick="nextPage()">
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Pages -->
+  <div class="pages-container" id="main">
+    <!-- PAGE 01: COVER (standard cover — copied from policy-study-eu.html) -->
+    <div class="page cover" id="page-0">
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="cover-inner">
+        <h1 class="cover-title">UNITED<br>KINGDOM</h1>
+        <p class="cover-line">Policy Study 006 &middot; 2026.6</p>
+      </div>
+      <span class="cover-hint" aria-hidden="true">&darr; Scroll</span>
+    </div>
+
+    <!-- PAGE 02: FRAMING -->
+    <div class="page" id="page-1">
+      <div class="page-inner">
+        <span class="part-divider">Framing</span>
+        <p class="page-label">Why the UK, Why Policy</p>
+        <h2 class="page-title">A Universal Floor, a Charitable Room</h2>
+
+        <div class="content-block">
+          <p>The aim is the same each region: read how a <em>jurisdiction</em> protects the mental health and welfare of music and performing-arts workers &mdash; through law, public funding, and worker bodies. The United Kingdom is this project's clearest &ldquo;room on a floor&rdquo; case, and the most instructive split of the floor itself.</p>
+        </div>
+
+        <div class="lead-quote">
+          <p>The UK has the strongest <strong>universal health floor</strong> in the whole set &mdash; the NHS: free at the point of use, covering mental health by statute, reachable by self-referral <em>regardless of employment status</em>. Unlike the United States, no musician is locked out of care by their job type.</p>
+          <p>But the UK's <strong>income and employment floor</strong> has a self-employment-shaped hole that most gigging musicians fall through, and its cultural money funds output, not welfare. So the music-specific <strong>care room</strong> &mdash; counselling, peer support, clinical performing-arts medicine &mdash; is built and paid for almost entirely by <strong>charity</strong>. It is the densest charitable room in this project, on a genuine universal floor &mdash; the natural experiment in what a sophisticated voluntary sector can, and cannot, substitute for.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 03: THE FLOOR -->
+    <div class="page" id="page-2">
+      <div class="page-inner">
+        <span class="part-divider">Part A &mdash; The Landscape</span>
+        <p class="page-label">Section 01 &middot; The Floor</p>
+        <h2 class="page-title">Universal Health, a Status-Shaped Hole</h2>
+
+        <div class="content-block">
+          <p>The founding fact that separates the UK from the United States is the National Health Service. The <strong>NHS Constitution for England</strong> guarantees a comprehensive service &ldquo;available to all&hellip; to improve, prevent, diagnose and treat both physical <em>and mental</em> health problems with equal regard,&rdquo; with access &ldquo;based on clinical need, not an individual's ability to pay.&rdquo;<sup class="cite"><a href="#uk-src-1" data-src="nhs-constitution" data-tip="NHS Constitution for England (DHSC, updated 17 Aug 2023): Principles 1&ndash;2 &mdash; comprehensive service available to all, physical and mental health with equal regard, free of charge, based on clinical need not ability to pay. Sourced (primary/official).">1</a></sup> Funded from general taxation, the floor reaches a freelance musician on exactly the same terms as a salaried one, because eligibility turns on residence and clinical need &mdash; never on whether the person is an employee, a worker, or self-employed.</p>
+          <p>The talking-therapies route is the concrete mental-health instance: <strong>NHS Talking Therapies for anxiety and depression</strong> (formerly IAPT) is free, accepts <strong>self-referral</strong> without a GP, and treated <strong>about 670,000 people who completed a course of treatment in 2023/24</strong>.<sup class="cite"><a href="#uk-src-2" data-src="talking-therapies" data-tip="NHS Talking Therapies for anxiety and depression (NHS England): formerly IAPT; free; self-referral; ~670,000 people completed a course of treatment in 2023/24; national commitment to +384,000 courses by 2029. Sourced (primary/official).">2</a></sup> The single biggest barrier the U.S. study identified &mdash; care locked behind employment-based insurance &mdash; simply does not exist here. The mental-health <em>floor</em> is universal.</p>
+        </div>
+
+        <div class="stat-strip">
+          <div class="stat-item">
+            <div class="stat-num">670k</div>
+            <div class="stat-label">NHS talking-therapy<br>courses (2023/24)</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">Universal</div>
+            <div class="stat-label">Free care, not<br>gated by job type</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">3 tiers</div>
+            <div class="stat-label">Employment status &mdash; most<br>musicians in the unprotected one</div>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <p>The <em>income</em> floor is the opposite story. UK employment law sorts people into three tiers &mdash; <strong>employee, &ldquo;worker,&rdquo; and self-employed</strong> &mdash; and the protections fall away sharply across them.</p>
+        </div>
+
+        <div class="reform-item">
+          <div class="reform-header">
+            <span class="reform-num">01</span>
+            <span class="reform-title">The self-employment hole</span>
+            <span class="reform-year">Status</span>
+          </div>
+          <div class="reform-body">
+            <p>Gov.uk states it plainly: &ldquo;Employment law does not cover self-employed people in most cases because they are their own boss,&rdquo; and &ldquo;they do not get holiday or sick pay.&rdquo; Most gigging musicians &mdash; invoicing per engagement, setting their own terms, working for many engagers &mdash; sit in that third tier and fall outside the protections that cushion salaried workers.<sup class="cite"><a href="#uk-src-3" data-src="employment-status" data-tip="Employment status (gov.uk): three tiers employee/worker/self-employed; the self-employed are outside most employment law and get no holiday or sick pay. Sourced (official). Application to musicians is Inferred &mdash; the sources speak of the self-employed generally, not musicians by name.">3</a></sup></p>
+          </div>
+        </div>
+
+        <div class="reform-item">
+          <div class="reform-header">
+            <span class="reform-num">02</span>
+            <span class="reform-title">Uber v Aslam narrowed the edge, not the core</span>
+            <span class="reform-year">2021</span>
+          </div>
+          <div class="reform-body">
+            <p>In <em>Uber BV v Aslam</em> [2021] UKSC 5 (19 February 2021) the Supreme Court unanimously held that Uber drivers were &ldquo;workers,&rdquo; reasoning that status follows the <em>purpose</em> of the protective legislation &mdash; shielding people in a &ldquo;subordinate and dependent position&rdquo; &mdash; not the wording of a contract. But it reclassifies only those under genuine control; a musician who really does set their own terms and clients stays self-employed and outside.<sup class="cite"><a href="#uk-src-4" data-src="uber-aslam" data-tip="Uber BV v Aslam [2021] UKSC 5 (judgment 19 Feb 2021, Lord Leggatt, unanimous): drivers are workers; status follows the purpose of protective legislation. Sourced (primary judgment). Musician application Inferred &mdash; reclassification is fact-specific.">4</a></sup></p>
+          </div>
+        </div>
+
+        <div class="reform-item">
+          <div class="reform-header">
+            <span class="reform-num">03</span>
+            <span class="reform-title">The Taylor Review tried to fix status &mdash; mostly on paper</span>
+            <span class="reform-year">2017&ndash;18</span>
+          </div>
+          <div class="reform-body">
+            <p>The <strong>Taylor Review of Modern Working Practices</strong> (&ldquo;Good Work,&rdquo; 11 July 2017) made 53 recommendations on employment status and gig work; the government accepted most in 2018 and published a <strong>Good Work Plan</strong> &mdash; but the core status-clarity reforms remain substantially unlegislated.<sup class="cite"><a href="#uk-src-5" data-src="taylor-review" data-tip="Taylor Review of Modern Working Practices (Good Work, 11 Jul 2017, Matthew Taylor; 53 recommendations); Good Work Plan (Dec 2018). Sourced (official). Status reforms substantially unlegislated = Inferred from the absence of enacting legislation (Rule 4).">5</a></sup> And the sickness backstop shows the hole directly: <strong>Statutory Sick Pay</strong> (&pound;123.25/week, up to 28 weeks) requires <em>employee</em> status, so a self-employed musician who cannot work falls not on SSP but on means-tested <strong>Universal Credit</strong>.<sup class="cite"><a href="#uk-src-6" data-src="ssp" data-tip="Statutory Sick Pay (gov.uk): &pound;123.25/week up to 28 weeks; requires employee status; the self-employed fall back on Universal Credit or Employment and Support Allowance. Sourced (official).">6</a></sup></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 04: THE STATE'S MONEY + THE UNION -->
+    <div class="page" id="page-3">
+      <div class="page-inner">
+        <p class="page-label">Section 02 &middot; The State's Money</p>
+        <h2 class="page-title">Funding the Output, Not the Worker</h2>
+
+        <div class="content-block">
+          <p>The state spends substantially on culture &mdash; but on what gets <em>made</em>, not on the people who make it. <strong>Arts Council England</strong>, an arm's-length body of the Department for Culture, Media and Sport, describes itself as &ldquo;investing <strong>&pound;445 million each year in 985 organisations</strong>, including music venues, galleries, museums, arts centres, libraries and more&rdquo; (the 2023&ndash;2026 National Portfolio, extended to March 2028). That money flows to organisations and projects under <em>Let's Create</em>; the one stream that funds individuals funds creative <em>practice</em>, not welfare or health.<sup class="cite"><a href="#uk-src-7" data-src="ace" data-tip="Arts Council England: investing &pound;445 million each year in 985 organisations (2023&ndash;26 National Portfolio, extended to March 2028); an executive non-departmental public body of DCMS; funds organisations/projects, not individual musician welfare. Sourced (ACE primary figure).">7</a></sup></p>
+        </div>
+
+        <div class="stat-strip">
+          <div class="stat-item">
+            <div class="stat-num">&pound;445m</div>
+            <div class="stat-label">Arts Council England<br>per year</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">985</div>
+            <div class="stat-label">Organisations<br>funded</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">0</div>
+            <div class="stat-label">Mentions of &ldquo;mental<br>health&rdquo; in the Sector Vision</div>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <p>When the government set out its industrial ambition in the <strong>Creative Industries Sector Vision (2023)</strong> &mdash; to grow the sector by an extra &pound;50&nbsp;billion in GVA and a million extra jobs by 2030 &mdash; the words &ldquo;mental health&rdquo; appear nowhere in it; &ldquo;wellbeing&rdquo; is used only of audiences and communities, and the workforce is engaged through a jobs-and-skills &ldquo;good work&rdquo; frame, never a health-and-welfare one.<sup class="cite"><a href="#uk-src-8" data-src="sector-vision" data-tip="Creative Industries Sector Vision (DCMS, 2023): grow the sector +&pound;50bn GVA and +1 million jobs by 2030; full-text read of the main document + Annex A confirms mental health appears nowhere and wellbeing is used only of audiences/communities. Sourced (official; absence verified by reading, Rule 4).">8</a></sup> The state builds venues and grows the sector; it does not run a care layer for the workers.</p>
+          <p>Nor does the worker body. The <strong>Musicians' Union</strong> &mdash; <strong>35,879 members</strong> &mdash; provides a thick layer of practical support: legal advice, contract representation, collective bargaining, &pound;10m liability and instrument cover, hearing services, and benevolent assistance. But on mental health specifically it does not run its own clinical service; it <strong>refers members to Music Minds Matter</strong> and calls itself &ldquo;proud to be a Music Minds Matter ally.&rdquo;<sup class="cite"><a href="#uk-src-9" data-src="musicians-union" data-tip="Musicians' Union: 35,879 members (union return via the TUC affiliate listing); General Secretary Naomi Pohl; refers members to Music Minds Matter and is &lsquo;proud to be a Music Minds Matter ally&rsquo; &mdash; it signposts rather than delivering clinical mental-health care. Sourced (membership); some MU own-voice claims caveated (MU site unreachable this run).">9</a></sup> Even the union hands the mental-health care layer to a charity &mdash; the structural signature of the UK model.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 05: THE ROOM -->
+    <div class="page" id="page-4">
+      <div class="page-inner">
+        <p class="page-label">Section 03 &middot; The Room</p>
+        <h2 class="page-title">The Care Left to Charity</h2>
+
+        <div class="content-block">
+          <p>Where the floor leaves off, an unusually developed sector-charity ecosystem takes over &mdash; the densest in this whole project &mdash; funded by donations and industry money rather than statutory budgets.</p>
+        </div>
+
+        <div class="reform-item">
+          <div class="reform-header">
+            <span class="reform-num">01</span>
+            <span class="reform-title">Help Musicians &mdash; the financial anchor</span>
+            <span class="reform-year">1921</span>
+          </div>
+          <div class="reform-body">
+            <p>The working name of the <strong>Musicians Benevolent Fund</strong> (charity 228089, patron HM King Charles III), founded in 1921 as the Gervase Elwes Memorial Fund and renamed the Musicians Benevolent Fund in 1926. In the year to 31 December 2025 it spent about <strong>&pound;9.19 million</strong> (roughly &pound;7.47m on charitable activities), delivering some <strong>13,000 interventions</strong>.<sup class="cite"><a href="#uk-src-10" data-src="help-musicians" data-tip="Help Musicians (Musicians Benevolent Fund, charity 228089): founded 1921 as the Gervase Elwes Memorial Fund, renamed Musicians Benevolent Fund 1926; FY2025 total spend ~&pound;9.19m (~&pound;7.47m charitable activities); ~13,000 interventions; ~&pound;0.7m direct health-and-welfare support to 1,022 musicians. Sourced (Charity Commission + own report).">10</a></sup></p>
+          </div>
+        </div>
+
+        <div class="reform-item">
+          <div class="reform-header">
+            <span class="reform-num">02</span>
+            <span class="reform-title">Music Minds Matter &mdash; the 24/7 line <span style="font-family:var(--font-mono);font-size:var(--text-micro);color:var(--purple-deep);">&nbsp;COMPANION ORG</span></span>
+            <span class="reform-year">2017</span>
+          </div>
+          <div class="reform-body">
+            <p>Help Musicians' dedicated mental-health arm (charity 1199795, sole member Help Musicians) runs a <strong>free, 24/7 mental-health support line</strong> open to <strong>everyone who works in UK music</strong> &mdash; not only Help Musicians' beneficiaries &mdash; offering listening, signposting, and charity-funded counselling. Its clinical partner is BAPAM, its peer partner Tonic.<sup class="cite"><a href="#uk-src-11" data-src="mmm" data-tip="Music Minds Matter (CIO charity 1199795, sole member Help Musicians; launched 2017): free 24/7 line 0808 802 8008; open to everyone working in UK music; listening, signposting, charity-funded counselling; clinical partner BAPAM, peer partner Tonic; 2025: 3,400+ interventions, ~1,200 calls. Sourced (own site; 2017 date from prior project verification).">11</a></sup> <a href="org-study-music-minds-matter.html">Read the MMM org study &rarr;</a></p>
+          </div>
+        </div>
+
+        <div class="reform-item">
+          <div class="reform-header">
+            <span class="reform-num">03</span>
+            <span class="reform-title">BAPAM &mdash; clinical performing-arts medicine</span>
+            <span class="reform-year">1984</span>
+          </div>
+          <div class="reform-body">
+            <p>The British Association for Performing Arts Medicine (charity 1167785), &ldquo;The Medical Charity for the Performing Arts,&rdquo; offers free clinical assessments for both physical <em>and</em> psychological health, a brief talking-therapy service, and a directory of performing-arts-specialist clinicians. Help Musicians is its major funder.<sup class="cite"><a href="#uk-src-12" data-src="bapam" data-tip="BAPAM (charity 1167785), The Medical Charity for the Performing Arts, established 1984: free clinical assessments for physical and psychological health, brief talking-therapy service, and the BAPAM Directory of performing-arts-specialist clinicians; Help Musicians is its major funder. Sourced (own site).">12</a></sup></p>
+          </div>
+        </div>
+
+        <div class="reform-item">
+          <div class="reform-header">
+            <span class="reform-num">04</span>
+            <span class="reform-title">Music Support &mdash; peer &amp; addiction</span>
+            <span class="reform-year">2016</span>
+          </div>
+          <div class="reform-body">
+            <p>A charity (1170231) founded in 2016 by music-industry people in recovery, running a peer-led helpline, counselling and addiction/recovery groups, Safe Hubs at festivals, and Mental Health First Aid training.<sup class="cite"><a href="#uk-src-13" data-src="music-support" data-tip="Music Support (charity 1170231), founded 2016 by music-industry people in recovery: peer-led helpline 0800 030 6789; counselling and addiction/recovery groups; Safe Hubs at festivals; Mental Health First Aid training. Sourced (own site).">13</a></sup></p>
+          </div>
+        </div>
+
+        <div class="reform-item">
+          <div class="reform-header">
+            <span class="reform-num">05</span>
+            <span class="reform-title">Tonic Rider &mdash; the industry programme <span style="font-family:var(--font-mono);font-size:var(--text-micro);color:var(--purple-deep);">&nbsp;COMPANION ORG</span></span>
+            <span class="reform-year">2021</span>
+          </div>
+          <div class="reform-body">
+            <p>Tonic Music for Mental Health (charity 1189913, founder/CEO Steph Langan) runs <strong>Tonic Rider</strong>, supporting artists and crew with free Mental Health First Aid and Suicide First Aid courses, peer-support groups, group therapy, and CBT/DBT/ACT workshops.<sup class="cite"><a href="#uk-src-14" data-src="tonic-rider" data-tip="Tonic Rider / Tonic Music for Mental Health (charity 1189913, founder/CEO Steph Langan): the Tonic Rider programme (launched 16 Feb 2021) provides free MHFA and Suicide First Aid courses, peer-support groups, group therapy, and CBT/DBT/ACT series. Sourced (own site + prior verification).">14</a></sup> <a href="org-study-tonic-rider.html">Read the Tonic Rider org study &rarr;</a></p>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <p>These bodies are knit together by <em>philanthropy</em>, not the state: Help Musicians is simultaneously the sole member of Music Minds Matter, the major funder of BAPAM, and a supporter of Tonic; collecting societies and benevolent funds recur across them all.<sup class="cite"><a href="#uk-src-10" data-src="help-musicians" data-tip="The room is knit by shared funders: Help Musicians is the sole member of Music Minds Matter, the major funder of BAPAM, and a supporter of Tonic; PPL, the PRS Members' Fund, the Royal Society of Musicians and Equity Charitable Trust recur across the bodies. Sourced.">10</a></sup> It is a crowded, partly self-coordinating, charitable room &mdash; with no statutory, music-worker-specific equivalent behind it.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 06: THE EVIDENCE -->
+    <div class="page" id="page-5">
+      <div class="page-inner">
+        <p class="page-label">Section 04 &middot; The Evidence</p>
+        <h2 class="page-title">What the Evidence Shows &mdash; and Doesn't</h2>
+
+        <div class="content-block">
+          <p>The UK has produced more <em>survey</em> evidence on musicians' mental health than almost anywhere &mdash; and almost no <em>probability-sample</em> evidence. The largest data point is the <strong>Musicians' Census Mental Health report</strong> (Help Musicians and the Musicians' Union, November 2023), drawing on roughly <strong>6,000 UK musicians</strong>. About <strong>30% reported poor or negative mental wellbeing</strong> &mdash; rising to 41% among music students and 35% in dance music &mdash; with disabled (49%) and LGBTQ+ (43%) musicians worse off, and wellbeing tracking income (43% earn under &pound;14,000 a year from music).<sup class="cite"><a href="#uk-src-15" data-src="census" data-tip="Musicians' Census Mental Health report (Help Musicians + Musicians' Union, 23 Nov 2023): ~6,000 UK musicians, largest survey of its kind; ~30% poor/negative wellbeing (41% students, 35% dance music); disabled 49%, LGBTQ+ 43%; 43% earn under &pound;14,000/yr. Sourced (official survey) but a self-selected, non-probability sample.">15</a></sup></p>
+        </div>
+
+        <div class="stat-strip">
+          <div class="stat-item">
+            <div class="stat-num">~6,000</div>
+            <div class="stat-label">Musicians surveyed<br>(Census, 2023)</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">30%</div>
+            <div class="stat-label">Poor / negative<br>mental wellbeing</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">0</div>
+            <div class="stat-label">UK probability-sample<br>prevalence studies</div>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <p>The other landmark is <strong>Gross and Musgrave's &ldquo;Can Music Make You Sick?&rdquo;</strong> (University of Westminster / MusicTank, commissioned by Help Musicians), whose 2016 pilot survey of <strong>2,211</strong> UK musicians reported that <strong>71.1% had experienced anxiety or panic attacks and 68.5% depression</strong> &mdash; framed against general-population figures as &ldquo;up to three times more likely,&rdquo; though the report itself flags self-selection bias and unverified self-report.<sup class="cite"><a href="#uk-src-16" data-src="can-music" data-tip="Gross &amp; Musgrave, Can Music Make You Sick? (Westminster/MusicTank, Help Musicians-commissioned; 2016 pilot n=2,211): 71.1% anxiety/panic, 68.5% depression; up to 3x vs ONS general population; the report names its own self-selection bias. 2020 UWP book. Loveday et al. 2023 journal paper similar shape but not PubMed-indexed, not UK-specific. Sourced (primary PDF); self-selected self-report.">16</a></sup> Both are indispensable for direction and texture &mdash; and both are <strong>self-selected, non-probability surveys</strong>, not population prevalence.</p>
+          <p>The honest gap: <strong>no UK probability-sample prevalence study of musicians' mental health exists.</strong> The nearest near-population <em>design</em> is Australian (Ackermann et al.'s 2014 census of all eight Australian orchestras, ~70% response, 32% positive depression screen); the strongest <em>validated-instrument</em> evidence is Danish (Musgrave, Gross &amp; Carney's 2025 HADS study of 986 musicians, which notably found that <strong>income did not predict anxiety or depression</strong>).<sup class="cite"><a href="#uk-src-17" data-src="evidence-gap" data-tip="No UK probability-sample prevalence study located (Rule 4). Nearest near-population design: Ackermann et al. 2014 Sound Practice (PMID 25249990; Australia; all 8 orchestras ~70% response; 32% depression screen). Validated-instrument anchor: Musgrave, Gross &amp; Carney 2025 When Music Speaks (PMID 39930749; Denmark; HADS n=986; income not predictive). Kegelaers &amp; Gibney 2025 scoping review (not PubMed-indexed). Sourced (PubMed) for the two anchors; No UK probability sample (Rule 4).">17</a></sup> Absence of a UK probability sample is not absence of evidence &mdash; but every headline UK prevalence figure is self-report from a non-representative sample, and must be read that way.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 07: APPRAISAL -->
+    <div class="page" id="page-6">
+      <div class="page-inner">
+        <span class="part-divider">Part B &mdash; Appraisal</span>
+        <p class="page-label">Section 05 &middot; Reading the Model</p>
+        <h2 class="page-title">A Rich Room Is Not a Secure One</h2>
+
+        <div class="appraise-item">
+          <h3>What the UK gets right is care-access and the depth of the room</h3>
+          <p>Two things stand out against the rest of the project. First, the <strong>NHS removes the barrier that crippled the U.S. model</strong>: mental-health care is universal, free, mentally-and-physically equal by statute, and reachable by self-referral regardless of employment status, so no musician is shut out of treatment by the nature of their work.<sup class="cite"><a href="#uk-src-1" data-src="nhs-constitution" data-tip="The NHS removes the U.S. model's barrier: universal, free, mental-and-physical-equal care reachable by self-referral regardless of status. Sourced (NHS Constitution + Talking Therapies).">1</a></sup> Second, the <strong>charitable room is genuinely world-leading</strong> &mdash; a 24/7 music-specific line open to the whole sector, a clinical performing-arts-medicine charity since 1984, a peer/addiction specialist, and an industry-facing programme, partly coordinated through shared funders.<sup class="cite"><a href="#uk-src-11" data-src="mmm" data-tip="The charitable room is world-leading: 24/7 line (MMM), clinical PA medicine since 1984 (BAPAM), peer/addiction (Music Support), industry programme (Tonic Rider), partly coordinated via shared funders. Sourced across the orgs' own sites.">11</a></sup> The UK is the richest example in this project of what a mature voluntary sector can build.</p>
+        </div>
+
+        <div class="appraise-item">
+          <h3>However, the model leans on charity to do what the floor does not</h3>
+          <p>The universal floor is a <em>health</em> floor, not an <em>income</em> floor: most musicians are self-employed and fall outside Statutory Sick Pay, paid holiday, and employment protection, with only means-tested Universal Credit beneath them.<sup class="cite"><a href="#uk-src-3" data-src="employment-status" data-tip="The floor is a health floor, not an income floor: most musicians are self-employed, outside SSP/holiday/employment protection, with means-tested Universal Credit beneath. Sourced (gov.uk).">3</a></sup> Meanwhile the state's cultural money &mdash; &pound;445m a year through Arts Council England, a &pound;50bn growth ambition &mdash; funds organisations and output and is silent on worker mental health.<sup class="cite"><a href="#uk-src-8" data-src="sector-vision" data-tip="State cultural money (ACE &pound;445m/yr; Sector Vision &pound;50bn growth ambition) funds organisations/output and is silent on worker mental health. Sourced (ACE + DCMS).">8</a></sup> So the music-specific care layer is delivered almost entirely by charity, and even the Musicians' Union routes its members to a charity for it.<sup class="cite"><a href="#uk-src-9" data-src="musicians-union" data-tip="Even the Musicians' Union routes members to a charity (Music Minds Matter) for mental-health care rather than delivering it. Sourced.">9</a></sup> That is a fragile foundation: Help Musicians spent more than it raised in 2025, and the room depends on donations rather than a statutory line.<sup class="cite"><a href="#uk-src-10" data-src="help-musicians" data-tip="A fragile foundation: Help Musicians' FY2025 expenditure (~&pound;9.19m) exceeded income (~&pound;5.65m), drawing on reserves; the room depends on donations, not a statutory line. Sourced (Charity Commission).">10</a></sup></p>
+        </div>
+
+        <div class="appraise-item">
+          <h3>Read the evidence with three cautions</h3>
+          <p>(1) The UK prevalence figures everyone quotes &mdash; the Census's 30%, &ldquo;Can Music Make You Sick?&rdquo;'s 71% &mdash; are <strong>self-selected surveys</strong>, not probability samples, and almost certainly over-state prevalence through response bias.<sup class="cite"><a href="#uk-src-15" data-src="census" data-tip="UK prevalence figures (Census 30%, Can Music Make You Sick? 71%) are self-selected surveys, not probability samples; they show distress is widespread and patterned, not a precise rate. Sourced; self-selected.">15</a></sup> (2) The strongest <em>validated</em> evidence is <strong>not British and complicates the story</strong> &mdash; the Danish HADS study found income did <em>not</em> predict anxiety or depression, tempering any claim that fixing pay alone fixes minds.<sup class="cite"><a href="#uk-src-17" data-src="evidence-gap" data-tip="The strongest validated evidence (Danish HADS, n=986) found income did not predict anxiety or depression &mdash; complicating the pure-precarity story. Sourced (PubMed).">17</a></sup> (3) The room's reach is real but <strong>uncounted against need</strong>: there is no UK probability study to size the charitable services against, so even the best-resourced sector here operates without a denominator.</p>
+        </div>
+
+        <div class="verdict">
+          <div class="verdict-label">Verdict</div>
+          <p><strong>The United Kingdom builds the project's strongest universal health floor and its densest charitable care room &mdash; but leaves the income floor full of self-employment holes and the music-specific care layer entirely to philanthropy, showing both how much charity can build and how precarious it is to let charity build it alone.</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 08: LESSONS FOR TAIWAN -->
+    <div class="page" id="page-7">
+      <div class="page-inner">
+        <span class="part-divider">Part C &mdash; For This Project</span>
+        <p class="page-label">Section 06 &middot; Translation</p>
+        <h2 class="page-title">Lessons for a Taiwan NPO</h2>
+
+        <div class="lesson-item">
+          <div class="lesson-header">
+            <span class="lesson-num">3.1</span>
+            <span class="lesson-title">A charitable room can be world-class &mdash; and it has a ceiling</span>
+          </div>
+          <div class="lesson-body">
+            <p>The British voluntary sector is the strongest proof in this project that non-state actors can build serious music-mental-health infrastructure &mdash; a 24/7 line, clinical medicine, peer/addiction care, industry training. Study it as the model of what <em>charity</em> can deliver. But it also shows the ceiling: even this sector cannot supply an income floor, depends on volatile donations (Help Musicians outspent its income in 2025), and lets the state off the hook on worker welfare. Build the room &mdash; but do not let policymakers treat the room as a reason to skip the floor.</p>
+          </div>
+        </div>
+
+        <div class="lesson-item">
+          <div class="lesson-header">
+            <span class="lesson-num">3.2</span>
+            <span class="lesson-title">Separate the two floors when you advocate</span>
+          </div>
+          <div class="lesson-body">
+            <p>The UK's most exportable analytical move is the distinction between a <strong>health floor</strong> and an <strong>income floor</strong>. Taiwan, like the UK, has a strong universal health system (<span class="cjk cjk-inline">全民健保</span>) that already reaches freelance musicians for care &mdash; so the binding gap is <em>not</em> access to treatment but the <strong>income and employment floor</strong> (extending <span class="cjk cjk-inline">勞保</span> / <span class="cjk cjk-inline">職業災害保險</span> and stable status to project-based performers). Concede the health floor; aim policy energy where the UK's hole actually is.</p>
+          </div>
+        </div>
+
+        <div class="lesson-item">
+          <div class="lesson-header">
+            <span class="lesson-num">3.3</span>
+            <span class="lesson-title">Build a single front door &mdash; the crowded room is a warning too</span>
+          </div>
+          <div class="lesson-body">
+            <p>The flip side of the UK's density is duplication &mdash; two parallel helplines, four bodies offering therapy in different models, Mental Health First Aid run by several charities &mdash; coordinated only because a few funders sit across them all. A Taiwan NPO entering an emptier field has the chance the UK never had: design <strong>one low-barrier front door</strong> (a single recognisable line and referral hub) and partner rather than proliferate, so scarce donor money buys reach, not overlap.</p>
+          </div>
+        </div>
+
+        <div class="lesson-item">
+          <div class="lesson-header">
+            <span class="lesson-num">3.4</span>
+            <span class="lesson-title">Make the care low-barrier, not status-gated</span>
+          </div>
+          <div class="lesson-body">
+            <p>Music Minds Matter's defining design choice is that it is open to <em>everyone who works in UK music</em>, not only the parent charity's grant recipients &mdash; no certification, no means test at the point of crisis. That openness is what lets it reach the most precarious. Gate funding decisions if you must, but never gate the helpline.</p>
+          </div>
+        </div>
+
+        <div class="lesson-item">
+          <div class="lesson-header">
+            <span class="lesson-num">3.5</span>
+            <span class="lesson-title">Generate the prevalence evidence the UK never produced</span>
+          </div>
+          <div class="lesson-body">
+            <p>Despite the richest survey literature in the project, the UK still has <strong>no probability-sample prevalence study</strong> of musicians' mental health, and even its world-class charities operate without a denominator. The same gap exists in Taiwan. A credible local prevalence survey of Taiwanese music workers would be a first-of-its-kind asset that right-sizes every service and advocacy argument that follows &mdash; the highest-leverage, lowest-cost early move an evidence-generating NPO can make. The UK shows you can build a great room and still not know how big the need is; Taiwan can do it in the right order.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 09: METHODOLOGY & BASIS -->
+    <div class="page" id="page-8">
+      <div class="page-inner">
+        <span class="part-divider">Part D &mdash; Method</span>
+        <p class="page-label">Section 07 &middot; Methodology &amp; Basis</p>
+        <h2 class="page-title">Sources &amp; Limits</h2>
+
+        <div class="content-block">
+          <div class="table-scroll" role="region" aria-label="Source, method and basis table" tabindex="0">
+            <table class="method-table">
+              <caption class="cite-help" style="text-align:left;caption-side:top;margin-bottom:0.5rem;">Source &middot; Method &middot; Basis (PROJECT_RULES §2 Rule 3). Full references on the next page.</caption>
+              <thead>
+                <tr><th>Source</th><th>Method</th><th>Basis</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>NHS Constitution for England (universal, free, mental-and-physical-equal care); NHS Talking Therapies (self-referral; ~670,000 courses 2023/24)</td>
+                  <td>WebFetch of gov.uk Constitution + NHS England programme page</td>
+                  <td>&#10003; Sourced (primary/official)</td>
+                </tr>
+                <tr>
+                  <td>Employment status &mdash; three tiers; self-employed outside most employment law (no holiday/sick pay)</td>
+                  <td>WebFetch of gov.uk employment-status pages</td>
+                  <td>&#10003; Sourced (official); musician application &#9888; Inferred</td>
+                </tr>
+                <tr>
+                  <td><em>Uber BV v Aslam</em> [2021] UKSC 5 (drivers are &ldquo;workers&rdquo;; purposive test)</td>
+                  <td>WebFetch of UK Supreme Court case page + press summary PDF</td>
+                  <td>&#10003; Sourced (primary judgment); musician application &#9888; Inferred (fact-specific)</td>
+                </tr>
+                <tr>
+                  <td>Taylor Review (&ldquo;Good Work,&rdquo; 2017; 53 recommendations) + Good Work Plan (2018); Statutory Sick Pay (&pound;123.25/wk; employee-only; self-employed &rarr; Universal Credit)</td>
+                  <td>WebFetch of gov.uk publication + SSP pages</td>
+                  <td>&#10003; Sourced (official); &ldquo;substantially unlegislated&rdquo; &#9888; Inferred from absence (Rule 4)</td>
+                </tr>
+                <tr>
+                  <td>Arts Council England &mdash; &pound;445m/yr to 985 organisations (2023&ndash;26, extended to Mar 2028), arm's-length body of DCMS; Creative Industries Sector Vision (2023; mental health absent)</td>
+                  <td>WebFetch/WebSearch of artscouncil.org.uk + gov.uk DCMS (Sector Vision main + Annex A)</td>
+                  <td>&#10003; Sourced (official; absence verified by full-text read, Rule 4)</td>
+                </tr>
+                <tr>
+                  <td>Musicians' Union &mdash; 35,879 members; refers members to Music Minds Matter (does not run own counselling)</td>
+                  <td>WebSearch (TUC affiliate listing carrying the union return + MU/MMM ally statement); MU site blocked to fetch tools</td>
+                  <td>&#10003; Sourced (membership); some MU own-voice claims &#9888; (site unreachable this run)</td>
+                </tr>
+                <tr>
+                  <td>Help Musicians (charity 228089; founded 1921, renamed 1926; FY2025 spend ~&pound;9.19m / charitable ~&pound;7.47m; ~13,000 interventions)</td>
+                  <td>WebFetch of Charity Commission record (228089) + Help Musicians 2025 annual-report page</td>
+                  <td>&#10003; Sourced (Charity Commission + own report)</td>
+                </tr>
+                <tr>
+                  <td>Music Minds Matter (CIO 1199795, sole member Help Musicians; 2017; 24/7 line; whole-sector); BAPAM (1167785; est. 1984); Music Support (1170231; 2016); Tonic Rider (1189913; Steph Langan; 2021)</td>
+                  <td>WebFetch of each charity's own site + prior project snapshots for the 2017 / 2021 launch dates</td>
+                  <td>&#10003; Sourced (own sites; two launch dates from prior project verification)</td>
+                </tr>
+                <tr>
+                  <td>Musicians' Census Mental Health report (Help Musicians + MU, 23 Nov 2023; n&asymp;6,000; 30% poor/negative wellbeing; earnings gradient)</td>
+                  <td>WebFetch of musicianscensus.co.uk / Help Musicians + official report PDF</td>
+                  <td>&#10003; Sourced (official survey); &#9888; self-selected, non-probability</td>
+                </tr>
+                <tr>
+                  <td>&ldquo;Can Music Make You Sick?&rdquo; Gross &amp; Musgrave (2016 pilot n=2,211; 71.1% anxiety, 68.5% depression); 2020 UWP book; Loveday et al. 2023 <em>Psychology of Music</em></td>
+                  <td>WebFetch of WestminsterResearch primary PDF; PubMed/WebSearch for the journal paper</td>
+                  <td>&#10003; Sourced (primary PDF); &#9888; self-selected self-report; Loveday 2023 not PubMed-indexed</td>
+                </tr>
+                <tr>
+                  <td>Evidence gap &mdash; no UK probability-sample prevalence study; near-misses: Ackermann et al. 2014 (PMID 25249990, Australia); Musgrave, Gross &amp; Carney 2025 (PMID 39930749, Denmark); Kegelaers &amp; Gibney 2025 review</td>
+                  <td>PubMed API (PMID/DOI/metadata) + WebSearch</td>
+                  <td>&#10003; Sourced (PubMed-indexed anchors); &#10067; No UK probability sample (Rule 4)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <h3>Limitations</h3>
+          <ol>
+            <li>The mental-health floor is established as universal <em>health-care access</em> (NHS Constitution + Talking Therapies); the report does not claim the NHS provides a <em>musician-specific</em> service &mdash; it does not. The music-specific care layer is the charitable room.</li>
+            <li>Every UK prevalence figure cited (Census 30%; &ldquo;Can Music Make You Sick?&rdquo; 71%/68.5%) is a <strong>self-selected, non-probability survey</strong>; they establish that distress is widespread and patterned, not a population rate. The strongest validated-instrument evidence (HADS) is Danish, and the nearest near-population design is Australian.</li>
+            <li>Two charity launch dates rest on prior project snapshots rather than this run's live fetch (Music Minds Matter, 2017; Tonic Rider, 16 Feb 2021). Help Musicians' founding history is stated precisely (1921 Gervase Elwes Memorial Fund &rarr; 1926 Musicians Benevolent Fund) to avoid the common imprecise &ldquo;founded 1921 as the Musicians' Benevolent Fund.&rdquo;</li>
+            <li>The Musicians' Union's own website was unreachable by the available fetch tools this run; membership comes from the union's return as carried by the TUC, and a few MU own-voice service claims are caveated accordingly.</li>
+            <li>The claim that the Taylor Review's status reforms remain &ldquo;substantially unlegislated&rdquo; is an inference from the absence of enacting primary legislation, not a single source stating it (Rule 4).</li>
+            <li>No direct contact with the NHS, DCMS, Arts Council England, the Musicians' Union, or any of the charities; all figures are from public primary or official-survey sources.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 10: REFERENCES -->
+    <div class="page" id="page-9">
+      <div class="page-inner">
+        <span class="part-divider">References</span>
+        <p class="page-label">Citation Registry</p>
+        <h2 class="page-title">References</h2>
+
+        <p class="cite-help">Every claim-bearing figure and provision above carries a numbered citation &mdash; hover (desktop) or tap (mobile) a number to see the source; click to jump here. UK legal and funding facts are &#10003; sourced from official/primary pages; the two headline prevalence surveys are &#10003; sourced from their official source but &#9888; self-selected (non-probability); the peer-reviewed anchors are &#10003; PubMed-indexed but non-UK, and no UK probability-sample prevalence study exists (&#10067;, Rule 4).</p>
+
+        <div class="refs" id="refs-all" data-citation-registry="uk-all">
+          <div class="refs-title">References</div>
+          <ol>
+            <li id="uk-src-1" data-src="nhs-constitution">Department of Health and Social Care. (2023, August 17). <em>The NHS Constitution for England</em>. GOV.UK. <a href="https://www.gov.uk/government/publications/the-nhs-constitution-for-england/the-nhs-constitution-for-england" target="_blank" rel="noopener">gov.uk</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (primary/official; Principles 1&ndash;2: comprehensive service available to all, physical and mental health &ldquo;with equal regard,&rdquo; free of charge, based on clinical need not ability to pay).</li>
+            <li id="uk-src-2" data-src="talking-therapies">NHS England. (n.d.). <em>NHS Talking Therapies for anxiety and depression</em>. Retrieved June 28, 2026, from <a href="https://www.england.nhs.uk/mental-health/adults/nhs-talking-therapies/" target="_blank" rel="noopener">england.nhs.uk</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (primary/official; formerly IAPT; free; self-referral; ~670,000 people completed a course of treatment in 2023/24; commitment to +384,000 courses by 2029).</li>
+            <li id="uk-src-3" data-src="employment-status">Government Digital Service. (n.d.). <em>Employment status: Worker</em>; <em>Employment status: Self-employed and contractor</em>. GOV.UK. Retrieved June 28, 2026, from <a href="https://www.gov.uk/employment-status/worker" target="_blank" rel="noopener">gov.uk/employment-status/worker</a> &amp; <a href="https://www.gov.uk/employment-status/selfemployed-contractor" target="_blank" rel="noopener">/selfemployed-contractor</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (official; three-tier status; &ldquo;Employment law does not cover self-employed people in most cases&hellip; they do not get holiday or sick pay&rdquo;). Application to gigging musicians &#9888; Inferred &mdash; official sources speak of the self-employed generally, not musicians by name.</li>
+            <li id="uk-src-4" data-src="uber-aslam">The Supreme Court. (2021, February 19). <em>Uber BV and others v Aslam and others</em> [2021] UKSC 5 [Judgment and press summary]. <a href="https://www.supremecourt.uk/cases/uksc-2019-0029" target="_blank" rel="noopener">supremecourt.uk</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (primary judgment; unanimous, Lord Leggatt; drivers were &ldquo;workers&rdquo;; status follows the purpose of protective legislation &mdash; &ldquo;subordinate and dependent position&rdquo;). Musician application &#9888; Inferred &mdash; reclassification is fact-specific; a musician who genuinely sets own terms remains self-employed.</li>
+            <li id="uk-src-5" data-src="taylor-review">Department for Business, Energy &amp; Industrial Strategy. (2017, July 11). <em>Good work: The Taylor review of modern working practices</em>; and (2018, December 17). <em>Good Work Plan</em>. GOV.UK. <a href="https://www.gov.uk/government/publications/good-work-the-taylor-review-of-modern-working-practices" target="_blank" rel="noopener">Taylor Review</a> &middot; <a href="https://www.gov.uk/government/publications/good-work-plan" target="_blank" rel="noopener">Good Work Plan</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (official; Matthew Taylor; 53 recommendations; government accepted most in Feb 2018; Good Work Plan Dec 2018). &ldquo;Status reforms substantially unlegislated&rdquo; &#9888; Inferred from the absence of enacting legislation (Rule 4).</li>
+            <li id="uk-src-6" data-src="ssp">Government Digital Service. (n.d.). <em>Statutory Sick Pay (SSP): Eligibility</em>; <em>What you'll get</em>. GOV.UK. Retrieved June 28, 2026, from <a href="https://www.gov.uk/statutory-sick-pay/eligibility" target="_blank" rel="noopener">gov.uk/statutory-sick-pay</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (official; SSP &pound;123.25/week up to 28 weeks; requires employee status; the self-employed &ldquo;may be able to apply for Universal Credit or Employment and Support Allowance&rdquo;).</li>
+            <li id="uk-src-7" data-src="ace">Arts Council England. (n.d.). <em>National Portfolio 2023&ndash;2026</em>; <em>Let's Create (Strategy 2020&ndash;2030)</em>. Retrieved June 28, 2026, from <a href="https://www.artscouncil.org.uk/" target="_blank" rel="noopener">artscouncil.org.uk</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (ACE primary; &ldquo;investing &pound;445 million each year in 985 organisations,&rdquo; 2023&ndash;26 programme extended to March 2028; an executive non-departmental public body of DCMS; funds organisations/projects, not individual musician welfare).</li>
+            <li id="uk-src-8" data-src="sector-vision">Department for Culture, Media and Sport. (2023, June 14). <em>Creative Industries Sector Vision</em>. GOV.UK. <a href="https://www.gov.uk/government/publications/creative-industries-sector-vision" target="_blank" rel="noopener">gov.uk</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (official; grow the sector by +&pound;50bn GVA and +1 million jobs by 2030; full-text read of the main document + Annex A confirms &ldquo;mental health&rdquo; appears nowhere and &ldquo;wellbeing&rdquo; is used only of audiences/communities &mdash; Rule 4 absence verified by reading, not assumed).</li>
+            <li id="uk-src-9" data-src="musicians-union">Trades Union Congress. (n.d.). <em>Musicians' Union</em> [Affiliate listing carrying the union's membership return]. Retrieved June 28, 2026, from <a href="https://www.tuc.org.uk/" target="_blank" rel="noopener">tuc.org.uk</a>; Musicians' Union. (n.d.). <em>Mental health support / Music Minds Matter ally</em>. <a href="https://musiciansunion.org.uk/" target="_blank" rel="noopener">musiciansunion.org.uk</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (membership 35,879 via the union's return as carried by the TUC; General Secretary Naomi Pohl; the MU refers members to Music Minds Matter and is &ldquo;proud to be a Music Minds Matter ally&rdquo; &mdash; it signposts rather than delivering clinical care). Some MU own-voice descriptions &#9888; &mdash; the MU website was unreachable by the available fetch tools this run.</li>
+            <li id="uk-src-10" data-src="help-musicians">Charity Commission for England and Wales. (2026). <em>Musicians Benevolent Fund (Help Musicians), registered charity 228089</em> [Register record, FY ending 31 December 2025]; Help Musicians. (2026). <em>Annual report 2025</em>. <a href="https://www.helpmusicians.org.uk/" target="_blank" rel="noopener">helpmusicians.org.uk</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (Charity Commission + own report; Help Musicians is the working name of the Musicians Benevolent Fund, founded 1921 as the Gervase Elwes Memorial Fund, renamed Musicians Benevolent Fund 1926, patron HM King Charles III; FY2025 total expenditure &asymp; &pound;9.19m, of which &asymp; &pound;7.47m on charitable activities; &asymp; 13,000 interventions; &asymp; &pound;0.7m direct health-and-welfare support to 1,022 musicians; FY2025 expenditure exceeded income &asymp; &pound;5.65m, drawing on reserves).</li>
+            <li id="uk-src-11" data-src="mmm">Music Minds Matter / Help Musicians. (n.d.). <em>Music Minds Matter &mdash; mental health support for the music community</em>. Retrieved June 28, 2026, from <a href="https://www.musicmindsmatter.org.uk/" target="_blank" rel="noopener">musicmindsmatter.org.uk</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (own site; a charitable incorporated organisation, charity 1199795, whose sole member is Help Musicians; free 24/7 support line 0808 802 8008; open to everyone working in UK music; listening, signposting and charity-funded counselling; clinical partner BAPAM, peer partner Tonic; 2025: 3,400+ mental-health interventions, ~1,200 helpline calls). The 2017 launch year is from prior project verification rather than this run's live fetch. <a href="org-study-music-minds-matter.html" target="_blank" rel="noopener">Companion org study &rarr;</a></li>
+            <li id="uk-src-12" data-src="bapam">British Association for Performing Arts Medicine. (n.d.). <em>BAPAM &mdash; The Medical Charity for the Performing Arts</em>. Retrieved June 28, 2026, from <a href="https://www.bapam.org.uk/" target="_blank" rel="noopener">bapam.org.uk</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (own site; registered charity 1167785; established 1984; free clinical assessments for physical and psychological health, a brief talking-therapy service, and the BAPAM Directory of performing-arts-specialist clinicians; Help Musicians is its major funder).</li>
+            <li id="uk-src-13" data-src="music-support">Music Support. (n.d.). <em>Music Support &mdash; for anyone working in the UK music industry</em>. Retrieved June 28, 2026, from <a href="https://www.musicsupport.org/" target="_blank" rel="noopener">musicsupport.org</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (own site; registered charity 1170231; founded 2016 by music-industry people in recovery; peer-led helpline 0800 030 6789; counselling and addiction/recovery groups; Safe Hubs at festivals; Mental Health First Aid training).</li>
+            <li id="uk-src-14" data-src="tonic-rider">Tonic Music for Mental Health. (n.d.). <em>Tonic Rider</em>. Retrieved June 28, 2026, from <a href="https://www.tonicmusic.co.uk/" target="_blank" rel="noopener">tonicmusic.co.uk</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (own site; registered charity 1189913; founder and CEO Steph Langan; the Tonic Rider programme, launched 16 February 2021, provides free Mental Health First Aid and Suicide First Aid courses, peer-support groups, group therapy, and CBT/DBT/ACT series and workshops for music-industry workers). The 16 Feb 2021 launch date is from prior project verification (Charity Commission&ndash;checked). <a href="org-study-tonic-rider.html" target="_blank" rel="noopener">Companion org study &rarr;</a></li>
+            <li id="uk-src-15" data-src="census">Help Musicians &amp; Musicians' Union. (2023, November 23). <em>The Musicians' Census: Understanding the mental health of musicians</em>. <a href="https://www.musicianscensus.co.uk/" target="_blank" rel="noopener">musicianscensus.co.uk</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (official survey report; ~6,000 UK musicians, the largest survey of its kind; ~30% reported poor/negative mental wellbeing, rising to 41% of music students and 35% in dance music; disabled 49% and LGBTQ+ 43% worse; 43% earn under &pound;14,000/year from music, with a clear earnings&ndash;wellbeing gradient). &#9888; Self-selected, non-probability sample &mdash; a robust descriptive self-report, not a population-prevalence estimate.</li>
+            <li id="uk-src-16" data-src="can-music">Gross, S. A., &amp; Musgrave, G. (2016). <em>Can music make you sick? Music and depression (Part 1: Pilot survey report)</em>. MusicTank / University of Westminster (commissioned by Help Musicians UK). <a href="https://westminsterresearch.westminster.ac.uk/" target="_blank" rel="noopener">westminsterresearch.westminster.ac.uk</a>; Gross, S. A., &amp; Musgrave, G. (2020). <em>Can music make you sick? Measuring the price of musical ambition</em>. University of Westminster Press; Loveday, C., Musgrave, G., &amp; Gross, S. A. (2023). Predicting anxiety, depression and wellbeing in professional and nonprofessional musicians. <em>Psychology of Music, 51</em>(2), 508&ndash;522. <a href="https://doi.org/10.1177/03057356221096506" target="_blank" rel="noopener">https://doi.org/10.1177/03057356221096506</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (primary Westminster PDF + journal); 2016 pilot n=2,211; 71.1% anxiety/panic, 68.5% depression; &ldquo;up to three times more likely&rdquo; framed against ONS general-population figures. &#9888; Self-selected self-report (the report names its own self-selection bias; conditions not medically verified). The Loveday 2023 paper is journal-published but <strong>not</strong> PubMed-indexed and not UK-specific.</li>
+            <li id="uk-src-17" data-src="evidence-gap">Ackermann, B., Kenny, D. T., O'Brien, I., &amp; Driscoll, T. (2014). Sound Practice&mdash;improving occupational health and safety for professional orchestral musicians in Australia. <em>Frontiers in Psychology, 5</em>, 973. <a href="https://doi.org/10.3389/fpsyg.2014.00973" target="_blank" rel="noopener">https://doi.org/10.3389/fpsyg.2014.00973</a> (PMID 25249990); Musgrave, G., Gross, S. A., &amp; Carney, D. (2025). Determinants of anxiety, depression and subjective wellbeing among musicians in Denmark: Findings from the &ldquo;When Music Speaks&rdquo; project. <em>Scandinavian Journal of Psychology, 66</em>(3), 429&ndash;445. <a href="https://doi.org/10.1111/sjop.13095" target="_blank" rel="noopener">https://doi.org/10.1111/sjop.13095</a> (PMID 39930749); Kegelaers, J., &amp; Gibney, A. (2025). The mental health of musicians: A scoping review. <em>Psychology of Music</em>. Advance online publication. <a href="https://doi.org/10.1177/03057356251384977" target="_blank" rel="noopener">https://doi.org/10.1177/03057356251384977</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (PubMed-indexed for the Australian orchestral census &mdash; nearest near-population design, 32% positive depression screen &mdash; and the Danish HADS study &mdash; n=986, income did not predict anxiety or depression). &#10067; No UK probability-sample prevalence study of musicians' mental health located (Rule 4); the Kegelaers &amp; Gibney scoping review is journal-published but not PubMed-indexed.</li>
+          </ol>
+          <p class="refs-note">Convention: every claim-bearing marker carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above &mdash; machine-checkable before each deploy (§5.2 / §6 gate 1). The MD draft (<code>2026-06-28_Policy_Study_United_Kingdom.md</code>) carries the same citations as <code>[^1]</code>&ndash;<code>[^17]</code> footnotes and is the citation source of truth.</p>
+        </div>
+
+        <nav class="related-block" aria-label="Related on this site">
+          <p class="related-title">Related</p>
+          <ul>
+            <li><a href="policy-study.html">&larr; Policy Study (hub &middot; all regions)</a></li>
+            <li><a href="org-study-music-minds-matter.html">Companion org study &mdash; Music Minds Matter (the 24/7 line)</a></li>
+            <li><a href="org-study-tonic-rider.html">Companion org study &mdash; Tonic Rider (the industry programme)</a></li>
+            <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+          </ul>
+        </nav>
+
+        <div class="source-info">
+          <p><strong>Report:</strong> Policy Study No.006 (United Kingdom) &middot; Country-parity set &middot; Music &amp; Mental Health NPO Research Project</p>
+          <p><strong>As of:</strong> 2026-06-28 &middot; Companion org studies: Music Minds Matter, Tonic Rider</p>
+          <p><strong>Basis:</strong> &#10003; Sourced for UK legal/funding facts (official/primary); &#10003; Sourced (official) but &#9888; self-selected for the two prevalence surveys; &#10003; PubMed-indexed but non-UK anchors; &#10067; no UK probability-sample prevalence study (Rule 4)</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /pages-container -->
+
+  <script>
+    var container = document.querySelector('.pages-container');
+    var pages = document.querySelectorAll('.page');
+    var nums = document.querySelectorAll('.page-num');
+    var current = 0;
+    var RM = window.matchMedia('(prefers-reduced-motion: reduce)');
+    function scrollBehavior(){ return RM.matches ? 'auto' : 'smooth'; }
+
+    function goTo(index) {
+      if (index < 0 || index >= pages.length) return;
+      pages[index].scrollIntoView({ behavior: scrollBehavior() });
+    }
+
+    function nextPage() { goTo(current + 1); }
+    function prevPage() { goTo(current - 1); }
+
+    var scrollRaf = null;
+    container.addEventListener('scroll', function() {
+      if (scrollRaf) return;
+      scrollRaf = requestAnimationFrame(function() {
+        scrollRaf = null;
+        var scrollPos = container.scrollTop;
+        var best = 0;
+        var bestDist = Infinity;
+        for (var i = 0; i < pages.length; i++) {
+          var dist = Math.abs(pages[i].offsetTop - scrollPos);
+          if (dist < bestDist) { bestDist = dist; best = i; }
+        }
+        if (best !== current) {
+          nums[current].classList.remove('active');
+          current = best;
+          nums[current].classList.add('active');
+        }
+      });
+    }, { passive: true });
+
+    nums.forEach(function(num) {
+      num.addEventListener('click', function() {
+        goTo(parseInt(this.getAttribute('data-page')));
+      });
+    });
+
+    // --- Citation click → jump to registry entry ---
+    document.querySelectorAll('.cite a[href^="#"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        var id = this.getAttribute('href');
+        var el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        el.scrollIntoView({ behavior: scrollBehavior(), block: 'center' });
+        location.hash = id;
+      });
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { nextPage(); e.preventDefault(); }
+      if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { prevPage(); e.preventDefault(); }
+    });
+  </script>
+
+  <script>
+  /* Scroll-reveal — R3.2 paged-safe (observes within .pages-container; per-page anchors only) */
+  (function(){
+    var root = document.querySelector('.pages-container');
+    if (!root) return;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = '.page-title, .part-divider, .page-label, .stat-strip, .method-table, .table-wrap, figure';
+    var nodes = Array.prototype.slice.call(root.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, idx = 0;
+        if (p){ var sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,5) * 60) + 'ms';
+        el.classList.add('in'); io.unobserve(el);
+      });
+    }, { root: root, threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
+
+  <!-- nav scroll-state fix: transparent over hero, blurred bar once scrolled -->
+  <style>
+    nav.nav, .nav { transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease); border-bottom: 1px solid transparent; }
+    nav.nav.scrolled, .nav.scrolled {
+      right: 0;
+      background: rgba(244, 244, 245, 0.45);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    @media (prefers-reduced-motion: reduce){ nav.nav, .nav { transition: none; } }
+    .skip-nav { position: absolute; left: -9999px; top: 0; z-index: 200; background: var(--signal); color: var(--white); padding: 0.5rem 1rem; font-family: var(--font-mono); }
+    .skip-nav:focus { left: 0; }
+  </style>
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav, .nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var c = document.querySelector('.pages-container, .pages');
+    if (c && getComputedStyle(c).overflowY !== 'visible') {
+      var ticking = false;
+      c.addEventListener('scroll', function(){ if (ticking) return; ticking = true; requestAnimationFrame(function(){ ticking = false; setS(c.scrollTop > THRESH); }); }, { passive: true });
+      setS(c.scrollTop > THRESH); return;
+    }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden', 'true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>
