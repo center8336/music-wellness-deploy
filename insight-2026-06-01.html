@@ -75,7 +75,7 @@
       font-family: var(--font);
       background: var(--snow);
       color: var(--graphite);
-      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      font-size: clamp(1.1875rem, 1.06rem + 0.55vw, 1.3125rem);
       line-height: var(--lh-prose);
       font-weight: var(--wt-prose);
       text-wrap: pretty;
@@ -86,7 +86,8 @@
     p { overflow-wrap: anywhere; }
     .cjk { font-family: 'Noto Serif TC', serif; }
     p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
-    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: 520; }
+    .cjk, .cjk-inline { line-break: strict; word-break: keep-all; }
     @media (max-width:680px){ .prose p, .section-subtitle { max-width:none; } }
     ::selection { background: var(--signal); color: white; }
 
@@ -253,7 +254,7 @@
     }
     .prose p {
       font-family:var(--font-body);
-      font-size:clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      font-size:clamp(1.1875rem, 1.06rem + 0.55vw, 1.3125rem);
       color:var(--graphite); line-height:1.7; margin-bottom:1.25rem;
       max-width:var(--measure-prose);
     }
@@ -293,7 +294,7 @@
       font-weight:600; color:var(--black); margin-bottom:0.5rem;
       text-transform:uppercase; letter-spacing:0.04em;
     }
-    .option-body { font-size:clamp(1.125rem, 1rem + 0.62vw, 1.3125rem); color:var(--graphite); line-height:1.7; }
+    .option-body { font-size:clamp(1.1875rem, 1.06rem + 0.55vw, 1.3125rem); color:var(--graphite); line-height:1.7; }
 
     /* Section 4 Workflow personas */
     .workflow-persona {
@@ -314,7 +315,7 @@
       font-family:var(--font-mono); font-size:var(--text-xs); color:var(--label-ink);
       text-transform:uppercase; letter-spacing:0.05em; margin-bottom:1rem;
     }
-    .wp-body { font-size:clamp(1.125rem, 1rem + 0.62vw, 1.3125rem); color:var(--graphite); line-height:1.8; }
+    .wp-body { font-size:clamp(1.1875rem, 1.06rem + 0.55vw, 1.3125rem); color:var(--graphite); line-height:1.8; }
     .wp-body p { margin-bottom:0.75rem; }
     .wp-body strong { color:var(--charcoal); }
     .wp-proposal {

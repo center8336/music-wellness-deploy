@@ -65,11 +65,12 @@
   }
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
   html, body { height:100%; overflow:hidden; }
-  body { font-family:var(--font-body); background:var(--bg-light); color:var(--charcoal); -webkit-font-smoothing:antialiased; font-size:clamp(1.125rem,1rem + 0.62vw,1.3125rem); line-height:var(--lh-prose); font-weight:var(--wt-prose); text-wrap:pretty; font-optical-sizing:auto; }
+  body { font-family:var(--font-body); background:var(--bg-light); color:var(--charcoal); -webkit-font-smoothing:antialiased; font-size:clamp(1.1875rem,1.06rem + 0.55vw,1.3125rem); line-height:var(--lh-prose); font-weight:var(--wt-prose); text-wrap:pretty; font-optical-sizing:auto; }
   p{overflow-wrap:anywhere}
   .cjk{font-family:var(--font-cjk)}
   p.cjk,.cjk p{line-height:1.95;font-weight:600;letter-spacing:0;max-width:var(--measure-cjk)}
-  .cjk-inline{font-size:.93em;vertical-align:.02em;letter-spacing:.02em;font-weight:inherit}
+  .cjk-inline{font-size:.93em;vertical-align:.02em;letter-spacing:.02em;font-weight:520}
+.cjk,.cjk-inline{line-break:strict;word-break:keep-all}
   ::selection { background:var(--signal); color:var(--white); }
 
   .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }

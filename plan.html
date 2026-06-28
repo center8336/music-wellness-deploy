@@ -51,7 +51,7 @@
     font-family: var(--font-body);
     background: var(--black);
     color: var(--white);
-    font-size: clamp(1.125rem,1rem + 0.62vw,1.3125rem);
+    font-size: clamp(1.1875rem, 1.06rem + 0.55vw, 1.3125rem);
     line-height: var(--lh-prose);
     font-weight: var(--wt-prose);
     text-wrap: pretty;
@@ -63,7 +63,8 @@
   p{overflow-wrap:anywhere}
   .cjk{font-family:var(--font-cjk)}
   p.cjk,.cjk p{line-height:1.95;font-weight:600;letter-spacing:0;max-width:var(--measure-cjk)}
-  .cjk-inline{font-size:.93em;vertical-align:.02em;letter-spacing:.02em;font-weight:inherit}
+  .cjk-inline{font-size:.93em;vertical-align:.02em;letter-spacing:.02em;font-weight:520}
+.cjk,.cjk-inline{line-break:strict;word-break:keep-all}
   ::selection { background: var(--signal); color: var(--white); }
 
   /* ════════════════════════════════════════
@@ -112,7 +113,7 @@
      ════════════════════════════════════════ */
   .hero {
     position: relative;
-    width: 100%; min-height: 100vh;
+    width: 100%; min-height: 100vh; min-height: 100svh;
     display: flex; align-items: center; justify-content: center;
     overflow: hidden;
     padding-top: calc(5rem + env(safe-area-inset-top, 0px));

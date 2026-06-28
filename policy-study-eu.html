@@ -81,7 +81,7 @@
       background: var(--bg-light);
       color: var(--charcoal);
       line-height: var(--lh-prose);
-      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      font-size: clamp(1.1875rem, 1.06rem + 0.55vw, 1.3125rem);
       font-weight: var(--wt-prose);
       text-wrap: pretty;
       font-optical-sizing: auto;
@@ -90,7 +90,8 @@
     p { overflow-wrap: anywhere; }
     .cjk { font-family: var(--font-cjk); }
     p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
-    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: 520; }
+    .cjk, .cjk-inline { line-break: strict; word-break: keep-all; }
 
     ::selection { background: var(--signal); color: var(--white); }
 
@@ -176,7 +177,7 @@
     .page-num {
       font-family: var(--font-mono);
       font-size: var(--text-xs);
-      color: var(--silver);
+      color: var(--label-ink);
       cursor: pointer;
       padding: 0.2rem 0;
       transition: color var(--dur) var(--ease);
@@ -186,6 +187,7 @@
 
     .page-num:hover { color: var(--label-ink); }
     .page-num.active { color: var(--black); font-weight: 700; }
+    .page-progress { display: none; font-family: var(--font-mono); font-size: var(--text-caption); color: var(--label-ink); letter-spacing: 0.08em; white-space: nowrap; }
 
     .page-arrows {
       display: flex;
@@ -241,7 +243,7 @@
     }
 
     .page {
-      min-height: 100vh;
+      min-height: 100vh; min-height: 100svh;
       scroll-snap-align: start;
       padding: 5rem 2.5rem 3rem 6.5rem;
       display: flex;
@@ -259,7 +261,7 @@
 
     /* ===== COVER PAGE — TWO-LINE MINIMAL (R2.1, decided 2026-06-20) ===== */
     .cover {
-      min-height: 100vh;
+      min-height: 100vh; min-height: 100svh;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -308,14 +310,14 @@
       font-weight: 400;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--purple-deep);            /* 4.92:1 AA */
+      color: var(--signal-dim);            /* 4.92:1 AA */
       margin: 1.75rem 0 0;
       padding-left: 0.25em;
     }
 
     .cover-hint {
       position: absolute;
-      bottom: 2rem;
+      bottom: calc(2rem + env(safe-area-inset-bottom));
       left: 50%;
       transform: translateX(-50%);
       font-family: var(--font-mono);
@@ -355,7 +357,7 @@
       font-size: var(--text-xs);
       letter-spacing: 0.4em;
       text-transform: uppercase;
-      color: var(--purple-deep);
+      color: var(--signal-dim);
       margin-bottom: 1rem;
     }
 
@@ -389,7 +391,7 @@
       margin-bottom: 0.75rem;
       color: var(--graphite);
       max-width: var(--measure-prose);
-      line-height: 1.65;
+      line-height: var(--lh-prose);
     }
     .content-block p + p { margin-top: 0.9em; }
 
@@ -410,7 +412,7 @@
 
     .content-block li {
       margin-bottom: 0.4rem;
-      line-height: 1.65;
+      line-height: var(--lh-prose);
       color: var(--graphite);
     }
 
@@ -680,9 +682,9 @@
 
       .page-sidebar {
         left: auto;
-        right: 1.25rem;
+        right: calc(1.25rem + env(safe-area-inset-right));
         top: auto;
-        bottom: 1.5rem;
+        bottom: calc(1.5rem + env(safe-area-inset-bottom));
         transform: none;
         flex-direction: row;
         align-items: center;
@@ -695,15 +697,9 @@
         border: 1px solid var(--border-light);
       }
 
-      .page-nums {
-        flex-direction: row;
-        gap: 0.3rem;
-      }
+      .page-nums { display: none; }
 
-      .page-num {
-        font-size: 0.6rem;
-        padding: 0.15rem 0.2rem;
-      }
+      .page-progress { display: block; }
 
       .page-arrows {
         flex-direction: row;
@@ -712,18 +708,19 @@
       }
 
       .arrow-btn {
-        width: 24px;
-        height: 24px;
+        width: 44px;
+        height: 44px;
       }
 
       .arrow-btn svg {
-        width: 10px;
-        height: 10px;
+        width: 14px;
+        height: 14px;
       }
 
       .page {
-        padding: 4.5rem 1.25rem 5rem 1.25rem;
+        padding: 4.5rem clamp(0.9rem, 4vw, 1.25rem) calc(5.5rem + env(safe-area-inset-bottom)) clamp(0.9rem, 4vw, 1.25rem);
       }
+      .content-block p + p { margin-top: 1.15em; }
 
       .cover-title {
         font-size: clamp(1.9rem, 8.5vw, 2.6rem);
@@ -858,6 +855,7 @@
       <span class="page-num" data-page="6">07</span>
       <span class="page-num" data-page="7">08</span>
     </div>
+    <span class="page-progress" aria-live="polite" aria-atomic="true"></span>
     <div class="page-arrows">
       <button class="arrow-btn" aria-label="Previous page" onclick="prevPage()">
         <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
@@ -1225,6 +1223,14 @@
     function nextPage() { goTo(current + 1); }
     function prevPage() { goTo(current - 1); }
 
+    var progressEl = document.querySelector('.page-progress');
+    function pad(n){ return (n < 10 ? '0' : '') + n; }
+    function updateProgress() {
+      if (progressEl) progressEl.textContent = pad(current + 1) + ' / ' + pad(pages.length);
+    }
+    updateProgress();
+    if (nums[0]) nums[0].setAttribute('aria-current', 'true');
+
     var scrollRaf = null;
     container.addEventListener('scroll', function() {
       if (scrollRaf) return;
@@ -1239,8 +1245,11 @@
         }
         if (best !== current) {
           nums[current].classList.remove('active');
+          nums[current].removeAttribute('aria-current');
           current = best;
           nums[current].classList.add('active');
+          nums[current].setAttribute('aria-current', 'true');
+          updateProgress();
         }
       });
     }, { passive: true });
