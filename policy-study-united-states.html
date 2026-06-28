@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Policy study: United States — the room substituting for an absent floor · MH&W Policy Study">
+  <title>Policy: United States · MH&W</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font-cjk: 'Noto Serif TC', serif;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1.3rem, 1.1rem + 1vw, 1.65rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      /* ── DIA-GRADE READING SCALE (calibrated to Dia browser, serif-corrected) ── */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;
+      --lh-prose:1.7;--wt-prose:440;
+      --measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;
+      --label-ink:var(--graphite);
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--charcoal);
+      line-height: var(--lh-prose);
+      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: inherit; }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    /* ===== SITE NAVIGATION ===== */
+    nav.nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem 2.5rem;
+      padding-top: calc(1.5rem + env(safe-area-inset-top));
+      background: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--label-ink);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      transition: color var(--dur) var(--ease);
+    }
+
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      z-index: 101;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--charcoal);
+      margin: 5px 0;
+      transition: all 0.3s var(--ease);
+    }
+    .nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(4px,-5px); }
+
+    /* Mobile nav brand */
+    .nav-topbar { display: none; }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
+
+    /* ===== PAGE SIDEBAR ===== */
+    .page-sidebar {
+      position: fixed;
+      left: 2.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+    }
+
+    .page-nums {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+    }
+
+    .page-num {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      cursor: pointer;
+      padding: 0.2rem 0;
+      transition: color var(--dur) var(--ease);
+      letter-spacing: 0.05em;
+      user-select: none;
+    }
+
+    .page-num:hover { color: var(--label-ink); }
+    .page-num.active { color: var(--black); font-weight: 700; }
+
+    .page-arrows {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+    }
+
+    .arrow-btn {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--silver);
+      border-radius: 50%;
+      background: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--label-ink);
+      font-size: 0.7rem;
+      transition: all var(--dur) var(--ease);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .arrow-btn:hover {
+      border-color: var(--signal);
+      color: var(--signal);
+    }
+
+    .arrow-btn:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+
+    .arrow-btn svg {
+      width: 12px;
+      height: 12px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ===== PAGES CONTAINER (scroll-snap) ===== */
+    .pages-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow-y: auto;
+      scroll-snap-type: y proximity;
+      scroll-behavior: smooth;
+      overscroll-behavior-y: contain;
+    }
+
+    .page {
+      min-height: 100vh;
+      scroll-snap-align: start;
+      padding: 5rem 2.5rem 3rem 6.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page-inner {
+      max-width: var(--max-w-text);
+      width: 100%;
+      margin: 0 auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== COVER PAGE — TWO-LINE MINIMAL (R2.1, decided 2026-06-20) ===== */
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;            /* clips the wash */
+      padding: 0 2rem;
+    }
+
+    /* one soft radial purple wash — the single dia accent */
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%, var(--signal-glow) 0%, rgba(102,103,171,0.06) 38%, rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
+    }
+
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 1280px);
+    }
+
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6rem);
+      font-weight: 900;
+      line-height: 1.04;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin: 0;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+
+    .cover-line {
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--purple-deep);            /* 4.92:1 AA */
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
+    }
+
+    .cover-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
+    }
+
+    /* entrance — soft fade + rise, one time */
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
+    }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-line  { animation-delay: 0.22s; }
+
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+    /* reduced-motion: no entrance, no drift, no pulse — everything static & visible */
+    @media (prefers-reduced-motion: reduce) {
+      .cover-inner > *,
+      .cover-wash,
+      .cover-hint { animation: none; opacity: 1; transform: none; }
+    }
+
+    /* ===== CONTENT PAGES ===== */
+    .page-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--purple-deep);
+      margin-bottom: 1rem;
+    }
+
+    .page-title {
+      font-family: var(--font-display);
+      font-size: var(--text-h1);
+      font-weight: 700;
+      line-height: 1.1;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 2rem;
+      letter-spacing: 0.01em;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+    }
+
+    .content-block {
+      margin-bottom: 1.75rem;
+    }
+
+    .content-block h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-h3);
+      line-height: 1.25;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+
+    .content-block p {
+      margin-bottom: 0.75rem;
+      color: var(--graphite);
+      max-width: var(--measure-prose);
+      line-height: 1.65;
+    }
+    .content-block p + p { margin-top: 0.9em; }
+
+    .content-block strong {
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    .content-block em {
+      font-style: italic;
+      color: var(--graphite);
+    }
+
+    .content-block ul, .content-block ol {
+      margin-left: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .content-block li {
+      margin-bottom: 0.4rem;
+      line-height: 1.65;
+      color: var(--graphite);
+    }
+
+    /* ===== LEAD / FRAMING QUOTE ===== */
+    .lead-quote {
+      border-left: 3px solid var(--signal);
+      background: var(--signal-bg);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 1rem 0 0;
+    }
+    .lead-quote p {
+      font-size: clamp(1.1875rem, 1rem + 1.1vw, 1.3125rem);
+      line-height: 1.62;
+      color: var(--charcoal);
+      max-width: var(--measure-prose);
+      margin-bottom: 0.75rem;
+    }
+    .lead-quote p:last-child { margin-bottom: 0; }
+
+    /* ===== REFORM ITEMS ===== */
+    .reform-item {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .reform-item:last-child { border-bottom: none; }
+    .reform-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .reform-num {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--purple-deep);
+      flex-shrink: 0;
+    }
+    .reform-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      line-height: 1.25;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+    .reform-year {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--label-ink);
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+    .reform-body {
+      padding-left: 2.25rem;
+      color: var(--graphite);
+      max-width: calc(var(--measure-prose) + 2.25rem);
+    }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin: 1rem 0 1.25rem;
+      background: var(--bg-card);
+    }
+    .stat-item {
+      padding: 1.1rem 1rem;
+      border-right: 1px solid var(--border-light);
+      text-align: center;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.6rem;
+      color: var(--purple-deep);
+      line-height: 1.1;
+      font-variant-numeric: tabular-nums;
+    }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-micro);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--label-ink);
+      margin-top: 0.35rem;
+    }
+
+    /* ===== APPRAISAL / VERDICT ===== */
+    .appraise-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .appraise-item:last-child { border-bottom: none; }
+    .appraise-item h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-h3);
+      line-height: 1.25;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 0.35rem;
+    }
+    .appraise-item p { color: var(--graphite); max-width: var(--measure-prose); }
+
+    .verdict {
+      background: var(--off-black);
+      color: var(--snow);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .verdict .verdict-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--purple-light);
+      margin-bottom: 0.5rem;
+    }
+    .verdict p { color: var(--snow); line-height: 1.7; margin: 0; }
+    .verdict strong { color: var(--white); font-weight: 600; }
+
+    /* ===== LESSON ITEMS ===== */
+    .lesson-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .lesson-item:last-child { border-bottom: none; }
+    .lesson-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      margin-bottom: 0.35rem;
+    }
+    .lesson-num {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--purple-deep);
+      flex-shrink: 0;
+    }
+    .lesson-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      line-height: 1.25;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+    .lesson-body {
+      padding-left: 2.25rem;
+      line-height: 1.7;
+      color: var(--graphite);
+      max-width: calc(var(--measure-prose) + 2.25rem);
+    }
+
+    /* ===== METHOD TABLE ===== */
+    .method-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--text-small);
+      margin: 1rem 0;
+    }
+    .method-table thead {
+      background: var(--purple-deep);
+      color: var(--white);
+    }
+    .method-table th {
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: var(--text-micro);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
+    .table-scroll:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; border-radius: var(--radius); }
+    .method-table td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid var(--border-light);
+      vertical-align: top;
+      font-variant-numeric: tabular-nums;
+    }
+    .method-table tbody tr:nth-child(odd) { background: var(--white); }
+    .method-table tbody tr:nth-child(even) { background: var(--snow); }
+
+    /* ===== SOURCE FOOTER ===== */
+    .source-info {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-light);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--label-ink);
+      line-height: 1.8;
+    }
+
+    .source-info code {
+      font-family: var(--font-mono);
+      background: var(--white);
+      padding: 0.1rem 0.3rem;
+      border-radius: var(--radius);
+      font-size: inherit;
+      color: var(--label-ink);
+    }
+
+    /* ===== SECTION DIVIDER ===== */
+    .part-divider {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--purple-light);
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--purple-light);
+      margin-bottom: 1.5rem;
+      display: inline-block;
+    }
+
+    /* ===== CITATIONS (§5 inline tier) — pattern: policy-study-japan.html ===== */
+    .cite { font-size: 0.72em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a:focus-visible { outline: 2px solid var(--signal); outline-offset: 1px; border-radius: 2px; }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 1.5rem; max-width: var(--measure-ref); }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-fine); color: var(--graphite); line-height: 1.7; margin-bottom: 0.6rem; overflow-wrap: anywhere; }
+    .refs li a { color: var(--signal); }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs-note { font-size: var(--text-xs); color: var(--label-ink); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-fine); color: var(--label-ink); font-style: italic; margin-bottom: 0.5rem; }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 768px) {
+      nav.nav {
+        padding: 1rem 1.25rem;
+        padding-top: calc(1rem + env(safe-area-inset-top));
+        right: 0;
+        background: none;
+        border-bottom: none;
+      }
+      nav.nav.open {
+        background: rgba(244, 244, 245, 0.9);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+      .nav-toggle { display: block; }
+      .nav-topbar { display: flex; align-items: center; gap: 0.75rem; }
+      .nav-mobile-brand { display:block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 0.6rem;
+        margin-top: 0.75rem;
+      }
+      .nav-links.show { display: flex; }
+      .nav-links a { font-size: 0.85rem; }
+
+      .page-sidebar {
+        left: auto;
+        right: 1.25rem;
+        top: auto;
+        bottom: 1.5rem;
+        transform: none;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(244, 244, 245, 0.9);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        padding: 0.5rem 0.75rem;
+        border-radius: 20px;
+        border: 1px solid var(--border-light);
+      }
+
+      .page-nums {
+        flex-direction: row;
+        gap: 0.3rem;
+      }
+
+      .page-num {
+        font-size: 0.6rem;
+        padding: 0.15rem 0.2rem;
+      }
+
+      .page-arrows {
+        flex-direction: row;
+        margin-top: 0;
+        margin-left: 0.25rem;
+      }
+
+      .arrow-btn {
+        width: 24px;
+        height: 24px;
+      }
+
+      .arrow-btn svg {
+        width: 10px;
+        height: 10px;
+      }
+
+      .page {
+        padding: 4.5rem 1.25rem 5rem 1.25rem;
+      }
+
+      .cover-title {
+        font-size: clamp(1.9rem, 8.5vw, 2.6rem);
+      }
+
+      .cover-line {
+        font-size: clamp(0.72rem, 3.2vw, 0.95rem);
+        letter-spacing: 0.18em;
+      }
+
+      .cover-wash {
+        width: 150vw;
+        height: 150vw;
+      }
+
+      .page-title {
+        font-size: var(--text-h2);
+      }
+
+      .reform-body, .lesson-body {
+        padding-left: 0;
+      }
+
+      .reform-header {
+        flex-wrap: wrap;
+      }
+
+      .reform-year {
+        margin-left: 0;
+        margin-top: 0.15rem;
+      }
+
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+      .stat-item:last-child { border-bottom: none; }
+
+      .method-table { font-size: 0.7rem; }
+      .method-table th, .method-table td { padding: 0.4rem 0.5rem; }
+    }
+
+    /* ── Reading env: phone measure release ── */
+    @media (max-width: 680px) {
+      .content-block p, .content-block p + p, .lead-quote p, .appraise-item p,
+      .reform-body, .lesson-body, .refs, .content-block li { max-width: none; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
+      /* table stays ≥13px, not 0.7rem; tighten padding instead */
+      .method-table { font-size: 0.82rem; }
+      .method-table th { font-size: var(--text-micro); }
+      .method-table th, .method-table td { padding: 0.4rem 0.45rem; }
+      /* pager controls reach a 44px tap target */
+      .arrow-btn { width: 44px; height: 44px; }
+    }
+
+    /* Scrollbar styling */
+    .pages-container::-webkit-scrollbar { width: 3px; }
+    .pages-container::-webkit-scrollbar-track { background: transparent; }
+    .pages-container::-webkit-scrollbar-thumb { background: var(--silver); border-radius: 3px; }
+    .pages-container::-webkit-scrollbar-thumb:hover { background: var(--grey-light); }
+
+    /* ===== DISCOVERABILITY: related block (closing page) ===== */
+    .related-block {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-light);
+    }
+    .related-title {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--label-ink);
+      margin-bottom: 0.6rem;
+    }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--signal);
+      text-decoration: none;
+      transition: color var(--dur) var(--ease);
+    }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+    .related-block .related-note { color: var(--graphite); }
+
+    /* ===== Scroll-reveal (R3.2, paged-safe) ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <!-- Site Navigation -->
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="this.classList.toggle('open');var x=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',!x);document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+        <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="org-study.html">ORG STUDY</a>
+      <a href="policy-study.html" class="current" aria-current="page">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
+      <a href="field-news.html">FIELD NEWS</a>
+    </div>
+  </nav>
+
+  <!-- Page Sidebar Navigation -->
+  <div class="page-sidebar">
+    <div class="page-nums">
+      <span class="page-num active" data-page="0">01</span>
+      <span class="page-num" data-page="1">02</span>
+      <span class="page-num" data-page="2">03</span>
+      <span class="page-num" data-page="3">04</span>
+      <span class="page-num" data-page="4">05</span>
+      <span class="page-num" data-page="5">06</span>
+      <span class="page-num" data-page="6">07</span>
+      <span class="page-num" data-page="7">08</span>
+      <span class="page-num" data-page="8">09</span>
+      <span class="page-num" data-page="9">10</span>
+    </div>
+    <div class="page-arrows">
+      <button class="arrow-btn" aria-label="Previous page" onclick="prevPage()">
+        <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+      </button>
+      <button class="arrow-btn" aria-label="Next page" onclick="nextPage()">
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Pages -->
+  <div class="pages-container" id="main">
+
+    <!-- PAGE 01: COVER (standard cover — copied from policy-study-eu.html) -->
+    <div class="page cover" id="page-0">
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="cover-inner">
+        <h1 class="cover-title">UNITED<br>STATES</h1>
+        <p class="cover-line">Policy Study 007 &middot; 2026.6</p>
+      </div>
+      <span class="cover-hint" aria-hidden="true">&darr; Scroll</span>
+    </div>
+
+    <!-- PAGE 02: FRAMING -->
+    <div class="page" id="page-1">
+      <div class="page-inner">
+        <span class="part-divider">Framing</span>
+        <p class="page-label">Why the US, Why Policy</p>
+        <h2 class="page-title">The Room Without the Floor</h2>
+
+        <div class="content-block">
+          <p>Part of the project's <strong>country-parity set</strong>: each country is read on two axes &mdash; the organizations on the ground (Org Study) and the system around them (Policy Study). The United States is the companion to three of this project's largest org studies &mdash; <strong>Backline</strong>, <strong>MusiCares</strong>, and <strong>To Write Love on Her Arms</strong> &mdash; so the question here is what the <em>jurisdiction</em> around those organizations does, or fails to do.</p>
+        </div>
+
+        <div class="lead-quote">
+          <p>Where Japan reached for <strong>labour law</strong>, Germany for <strong>social insurance</strong>, the UK for a <strong>universal NHS floor</strong>, and the EU for <strong>coordination</strong>, the United States has reached for <strong>charity and the market</strong>. It has the project's <strong>thinnest statutory floor</strong> and, not coincidentally, its <strong>largest and most sophisticated charitable room</strong>.</p>
+          <p>That makes the US the cleanest test of this project's central thesis &mdash; <em>a rich room cannot fully replace a missing floor</em> &mdash; because here the room is as good as it gets and the floor is as thin as it gets. And in 2026 the floor got thinner: the enhanced ACA subsidies that had widened coverage since 2021 <strong>expired on 1 January 2026</strong>, raising subsidized premiums by an average of <strong>114%</strong>.<sup class="cite"><a href="#us-src-2" data-src="aca" data-tip="Enhanced ACA premium tax credits expired 1 Jan 2026; subsidized net premiums +114% (~$1,016/yr); 2026 enrollment fell to 23.1M (sharpest drop on record): CRS R48290 + KFF. ✅ Sourced.">2</a></sup></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 03: THE THIN FLOOR -->
+    <div class="page" id="page-2">
+      <div class="page-inner">
+        <span class="part-divider">Part A &mdash; The Landscape</span>
+        <p class="page-label">Section 01 &middot; The Thin Floor</p>
+        <h2 class="page-title">No Floor, by Design</h2>
+
+        <div class="content-block">
+          <p>The United States has <strong>no universal health system</strong>. Coverage is a patchwork &mdash; employer-sponsored insurance, the individual ACA marketplace, and the public Medicare and Medicaid programs. The overall uninsured rate was about <strong>8.0%</strong> in 2024 (roughly <strong>11%</strong> among working-age adults), but that understates the exposure of music workers: Future of Music Coalition surveys repeatedly found musicians uninsured at far higher rates &mdash; about <strong>53%</strong> of musician respondents in 2013, <strong>33%</strong> in 2010.<sup class="cite"><a href="#us-src-1" data-src="floor" data-tip="No universal health system; overall uninsured ≈8.0% (2024), ≈11% working-age adults: US Census Bureau P60-288. ✅ Sourced (Census primary).">1</a></sup><sup class="cite"><a href="#us-src-6" data-src="fmc" data-tip="Future of Music Coalition surveys: ~53% of musician respondents uninsured (2013), 33% (2010). ⚠️ As-reported — self-selected, pre-marketplace advocacy data, directionally reliable.">6</a></sup></p>
+        </div>
+
+        <div class="content-block">
+          <p>For an independent worker, the route to coverage is the <strong>ACA marketplace</strong>, where income-based premium tax credits lower the cost. The base credit is permanent, but the <strong>enhanced</strong> subsidies layered on from 2021 <strong>lapsed on 1 January 2026</strong>: average subsidized net premiums rose about <strong>114% (~$1,016/yr)</strong>, and 2026 enrollment fell to <strong>23.1 million</strong> &mdash; the largest single-year drop since the marketplaces launched.<sup class="cite"><a href="#us-src-2" data-src="aca" data-tip="ACA marketplace is how independent workers buy coverage; enhanced PTC expired 1 Jan 2026 → +114%/~$1,016; 2026 enrollment 23.1M: CRS R48290 + KFF + HealthCare.gov. ✅ Sourced.">2</a></sup> <strong>Medicaid</strong>, covering low-income adults to 138% of the poverty line, has been adopted by <strong>40 states plus DC</strong> (about <strong>20.4 million</strong> in the expansion group), but the 2025 reconciliation law added <strong>work requirements</strong> that narrow it.<sup class="cite"><a href="#us-src-3" data-src="medicaid" data-tip="Medicaid expansion: 40 states + DC; ~20.4M in the expansion group (June 2025); H.R.1 (2025) added work requirements: KFF trackers. ✅ Sourced.">3</a></sup></p>
+        </div>
+
+        <div class="stat-strip">
+          <div class="stat-item">
+            <div class="stat-num">8.0%</div>
+            <div class="stat-label">Uninsured<br>(2024, overall)</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">+114%</div>
+            <div class="stat-label">Subsidized premiums<br>after Jan 2026</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">~53%</div>
+            <div class="stat-label">Musicians uninsured<br>(FMC 2013)</div>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <p>The deeper problem is <strong>classification</strong>. Most working musicians are paid as <strong>independent contractors</strong> (Form 1099-NEC), not employees &mdash; and that single status removes them from the institutions that carry welfare in the US: employer health insurance, <strong>unemployment insurance</strong>, and <strong>workers' compensation</strong> all attach to employment, not to contractors, who also owe the full self-employment tax. The IRS decides status by a three-part common-law test &mdash; behavioral control, financial control, type of relationship &mdash; with "no magic number" of decisive factors.<sup class="cite"><a href="#us-src-4" data-src="irs1099" data-tip="Most musicians are 1099 independent contractors → outside employer health, unemployment insurance, workers' comp; full self-employment tax. IRS three-category common-law test. ✅ Sourced (IRS primary).">4</a></sup></p>
+          <p>Classification law then <strong>varies by state</strong>. California's <strong>AB5 (2019)</strong> codified the strict <strong>ABC test</strong> (Labor Code &sect;2775), but the follow-up <strong>AB2257 (2020)</strong> carved most musicians back out: &sect;2780 returns recording artists, composers, and musicians and vocalists on sound recordings &mdash; and most <strong>single-engagement live performances</strong> &mdash; to the looser <em>Borello</em> test, with exceptions for large venues. Federally, the Department of Labor's contractor rule was rewritten in 2024, partly suspended in 2025, and is being rewritten again under a 2026 proposed rule &mdash; so even the federal floor is unstable.<sup class="cite"><a href="#us-src-5" data-src="classification" data-tip="CA AB5 (2019) ABC test (§2775); AB2257 (2020) §2780 carves musicians back to Borello with large-venue exceptions; federal DOL rule rewritten 2024, paused 2025, new NPRM 2026: CA Labor Code + DOL WHD. ✅ Sourced.">5</a></sup></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 04: OUTPUT, NOT WELFARE -->
+    <div class="page" id="page-3">
+      <div class="page-inner">
+        <p class="page-label">Section 02 &middot; What the State Funds</p>
+        <h2 class="page-title">Output, Not Welfare</h2>
+
+        <div class="content-block">
+          <p>What the state <em>does</em> fund is <strong>arts output, not worker welfare</strong>. The <strong>National Endowment for the Arts</strong> (est. 1965) makes grants to nonprofit arts <strong>organizations</strong> and to state and regional arts agencies; by statute it generally cannot fund individuals beyond honorific fellowships.</p>
+        </div>
+
+        <div class="reform-item">
+          <div class="reform-header">
+            <span class="reform-num">01</span>
+            <span class="reform-title">The NEA survived &mdash; barely &mdash; and funds output anyway</span>
+            <span class="reform-year">2025&ndash;26</span>
+          </div>
+          <div class="reform-body">
+            <p>The FY2026 appropriation is <strong>$207 million</strong> &mdash; but only after a turbulent year: the FY2026 budget request proposed <strong>eliminating</strong> the agency (May 2025), <strong>more than 1,600 grants were terminated</strong>, and Congress ultimately <strong>restored</strong> it at flat funding (signed into law January 2026). Survived, disrupted, politically fragile &mdash; and an output-funder either way; none of this money is a welfare or mental-health line for workers.<sup class="cite"><a href="#us-src-7" data-src="nea" data-tip="NEA FY2026 $207M signed into law Jan 2026, after a proposed FY2026 elimination (May 2025) and 1,600+ grant terminations; funds organizations/state agencies, not individual welfare: NEA FY2025 AFR + NASAA + NPR. ✅ Sourced.">7</a></sup></p>
+          </div>
+        </div>
+
+        <div class="reform-item">
+          <div class="reform-header">
+            <span class="reform-num">02</span>
+            <span class="reform-title">The unions reach a minority</span>
+            <span class="reform-year">2024&ndash;26</span>
+          </div>
+          <div class="reform-body">
+            <p>The <strong>American Federation of Musicians</strong> provides <strong>no general health insurance</strong> to most members &mdash; coverage exists only through <em>local</em> funds tied to employer contributions on union gigs, which most freelance work never triggers. Its pension (AFM-EPF) was officially "critical and declining" and survived only through a <strong>$1.53&nbsp;billion federal bailout</strong> (the American Rescue Plan's Special Financial Assistance, paid August 2024); an earlier application to <em>cut</em> benefits was withdrawn, never enacted.<sup class="cite"><a href="#us-src-8" data-src="afm" data-tip="AFM provides no general health insurance (only local employer-contribution funds); AFM-EPF 'critical and declining,' rescued by ~$1.53B federal SFA paid Aug 2024; 2019 benefit-cut application withdrawn: AFM + PBGC. ✅ Sourced.">8</a></sup></p>
+            <p><strong>SAG-AFTRA</strong> covers recording artists and singers, but its Health Plan requires about <strong>$28,090</strong> in covered union earnings (2026) &mdash; a threshold most working musicians never reach &mdash; and the joint AFM &amp; SAG-AFTRA IP Rights Distribution Fund pays modest royalties, not benefits.<sup class="cite"><a href="#us-src-9" data-src="sagaftra" data-tip="SAG-AFTRA Health Plan threshold ~$28,090 covered union earnings (2026) — most musicians miss it; AFM & SAG-AFTRA IP Fund distributes statutory royalties, not benefits: sagaftraplans.org + afmsagaftrafund.org. ✅ Sourced.">9</a></sup></p>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <p>The net effect: public money flows to arts institutions, union welfare reaches a minority, and the welfare of the individual music worker is left to private charity.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 05: THE ROOM -->
+    <div class="page" id="page-4">
+      <div class="page-inner">
+        <p class="page-label">Section 03 &middot; The Charitable Substitute</p>
+        <h2 class="page-title">The Largest Room in the Study</h2>
+
+        <div class="content-block">
+          <p>Into that gap steps the <strong>largest and most mature charitable room</strong> for musician welfare anywhere in this project &mdash; the three org studies' subjects plus a long-standing fourth fund.</p>
+        </div>
+
+        <div class="reform-item">
+          <div class="reform-header">
+            <span class="reform-num">01</span>
+            <span class="reform-title">MusiCares &mdash; scale and a mental-health track</span>
+          </div>
+          <div class="reform-body">
+            <p>The Recording Academy's charity (est. 1989) runs preventive, emergency, and recovery programs, with a dedicated <strong>mental-health and addiction-recovery</strong> track (referrals, treatment funding, free weekly support groups, the backstage Safe Harbor Room). Its scale is real: <strong>$35.7&nbsp;million and 140,000+ services</strong> during COVID relief (2020&ndash;2022), and <strong>$15&nbsp;million+</strong> after the 2025 Los Angeles wildfires; FY2024 shows about $14M revenue and $32.7M net assets.<sup class="cite"><a href="#us-src-10" data-src="musicares" data-tip="MusiCares (est. 1989): MH & addiction-recovery + emergency aid; $35.7M/140,000+ services in COVID relief 2020–22; $15M+ in 2025 LA wildfire relief; FY2024 ≈$14M rev / ≈$32.7M net assets: musicares.org + ProPublica 990. ✅ Sourced.">10</a></sup></p>
+          </div>
+        </div>
+
+        <div class="reform-item">
+          <div class="reform-header">
+            <span class="reform-num">02</span>
+            <span class="reform-title">Backline &mdash; the connector</span>
+          </div>
+          <div class="reform-body">
+            <p>Founded 2019, Backline is the <strong>connector / navigator</strong> model &mdash; 1:1 case management, a 24/7 mental-health line (B-LINE), and support groups that route music workers to vetted providers; <strong>$3.5&nbsp;million+ invested and 84,000+ people supported</strong>, built precisely because the ordinary system leaves a three-plus-month provider waitlist.<sup class="cite"><a href="#us-src-11" data-src="backline" data-tip="Backline (2019): connector/navigator — case management, B-LINE 24/7 line, support groups; $3.5M+ invested, 84,000+ supported; exists because ordinary system leaves a 3+ month waitlist: backline.care. ✅ Sourced (scale org-reported via press).">11</a></sup></p>
+          </div>
+        </div>
+
+        <div class="reform-item">
+          <div class="reform-header">
+            <span class="reform-num">03</span>
+            <span class="reform-title">TWLOHA &mdash; music roots, finite reserves</span>
+          </div>
+          <div class="reform-body">
+            <p>To Write Love on Her Arms (founded 2006) is a general mental-health nonprofit with <strong>music-scene roots</strong> &mdash; a treatment-and-recovery scholarship and crisis-awareness model rather than a musician-only fund &mdash; and it ran <strong>three consecutive annual deficits (2022&ndash;2024)</strong>, drawing net assets from $2.79M down to $1.64M.<sup class="cite"><a href="#us-src-12" data-src="twloha" data-tip="TWLOHA (2006): general MH nonprofit with music-scene roots; treatment-scholarship model; three consecutive deficits FY2022–24, net assets $2.79M→$1.64M: twloha.com/finances + ProPublica 990. ✅ Sourced.">12</a></sup></p>
+          </div>
+        </div>
+
+        <div class="reform-item">
+          <div class="reform-header">
+            <span class="reform-num">04</span>
+            <span class="reform-title">Sweet Relief &mdash; explicitly discretionary</span>
+          </div>
+          <div class="reform-body">
+            <p>Sweet Relief (1994) gives direct aid that is explicitly <strong>discretionary</strong>: candidacy "depends on the availability of funds and the number of eligible applicants," and the fund spent net assets down to about <strong>$0.88&nbsp;million</strong> in FY2025.<sup class="cite"><a href="#us-src-13" data-src="sweetrelief" data-tip="Sweet Relief (1994): direct aid explicitly discretionary ('availability of funds and the number of eligible applicants'); FY2025 net assets spent down to ≈$0.88M: sweetrelief.org + ProPublica 990. ✅ Sourced.">13</a></sup></p>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <p>This room is generous, sophisticated, and nationally significant. It is also, on the evidence of its own filings, <strong>discretionary, application-based, criteria-gated, and finite</strong> &mdash; MusiCares paused intake in May 2020 when demand outran supply; two of the four ran their reserves down. It patches a structural hole; it is not an entitlement.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 06: THE MENTAL-HEALTH LAYER + EVIDENCE -->
+    <div class="page" id="page-5">
+      <div class="page-inner">
+        <p class="page-label">Section 04 &middot; The Mental-Health Layer</p>
+        <h2 class="page-title">A Burden Measured in Convenience Samples</h2>
+
+        <div class="content-block">
+          <p>The burden the room responds to is well documented in <strong>convenience samples</strong> and thinly documented in anything stronger. The landmark US figure comes from the <strong>MIRA Survey of Musicians (2018)</strong> &mdash; the Music Industry Research Association with Princeton's Survey Research Center and MusiCares &mdash; which found about <strong>50%</strong> of roughly 1,227 musicians had felt down, depressed, or hopeless (versus under 25% of general adults) and <strong>11.8%</strong> had had thoughts of self-harm or being better off dead (versus 3.4%). But it was a <strong>non-probability convenience sample</strong>, recruited through networks, not a representative survey.<sup class="cite"><a href="#us-src-14" data-src="mira" data-tip="MIRA Survey of Musicians 2018 (MIRA + Princeton SRC + MusiCares): n≈1,227 convenience sample; ~50% down/depressed/hopeless (vs <25% general adults); 11.8% suicidal ideation (vs 3.4%); ~two-thirds anxiety: Princeton SRC. ⚠️ As-reported, non-probability.">14</a></sup></p>
+        </div>
+
+        <div class="stat-strip">
+          <div class="stat-item">
+            <div class="stat-num">~50%</div>
+            <div class="stat-label">Depressed/hopeless<br>(MIRA, n&asymp;1,227)</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">39%</div>
+            <div class="stat-label">High suicidality<br>(THRIV touring, n=508)</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">0</div>
+            <div class="stat-label">US probability-sample<br>prevalence studies</div>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <p>The peer-reviewed work points the same way. <strong>Newman et al. (2021)</strong>, in the <em>Journal of Psychiatric Research</em>, found among 508 touring professionals <strong>50% at high risk for clinical depression and 39.4% reporting high suicidality</strong> (volunteer, international); <strong>Berg, King et al. (2022)</strong> found among 317 popular musicians who had used mental-health services in Texas <strong>over 36% with moderate-to-severe depression</strong> &mdash; a distinct, smaller, clinic-recruited study, not the MIRA national survey. A 2025 scoping review (Kegelaers &amp; Gibney, 89 studies) confirms a literature <strong>dominated by convenience samples</strong>.<sup class="cite"><a href="#us-src-15" data-src="evidence" data-tip="Newman et al. 2021 (J Psychiatr Res, n=508): 50% high depression risk, 39.4% high suicidality; Berg/King 2022 (Texas, n=317): >36% moderate-severe depression; Kegelaers & Gibney 2025 scoping review (89 studies): base dominated by convenience samples. ✅ Sourced (peer-reviewed).">15</a></sup></p>
+          <p>What is missing is decisive. A targeted search returned <strong>no probability-sample prevalence study of US musicians' mental health</strong>; the nearest near-misses are MIRA (largest US sample, non-probability), the THRIV touring study (peer-reviewed but volunteer and international), and the Danish "When Music Speaks" project (most systematically recruited, non-US). A "Van Dyke" study sometimes attached to this topic <strong>could not be verified</strong> and is not cited here &mdash; absence is not non-existence (Rule 4), but a figure with no traceable source is not a figure.<sup class="cite"><a href="#us-src-15" data-src="evidence" data-tip="No US probability-sample prevalence study located (PubMed returned none); nearest near-misses MIRA, THRIV, Danish 'When Music Speaks.' The 'Van Dyke' reference could not be verified and is not cited (Rule 4). ❓ No probability sample.">15</a></sup> The burden is real and consistently large across every sample; the US still lacks the representative study that would let anyone state a prevalence with confidence.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 07: APPRAISAL -->
+    <div class="page" id="page-6">
+      <div class="page-inner">
+        <span class="part-divider">Part B &mdash; Appraisal</span>
+        <p class="page-label">Section 05 &middot; Reading the Model</p>
+        <h2 class="page-title">A Room Cannot Be a Floor</h2>
+
+        <div class="appraise-item">
+          <h3>What the US gets right is the room</h3>
+          <p>No country in this project has built a charitable infrastructure for musician welfare as large, as specialized, or as fast-moving. MusiCares can move tens of millions in a disaster; Backline has turned the navigator problem &mdash; <em>which provider, how soon</em> &mdash; into a 24/7 service; TWLOHA built a national mental-health brand out of the music scene. For a Taiwan NPO this is the most useful catalogue of <em>what a room can be</em> anywhere in the study, and three of these are already this project's org studies.<sup class="cite"><a href="#us-src-10" data-src="musicares" data-tip="MusiCares can move tens of millions in a disaster ($35.7M COVID; $15M+ 2025 wildfire): musicares.org + 990. ✅ Sourced.">10</a></sup><sup class="cite"><a href="#us-src-11" data-src="backline" data-tip="Backline turned the navigator problem into a 24/7 service: backline.care. ✅ Sourced.">11</a></sup></p>
+        </div>
+
+        <div class="appraise-item">
+          <h3>However, the room cannot do what a floor does</h3>
+          <p>Every strength of the US charitable layer is shadowed by the same limit: it is <strong>discretionary</strong> where a floor is universal, <strong>application-based</strong> where a floor is automatic, and <strong>finite</strong> where a floor is funded by law. The structural exclusions are upstream of the charity &mdash; 1099 status removes musicians from unemployment insurance and workers' comp before any charity is asked; the ACA is the only health route for most, and in 2026 it became more expensive for millions just as the room was being asked to absorb the difference.<sup class="cite"><a href="#us-src-4" data-src="irs1099" data-tip="1099 status removes musicians from UI and workers' comp upstream of any charity: IRS. ✅ Sourced.">4</a></sup><sup class="cite"><a href="#us-src-2" data-src="aca" data-tip="In 2026 ACA marketplace coverage became more expensive for millions (enhanced subsidies lapsed): CRS + KFF. ✅ Sourced.">2</a></sup> Charity is, by design, the layer that activates <em>after</em> someone has already fallen; a floor is the layer that stops the fall.</p>
+        </div>
+
+        <div class="appraise-item">
+          <h3>Read the evidence with two cautions</h3>
+          <p>(1) The headline numbers are <strong>convenience samples</strong> &mdash; MIRA and the clinic studies describe the people who answered, not US musicians as a population; the direction is robust across every sample, the magnitude is not a measured prevalence.<sup class="cite"><a href="#us-src-14" data-src="mira" data-tip="MIRA and clinic studies are convenience samples — direction robust, magnitude not a measured prevalence: Princeton SRC. ⚠️ As-reported.">14</a></sup><sup class="cite"><a href="#us-src-15" data-src="evidence" data-tip="No US probability-sample prevalence study exists; the base is convenience/volunteer samples: Kegelaers & Gibney 2025. ✅/❓ Sourced for the gap.">15</a></sup> (2) The policy facts here are <strong>fast-moving</strong> &mdash; the ACA subsidy lapse, the NEA's near-elimination-and-restoration, and the unsettled federal contractor rule are all 2025&ndash;2026 events that could move again; this report reads the system as of June 2026.<sup class="cite"><a href="#us-src-7" data-src="nea" data-tip="The NEA near-elimination-and-restoration is a 2025–26 event that could move again: NASAA + NPR. ✅ Sourced.">7</a></sup><sup class="cite"><a href="#us-src-5" data-src="classification" data-tip="The federal contractor rule is unsettled (2024 rule, 2025 pause, 2026 NPRM): DOL WHD. ✅ Sourced.">5</a></sup></p>
+        </div>
+
+        <div class="verdict">
+          <div class="verdict-label">Verdict</div>
+          <p><strong>The United States is the project's clearest room-without-a-floor &mdash; the most generous charitable infrastructure for musician welfare in the study, sitting on its thinnest statutory floor, a floor that in 2026 got thinner still.</strong> The lesson is not that the room is wrong; the rooms here are excellent. It is that a room, however well built, cannot substitute for the floor it is standing on.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 08: LESSONS FOR TAIWAN -->
+    <div class="page" id="page-7">
+      <div class="page-inner">
+        <span class="part-divider">Part C &mdash; For This Project</span>
+        <p class="page-label">Section 06 &middot; Translation</p>
+        <h2 class="page-title">Lessons for a Taiwan NPO</h2>
+
+        <div class="lesson-item">
+          <div class="lesson-header">
+            <span class="lesson-num">3.1</span>
+            <span class="lesson-title">A rich room is not a floor &mdash; complement public coverage, don't replace it</span>
+          </div>
+          <div class="lesson-body">
+            <p>The US proves a well-funded charitable layer can coexist with millions uninsured. Taiwan's advantage is that it already has the floor the US lacks &mdash; <span class="cjk cjk-inline">&#20840;&#27665;&#20581;&#24247;&#20445;&#38522;</span> (健保) is near-universal. The strategic implication is the opposite of the US: design the NPO as a <em>complement</em> to public coverage (the music-specific care and navigation 健保 doesn't provide), never a substitute &mdash; and defend 健保's universality as the asset that lets a small NPO stay small.</p>
+          </div>
+        </div>
+
+        <div class="lesson-item">
+          <div class="lesson-header">
+            <span class="lesson-num">3.2</span>
+            <span class="lesson-title">Classification is the hinge</span>
+          </div>
+          <div class="lesson-body">
+            <p>US musicians' exclusion flows almost entirely from 1099 independent-contractor status. Taiwan's equivalent fight is extending <span class="cjk cjk-inline">&#21214;&#20445;</span> / <span class="cjk cjk-inline">&#32887;&#28797;&#20445;&#38522;</span> and a stable working status to project-based performers. Track classification as the policy prize, and position the NPO as the evidence-generator and bridge service while that question is unresolved &mdash; the gap the US room fills, but on a better foundation.</p>
+          </div>
+        </div>
+
+        <div class="lesson-item">
+          <div class="lesson-header">
+            <span class="lesson-num">3.3</span>
+            <span class="lesson-title">Coverage you cannot reach is not coverage</span>
+          </div>
+          <div class="lesson-body">
+            <p>US union health plans exist, but the ~$28,090 earnings gate means most musicians never qualify. When the NPO assesses any Taiwan benefit &mdash; public or private &mdash; verify <strong>reach</strong>, not just existence: who actually qualifies, and how many real working musicians clear the bar.</p>
+          </div>
+        </div>
+
+        <div class="lesson-item">
+          <div class="lesson-header">
+            <span class="lesson-num">3.4</span>
+            <span class="lesson-title">Build the connector first &mdash; highest leverage, lowest capital</span>
+          </div>
+          <div class="lesson-body">
+            <p>Backline's navigator model &mdash; a 24/7 line, a triage call, a warm referral to a vetted provider within days rather than months &mdash; is the part of the US room most transferable to Taiwan and the cheapest to start. It needs a curated provider network and a phone, not an endowment.</p>
+          </div>
+        </div>
+
+        <div class="lesson-item">
+          <div class="lesson-header">
+            <span class="lesson-num">3.5</span>
+            <span class="lesson-title">Generate the evidence &mdash; even the US doesn't have it</span>
+          </div>
+          <div class="lesson-body">
+            <p>The world's largest music market still lacks a probability-sample prevalence study of musicians' mental health. A credible Taiwan survey would not be catching up &mdash; it would be a genuine contribution, and the citation a Taiwan NPO could use with <span class="cjk cjk-inline">&#25991;&#21270;&#37096;</span> and <span class="cjk cjk-inline">&#34907;&#31119;&#37096;</span>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 09: METHODOLOGY & BASIS -->
+    <div class="page" id="page-8">
+      <div class="page-inner">
+        <span class="part-divider">Part D &mdash; Method</span>
+        <p class="page-label">Section 07 &middot; Methodology &amp; Basis</p>
+        <h2 class="page-title">Sources &amp; Limits</h2>
+
+        <div class="content-block">
+          <div class="table-scroll" role="region" aria-label="Source, method and basis table" tabindex="0">
+            <table class="method-table">
+              <caption class="cite-help" style="text-align:left;caption-side:top;margin-bottom:0.5rem;">Source &middot; Method &middot; Basis (PROJECT_RULES &sect;2 Rule 3). Full references on the next page.</caption>
+              <thead>
+                <tr><th>Source</th><th>Method</th><th>Basis</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>No universal system; uninsured &asymp;8.0% (2024), &asymp;11% working-age; FMC musician-uninsurance (2010/2013)</td>
+                  <td>WebSearch + Census P60-288 primary; FMC survey pages</td>
+                  <td>&#10003; Sourced (Census); &#9888; FMC self-selected/pre-marketplace</td>
+                </tr>
+                <tr>
+                  <td>ACA marketplace + enhanced PTC expiry (1 Jan 2026; +114%/$1,016; 23.1M enrollment)</td>
+                  <td>WebSearch (CRS R48290 + KFF + HealthCare.gov), cross-checked</td>
+                  <td>&#10003; Sourced across CRS + KFF</td>
+                </tr>
+                <tr>
+                  <td>Medicaid expansion (40 states + DC; ~20.4M; H.R.1 work requirements)</td>
+                  <td>WebSearch (KFF trackers)</td>
+                  <td>&#10003; Sourced</td>
+                </tr>
+                <tr>
+                  <td>IRS independent-contractor common-law test; 1099 exclusions</td>
+                  <td>WebFetch/Search of IRS primary page</td>
+                  <td>&#10003; Sourced (IRS primary)</td>
+                </tr>
+                <tr>
+                  <td>CA AB5 (&sect;2775) + AB2257 music carve-outs (&sect;2780); federal DOL rule in flux</td>
+                  <td>leginfo statutory text (via mirror; direct page JS-rendered) + DOL WHD</td>
+                  <td>&#10003; Sourced (statute); &#9888; leginfo via mirror citing official URL</td>
+                </tr>
+                <tr>
+                  <td>NEA $207M FY2026; proposed FY2026 elimination + 1,600+ grant terminations; restoration</td>
+                  <td>WebSearch (NEA FY2025 AFR + NPR + NASAA), cross-checked</td>
+                  <td>&#10003; Sourced across agency report + outlets</td>
+                </tr>
+                <tr>
+                  <td>AFM (no general health); AFM-EPF $1.53B SFA bailout (Aug 2024)</td>
+                  <td>WebSearch (AFM + PBGC SFA application)</td>
+                  <td>&#10003; Sourced (AFM + PBGC primary)</td>
+                </tr>
+                <tr>
+                  <td>SAG-AFTRA Health Plan threshold $28,090 (2026); AFM &amp; SAG-AFTRA IP Fund</td>
+                  <td>WebSearch (sagaftraplans.org + afmsagaftrafund.org + 990)</td>
+                  <td>&#10003; Sourced (plan primary)</td>
+                </tr>
+                <tr>
+                  <td>MusiCares programs + COVID ($35.7M/140k) + 2025 wildfire ($15M+) + FY2024 990</td>
+                  <td>musicares.org + annual report + ProPublica 990</td>
+                  <td>&#10003; Sourced (org + IRS filing)</td>
+                </tr>
+                <tr>
+                  <td>Backline connector model; $3.5M+/84,000+; B-LINE</td>
+                  <td>backline.care + sector press</td>
+                  <td>&#10003; Sourced (org); &#9888; scale org-reported via press</td>
+                </tr>
+                <tr>
+                  <td>TWLOHA general MH + music roots; FY2022&ndash;24 deficits</td>
+                  <td>twloha.com/finances + ProPublica 990</td>
+                  <td>&#10003; Sourced (IRS filing)</td>
+                </tr>
+                <tr>
+                  <td>Sweet Relief discretionary aid; FY2025 net assets ~$0.88M</td>
+                  <td>sweetrelief.org + ProPublica 990</td>
+                  <td>&#10003; Sourced (IRS filing)</td>
+                </tr>
+                <tr>
+                  <td>MIRA Survey of Musicians 2018 (n&asymp;1,227; ~50% depressed; 11.8% suicidal ideation)</td>
+                  <td>Princeton SRC report + WebSearch</td>
+                  <td>&#9888; As-reported; non-probability convenience sample</td>
+                </tr>
+                <tr>
+                  <td>Newman et al. 2021 (THRIV); Berg/King 2022 (Texas); Kegelaers &amp; Gibney 2025 scoping review</td>
+                  <td>PubMed + DOI</td>
+                  <td>&#10003; Sourced (peer-reviewed); convenience/volunteer samples</td>
+                </tr>
+                <tr>
+                  <td>Probability-sample prevalence study of US musicians' MH; "Van Dyke" reference</td>
+                  <td>PubMed + WebSearch (targeted)</td>
+                  <td>&#10067; None located; "Van Dyke" unverifiable, not cited (Rule 4)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <h3>Limitations</h3>
+          <ol>
+            <li>The headline mental-health figures are <strong>convenience samples</strong> (MIRA, clinic studies); they establish a consistently large burden, not a representative prevalence.</li>
+            <li>Several load-bearing facts are <strong>2025&ndash;2026 events</strong> (ACA subsidy lapse, NEA elimination-and-restoration, the federal contractor rule) and may move again; the report reads the system as of June 2026.</li>
+            <li><strong>State variation</strong> in classification and Medicaid is summarized through the clearest cases (California; expansion status), not surveyed state by state.</li>
+            <li>Charity scale figures are partly <strong>org-reported</strong> (annual reports, press) alongside IRS 990 data; where a 990 line was unavailable (e.g., Backline), the figure is labeled org-reported.</li>
+            <li>The California statutory text was read via a mirror citing the official <code>leginfo</code> URL after the official page returned JS-rendered/empty on direct fetch; the citation is to the official section.</li>
+            <li>No direct contact with any agency, union, or charity; no primary interviews.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 10: REFERENCES -->
+    <div class="page" id="page-9">
+      <div class="page-inner">
+        <span class="part-divider">References</span>
+        <p class="page-label">Citation Registry</p>
+        <h2 class="page-title">References</h2>
+
+        <p class="cite-help">Every claim-bearing figure and provision above carries a numbered citation &mdash; hover (desktop) or tap (mobile) a number to see the source; click to jump here. US policy facts are &#10003; sourced from primary federal/state and agency sources, cross-checked for fast-moving 2025&ndash;2026 items; the peer-reviewed anchors are &#10003; sourced with convenience-sample caveats; the absence of a probability-sample prevalence study is recorded as &#10067; (Rule 4).</p>
+
+        <div class="refs" id="refs-all" data-citation-registry="us-all">
+          <div class="refs-title">References</div>
+          <ol>
+            <li id="us-src-1" data-src="floor">U.S. Census Bureau. (2025). <em>Health insurance coverage in the United States: 2024</em> (Report No. P60-288). U.S. Government Publishing Office. <a href="https://www.census.gov/library/publications/2025/demo/p60-288.html" target="_blank" rel="noopener">census.gov</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (Census primary; no universal health system; overall uninsured &asymp;8.0% in 2024, &asymp;11% among working-age adults).</li>
+            <li id="us-src-2" data-src="aca">Congressional Research Service. (2025). <em>Enhanced premium tax credit and 2026 exchange premiums: Frequently asked questions</em> (Report No. R48290). <a href="https://www.congress.gov/crs-product/R48290" target="_blank" rel="noopener">congress.gov</a>; KFF. (2025). <em>ACA marketplace premium payments would more than double on average next year if enhanced premium tax credits expire</em>. <a href="https://www.kff.org/affordable-care-act/aca-marketplace-premium-payments-would-more-than-double-on-average-next-year-if-enhanced-premium-tax-credits-expire/" target="_blank" rel="noopener">kff.org</a>; Centers for Medicare &amp; Medicaid Services. (n.d.). <em>Health coverage if you're self-employed</em>. Retrieved June 28, 2026, from <a href="https://www.healthcare.gov/self-employed/coverage/" target="_blank" rel="noopener">healthcare.gov</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced across CRS + KFF (enhanced PTC expired Jan 1, 2026; subsidized net premiums +114%/~$1,016; 2026 enrollment 23.1M, sharpest drop on record).</li>
+            <li id="us-src-3" data-src="medicaid">KFF. (2026). <em>Status of state Medicaid expansion decisions</em>. Retrieved June 28, 2026, from <a href="https://www.kff.org/medicaid/status-of-state-medicaid-expansion-decisions/" target="_blank" rel="noopener">kff.org</a>; KFF. (2025). <em>Medicaid work requirements tracker</em>. <a href="https://www.kff.org/medicaid/medicaid-work-requirements-tracker-overview/" target="_blank" rel="noopener">kff.org</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (40 states + DC expanded; ~20.4M in the expansion group, June 2025; H.R.1 work requirements added 2025).</li>
+            <li id="us-src-4" data-src="irs1099">Internal Revenue Service. (2026). <em>Independent contractor (self-employed) or employee?</em> <a href="https://www.irs.gov/businesses/small-businesses-self-employed/independent-contractor-self-employed-or-employee" target="_blank" rel="noopener">irs.gov</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (IRS primary; three-category common-law test; 1099 contractors fall outside employer health, unemployment insurance, and workers' compensation, and owe full self-employment tax).</li>
+            <li id="us-src-5" data-src="classification">California Legislature. (2020). <em>Assembly Bill No. 2257</em> (Labor Code &sect;2780, &sect;2778); <em>Assembly Bill No. 5</em> (2019; Labor Code &sect;2775). <a href="https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=LAB&sectionNum=2780" target="_blank" rel="noopener">leginfo.legislature.ca.gov</a>; U.S. Department of Labor, Wage and Hour Division. (2026). <em>Employee or independent contractor classification under the FLSA &mdash; rulemaking</em>. <a href="https://www.dol.gov/agencies/whd/flsa/misclassification/rulemaking" target="_blank" rel="noopener">dol.gov</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (AB5 ABC test &sect;2775; AB2257 &sect;2780 music carve-outs to <em>Borello</em> with large-venue exceptions; federal DOL rule rewritten 2024, enforcement paused 2025, new NPRM 2026). leginfo page JS-rendered; text read via a mirror citing the official section URL.</li>
+            <li id="us-src-6" data-src="fmc">Future of Music Coalition. (2013). <em>Artist health insurance survey</em> (with the Artists' Health Insurance Resource Center; n=3,402 artists); Future of Music Coalition. (2010). <em>Health insurance survey of musicians</em> (n=1,451). <a href="https://www.futureofmusic.org/" target="_blank" rel="noopener">futureofmusic.org</a> &mdash; Source &middot; Method &middot; Basis: &#9888; As-reported (FMC self-selected online surveys, pre-ACA-marketplace; ~53% of musician respondents uninsured in 2013, 33% in 2010; directionally reliable, not nationally representative).</li>
+            <li id="us-src-7" data-src="nea">National Endowment for the Arts. (2025). <em>FY2025 agency financial report</em>. <a href="https://www.arts.gov/sites/default/files/NEA-FY2025-AFR.pdf" target="_blank" rel="noopener">arts.gov (PDF)</a>; National Assembly of State Arts Agencies. (2026, February). <em>NEA funded for FY2026</em>. <a href="https://nasaa-arts.org/newsletter/2026-nasaa-notes-issues/february-2026-nasaa-notes/nea-funded-for-fy2026/" target="_blank" rel="noopener">nasaa-arts.org</a>; Treisman, R. (2025, May 3). <em>Sweeping cuts hit NEA after Trump administration calls to eliminate the agency</em>. NPR. <a href="https://www.npr.org/2025/05/03/nx-s1-5385888/sweeping-cuts-hit-nea-after-trump-administration-calls-to-eliminate-the-agency" target="_blank" rel="noopener">npr.org</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced across agency report + NASAA + NPR (FY2026 $207M signed into law Jan 2026 after a proposed elimination and 1,600+ grant terminations; funds organizations/state agencies, not individual welfare).</li>
+            <li id="us-src-8" data-src="afm">American Federation of Musicians. (2024, July). <em>Major victory for AFM-EPF</em>. <a href="https://www.afm.org/2024/07/major-victory-for-afm-epf/" target="_blank" rel="noopener">afm.org</a>; Pension Benefit Guaranty Corporation. (2024). <em>American Federation of Musicians and Employers' Pension Fund &mdash; Special Financial Assistance application</em>. <a href="https://www.pbgc.gov/" target="_blank" rel="noopener">pbgc.gov</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (AFM + PBGC primary; AFM-EPF "critical and declining," ~$1.53B SFA paid Aug 2024; the 2019 benefit-cut application was withdrawn, never enacted; AFM provides no general health insurance).</li>
+            <li id="us-src-9" data-src="sagaftra">SAG-AFTRA Health Plan. (2026). <em>Earned eligibility</em>. <a href="https://www.sagaftraplans.org/health/eligibility/earned-eligibility" target="_blank" rel="noopener">sagaftraplans.org</a>; AFM &amp; SAG-AFTRA Intellectual Property Rights Distribution Fund. (n.d.). <em>About</em>. Retrieved June 28, 2026, from <a href="https://www.afmsagaftrafund.org/about.php" target="_blank" rel="noopener">afmsagaftrafund.org</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (2026 Health Plan threshold ~$28,090 in covered union earnings; the IP Fund distributes statutory royalties, not benefits).</li>
+            <li id="us-src-10" data-src="musicares">MusiCares. (n.d.). <em>About</em>. Retrieved June 28, 2026, from <a href="https://musicares.org/about" target="_blank" rel="noopener">musicares.org</a>; MusiCares. (2022). <em>Annual report 2021&ndash;2022</em>; ProPublica. (2025). <em>MusiCares Foundation &mdash; Form 990</em> (EIN 95-4470909). <a href="https://projects.propublica.org/nonprofits/organizations/954470909" target="_blank" rel="noopener">projects.propublica.org</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (org + IRS 990; $35.7M and 140,000+ services in COVID relief 2020&ndash;2022, intake paused May 2020 when demand outran funds; $15M+ in 2025 LA wildfire relief; FY2024 &asymp;$14M revenue, &asymp;$32.7M net assets).</li>
+            <li id="us-src-11" data-src="backline">Backline. (n.d.). <em>About</em>. Retrieved June 28, 2026, from <a href="https://backline.care/about/" target="_blank" rel="noopener">backline.care</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (connector/navigator model: case management, B-LINE 24/7 line, support groups; $3.5M+ invested and 84,000+ people supported since 2019; the org reports a 3+ month ordinary provider waitlist vs matching in days). Scale figures org-reported via press.</li>
+            <li id="us-src-12" data-src="twloha">To Write Love on Her Arms. (n.d.). <em>Finances</em>. Retrieved June 28, 2026, from <a href="https://twloha.com/finances/" target="_blank" rel="noopener">twloha.com</a>; ProPublica. (2025). <em>To Write Love on Her Arms Inc &mdash; Form 990</em> (EIN 26-0789229). <a href="https://projects.propublica.org/nonprofits/organizations/260789229" target="_blank" rel="noopener">projects.propublica.org</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (IRS 990; general mental-health nonprofit with music-scene roots; treatment-scholarship model; three consecutive deficits FY2022&ndash;2024, net assets $2.79M&rarr;$1.64M).</li>
+            <li id="us-src-13" data-src="sweetrelief">Sweet Relief Musicians Fund. (n.d.). <em>Request assistance</em>. Retrieved June 28, 2026, from <a href="https://www.sweetrelief.org/" target="_blank" rel="noopener">sweetrelief.org</a>; ProPublica. (2026). <em>Sweet Relief Musicians Fund &mdash; Form 990</em> (EIN 95-4443269). <a href="https://projects.propublica.org/nonprofits/organizations/954443269" target="_blank" rel="noopener">projects.propublica.org</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (IRS 990; aid explicitly discretionary &mdash; "availability of funds and the number of eligible applicants"; FY2025 net assets spent down to &asymp;$0.88M).</li>
+            <li id="us-src-14" data-src="mira">Princeton University Survey Research Center, &amp; Music Industry Research Association. (2018). <em>MIRA survey of musicians</em>. <a href="https://psrc.princeton.edu/news/mira-survey-musicians-april-june-2018" target="_blank" rel="noopener">psrc.princeton.edu</a> &mdash; Source &middot; Method &middot; Basis: &#9888; As-reported (non-probability convenience sample, n&asymp;1,227; ~50% felt down/depressed/hopeless vs &lt;25% general adults; 11.8% reported thoughts of self-harm/being better off dead vs 3.4%; ~two-thirds anxiety).</li>
+            <li id="us-src-15" data-src="evidence">Newman, A. K., George, M., Beitz, K. M., Bergson, S., &amp; Zemon, V. (2021). Mental health among touring industry professionals. <em>Journal of Psychiatric Research, 145</em>, 243&ndash;249. <a href="https://doi.org/10.1016/j.jpsychires.2021.12.031" target="_blank" rel="noopener">https://doi.org/10.1016/j.jpsychires.2021.12.031</a>; Berg, L., King, B., Koenig, J., &amp; McRoberts, R. (2022). Popular musicians' mental health and the role of accessibility. <em>Psychology of Music, 50</em>(2), 529&ndash;543. <a href="https://doi.org/10.1177/03057356211064642" target="_blank" rel="noopener">https://doi.org/10.1177/03057356211064642</a>; Kegelaers, J., &amp; Gibney, A. (2025). The mental health of musicians: A scoping review. <em>Psychology of Music</em>. Advance online publication. <a href="https://doi.org/10.1177/03057356251384977" target="_blank" rel="noopener">https://doi.org/10.1177/03057356251384977</a> &mdash; Source &middot; Method &middot; Basis: &#10003; Sourced (peer-reviewed; Newman n=508 &rarr; 50% high depression risk, 39.4% high suicidality; Berg/King n=317 &rarr; &gt;36% moderate-severe depression; scoping review confirms a convenience-sample-dominated base). &#10067; No probability-sample US prevalence study located (Rule 4); the "Van Dyke" reference could not be verified and is not cited.</li>
+          </ol>
+          <p class="refs-note">Convention: every claim-bearing marker carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above &mdash; machine-checkable before each deploy (&sect;5.2 / &sect;6 gate 1). The MD draft (<code>2026-06-28_Policy_Study_United_States.md</code>) carries the same citations as <code>[^1]</code>&ndash;<code>[^15]</code> footnotes and is the citation source of truth.</p>
+        </div>
+
+        <nav class="related-block" aria-label="Related on this site">
+          <p class="related-title">Related</p>
+          <ul>
+            <li><a href="policy-study.html">&larr; Policy Study (hub &middot; all regions)</a></li>
+            <li><a href="org-study-backline.html">The connector, in depth &mdash; Backline org study</a></li>
+            <li><a href="org-study-musicares.html">The largest US music charity &mdash; MusiCares org study</a></li>
+            <li><a href="org-study-twloha.html">Music-roots mental-health nonprofit &mdash; TWLOHA org study</a></li>
+            <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+          </ul>
+        </nav>
+
+        <div class="source-info">
+          <p><strong>Report:</strong> Policy Study 007 (United States) &middot; country-parity set &middot; Music &amp; Mental Health NPO Research Project</p>
+          <p><strong>As of:</strong> 2026-06-28 &middot; Companion org studies: Backline, MusiCares, TWLOHA</p>
+          <p><strong>Basis:</strong> &#10003; Sourced for US policy facts (primary federal/state + agency, cross-checked for 2025&ndash;2026 items); &#10003; Sourced peer-reviewed anchors with convenience-sample caveats; &#10067; no probability-sample US prevalence study (Rule 4)</p>
+        </div>
+      </div>
+    </div>
+
+
+  </div><!-- /pages-container -->
+
+  <script>
+    var container = document.querySelector('.pages-container');
+    var pages = document.querySelectorAll('.page');
+    var nums = document.querySelectorAll('.page-num');
+    var current = 0;
+    var RM = window.matchMedia('(prefers-reduced-motion: reduce)');
+    function scrollBehavior(){ return RM.matches ? 'auto' : 'smooth'; }
+
+    function goTo(index) {
+      if (index < 0 || index >= pages.length) return;
+      pages[index].scrollIntoView({ behavior: scrollBehavior() });
+    }
+
+    function nextPage() { goTo(current + 1); }
+    function prevPage() { goTo(current - 1); }
+
+    var scrollRaf = null;
+    container.addEventListener('scroll', function() {
+      if (scrollRaf) return;
+      scrollRaf = requestAnimationFrame(function() {
+        scrollRaf = null;
+        var scrollPos = container.scrollTop;
+        var best = 0;
+        var bestDist = Infinity;
+        for (var i = 0; i < pages.length; i++) {
+          var dist = Math.abs(pages[i].offsetTop - scrollPos);
+          if (dist < bestDist) { bestDist = dist; best = i; }
+        }
+        if (best !== current) {
+          nums[current].classList.remove('active');
+          current = best;
+          nums[current].classList.add('active');
+        }
+      });
+    }, { passive: true });
+
+    nums.forEach(function(num) {
+      num.addEventListener('click', function() {
+        goTo(parseInt(this.getAttribute('data-page')));
+      });
+    });
+
+    // --- Citation click → jump to registry entry ---
+    document.querySelectorAll('.cite a[href^="#"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        var id = this.getAttribute('href');
+        var el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        el.scrollIntoView({ behavior: scrollBehavior(), block: 'center' });
+        location.hash = id;
+      });
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { nextPage(); e.preventDefault(); }
+      if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { prevPage(); e.preventDefault(); }
+    });
+  </script>
+
+  <script>
+  /* Scroll-reveal — R3.2 paged-safe (observes within .pages-container; per-page anchors only) */
+  (function(){
+    var root = document.querySelector('.pages-container');
+    if (!root) return;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = '.page-title, .part-divider, .page-label, .stat-strip, .method-table, .table-wrap, figure';
+    var nodes = Array.prototype.slice.call(root.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, idx = 0;
+        if (p){ var sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,5) * 60) + 'ms';
+        el.classList.add('in'); io.unobserve(el);
+      });
+    }, { root: root, threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
+
+  <!-- nav scroll-state fix: transparent over hero, blurred bar once scrolled -->
+  <style>
+    nav.nav, .nav { transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease); border-bottom: 1px solid transparent; }
+    nav.nav.scrolled, .nav.scrolled {
+      right: 0;
+      background: rgba(244, 244, 245, 0.45);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    @media (prefers-reduced-motion: reduce){ nav.nav, .nav { transition: none; } }
+    .skip-nav { position: absolute; left: -9999px; top: 0; z-index: 200; background: var(--signal); color: var(--white); padding: 0.5rem 1rem; font-family: var(--font-mono); }
+    .skip-nav:focus { left: 0; }
+  </style>
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav, .nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var c = document.querySelector('.pages-container, .pages');
+    if (c && getComputedStyle(c).overflowY !== 'visible') {
+      var ticking = false;
+      c.addEventListener('scroll', function(){ if (ticking) return; ticking = true; requestAnimationFrame(function(){ ticking = false; setS(c.scrollTop > THRESH); }); }, { passive: true });
+      setS(c.scrollTop > THRESH); return;
+    }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden', 'true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>
