@@ -887,7 +887,7 @@
         <h2 class="page-title">Both the Floor and the Room</h2>
 
         <div class="content-block">
-          <p>This is an added comparator beyond the project's original six-region set &mdash; the expansion past six was authorized. The aim is unchanged: read how a <em>jurisdiction</em> protects the mental health and welfare of music and performing-arts workers &mdash; through law, public funding, and worker bodies. South Korea earns its place because it does something <strong>no region in the original cycle did</strong>. Japan built the floor of <em>rights</em> (labor law) but left the <em>care</em> layer to a volunteer worker body. The EU diagnosed the precarity&ndash;distress link but had no competence to deliver.</p>
+          <p>This is an added comparator beyond the project's original policy series &mdash; the expansion was authorized. The aim is unchanged: read how a <em>jurisdiction</em> protects the mental health and welfare of music and performing-arts workers &mdash; through law, public funding, and worker bodies. South Korea earns its place because it does something <strong>no region in the original cycle did</strong>. Japan built the floor of <em>rights</em> (labor law) but left the <em>care</em> layer to a volunteer worker body. The EU diagnosed the precarity&ndash;distress link but had no competence to deliver.</p>
         </div>
 
         <div class="lead-quote">
@@ -1191,7 +1191,7 @@
         </nav>
 
         <div class="source-info">
-          <p><strong>Report:</strong> Research track &mdash; Policy Study No.004 (South Korea) &middot; an added comparator beyond the original six-region cycle &middot; Music &amp; Mental Health NPO Research Project</p>
+          <p><strong>Report:</strong> Research track &mdash; Policy Study No.004 (South Korea) &middot; an added comparator beyond the project's original policy series &middot; Music &amp; Mental Health NPO Research Project</p>
           <p><strong>As of:</strong> 2026-06-27</p>
           <p><strong>Basis:</strong> &#10003; Sourced for the legal/institutional facts (two statutes, insurance routes, the KAWF counselling programme) on Korean government and foundation primary sources; &#9888; current contribution rate / 0.8 income-base factor read on the KAWF foundation page; &#10067; No source for a pan-Korea probability-sample prevalence study (thin peer-reviewed evidence base)</p>
         </div>
@@ -1333,6 +1333,60 @@
     } else {
       window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
     }
+  })();
+  </script>
+  <!-- ===== Mobile design-team fixes (2026-07-05) — overlap, cover, eyebrow, contrast ===== -->
+  <style>
+    :root { --header-height: 4rem; --purple-mid: #7B5CA0; }
+    /* #4 eyebrow — AA contrast fix (was --purple-light #CBB9D6 @1.67:1 → #7B5CA0 @4.92:1) */
+    .part-divider { color: var(--purple-mid); border-bottom-color: var(--purple-mid); }
+    /* nav-on-scroll — enough fill to separate from content (was rgba 0.45) */
+    nav.nav.scrolled, .nav.scrolled { background: rgba(244, 244, 245, 0.85); }
+    /* floating controls — unified elevation + legible chevrons (was --grey-light, failed 3:1) */
+    .page-sidebar { box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+    /* literal hex — a var() to an original-stylesheet token does not resolve inside this appended block */
+    .page-sidebar .arrow-btn { color: #3f3f46; }
+    .page-sidebar .arrow-btn:hover { color: #6667AB; }
+    /* auto-hide transition base (hide rules are mobile-only, below) */
+    .page-sidebar, .paper-link-badge { transition: transform 180ms cubic-bezier(0.4,0,0.2,1), opacity 180ms cubic-bezier(0.4,0,0.2,1); }
+    @media (max-width: 768px) {
+      :root { --header-height: 4.5rem; }
+      /* solid pill so body text can't ghost through (was rgba 0.9) */
+      .page-sidebar { background: #f4f4f5; }
+      /* #4 clear the sticky nav (top) + #1 reserve a real bottom safe-zone */
+      .page { padding: calc(var(--header-height) + 1.5rem) clamp(0.9rem, 4vw, 1.25rem) calc(6rem + env(safe-area-inset-bottom)) clamp(0.9rem, 4vw, 1.25rem); }
+      /* #3 cap the cover so the scroll hint stops floating in dead space */
+      .cover { min-height: auto; height: clamp(28rem, 78vh, 42rem); }
+      .cover-hint { bottom: calc(1.25rem + env(safe-area-inset-bottom)); }
+      /* FAB (research pages) — stack above the pager as one right-side cluster, 44px target */
+      .paper-link-badge { left: auto; right: calc(1.25rem + env(safe-area-inset-right)); bottom: calc(6.5rem + env(safe-area-inset-bottom)); min-width: 44px; min-height: 44px; justify-content: center; }
+      /* #1 auto-hide — slide down + fade while scrolling, return at rest */
+      body.controls-hidden .page-sidebar,
+      body.controls-hidden .paper-link-badge {
+        transform: translateY(calc(100% + 2rem));
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 240ms cubic-bezier(0.16,1,0.3,1), opacity 240ms cubic-bezier(0.16,1,0.3,1);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .page-sidebar, .paper-link-badge { transition: none !important; }
+      body.controls-hidden .page-sidebar,
+      body.controls-hidden .paper-link-badge { transform: none !important; opacity: 1 !important; pointer-events: auto !important; }
+    }
+  </style>
+  <script>
+  /* #1 auto-hide floating controls while scrolling; reduced-motion keeps them visible */
+  (function(){
+    var sc = document.querySelector('.pages-container'); if (!sc) return;
+    var RMh = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var idle;
+    sc.addEventListener('scroll', function(){
+      if (RMh.matches) return;
+      document.body.classList.add('controls-hidden');
+      clearTimeout(idle);
+      idle = setTimeout(function(){ document.body.classList.remove('controls-hidden'); }, 650);
+    }, { passive: true });
   })();
   </script>
 </body>
