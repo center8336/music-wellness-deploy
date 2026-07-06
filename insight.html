@@ -316,8 +316,9 @@
       display: block;
       position: relative;
       overflow: hidden;
-      height: 0;
-      padding-bottom: 62.5%;
+      /* Content-safe sizing (2026-07-06): see org-study.html — the padding-bottom
+         pin clips tall content; cards now grow, rows stay equal via the grid. */
+      height: 100%;
       background: rgba(244, 244, 245, 0.55);
       -webkit-backdrop-filter: blur(8px);
       backdrop-filter: blur(8px);
@@ -330,8 +331,9 @@
       border-color: rgba(102, 103, 171, 0.25);
     }
     .work-card .card-visual {
-      position: absolute;
-      inset: 0;
+      width: 100%;
+      height: 100%;
+      min-height: clamp(180px, 17vw, 246px);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -427,7 +429,7 @@
       .ripple-page { padding-top: calc(2rem + env(safe-area-inset-top, 0px)); }
       .page-header { padding-top: calc(4rem + env(safe-area-inset-top, 0px)); padding-bottom: 1.2rem; }
       .page-header h1 { font-size: clamp(2.5rem, 12vw, 3.5rem); }
-      .work-card { padding-bottom: 56.25%; }
+      .work-card .card-visual { min-height: clamp(160px, 52vw, 210px); }
       .work-item .caption { padding: 0.75rem 0 1.5rem; }
       .work-card.placeholder { background: transparent; }
       .work-card.placeholder .card-title { color: var(--grey-light); opacity: 0.6; }

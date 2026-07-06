@@ -236,13 +236,12 @@
       display: block;
       position: relative;
       overflow: hidden;
-      aspect-ratio: 16 / 10;
-      /* Strict 16:10 — aspect-ratio alone is a default that content can override.
-         The padding-bottom hack pins height to width × 0.625, and the inner
-         .card-visual is absolutely positioned so long titles can't grow the box
-         (Détári vs Rousseau size mismatch). */
-      height: 0;
-      padding-bottom: 62.5%;
+      /* Content-safe sizing (2026-07-06): the strict 16:10 pin (height:0 +
+         padding-bottom hack) clipped card metas (Détári). Cards now grow with
+         content; height:100% + the grid row keeps every card in a row equal
+         height — the uniform-size intent of the old pin — and .card-visual's
+         min-height preserves the 16/10 rhythm when titles are short. */
+      height: 100%;
       background: rgba(244, 244, 245, 0.55);
       -webkit-backdrop-filter: blur(8px);
       backdrop-filter: blur(8px);
@@ -257,8 +256,9 @@
     }
 
     .work-card .card-visual {
-      position: absolute;
-      inset: 0;
+      width: 100%;
+      height: 100%;
+      min-height: clamp(180px, 17vw, 246px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -369,9 +369,8 @@
         font-size: clamp(2.5rem, 12vw, 3.5rem);
       }
 
-      .work-card {
-        aspect-ratio: 16 / 9;
-        padding-bottom: 56.25%;
+      .work-card .card-visual {
+        min-height: clamp(160px, 52vw, 210px);
       }
 
       .work-item .caption {
