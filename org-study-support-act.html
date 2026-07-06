@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Support Act · Org Study · MH&amp;W</title>
+  <meta name="description" content="Support Act is Asia-Pacific's only full-scale national music-industry charity: audited KPMG financials, a COVID windfall-and-cliff survived, and a fundable prevention product line built on top of crisis relief and a 24/7 helpline. Founded 1997.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      /* ── DIA-GRADE READING SCALE (calibrated to Dia browser, serif-corrected) ── */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;--lh-prose:1.7;--wt-prose:440;--measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;--label-ink:var(--graphite);
+      --font-cjk:'Noto Serif TC',serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { overflow-x: hidden; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--black);
+      font-size: clamp(1.1875rem, 1.06rem + 0.55vw, 1.3125rem);
+      line-height: var(--lh-prose);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: 520; }
+    .cjk, .cjk-inline { line-break: strict; word-break: keep-all; }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    a { color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    a:hover { color: var(--signal-dim); }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--signal); outline-offset: 3px; border-radius: var(--radius);
+    }
+
+    .skip-nav {
+      position: absolute; left: -9999px; top: 0; z-index: 200;
+      background: var(--signal); color: var(--white);
+      padding: 0.5rem 1rem; font-family: var(--font-mono);
+    }
+    .skip-nav:focus { left: 0; }
+
+    /* ===== NAVIGATION ===== */
+    nav.nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; flex-direction: column;
+      padding: 2rem 2.5rem;
+      padding-top: calc(2rem + env(safe-area-inset-top));
+      background: transparent;
+      transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    nav.nav.scrolled {
+      background: rgba(244, 244, 245, 0.45);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: var(--font-mono); font-size: 1.1rem; font-weight: 400;
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-topbar { display:none; }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; min-width:44px; min-height:44px; z-index:101; -webkit-tap-highlight-color:transparent; }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity:0; }
+    .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
+
+    /* ===== LAYOUT ===== */
+    main { max-width: var(--max-w); margin: 0 auto; padding: 0 2.5rem 5rem 2.5rem; }
+    section { margin-bottom: 4rem; }
+    .narrow { max-width: var(--max-w-text); }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding-top: calc(9rem + env(safe-area-inset-top));
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-light);
+      margin-bottom: 3rem;
+    }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.18em;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: var(--font-display); font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6.5rem);
+      font-weight: 800; line-height: 1.04; color: var(--black); letter-spacing: -0.01em;
+      overflow-wrap: break-word; hyphens: auto;
+    }
+    .hero h1 .tail { display:block; font-size: clamp(1.15rem, 2.6vw, 1.9rem); font-weight: 600; color: var(--signal); letter-spacing: 0; margin-top: 0.9rem; }
+    .hero .subtitle {
+      font-family: var(--font-body); font-size: clamp(1.25rem, 1.05rem + 1.4vw, 1.5rem);
+      color: var(--graphite); line-height: 1.55; margin-top: 1.5rem; max-width: 54ch;
+    }
+    .basis-badge {
+      display: inline-block; margin-top: 1.75rem;
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--graphite); background: var(--signal-bg);
+      border: 1px solid var(--signal-glow); border-radius: var(--radius);
+      padding: 0.5rem 0.85rem; line-height: 1.5;
+    }
+
+    /* ===== TWO-LINE COVER (R2.1, 2026-06-20) — width:100% inside main (no 100vw breakout → no x-overflow) ===== */
+    .cover {
+      position: relative;
+      width: 100%;
+      min-height: 100vh; min-height: 100svh;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;                /* clips the wash */
+      padding: 0 2rem;
+    }
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%,
+        var(--signal-glow) 0%,
+        rgba(102,103,171,0.06) 38%,
+        rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
+    }
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 1280px);
+    }
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin: 0;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+    .cover-line {
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--signal-dim);
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
+    }
+    .cover-hint {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
+    }
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
+    }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-line  { animation-delay: 0.22s; }
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .cover-wash,
+      .cover-hint,
+      .cover-inner > * { animation: none; opacity: 1; transform: none; }
+    }
+    @media (max-width: 768px) {
+      .cover { padding: 0 1.25rem; }
+      .cover-title { font-size: clamp(1.7rem, 7.3vw, 2.4rem); }
+      .cover-line  { font-size: clamp(0.72rem, 3.2vw, 0.95rem); letter-spacing: 0.18em; }
+    }
+
+    /* ===== TYPE ===== */
+    h2 {
+      font-family: var(--font-display); font-size: var(--text-h2);
+      font-weight: 700; line-height: 1.1; color: var(--black);
+      margin-bottom: 1.25rem; letter-spacing: -0.01em;
+      text-wrap: balance; overflow-wrap: break-word;
+    }
+    h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem); line-height: 1.25; font-weight: 600; color: var(--charcoal); margin: 1.75rem 0 0.75rem; }
+    .section-label {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem;
+    }
+    p { color: var(--graphite); max-width: var(--measure-prose); margin-bottom: 1rem; line-height: 1.65; }
+    p.lead { font-size: 1.1rem; color: var(--charcoal); }
+    strong { color: var(--charcoal); font-weight: 600; }
+    em { color: var(--graphite); }
+
+    /* ===== MODEL CALLOUT ===== */
+    .model-callout { background: var(--bg-card-dark); color: var(--snow); border-radius: var(--radius-lg); padding: 2.25rem 2.5rem; margin-bottom: 3rem; }
+    .model-callout h2 { color: var(--white); margin-bottom: 1rem; }
+    .model-callout p { color: var(--silver); max-width: none; }
+    .model-callout strong { color: var(--white); }
+    .model-callout a { color: var(--spectrum-3); text-decoration: underline; text-underline-offset: 2px; }
+    .model-callout a:hover { color: var(--white); }
+
+    /* ===== GEAR CARDS (distinctive model) ===== */
+    .gear-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .gear {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-left: 3px solid var(--spectrum-2); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem;
+    }
+    .gear .gn { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); letter-spacing: 0.1em; }
+    .gear h3 { margin: 0.35rem 0 0.5rem; font-size: 1.08rem; }
+    .gear p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-card); margin: 1.5rem 0 0.75rem; }
+    .stat-item { padding: 1.75rem 1.25rem; border-right: 1px solid var(--border-light); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--signal); line-height: 1; font-variant-numeric: tabular-nums; }
+    .stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.6rem; line-height: 1.4; }
+
+    /* ===== TABLES ===== */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; margin: 1.25rem 0; border-radius: var(--radius-lg); border: 1px solid var(--border-light); }
+    .table-wrap:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+    table { width: 100%; border-collapse: collapse; background: var(--bg-card); font-size: var(--text-small); }
+    caption { text-align: left; font-family: var(--font-mono); font-size: var(--text-caption); color: var(--label-ink); padding: 0.75rem 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border-light); vertical-align: top; font-variant-numeric: tabular-nums; }
+    thead th { font-family: var(--font-mono); font-size: var(--text-micro); text-transform: uppercase; letter-spacing: 0.06em; color: var(--label-ink); background: var(--snow); }
+    tbody tr:last-child td { border-bottom: none; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .row-emph td { background: var(--signal-bg); font-weight: 600; color: var(--charcoal); }
+    .row-covid td { background: rgba(232, 168, 124, 0.12); }
+
+    /* ===== PROGRAM LIST ===== */
+    .prog { list-style: none; margin: 1.25rem 0 0; padding: 0; }
+    .prog li { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 0.85rem; }
+    .prog h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .prog p { font-size: var(--text-sm); margin-bottom: 0; }
+    .prog .ptag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ===== SW CARDS ===== */
+    .sw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.25rem; }
+    .sw-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem; }
+    .sw-card.weak { border-left: 3px solid var(--spectrum-2); }
+    .sw-card.strong { border-left: 3px solid var(--spectrum-4); }
+    .sw-card h3 { margin: 0 0 0.4rem; font-size: 1rem; }
+    .sw-card p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== LESSONS ===== */
+    .lessons { counter-reset: lesson; list-style: none; margin: 1.5rem 0 0; padding: 0; }
+    .lessons li { position: relative; padding: 1.25rem 1.5rem 1.25rem 3.5rem; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); margin-bottom: 0.85rem; }
+    .lessons li::before { counter-increment: lesson; content: counter(lesson); position: absolute; left: 1.25rem; top: 1.25rem; font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--signal); }
+    .lessons h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .lessons p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== CITATIONS (§5 inline tier) ===== */
+    .cite { font-size: 0.7em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem; }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-fine); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; max-width: var(--measure-ref); overflow-wrap: anywhere; }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs-note { font-size: var(--text-xs); color: var(--label-ink); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-sm); color: var(--label-ink); font-style: italic; max-width: var(--max-w-text); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .gear-cards { grid-template-columns: 1fr; }
+      .sw-grid { grid-template-columns: 1fr; }
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2n) { border-right: none; }
+      .stat-item:nth-child(-n+2) { border-bottom: 1px solid var(--border-light); }
+    }
+    @media (max-width: 768px) {
+      nav.nav { padding: 1.2rem 1.5rem; padding-top: calc(1.2rem + env(safe-area-inset-top)); }
+      nav.nav.open { background: rgba(244,244,245,0.95); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-light); }
+      .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
+      .nav-toggle { display:block; }
+      .nav-mobile-brand { display:block; }
+      .nav-links { display:none; flex-direction:column; gap:0.75rem; margin-top:1rem; }
+      .nav-links.show { display:flex; }
+      .nav-links a { font-size: 0.85rem; }
+      main { padding: 0 1.5rem 3rem 1.5rem; }
+      .hero { padding-top: calc(7rem + env(safe-area-inset-top)); }
+      .hero h1 { font-size: clamp(2.4rem, 10.5vw, 3.4rem); }
+      .model-callout { padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
+    @media (max-width: 680px) {
+      p, .hero .subtitle, .refs li, .cite-help { max-width: none; }
+    }
+    @media (max-width: 480px) {
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+      .stat-item:last-child { border-bottom: none; }
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
+      table { font-size: 0.82rem; }
+      thead th { font-size: 0.6rem; }
+      th, td { padding: 0.5rem 0.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } nav.nav { transition: none; } }
+
+    /* ===== Scroll-reveal (R3.2 craft pass) ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ===== Related block (no dead-ends, R3.2) ===== */
+    .related-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-light); }
+    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--label-ink); margin-bottom: 0.6rem; }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a { font-family: var(--font-body); font-size: var(--text-sm); color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+  </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open');this.setAttribute('aria-expanded',o)">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+        <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="org-study.html" class="current" aria-current="page">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
+      <a href="field-news.html">FIELD NEWS</a>
+    <a href="search.html">SEARCH</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- COVER -->
+    <section class="cover">
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="cover-inner">
+        <div class="eyebrow" style="text-align:center;">2026-07-06 · ORG STUDY · v1</div>
+        <h1 class="cover-title">SUPPORT ACT</h1>
+        <p class="cover-line">Org Study · Est. 1997</p>
+      </div>
+      <span class="cover-hint" aria-hidden="true">↓ Scroll</span>
+    </section>
+
+    <!-- MODEL CALLOUT -->
+    <div class="model-callout">
+      <h2>Why this case matters</h2>
+      <p>Support Act is the <strong>only full-scale national music-industry charity in Asia-Pacific</strong> — the regional exception that proves the gap the rest of this project's org studies document. It is also the oldest org in this series' comparator set (incorporated 1997, before MusiCares-style galas reached the region) and the only one whose complete audited accounts were retrievable as primary documents. Three things make it the most instructive case yet for a Taiwan NPO: it was <strong>founded by trade bodies</strong> (ARIA, PPCA, APRA AMCOS) rather than by a label or a benefactor; it survived a textbook <strong>government windfall-and-cliff</strong> (A$30M of COVID-era federal money, then zero) that the audited statements document year by year; and it has diversified past cash relief into a <strong>prevention/training product line</strong> that now defines its shape.<sup class="cite"><a href="#sa-src-1" data-src="identity" data-tip="Identity, mission, eligibility and the Wellbeing Helpline: Support Act, Home and About Support Act.">1</a></sup><sup class="cite"><a href="#sa-src-9" data-src="fy2025" data-tip="FY2025 KPMG-audited statutory accounts, Support Act Ltd.">9</a></sup><sup class="cite"><a href="#sa-src-11" data-src="covid-10m" data-tip="April 2020 federal A$10M COVID-19 response funding, Support Act.">11</a></sup></p>
+    </div>
+
+    <!-- 1. PROFILE -->
+    <section>
+      <div class="section-label">01 — Profile</div>
+      <h2>Founded by the industry's plumbing, not its stars<sup class="cite"><a href="#sa-src-2" data-src="history" data-tip="Founding history: incorporated 7 August 1997; conceived 1980 by John Bromell; founding support ARIA, PPCA, APRA AMCOS; charity status 2000. Support Act, About Support Act.">2</a></sup></h2>
+      <p>Support Act serves musicians, managers, crew and music workers across all genres who are unable to work due to ill health, injury, mental-health crisis or other crisis; the Wellbeing Helpline is open more broadly to creative-industries workers.<sup class="cite"><a href="#sa-src-1" data-src="identity" data-tip="Eligibility and the Wellbeing Helpline's broader creative-industries scope. Support Act, Home / About Support Act.">1</a></sup></p>
+
+      <div class="table-wrap" role="region" aria-label="Organization profile — Support Act (scrollable table)" tabindex="0">
+        <table>
+          <caption>Organization profile — Support Act (sources cited inline)</caption>
+          <tbody>
+            <tr><th scope="row">Name</th><td>Support Act Ltd</td></tr>
+            <tr><th scope="row">Legal status</th><td>Australian registered charity (ACNC); charity status granted 2000</td></tr>
+            <tr><th scope="row">Incorporated</th><td>7 August 1997 (launched 8 August 1997)</td></tr>
+            <tr><th scope="row">Origins</th><td>Conceived 1980 by music publisher John Bromell; 17 years of industry lobbying</td></tr>
+            <tr><th scope="row">Founding backers</th><td>ARIA, PPCA, APRA AMCOS</td></tr>
+            <tr><th scope="row">Co-Chairs</th><td>Lynne Small and David Albert</td></tr>
+            <tr><th scope="row">CEO</th><td>Clive Miller</td></tr>
+            <tr><th scope="row">CFO</th><td>Lisa Smith</td></tr>
+            <tr><th scope="row">Crisis line</th><td>Wellbeing Helpline 1800 959 500, 24/7</td></tr>
+            <tr><th scope="row">Website</th><td><a href="https://supportact.org.au" target="_blank" rel="noopener">supportact.org.au</a></td></tr>
+            <tr><th scope="row">Mission</th><td>"To help create a diverse, thriving music culture where all people in the music industry are safe, supported, respected, valued, heard and enjoy improved health and greater economic security"</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="margin-top:1.5rem;">The founding pattern differs from every other org in this series. MusiCares was created by the Recording Academy; Music Minds Matter was incubated inside a century-old benevolent fund; Unison was seeded by a trade body plus a benefactor family. Support Act was lobbied into existence over 17 years and founded with the backing of the three bodies that administer the Australian industry's money: <strong>ARIA</strong> (labels), <strong>PPCA</strong> (recorded-music licensing) and <strong>APRA AMCOS</strong> (songwriters' collecting society).<sup class="cite"><a href="#sa-src-2" data-src="history" data-tip="Founding pattern and the three collecting-society/trade-body backers. Support Act, About Support Act; Beat, The story of Support Act charity.">2</a></sup> The collecting-society route matters for Taiwan: it anchors the charity to recurring industry revenue streams and to institutions with member lists, rather than to any single company's goodwill.</p>
+    </section>
+
+    <!-- 2. THE DISTINCTIVE MODEL -->
+    <section>
+      <div class="section-label">02 — The distinctive model</div>
+      <h2>Relief + helpline + a prevention product line</h2>
+      <p>Support Act runs three service layers, and the third is what sets it apart.<sup class="cite"><a href="#sa-src-3" data-src="crisis" data-tip="Crisis relief menu: Crisis Relief Grants, Funeral Help, Tax Help. Support Act, Crisis relief support.">3</a></sup><sup class="cite"><a href="#sa-src-4" data-src="helpline" data-tip="Wellbeing Helpline and social work support. Support Act.">4</a></sup><sup class="cite"><a href="#sa-src-5" data-src="training" data-tip="Prevention/training suite. Support Act, Mental health programs and events.">5</a></sup></p>
+      <div class="gear-cards">
+        <div class="gear">
+          <div class="gn">LAYER 01</div>
+          <h3>Crisis relief, means-tested and specific</h3>
+          <p>Crisis Relief Grants, <strong>Funeral Help</strong>, and <strong>Tax Help</strong> — the latter two being unusually concrete acknowledgments of how music-worker hardship actually presents (a death the family cannot fund; years of unfiled tax returns blocking access to benefits).<sup class="cite"><a href="#sa-src-3" data-src="crisis" data-tip="Crisis Relief Grants, Funeral Help, Tax Help. Support Act, Crisis relief support / Funeral help / Tax help.">3</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">LAYER 02</div>
+          <h3>A 24/7 helpline plus social work</h3>
+          <p>The <strong>Wellbeing Helpline</strong> (1800 959 500) provides free 24/7 phone counselling, extended beyond music to all creative-industries workers, backed by an in-house <strong>social work support</strong> service — a case-management layer between the phone line and the grant.<sup class="cite"><a href="#sa-src-4" data-src="helpline" data-tip="Wellbeing Helpline 1800 959 500, 24/7, free; social work support. Support Act, Wellbeing Helpline / Social work support.">4</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">LAYER 03</div>
+          <h3>A named, branded prevention/training suite</h3>
+          <p>REWIRE, LEAD WELL, Speak Up Safely, Hearing the Hard Stuff, De-escalation, <strong>Mental Health First Aid</strong>, <strong>Recognise and Respond</strong> (suicide-prevention training), Money Moves, MINIs, Creative Minds, Sound Minds, and Backstage Mental Health Support — plus a workplace layer: the <strong>Mentally Healthy Workplaces Program</strong> and published <strong>"Minimum Standards for a Mentally Healthy Music Industry."</strong> The audited accounts show why it matters financially: training programs attract <strong>program-tied state government grants</strong> (Creative Victoria, Sound NSW, South Australian Government, Creative Workplaces/Creative Australia — across the FY2024–FY2025 filings), giving the org a fundable product between "donate to charity" and "pay for crisis relief."<sup class="cite"><a href="#sa-src-5" data-src="training" data-tip="Prevention/training suite. Support Act, Mental health programs and events.">5</a></sup><sup class="cite"><a href="#sa-src-7" data-src="workplace" data-tip="Mentally Healthy Workplaces Program and Minimum Standards. Support Act.">7</a></sup><sup class="cite"><a href="#sa-src-9" data-src="fy2025" data-tip="Named state government funders per the FY2025 and FY2024 audited accounts. Support Act Ltd, statutory accounts.">9</a></sup><sup class="cite"><a href="#sa-src-10" data-src="fy2024" data-tip="South Australian Government grant named in the FY2024 filing. Support Act Ltd, FY2024 statutory accounts.">10</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">LAYER 04</div>
+          <h3>A dedicated First Nations stream</h3>
+          <p>Parallel First Nations crisis relief, Funeral Help and Tax Help, a <strong>First Nations Support Line</strong>, First Nations Mental Health First Aid, cultural programs (Voices Amplified, Yarning Strong) and a published First Nations strategic plan, with named program partners (JB Hi-Fi, Alberts). This is population-specific service design inside a music-specific charity — directly relevant to how a Taiwan org would need to treat, for example, Indigenous Taiwanese musicians.<sup class="cite"><a href="#sa-src-6" data-src="first-nations" data-tip="First Nations stream: crisis relief, Funeral Help, Tax Help, Support Line, MHFA, cultural programs, strategic plan. Support Act.">6</a></sup></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. FINANCIAL PROFILE -->
+    <section>
+      <div class="section-label">03 — Financial profile</div>
+      <h2>Three audited years<sup class="cite"><a href="#sa-src-9" data-src="fy2025" data-tip="FY2025 KPMG-audited statutory accounts (with FY2024 comparatives). Support Act Ltd.">9</a></sup><sup class="cite"><a href="#sa-src-10" data-src="fy2024" data-tip="FY2024 KPMG-audited statutory accounts (with FY2023 comparatives). Support Act Ltd.">10</a></sup></h2>
+      <p>Support Act publishes its complete KPMG-audited statutory accounts. The three-year picture (AUD, verbatim from the FY2025 and FY2024 filings):</p>
+
+      <div class="table-wrap" role="region" aria-label="Support Act three-year financial profile, AUD (scrollable table)" tabindex="0">
+        <table>
+          <caption>Financial profile — three audited years, AUD (✅ audited; sources cited inline)</caption>
+          <thead><tr><th scope="col">Metric</th><th class="num" scope="col">FY2023</th><th class="num" scope="col">FY2024</th><th class="num" scope="col">FY2025</th></tr></thead>
+          <tbody>
+            <tr><td>Total revenue &amp; other income</td><td class="num">$3,760,702</td><td class="num">$3,323,958</td><td class="num">$4,740,314</td></tr>
+            <tr><td>— of which government grants</td><td class="num">$1,397,462</td><td class="num">$853,662</td><td class="num">$1,657,301</td></tr>
+            <tr><td>Total expenses</td><td class="num">$5,146,068</td><td class="num">$3,679,068</td><td class="num">$3,940,753</td></tr>
+            <tr class="row-covid"><td>— crisis relief grants paid</td><td class="num">$2,350,581</td><td class="num">$771,547</td><td class="num">$674,915</td></tr>
+            <tr><td>— wellbeing services</td><td class="num">$622,412</td><td class="num">$637,468</td><td class="num">$694,758</td></tr>
+            <tr class="row-emph"><td>Net surplus / (deficit)</td><td class="num">($1,385,366)</td><td class="num">($355,110)</td><td class="num">$799,561</td></tr>
+            <tr><td>Net assets (reserves)</td><td class="num">$4,210,667</td><td class="num">$3,855,557</td><td class="num">$4,655,118</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Three readings (ratios computed, not quoted):<sup class="cite"><a href="#sa-src-9" data-src="fy2025" data-tip="Ratios in this section are computed from the FY2025 audited figures, not quoted directly. Support Act Ltd, FY2025 statutory accounts.">9</a></sup></p>
+      <ul style="margin: 0 0 1rem 1.25rem; color: var(--graphite);">
+        <li style="margin-bottom:0.6rem;"><strong>The COVID tail is visible line by line.</strong> FY2023's $2.35M in grants paid — against only $3.76M revenue — produced a $1.39M deficit as the org spent down the remainder of COVID-era funding; the Directors' Report attributes the deficit to exactly this wind-down, with the funding "fully expended" by FY2024. By FY2025 grants paid had normalized to $674,915 — a −71% fall from FY2023 — and the org returned a $799,561 surplus.</li>
+        <li style="margin-bottom:0.6rem;"><strong>Government money is real but volatile and program-tied.</strong> The grants line swings between 26% and 37% of revenue across the three years, and the named funders across the FY2024–FY2025 filings are <strong>state</strong> cultural agencies funding specific programs (Creative Victoria and Sound NSW in FY2025; the South Australian Government grant appears in the FY2024 filing) — not recurrent federal core funding.<sup class="cite"><a href="#sa-src-9" data-src="fy2025" data-tip="Support Act Ltd, FY2025 statutory accounts.">9</a></sup><sup class="cite"><a href="#sa-src-10" data-src="fy2024" data-tip="Support Act Ltd, FY2024 statutory accounts.">10</a></sup></li>
+        <li><strong>Reserves ≈ 14 months of expenses, no endowment.</strong> Net assets of $4.66M against $3.94M annual expenses (≈1.18×, computed) is a working buffer, not an income-producing endowment: like Unison and unlike Help Musicians, Support Act must re-raise its base every year.</li>
+      </ul>
+      <p>Key management personnel compensation was $225,025 (FY2023), $236,298 (FY2024), $233,530 (FY2025) — lean for a national charity.<sup class="cite"><a href="#sa-src-9" data-src="fy2025" data-tip="KMP compensation FY2025. Support Act Ltd, FY2025 statutory accounts.">9</a></sup><sup class="cite"><a href="#sa-src-10" data-src="fy2024" data-tip="KMP compensation FY2024 and FY2023 comparatives. Support Act Ltd, FY2024 statutory accounts.">10</a></sup></p>
+    </section>
+
+    <!-- 4. WINDFALL AND CLIFF -->
+    <section>
+      <div class="section-label">04 — The windfall-and-cliff</div>
+      <h2>A$30M in, then zero<sup class="cite"><a href="#sa-src-11" data-src="covid-10m" data-tip="April 2020 federal A$10M COVID-19 response funding. Support Act.">11</a></sup><sup class="cite"><a href="#sa-src-12" data-src="covid-20m" data-tip="August 2021 federal A$20M funding. Beat; The Music Network.">12</a></sup><sup class="cite"><a href="#sa-src-13" data-src="cliff" data-tip="January 2022 funding cliff and emergency appeal. The Music Network.">13</a></sup></h2>
+      <p>Support Act is the cleanest documented case in this series of what emergency government money does to a charity.</p>
+      <div class="stat-strip">
+        <div class="stat-item"><div class="stat-num">$0</div><div class="stat-label">government funding before 2020</div></div>
+        <div class="stat-item"><div class="stat-num">A$10M</div><div class="stat-label">federal COVID funding, April 2020</div></div>
+        <div class="stat-item"><div class="stat-num">A$20M</div><div class="stat-label">further federal funding, August 2021</div></div>
+        <div class="stat-item"><div class="stat-num">$0</div><div class="stat-label">left by January 2022 — emergency appeal launched</div></div>
+      </div>
+      <ul style="margin: 1.5rem 0 1rem 1.25rem; color: var(--graphite);">
+        <li style="margin-bottom:0.6rem;"><strong>Before 2020:</strong> no recurring government funding; industry- and fundraising-dependent (⚠️ as-reported in appeal-period coverage).<sup class="cite"><a href="#sa-src-13" data-src="cliff" data-tip="As-reported in appeal-period coverage. The Music Network.">13</a></sup></li>
+        <li style="margin-bottom:0.6rem;"><strong>April 2020:</strong> the Australian Government announced <strong>A$10M</strong> for Support Act as part of its COVID-19 response.<sup class="cite"><a href="#sa-src-11" data-src="covid-10m" data-tip="A$10M announced April 2020. Support Act, Federal government funding for COVID-19 response.">11</a></sup></li>
+        <li style="margin-bottom:0.6rem;"><strong>August 2021:</strong> a further <strong>A$20M</strong> (within a A$35M arts package), with eligibility temporarily widened beyond music to theatre, dance and circus workers. By that announcement, the org had processed <strong>4,506 crisis relief grants</strong> and delivered <strong>1,700+ hours of counselling</strong> cumulatively.<sup class="cite"><a href="#sa-src-12" data-src="covid-20m" data-tip="A$20M within a A$35M arts package; cumulative totals of 4,506 grants and 1,700+ counselling hours as of August 2021. Beat; The Music Network.">12</a></sup></li>
+        <li><strong>January 2022:</strong> the funding exhausted, Support Act launched an emergency public appeal, CEO Clive Miller describing the org as under "enormous pressure" as demand persisted after the money ended.<sup class="cite"><a href="#sa-src-13" data-src="cliff" data-tip="Funding exhausted; emergency appeal; CEO Clive Miller on 'enormous pressure.' The Music Network, Support Act COVID emergency appeal.">13</a></sup></li>
+      </ul>
+      <p>The audited accounts then show the landing (§3): two deficit years absorbing the tail of elevated demand, reserves drawn down from $5.6M (implied FY2022 level, computed from FY2023 opening) to $3.86M, then a rebuilt surplus in FY2025 on <strong>diversified</strong> revenue — record fundraising plus a return of <em>state-level</em> program grants. The org survived the cliff because it had reserves and a fundraising machine that predated the windfall.<sup class="cite"><a href="#sa-src-9" data-src="fy2025" data-tip="Reserve draw-down and FY2025 recovery on diversified revenue. Support Act Ltd, FY2025 statutory accounts.">9</a></sup></p>
+    </section>
+
+    <!-- 5. PROGRAMS AND IMPACT -->
+    <section>
+      <div class="section-label">05 — Programs &amp; impact</div>
+      <h2>Org-stated figures, audited anchors<sup class="cite"><a href="#sa-src-3" data-src="crisis" data-tip="Short-term financial support figure. Support Act, Crisis relief support.">3</a></sup><sup class="cite"><a href="#sa-src-4" data-src="helpline" data-tip="Wellbeing services spend. Support Act.">4</a></sup></h2>
+      <div class="table-wrap" role="region" aria-label="Support Act programs and impact, organization-stated (scrollable table)" tabindex="0">
+        <table>
+          <caption>Programs and impact (org-stated where noted; sources cited inline)</caption>
+          <thead><tr><th scope="col">Metric</th><th scope="col">Figure</th><th scope="col">Period</th><th scope="col">Basis</th></tr></thead>
+          <tbody>
+            <tr><td>Short-term financial support</td><td>"over $585,000"</td><td>"last financial year" (page undated)</td><td>⚠️ org-stated; audited FY2025 grants-paid figure is $674,915<sup class="cite"><a href="#sa-src-9" data-src="fy2025" data-tip="Audited FY2025 crisis relief grants paid, the anchor figure. Support Act Ltd, FY2025 statutory accounts.">9</a></sup></td></tr>
+            <tr><td>COVID crisis relief grants processed</td><td>4,506</td><td>cumulative to Aug 2021</td><td>✅ press-reported figures<sup class="cite"><a href="#sa-src-12" data-src="covid-20m" data-tip="Cumulative totals as of the August 2021 announcement. Beat.">12</a></sup></td></tr>
+            <tr><td>COVID counselling hours delivered</td><td>1,700+</td><td>cumulative to Aug 2021</td><td>✅ press-reported figures<sup class="cite"><a href="#sa-src-12" data-src="covid-20m" data-tip="Cumulative totals as of the August 2021 announcement. Beat.">12</a></sup></td></tr>
+            <tr><td>Wellbeing services spend</td><td>$694,758</td><td>FY2025</td><td>✅ audited<sup class="cite"><a href="#sa-src-9" data-src="fy2025" data-tip="Audited FY2025 wellbeing services expense line. Support Act Ltd, FY2025 statutory accounts.">9</a></sup></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The website's live impact counters (people served, counselling hours, event attendance) render as JavaScript placeholders and could not be captured this pass — flagged, not estimated. A published <strong>Wellbeing Helpline evaluation</strong> exists on the org's news page; the full findings were not retrieved this pass.<sup class="cite"><a href="#sa-src-4" data-src="helpline" data-tip="Website impact counters are JS placeholders, not captured; Wellbeing Helpline evaluation findings noted but not retrieved. Support Act.">4</a></sup></p>
+    </section>
+
+    <!-- 6. GOVERNANCE -->
+    <section>
+      <div class="section-label">06 — Governance</div>
+      <h2>Co-chaired, industry-embedded<sup class="cite"><a href="#sa-src-8" data-src="governance" data-tip="Governance and staff: Support Act, Our people.">8</a></sup></h2>
+      <p>Leadership is industry-embedded and, notably, <strong>co-chaired</strong>: <strong>Lynne Small</strong> and <strong>David Albert</strong> share the chair, with CEO <strong>Clive Miller</strong> (in post since before the 2020 COVID response) and CFO <strong>Lisa Smith</strong> leading a listed staff of ~16 across crisis relief, social work, helpline, First Nations programs, prevention training and fundraising. The full board and staff roster is published with names and roles on the org's <em>Our People</em> page (snapshot 2026-07-06); a roster is a point-in-time fact.<sup class="cite"><a href="#sa-src-8" data-src="governance" data-tip="Co-Chairs Lynne Small and David Albert; CEO Clive Miller; CFO Lisa Smith; ~16 staff listed with roles. Support Act, Our people.">8</a></sup></p>
+      <p>Two signals stand out. The <strong>co-chair structure</strong> spreads governance legitimacy across two industry constituencies rather than concentrating it. And the staff list shows <strong>dedicated First Nations roles</strong> — the population-specific stream is staffed, not just branded.<sup class="cite"><a href="#sa-src-8" data-src="governance" data-tip="Co-chair structure and dedicated First Nations staff roles. Support Act, Our people.">8</a></sup></p>
+    </section>
+
+    <!-- 7. STRENGTHS -->
+    <section>
+      <div class="section-label">07 — Strengths</div>
+      <h2>What works</h2>
+      <div class="sw-grid">
+        <div class="sw-card strong"><h3>The only full-scale APAC precedent</h3><p>Support Act proves a national, music-specific charity can reach maturity in Asia-Pacific — sustaining a 24/7 helpline, cash relief and a training arm for nearly three decades in a mid-sized market.<sup class="cite"><a href="#sa-src-1" data-src="identity" data-tip="Support Act, Home / About Support Act.">1</a></sup><sup class="cite"><a href="#sa-src-2" data-src="history" data-tip="Support Act, About Support Act.">2</a></sup></p></div>
+        <div class="sw-card strong"><h3>Audited transparency</h3><p>Complete KPMG-audited statutory accounts published on its own site — the strongest financial transparency in this series, and the reason this study could quote line items rather than org-stated totals.<sup class="cite"><a href="#sa-src-9" data-src="fy2025" data-tip="Support Act Ltd, FY2025 statutory accounts.">9</a></sup><sup class="cite"><a href="#sa-src-10" data-src="fy2024" data-tip="Support Act Ltd, FY2024 statutory accounts.">10</a></sup></p></div>
+        <div class="sw-card strong"><h3>A fundable prevention product line</h3><p>Branded training programs give state cultural agencies a concrete thing to fund (Creative Victoria, Sound NSW and the South Australian Government all appear as program funders across the FY2024–FY2025 filings), diversifying revenue beyond donations and crisis appeals.<sup class="cite"><a href="#sa-src-5" data-src="training" data-tip="Support Act, Mental health programs and events.">5</a></sup><sup class="cite"><a href="#sa-src-9" data-src="fy2025" data-tip="Named state funders. Support Act Ltd, FY2025 statutory accounts.">9</a></sup><sup class="cite"><a href="#sa-src-10" data-src="fy2024" data-tip="South Australian Government grant named in the FY2024 filing. Support Act Ltd, FY2024 statutory accounts.">10</a></sup></p></div>
+        <div class="sw-card strong"><h3>Trade-body founding anchors recurring industry money</h3><p>ARIA/PPCA/APRA AMCOS backing ties the charity to the industry's permanent institutions and their member rolls, not to any single company — and the donor base layered on top spans state governments, corporate partners (AusMusic T-Shirt Day with ARIA, Triple J, Live Performance Australia), a dedicated crew fund (CrewCare) and individual giving.<sup class="cite"><a href="#sa-src-2" data-src="history" data-tip="Support Act, About Support Act.">2</a></sup><sup class="cite"><a href="#sa-src-14" data-src="partners" data-tip="Support Act, Donors and partners.">14</a></sup></p></div>
+        <div class="sw-card strong"><h3>Windfall discipline, demonstrated</h3><p>A$30M of emergency federal money was absorbed, spent to purpose, and its withdrawal survived — with the deficits, reserve draw-down and recovery documented in audited statements rather than smoothed over.<sup class="cite"><a href="#sa-src-9" data-src="fy2025" data-tip="Support Act Ltd, FY2025 statutory accounts.">9</a></sup><sup class="cite"><a href="#sa-src-11" data-src="covid-10m" data-tip="Support Act, Federal government funding for COVID-19 response.">11</a></sup><sup class="cite"><a href="#sa-src-12" data-src="covid-20m" data-tip="Beat; The Music Network.">12</a></sup><sup class="cite"><a href="#sa-src-13" data-src="cliff" data-tip="The Music Network, Support Act COVID emergency appeal.">13</a></sup></p></div>
+        <div class="sw-card strong"><h3>Population-specific design inside a music charity</h3><p>The First Nations stream (own support line, own grants, own strategic plan, staffed roles) is the series' clearest example of equity-by-design.<sup class="cite"><a href="#sa-src-6" data-src="first-nations" data-tip="Support Act, First Nations Support Line and sibling pages.">6</a></sup></p></div>
+      </div>
+    </section>
+
+    <!-- 8. WEAKNESSES -->
+    <section>
+      <div class="section-label">08 — Weaknesses &amp; risks</div>
+      <h2>What to watch</h2>
+      <div class="sw-grid">
+        <div class="sw-card weak"><h3>Government money is program-tied and volatile</h3><p>The grants line swung 26%→37% of revenue in three years, and it funds <em>programs</em>, not core operations; a state agency's priorities can reshape the service mix.<sup class="cite"><a href="#sa-src-9" data-src="fy2025" data-tip="Support Act Ltd, FY2025 statutory accounts.">9</a></sup></p></div>
+        <div class="sw-card weak"><h3>No endowment — perpetual re-raising</h3><p>Reserves of ~14 months' expenses (computed) buffer shocks but generate no income; like Unison, the base must be rebuilt annually.<sup class="cite"><a href="#sa-src-9" data-src="fy2025" data-tip="Support Act Ltd, FY2025 statutory accounts.">9</a></sup></p></div>
+        <div class="sw-card weak"><h3>Crisis-relief capacity has structurally shrunk</h3><p>Grants paid fell from $2.35M (FY2023) to $0.67M (FY2025). The org-preferred reading is normalization after COVID; the risk reading is that relief capacity is now below post-COVID demand — the January 2022 appeal suggested demand did not fall with the funding.<sup class="cite"><a href="#sa-src-9" data-src="fy2025" data-tip="Support Act Ltd, FY2025 statutory accounts.">9</a></sup><sup class="cite"><a href="#sa-src-13" data-src="cliff" data-tip="The Music Network, Support Act COVID emergency appeal.">13</a></sup></p></div>
+        <div class="sw-card weak"><h3>Helpline delivery model not fully visible</h3><p>The accounts show a wellbeing-services line of ~$0.7M/yr but the delivery contract (in-house vs. outsourced clinical provider) is not itemized in what was retrieved; the Unison-style vendor-dependency question cannot be assessed this pass. ❓<sup class="cite"><a href="#sa-src-4" data-src="helpline" data-tip="Support Act, Wellbeing Helpline / Social work support.">4</a></sup><sup class="cite"><a href="#sa-src-9" data-src="fy2025" data-tip="Support Act Ltd, FY2025 statutory accounts.">9</a></sup></p></div>
+        <div class="sw-card weak"><h3>The ACNC register itself was not readable this pass</h3><p>All financials here come from the org's own audited PDFs; the regulator's data view (AIS) is JS-gated to fetch tools. The audited accounts are the stronger source anyway, but the registry cross-check is pending.<sup class="cite"><a href="#sa-src-15" data-src="acnc" data-tip="Australian Charities and Not-for-profits Commission, Support Act Ltd charity profile — attempted, JS app shell.">15</a></sup></p></div>
+        <div class="sw-card weak"><h3>Single-country scope</h3><p>Like every peer in this set, Support Act serves one market; its existence does not close the gap in the rest of Asia-Pacific.<sup class="cite"><a href="#sa-src-1" data-src="identity" data-tip="Support Act, Home / About Support Act.">1</a></sup></p></div>
+      </div>
+    </section>
+
+    <!-- 9. LESSONS -->
+    <section>
+      <div class="section-label">09 — Lessons for Taiwan</div>
+      <h2>What a Taiwan music mental health NPO should take</h2>
+      <ol class="lessons">
+        <li><h3>Found through the collecting societies and trade bodies</h3><p>Support Act's ARIA/PPCA/APRA AMCOS founding is the closest available template for Taiwan: seed the org through MÜST/RPAT-type collecting societies and industry associations, which hold both recurring revenue and member lists — rather than waiting for a single benefactor or label.<sup class="cite"><a href="#sa-src-2" data-src="history" data-tip="Support Act, About Support Act.">2</a></sup></p></li>
+        <li><h3>Build a prevention/training product line early — it is what governments will actually fund</h3><p>Taiwan's 文化部/文策院 fund programs and output, not welfare (a finding repeated across this project's policy studies). Support Act shows the workaround: package prevention as named, deliverable training products (MHFA, suicide-prevention training, workplace standards) that a cultural agency can grant against, while donations fund the cash relief that grants won't touch.<sup class="cite"><a href="#sa-src-5" data-src="training" data-tip="Support Act, Mental health programs and events.">5</a></sup><sup class="cite"><a href="#sa-src-9" data-src="fy2025" data-tip="Support Act Ltd, FY2025 statutory accounts.">9</a></sup></p></li>
+        <li><h3>Treat any government windfall as a program, never as the base</h3><p>The A$30M COVID episode is the controlled experiment: the org that survived it was the one with a pre-existing fundraising machine and reserves. Plan the Taiwan org's core budget on industry + public fundraising, and absorb government surges as time-boxed programs with an explicit wind-down plan.<sup class="cite"><a href="#sa-src-9" data-src="fy2025" data-tip="Support Act Ltd, FY2025 statutory accounts.">9</a></sup><sup class="cite"><a href="#sa-src-11" data-src="covid-10m" data-tip="Support Act, Federal government funding for COVID-19 response.">11</a></sup><sup class="cite"><a href="#sa-src-12" data-src="covid-20m" data-tip="Beat; The Music Network.">12</a></sup><sup class="cite"><a href="#sa-src-13" data-src="cliff" data-tip="The Music Network, Support Act COVID emergency appeal.">13</a></sup></p></li>
+        <li><h3>Publish audited accounts from year one</h3><p>Support Act's KPMG-audited statements are why this study could be precise where the Unison study had to flag ❓. In a low-trust founding environment (a new NPO in a market with no precedent), audited transparency is the cheapest credibility available.<sup class="cite"><a href="#sa-src-9" data-src="fy2025" data-tip="Support Act Ltd, FY2025 statutory accounts.">9</a></sup></p></li>
+        <li><h3>Fund funerals and tax help, not just "counselling"</h3><p>The concreteness of Support Act's relief menu — Funeral Help, Tax Help — reflects how hardship actually presents and gives donors legible things to fund. A Taiwan org should map the equivalent concrete failure points (健保 arrears, 勞保 gaps, funeral costs) rather than offering only generic aid.<sup class="cite"><a href="#sa-src-3" data-src="crisis" data-tip="Support Act, Crisis relief support / Funeral help / Tax help.">3</a></sup></p></li>
+        <li><h3>Design population-specific streams from the start</h3><p>The First Nations stream — own line, own grants, own plan, staffed — is the template for how a Taiwan org should structure service for Indigenous musicians and other distinct populations: parallel and staffed, not an afterthought paragraph.<sup class="cite"><a href="#sa-src-6" data-src="first-nations" data-tip="Support Act, First Nations Support Line and sibling pages.">6</a></sup></p></li>
+        <li><h3>Reserves target: ~12 months of expenses</h3><p>Support Act entered the COVID cliff with reserves and exited solvent; ~1.2× annual expenses (computed) is a defensible working target for a young org that cannot build an endowment.<sup class="cite"><a href="#sa-src-9" data-src="fy2025" data-tip="Support Act Ltd, FY2025 statutory accounts.">9</a></sup></p></li>
+      </ol>
+    </section>
+
+    <!-- 10. METHOD + REFERENCES -->
+    <section>
+      <div class="section-label">10 — Methodology &amp; references</div>
+      <h2>Basis</h2>
+      <p class="cite-help">Every figure carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source; click to jump to the full reference. Identity, history, programs, and governance are traced to the organization's own pages, and — unusually strong for this series — the financials are traced to the organization's own KPMG-audited statutory accounts. The COVID-era federal funding timeline is traced to named outlets and org announcements. The ACNC register and website impact counters could not be retrieved this pass and are flagged ❓, not estimated.</p>
+
+      <div class="table-wrap" role="region" aria-label="Methodology and basis (scrollable table)" tabindex="0">
+        <table>
+          <caption>Methodology &amp; basis — by source</caption>
+          <thead><tr><th scope="col">Source</th><th scope="col">Method</th><th scope="col">Basis</th></tr></thead>
+          <tbody>
+            <tr><td>Support Act — homepage, About, program pages, Our People, Documents (supportact.org.au)</td><td>WebFetch</td><td>✅ Sourced (org-published primary)</td></tr>
+            <tr><td>Support Act FY2025 + FY2024 KPMG-audited statutory accounts (PDFs on supportact.org.au)</td><td>WebFetch (direct PDF)</td><td>✅ Sourced (audited primary; FY2023 figures from the FY2024 filing's audited comparatives)</td></tr>
+            <tr><td>ACNC charity register profile</td><td>Attempted WebFetch</td><td>❓ JS app shell — not readable this pass; pending</td></tr>
+            <tr><td>COVID funding timeline — org announcements + Beat, The Music Network</td><td>WebSearch + WebFetch</td><td>✅ Sourced (named outlets / org announcements)</td></tr>
+            <tr><td>Website impact counters</td><td>WebFetch</td><td>❓ JS placeholders — not captured; flagged, not estimated</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>Limitations.</strong> (1) The ACNC register/AIS data view could not be read (JS-gated); the audited accounts are the superior source but the registry cross-check (ABN, charity size classification) is pending. (2) Staff FTE count is not disclosed in the accounts — only the ~16-person public roster. (3) The Wellbeing Helpline's delivery contract (in-house vs. outsourced provider) is not itemized in retrieved documents. (4) FY2021/FY2022 accounts (the COVID peak years) were not retrieved this pass — Dropbox-hosted and fetch-gated; the exact COVID-grant recognition per year is therefore narratively evidenced only. (5) No direct organizational contact; all data from public sources.</p>
+
+      <div class="refs" id="refs-all" data-citation-registry="sa-all">
+        <div class="refs-title">References</div>
+        <ol>
+          <li id="sa-src-1" data-src="identity">Identity, mission, eligibility, and the Wellbeing Helpline number: Support Act. (n.d.). <em>Home</em> and <em>About Support Act</em>. Retrieved July 6, 2026, from <a href="https://supportact.org.au/" target="_blank" rel="noopener">https://supportact.org.au/</a> and <a href="https://supportact.org.au/about-support-act/" target="_blank" rel="noopener">https://supportact.org.au/about-support-act/</a> (mission statement quoted verbatim; serves musicians, managers, crew and music workers unable to work due to ill health, injury, mental health crisis or other crisis; Wellbeing Helpline 1800 959 500). <strong>Source · Method · Basis:</strong> org-published primary · WebFetch · ✅ Sourced.</li>
+          <li id="sa-src-2" data-src="history">Founding history: Support Act. (n.d.). <em>About Support Act</em> (incorporated 7 August 1997, launched 8 August 1997; conceived 1980 by John Bromell; founding support from ARIA, PPCA, APRA AMCOS; charity status 2000). Retrieved July 6, 2026, from <a href="https://supportact.org.au/about-support-act/" target="_blank" rel="noopener">https://supportact.org.au/about-support-act/</a>; Support Act. (2022). <em>Support Act celebrates 25 years as the music industry's charity</em>. <a href="https://supportact.org.au/latest-news/support-act-celebrates-25-years-as-the-music-industrys-charity/" target="_blank" rel="noopener">supportact.org.au</a>; Beat. (n.d.). <em>The story of Support Act charity</em>. <a href="https://beat.com.au/the-story-of-support-act-charity/" target="_blank" rel="noopener">beat.com.au</a> (17 years of lobbying; initial committee of 16 directors). <strong>Source · Method · Basis:</strong> org pages + named outlet · WebFetch + WebSearch · ✅ Sourced.</li>
+          <li id="sa-src-3" data-src="crisis">Crisis relief menu: Support Act. (n.d.). <em>Crisis relief support</em>, <em>Crisis relief grants</em>, <em>Funeral help</em>, <em>Tax help</em>. Retrieved July 6, 2026, from <a href="https://supportact.org.au/individual-support/crisis-relief-support/" target="_blank" rel="noopener">https://supportact.org.au/individual-support/crisis-relief-support/</a> (and child pages /crisis-relief-grants/, /funeral-help/, /tax-help/). The homepage states "over $585,000 in short term financial support" in the last financial year (period not specified on page). <strong>Source · Method · Basis:</strong> org pages · WebFetch · ✅ Sourced (the $585,000 counter is ⚠️ org-stated and undated; the audited FY2025 grants-paid figure in §3 is the anchor).</li>
+          <li id="sa-src-4" data-src="helpline">Wellbeing Helpline and social work support: Support Act. (n.d.). <em>Wellbeing Helpline</em> and <em>Social work support</em>. Retrieved July 6, 2026, from <a href="https://supportact.org.au/individual-support/wellbeing-helpline/" target="_blank" rel="noopener">https://supportact.org.au/individual-support/wellbeing-helpline/</a> and <a href="https://supportact.org.au/individual-support/social-work-support/" target="_blank" rel="noopener">https://supportact.org.au/individual-support/social-work-support/</a> (1800 959 500, 24/7, free; extended to creative-industries workers); helpline evaluation noted at Support Act. (n.d.). <em>Wellbeing Helpline evaluation findings</em>. <a href="https://supportact.org.au/latest-news/wellbeing-helpline-evaluation-findings/" target="_blank" rel="noopener">supportact.org.au</a> (full findings not retrieved this pass). <strong>Source · Method · Basis:</strong> org pages · WebFetch · ✅ Sourced (delivery-contract detail ❓).</li>
+          <li id="sa-src-5" data-src="training">Prevention/training suite: Support Act. (n.d.). <em>Mental health programs and events</em> — REWIRE, LEAD WELL, Speak Up Safely, Hearing the Hard Stuff, De-escalation, Mental Health First Aid, Recognise and Respond (suicide prevention), Money Moves, MINIs, Creative Minds, Sound Minds, Backstage Mental Health Support. Retrieved July 6, 2026, from <a href="https://supportact.org.au/individual-support/mental-health-and-wellbeing-support/mental-health-programs-and-events/rewire/" target="_blank" rel="noopener">supportact.org.au</a> (and sibling program pages under the same path). <strong>Source · Method · Basis:</strong> org pages · WebFetch · ✅ Sourced.</li>
+          <li id="sa-src-6" data-src="first-nations">First Nations stream: Support Act. (n.d.). <em>First Nations crisis relief grants</em>, <em>First Nations funeral help</em>, <em>First Nations tax help</em>, <em>First Nations Support Line</em>, <em>First Nations Mental Health First Aid</em>, <em>Voices Amplified</em>, <em>Yarning Strong</em>, <em>First Nations strategic plan</em>. Retrieved July 6, 2026, from <a href="https://supportact.org.au/first-nations-support/first-nations-support-line/" target="_blank" rel="noopener">supportact.org.au</a> (and sibling pages); First Nations program partners (JB Hi-Fi, Alberts) per Support Act. (n.d.). <em>Donors and partners</em>. <a href="https://supportact.org.au/about-support-act/donors-and-partners/" target="_blank" rel="noopener">supportact.org.au</a>. <strong>Source · Method · Basis:</strong> org pages · WebFetch · ✅ Sourced.</li>
+          <li id="sa-src-7" data-src="workplace">Workplace layer: Support Act. (n.d.). <em>Mentally Healthy Workplaces Program</em> and <em>Minimum standards for a mentally healthy music industry</em>. Retrieved July 6, 2026, from <a href="https://supportact.org.au/workplace-support/mentally-healthy-workplaces-program/" target="_blank" rel="noopener">supportact.org.au</a> and <a href="https://supportact.org.au/workplace-support/minimum-standards-for-a-mentally-healthy-music-industry/" target="_blank" rel="noopener">supportact.org.au</a>. <strong>Source · Method · Basis:</strong> org pages · WebFetch · ✅ Sourced.</li>
+          <li id="sa-src-8" data-src="governance">Governance and staff: Support Act. (n.d.). <em>Our people</em>. Retrieved July 6, 2026, from <a href="https://supportact.org.au/about-support-act/our-people/" target="_blank" rel="noopener">https://supportact.org.au/about-support-act/our-people/</a> (Co-Chairs Lynne Small and David Albert; CEO Clive Miller; CFO Lisa Smith; ~16 staff listed with roles, including dedicated First Nations positions). Roster snapshot saved to <span style="font-family:var(--font-mono);">wiki/snapshots/SupportAct_Website_2026-07-06.md</span>. <strong>Source · Method · Basis:</strong> org page · WebFetch · ✅ Sourced (point-in-time roster).</li>
+          <li id="sa-src-9" data-src="fy2025">FY2025 audited financial statements (with FY2024 comparatives): Support Act Ltd. (2025). <em>Statutory accounts for the year ended 30 June 2025</em> [Audited financial statements, KPMG]. <a href="https://supportact.org.au/wp-content/uploads/2025/11/3.-2506-SAL-Stat-Accounts-3.-FINAL.pdf" target="_blank" rel="noopener">supportact.org.au</a> (total revenue $4,740,314; government grants $1,657,301; total expenses $3,940,753; crisis relief grants paid $674,915; wellbeing services $694,758; surplus $799,561; net assets $4,655,118; key management personnel compensation $233,530; named government funders in this filing incl. Creative Victoria, Sound NSW, Creative Workplaces/Creative Australia; Directors' Report attribution of the FY2023 deficit to COVID-funding wind-down, "fully expended" by FY2024). Ratios in §3 (government share of revenue, reserves-to-expenses, grants-paid change) are computed from these figures, not quoted. <strong>Source · Method · Basis:</strong> audited org-published primary · WebFetch (direct PDF) · ✅ Sourced.</li>
+          <li id="sa-src-10" data-src="fy2024">FY2024 audited financial statements (with FY2023 comparatives): Support Act Ltd. (2024). <em>Statutory accounts for the year ended 30 June 2024</em> [Audited financial statements, KPMG]. <a href="https://supportact.org.au/wp-content/uploads/2024/11/3.-2406-SAL-Stat-Accounts-3.-FINAL.pdf" target="_blank" rel="noopener">supportact.org.au</a> (FY2024: revenue $3,323,958, government grants $853,662, expenses $3,679,068, grants paid $771,547, wellbeing services $637,468, deficit $355,110, net assets $3,855,557, KMP compensation $236,298; South Australian Government program grant named in this filing (originally received FY2022); FY2023 comparatives: revenue $3,760,702, government grants $1,397,462, expenses $5,146,068, grants paid $2,350,581, wellbeing services $622,412, deficit $1,385,366, net assets $4,210,667, KMP compensation $225,025). <strong>Source · Method · Basis:</strong> audited org-published primary · WebFetch (direct PDF) · ✅ Sourced.</li>
+          <li id="sa-src-11" data-src="covid-10m">April 2020 federal A$10M: Support Act. (2020). <em>Federal government funding for COVID-19 response</em>. <a href="https://supportact.org.au/latest-news/federal-government-funding-for-covid-19-response/" target="_blank" rel="noopener">supportact.org.au</a> (A$10M announced April 2020). <strong>Source · Method · Basis:</strong> org announcement · WebSearch + WebFetch · ✅ Sourced.</li>
+          <li id="sa-src-12" data-src="covid-20m">August 2021 federal A$20M: Beat. (2021). <em>The federal government announces $20 million in funding for Support Act</em>. <a href="https://beat.com.au/the-federal-government-announces-20-million-in-funding-for-support-act/" target="_blank" rel="noopener">beat.com.au</a>; The Music Network. (2021). <em>Support Act funding 2021</em>. <a href="https://themusicnetwork.com/support-act-funding-2021/" target="_blank" rel="noopener">themusicnetwork.com</a> (A$20M within a A$35M arts package; eligibility temporarily widened to theatre, dance and circus; the Beat article reports "to date" cumulative totals of 4,506 Crisis Relief Grants processed and 1,700+ hours of counselling delivered as of the August 2021 announcement). <strong>Source · Method · Basis:</strong> named outlets · WebSearch + WebFetch · ✅ Sourced.</li>
+          <li id="sa-src-13" data-src="cliff">January 2022 funding cliff and emergency appeal: The Music Network. (2022). <em>Support Act COVID emergency appeal</em>. <a href="https://themusicnetwork.com/news/support-act-covid-emergency-appeal" target="_blank" rel="noopener">themusicnetwork.com</a> (federal COVID grants exhausted; emergency appeal launched; CEO Clive Miller on "enormous pressure"; pre-COVID the org received no government funding). <strong>Source · Method · Basis:</strong> named outlet · WebSearch + WebFetch · ✅ Sourced.</li>
+          <li id="sa-src-14" data-src="partners">Donors and partners: Support Act. (n.d.). <em>Donors and partners</em>. Retrieved July 6, 2026, from <a href="https://supportact.org.au/about-support-act/donors-and-partners/" target="_blank" rel="noopener">https://supportact.org.au/about-support-act/donors-and-partners/</a> (founding partners APRA AMCOS, ARIA, PPCA; state government partners; AusMusic T-Shirt Day partners ARIA, Triple J, Live Performance Australia et al.; CrewCare crew fund; corporate and in-kind partners). <strong>Source · Method · Basis:</strong> org page · WebFetch · ✅ Sourced.</li>
+          <li id="sa-src-15" data-src="acnc">ACNC register: Australian Charities and Not-for-profits Commission. (n.d.). <em>Support Act Ltd [Charity profile]</em>. <a href="https://www.acnc.gov.au/charity/charities/5674c096-39af-e811-a962-000d3ad24a0d/profile" target="_blank" rel="noopener">acnc.gov.au</a> — returned a JavaScript app shell to fetch tools this pass; not used for any figure. Registry cross-check pending. <strong>Source · Method · Basis:</strong> attempted registry · WebFetch · ❓ Unverified this pass.</li>
+        </ol>
+        <p class="refs-note">Convention: every claim-bearing element carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above — machine-checkable before each deploy (§5.2 / §6 gate 1). The source of truth for these citations is the report <span style="font-family:var(--font-mono);">2026-07-06_Report_Org_Study_Support_Act.md</span>. The ACNC registry cross-check and FY2021/FY2022 accounts are flagged pending; no figure is invented.</p>
+      </div>
+    </section>
+
+
+    <nav class="related-block" aria-label="Related on this site">
+      <p class="related-title">Related</p>
+      <ul>
+        <li><a href="org-study.html">&larr; Org Study (all organizations)</a></li>
+        <li><a href="org-study-unison-fund.html">Org Study: The Unison Fund &mdash; the closest structural analogue</a></li>
+        <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+        <li><a href="policy-study.html">Policy Study &mdash; how jurisdictions protect music workers</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <script>
+  /* Scroll-reveal — R3.2 shared IntersectionObserver (normal-scroll page) */
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = 'section > h2, .stat-strip, figure, .table-wrap, .phases-grid, .sources-card, .refs';
+    var nodes = Array.prototype.slice.call(document.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, sibs, idx = 0;
+        if (p){ sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,6) * 60) + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
+
+  <!-- nav scroll-state: transparent over hero, blurred bar once scrolled -->
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden','true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>
