@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Search · MH&W</title>
+<meta name="description" content="Search all reports, org studies, policy studies and insights — Mental Health & Wellness for Musicians.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Space+Mono:wght@400;700&display=swap');
+:root {
+  --black:#09090b; --off-black:#141416; --charcoal:#27272a; --graphite:#3f3f46;
+  --grey:#71717a; --grey-light:#a1a1aa; --silver:#d4d4d8; --snow:#f4f4f5; --white:#fafafa;
+  --purple-deep:#6667AB; --signal:var(--purple-deep); --signal-dim:#565799;
+  --signal-bg:rgba(102,103,171,0.08); --signal-glow:rgba(102,103,171,0.2);
+  --bg-light:var(--snow); --border-light:rgba(0,0,0,0.07);
+  --font-display:'Fraunces','Noto Serif TC',Georgia,serif;
+  --font-body:'Fraunces','Noto Serif TC',Georgia,serif;
+  --font-mono:'Space Mono','Courier New',monospace;
+  --text-h1:clamp(2rem,4.5vw,3rem); --text-xs:0.75rem; --text-fine:0.875rem; --text-small:0.9375rem;
+  --lh-prose:1.7; --wt-prose:440; --measure-prose:66ch; --label-ink:var(--graphite);
+  --ease:cubic-bezier(0.4,0,0.2,1); --dur:0.3s; --radius:4px; --radius-lg:6px; --max-w:1100px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--bg-light); color:var(--charcoal);
+  font-family:var(--font-body);
+  font-size:clamp(1.1875rem, 1.06rem + 0.55vw, 1.3125rem);
+  line-height:var(--lh-prose); font-weight:var(--wt-prose);
+  -webkit-font-smoothing:antialiased;
+}
+a { color:inherit; }
+.skip-nav { position:absolute; left:-9999px; top:0; background:var(--black); color:var(--white); padding:0.6rem 1rem; z-index:200; font-family:var(--font-mono); font-size:var(--text-fine); }
+.skip-nav:focus { left:0; }
+
+.nav { display:flex; flex-direction:column; padding:2rem 2.5rem; padding-top:calc(2rem + env(safe-area-inset-top)); }
+.nav-links { display:flex; flex-wrap:wrap; gap:1.4rem 2.5rem; margin-bottom:1rem; }
+.nav-links a { font-family:var(--font-mono); font-size:1.1rem; color:var(--label-ink); text-decoration:none; text-transform:uppercase; letter-spacing:0.08em; transition:color var(--dur) var(--ease); }
+.nav-links a:hover { color:var(--black); }
+.nav-links a.current { color:var(--black); }
+.nav-links a:focus-visible { outline:2px solid var(--signal); outline-offset:3px; }
+.nav-brand { font-family:var(--font-display); font-size:1.5rem; font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.12em; line-height:1.15; }
+.nav-sub { font-family:var(--font-mono); font-size:var(--text-xs); color:var(--signal); text-transform:uppercase; letter-spacing:0.5em; }
+@media (max-width:680px){
+  .nav { padding:1.2rem 1.5rem; }
+  .nav-links { gap:0.8rem 1.4rem; }
+  .nav-links a { font-size:0.85rem; }
+}
+
+main { max-width:var(--max-w); margin:0 auto; padding:2.5rem 2.5rem 6rem; }
+@media (max-width:680px){ main { padding:1.5rem 1.25rem 4rem; } }
+
+h1 { font-family:var(--font-display); font-size:var(--text-h1); font-weight:900; color:var(--black); line-height:1.1; margin-bottom:2rem; }
+.local-note { display:none; font-family:var(--font-mono); font-size:var(--text-fine); color:var(--signal-dim); background:var(--signal-bg); border:1px solid var(--signal-glow); border-radius:var(--radius); padding:0.5rem 0.9rem; margin-bottom:2rem; }
+
+.searchbar { position:relative; max-width:44rem; }
+#q {
+  width:100%; font-family:var(--font-body); font-size:1.25rem; font-weight:440;
+  color:var(--black); background:var(--white);
+  border:1.5px solid var(--silver); border-radius:var(--radius-lg);
+  padding:0.9rem 3rem 0.9rem 1.1rem; transition:border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+#q:focus { outline:none; border-color:var(--signal); box-shadow:0 0 0 4px var(--signal-bg); }
+#q::placeholder { color:var(--grey-light); }
+.kbd-hint { position:absolute; right:0.9rem; top:50%; transform:translateY(-50%); font-family:var(--font-mono); font-size:var(--text-xs); color:var(--grey-light); border:1px solid var(--silver); border-radius:3px; padding:0.1rem 0.45rem; pointer-events:none; }
+@media (hover:none){ .kbd-hint { display:none; } }
+
+.chips { display:flex; flex-wrap:wrap; gap:0.5rem; margin:1.4rem 0 0.5rem; }
+.chip {
+  font-family:var(--font-mono); font-size:var(--text-xs); text-transform:uppercase; letter-spacing:0.1em;
+  color:var(--label-ink); background:transparent; border:1px solid var(--silver); border-radius:999px;
+  padding:0.35rem 0.9rem; cursor:pointer; transition:all var(--dur) var(--ease);
+}
+.chip:hover { border-color:var(--graphite); }
+.chip[aria-pressed="true"] { background:var(--black); border-color:var(--black); color:var(--white); }
+.chip:focus-visible { outline:2px solid var(--signal); outline-offset:2px; }
+
+.meta-line { font-family:var(--font-mono); font-size:var(--text-fine); color:var(--grey); margin:1.6rem 0 1.2rem; min-height:1.4em; }
+.meta-line .warn { color:var(--signal-dim); }
+
+#results { list-style:none; display:flex; flex-direction:column; gap:1rem; max-width:52rem; }
+.hit { background:var(--white); border:1px solid var(--border-light); border-radius:var(--radius-lg); padding:1.3rem 1.5rem; transition:border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease); }
+.hit:hover { border-color:var(--signal-glow); box-shadow:0 4px 18px rgba(0,0,0,0.05); }
+.hit-top { display:flex; align-items:baseline; gap:0.8rem; flex-wrap:wrap; margin-bottom:0.35rem; }
+.hit-type { font-family:var(--font-mono); font-size:var(--text-xs); letter-spacing:0.12em; text-transform:uppercase; color:var(--signal); }
+.hit-date { font-family:var(--font-mono); font-size:var(--text-xs); letter-spacing:0.1em; color:var(--grey-light); }
+.hit-title { font-family:var(--font-display); font-size:1.35rem; font-weight:600; line-height:1.3; }
+.hit-title a { color:var(--black); text-decoration:none; }
+.hit-title a:hover { color:var(--signal-dim); text-decoration:underline; text-underline-offset:3px; }
+.hit-title a:focus-visible { outline:2px solid var(--signal); outline-offset:3px; }
+.hit-excerpt { font-size:var(--text-small); color:var(--grey); margin-top:0.45rem; max-width:var(--measure-prose); overflow-wrap:anywhere; }
+mark { background:var(--signal-bg); color:var(--signal-dim); font-weight:600; border-radius:2px; padding:0 0.1em; }
+.hit-path { font-family:var(--font-mono); font-size:var(--text-xs); color:var(--grey-light); margin-top:0.5rem; overflow-wrap:anywhere; }
+.empty { max-width:var(--measure-prose); color:var(--grey); font-size:var(--text-small); }
+.empty code { font-family:var(--font-mono); font-size:0.85em; background:var(--signal-bg); padding:0.05em 0.4em; border-radius:3px; }
+
+footer { max-width:var(--max-w); margin:0 auto; padding:0 2.5rem 3rem; font-family:var(--font-mono); font-size:var(--text-xs); color:var(--grey-light); letter-spacing:0.1em; text-transform:uppercase; }
+@media (max-width:680px){ footer { padding:0 1.25rem 2rem; } }
+@media (prefers-reduced-motion:reduce){ *{ transition:none!important; } }
+</style>
+</head>
+<body>
+<a class="skip-nav" href="#q">Skip to search</a>
+<nav class="nav" aria-label="Site">
+  <div class="nav-links">
+    <a href="index.html">HOME</a>
+    <a href="report-global-npo-landscape.html">ORGS MAP</a>
+    <a href="org-study.html">ORG STUDY</a>
+    <a href="policy-study.html">POLICY STUDY</a>
+    <a href="research.html">RESEARCH</a>
+    <a href="insight.html">INSIGHT</a>
+    <a href="plan.html">PLAN</a>
+    <a href="field-news.html">FIELD NEWS</a>
+    <a href="search.html" class="current">SEARCH</a>
+  </div>
+  <div class="nav-brand">MENTAL HEALTH<br>& WELLNESS</div>
+  <div class="nav-sub">FOR MUSICIANS</div>
+</nav>
+
+<main>
+  <h1>Search / 搜尋</h1>
+  <p class="local-note" id="local-note">LOCAL MODE — 含 wiki 知識庫全文（未公開）。此頁不會上傳。</p>
+
+  <div class="searchbar">
+    <label for="q" class="skip-nav">Search query</label>
+    <input id="q" type="search" placeholder="Search reports… / 輸入關鍵字" autocomplete="off" autofocus>
+    <span class="kbd-hint">/</span>
+  </div>
+
+  <div class="chips" id="chips" role="group" aria-label="Filter by type"></div>
+
+  <p class="meta-line" id="meta" aria-live="polite"></p>
+  <ul id="results"></ul>
+  <p class="empty" id="empty" hidden></p>
+</main>
+
+<footer><span id="foot-count"></span></footer>
+
+<script>window.IS_LOCAL=false</script>
+<script src="search-index.js"></script>
+<script>
+(function(){
+  'use strict';
+  var DOCS = window.SEARCH_INDEX || [];
+  var BUILT = window.SEARCH_BUILT || '';
+  var LOCAL = !!window.IS_LOCAL;
+  var CJK = /[㐀-鿿豈-﫿]/;
+
+  if (LOCAL) document.getElementById('local-note').style.display = 'inline-block';
+  document.getElementById('foot-count').textContent = BUILT ? 'UPDATED ' + BUILT : '';
+
+  // ---- pre-normalize ----
+  DOCS.forEach(function(d){
+    d._t = d.t.toLowerCase(); d._h = (d.h||'').toLowerCase(); d._b = (d.b||'').toLowerCase();
+    d._g = d.ty.indexOf('WIKI') === 0 ? 'WIKI' : d.ty;   // chip group
+  });
+
+  // ---- chips ----
+  var groups = ['ALL'];
+  DOCS.forEach(function(d){ if (groups.indexOf(d._g) < 0) groups.push(d._g); });
+  var order = ['ALL','ORGS MAP','ORG STUDY','POLICY STUDY','RESEARCH','INSIGHT','NEWS','WIKI'];
+  groups.sort(function(a,b){ return order.indexOf(a) - order.indexOf(b); });
+  var active = 'ALL';
+  var chipsEl = document.getElementById('chips');
+  groups.forEach(function(g){
+    var b = document.createElement('button');
+    b.className = 'chip'; b.textContent = g;
+    b.setAttribute('aria-pressed', g === active ? 'true' : 'false');
+    b.addEventListener('click', function(){
+      active = g;
+      Array.prototype.forEach.call(chipsEl.children, function(c){
+        c.setAttribute('aria-pressed', c.textContent === g ? 'true' : 'false');
+      });
+      run();
+    });
+    chipsEl.appendChild(b);
+  });
+
+  // ---- scoring ----
+  function esc(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+  function lev1(a, b){ // true if edit distance <= 1
+    if (a === b) return true;
+    var la = a.length, lb = b.length;
+    if (Math.abs(la - lb) > 1) return false;
+    var i = 0, j = 0, edits = 0;
+    while (i < la && j < lb) {
+      if (a[i] === b[j]) { i++; j++; continue; }
+      if (++edits > 1) return false;
+      if (la > lb) i++; else if (lb > la) j++; else { i++; j++; }
+    }
+    return edits + (la - i) + (lb - j) <= 1;
+  }
+
+  function tokenScore(d, tok){
+    var s = 0;
+    if (CJK.test(tok)) {
+      if (d._t.indexOf(tok) >= 0) s += 8;
+      if (d._h.indexOf(tok) >= 0) s += 4;
+      var n = 0, p = d._b.indexOf(tok);
+      while (p >= 0 && n < 3) { n++; p = d._b.indexOf(tok, p + tok.length); }
+      s += n;
+    } else {
+      var re = new RegExp('\\b' + esc(tok));
+      if (re.test(d._t)) s += 8;
+      if (re.test(d._h)) s += 4;
+      var m = d._b.match(new RegExp('\\b' + esc(tok), 'g'));
+      if (m) s += Math.min(m.length, 3);
+      if (s === 0 && tok.length >= 5) { // fuzzy on title/heading words only
+        var words = (d._t + ' ' + d._h).split(/[^a-z0-9]+/);
+        for (var i = 0; i < words.length; i++) {
+          if (words[i].length >= 4 && lev1(tok, words[i])) { s += 3; break; }
+        }
+      }
+    }
+    return s;
+  }
+
+  function search(q){
+    var toks = q.toLowerCase().split(/\s+/).filter(Boolean);
+    if (!toks.length) return { hits: [], partial: false };
+    var full = [], part = [];
+    DOCS.forEach(function(d){
+      if (active !== 'ALL' && d._g !== active) return;
+      var sum = 0, matched = 0;
+      toks.forEach(function(t){ var s = tokenScore(d, t); if (s > 0) matched++; sum += s; });
+      if (!matched) return;
+      var rec = { d: d, s: sum + (d.d ? 0.3 : 0) };
+      if (matched === toks.length) full.push(rec); else part.push(rec);
+    });
+    var pool = full.length ? full : part;
+    pool.sort(function(a, b){ return b.s - a.s || (b.d.d > a.d.d ? 1 : -1); });
+    return { hits: pool.slice(0, 50), partial: !full.length && part.length > 0 };
+  }
+
+  // ---- excerpt + highlight ----
+  function excerpt(d, toks){
+    var body = d.b || '', low = d._b, pos = -1;
+    for (var i = 0; i < toks.length; i++) {
+      var p = low.indexOf(toks[i]);
+      if (p >= 0 && (pos < 0 || p < pos)) pos = p;
+    }
+    var start = pos < 0 ? 0 : Math.max(0, pos - 70);
+    var frag = body.slice(start, start + 240);
+    if (start > 0) frag = '…' + frag;
+    if (start + 240 < body.length) frag += '…';
+    return highlight(frag, toks);
+  }
+
+  function highlight(text, toks){
+    var safe = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    toks.forEach(function(t){
+      if (!t) return;
+      try {
+        var re = CJK.test(t) ? new RegExp(esc(t), 'gi') : new RegExp('(^|[^a-z0-9])(' + esc(t) + '[a-z0-9]*)', 'gi');
+        safe = CJK.test(t)
+          ? safe.replace(re, function(m){ return '<mark>' + m + '</mark>'; })
+          : safe.replace(re, function(m, pre, w){ return pre + '<mark>' + w + '</mark>'; });
+      } catch (e) {}
+    });
+    return safe;
+  }
+
+  // ---- render ----
+  var qEl = document.getElementById('q');
+  var resEl = document.getElementById('results');
+  var metaEl = document.getElementById('meta');
+  var emptyEl = document.getElementById('empty');
+
+  function run(){
+    var q = qEl.value.trim();
+    resEl.innerHTML = '';
+    emptyEl.hidden = true;
+    if (!q) {
+      metaEl.textContent = '';
+      return;
+    }
+    var r = search(q);
+    var toks = q.toLowerCase().split(/\s+/).filter(Boolean);
+    if (!r.hits.length) {
+      metaEl.textContent = '0 results';
+      emptyEl.hidden = false;
+      emptyEl.innerHTML = '找不到「' + q.replace(/</g, '&lt;') + '」。試試更短的關鍵字、英文機構名，或切回 <code>ALL</code>。';
+      return;
+    }
+    metaEl.innerHTML = r.hits.length + ' result' + (r.hits.length > 1 ? 's' : '') +
+      (r.partial ? ' <span class="warn">· 無同時符合全部字詞的結果，顯示部分符合</span>' : '');
+    var frag = document.createDocumentFragment();
+    r.hits.forEach(function(h){
+      var d = h.d;
+      var li = document.createElement('li');
+      li.className = 'hit';
+      li.innerHTML =
+        '<div class="hit-top"><span class="hit-type">' + d.ty + '</span>' +
+        (d.d ? '<span class="hit-date">' + d.d + '</span>' : '') + '</div>' +
+        '<div class="hit-title"><a href="' + d.u + '">' + highlight(d.t, toks) + '</a></div>' +
+        '<p class="hit-excerpt">' + excerpt(d, toks) + '</p>' +
+        (LOCAL ? '<p class="hit-path">' + d.u + '</p>' : '');
+      frag.appendChild(li);
+    });
+    resEl.appendChild(frag);
+  }
+
+  var timer = null;
+  qEl.addEventListener('input', function(){
+    clearTimeout(timer); timer = setTimeout(run, 120);
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === '/' && document.activeElement !== qEl) { e.preventDefault(); qEl.focus(); }
+    if (e.key === 'Escape' && document.activeElement === qEl) { qEl.value = ''; run(); }
+  });
+
+  // ?q= deep link
+  var m = location.search.match(/[?&]q=([^&]+)/);
+  if (m) { qEl.value = decodeURIComponent(m[1].replace(/\+/g, ' ')); }
+  run();
+})();
+</script>
+</body>
+</html>
