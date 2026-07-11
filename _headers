@@ -1,0 +1,19 @@
+# Security + cache headers (added 2026-07-11).
+# X-Frame-Options is SAMEORIGIN (not DENY) on purpose: the §10.8 mobile-review
+# harness (_mobile-preview.html) iframes site pages same-origin.
+# No CSP: every page uses inline <style>/<script>; a CSP strict enough to matter
+# would break them. Revisit only with a full inline-hash audit.
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+/hero.jpg
+  Cache-Control: public, max-age=604800
+
+/papers/*
+  Cache-Control: public, max-age=604800
+
+/search-index.js
+  Cache-Control: public, max-age=3600
