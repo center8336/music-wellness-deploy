@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>MusicHelps · Org Study · MH&amp;W</title>
+  <meta name="description" content="MusicHelps is the second of the only two full-scale, independent, music-specific charities found in Asia-Pacific: a national 24/7 wellbeing service, a benevolent fund, and a regranting programme run on roughly NZ$300-400k a year with one full-time staff member. Registered 2012 as the New Zealand Music Foundation.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      /* ── DIA-GRADE READING SCALE (calibrated to Dia browser, serif-corrected) ── */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;--lh-prose:1.7;--wt-prose:440;--measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;--label-ink:var(--graphite);
+      --font-cjk:'Noto Serif TC',serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { overflow-x: hidden; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--black);
+      font-size: clamp(1.125rem, 1rem + 0.62vw, 1.3125rem);
+      line-height: var(--lh-prose);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: 520; }
+    .cjk, .cjk-inline { line-break: strict; word-break: keep-all; }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    a { color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    a:hover { color: var(--signal-dim); }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--signal); outline-offset: 3px; border-radius: var(--radius);
+    }
+
+    .skip-nav {
+      position: absolute; left: -9999px; top: 0; z-index: 200;
+      background: var(--signal); color: var(--white);
+      padding: 0.5rem 1rem; font-family: var(--font-mono);
+    }
+    .skip-nav:focus { left: 0; }
+
+    /* ===== NAVIGATION ===== */
+    nav.nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; flex-direction: column;
+      padding: 2rem 2.5rem;
+      padding-top: calc(2rem + env(safe-area-inset-top));
+      background: transparent;
+      transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    nav.nav.scrolled {
+      background: rgba(244, 244, 245, 0.45);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: var(--font-mono); font-size: 1.1rem; font-weight: 400;
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-topbar { display:none; }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; min-width:44px; min-height:44px; z-index:101; -webkit-tap-highlight-color:transparent; }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity:0; }
+    .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
+
+    /* ===== LAYOUT ===== */
+    main { max-width: var(--max-w); margin: 0 auto; padding: 0 2.5rem 5rem 2.5rem; }
+    section { margin-bottom: 4rem; }
+    .narrow { max-width: var(--max-w-text); }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding-top: calc(9rem + env(safe-area-inset-top));
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-light);
+      margin-bottom: 3rem;
+    }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.18em;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: var(--font-display); font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6.5rem);
+      font-weight: 800; line-height: 1.04; color: var(--black); letter-spacing: -0.01em;
+      overflow-wrap: break-word; hyphens: auto;
+    }
+    .hero h1 .tail { display:block; font-size: clamp(1.15rem, 2.6vw, 1.9rem); font-weight: 600; color: var(--signal); letter-spacing: 0; margin-top: 0.9rem; }
+    .hero .subtitle {
+      font-family: var(--font-body); font-size: clamp(1.25rem, 1.05rem + 1.4vw, 1.5rem);
+      color: var(--graphite); line-height: 1.55; margin-top: 1.5rem; max-width: 54ch;
+    }
+    .basis-badge {
+      display: inline-block; margin-top: 1.75rem;
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--graphite); background: var(--signal-bg);
+      border: 1px solid var(--signal-glow); border-radius: var(--radius);
+      padding: 0.5rem 0.85rem; line-height: 1.5;
+    }
+
+    /* ===== TWO-LINE COVER (R2.1, 2026-06-20) — width:100% inside main (no 100vw breakout → no x-overflow) ===== */
+    .cover {
+      position: relative;
+      width: 100%;
+      min-height: 100vh; min-height: 100svh;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;                /* clips the wash */
+      padding: 0 2rem;
+    }
+    .cover-wash {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: min(115vw, 1100px);
+      height: min(115vw, 1100px);
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle at 50% 45%,
+        var(--signal-glow) 0%,
+        rgba(102,103,171,0.06) 38%,
+        rgba(102,103,171,0) 68%);
+      pointer-events: none;
+      z-index: 0;
+      animation: coverWashDrift 18s ease-in-out infinite alternate;
+    }
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 1280px);
+    }
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin: 0;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+    .cover-line {
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 2.1vw, 1.35rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--signal-dim);
+      margin: 1.75rem 0 0;
+      padding-left: 0.25em;
+    }
+    .cover-sub {
+      font-family: var(--font-body);
+      font-size: clamp(1.05rem, 0.95rem + 0.6vw, 1.3rem);
+      font-weight: 500;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--graphite);
+      margin: 1rem 0 0;
+    }
+    .cover-hint {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      z-index: 1;
+      animation: coverPulse 2s ease-in-out infinite;
+    }
+    .cover-inner > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: coverRise 0.7s var(--ease) forwards;
+    }
+    .cover-inner > .cover-title { animation-delay: 0.08s; }
+    .cover-inner > .cover-line  { animation-delay: 0.22s; }
+    .cover-inner > .cover-sub   { animation-delay: 0.32s; }
+    @keyframes coverRise   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes coverWashDrift {
+      0%   { transform: translate(-50%, -54%) scale(1); }
+      100% { transform: translate(-50%, -48%) scale(1.06); }
+    }
+    @keyframes coverPulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .cover-wash,
+      .cover-hint,
+      .cover-inner > * { animation: none; opacity: 1; transform: none; }
+    }
+    @media (max-width: 768px) {
+      .cover { padding: 0 1.25rem; }
+      .cover-title { font-size: clamp(1.7rem, 7.3vw, 2.4rem); }
+      .cover-line  { font-size: clamp(0.72rem, 3.2vw, 0.95rem); letter-spacing: 0.18em; }
+    }
+
+    /* ===== TYPE ===== */
+    h2 {
+      font-family: var(--font-display); font-size: var(--text-h2);
+      font-weight: 700; line-height: 1.1; color: var(--black);
+      margin-bottom: 1.25rem; letter-spacing: -0.01em;
+      text-wrap: balance; overflow-wrap: break-word;
+    }
+    h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem); line-height: 1.25; font-weight: 600; color: var(--charcoal); margin: 1.75rem 0 0.75rem; }
+    .section-label {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem;
+    }
+    p { color: var(--graphite); max-width: var(--measure-prose); margin-bottom: 1rem; line-height: 1.65; }
+    p.lead { font-size: 1.1rem; color: var(--charcoal); }
+    strong { color: var(--charcoal); font-weight: 600; }
+    em { color: var(--graphite); }
+
+    /* ===== MODEL CALLOUT ===== */
+    .model-callout { background: var(--bg-card-dark); color: var(--snow); border-radius: var(--radius-lg); padding: 2.25rem 2.5rem; margin-bottom: 3rem; }
+    .model-callout h2 { color: var(--white); margin-bottom: 1rem; }
+    .model-callout p { color: var(--silver); max-width: none; }
+    .model-callout strong { color: var(--white); }
+    .model-callout a { color: var(--spectrum-3); text-decoration: underline; text-underline-offset: 2px; }
+    .model-callout a:hover { color: var(--white); }
+
+    /* ===== GEAR CARDS (distinctive model) ===== */
+    .gear-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .gear {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-left: 3px solid var(--spectrum-2); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem;
+    }
+    .gear .gn { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); letter-spacing: 0.1em; }
+    .gear h3 { margin: 0.35rem 0 0.5rem; font-size: 1.08rem; }
+    .gear p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-card); margin: 1.5rem 0 0.75rem; }
+    .stat-item { padding: 1.75rem 1.25rem; border-right: 1px solid var(--border-light); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--signal); line-height: 1; font-variant-numeric: tabular-nums; }
+    .stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.6rem; line-height: 1.4; }
+
+    /* ===== TABLES ===== */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; margin: 1.25rem 0; border-radius: var(--radius-lg); border: 1px solid var(--border-light); }
+    .table-wrap:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+    table { width: 100%; border-collapse: collapse; background: var(--bg-card); font-size: var(--text-small); }
+    caption { text-align: left; font-family: var(--font-mono); font-size: var(--text-caption); color: var(--label-ink); padding: 0.75rem 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border-light); vertical-align: top; font-variant-numeric: tabular-nums; }
+    thead th { font-family: var(--font-mono); font-size: var(--text-micro); text-transform: uppercase; letter-spacing: 0.06em; color: var(--label-ink); background: var(--snow); }
+    tbody tr:last-child td { border-bottom: none; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .row-emph td { background: var(--signal-bg); font-weight: 600; color: var(--charcoal); }
+    .row-covid td { background: rgba(232, 168, 124, 0.12); }
+
+    /* ===== PROGRAM LIST ===== */
+    .prog { list-style: none; margin: 1.25rem 0 0; padding: 0; }
+    .prog li { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 0.85rem; }
+    .prog h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .prog p { font-size: var(--text-sm); margin-bottom: 0; }
+    .prog .ptag { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ===== SW CARDS ===== */
+    .sw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.25rem; }
+    .sw-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.4rem 1.5rem; }
+    .sw-card.weak { border-left: 3px solid var(--spectrum-2); }
+    .sw-card.strong { border-left: 3px solid var(--spectrum-4); }
+    .sw-card h3 { margin: 0 0 0.4rem; font-size: 1rem; }
+    .sw-card p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== LESSONS ===== */
+    .lessons { counter-reset: lesson; list-style: none; margin: 1.5rem 0 0; padding: 0; }
+    .lessons li { position: relative; padding: 1.25rem 1.5rem 1.25rem 3.5rem; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); margin-bottom: 0.85rem; }
+    .lessons li::before { counter-increment: lesson; content: counter(lesson); position: absolute; left: 1.25rem; top: 1.25rem; font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--signal); }
+    .lessons h3 { margin: 0 0 0.35rem; font-size: 1.02rem; }
+    .lessons p { font-size: var(--text-sm); margin-bottom: 0; }
+
+    /* ===== CITATIONS (§5 inline tier) ===== */
+    .cite { font-size: 0.7em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.2em; position: relative; text-transform: none; font-weight: 400; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+    .refs { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem; }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0.75rem 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-fine); color: var(--graphite); line-height: 1.6; margin-bottom: 0.6rem; max-width: var(--measure-ref); overflow-wrap: anywhere; }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs-note { font-size: var(--text-xs); color: var(--label-ink); margin-bottom: 0; max-width: none; }
+    .cite-help { font-size: var(--text-sm); color: var(--label-ink); font-style: italic; max-width: var(--max-w-text); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .gear-cards { grid-template-columns: 1fr; }
+      .sw-grid { grid-template-columns: 1fr; }
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2n) { border-right: none; }
+      .stat-item:nth-child(-n+2) { border-bottom: 1px solid var(--border-light); }
+    }
+    @media (max-width: 768px) {
+      nav.nav { padding: 1.2rem 1.5rem; padding-top: calc(1.2rem + env(safe-area-inset-top)); }
+      nav.nav.open { background: rgba(244,244,245,0.95); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-light); }
+      .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
+      .nav-toggle { display:block; }
+      .nav-mobile-brand { display:block; }
+      .nav-links { display:none; flex-direction:column; gap:0.75rem; margin-top:1rem; }
+      .nav-links.show { display:flex; }
+      .nav-links a { font-size: 0.85rem; }
+      main { padding: 0 1.5rem 3rem 1.5rem; }
+      .hero { padding-top: calc(7rem + env(safe-area-inset-top)); }
+      .hero h1 { font-size: clamp(2.4rem, 10.5vw, 3.4rem); }
+      .model-callout { padding-left: 1.5rem; padding-right: 1.5rem; }
+      /* Stat-strip / grids: one column below 768px (house rule for this page) */
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+      .stat-item:last-child { border-bottom: none; }
+      .gear-cards, .sw-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 680px) {
+      p, .hero .subtitle, .refs li, .cite-help { max-width: none; }
+    }
+    @media (max-width: 480px) {
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+      .stat-item:last-child { border-bottom: none; }
+      .nav-mobile-brand { font-size:0.58rem; }
+      .nav-mobile-brand .mobile-sub { font-size:0.45rem; letter-spacing:0.15em; }
+      table { font-size: 0.82rem; }
+      thead th { font-size: 0.6rem; }
+      th, td { padding: 0.5rem 0.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } nav.nav { transition: none; } }
+
+    /* ===== Scroll-reveal (R3.2 craft pass) ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ===== Related block (no dead-ends, R3.2) ===== */
+    .related-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-light); }
+    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--label-ink); margin-bottom: 0.6rem; }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a { font-family: var(--font-body); font-size: var(--text-sm); color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+  </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open');this.setAttribute('aria-expanded',o)">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+        <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="org-study.html" class="current" aria-current="page">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
+      <a href="research.html">RESEARCH</a>
+      <a href="insight.html">INSIGHT</a>
+      <a href="plan.html">PLAN</a>
+      <a href="field-news.html">FIELD NEWS</a>
+    <a href="search.html">SEARCH</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- COVER -->
+    <section class="cover">
+      <div class="cover-wash" aria-hidden="true"></div>
+      <div class="cover-inner">
+        <div class="eyebrow" style="text-align:center;">2026-07-17 · ORG STUDY</div>
+        <h1 class="cover-title">MUSICHELPS</h1>
+        <p class="cover-line">Org Study · Est. 2012</p>
+        <p class="cover-sub">The Minimum Viable National Charity — New Zealand</p>
+      </div>
+      <span class="cover-hint" aria-hidden="true">↓ Scroll</span>
+    </section>
+
+    <!-- MODEL CALLOUT -->
+    <div class="model-callout">
+      <h2>Why this case matters</h2>
+      <p>MusicHelps is the <strong>second of the only two full-scale, independent, music-specific charities this project's scans have found in Asia-Pacific</strong> — the other is <a href="org-study-support-act.html">Support Act</a>, studied 2026-07-06. Where Support Act shows the model at A$4.7M with state grants and ~16 staff, MusicHelps shows the <strong>minimum viable version: a national 24/7 wellbeing service, a benevolent fund, and a grants programme run on ~NZ$300–400k a year with one full-time person</strong>. For a Taiwan NPO that will start small, this is the more proximate blueprint — including its failure modes, which the register data makes unusually visible.<sup class="cite"><a href="#mh-src-1" data-src="identity" data-tip="Registration identity: NZ Charities Register CC47494, cross-checked via the Charities Services OData API.">1</a></sup><sup class="cite"><a href="#mh-src-6" data-src="financials" data-tip="Financial totals FY2023–FY2026, NZ Charities Register CC47494, cross-validated across the register HTML and the OData API.">6</a></sup></p>
+    </div>
+
+    <!-- 1. PROFILE -->
+    <section>
+      <div class="section-label">01 — Profile</div>
+      <h2>Organization Profile<sup class="cite"><a href="#mh-src-1" data-src="identity" data-tip="Registration identity: NZ Charities Register CC47494, cross-checked via the Charities Services OData API.">1</a></sup><sup class="cite"><a href="#mh-src-2" data-src="rebrand" data-tip="2018 rebrand to MusicHelps; founders Campbell Smith and Barbara Ward; patrons Neil Finn and Lorde. MusicHelps press release, NZ Musician, org About page.">2</a></sup></h2>
+
+      <div class="table-wrap" role="region" aria-label="Organization profile — MusicHelps (scrollable table)" tabindex="0">
+        <table>
+          <caption>Organization profile — MusicHelps (sources cited inline)</caption>
+          <tbody>
+            <tr><th scope="row">Name</th><td>MusicHelps (register name; trading name "The New Zealand Music Foundation")</td></tr>
+            <tr><th scope="row">Legal status</th><td>Charitable Trust, NZ Charities Register <strong>CC47494</strong>; NZBN 9429043147427</td></tr>
+            <tr><th scope="row">Registered</th><td>25 March 2012, as "New Zealand Music Foundation Trust 2011"</td></tr>
+            <tr><th scope="row">Rebrand</th><td>Announced 7 November 2018; register name change effective 2 April 2019</td></tr>
+            <tr><th scope="row">Founders</th><td>Campbell Smith ONZM and Barbara Ward (both retired as trustees 1 April 2021)</td></tr>
+            <tr><th scope="row">Patrons</th><td>Neil Finn (founding), Lorde (since the 2018 rebrand)</td></tr>
+            <tr><th scope="row">Chair</th><td>Anthony Healey (Director of NZ Operations, APRA AMCOS)</td></tr>
+            <tr><th scope="row">Staff</th><td>1 full-time position (contractor in FY2024–25 at NZ$86,280/yr, per the org's own register note); +1 part-time from FY2026</td></tr>
+            <tr><th scope="row">Base</th><td>Eden Terrace, Auckland</td></tr>
+            <tr><th scope="row">Reporting tier</th><td>Tier 3 (small charity); FY ends 31 March; audit status not stated in any filing (❓)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>The rename that states the theory of change<sup class="cite"><a href="#mh-src-2" data-src="rebrand" data-tip="2018 rebrand to MusicHelps; founders Campbell Smith and Barbara Ward; patrons Neil Finn and Lorde. MusicHelps press release, NZ Musician, org About page.">2</a></sup></h3>
+      <p>The 2018 rebrand from "NZ Music Foundation" to "MusicHelps" was framed by the org as making it "more direct, more impactful" — and the new name reads two ways at once: <em>help for music people</em> and <em>music as help for everyone</em>. That ambiguity is not cosmetic; it runs through the whole organization (see §5) and is the single most instructive tension in this case.</p>
+    </section>
+
+    <!-- 2. THE MODEL -->
+    <section>
+      <div class="section-label">02 — The model</div>
+      <h2>One Desk, Three Levers<sup class="cite"><a href="#mh-src-3" data-src="wellbeing" data-tip="Wellbeing Service (0508 MUSICHELPS) and MusicHelps Legacy; clinical delivery by Southern Cross Wellness Partners. MusicHelps org pages, NZ Musician (2016).">3</a></sup><sup class="cite"><a href="#mh-src-4" data-src="benevolent" data-tip="Benevolent Fund: 10+ years industry service, committee-approved, 3–6 week turnaround; ~NZ$40,000 across 8 workers (org-stated). MusicHelps org pages.">4</a></sup><sup class="cite"><a href="#mh-src-5" data-src="grants" data-tip="Grants programme: two rounds/yr; March 2026 round names 19 recipients; 'over 90,000 people' and NZ$1M cumulative milestone (org-stated). MusicHelps Grants page, NZ Music Commission.">5</a></sup></h2>
+      <p>MusicHelps delivers a national footprint with almost no organization behind it, by pulling three levers a small charity can actually hold:</p>
+      <div class="gear-cards">
+        <div class="gear">
+          <div class="gn">LEVER 01</div>
+          <h3>An outsourced 24/7 clinical layer</h3>
+          <p>The MusicHelps Wellbeing Service (0508 MUSICHELPS) offers free, confidential, round-the-clock support to NZ music people in crisis. The clinical delivery is not in-house: the org's own privacy policy states the majority of the service is managed by <strong>Southern Cross Wellness Partners</strong>, a commercial workplace-health provider. NZ Musician reported the 2016 launch as a "world-first" wellbeing service for musicians (⚠️ outlet's framing). The charity buys a national counselling capability it could never staff — the same rent-the-EAP pattern as Unison Fund (TELUS Health). (Support Act's helpline delivery contract is not public; its own study leaves that ❓.)<sup class="cite"><a href="#mh-src-3" data-src="wellbeing" data-tip="Wellbeing Service (0508 MUSICHELPS) and MusicHelps Legacy; clinical delivery by Southern Cross Wellness Partners. MusicHelps org pages, NZ Musician (2016).">3</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">LEVER 02</div>
+          <h3>A gated benevolent fund</h3>
+          <p>Crisis financial assistance for music workers with <strong>10+ years of industry service</strong>, committee-approved, 3–6 week turnaround. Org-claimed past-year scale: close to NZ$40,000 across 8 workers (⚠️ as-reported). The 10-year gate is strict — it rations a small pool toward career members, at the cost of excluding emerging workers.<sup class="cite"><a href="#mh-src-4" data-src="benevolent" data-tip="Benevolent Fund: 10+ years industry service, committee-approved, 3–6 week turnaround; ~NZ$40,000 across 8 workers (org-stated). MusicHelps org pages.">4</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">LEVER 03</div>
+          <h3>Regranting</h3>
+          <p>Two grant rounds a year (March and September) fund <em>other</em> charities that use music to improve wellbeing — the March 2026 round lists 19 named recipients, from the Auckland Philharmonia Trust and Chamber Music New Zealand to hospice, brain-injury, and children's-health trusts. Org-claimed cumulative reach: "over 90,000 people"; April 2026 milestone: <strong>NZ$1M in cumulative funding since 2012</strong>.<sup class="cite"><a href="#mh-src-5" data-src="grants" data-tip="Grants programme: two rounds/yr; March 2026 round names 19 recipients; 'over 90,000 people' and NZ$1M cumulative milestone (org-stated). MusicHelps Grants page, NZ Music Commission.">5</a></sup></p>
+        </div>
+        <div class="gear">
+          <div class="gn">QUIETER LEVER</div>
+          <h3>MusicHelps Legacy</h3>
+          <p>A fourth, quieter lever — free wills through partner Footprint — builds a bequest pipeline at near-zero cost.<sup class="cite"><a href="#mh-src-3" data-src="wellbeing" data-tip="Wellbeing Service (0508 MUSICHELPS) and MusicHelps Legacy; clinical delivery by Southern Cross Wellness Partners. MusicHelps org pages, NZ Musician (2016).">3</a></sup></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. FINANCIAL PROFILE -->
+    <section>
+      <div class="section-label">03 — Financial profile</div>
+      <h2>Four Register Years<sup class="cite"><a href="#mh-src-6" data-src="financials" data-tip="Financial totals FY2023–FY2026, NZ Charities Register CC47494, cross-validated across the register HTML and the OData API.">6</a></sup><sup class="cite"><a href="#mh-src-7" data-src="income" data-tip="Income sub-lines (donations, grants received, commercial activities), Charities Services OData API AnnualReturn fields.">7</a></sup><sup class="cite"><a href="#mh-src-8" data-src="expenditure" data-tip="Expenditure sub-lines and org-authored narrative notes, Charities Services OData API.">8</a></sup><sup class="cite"><a href="#mh-src-9" data-src="balance" data-tip="Balance sheet (assets, liabilities, cash); FY2024 TotalEquity filed as $10, reconciled figure used. Charities Services OData API.">9</a></sup></h2>
+      <p>The register filing <em>is</em> the primary financial document: the "Charity Documents" tab reads "No supporting documents," no annual-report PDF exists on the org's site, and the audit field is blank in every year (❓). Totals below were confirmed identical across the register HTML and the OData API (two independent endpoints).<sup class="cite"><a href="#mh-src-6" data-src="financials" data-tip="Financial totals FY2023–FY2026, NZ Charities Register CC47494, cross-validated across the register HTML and the OData API.">6</a></sup></p>
+
+      <div class="table-wrap" role="region" aria-label="MusicHelps financial profile FY2023–FY2026, NZD (scrollable table)" tabindex="0">
+        <table>
+          <caption>Financial profile — four register years, NZD (✅ register-sourced; ❓ audit status unstated; sources cited inline)</caption>
+          <thead><tr><th scope="col">NZD</th><th class="num" scope="col">FY2023</th><th class="num" scope="col">FY2024</th><th class="num" scope="col">FY2025</th><th class="num" scope="col">FY2026</th></tr></thead>
+          <tbody>
+            <tr><td>Total income</td><td class="num">397,039</td><td class="num">311,777</td><td class="num">342,749</td><td class="num">399,872</td></tr>
+            <tr><td>— Donations/koha</td><td class="num">385,712</td><td class="num">176,833</td><td class="num">188,852</td><td class="num">260,329</td></tr>
+            <tr><td>— Grants received</td><td class="num">not itemised (❓)</td><td class="num">129,500</td><td class="num">148,400</td><td class="num">95,000</td></tr>
+            <tr><td>— Commercial activities</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">41,675</td></tr>
+            <tr><td>Total expenditure</td><td class="num">309,743</td><td class="num">345,713</td><td class="num">343,083</td><td class="num">287,310</td></tr>
+            <tr><td>— Grants/donations paid out</td><td class="num">133,083</td><td class="num">139,048</td><td class="num">164,620</td><td class="num">159,020</td></tr>
+            <tr><td>— Employee remuneration</td><td class="num">58,423</td><td class="num">0 (see note)</td><td class="num">0 (see note)</td><td class="num">36,923</td></tr>
+            <tr><td>— Fundraising expenses</td><td class="num">2,719</td><td class="num">6,797</td><td class="num">10,213</td><td class="num">7,774</td></tr>
+            <tr><td>— All other expenditure</td><td class="num">115,518</td><td class="num">199,868</td><td class="num">168,250</td><td class="num">83,593</td></tr>
+            <tr class="row-emph"><td>Surplus/(deficit)</td><td class="num">+87,296</td><td class="num">(33,936)</td><td class="num">(334)</td><td class="num">+112,562</td></tr>
+            <tr><td>Net assets</td><td class="num">446,703</td><td class="num">412,767*</td><td class="num">412,433</td><td class="num">524,995</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size: var(--text-sm);">*FY2024 <code style="font-family:var(--font-mono);">TotalEquity</code> is filed as $10 — a register mapping quirk; the table shows assets − liabilities (⚠️ reconciled). The $0 employee-remuneration years reflect the paid role being engaged as a contractor (NZ$86,280/yr per the org's own filing note), folded into "all other expenditure."<sup class="cite"><a href="#mh-src-8" data-src="expenditure" data-tip="Expenditure sub-lines and org-authored narrative notes, Charities Services OData API.">8</a></sup><sup class="cite"><a href="#mh-src-9" data-src="balance" data-tip="Balance sheet (assets, liabilities, cash); FY2024 TotalEquity filed as $10, reconciled figure used. Charities Services OData API.">9</a></sup></p>
+
+      <p style="margin-top:1.5rem;">Three structural reads:</p>
+      <ul style="margin: 0 0 1rem 1.25rem; color: var(--graphite);">
+        <li style="margin-bottom:0.6rem;"><strong>This is a regranting charity with a service attached, not the reverse.</strong> The org's own filing notes put programme spend at: grants NZ$137,258 + wellbeing service NZ$45,000 (counselling) + NZ$27,362 (emergency services) in FY2025; grants NZ$134,008 + wellbeing NZ$25,012 in FY2026. Grant-making outweighs the flagship helpline — ≈1.9:1 in FY2025 (counting counselling plus emergency services) and ≈5:1 in FY2026 — and the wellbeing line <em>fell by half</em> in FY2026.<sup class="cite"><a href="#mh-src-8" data-src="expenditure" data-tip="Expenditure sub-lines and org-authored narrative notes, Charities Services OData API.">8</a></sup></li>
+        <li style="margin-bottom:0.6rem;"><strong>Income is one bad year from crisis.</strong> Donations halved from FY2023 (NZ$385,712) to FY2024 (NZ$176,833) and have not recovered to trend; FY2024 ran a deficit and FY2025 broke even to the dollar (−$334). Industry reporting has the org saying it "doesn't qualify for a lot of funding" and must "hustle" (⚠️ as-reported). The FY2026 surplus (+$112,562) restores the cushion — cash NZ$531,441, ≈1.85× annual expenditure — but the swing illustrates how thin the base is.<sup class="cite"><a href="#mh-src-6" data-src="financials" data-tip="Financial totals FY2023–FY2026, NZ Charities Register CC47494, cross-validated across the register HTML and the OData API.">6</a></sup><sup class="cite"><a href="#mh-src-7" data-src="income" data-tip="Income sub-lines (donations, grants received, commercial activities), Charities Services OData API AnnualReturn fields.">7</a></sup></li>
+        <li><strong>The donor-facing "100%" claim does not map onto the filings.</strong> The About page states: "All administration costs are covered by the music industry itself. 100% of what you contribute will be applied directly to the music charities we support." The register shows fundraising expenses and NZ$83k–200k/yr of "all other expenditure" paid from general income, with no ring-fenced industry-funded admin pool visible in the Tier-3 filing. The claim may reflect an internal earmarking convention, but nothing in the public accounts substantiates it — a transparency gap for an org whose finances are otherwise exemplary.<sup class="cite"><a href="#mh-src-12" data-src="hundred-percent" data-tip="The '100%' administration claim on the About page, set against the filed fundraising/other-expenditure lines — unsubstantiated by the public accounts.">12</a></sup></li>
+      </ul>
+    </section>
+
+    <!-- 4. COVID -->
+    <section>
+      <div class="section-label">04 — COVID</div>
+      <h2>Small-Org Speed<sup class="cite"><a href="#mh-src-13" data-src="covid" data-tip="COVID response: MusicHelpsLive (30 March 2020, NZ$2M target); NZ$500 (2020) and NZ$1,000 (2021 Delta) emergency grants. Under the Radar, Recorded Music NZ, NZ Music Commission, APRA AMCOS.">13</a></sup></h2>
+      <p>MusicHelps' pandemic response shows the upside of having no bureaucracy. <strong>MusicHelpsLive</strong> launched 30 March 2020 — days into NZ's first lockdown — with a NZ$2M target for music workers whose livelihoods had collapsed (final tally not found in public sources, ❓). Emergency assistance grants went out at NZ$500 (2020), raised to NZ$1,000 during the 2021 Delta outbreak. The register shows the spike: FY2021 income NZ$1,039,793 — roughly triple a normal year — tapering through FY2022 (NZ$778,590) back to the NZ$300–400k band: the same <strong>windfall-and-cliff shape</strong> documented at Support Act, in miniature.<sup class="cite"><a href="#mh-src-6" data-src="financials" data-tip="Financial totals FY2023–FY2026, NZ Charities Register CC47494, cross-validated across the register HTML and the OData API.">6</a></sup><sup class="cite"><a href="#mh-src-13" data-src="covid" data-tip="COVID response: MusicHelpsLive (30 March 2020, NZ$2M target); NZ$500 (2020) and NZ$1,000 (2021 Delta) emergency grants. Under the Radar, Recorded Music NZ, NZ Music Commission, APRA AMCOS.">13</a></sup></p>
+      <div class="stat-strip">
+        <div class="stat-item"><div class="stat-num">NZ$2M</div><div class="stat-label">MusicHelpsLive target, launched 30 March 2020</div></div>
+        <div class="stat-item"><div class="stat-num">$500</div><div class="stat-label">emergency assistance grant, 2020</div></div>
+        <div class="stat-item"><div class="stat-num">$1,000</div><div class="stat-label">emergency grant, raised for the 2021 Delta outbreak</div></div>
+        <div class="stat-item"><div class="stat-num">$1,039,793</div><div class="stat-label">FY2021 total income — the COVID-era peak</div></div>
+      </div>
+    </section>
+
+    <!-- 5. DUAL MISSION -->
+    <section>
+      <div class="section-label">05 — Dual mission</div>
+      <h2>The Dual Mission Problem<sup class="cite"><a href="#mh-src-5" data-src="grants" data-tip="Grants programme: two rounds/yr; March 2026 round names 19 recipients; 'over 90,000 people' and NZ$1M cumulative milestone (org-stated). MusicHelps Grants page, NZ Music Commission.">5</a></sup></h2>
+      <p>The grants list is the tell: of the 19 March 2026 recipients, most are <strong>not music-industry organizations</strong> — they are hospices, schools, disability trusts, and health charities running music-based programmes. MusicHelps operates two different theories of change under one brand:</p>
+      <ul style="margin: 0 0 1rem 1.25rem; color: var(--graphite);">
+        <li style="margin-bottom:0.6rem;"><strong>"Help music people"</strong> — the Wellbeing Service and Benevolent Fund, serving industry workers (the Support Act/MusiCares theory).</li>
+        <li><strong>"Music helps people"</strong> — the grants programme, funding music <em>as an intervention</em> for general wellbeing (a music-therapy funder's theory).</li>
+      </ul>
+      <p>By spend, the second theory dominates (§3). Both are legitimate; but the headline impact number ("over 90,000 people") belongs almost entirely to the second, while the brand story and patron wattage suggest the first. A donor giving after a musician's suicide story funds, mostly, community music therapy. This is not misconduct — it is mission drift made visible by good disclosure, and the single most important design warning this case offers.<sup class="cite"><a href="#mh-src-5" data-src="grants" data-tip="Grants programme: two rounds/yr; March 2026 round names 19 recipients; 'over 90,000 people' and NZ$1M cumulative milestone (org-stated). MusicHelps Grants page, NZ Music Commission.">5</a></sup><sup class="cite"><a href="#mh-src-8" data-src="expenditure" data-tip="Expenditure sub-lines and org-authored narrative notes, Charities Services OData API.">8</a></sup></p>
+    </section>
+
+    <!-- 6. GOVERNANCE -->
+    <section>
+      <div class="section-label">06 — Governance</div>
+      <h2>Governance<sup class="cite"><a href="#mh-src-11" data-src="governance" data-tip="Governance: nine current trustees per the register; six shown on the org's About page; certifying officer inferred as an outsourced accountant. MusicHelps About page, NZ Charities Register Officer Details.">11</a></sup></h2>
+      <p>Nine current trustees per the register — six shown on the org's About page: Anthony Healey (Chair; APRA AMCOS NZ), Cath Anderson (CEO, NZ Music Commission), Jo Oliver (CEO, Recorded Music NZ), Myra Hemara (Universal Music), plus artists Don McGlashan and Joel Little. Three trustees added 23 June 2026 (Davis, Ellis, Lock) do not yet appear on the site — a staleness gap. The board <em>is</em> the NZ music industry's plumbing: the royalty society, the government music office, the labels body, and a major label sit on it by office-holder. There is no CEO named anywhere (❓); filings are certified by an outsourced entertainment-industry accountant (⚠️ inferred from matching contact details). Founding chair Campbell Smith retired in 2021; the founders' generation has fully handed over.<sup class="cite"><a href="#mh-src-11" data-src="governance" data-tip="Governance: nine current trustees per the register; six shown on the org's About page; certifying officer inferred as an outsourced accountant. MusicHelps About page, NZ Charities Register Officer Details.">11</a></sup></p>
+    </section>
+
+    <!-- 7. STRENGTHS -->
+    <section>
+      <div class="section-label">07 — Strengths</div>
+      <h2>What works</h2>
+      <div class="sw-grid">
+        <div class="sw-card strong"><h3>The minimum viable national charity, demonstrated</h3><p>One FTE + an outsourced clinical provider + a regranting programme = 24/7 national coverage, a crisis fund, and a field-funder role, on ~NZ$350k/yr. No other org in this series does so much with so little.<sup class="cite"><a href="#mh-src-6" data-src="financials" data-tip="Financial totals FY2023–FY2026, NZ Charities Register CC47494, cross-validated across the register HTML and the OData API.">6</a></sup><sup class="cite"><a href="#mh-src-8" data-src="expenditure" data-tip="Expenditure sub-lines and org-authored narrative notes, Charities Services OData API.">8</a></sup></p></div>
+        <div class="sw-card strong"><h3>Transparency by regulation, exploited well</h3><p>Fourteen years of line-item filings, machine-readable, cross-checkable via two public endpoints. The org files promptly (FY2026 filed 8 July 2026, 99 days after year-end) and its narrative notes voluntarily disclose programme-level spend.<sup class="cite"><a href="#mh-src-6" data-src="financials" data-tip="Financial totals FY2023–FY2026, NZ Charities Register CC47494, cross-validated across the register HTML and the OData API.">6</a></sup><sup class="cite"><a href="#mh-src-8" data-src="expenditure" data-tip="Expenditure sub-lines and org-authored narrative notes, Charities Services OData API.">8</a></sup></p></div>
+        <div class="sw-card strong"><h3>Industry-embedded board as a fundraising machine</h3><p>NZ Music T-Shirt Day (May, inside NZ Music Month, 100% net proceeds) runs on infrastructure the trustees control in their day jobs — APRA AMCOS, Recorded Music NZ, and the Music Commission all promote it. Patrons Neil Finn and Lorde price the brand far above its budget class.<sup class="cite"><a href="#mh-src-11" data-src="governance" data-tip="Governance: nine current trustees per the register; six shown on the org's About page; certifying officer inferred as an outsourced accountant. MusicHelps About page, NZ Charities Register Officer Details.">11</a></sup><sup class="cite"><a href="#mh-src-14" data-src="funding" data-tip="Funding mechanisms: founding supporters and sponsors; NZ Music T-Shirt Day (100% net proceeds). MusicHelps Supporters/Donate pages, NZ Music T-Shirt Day, NZ Music Commission.">14</a></sup></p></div>
+        <div class="sw-card strong"><h3>Reserves discipline</h3><p>Cash ≈ 1.1–1.85× annual expenditure across the period — a small org that has never bet the trust.<sup class="cite"><a href="#mh-src-9" data-src="balance" data-tip="Balance sheet (assets, liabilities, cash); FY2024 TotalEquity filed as $10, reconciled figure used. Charities Services OData API.">9</a></sup></p></div>
+        <div class="sw-card strong"><h3>Crisis speed</h3><p>MusicHelpsLive shipped within days of lockdown; grant sizes flexed with variant waves.<sup class="cite"><a href="#mh-src-13" data-src="covid" data-tip="COVID response: MusicHelpsLive (30 March 2020, NZ$2M target); NZ$500 (2020) and NZ$1,000 (2021 Delta) emergency grants. Under the Radar, Recorded Music NZ, NZ Music Commission, APRA AMCOS.">13</a></sup></p></div>
+      </div>
+    </section>
+
+    <!-- 8. WEAKNESSES -->
+    <section>
+      <div class="section-label">08 — Weaknesses &amp; risks</div>
+      <h2>What to watch</h2>
+      <div class="sw-grid">
+        <div class="sw-card weak"><h3>Key-person concentration</h3><p>One paid role, engaged as a contractor for two of the four years examined. Illness, departure, or a contract dispute stops the organization.<sup class="cite"><a href="#mh-src-8" data-src="expenditure" data-tip="Expenditure sub-lines and org-authored narrative notes, Charities Services OData API.">8</a></sup><sup class="cite"><a href="#mh-src-10" data-src="staffing" data-tip="Staffing and volunteer fields, Charities Services OData API (1 FT employee all years; 1 PT added FY2026).">10</a></sup></p></div>
+        <div class="sw-card weak"><h3>Revenue fragility</h3><p>Donations halved in one year; grants received swing NZ$95k–148k; the whole income statement is smaller than Support Act's <em>helpline budget</em>.<sup class="cite"><a href="#mh-src-6" data-src="financials" data-tip="Financial totals FY2023–FY2026, NZ Charities Register CC47494, cross-validated across the register HTML and the OData API.">6</a></sup><sup class="cite"><a href="#mh-src-7" data-src="income" data-tip="Income sub-lines (donations, grants received, commercial activities), Charities Services OData API AnnualReturn fields.">7</a></sup></p></div>
+        <div class="sw-card weak"><h3>The "100%" claim</h3><p>Unsubstantiated by the public accounts (§3). For a charity whose registry hygiene is otherwise excellent, this is an avoidable credibility exposure.<sup class="cite"><a href="#mh-src-12" data-src="hundred-percent" data-tip="The '100%' administration claim on the About page, set against the filed fundraising/other-expenditure lines — unsubstantiated by the public accounts.">12</a></sup></p></div>
+        <div class="sw-card weak"><h3>Mission dilution by regranting</h3><p>The flagship musician-facing wellbeing spend (NZ$45,000 → NZ$25,012) is small and shrinking while grants to general-population music programmes hold at ~NZ$135–165k (§5).<sup class="cite"><a href="#mh-src-8" data-src="expenditure" data-tip="Expenditure sub-lines and org-authored narrative notes, Charities Services OData API.">8</a></sup></p></div>
+        <div class="sw-card weak"><h3>No audit, no annual report</h3><p>Tier-3 filing is legal and adequate, but the audit field is blank and no narrative annual report exists — at exactly the moment the org claims a NZ$1M cumulative milestone, there is no independent assurance behind any impact number.<sup class="cite"><a href="#mh-src-6" data-src="financials" data-tip="Financial totals FY2023–FY2026, NZ Charities Register CC47494, cross-validated across the register HTML and the OData API.">6</a></sup><sup class="cite"><a href="#mh-src-5" data-src="grants" data-tip="Grants programme: two rounds/yr; March 2026 round names 19 recipients; 'over 90,000 people' and NZ$1M cumulative milestone (org-stated). MusicHelps Grants page, NZ Music Commission.">5</a></sup></p></div>
+        <div class="sw-card weak"><h3>Governance-page staleness</h3><p>Minor, but visible within weeks to any donor who checks the register.<sup class="cite"><a href="#mh-src-11" data-src="governance" data-tip="Governance: nine current trustees per the register; six shown on the org's About page; certifying officer inferred as an outsourced accountant. MusicHelps About page, NZ Charities Register Officer Details.">11</a></sup></p></div>
+      </div>
+    </section>
+
+    <!-- 9. LESSONS -->
+    <section>
+      <div class="section-label">09 — Lessons for Taiwan</div>
+      <h2>Lessons for a Taiwan-Based Music Mental Health NPO</h2>
+      <ol class="lessons">
+        <li><h3>Budget realism: the entry ticket is ~NT$6–8M/yr, not NT$80M</h3><p>(NZ$300–400k at ≈19 TWD/NZD — computed, not quoted.) MusicHelps runs a country of 5.2M people on NZ$300–400k. Taiwan's music workforce is larger but the same architecture — one coordinator, an outsourced counselling contract, a small committee-gated fund — is a credible year-one shape. Support Act is the ten-year aspiration; MusicHelps is the day-one blueprint.<sup class="cite"><a href="#mh-src-6" data-src="financials" data-tip="Financial totals FY2023–FY2026, NZ Charities Register CC47494, cross-validated across the register HTML and the OData API.">6</a></sup><sup class="cite"><a href="#mh-src-8" data-src="expenditure" data-tip="Expenditure sub-lines and org-authored narrative notes, Charities Services OData API.">8</a></sup></p></li>
+        <li><h3>Rent the clinical layer; own the trust layer</h3><p>Southern Cross delivers the counselling; MusicHelps owns the brand, the 0508 number, and the industry relationships. A Taiwan NPO should contract an EAP/counselling network (<span class="cjk-inline">張老師基金會</span>-adjacent providers, or a commercial EAP) rather than hire clinicians — and keep the intake identity music-native.<sup class="cite"><a href="#mh-src-3" data-src="wellbeing" data-tip="Wellbeing Service (0508 MUSICHELPS) and MusicHelps Legacy; clinical delivery by Southern Cross Wellness Partners. MusicHelps org pages, NZ Musician (2016).">3</a></sup></p></li>
+        <li><h3>Pick one theory of change and name the org for it</h3><p>MusicHelps' dual mission (§5) shows how "help musicians" quietly becomes "music helps everyone" — regranting is easier than service delivery, and general-wellbeing recipients are more numerous than musicians. A Taiwan founder must decide <em>before</em> branding: <span class="cjk-inline">幫助音樂人</span>, or <span class="cjk-inline">用音樂幫助人</span>. This project's thesis (the service <em>room</em> for music workers) is the first; drift toward the second should be a governance-level alarm, not an accident.<sup class="cite"><a href="#mh-src-5" data-src="grants" data-tip="Grants programme: two rounds/yr; March 2026 round names 19 recipients; 'over 90,000 people' and NZ$1M cumulative milestone (org-stated). MusicHelps Grants page, NZ Music Commission.">5</a></sup></p></li>
+        <li><h3>Put the industry's plumbing on the board, keep stars as patrons</h3><p>MÜST/ACMA-analog officeholders, a Ministry of Culture music-office representative, and a label-association seat replicate the Healey/Anderson/Oliver structure; celebrity belongs in the patron slot (Neil Finn/Lorde), where turnover doesn't destabilize governance.<sup class="cite"><a href="#mh-src-11" data-src="governance" data-tip="Governance: nine current trustees per the register; six shown on the org's About page; certifying officer inferred as an outsourced accountant. MusicHelps About page, NZ Charities Register Officer Details.">11</a></sup></p></li>
+        <li><h3>One branded annual moment beats year-round asking</h3><p>T-Shirt Day inside NZ Music Month concentrates the entire year's public fundraising into one industry-amplified week. The Taiwan analog is obvious: a branded day inside <span class="cjk-inline">金曲獎</span> week or <span class="cjk-inline">貴人散步</span>/LUCfest, with labels and streaming platforms as amplifiers.<sup class="cite"><a href="#mh-src-14" data-src="funding" data-tip="Funding mechanisms: founding supporters and sponsors; NZ Music T-Shirt Day (100% net proceeds). MusicHelps Supporters/Donate pages, NZ Music T-Shirt Day, NZ Music Commission.">14</a></sup></p></li>
+        <li><h3>File like it's marketing</h3><p>MusicHelps' register discipline — prompt, granular, narrative notes included — is what made this study possible and is itself a trust asset. A Taiwan NPO should publish <span class="cjk-inline">衛福部</span>/<span class="cjk-inline">內政部</span> filings and a simple annual accounting voluntarily from year one — and never print a "100% to the cause" claim its own filings can't support.<sup class="cite"><a href="#mh-src-6" data-src="financials" data-tip="Financial totals FY2023–FY2026, NZ Charities Register CC47494, cross-validated across the register HTML and the OData API.">6</a></sup><sup class="cite"><a href="#mh-src-12" data-src="hundred-percent" data-tip="The '100%' administration claim on the About page, set against the filed fundraising/other-expenditure lines — unsubstantiated by the public accounts.">12</a></sup></p></li>
+        <li><h3>The floor-vs-room thesis holds at the last APAC data point</h3><p>New Zealand has universal public healthcare, yet a musician-specific charity still found a service room to fill — as in Australia, the universal floor did not make the music-specific room redundant. The gap this project tracks is now confirmed to end, in both directions, at the Tasman Sea.<sup class="cite"><a href="#mh-src-15" data-src="ecosystem" data-tip="NZ music-wellbeing ecosystem and scale statistics: SoundCheck Aotearoa, Figure.NZ (FTE), Recorded Music NZ (GDP).">15</a></sup></p></li>
+      </ol>
+    </section>
+
+    <!-- 10. METHOD + REFERENCES -->
+    <section>
+      <div class="section-label">10 — Methodology &amp; references</div>
+      <h2>Methodology and Basis</h2>
+      <p>Collected 2026-07-17 by four parallel research passes: (1) the org's own site (musichelps.org.nz — all substantive pages fetched and quoted); (2) the NZ Charities Register page for CC47494 plus the Charities Services OData API (14 filed years; totals cross-validated across the two endpoints); (3) news coverage (Scoop, NZ Musician, Under the Radar, Recorded Music NZ, NZ Music Commission, APRA AMCOS, The Music Network); (4) the NZ music-wellbeing ecosystem (SoundCheck Aotearoa, industry bodies, scale statistics). Dated snapshots: <code style="font-family:var(--font-mono); font-size:var(--text-sm);">wiki/snapshots/MusicHelps_Org_Site_2026-07-17.md</code>, <code style="font-family:var(--font-mono); font-size:var(--text-sm);">MusicHelps_Financials_2026-07-17.md</code>, <code style="font-family:var(--font-mono); font-size:var(--text-sm);">MusicHelps_News_2026-07-17.md</code>, <code style="font-family:var(--font-mono); font-size:var(--text-sm);">NZ_Music_Wellbeing_Landscape_2026-07-17.md</code>. No figure was estimated; every gap is labeled ❓ rather than filled. Register figures are self-filed by the charity (Tier 3, audit status unstated) — solid as <em>filings</em>, weaker as <em>assured accounts</em>; org-claimed impact counts are ⚠️ as-reported throughout.</p>
+
+      <p class="cite-help">Every figure carries a numbered citation — hover (desktop) or tap (mobile) a number to see the source; click to jump to the full reference.</p>
+
+      <div class="refs" id="refs-all" data-citation-registry="mh-all">
+        <div class="refs-title">References</div>
+        <ol>
+          <li id="mh-src-1" data-src="identity">Registration identity: New Zealand Charities Register. (n.d.). <em>MusicHelps</em> [Charity summary, CC47494]. Retrieved July 17, 2026, from <a href="https://register.charities.govt.nz/Charity/CC47494" target="_blank" rel="noopener">https://register.charities.govt.nz/Charity/CC47494</a> (legal name MusicHelps; other name The New Zealand Music Foundation; registered 25/03/2012 as "New Zealand Music Foundation Trust 2011"; name change effective 2/04/2019; NZBN 9429043147427; balance date 31 March; Tier 3). Cross-checked: Charities Services OData API, <a href="http://www.odata.charities.govt.nz/Organisations?$filter=CharityRegistrationNumber%20eq%20%27CC47494%27" target="_blank" rel="noopener">odata.charities.govt.nz/Organisations?$filter=CharityRegistrationNumber eq 'CC47494'</a> (OrganisationId 38898). <strong>Source · Method · Basis:</strong> government register, two endpoints · web fetch + HTTP GET · ✅ Sourced.</li>
+          <li id="mh-src-2" data-src="rebrand">Rebrand and founders: MusicHelps. (2018, November 7). <em>New Zealand Music Foundation rebrands to MusicHelps</em> [Press release]. Scoop. <a href="https://www.scoop.co.nz/stories/CU1811/S00084/new-zealand-music-foundation-rebrands-to-musichelps.htm" target="_blank" rel="noopener">scoop.co.nz</a>; NZ Musician. (2018). <em>NZ Music Foundation rebrands to MusicHelps</em>. <a href="https://nzmusician.co.nz/news/nz-music-foundation-rebrands-to-musichelps/" target="_blank" rel="noopener">nzmusician.co.nz</a> (Lorde announced as patron); founders and patrons per MusicHelps. (n.d.). <em>About</em>. Retrieved July 17, 2026, from <a href="https://www.musichelps.org.nz/about" target="_blank" rel="noopener">musichelps.org.nz/about</a>. <strong>Source · Method · Basis:</strong> org press release + named outlet + org page · WebFetch + WebSearch · ✅ Sourced.</li>
+          <li id="mh-src-3" data-src="wellbeing">Wellbeing Service and Legacy: MusicHelps. (n.d.). <em>Wellbeing Service</em> and <em>MusicHelps Legacy</em>. Retrieved July 17, 2026, from <a href="https://www.musichelps.org.nz/backline/backline" target="_blank" rel="noopener">musichelps.org.nz/backline/backline</a> and <a href="https://www.musichelps.org.nz/backline/musichelps-legacy" target="_blank" rel="noopener">musichelps.org.nz/backline/musichelps-legacy</a> (24/7, free, confidential; 0508 MUSICHELPS; wills via Footprint). Clinical delivery: MusicHelps. (n.d.). <em>Privacy policy</em>, §7. <a href="https://www.musichelps.org.nz/privacy-policy" target="_blank" rel="noopener">musichelps.org.nz/privacy-policy</a> ("The majority of our wellbeing services are managed by Southern Cross Wellness Partners," quoted verbatim). Launch framing: NZ Musician. (2016). <em>NZMF establish world-first wellbeing service for musicians</em>. <a href="https://www.nzmusician.co.nz/news/nzmf-establish-world-first-wellbeing-service-musicians/" target="_blank" rel="noopener">nzmusician.co.nz</a>. <strong>Source · Method · Basis:</strong> org pages + named outlet · WebFetch · ✅ Sourced ("world-first" is the outlet's framing, ⚠️).</li>
+          <li id="mh-src-4" data-src="benevolent">Benevolent Fund: MusicHelps. (n.d.). <em>Benevolent Fund</em>. Retrieved July 17, 2026, from <a href="https://www.musichelps.org.nz/backline/benevolent-fund" target="_blank" rel="noopener">musichelps.org.nz/backline/benevolent-fund</a> (10+ years industry service; committee approval; 3–6 week process). Past-year scale: MusicHelps homepage, <a href="https://www.musichelps.org.nz/" target="_blank" rel="noopener">musichelps.org.nz</a> ("8 music workers… close to $40,000"). <strong>Source · Method · Basis:</strong> org pages · WebFetch · ✅ Sourced (impact counts ⚠️ org-stated).</li>
+          <li id="mh-src-5" data-src="grants">Grants programme and milestone: MusicHelps. (n.d.). <em>Grants</em>. Retrieved July 17, 2026, from <a href="https://www.musichelps.org.nz/grants" target="_blank" rel="noopener">musichelps.org.nz/grants</a> (two rounds/yr, March and September; "projects impacting over 90,000 people"); MusicHelps. (2026). <em>The MusicHelps board are pleased to announce the March 2026 grant recipients</em>. <a href="https://www.musichelps.org.nz/news/the-musichelps-board-are-pleased-to-announce-the-march-2026-grant-recipients" target="_blank" rel="noopener">musichelps.org.nz</a> (19 named recipients); NZ Music Commission. (2026, April). <em>MusicHelps surpasses $1m in funding for music therapy across NZ</em>. <a href="https://nzmusic.org.nz/music-industry-news/musichelps-surpasses-1m-in-funding-for-music-therapy-across-nz/" target="_blank" rel="noopener">nzmusic.org.nz</a> (Healey and Ward quotes). <strong>Source · Method · Basis:</strong> org pages + sector body · WebFetch · ✅ Sourced (reach counts ⚠️ org-stated).</li>
+          <li id="mh-src-6" data-src="financials">Financial totals FY2023–FY2026: New Zealand Charities Register, CC47494, Annual Returns table (FY2023 filed 7/11/2023; FY2024 9/09/2024; FY2025 19/09/2025; FY2026 8/07/2026), <a href="https://register.charities.govt.nz/Charity/CC47494" target="_blank" rel="noopener">register.charities.govt.nz/Charity/CC47494</a>; identical totals independently returned by Charities Services OData API, <a href="http://www.odata.charities.govt.nz/Organisations(38898)/AnnualReturn" target="_blank" rel="noopener">odata.charities.govt.nz/Organisations(38898)/AnnualReturn</a>. FY2021–FY2022 context figures (income $1,039,793; $778,590) from the same feed and the register's annual-returns table. "Charity Documents: No supporting documents" and blank <code style="font-family:var(--font-mono);">IsFinancialReportAudited</code> per the same sources. <strong>Source · Method · Basis:</strong> government register, two endpoints cross-validated · web fetch + HTTP GET/XML parse · ✅ Sourced (audit status ❓).</li>
+          <li id="mh-src-7" data-src="income">Income sub-lines (donations/koha, membership, investment, grants received, commercial activities): Charities Services OData API, <code style="font-family:var(--font-mono);">AnnualReturn</code> entity fields for OrganisationId 38898 (sub-lines sum exactly to filed totals each year; FY2023 grants/events not disaggregated by that year's form — reported as not itemised, not estimated). <strong>Source · Method · Basis:</strong> government open-data API · HTTP GET/XML parse · ✅ Sourced (FY2023 gaps ❓).</li>
+          <li id="mh-src-8" data-src="expenditure">Expenditure sub-lines and programme-level narrative: same OData <code style="font-family:var(--font-mono);">AnnualReturn</code> feed (grants paid, fundraising, employee remuneration, all other; sums reconcile exactly). Narrative disclosures quoted verbatim from the org's filed notes: FY2025 — "MusicHelps also pays one contracting staff $86,280 a year… two Grant rounds each year and in 2025 this was $137,258… wellbeing service… cost was $45,000 for counselling and emergency services of $27,362"; FY2026 — grants "$134,008," wellbeing "$25,012." The $0 employee-remuneration entries in FY2024–25 are read against the contractor note (allocation logic ⚠️ inferred). <strong>Source · Method · Basis:</strong> government open-data API, org-authored notes · HTTP GET/XML parse · ✅ Sourced (⚠️ for the allocation inference).</li>
+          <li id="mh-src-9" data-src="balance">Balance sheet: same OData feed (total assets, liabilities, cash). FY2024 <code style="font-family:var(--font-mono);">TotalEquity</code> filed as $10, inconsistent with assets − liabilities ($412,767) and accumulated surplus ($412,757); the reconciled figure is used and the substitution marked ⚠️. <strong>Source · Method · Basis:</strong> government open-data API · HTTP GET/XML parse + arithmetic reconciliation · ✅ Sourced (⚠️ one reconciled cell).</li>
+          <li id="mh-src-10" data-src="staffing">Staffing and volunteers: same OData feed (1 FT employee all years; 1 PT added FY2026; 40 paid hrs/wk; volunteer fields filed as 0 people/1 hour — reported as filed, meaning unclear ❓). <strong>Source · Method · Basis:</strong> government open-data API · HTTP GET/XML parse · ✅ Sourced (volunteer field ❓).</li>
+          <li id="mh-src-11" data-src="governance">Governance: MusicHelps. (n.d.). <em>About</em>. Retrieved July 17, 2026, from <a href="https://www.musichelps.org.nz/about" target="_blank" rel="noopener">musichelps.org.nz/about</a> (six trustees with roles as printed: Healey — Chair, APRA AMCOS; Anderson — CEO, NZ Music Commission; Oliver — CEO, Recorded Music NZ; Hemara — Universal Music; McGlashan; Little; founders Smith and Ward; patrons Finn and Lorde); New Zealand Charities Register, CC47494, Officer Details (nine current trustees incl. Davis, Ellis, Lock effective 23/06/2026; Smith and Ward past since 1/04/2021; certifying officer Lynda Parsons, contact matching an entertainment-accounting firm — outsourced-accountant reading ⚠️ inferred; the register spells the Music Commission CEO's surname "Andersen" where the org's site prints "Anderson"). <strong>Source · Method · Basis:</strong> org page + government register · WebFetch · ✅ Sourced (accountant inference ⚠️).</li>
+          <li id="mh-src-12" data-src="hundred-percent">The "100%" claim: MusicHelps. (n.d.). <em>About</em>. Retrieved July 17, 2026, from <a href="https://www.musichelps.org.nz/about" target="_blank" rel="noopener">musichelps.org.nz/about</a> ("All administration costs are covered by the music industry itself. 100% of what you contribute will be applied directly to the music charities we support," quoted verbatim). Set against the filed fundraising-expense and all-other-expenditure lines in [8] — no ring-fenced admin pool is visible in the Tier-3 filing; the discrepancy is reported, not resolved. <strong>Source · Method · Basis:</strong> org page vs. government filing · WebFetch + API · ✅ Sourced (claim itself unverified against accounts, ⚠️).</li>
+          <li id="mh-src-13" data-src="covid">COVID response: Under the Radar. (2020, March 30). <em>MusicHelpsLive launched to support NZ's live music industry</em>. <a href="https://www.undertheradar.co.nz/news/17089/MusicHelpsLive-Launched-To-Support-NZs-Live-Music-Industry.utr" target="_blank" rel="noopener">undertheradar.co.nz</a> (NZ$2M target; Campbell Smith quoted); Recorded Music NZ. (2020). <em>MusicHelps announces COVID-19 emergency assistance grant</em>. <a href="https://www.recordedmusic.co.nz/musichelps-announces-covid-19-emergency-assistance-grant-for-kiwi-music-workers/" target="_blank" rel="noopener">recordedmusic.co.nz</a> (NZ$500 grants); NZ Music Commission. (2021). <em>MusicHelps COVID-19 Delta hardship emergency grant</em>. <a href="https://nzmusic.org.nz/news/commission/musichelps-covid-19-delta-hardship-emergency-grant/" target="_blank" rel="noopener">nzmusic.org.nz</a> and APRA AMCOS. (2021). <em>MusicHelps COVID-19 Delta hardship grants</em>. <a href="https://www.apraamcos.co.nz/about-us/news-and-events/musichelps-covid-19-delta-hardship-grants" target="_blank" rel="noopener">apraamcos.co.nz</a> (NZ$1,000 Delta grants). Final MusicHelpsLive tally: not found in public sources (❓). <strong>Source · Method · Basis:</strong> named outlets + sector bodies · WebSearch + WebFetch · ✅ Sourced (tally ❓).</li>
+          <li id="mh-src-14" data-src="funding">Funding mechanisms: MusicHelps. (n.d.). <em>Supporters</em> and <em>Donate</em>. Retrieved July 17, 2026, from <a href="https://www.musichelps.org.nz/supporters" target="_blank" rel="noopener">musichelps.org.nz/supporters</a> and <a href="https://www.musichelps.org.nz/donate" target="_blank" rel="noopener">musichelps.org.nz/donate</a> (founding supporters APRA AMCOS, Universal Music NZ, Les Mills, Recorded Music NZ; sponsors incl. JB Hi-Fi, Sony Music NZ, NZ On Air, Spark; Stripe/Givealittle/TXT/payroll giving/bequests); NZ Music T-Shirt Day. (n.d.). <em>Beneficiaries: MusicHelps</em>. <a href="https://www.nzmusictshirtday.org.nz/beneficiaries/musichelps" target="_blank" rel="noopener">nzmusictshirtday.org.nz</a> (100% net proceeds); NZ Music Commission. (2026, May). <em>NZ Music T-Shirt Day returns Friday 30 May</em>. <a href="https://nzmusic.org.nz/music-industry-news/nz-music-t-shirt-day-returns-friday-30-may/" target="_blank" rel="noopener">nzmusic.org.nz</a>. Funding-difficulty framing ("doesn't qualify for a lot of funding… hustle") per industry reporting collected in <code style="font-family:var(--font-mono);">wiki/snapshots/MusicHelps_News_2026-07-17.md</code> (⚠️ as-reported). <strong>Source · Method · Basis:</strong> org pages + campaign site + sector body · WebFetch · ✅ Sourced (hustle framing ⚠️).</li>
+          <li id="mh-src-15" data-src="ecosystem">Ecosystem and scale: SoundCheck Aotearoa. (n.d.). <em>Our mission</em> and <em>About</em>. <a href="https://www.soundcheckaotearoa.co.nz/our-mission" target="_blank" rel="noopener">soundcheckaotearoa.co.nz/our-mission</a> and <a href="https://www.soundcheckaotearoa.co.nz/about" target="_blank" rel="noopener">soundcheckaotearoa.co.nz/about</a> (charitable trust; SHAPRA sexual-harm prevention/response service launched 2023; founding industry coalition); MusicHelps lists SoundCheck as an external resource: <a href="https://www.musichelps.org.nz/backline/do-you-need-help" target="_blank" rel="noopener">musichelps.org.nz/backline/do-you-need-help</a>; NZ music direct FTE ≈2,750 (2023): Figure.NZ, <a href="https://figure.nz/chart/tAQeOoJ0aDCZo3ER-KTdEuQTjx2wNBY9Y" target="_blank" rel="noopener">figure.nz</a>; direct GDP NZ$451M (2023): Recorded Music NZ, <a href="https://recordedmusic.co.nz/" target="_blank" rel="noopener">recordedmusic.co.nz</a>. <strong>Source · Method · Basis:</strong> org pages + statistics service · WebFetch · ✅ Sourced.</li>
+        </ol>
+        <p class="refs-note">Convention: every claim-bearing element carries a <span style="font-family:var(--font-mono);">data-src</span> ID matching an entry above — machine-checkable before each deploy (§5.2 / §6 gate 1). The source of truth for these citations is the report <span style="font-family:var(--font-mono);">2026-07-17_Report_Org_Study_MusicHelps.md</span>. No figure is invented; every gap is flagged ❓.</p>
+      </div>
+    </section>
+
+
+    <nav class="related-block" aria-label="Related on this site">
+      <p class="related-title">Related</p>
+      <ul>
+        <li><a href="org-study.html">&larr; Org Study (all organizations)</a></li>
+        <li><a href="org-study-support-act.html">Org Study: Support Act &mdash; the region's other full-scale music charity</a></li>
+        <li><a href="report-global-npo-landscape.html">Orgs Map &mdash; global NPO landscape</a></li>
+        <li><a href="policy-study.html">Policy Study &mdash; how jurisdictions protect music workers</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <script>
+  /* Scroll-reveal — R3.2 shared IntersectionObserver (normal-scroll page) */
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = 'section > h2, .stat-strip, figure, .table-wrap, .phases-grid, .sources-card, .refs';
+    var nodes = Array.prototype.slice.call(document.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, sibs, idx = 0;
+        if (p){ sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,6) * 60) + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
+
+  <!-- nav scroll-state: transparent over hero, blurred bar once scrolled -->
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden','true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>
