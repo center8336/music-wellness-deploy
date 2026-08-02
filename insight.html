@@ -270,8 +270,8 @@
     .position-item { border-top: 1px solid var(--border-light); }
     .position-item:last-child { border-bottom: 1px solid var(--border-light); }
     .position-link {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: 9rem minmax(0, 1fr) auto;
       align-items: baseline;
       gap: 0.4rem 1.25rem;
       padding: 1.15rem 0.4rem;
@@ -287,7 +287,6 @@
       letter-spacing: 0.08em;
       color: var(--label-ink);
       font-variant-numeric: tabular-nums;
-      flex: 0 0 9rem;
     }
     .position-claim {
       font-family: var(--font-display);
@@ -296,7 +295,6 @@
       color: var(--charcoal);
       line-height: 1.3;
       letter-spacing: -0.005em;
-      flex: 1 1 20rem;
       text-wrap: pretty;
     }
     .position-where {
@@ -305,7 +303,7 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: var(--label-ink);
-      flex: 0 0 auto;
+      text-align: right;
     }
     .lane-note {
       max-width: var(--measure-prose);
@@ -316,8 +314,9 @@
     }
     @media (max-width: 680px) {
       .position-list { max-width: none; }
-      .position-date, .position-where { flex-basis: 100%; }
-      .position-claim { flex-basis: 100%; font-size: 1.05rem; }
+      .position-link { grid-template-columns: 1fr; }
+      .position-where { text-align: left; }
+      .position-claim { font-size: 1.05rem; }
       .lane-note { max-width: none; }
     }
 
@@ -516,82 +515,82 @@
         <div class="works-list">
 
           <!-- August 1, 2026 — latest -->
-          <a class="work-item" href="insight-2026-08-01.html" aria-label="Insight, August 1 2026 — Pause the Schedule (Synthesis)">
+          <a class="work-item" href="insight-2026-08-01.html" aria-label="Insight, August 1 2026 — Pause the Schedule">
             <div class="work-card accent-insight is-latest">
               <span class="card-latest">Latest</span>
               <div class="card-visual">
                 <div>
                   <div class="card-title">Pause the Schedule</div>
-                  <div class="card-meta">August 1, 2026 · Synthesis</div>
+                  <div class="card-meta">August 1, 2026</div>
                 </div>
               </div>
             </div>
-            <div class="caption">The kill criterion the project set for itself in June has been met — the verdict, and the receipt behind it.<div class="type">Research Synthesis</div></div>
+            <div class="caption">The kill criterion the project set for itself in June has been met — the verdict, and the receipt behind it.<div class="type">Bi-monthly issue</div></div>
           </a>
 
           <!-- July 4, 2026 -->
-          <a class="work-item" href="insight-2026-07-04.html" aria-label="Insight, July 4 2026 — Everywhere But Home (Synthesis)">
+          <a class="work-item" href="insight-2026-07-04.html" aria-label="Insight, July 4 2026 — Everywhere But Home">
             <div class="work-card accent-insight">
               <div class="card-visual">
                 <div>
                   <div class="card-title">Everywhere But Home</div>
-                  <div class="card-meta">July 4, 2026 · Synthesis</div>
+                  <div class="card-meta">July 4, 2026</div>
                 </div>
               </div>
             </div>
-            <div class="caption">The world's music-health systems mapped at record scale — every country studied but Taiwan.<div class="type">Research Synthesis</div></div>
+            <div class="caption">The world's music-health systems mapped at record scale — every country studied but Taiwan.<div class="type">Bi-monthly issue</div></div>
           </a>
 
           <!-- June 18, 2026 -->
-          <a class="work-item" href="insight-2026-06-18.html" aria-label="Insight, June 18 2026 — The Loud Month (Synthesis)">
+          <a class="work-item" href="insight-2026-06-18.html" aria-label="Insight, June 18 2026 — The Loud Month">
             <div class="work-card accent-insight">
               <div class="card-visual">
                 <div>
                   <div class="card-title">The Loud Month</div>
-                  <div class="card-meta">June 18, 2026 · Synthesis</div>
+                  <div class="card-meta">June 18, 2026</div>
                 </div>
               </div>
             </div>
-            <div class="caption">Output resumed — but allocated to infrastructure and academic reading, not the Taiwan track.<div class="type">Bi-monthly Research Synthesis</div></div>
+            <div class="caption">Output resumed — but allocated to infrastructure and academic reading, not the Taiwan track.<div class="type">Bi-monthly issue</div></div>
           </a>
 
           <!-- June 1, 2026 -->
-          <a class="work-item" href="insight-2026-06-01.html" aria-label="Insight, June 1 2026 — The Silent Month (Synthesis)">
+          <a class="work-item" href="insight-2026-06-01.html" aria-label="Insight, June 1 2026 — The Silent Month">
             <div class="work-card accent-insight">
               <div class="card-visual">
                 <div>
                   <div class="card-title">The Silent Month</div>
-                  <div class="card-meta">June 1, 2026 · Synthesis</div>
+                  <div class="card-meta">June 1, 2026</div>
                 </div>
               </div>
             </div>
-            <div class="caption">When the schedule keeps running and the work stops — three options, one decision gate.<div class="type">Bi-monthly Research Synthesis</div></div>
+            <div class="caption">When the schedule keeps running and the work stops — three options, one decision gate.<div class="type">Bi-monthly issue</div></div>
           </a>
 
           <!-- May 1, 2026 -->
-          <a class="work-item" href="insight-2026-05-01.html" aria-label="Insight, May 1 2026 — The Validation Imperative (Synthesis)">
+          <a class="work-item" href="insight-2026-05-01.html" aria-label="Insight, May 1 2026 — The Validation Imperative">
             <div class="work-card accent-insight">
               <div class="card-visual">
                 <div>
                   <div class="card-title">The Validation Imperative</div>
-                  <div class="card-meta">May 1, 2026 · Synthesis</div>
+                  <div class="card-meta">May 1, 2026</div>
                 </div>
               </div>
             </div>
-            <div class="caption">From evidence to action — the shift from secondary research toward primary Taiwan data.<div class="type">Bi-monthly Research Synthesis</div></div>
+            <div class="caption">From evidence to action — the shift from secondary research toward primary Taiwan data.<div class="type">Bi-monthly issue</div></div>
           </a>
 
           <!-- April 13, 2026 -->
-          <a class="work-item" href="insight-2026-04-13.html" aria-label="Insight, April 13 2026 — 23 personas, 6 questions (Synthesis)">
+          <a class="work-item" href="insight-2026-04-13.html" aria-label="Insight, April 13 2026 — 23 personas, 6 questions">
             <div class="work-card accent-insight">
               <div class="card-visual">
                 <div>
                   <div class="card-title">23 Personas, 6 Questions</div>
-                  <div class="card-meta">April 13, 2026 · Synthesis</div>
+                  <div class="card-meta">April 13, 2026</div>
                 </div>
               </div>
             </div>
-            <div class="caption">The first synthesis — a multi-persona debate that set the project's questions.<div class="type">Bi-monthly Research Synthesis</div></div>
+            <div class="caption">The first synthesis — a multi-persona debate that set the project's questions.<div class="type">Bi-monthly issue</div></div>
           </a>
 
           <!-- Placeholder -->
