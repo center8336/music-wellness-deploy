@@ -92,7 +92,7 @@
     p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
     .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: 520; }
     .cjk, .cjk-inline { line-break: strict; word-break: keep-all; }
-    @media (max-width: 680px){ .lane-dek, .seed-body, .work-item .caption { max-width: none; } }
+    @media (max-width: 680px){ .lane-dek, .lane-note, .work-item .caption { max-width: none; } }
 
     ::selection { background: var(--signal); color: var(--white); }
 
@@ -265,38 +265,60 @@
       white-space: nowrap;
     }
 
-    /* seed / empty state for the personal-examination lane */
-    .seed-card {
-      max-width: var(--max-w-text);
-      padding: 1.5rem 1.5rem;
-      background: rgba(244, 244, 245, 0.4);
-      -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
-      border: 1.5px dashed var(--silver);
-      border-radius: var(--radius-lg);
+    /* position list — the personal-examination register, filed by date */
+    .position-list { list-style: none; max-width: var(--measure-ref); margin: 0; padding: 0; }
+    .position-item { border-top: 1px solid var(--border-light); }
+    .position-item:last-child { border-bottom: 1px solid var(--border-light); }
+    .position-link {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.4rem 1.25rem;
+      padding: 1.15rem 0.4rem;
+      text-decoration: none;
+      color: inherit;
+      transition: background var(--dur) var(--ease);
     }
-    .seed-card .seed-status {
+    .position-link:hover { background: rgba(102, 103, 171, 0.06); }
+    .position-date {
       font-family: var(--font-mono);
       font-size: var(--text-xs);
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       color: var(--label-ink);
+      font-variant-numeric: tabular-nums;
+      flex: 0 0 9rem;
     }
-    .seed-card .seed-title {
+    .position-claim {
       font-family: var(--font-display);
       font-size: var(--text-h3);
       font-weight: 600;
       color: var(--charcoal);
-      margin: 0.5rem 0 0.6rem;
-      line-height: 1.2;
+      line-height: 1.3;
       letter-spacing: -0.005em;
-      text-wrap: balance;
+      flex: 1 1 20rem;
+      text-wrap: pretty;
     }
-    .seed-card .seed-body {
-      font-family: var(--font-body);
+    .position-where {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--label-ink);
+      flex: 0 0 auto;
+    }
+    .lane-note {
+      max-width: var(--measure-prose);
+      margin-top: 1.6rem;
       font-size: var(--text-small);
       color: var(--graphite);
       line-height: 1.65;
+    }
+    @media (max-width: 680px) {
+      .position-list { max-width: none; }
+      .position-date, .position-where { flex-basis: 100%; }
+      .position-claim { flex-basis: 100%; font-size: 1.05rem; }
+      .lane-note { max-width: none; }
     }
 
     /* ===== ISSUES GRID ===== */
@@ -479,7 +501,7 @@
 
     <div class="page-content" id="main">
       <div class="page-header">
-        <p class="eyebrow">INSIGHT · Personal Examination Home</p>
+        <p class="eyebrow">INSIGHT</p>
         <h1>Insight</h1>
       </div>
 
@@ -487,7 +509,7 @@
       <section class="register-lane synthesis" aria-labelledby="lane-synthesis">
         <div class="lane-head">
           <h2 class="lane-label" id="lane-synthesis">Synthesis</h2>
-          <p class="lane-dek">Bi-monthly issues — newest first.</p>
+          <p class="lane-dek">Bi-monthly issues — newest first. §01 of each issue carries this register.</p>
         </div>
 
         <!-- Issues Grid (newest first) -->
@@ -591,14 +613,62 @@
       <section class="register-lane examination" aria-labelledby="lane-examination">
         <div class="lane-head">
           <h2 class="lane-label" id="lane-examination">Personal Examination</h2>
-          <p class="lane-dek">陳棉's own position — dated, once worth standing behind.</p>
+          <p class="lane-dek">陳棉's own position — dated, once worth standing behind. Each entry opens inside the issue that carries it.</p>
         </div>
 
-        <div class="seed-card">
-          <p class="seed-status">In progress · lands as a dated piece</p>
-          <p class="seed-title">The first examination is being written.</p>
-          <p class="seed-body">The first position will land here as a dated entry, tagged <span class="register-tag">Personal Examination</span>.</p>
-        </div>
+        <ul class="position-list">
+
+          <li class="position-item">
+            <a class="position-link" href="insight-2026-08-01.html#s3">
+              <span class="position-date">August 1, 2026</span>
+              <span class="position-claim">Two things are true at once: the research is good, and the stated purpose is not being served.</span>
+              <span class="position-where">Pause the Schedule · §03</span>
+            </a>
+          </li>
+
+          <li class="position-item">
+            <a class="position-link" href="insight-2026-07-04.html#s3">
+              <span class="position-date">July 4, 2026</span>
+              <span class="position-claim">That is a decision — the loudest one yet — and it is keep mapping the world.</span>
+              <span class="position-where">Everywhere But Home · §03</span>
+            </a>
+          </li>
+
+          <li class="position-item">
+            <a class="position-link" href="insight-2026-06-18.html#s3">
+              <span class="position-date">June 18, 2026</span>
+              <span class="position-claim">The gun is loaded and has not been fired.</span>
+              <span class="position-where">The Loud Month · §03</span>
+            </a>
+          </li>
+
+          <li class="position-item">
+            <a class="position-link" href="insight-2026-06-01.html#s3">
+              <span class="position-date">June 1, 2026</span>
+              <span class="position-claim">The June answer, on the evidence in the workspace, is: nobody on record.</span>
+              <span class="position-where">The Silent Month · §03</span>
+            </a>
+          </li>
+
+          <li class="position-item">
+            <a class="position-link" href="insight-2026-05-01.html#s3">
+              <span class="position-date">May 1, 2026</span>
+              <span class="position-claim">Validation is now the bottleneck, not knowledge</span>
+              <span class="position-where">The Validation Imperative · §03</span>
+            </a>
+          </li>
+
+          <li class="position-item">
+            <a class="position-link" href="insight-2026-04-13.html#s3">
+              <span class="position-date">April 13, 2026</span>
+              <span class="position-claim">The infrastructure phase earned its place. Now it earns its rest.</span>
+              <span class="position-where">23 Personas, 6 Questions · Closing</span>
+            </a>
+          </li>
+
+        </ul>
+
+        <p class="lane-note">These positions live inside the bi-monthly issues rather than as standalone pieces: §01 of an issue is synthesis, §02–§04 are examination. Register belongs to a section, not to a whole issue — so every issue appears in both lanes. A position written on its own, off the cadence, lands here as its own dated entry.</p>
       </section>
     </div>
   </section>
