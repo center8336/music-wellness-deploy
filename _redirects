@@ -29,3 +29,9 @@
 
 /index-mixer.html   /   301
 /index-mixer        /   301
+
+# INSIGHT section unpublished 2026-08-03 pending a rewrite (user request).
+# The 7 files were moved to output/deploy-archive/insight/ and are no longer
+# on the site; old URLs 301 to home so nothing dead-ends.
+/insight.html   /   301
+/insight-*      /   301

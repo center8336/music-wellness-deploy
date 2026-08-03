@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Search · MH&W</title>
-<meta name="description" content="Search all reports, org studies, policy studies and insights — Mental Health & Wellness for Musicians.">
+<meta name="description" content="Search all reports, org studies, policy studies and research — Mental Health & Wellness for Musicians.">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Space+Mono:wght@400;700&display=swap');
 :root {
@@ -108,7 +108,6 @@ footer { max-width:var(--max-w); margin:0 auto; padding:0 2.5rem 3rem; font-fami
     <a href="org-study.html">ORG STUDY</a>
     <a href="policy-study.html">POLICY STUDY</a>
     <a href="research.html">RESEARCH</a>
-    <a href="insight.html">INSIGHT</a>
     <a href="plan.html">PLAN</a>
     <a href="field-news.html">FIELD NEWS</a>
     <a href="search.html" class="current">SEARCH</a>
@@ -158,7 +157,7 @@ footer { max-width:var(--max-w); margin:0 auto; padding:0 2.5rem 3rem; font-fami
   // ---- chips ----
   var groups = ['ALL'];
   DOCS.forEach(function(d){ if (groups.indexOf(d._g) < 0) groups.push(d._g); });
-  var order = ['ALL','ORGS MAP','ORG STUDY','POLICY STUDY','RESEARCH','INSIGHT','NEWS','WIKI'];
+  var order = ['ALL','ORGS MAP','ORG STUDY','POLICY STUDY','RESEARCH','NEWS','WIKI'];
   groups.sort(function(a,b){ return order.indexOf(a) - order.indexOf(b); });
   var active = 'ALL';
   var chipsEl = document.getElementById('chips');
