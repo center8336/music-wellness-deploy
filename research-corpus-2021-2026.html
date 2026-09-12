@@ -391,6 +391,62 @@
     details > summary { font-family: var(--font-mono); font-size: var(--text-caption); text-transform: uppercase; letter-spacing: 0.05em; color: var(--signal-dim); cursor: pointer; padding: 0.4rem 0; }
     .no-ab { font-family: var(--font-mono); font-size: var(--text-micro); text-transform: uppercase; letter-spacing: 0.05em; color: var(--grey); }
     .empty { padding: 3rem 0; text-align: center; font-family: var(--font-mono); font-size: var(--text-caption); text-transform: uppercase; letter-spacing: 0.06em; color: var(--label-ink); }
+
+    /* ===== SUMMARY TABLES (house component, design-system.html "TABLE") =====
+       The head is sliced from research-rousseau-2026.html, which references
+       .table-wrap in its reveal script but never styles it — so before
+       2026-09-12 the three legend tables rendered as raw UA-default tables:
+       no cell padding (the Covers text touched the Records figure), .num inert
+       (figures left-aligned at a different x in each table), caption centred
+       at body size, and 1.19rem serif prose inside a data table. Keep these
+       rules here; do not rely on the sliced head for them. */
+    .table-wrap { border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow-x: auto; background: var(--bg-card); margin-top: 2.25rem; }
+    .table-wrap table { width: 100%; border-collapse: collapse; font-family: var(--font-body); font-size: var(--text-small); line-height: 1.5; }
+    .table-wrap caption { caption-side: top; text-align: left; font-family: var(--font-mono); font-size: var(--text-caption); text-transform: uppercase; letter-spacing: 0.06em; color: var(--label-ink); padding: 0.85rem 1rem 0.7rem; border-bottom: 1px solid var(--border-light); }
+    .table-wrap thead th { background: var(--black); color: var(--silver); font-family: var(--font-mono); font-weight: 400; font-size: var(--text-xs); letter-spacing: 0.08em; text-transform: uppercase; text-align: left; padding: 0.7rem 1rem; white-space: nowrap; }
+    .table-wrap td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--border-light); color: var(--charcoal); vertical-align: top; }
+    .table-wrap tbody tr:last-child td { border-bottom: none; }
+    .table-wrap tbody tr:hover { background: var(--signal-bg); }
+    /* one fixed figure column so Records lines up across all three tables */
+    .table-wrap.num th:last-child, .table-wrap.num td:last-child { width: 7rem; }
+    .table-wrap.num th:last-child, .table-wrap td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    @media (max-width: 600px) {
+      /* 3 prose columns inside ~310px wraps every Covers cell to 5-6 lines;
+         stack each row as tag + figure on one line, definition under it. */
+      .table-wrap.num thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+      .table-wrap.num tbody tr { display: grid; grid-template-columns: 1fr auto; gap: 0.3rem 0.75rem; padding: 0.85rem 1rem; border-bottom: 1px solid var(--border-light); }
+      .table-wrap.num tbody tr:last-child { border-bottom: none; }
+      .table-wrap.num td { display: block; padding: 0; border-bottom: none; }
+      .table-wrap.num td:nth-child(2) { grid-column: 1 / -1; color: var(--grey); font-size: var(--text-fine); line-height: 1.55; }
+      .table-wrap.num td.num { grid-column: 2; grid-row: 1; width: auto; align-self: start; font-size: var(--text-body); color: var(--black); }
+    }
+
+    /* ===== RECORDS-BY-YEAR STRIP — transparent ground (陳棉, 2026-09-12) =====
+       Was the sliced head's dark slab: --bg-dark ground, --white figures,
+       repeat(4,1fr) for 7 cells, so it left a dead cell bottom-right on desktop
+       and an orphan half-row on phone. Rules are drawn per cell (right+bottom,
+       with top+left on the container) so the grid closes at any column count. */
+    .stat-strip { grid-template-columns: repeat(7, 1fr); background: transparent; border-top: 1px solid var(--border-light); border-left: 1px solid var(--border-light); }
+    .stat-item { padding: 1.35rem 1rem; border-right: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); }
+    .stat-item:last-child { border-right: 1px solid var(--border-light); }
+    /* the sliced head kills these two rules at <=768px with --border-dark (invisible on a light ground) */
+    .stat-item:nth-child(1), .stat-item:nth-child(2) { border-right: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); }
+    .stat-num { color: var(--black); font-size: clamp(1.6rem, 2.6vw, 2.3rem); }
+    .stat-num.purple { color: var(--purple-deep); }  /* --purple-light is 1.67:1 on --snow, fails AA */
+    .stat-label { color: var(--label-ink); }
+    @media (max-width: 1024px) {
+      .stat-strip { grid-template-columns: repeat(4, 1fr); }
+      .stat-item:last-child { grid-column: span 2; }
+    }
+    @media (max-width: 600px) {
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: 1px solid var(--border-light); }
+      .stat-item:last-child { grid-column: 1 / -1; }
+    }
+
+    /* nav: the sliced tail sets .scrolled to rgba(...,0.45)+blur, which smeared
+       the strip and the tables showing through it. Opaque page ground instead. */
+    nav.nav.scrolled, .nav.scrolled { background: var(--snow); }
     @media (max-width: 900px) {
       .ctable thead { display: none; }
       .ctable, .ctable tbody, .ctable tr, .ctable td { display: block; width: auto; }
