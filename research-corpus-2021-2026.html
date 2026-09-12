@@ -443,7 +443,7 @@
           <p><strong>Searches.</strong> <strong>Web of Science Core Collection</strong> is the spine of this table &mdash; <code>TS=((musician* OR "music industry" OR "music workers") AND ("mental health" OR depression OR anxiety OR wellbeing OR "psychological distress" OR burnout OR suicide OR "occupational health" OR psychosocial OR "working conditions" OR precarious OR "occupational stress")) NOT TS=("music therapy" OR "music listening" OR dementia OR stroke OR parkinson) AND PY=(2021-2026)</code> returned <strong>580 records</strong>, exported in full and saved to <code>raw/notes/WoS_export_musicians_2021-2026_2026-09-12.txt</code>. <strong>PubMed</strong> (E-utilities, two query sets plus a journal sweep) returned 346 deduplicated records; <strong>Scopus</strong> returned 789 for the equivalent query, 296 of them 2025&ndash;2026.</p>
           <p><strong>Screening.</strong> Titles and abstracts were filtered by a keyword rule that removes music-therapy and music-as-intervention studies, the physical-health literature (hearing, musculoskeletal, pain, dystonia, voice, dental), music-cognition and neuroscience comparisons, and pedagogy; and that drops studies whose stated sample is student-dominated unless they also name professionals, industry or the workforce. Of the 580 Web of Science records, <strong>267 survived</strong>; 21 further records come from the PubMed and Scopus sets or were added by hand, giving <strong>288 rows</strong>. The rule is blunt on purpose: it is reproducible, and it over-includes rather than guesses. <strong>It is not precise.</strong> Keyword screening cannot tell whose health a study is about, so a handful of screened rows study audiences, patients or teachers rather than musicians; one record was excluded by hand after reading its abstract (a trial of audience well-being at live versus livestreamed concerts), and others like it almost certainly remain. Only the assessed tier has been checked.</p>
           <p><strong>Two tiers, and the difference matters.</strong> <span class="tier a">Assessed</span> marks the <strong>78</strong> records whose full text is in this project&rsquo;s corpus and which were read &mdash; their category is assigned by hand. <span class="tier">Screened</span> marks the remaining <strong>210</strong>: classified by the keyword rule above from title and abstract only, <strong>not read and not appraised</strong>. Treat a screened row as a pointer, never as a finding.</p>
-          <p><strong>Abstracts are the authors&rsquo; own, verbatim.</strong> 230 of 288 rows carry one, taken from the publisher&rsquo;s Crossref deposit, from PubMed, or from the Abstract section of the PDF in this project&rsquo;s corpus &mdash; the source is stated under each. Where no official abstract could be obtained, the cell is left empty rather than filled with a summary of ours. Nothing in the abstract column is written or paraphrased by this project.</p>
+          <p><strong>Abstracts are the authors&rsquo; own, verbatim.</strong> 230 of 288 rows carry one, taken from the publisher&rsquo;s Crossref deposit, from PubMed, or from the Abstract section of the PDF in this project&rsquo;s corpus &mdash; the source is stated under each. Where no official abstract could be obtained, the cell is left empty rather than filled with a summary of ours. Nothing in the abstract column is written or paraphrased by this project &mdash; which is also why a handful of abstracts appear in the article&rsquo;s original language (German, Spanish, Portuguese) rather than translated.</p>
         </div>
 
         <div class="stat-strip" role="group" aria-label="Records by year"><div class="stat-item"><div class="stat-num">30</div><div class="stat-label">2021</div></div><div class="stat-item"><div class="stat-num">36</div><div class="stat-label">2022</div></div><div class="stat-item"><div class="stat-num">47</div><div class="stat-label">2023</div></div><div class="stat-item"><div class="stat-num">39</div><div class="stat-label">2024</div></div><div class="stat-item"><div class="stat-num">54</div><div class="stat-label">2025</div></div><div class="stat-item"><div class="stat-num">61</div><div class="stat-label">2026</div></div></div>
@@ -481,7 +481,6 @@
           <option value="y+">Year, oldest</option>
           <option value="a+">Author A&ndash;Z</option>
           <option value="j+">Journal A&ndash;Z</option>
-          <option value="n-">Times cited (WoS)</option>
         </select>
         <span class="tb-count" id="count" role="status" aria-live="polite"></span>
       </div>
@@ -506,7 +505,7 @@
         <h2 class="sec-title">Where every field comes from</h2>
         <div class="text-col">
           <ul class="comment-list">
-            <li><strong>Titles, authors, journals, years, times-cited</strong> &mdash; Web of Science Core Collection export of 2026-09-12 (<code>raw/notes/WoS_export_musicians_2021-2026_2026-09-12.txt</code>), completed for non-WoS records from the <a href="https://api.crossref.org/" target="_blank" rel="noopener">Crossref REST API</a>. Times-cited is WoS at export date and drifts.</li>
+            <li><strong>Titles, authors, journals, years</strong> &mdash; Web of Science Core Collection export of 2026-09-12 (<code>raw/notes/WoS_export_musicians_2021-2026_2026-09-12.txt</code>), completed for non-WoS records from the <a href="https://api.crossref.org/" target="_blank" rel="noopener">Crossref REST API</a>. The export&rsquo;s times-cited and abstract columns came back empty, so neither is used here.</li>
             <li><strong>Abstracts</strong> &mdash; publisher deposits via Crossref; <a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank" rel="noopener">PubMed</a> via E-utilities; or the Abstract section of the PDF held in <code>raw/papers/musician_wellbeing_2021plus/</code>. Stated per row.</li>
             <li><strong>DOIs and open-access locations</strong> &mdash; Crossref, the NCBI ID Converter and <a href="https://unpaywall.org/" target="_blank" rel="noopener">Unpaywall</a>.</li>
             <li><strong>Categories, the screening rule and the assessed/screened split</strong> &mdash; this project&rsquo;s own work, described above. Not from any database.</li>
@@ -553,8 +552,7 @@
         'y-':function(a,b){ return (parseInt(b.y||0)-parseInt(a.y||0)) || (a.a||a.t).localeCompare(b.a||b.t); },
         'y+':function(a,b){ return (parseInt(a.y||0)-parseInt(b.y||0)) || (a.a||a.t).localeCompare(b.a||b.t); },
         'a+':function(a,b){ return (a.a||a.t).localeCompare(b.a||b.t); },
-        'j+':function(a,b){ return (a.j||'').localeCompare(b.j||'') || (parseInt(b.y||0)-parseInt(a.y||0)); },
-        'n-':function(a,b){ return (parseInt(b.n||0)-parseInt(a.n||0)); }
+        'j+':function(a,b){ return (a.j||'').localeCompare(b.j||'') || (parseInt(b.y||0)-parseInt(a.y||0)); }
       }[m];
       return rows.slice().sort(f);
     }
