@@ -35,3 +35,8 @@
 # on the site; old URLs 301 to home so nothing dead-ends.
 /insight.html   /   301
 /insight-*      /   301
+
+# 2021-2026 Research Overview unpublished 2026-09-12 (user request): kept as the
+# working copy in output/deploy-archive/research/ while it is revised. The corpus
+# table stays live, so the old URL points there rather than at home.
+/research-overview-2021-2026.html   /research-corpus-2021-2026.html   301
