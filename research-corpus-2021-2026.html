@@ -382,6 +382,10 @@
     .ab-toggle { font-family: var(--font-mono); font-size: var(--text-micro); text-transform: uppercase; letter-spacing: 0.05em; background: none; border: 1px solid var(--silver); border-radius: 3px; padding: 0.12rem 0.4rem; color: var(--label-ink); cursor: pointer; margin-top: 0.35rem; }
     .ab-toggle[aria-expanded="true"] { background: var(--signal-bg); border-color: var(--signal); color: var(--signal-dim); }
     tr.ab-row td { background: var(--bg-card); border-bottom: 1px solid var(--silver); padding: 0.9rem 1rem 1rem; }
+    /* The <=900px rule below sets tr{display:block}, which outranks the UA sheet's
+       [hidden]{display:none} and left every collapsed abstract visible. Keep this
+       after the .ctable rules and above the media query. */
+    .ctable tr[hidden] { display: none !important; }
     .ab-text { font-size: var(--text-small); line-height: 1.62; color: var(--graphite); max-width: 78ch; }
     .ab-src { display: block; font-family: var(--font-mono); font-size: var(--text-micro); text-transform: uppercase; letter-spacing: 0.05em; color: var(--label-ink); margin-top: 0.55rem; }
     details > summary { font-family: var(--font-mono); font-size: var(--text-caption); text-transform: uppercase; letter-spacing: 0.05em; color: var(--signal-dim); cursor: pointer; padding: 0.4rem 0; }
