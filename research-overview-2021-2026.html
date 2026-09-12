@@ -357,7 +357,17 @@
     .basis-note { display: inline; font-family: var(--font-mono); font-size: var(--text-caption); letter-spacing: 0.02em; color: var(--label-ink); }
     .stat-num .pct { font-size: 0.55em; margin-left: 0.08em; opacity: 0.85; }
     code { font-family: var(--font-mono); font-size: 0.86em; background: var(--signal-bg); padding: 0.08em 0.32em; border-radius: 3px; color: var(--charcoal); word-break: break-word; }
-    @media (max-width: 768px) { .table-wrap table { min-width: 26rem; } .table-wrap tbody th[scope="row"] { width: auto; white-space: normal; } }
+    @media (max-width: 768px) { .table-wrap table { min-width: 26rem; } .table-wrap tbody th[scope="row"] { width: auto; white-space: normal; } .table-wrap.num table { min-width: 20rem; } }
+    /* label/prose tables stack on phones — the phone min is the deliverable (reading-environment) */
+    @media (max-width: 600px) {
+      .table-wrap.stack { overflow-x: visible; }
+      .table-wrap.stack table { min-width: 0; display: block; }
+      .table-wrap.stack tbody { display: block; }
+      .table-wrap.stack tr { display: block; border-bottom: 1px solid var(--border-light); padding: 0.55rem 0; }
+      .table-wrap.stack tr:last-child { border-bottom: none; }
+      .table-wrap.stack th[scope="row"], .table-wrap.stack td { display: block; width: auto; border-bottom: none; padding: 0.1rem 0.9rem; }
+      .table-wrap.stack th[scope="row"] { padding-bottom: 0.25rem; }
+    }
   </style>
 </head>
 <body>
@@ -411,7 +421,7 @@
           <p>Two databases and one citation index were swept. Three major sources were not, and that shapes everything below.</p>
         </div>
 
-        <div class="table-wrap">
+        <div class="table-wrap stack">
         <table>
           <caption>Search scope, September 2026</caption>
           <tbody>
@@ -491,7 +501,7 @@
           <p>D&eacute;t&aacute;ri and colleagues compared 1,607 musicians against 8,517 general-workforce respondents and &mdash; unusually for this literature &mdash; reported effect sizes rather than only significance.<sup class="cite"><a href="#src-3" data-src="detari-2020" data-tip="Détári A, Egermann H, Bjerkeset O, Vaag J. Front Psychol 2020;11:1315. Effect sizes as recorded in this project's wiki card wiki/papers/detari_2020.md, critical reading completed 2026-04-11; all differences p &lt; 0.001. ✅ Sourced — project wiki card from the open-access full text.">3</a></sup></p>
         </div>
 
-        <div class="table-wrap">
+        <div class="table-wrap num">
         <table>
           <caption>D&eacute;t&aacute;ri et al. (2020) &mdash; 1,607 musicians vs. 8,517 general workforce, all <em>p</em> &lt; 0.001</caption>
           <thead><tr><th scope="col">Dimension</th><th scope="col">&eta;&sup2;</th><th scope="col">Direction &amp; size</th></tr></thead>
@@ -553,7 +563,7 @@
           <p>Nicholl &amp; Abbott&rsquo;s review is the <strong>first meta-analytic pooling</strong> of treatment for performance anxiety &mdash; not the first review; Fernholz et al. (2019), Brugu&eacute;s (2011) and Kenny (2005) preceded it without meta-analysis. It rewards reading past the abstract. The search found 57 intervention articles and <strong>25 published RCTs</strong>; data for only <strong>16 of them (total N&nbsp;=&nbsp;543)</strong> could be obtained after contacting authors, and those 16 carry the pooled estimates.<sup class="cite"><a href="#src-16" data-src="nicholl" data-tip="Nicholl TJ, Abbott MJ. Psychology of Music 2025;54(4):617–657. Results section read from the publisher PDF (NTU institutional access, 2026-09-12): 57 articles screened; 16 RCTs, N=543, within-group pre-post Hedges' g; treatment 22 comparisons g=1.21 [0.89,1.53]; control 17 comparisons g=0.57 [0.28,0.86]; between-groups p=.004; Q(1)=7.790, p=.005; treatment prediction interval −0.21 to 2.82. ✅ Sourced (primary full text).">16</a></sup></p>
         </div>
 
-        <div class="table-wrap">
+        <div class="table-wrap num">
         <table>
           <caption>Nicholl &amp; Abbott (2026) &mdash; pooled within-group pre&ndash;post effects, 16 RCTs, <em>N</em> = 543</caption>
           <thead><tr><th scope="col">Condition</th><th scope="col">Comparisons</th><th scope="col">Hedges&rsquo; <em>g</em></th><th scope="col">95% CI</th></tr></thead>
