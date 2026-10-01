@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>2021–2026 Musician Health Research Overview · MH&amp;W</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      /* — Dia-grade reading environment (v1 spec) — */
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;
+      --lh-prose:1.7;--wt-prose:440;
+      --measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;
+      --label-ink:var(--graphite);
+      --font-cjk:'Noto Serif TC', serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--black);
+      font-size: clamp(1.1875rem, 1.06rem + 0.55vw, 1.3125rem);
+      line-height: var(--lh-prose);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden; /* guard: no horizontal scroll on mobile */
+    }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: 520; }
+    .cjk, .cjk-inline { line-break: strict; word-break: keep-all; }
+    ::selection { background: var(--signal); color: var(--white); }
+
+    a { color: var(--signal); }
+
+    /* Skip nav */
+    .skip-nav {
+      position: absolute; left: -999px; top: 0; z-index: 200;
+      background: var(--black); color: var(--white);
+      padding: 0.75rem 1.25rem; border-radius: var(--radius);
+      font-family: var(--font-mono); font-size: var(--text-sm);
+    }
+    .skip-nav:focus { left: 1rem; top: 1rem; }
+
+    :focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 2px; }
+
+    /* ===== NAVIGATION (PERIMETRON editorial) ===== */
+    nav.nav {
+      position: fixed; top: 0; left: 0; z-index: 100;
+      display: flex; flex-direction: column;
+      padding: 2rem 2.5rem;
+      padding-top: calc(2rem + env(safe-area-inset-top));
+      background: transparent;
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: var(--font-mono); font-size: 1.1rem; font-weight: 400;
+      color: var(--label-ink); text-decoration: none; text-transform: uppercase;
+      letter-spacing: 0.08em; transition: color var(--dur) var(--ease);
+    }
+    /* --signal reads on both the dark cover and the light body (white would vanish on light sections) */
+    .nav-links a:hover { color: var(--signal); }
+    .nav-links a.current { color: var(--signal); }
+    .nav-topbar { display:none; }
+    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; z-index:101; -webkit-tap-highlight-color:transparent; }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--charcoal); margin:5px 0; transition:all 0.3s var(--ease); }
+    .nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity:0; }
+    .nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-5px); }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
+
+    @media (max-width: 768px) {
+      nav.nav {
+        padding: 1.2rem 1.5rem;
+        padding-top: calc(1.2rem + env(safe-area-inset-top));
+        right: 0; background: none;
+      }
+      nav.nav.open {
+        background: rgba(244, 244, 245, 0.92);
+        -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--border-light);
+      }
+      .nav-topbar { display:flex; align-items:center; gap:0.75rem; }
+      .nav-toggle { display:block; }
+      .nav-links { display:none; flex-direction:column; gap:0.75rem; margin-top:1rem; }
+      .nav-links.show { display:flex; }
+      .nav-links a { font-size: 0.85rem; }
+      .nav-mobile-brand { display:block; }
+    }
+
+    /* ===== COVER — standard MH&W research cover (pattern ref: research-detari-2020.html, codified in PROJECT_RULES §10) ===== */
+    .cover {
+      position: relative; min-height: 100vh; min-height: 100svh;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center;
+      padding: 6rem 1.5rem 4rem;
+    }
+    .cover-inner { max-width: 800px; margin: 0 auto; width: 100%; }
+    .cover-eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink);
+      text-transform: uppercase; letter-spacing: 0.5em; margin-bottom: 2.5rem;
+    }
+    .cover-title {
+      /* Détári clamp(4.5rem,11vw,9rem) is calibrated for ~6-char surnames;
+         ROUSSEAU (8 chars) scales down so the name spans the same ~800px column */
+      font-family: var(--font-display); font-size: clamp(2.2rem, 1.35rem + 5.2vw, 6rem); font-weight: 900;
+      line-height: 1.04; letter-spacing: -0.01em;
+      color: var(--black); margin-bottom: 0.5rem; text-wrap: balance;
+      overflow-wrap: break-word; hyphens: auto;
+    }
+    .cover-title .accent { color: var(--purple-deep); }
+    .cover-year {
+      font-family: var(--font-mono); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 400;
+      color: var(--purple-light); letter-spacing: 0.35em; margin-bottom: 2rem;
+    }
+    .cover-subtitle {
+      font-family: var(--font-body); font-size: clamp(1.25rem, 1.05rem + 1.4vw, 1.5rem); font-weight: 400;
+      font-style: italic; color: var(--graphite); letter-spacing: 0;
+      line-height: 1.55; max-width: var(--measure); margin-left: auto; margin-right: auto; margin-bottom: 3rem;
+    }
+    .cover-meta {
+      font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink);
+      line-height: 2; letter-spacing: 0.02em;
+    }
+    .cover-meta p { margin: 0; }
+    .cover-meta a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+    .cover-meta a:hover { color: var(--signal); }
+    .cover-hint {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      font-family: var(--font-mono); font-size: var(--text-xs); color: var(--silver);
+      letter-spacing: 0.1em; animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) { .cover-hint { animation: none; } }
+
+    /* ===== SECTIONS ===== */
+    main { display: block; }
+    .section { padding: 4.5rem 2.5rem; }
+    .section-inner { max-width: var(--max-w); margin: 0 auto; }
+    .text-col { max-width: var(--max-w-text); }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs); color: var(--signal);
+      text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 0.9rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--signal); display: inline-block; }
+    h2.sec-title {
+      font-family: var(--font-display); font-size: var(--text-h1); font-weight: 600;
+      line-height: 1.1; letter-spacing: -0.005em; color: var(--black); margin-bottom: 1.5rem; text-wrap: balance; overflow-wrap: break-word;
+    }
+    .section p { color: var(--graphite); margin-bottom: 1.15rem; max-width: var(--measure-prose); }
+    .section p.lead { font-size: clamp(1.1875rem, 1rem + 1.1vw, 1.3125rem); line-height: 1.62; color: var(--charcoal); font-weight: 400; max-width: var(--measure-prose); }
+
+    .alt { background: var(--white); border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); }
+
+    /* ===== AT A GLANCE STAT STRIP ===== */
+    .stat-strip {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      background: var(--bg-dark); border-radius: var(--radius-lg); overflow: hidden;
+      margin-top: 2rem;
+    }
+    .stat-item { padding: 1.6rem 1.25rem; border-right: 1px solid var(--border-dark); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-mono); font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; color: var(--white); line-height: 1; font-variant-numeric: tabular-nums; }
+    .stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey-light); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.5rem; line-height: 1.4; }
+    .stat-num.purple { color: var(--purple-light); }
+
+    /* ===== DOMAIN GRID ===== */
+    .domain-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2.25rem; }
+    .domain-card {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-left: 3px solid var(--signal); border-radius: var(--radius-lg);
+      padding: 1.4rem 1.5rem;
+      min-width: 0; /* allow grid item to shrink below content min-content */
+    }
+    .domain-card .dc-head { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.6rem; }
+    .domain-card h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem); line-height: 1.25; font-weight: 600; letter-spacing: -0.005em; color: var(--charcoal); }
+    .dc-count { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--white); background: var(--signal); padding: 0.15rem 0.5rem; border-radius: 100px; white-space: nowrap; letter-spacing: 0.04em; }
+    .domain-card p { font-size: clamp(1rem, 0.95rem + 0.35vw, 1.1875rem); line-height: 1.55; color: var(--graphite); margin: 0; }
+    .domain-card .dc-num { color: var(--signal-dim); font-weight: 600; }
+    /* spectrum left-borders to differentiate domains */
+    .domain-card.d1 { border-left-color: var(--spectrum-1); } .domain-card.d1 .dc-count { background: var(--spectrum-1); color: var(--off-black); }
+    .domain-card.d2 { border-left-color: var(--spectrum-5); } .domain-card.d2 .dc-count { background: var(--spectrum-5); color: var(--off-black); }
+    .domain-card.d3 { border-left-color: var(--spectrum-4); } .domain-card.d3 .dc-count { background: var(--spectrum-4); color: var(--off-black); }
+    .domain-card.d4 { border-left-color: var(--spectrum-6); } .domain-card.d4 .dc-count { background: var(--spectrum-6); color: var(--off-black); }
+    .domain-card.d5 { border-left-color: var(--spectrum-2); } .domain-card.d5 .dc-count { background: var(--spectrum-2); color: var(--off-black); }
+    .domain-card.d6 { border-left-color: var(--spectrum-3); } .domain-card.d6 .dc-count { background: var(--spectrum-3); color: var(--off-black); }
+
+    /* ===== COMMENT (numbered critical points) ===== */
+    .comment-list { list-style: none; counter-reset: crit; margin-top: 1.5rem; }
+    .comment-list > li {
+      position: relative; counter-increment: crit;
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg); padding: 1.5rem 1.6rem 1.5rem 4.2rem;
+      margin-bottom: 1rem; min-width: 0;
+    }
+    .comment-list > li::before {
+      content: counter(crit); position: absolute; left: 1.25rem; top: 1.4rem;
+      font-family: var(--font-mono); font-weight: 700; font-size: 1.5rem;
+      color: var(--signal); line-height: 1;
+    }
+    .comment-list h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem); line-height: 1.25; font-weight: 600; letter-spacing: -0.005em; color: var(--charcoal); margin-bottom: 0.5rem; }
+    .comment-list p { font-size: clamp(1rem, 0.95rem + 0.35vw, 1.1875rem); line-height: 1.6; color: var(--graphite); margin: 0; }
+
+    /* ===== CALLOUT (for this project) ===== */
+    .callout {
+      background: var(--signal-bg); border: 1px solid var(--signal-glow);
+      border-left: 4px solid var(--signal); border-radius: var(--radius-lg);
+      padding: 1.75rem 2rem; margin-top: 1.5rem;
+    }
+    .callout h3 { font-family: var(--font-display); font-size: var(--text-h3); font-weight: 600; letter-spacing: -0.005em; color: var(--charcoal); margin-bottom: 0.75rem; }
+    .callout p { color: var(--graphite); max-width: var(--measure-prose); }
+    .callout p:last-child { margin-bottom: 0; }
+
+    .verdict {
+      font-family: var(--font-display); font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+      font-weight: 600; color: var(--black); line-height: 1.35;
+      border-top: 2px solid var(--signal); padding-top: 1.5rem; margin-top: 2.5rem;
+    }
+
+    /* ===== Citations (§6.11 inline tier) ===== */
+    .cite { font-size: 0.7em; line-height: 0; vertical-align: super; letter-spacing: 0; }
+    .cite a { font-family: var(--font-mono); color: var(--signal); padding: 0.1em 0.25em; position: relative; text-transform: none; font-weight: 400; text-decoration: none; }
+    .cite a:hover, .cite a:focus { color: var(--signal-dim); }
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip); position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+      background: var(--off-black); color: var(--snow); font-family: var(--font-body); font-size: 0.78rem;
+      font-weight: 400; line-height: 1.5; letter-spacing: 0.01em; text-transform: none; text-align: left;
+      padding: 0.6rem 0.85rem; border-radius: var(--radius); width: max-content; max-width: min(320px, 78vw);
+      white-space: normal; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: none;
+    }
+
+    /* ===== References + confidence ===== */
+    .refs { background-color: var(--white); border: 1px solid var(--border-light); border-left: 3px solid var(--signal); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem; max-width: var(--measure-ref); }
+    .refs-title { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.75rem; }
+    .refs ol { margin: 0 0 0 1.25rem; padding: 0; }
+    .refs li { font-size: var(--text-fine); color: var(--graphite); line-height: 1.65; margin-bottom: 0.6rem; }
+    .refs li:target { background: var(--signal-bg); border-radius: var(--radius); outline: 2px solid var(--signal-glow); }
+    .refs li a { color: var(--signal); }
+
+    .conf-block { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin: 1.75rem 0; }
+    .conf-item { border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.1rem 1.2rem; background: var(--bg-card); }
+    .conf-tag { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem; }
+    .conf-item.ok { border-top: 3px solid var(--spectrum-4); }
+    .conf-item.warn { border-top: 3px solid var(--spectrum-2); }
+    .conf-item.warn2 { border-top: 3px solid var(--spectrum-3); }
+    .conf-item p { font-size: var(--text-sm); color: var(--graphite); margin: 0; }
+
+    .smeta { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--label-ink); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 1.5rem; }
+
+    /* ===== RESPONSIVE ===== */
+    /* Release reading-column caps to ~90vw on phones (spec §6). */
+    @media (max-width: 680px) {
+      .text-col, .section p, .section p.lead, .cover-subtitle, .callout p, .refs { max-width: none; }
+    }
+    @media (max-width: 768px) {
+      .section { padding: 3rem 1.5rem; }
+      /* Détári-pattern mobile cover values (title scaled for 8-char ROUSSEAU).
+         min() with a rem ceiling: vw inflates inside the §6.9 preview iframe, rem doesn't */
+      .cover-title { font-size: min(9.5vw, 2.3rem); }
+      .cover-year { font-size: clamp(1.5rem, 6vw, 2rem); letter-spacing: 0.25em; }
+      /* lede keeps its clamp floor on phone (spec §6: phone floor is the deliverable) */
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(1), .stat-item:nth-child(2) { border-bottom: 1px solid var(--border-dark); }
+      .domain-grid { grid-template-columns: 1fr; }
+      .conf-block { grid-template-columns: 1fr; }
+      .comment-list > li { padding: 1.3rem 1.3rem 1.3rem 3.6rem; }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+      .reveal.in { opacity: 1; transform: none; }
+    }
+
+    /* ===== Related block (no dead-ends, R3.2) ===== */
+    .related-block { margin: 0 auto; max-width: var(--max-w); padding: 2.5rem 2.5rem 3rem; border-top: 1px solid var(--border-light); }
+    .related-title { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; color: var(--label-ink); margin-bottom: 0.6rem; }
+    .related-block ul { list-style: none; margin: 0; padding: 0; }
+    .related-block li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .related-block a { font-family: var(--font-body); font-size: var(--text-sm); color: var(--signal); text-decoration: none; transition: color var(--dur) var(--ease); }
+    .related-block a:hover, .related-block a:focus { color: var(--signal-dim); text-decoration: underline; }
+  </style>
+
+  <style>/* NAV-WRAP-GUARD + a11y baseline (site-IA 2026-06-20) */ @media (min-width:769px){.nav-links{flex-wrap:wrap;gap:1.75rem;}.nav-links a{font-size:0.95rem;letter-spacing:0.06em;}} a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:var(--radius);}</style>
+  <style>/* page-scoped: tables, sub-heads, basis notes (overview page, 2026-09-12) */
+    .table-wrap { overflow-x: auto; margin: 2rem 0 0.5rem; -webkit-overflow-scrolling: touch; }
+    .table-wrap table { border-collapse: collapse; width: 100%; min-width: 34rem; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius); }
+    .table-wrap caption { font-family: var(--font-mono); font-size: var(--text-caption); text-transform: uppercase; letter-spacing: 0.06em; color: var(--label-ink); text-align: left; padding: 0 0 0.75rem; }
+    .table-wrap th, .table-wrap td { padding: 0.7rem 0.9rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--border-light); font-size: var(--text-small); line-height: 1.55; color: var(--graphite); }
+    .table-wrap thead th { font-family: var(--font-mono); font-size: var(--text-caption); text-transform: uppercase; letter-spacing: 0.06em; color: var(--label-ink); background: var(--snow); border-bottom: 1px solid var(--silver); }
+    .table-wrap tbody th[scope="row"] { font-family: var(--font-mono); font-size: var(--text-caption); text-transform: uppercase; letter-spacing: 0.06em; color: var(--label-ink); white-space: nowrap; width: 8.5rem; }
+    .table-wrap td.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--charcoal); }
+    .table-wrap tbody tr:last-child th, .table-wrap tbody tr:last-child td { border-bottom: none; }
+    .section h3.sub { font-family: var(--font-display); font-size: clamp(1.2rem, 1.05rem + 0.8vw, 1.45rem); line-height: 1.3; font-weight: 600; letter-spacing: -0.005em; color: var(--charcoal); margin: 2.4rem 0 0.6rem; }
+    .section .text-col h3.sub:first-child { margin-top: 0; }
+    .basis-note { display: inline; font-family: var(--font-mono); font-size: var(--text-caption); letter-spacing: 0.02em; color: var(--label-ink); }
+    .stat-num .pct { font-size: 0.55em; margin-left: 0.08em; opacity: 0.85; }
+    code { font-family: var(--font-mono); font-size: 0.86em; background: var(--signal-bg); padding: 0.08em 0.32em; border-radius: 3px; color: var(--charcoal); word-break: break-word; }
+    @media (max-width: 768px) { .table-wrap table { min-width: 26rem; } .table-wrap tbody th[scope="row"] { width: auto; white-space: normal; } .table-wrap.num table { min-width: 20rem; } }
+    /* label/prose tables stack on phones — the phone min is the deliverable (reading-environment) */
+    @media (max-width: 600px) {
+      .table-wrap.stack { overflow-x: visible; }
+      .table-wrap.stack table { min-width: 0; display: block; }
+      .table-wrap.stack tbody { display: block; }
+      .table-wrap.stack tr { display: block; border-bottom: 1px solid var(--border-light); padding: 0.55rem 0; }
+      .table-wrap.stack tr:last-child { border-bottom: none; }
+      .table-wrap.stack th[scope="row"], .table-wrap.stack td { display: block; width: auto; border-bottom: none; padding: 0.1rem 0.9rem; }
+      .table-wrap.stack th[scope="row"] { padding-bottom: 0.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-nav">Skip to content</a>
+  <!-- Navigation -->
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav-topbar">
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('show');this.closest('.nav').classList.toggle('open');this.setAttribute('aria-expanded',o)">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-mobile-brand">MENTAL HEALTH &amp; WELLNESS<br><span class="mobile-sub">FOR MUSICIANS</span></div>
+    </div>
+        <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="report-global-npo-landscape.html">ORGS MAP</a>
+      <a href="org-study.html">ORG STUDY</a>
+      <a href="policy-study.html">POLICY STUDY</a>
+      <a href="research.html" class="current" aria-current="page">RESEARCH</a>
+      <a href="plan.html">PLAN</a>
+      <a href="field-news.html">FIELD NEWS</a>
+    <a href="search.html">SEARCH</a>
+    </div>
+  </nav>
+
+
+  <!-- COVER — standard MH&W research cover (pattern: research-detari-2020.html) -->
+  <header class="cover">
+    <div class="cover-inner">
+      <p class="cover-eyebrow">MH&amp;W Research</p>
+      <h1 class="cover-title">Musician Health<br><span class="accent">Research Overview</span></h1>
+      <p class="cover-year">2021&ndash;2026</p>
+      <p class="cover-subtitle">Mental health &middot; occupational health &middot; psychosocial work environment<br>A map of what the literature establishes, and what it does not</p>
+      <div class="cover-meta">
+        <p>Field map &middot; not a systematic review</p>
+        <p>Web of Science + PubMed + Scopus (NTU access) &middot; 263-row corpus</p>
+        <p>Compiled 2026-09-12 &middot; revised 2026-10-01</p>
+      </div>
+    </div>
+    <span class="cover-hint">&darr; Scroll</span>
+  </header>
+
+  <main id="main">
+
+    <section class="section" id="s1">
+      <div class="section-inner">
+        <div class="eyebrow">&sect;1 &middot; Scope</div>
+        <h2 class="sec-title">Scope</h2>
+        <div class="text-col"><p class="lead">Not a systematic review — a map of what the 2021–2026 literature establishes and what it does not.</p></div><div class="table-wrap stack"><table><caption>Search scope, October 2026</caption><tbody><tr><th scope="row">Web of Science</th><td>Core Collection, NTU access, <code>PY=(2021-2026)</code>, three overlapping arms: mental health and psychosocial work environment (580 records), occupational disease and injury (391), music-industry job titles (64). With the PubMed and Scopus hits, screened into the companion corpus table: <strong>263 rows</strong>, 250 of them in a WoS export. Queries and removals are listed there.</td></tr><tr><th scope="row">PubMed</th><td>Mental-health and occupational/psychosocial query sets plus a journal sweep — <strong>346 records</strong>, deduplicated.</td></tr><tr><th scope="row">Scopus</th><td>Same term set, <code>PUBYEAR &gt; 2020</code>, music therapy excluded — <strong>789 records</strong>.</td></tr><tr><th scope="row">Spine</th><td>Kegelaers &amp; Gibney (2025)<sup class="cite"><a href="#src-10" data-src="ref-10" data-tip="Kegelaers, J., &amp; Gibney, A. (2025). The mental health of musicians: A scoping review. Psychology of Music. Advance online publication. https://doi.org/10.1177/03057356251384977 Basis: ✅ Sourced — primary full text read.">10</a></sup> scoping review, 89 studies, read in full.</td></tr><tr><th scope="row">Full text</th><td><strong>50 articles</strong> held. 47 carry a corpus row; Guptill et al. 2022 (<code>10.3389/fpsyg.2022.886815</code>) and Burland 2023 (<code>10.1177/14740222221125629</code>) were removed there as student samples, Hesmondhalgh &amp; Sun 2024 as a book chapter.</td></tr><tr><th scope="row">華藝</th><td>Searched 2026-10-01 to size the Chinese-language literature: 96 hits (title, keywords, abstract; all years), 12 distinct in scope (7 journal articles, 5 theses). Theses excluded by decision; nothing merged into the corpus.</td></tr><tr><th scope="row">Not searched</th><td>PsycInfo · TCI-HSS · Taiwan thesis index · grey literature.</td></tr></tbody></table></div><div class="text-col"><p>Population: professional musicians and music-industry workers. Student- and teacher-only samples excluded; 33 rows have no abstract and were screened by title or full text. Mixed samples kept; five rows tagged amateur remain.</p></div><div class="callout"><h3>PubMed alone misses the sociology</h3><p>The most-cited item here (Scopus, 2026-09-12), Hesmondhalgh's <em>Is music streaming bad for musicians?</em><sup class="cite"><a href="#src-8" data-src="ref-8" data-tip="Hesmondhalgh, D. (2021). Is music streaming bad for musicians? Problems of evidence and argument. New Media &amp; Society, 23(12), 3593–3615. https://doi.org/10.1177/1461444820953541 Basis: ✅ Sourced — primary full text read.">8</a></sup>, is not in PubMed. <em>Poetics</em> and <em>Media, Culture &amp; Society</em> return zero PubMed records, <em>Cultural Trends</em> one.</p></div>
+      </div>
+    </section>
+
+    <section class="section alt" id="s2">
+      <div class="section-inner">
+        <div class="eyebrow">&sect;2 &middot; Structure of the field</div>
+        <h2 class="sec-title">Three literatures that barely cite each other</h2>
+        <div class="domain-grid"><div class="domain-card d1"><div class="dc-head"><h3>A &middot; Performance science / music psychology</h3></div><p>the largest. Performance anxiety, flow, perfectionism, prevalence. Cross-sectional, self-report.</p></div><div class="domain-card d5"><div class="dc-head"><h3>B &middot; Creative labour / cultural sociology</h3></div><p>precarity, streaming, gender and class. Qualitative.</p></div><div class="domain-card d4"><div class="dc-head"><h3>C &middot; Occupational health</h3></div><p>playing-related pain, hearing, dystonia. The first search's keyword rule discarded it; the occupational-disease arm's first screening phase added 77 rows, with about 166 candidates still unscreened.</p></div></div><div class="text-col"><p>A measures how anxious musicians are; B explains why the work produces it. Kegelaers &amp; Gibney's 89 studies come almost entirely from A and C, yet conclude that "structural changes within the industry" are needed — which is B's subject.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="s3">
+      <div class="section-inner">
+        <div class="eyebrow">&sect;3 &middot; Established</div>
+        <h2 class="sec-title">What the evidence establishes</h2>
+        <div class="text-col"><h3 class="sub">3.1 &nbsp;More distress than the general workforce — on one cohort</h3><p>1,607 Norwegian union musicians vs 2,550 workforce respondents, adjusted for age, sex, education, substance use, exercise and finances: distress higher, highest in solo/lead performers, vocalists, keyboard players and traditional-genre musicians (Vaag et al., 2016a)<sup class="cite"><a href="#src-21" data-src="ref-21" data-tip="Vaag, J., Bjørngaard, J. H., &amp; Bjerkeset, O. (2016a). Symptoms of anxiety and depression among Norwegian musicians compared to the general workforce. Psychology of Music, 44(2), 234–248. https://doi.org/10.1177/0305735614564910 Basis: ✅ Sourced — primary full text read.">21</a></sup>. The same cohort underpins Vaag et al. (2016b)<sup class="cite"><a href="#src-22" data-src="ref-22" data-tip="Vaag, J., Bjørngaard, J. H., &amp; Bjerkeset, O. (2016b). Use of psychotherapy and psychotropic medication among Norwegian musicians compared to the general workforce. Psychology of Music, 44(6), 1439–1453. https://doi.org/10.1177/0305735616637132 — metadata only. Basis: ✅ Sourced — abstract or metadata only.">22</a></sup>, Aalberg et al. (2019)<sup class="cite"><a href="#src-1" data-src="ref-1" data-tip="Aalberg, A. L., Saksvik-Lehouillier, I., &amp; Vaag, J. R. (2019). Demands and resources associated with mental health among Norwegian professional musicians. Work, 63(1), 39–47. https://doi.org/10.3233/WOR-192906 Basis: ✅ Sourced — abstract or metadata only.">1</a></sup> and Détári et al. (2020)<sup class="cite"><a href="#src-4" data-src="ref-4" data-tip="Détári, A., Egermann, H., Bjerkeset, O., &amp; Vaag, J. (2020). Psychosocial work environment among musicians and in the general workforce in Norway. Frontiers in Psychology, 11, 1315. https://doi.org/10.3389/fpsyg.2020.01315 Basis: ✅ Sourced — project wiki card.">4</a></sup>; Denmark (n = 986) and Finland are the main independent comparisons.</p></div><div class="text-col"><h3 class="sub">3.2 &nbsp;High demand, high control, low support</h3><p>Same cohort vs 8,517 workforce respondents (Détári et al., 2020)<sup class="cite"><a href="#src-4" data-src="ref-4" data-tip="Détári, A., Egermann, H., Bjerkeset, O., &amp; Vaag, J. (2020). Psychosocial work environment among musicians and in the general workforce in Norway. Frontiers in Psychology, 11, 1315. https://doi.org/10.3389/fpsyg.2020.01315 Basis: ✅ Sourced — project wiki card.">4</a></sup>:</p></div><div class="table-wrap num"><table><caption>D&eacute;t&aacute;ri et al. (2020) &mdash; musicians vs. general workforce</caption><thead><tr><th scope="col">Dimension</th><th scope="col">η²</th><th scope="col">Direction</th></tr></thead><tbody><tr><td>Job demands</td><td class="num">0.155</td><td>higher</td></tr><tr><td>Job control</td><td class="num">0.141</td><td><strong>higher</strong></td></tr><tr><td>Work–family conflict</td><td class="num">0.086</td><td>higher</td></tr><tr><td>Social support</td><td class="num">0.077</td><td>lower</td></tr><tr><td>Peer acknowledgment</td><td class="num">0.074</td><td>lower</td></tr><tr><td>Salary reward</td><td class="num">0.015</td><td>trivial</td></tr><tr><td>Job motivation</td><td class="num">0.007</td><td>trivial</td></tr></tbody></table></div><div class="text-col"><p>Not the low-control profile most occupational-stress instruments were built to detect.</p></div><div class="text-col"><h3 class="sub">3.3 &nbsp;Bullying in the most secure jobs</h3><p>Finnish symphony orchestras vs the Finnish workforce, same questionnaire (Vastamäki et al., 2023)<sup class="cite"><a href="#src-24" data-src="ref-24" data-tip="Vastamäki, M., Heliövaara, M., Vastamäki, H., &amp; Ristolainen, L. (2023). Orchestra musicians&#x27; work environment and health versus general workforce. Journal of Occupational and Environmental Medicine, 65(4), 344–348. https://doi.org/10.1097/JOM.0000000000002763 Basis: ✅ Sourced — primary full text read.">24</a></sup>: noise 8×, poor lighting 22×, <strong>mental violence or bullying OR 3.0 (95% CI 2.0–4.7)</strong>. These are the 2002 wave (n = 345, against Health 2000); in 2011 (n = 195, against Health 2011) bullying was <strong>OR 2.1 (1.2–3.7)</strong>, noise 16.3 (11.7–22.7), lighting 31.8 (21.2–47.6).</p></div><div class="text-col"><h3 class="sub">3.4 &nbsp;For depression and anxiety, only job insecurity survives adjustment</h3><p>Four stress factors — work insecurity, touring, performance, professional relationships (King et al., 2024)<sup class="cite"><a href="#src-11" data-src="ref-11" data-tip="King, B., Koenig, J., &amp; Berg, L. (2024). Popular musician occupational stress and psychological ill health: An exploratory factor analysis. Medical Problems of Performing Artists, 39(2), 72–81. https://doi.org/10.21091/mppa.2024.2010 Basis: ✅ Sourced — abstract or metadata only.">11</a></sup>. Adjusted, work insecurity alone predicts depression (OR 5.42, 3.23–9.09) and anxiety (OR 5.95, 3.51–10.11); touring stress inverts (depression OR 0.59, 0.40–0.89). For alcohol misuse, professional relationships survive (OR 1.66, 1.04–2.65) and performance stress inverts (0.60, 0.40–0.91). Sample: 317 of 655 US musicians invited because they had used mental-health services in the preceding two years, fielded 2015 (Berg et al., 2022)<sup class="cite"><a href="#src-2" data-src="ref-2" data-tip="Berg, L., King, B., Koenig, J., &amp; McRoberts, R. L. (2022). Musician occupational and financial stress and mental health burden. Psychology of Music, 50(6), 1801–1815. https://doi.org/10.1177/03057356211064642 Basis: ✅ Sourced — primary full text read.">2</a></sup> — the selection §4.1 turns on.</p></div><div class="text-col"><h3 class="sub">3.5 &nbsp;A clinical caseload</h3><p>678 musicians and students at Charité's musicians' clinic; 46 fully assessed (Fernholz et al., 2026)<sup class="cite"><a href="#src-6" data-src="ref-6" data-tip="Fernholz, I., Hering, C., Kunte, H., Mumm, J., Ströhle, A., Schmidt, A., Bendau, A., &amp; Plag, J. (2026). Psychiatric diagnoses of professional musicians: Results of an outpatient service specializing in musicians&#x27; health. Psychology of Music, 54(1), 139–156. https://doi.org/10.1177/03057356241307570 Basis: ✅ Sourced — primary full text read.">6</a></sup>: depression 39%, performance anxiety 26%, adjustment disorder 13%, somatoform 11%; 28% personality disorder or accentuation; 41.3% two or more diagnoses. Diagnostic composition, not prevalence.</p></div><div class="text-col"><h3 class="sub">3.6 &nbsp;Income predicts wellbeing, not anxiety</h3><p>986 Danish musicians: anxiety predicted by age ≤ 40, female gender and subjective career status; depression by age and gender; wellbeing by low income (Musgrave et al., 2025)<sup class="cite"><a href="#src-14" data-src="ref-14" data-tip="Musgrave, G., Gross, S. A., &amp; Carney, D. (2025). Determinants of anxiety, depression and subjective wellbeing among musicians in Denmark: Findings from the &#x27;When Music Speaks&#x27; project. Scandinavian Journal of Psychology, 66(3), 429–445. https://doi.org/10.1111/sjop.13095 Basis: ✅ Sourced — primary full text read.">14</a></sup>.</p></div>
+      </div>
+    </section>
+
+    <section class="section alt" id="s4">
+      <div class="section-inner">
+        <div class="eyebrow">&sect;4 &middot; Not established</div>
+        <h2 class="sec-title">What it does not establish</h2>
+        <div class="text-col"><h3 class="sub">4.1 &nbsp;Mental-health prevalence</h3><p>No probability-sample study exists in any country; every headline mental-health rate comes from a self-selected sample. <em>Quote the comparison, not the rate.</em></p></div><div class="text-col"><h3 class="sub">4.2 &nbsp;Which intervention works</h3><p>Nicholl &amp; Abbott (2026)<sup class="cite"><a href="#src-17" data-src="ref-17" data-tip="Nicholl, T. J., &amp; Abbott, M. J. (2026). Treatments for performance anxiety in musicians across the lifespan: A systematic review and meta-analysis. Psychology of Music, 54(4), 617–657. https://doi.org/10.1177/03057356251322655 Basis: ✅ Sourced — primary full text read.">17</a></sup> found 25 performance-anxiety RCTs and obtained data for 16 (N = 543). Treatment g = 1.21 [0.89, 1.53]; <strong>control g = 0.57 [0.28, 0.86]</strong>; difference p = .004; treatment prediction interval −0.21 to 2.82. Something helps; about half the improvement is not the treatment; the authors could not isolate the active component. A second 2026 meta-analysis covers mindfulness- and acceptance-based interventions only (Zhang et al., 2026)<sup class="cite"><a href="#src-28" data-src="ref-28" data-tip="Zhang, C., Shan, X., Zhang, H., Zhang, M., &amp; Zhou, H. (2026). Mindfulness- and acceptance-based interventions for music performance anxiety: A three-level meta-analysis of therapeutic effects, mechanisms, and boundary conditions. Frontiers in Psychology, 17, 1851221. https://doi.org/10.3389/fpsyg.2026.1851221 — abstract only. Basis: ✅ Sourced — abstract or metadata only.">28</a></sup>.</p></div><div class="text-col"><h3 class="sub">4.3 &nbsp;The mechanism</h3><p>Vachet (2025<sup class="cite"><a href="#src-23" data-src="ref-23" data-tip="Vachet, J. (2025). Toward a sociological explanation of anxiety: Precariousness, class and gender among independent musicians. The Sociological Review, 73(5), 1159–1176. https://doi.org/10.1177/00380261241276928 Basis: ✅ Sourced — primary full text read.">23</a></sup>; semi-professional musicians in seven locations) argues anxiety is produced by precarity, unevenly by gender and class; the Danish survey finds income does not predict it (§3.6). Two reconciliations — precarity as unpredictability rather than low income; a welfare floor decoupling the two — are hypotheses. This is the field's most productive open question.</p></div><div class="text-col"><h3 class="sub">4.4 &nbsp;Workers beyond the performer are barely studied</h3><p>Mental health: one international touring survey of 1,154 artists and crew (Newman et al., 2022<sup class="cite"><a href="#src-15" data-src="ref-15" data-tip="Newman, C., George, R. P., Beitz, T., Bergson, Z., &amp; Zemon, V. (2022). Mental health issues among international touring professionals in the music industry. Journal of Psychiatric Research, 145, 243–249. https://doi.org/10.1016/j.jpsychires.2021.12.031 Basis: ✅ Sourced — abstract or metadata only.">15</a></sup>, 508 completers; re-analysed by Bergson et al., 2024<sup class="cite"><a href="#src-3" data-src="ref-3" data-tip="Bergson, Z., Newman, C., George, R. P., Beitz, T., &amp; Zemon, V. (2024). Trait mindfulness plays a protective role in the positive relationships between stress, depressive symptoms, and suicidal behavior in an at-risk population: Music industry touring professionals. Psychology of Music, 52(1), 75–92. https://doi.org/10.1177/03057356231159217 Basis: ✅ Sourced — abstract or metadata only.">3</a></sup>, n = 550), one COVID multiwave study (Scott et al., 2024)<sup class="cite"><a href="#src-18" data-src="ref-18" data-tip="Scott, K. L., Ferrise, E., Sheridan, S., &amp; Zagenczyk, T. J. (2024). Work-related resilience, engagement and wellbeing among music industry workers during the Covid-19 pandemic: A multiwave model of mindfulness and hope. Stress and Health, 40(5), e3466. https://doi.org/10.1002/smi.3466 — metadata only. Basis: ✅ Sourced — abstract or metadata only.">18</a></sup>, and interviews and focus groups with 15 professionals including producers and managers (Jepson et al., 2025)<sup class="cite"><a href="#src-9" data-src="ref-9" data-tip="Jepson, R., Sims, M., Ravalier, J., &amp; Brougham, R. (2025). Exploring the mental health challenges of music industry professionals: Recommendation for an industry-wide code of practice. Music &amp; Science, 8, 20592043251394824. https://doi.org/10.1177/20592043251394824 — abstract only. Basis: ✅ Sourced — abstract or metadata only.">9</a></sup>. Hearing: 27 live-music sound engineers, 30% with constant tinnitus (McGinnity et al., 2021)<sup class="cite"><a href="#src-12" data-src="ref-12" data-tip="McGinnity, S., Beach, E. F., Cowan, R. S. C., &amp; Mulder, J. (2021). The hearing health of live-music sound engineers. Archives of Environmental &amp; Occupational Health, 76(6), 301–312. https://doi.org/10.1080/19338244.2020.1828241 — abstract only. Basis: ✅ Sourced — abstract or metadata only.">12</a></sup>. Work conditions: producers (Ng &amp; Gamble, 2026<sup class="cite"><a href="#src-16" data-src="ref-16" data-tip="Ng, J., &amp; Gamble, S. (2026). Hip-hop music producers&#x27; labour in the digital music economy: Self-promotion, social media and platform gatekeeping. New Media &amp; Society, 28(2), 530–548. https://doi.org/10.1177/14614448241295304 — abstract only. Basis: ✅ Sourced — abstract or metadata only.">16</a></sup>; Woods &amp; Davis, 2026)<sup class="cite"><a href="#src-26" data-src="ref-26" data-tip="Woods, C., &amp; Davis, J. (2026). &quot;If you don&#x27;t have a strong social media game, you might as well hang up your instrument&quot;: Algorithms, (mis)interpellation, and planetary Silicon Valley ideology. Organization. Advance online publication. https://doi.org/10.1177/13505084261447974 — abstract only. Basis: ✅ Sourced — abstract or metadata only.">26</a></sup>, composers (Dowd &amp; Park, 2024)<sup class="cite"><a href="#src-5" data-src="ref-5" data-tip="Dowd, T. J., &amp; Park, J. H. (2024). She still works hard for the money: Composers, precarious work, and the gender pay gap. Work and Occupations, 51(3), 408–476. https://doi.org/10.1177/07308884231165079 — abstract only. Basis: ✅ Sourced — abstract or metadata only.">5</a></sup>, songwriters (Smolka &amp; Heugens, 2026)<sup class="cite"><a href="#src-19" data-src="ref-19" data-tip="Smolka, K. M., &amp; Heugens, P. P. M. A. R. (2026). &quot;I hold on&quot;: How country music songwriters cope with the precarity of craft work. Journal of Management. Advance online publication. https://doi.org/10.1177/01492063251398783 — abstract only. Basis: ✅ Sourced — abstract or metadata only.">19</a></sup>. The job-title arm (§1) named crew, roadies and tour managers; none of its 61 records new to the corpus studied them.</p></div><div class="text-col"><h3 class="sub">4.5 &nbsp;Countries</h3><p>Kegelaers &amp; Gibney's 89 studies: UK 14, Germany 13, US 12, Australia 8, Norway 6, Canada / Finland / Netherlands / Spain 4 each, China 1, Singapore 1. The corpus cannot update this count: its Web of Science exports carry no affiliations. East Asian samples appear in its 2025–2026 titles and abstracts (e.g. Yang, 2026<sup class="cite"><a href="#src-27" data-src="ref-27" data-tip="Yang, Y. (2026). Negotiating gender and creative work in Shanghai&#x27;s music industry: Female creative workers&#x27; career choices and development. Frontiers in Sociology, 11, 1848381. https://doi.org/10.3389/fsoc.2026.1848381 Basis: ✅ Sourced — primary full text read.">27</a></sup>, Shanghai; Takagi et al., 2026<sup class="cite"><a href="#src-20" data-src="ref-20" data-tip="Takagi, S., Murai, A., &amp; Yoshie, M. (2026). Music-related background and experience as correlates of music performance anxiety among Japanese musicians. Frontiers in Psychology, 17, 1763814. https://doi.org/10.3389/fpsyg.2026.1763814 — abstract only. Basis: ✅ Sourced — abstract or metadata only.">20</a></sup>, Japan). English-language record only.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="s5">
+      <div class="section-inner">
+        <div class="eyebrow">&sect;5 &middot; Recent change</div>
+        <h2 class="sec-title">What changed in 2025–2026</h2>
+        <div class="text-col"><ol><li><strong>Clinical data</strong> (§3.5).</li><li><strong>Occupational health reviewed the field</strong> — a mapping review in <em>J Occup Environ Hyg</em> (Fukumura et al., 2026)<sup class="cite"><a href="#src-7" data-src="ref-7" data-tip="Fukumura, Y. E., Wolff, A., Kijel, M. T., Lin, E., &amp; Roll, S. C. (2026). Mapping review of musician well-being literature. Journal of Occupational and Environmental Hygiene, 23(1), 48–58. https://doi.org/10.1080/15459624.2025.2544749 Basis: ✅ Sourced — abstract or metadata only.">7</a></sup>.</li><li><strong>A and B converging</strong> — Vachet (2025)<sup class="cite"><a href="#src-23" data-src="ref-23" data-tip="Vachet, J. (2025). Toward a sociological explanation of anxiety: Precariousness, class and gender among independent musicians. The Sociological Review, 73(5), 1159–1176. https://doi.org/10.1177/00380261241276928 Basis: ✅ Sourced — primary full text read.">23</a></sup> in mainstream sociology; Musgrave (2026)<sup class="cite"><a href="#src-13" data-src="ref-13" data-tip="Musgrave, G. (2026). The &#x27;Creative Labour Sustainability Framework&#x27;: Developing a governance-oriented risk assessment for harm prevention in the creative industries. Creative Industries Journal, 1–27. https://doi.org/10.1080/17510694.2026.2708534 Basis: ✅ Sourced — abstract or metadata only.">13</a></sup> recasting the structural account as a risk assessment.</li><li><strong>Reviews multiplied</strong> — 24 corpus rows typed Review across 2021–2026 (0, 3, 2, 0, 8, 11 by year); three 2026 reviews are meta-analyses. Earlier reviews exist (Willis et al., 2019<sup class="cite"><a href="#src-25" data-src="ref-25" data-tip="Willis, S., Neil, R., Mellick, M. C., &amp; Wasley, D. (2019). The relationship between occupational demands and well-being of performing artists: A systematic review. Frontiers in Psychology, 10, 393. https://doi.org/10.3389/fpsyg.2019.00393 Basis: ✅ Sourced — primary full text read.">25</a></sup>; performance-anxiety reviews back to 2005, per Nicholl &amp; Abbott). A literature large enough to synthesise, still short of primary studies worth synthesising.</li></ol></div>
+      </div>
+    </section>
+
+    <section class="section alt" id="s6">
+      <div class="section-inner">
+        <div class="eyebrow">&sect;6 &middot; Design</div>
+        <h2 class="sec-title">The comparison design</h2>
+        <div class="text-col"><p>The strongest studies give one instrument to musicians and to a national workforce sample. Vastamäki's waves align but are two decades old (§3.3); Vaag's align (musicians Feb–Apr 2013; workforce Oct 2012–Jan 2013) but use a symptom checklist; Détári compares 2013 musicians with a 2009–10 workforce, a gap the paper does not acknowledge.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="s7">
+      <div class="section-inner">
+        <div class="eyebrow">&sect;7 &middot; Source · Method · Basis</div>
+        <h2 class="sec-title">Source · Method · Basis</h2>
+        <div class="text-col"><p><strong>Method.</strong> PubMed via E-utilities; Scopus, Web of Science and 華藝 via NTU IP. DOIs resolved through Crossref; open-access copies via Unpaywall and Europe PMC. PDFs in <code>raw/papers/musician_wellbeing_2021plus/</code>, each checked against its first-page title.</p></div><div class="conf-block"><div class="conf-item ok"><div class="conf-tag" style="color:var(--spectrum-4)">&#9989; Sourced — primary full text read </div><p>Kegelaers &amp; Gibney 2025 &middot; Vaag et al. 2016a &middot; Vastamäki et al. 2023 &middot; Fernholz et al. 2026 &middot; Musgrave, Gross &amp; Carney 2025 &middot; Nicholl &amp; Abbott 2026 &middot; Vachet 2025 &middot; Hesmondhalgh 2021 &middot; Willis et al. 2019 &middot; Berg et al. 2022 &middot; Yang 2026</p></div><div class="conf-item ok"><div class="conf-tag" style="color:var(--spectrum-4)">&#9989; Sourced — project wiki card </div><p>Détári et al. 2020 (<code>wiki/papers/detari_2020.md</code>)</p></div><div class="conf-item ok"><div class="conf-tag" style="color:var(--spectrum-4)">&#9989; Sourced — abstract or metadata only </div><p>Fukumura et al. 2026 &middot; Musgrave 2026 &middot; Newman et al. 2022 (PubMed abstract) &middot; Bergson et al. 2024 &middot; Scott et al. 2024 &middot; Vaag et al. 2016b &middot; Aalberg et al. 2019 and King et al. 2024 (read earlier through project cards) &middot; Jepson et al. 2025 &middot; McGinnity et al. 2021 &middot; Ng &amp; Gamble 2026 &middot; Woods &amp; Davis 2026 &middot; Dowd &amp; Park 2024 &middot; Smolka &amp; Heugens 2026 &middot; Takagi et al. 2026 &middot; Zhang et al. 2026</p></div><div class="conf-item ok"><div class="conf-tag" style="color:var(--spectrum-4)">&#9989; Sourced — corpus pipeline (<code>tools/corpus/</code>) </div><p>§1 counts &middot; §2's 77 rows (<code>addocc.py</code>) &middot; §4.4's job-title arm &middot; §5's review count</p></div><div class="conf-item warn"><div class="conf-tag" style="color:var(--spectrum-2)">&#9888; Inferred — our reasoning </div><p>§2's three-literature split and cross-citation claim &middot; §3.1's one-cohort observation &middot; §4.3's hypotheses and "most productive open question"</p></div></div><p class="smeta">Basis: &#9989; Sourced = traceable to a source we link to. &#9888; Inferred = no source states it; our own reasoning.</p><div class="text-col"><p><strong>Weaknesses.</strong> §3, §4.1–4.3 and §6 come from the PubMed and Scopus reading and were not re-derived against the corpus; §1, §2's C layer, §4.4, §4.5 and §5 were (2026-10-01). Missing PsycInfo most likely understates literature A; missing grey literature makes §4.1 look cleaner than the public debate.</p></div>
+        <div class="refs"><div class="refs-title">References</div><ol><li id="src-1" data-src="ref-1">Aalberg, A. L., Saksvik-Lehouillier, I., &amp; Vaag, J. R. (2019). Demands and resources associated with mental health among Norwegian professional musicians. <em>Work, 63</em>(1), 39–47. <a href="https://doi.org/10.3233/WOR-192906" target="_blank" rel="noopener">DOI 10.3233/WOR-192906</a> Basis: ✅ Sourced — abstract or metadata only.</li><li id="src-2" data-src="ref-2">Berg, L., King, B., Koenig, J., &amp; McRoberts, R. L. (2022). Musician occupational and financial stress and mental health burden. <em>Psychology of Music, 50</em>(6), 1801–1815. <a href="https://doi.org/10.1177/03057356211064642" target="_blank" rel="noopener">DOI 10.1177/03057356211064642</a> Basis: ✅ Sourced — primary full text read.</li><li id="src-3" data-src="ref-3">Bergson, Z., Newman, C., George, R. P., Beitz, T., &amp; Zemon, V. (2024). Trait mindfulness plays a protective role in the positive relationships between stress, depressive symptoms, and suicidal behavior in an at-risk population: Music industry touring professionals. <em>Psychology of Music, 52</em>(1), 75–92. <a href="https://doi.org/10.1177/03057356231159217" target="_blank" rel="noopener">DOI 10.1177/03057356231159217</a> Basis: ✅ Sourced — abstract or metadata only.</li><li id="src-4" data-src="ref-4">Détári, A., Egermann, H., Bjerkeset, O., &amp; Vaag, J. (2020). Psychosocial work environment among musicians and in the general workforce in Norway. <em>Frontiers in Psychology, 11</em>, 1315. <a href="https://doi.org/10.3389/fpsyg.2020.01315" target="_blank" rel="noopener">DOI 10.3389/fpsyg.2020.01315</a> Basis: ✅ Sourced — project wiki card.</li><li id="src-5" data-src="ref-5">Dowd, T. J., &amp; Park, J. H. (2024). She <em>still</em> works hard for the money: Composers, precarious work, and the gender pay gap. <em>Work and Occupations, 51</em>(3), 408–476. <a href="https://doi.org/10.1177/07308884231165079" target="_blank" rel="noopener">DOI 10.1177/07308884231165079</a> — abstract only. Basis: ✅ Sourced — abstract or metadata only.</li><li id="src-6" data-src="ref-6">Fernholz, I., Hering, C., Kunte, H., Mumm, J., Ströhle, A., Schmidt, A., Bendau, A., &amp; Plag, J. (2026). Psychiatric diagnoses of professional musicians: Results of an outpatient service specializing in musicians' health. <em>Psychology of Music, 54</em>(1), 139–156. <a href="https://doi.org/10.1177/03057356241307570" target="_blank" rel="noopener">DOI 10.1177/03057356241307570</a> Basis: ✅ Sourced — primary full text read.</li><li id="src-7" data-src="ref-7">Fukumura, Y. E., Wolff, A., Kijel, M. T., Lin, E., &amp; Roll, S. C. (2026). Mapping review of musician well-being literature. <em>Journal of Occupational and Environmental Hygiene, 23</em>(1), 48–58. <a href="https://doi.org/10.1080/15459624.2025.2544749" target="_blank" rel="noopener">DOI 10.1080/15459624.2025.2544749</a> Basis: ✅ Sourced — abstract or metadata only.</li><li id="src-8" data-src="ref-8">Hesmondhalgh, D. (2021). Is music streaming bad for musicians? Problems of evidence and argument. <em>New Media &amp; Society, 23</em>(12), 3593–3615. <a href="https://doi.org/10.1177/1461444820953541" target="_blank" rel="noopener">DOI 10.1177/1461444820953541</a> Basis: ✅ Sourced — primary full text read.</li><li id="src-9" data-src="ref-9">Jepson, R., Sims, M., Ravalier, J., &amp; Brougham, R. (2025). Exploring the mental health challenges of music industry professionals: Recommendation for an industry-wide code of practice. <em>Music &amp; Science, 8</em>, 20592043251394824. <a href="https://doi.org/10.1177/20592043251394824" target="_blank" rel="noopener">DOI 10.1177/20592043251394824</a> — abstract only. Basis: ✅ Sourced — abstract or metadata only.</li><li id="src-10" data-src="ref-10">Kegelaers, J., &amp; Gibney, A. (2025). The mental health of musicians: A scoping review. <em>Psychology of Music</em>. Advance online publication. <a href="https://doi.org/10.1177/03057356251384977" target="_blank" rel="noopener">DOI 10.1177/03057356251384977</a> Basis: ✅ Sourced — primary full text read.</li><li id="src-11" data-src="ref-11">King, B., Koenig, J., &amp; Berg, L. (2024). Popular musician occupational stress and psychological ill health: An exploratory factor analysis. <em>Medical Problems of Performing Artists, 39</em>(2), 72–81. <a href="https://doi.org/10.21091/mppa.2024.2010" target="_blank" rel="noopener">DOI 10.21091/mppa.2024.2010</a> Basis: ✅ Sourced — abstract or metadata only.</li><li id="src-12" data-src="ref-12">McGinnity, S., Beach, E. F., Cowan, R. S. C., &amp; Mulder, J. (2021). The hearing health of live-music sound engineers. <em>Archives of Environmental &amp; Occupational Health, 76</em>(6), 301–312. <a href="https://doi.org/10.1080/19338244.2020.1828241" target="_blank" rel="noopener">DOI 10.1080/19338244.2020.1828241</a> — abstract only. Basis: ✅ Sourced — abstract or metadata only.</li><li id="src-13" data-src="ref-13">Musgrave, G. (2026). The 'Creative Labour Sustainability Framework': Developing a governance-oriented risk assessment for harm prevention in the creative industries. <em>Creative Industries Journal</em>, 1–27. <a href="https://doi.org/10.1080/17510694.2026.2708534" target="_blank" rel="noopener">DOI 10.1080/17510694.2026.2708534</a> Basis: ✅ Sourced — abstract or metadata only.</li><li id="src-14" data-src="ref-14">Musgrave, G., Gross, S. A., &amp; Carney, D. (2025). Determinants of anxiety, depression and subjective wellbeing among musicians in Denmark: Findings from the 'When Music Speaks' project. <em>Scandinavian Journal of Psychology, 66</em>(3), 429–445. <a href="https://doi.org/10.1111/sjop.13095" target="_blank" rel="noopener">DOI 10.1111/sjop.13095</a> Basis: ✅ Sourced — primary full text read.</li><li id="src-15" data-src="ref-15">Newman, C., George, R. P., Beitz, T., Bergson, Z., &amp; Zemon, V. (2022). Mental health issues among international touring professionals in the music industry. <em>Journal of Psychiatric Research, 145</em>, 243–249. <a href="https://doi.org/10.1016/j.jpsychires.2021.12.031" target="_blank" rel="noopener">DOI 10.1016/j.jpsychires.2021.12.031</a> Basis: ✅ Sourced — abstract or metadata only.</li><li id="src-16" data-src="ref-16">Ng, J., &amp; Gamble, S. (2026). Hip-hop music producers' labour in the digital music economy: Self-promotion, social media and platform gatekeeping. <em>New Media &amp; Society, 28</em>(2), 530–548. <a href="https://doi.org/10.1177/14614448241295304" target="_blank" rel="noopener">DOI 10.1177/14614448241295304</a> — abstract only. Basis: ✅ Sourced — abstract or metadata only.</li><li id="src-17" data-src="ref-17">Nicholl, T. J., &amp; Abbott, M. J. (2026). Treatments for performance anxiety in musicians across the lifespan: A systematic review and meta-analysis. <em>Psychology of Music, 54</em>(4), 617–657. <a href="https://doi.org/10.1177/03057356251322655" target="_blank" rel="noopener">DOI 10.1177/03057356251322655</a> Basis: ✅ Sourced — primary full text read.</li><li id="src-18" data-src="ref-18">Scott, K. L., Ferrise, E., Sheridan, S., &amp; Zagenczyk, T. J. (2024). Work-related resilience, engagement and wellbeing among music industry workers during the Covid-19 pandemic: A multiwave model of mindfulness and hope. <em>Stress and Health, 40</em>(5), e3466. <a href="https://doi.org/10.1002/smi.3466" target="_blank" rel="noopener">DOI 10.1002/smi.3466</a> — metadata only. Basis: ✅ Sourced — abstract or metadata only.</li><li id="src-19" data-src="ref-19">Smolka, K. M., &amp; Heugens, P. P. M. A. R. (2026). "I hold on": How country music songwriters cope with the precarity of craft work. <em>Journal of Management</em>. Advance online publication. <a href="https://doi.org/10.1177/01492063251398783" target="_blank" rel="noopener">DOI 10.1177/01492063251398783</a> — abstract only. Basis: ✅ Sourced — abstract or metadata only.</li><li id="src-20" data-src="ref-20">Takagi, S., Murai, A., &amp; Yoshie, M. (2026). Music-related background and experience as correlates of music performance anxiety among Japanese musicians. <em>Frontiers in Psychology, 17</em>, 1763814. <a href="https://doi.org/10.3389/fpsyg.2026.1763814" target="_blank" rel="noopener">DOI 10.3389/fpsyg.2026.1763814</a> — abstract only. Basis: ✅ Sourced — abstract or metadata only.</li><li id="src-21" data-src="ref-21">Vaag, J., Bjørngaard, J. H., &amp; Bjerkeset, O. (2016a). Symptoms of anxiety and depression among Norwegian musicians compared to the general workforce. <em>Psychology of Music, 44</em>(2), 234–248. <a href="https://doi.org/10.1177/0305735614564910" target="_blank" rel="noopener">DOI 10.1177/0305735614564910</a> Basis: ✅ Sourced — primary full text read.</li><li id="src-22" data-src="ref-22">Vaag, J., Bjørngaard, J. H., &amp; Bjerkeset, O. (2016b). Use of psychotherapy and psychotropic medication among Norwegian musicians compared to the general workforce. <em>Psychology of Music, 44</em>(6), 1439–1453. <a href="https://doi.org/10.1177/0305735616637132" target="_blank" rel="noopener">DOI 10.1177/0305735616637132</a> — metadata only. Basis: ✅ Sourced — abstract or metadata only.</li><li id="src-23" data-src="ref-23">Vachet, J. (2025). Toward a sociological explanation of anxiety: Precariousness, class and gender among independent musicians. <em>The Sociological Review, 73</em>(5), 1159–1176. <a href="https://doi.org/10.1177/00380261241276928" target="_blank" rel="noopener">DOI 10.1177/00380261241276928</a> Basis: ✅ Sourced — primary full text read.</li><li id="src-24" data-src="ref-24">Vastamäki, M., Heliövaara, M., Vastamäki, H., &amp; Ristolainen, L. (2023). Orchestra musicians' work environment and health versus general workforce. <em>Journal of Occupational and Environmental Medicine, 65</em>(4), 344–348. <a href="https://doi.org/10.1097/JOM.0000000000002763" target="_blank" rel="noopener">DOI 10.1097/JOM.0000000000002763</a> Basis: ✅ Sourced — primary full text read.</li><li id="src-25" data-src="ref-25">Willis, S., Neil, R., Mellick, M. C., &amp; Wasley, D. (2019). The relationship between occupational demands and well-being of performing artists: A systematic review. <em>Frontiers in Psychology, 10</em>, 393. <a href="https://doi.org/10.3389/fpsyg.2019.00393" target="_blank" rel="noopener">DOI 10.3389/fpsyg.2019.00393</a> Basis: ✅ Sourced — primary full text read.</li><li id="src-26" data-src="ref-26">Woods, C., &amp; Davis, J. (2026). "If you don't have a strong social media game, you might as well hang up your instrument": Algorithms, (mis)interpellation, and planetary Silicon Valley ideology. <em>Organization</em>. Advance online publication. <a href="https://doi.org/10.1177/13505084261447974" target="_blank" rel="noopener">DOI 10.1177/13505084261447974</a> — abstract only. Basis: ✅ Sourced — abstract or metadata only.</li><li id="src-27" data-src="ref-27">Yang, Y. (2026). Negotiating gender and creative work in Shanghai's music industry: Female creative workers' career choices and development. <em>Frontiers in Sociology, 11</em>, 1848381. <a href="https://doi.org/10.3389/fsoc.2026.1848381" target="_blank" rel="noopener">DOI 10.3389/fsoc.2026.1848381</a> Basis: ✅ Sourced — primary full text read.</li><li id="src-28" data-src="ref-28">Zhang, C., Shan, X., Zhang, H., Zhang, M., &amp; Zhou, H. (2026). Mindfulness- and acceptance-based interventions for music performance anxiety: A three-level meta-analysis of therapeutic effects, mechanisms, and boundary conditions. <em>Frontiers in Psychology, 17</em>, 1851221. <a href="https://doi.org/10.3389/fpsyg.2026.1851221" target="_blank" rel="noopener">DOI 10.3389/fpsyg.2026.1851221</a> — abstract only. Basis: ✅ Sourced — abstract or metadata only.</li></ol></div>
+      </div>
+    </section>
+
+    <nav class="related-block" aria-label="Related on this site">
+      <p class="related-title">Related</p>
+      <ul>
+        <li><a href="research-corpus-2021-2026.html">&rarr; The searchable corpus behind this reading &mdash; 263 records, 230 author abstracts</a></li>
+        <li><a href="research.html">&larr; Research (all readings)</a></li>
+        <li><a href="research-detari-2020.html">D&eacute;t&aacute;ri et al. (2020) &mdash; psychosocial work environment, in depth</a></li>
+        <li><a href="research-musgrave-lamis-2025.html">Musgrave &amp; Lamis (2025) &mdash; musicians and suicide</a></li>
+        <li><a href="research-rousseau-2026.html">Rousseau et al. (2026) &mdash; metal musicians&rsquo; health</a></li>
+        <li><a href="research-tools.html">Research tools &mdash; frameworks and instruments for a Taiwan study</a></li>
+      </ul>
+    </nav>
+  </main>
+
+
+  <script>
+  (function() {
+    'use strict';
+    // Close mobile menu on link tap
+    document.querySelectorAll('.nav-links a').forEach(function(a){
+      a.addEventListener('click', function(){
+        var nav = document.querySelector('.nav');
+        var links = document.querySelector('.nav-links');
+        var toggle = document.querySelector('.nav-toggle');
+        if (links.classList.contains('show')) {
+          links.classList.remove('show'); nav.classList.remove('open');
+          toggle.classList.remove('open'); toggle.setAttribute('aria-expanded','false');
+        }
+      });
+    });
+    // Scroll reveal (respects reduced motion)
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduce && 'IntersectionObserver' in window) {
+      document.querySelectorAll('h2.sec-title, .section .text-col, .stat-strip, .domain-card, .comment-list > li, .callout, .conf-item, .refs, .table-wrap, figure').forEach(function(el){
+        el.classList.add('reveal');
+      });
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (!e.isIntersecting) return;
+          var el = e.target, p = el.parentElement, idx = 0;
+          if (p){ var sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+          el.style.transitionDelay = (Math.min(idx,6) * 60) + 'ms';
+          el.classList.add('in'); io.unobserve(el);
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+      document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+    }
+  })();
+  </script>
+  <!-- nav scroll-state fix: transparent over hero, blurred bar once scrolled -->
+  <style>
+    nav.nav, .nav { transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease); border-bottom: 1px solid transparent; }
+    nav.nav.scrolled, .nav.scrolled {
+      right: 0;
+      background: rgba(244, 244, 245, 0.45);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    @media (prefers-reduced-motion: reduce){ nav.nav, .nav { transition: none; } }
+  </style>
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav, .nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var c = document.querySelector('.pages-container, .pages');
+    if (c && getComputedStyle(c).overflowY !== 'visible') {
+      var ticking = false;
+      c.addEventListener('scroll', function(){ if (ticking) return; ticking = true; requestAnimationFrame(function(){ ticking = false; setS(c.scrollTop > THRESH); }); }, { passive: true });
+      setS(c.scrollTop > THRESH); return;
+    }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden', 'true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+</body>
+</html>
+
