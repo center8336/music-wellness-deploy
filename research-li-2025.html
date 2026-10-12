@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Li, Sakata &amp; Donn (2025) &mdash; a critical reading of the scoping review of mental health literacy in performing and creative artists &middot; MH&W Research">
+  <title>Li et al. (2025) &middot; MH&W</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --black: #09090b;
+      --off-black: #141416;
+      --charcoal: #27272a;
+      --graphite: #3f3f46;
+      --grey: #71717a;
+      --grey-light: #a1a1aa;
+      --silver: #d4d4d8;
+      --snow: #f4f4f5;
+      --white: #fafafa;
+      --purple-light: #CBB9D6;
+      --purple-deep: #6667AB;
+      --signal: var(--purple-deep);
+      --signal-dim: #565799;
+      --signal-bg: rgba(102, 103, 171, 0.08);
+      --signal-glow: rgba(102, 103, 171, 0.2);
+      --spectrum-1: #d4799c;
+      --spectrum-2: #e8a87c;
+      --spectrum-3: #d4c97a;
+      --spectrum-4: #85c9a3;
+      --spectrum-5: #7aaed4;
+      --spectrum-6: #b8a9d4;
+      --bg-light: var(--snow);
+      --bg-dark: var(--black);
+      --bg-card: var(--white);
+      --bg-card-dark: var(--off-black);
+      --border-light: rgba(0,0,0,0.07);
+      --border-dark: rgba(255,255,255,0.1);
+      --font-display: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-body: 'Fraunces', 'Noto Serif TC', Georgia, serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font: var(--font-body);
+      --text-hero: clamp(3.5rem, 8vw, 6.5rem);
+      --text-h1: clamp(2rem, 4.5vw, 3rem);
+      --text-h2: clamp(1.5rem, 3vw, 2rem);
+      --text-h3: clamp(1rem, 2vw, 1.3rem);
+      --text-body: 1rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+      --text-micro:0.6875rem;--text-caption:0.75rem;--text-fine:0.875rem;--text-small:0.9375rem;
+      --lh-prose:1.7;--wt-prose:440;
+      --measure-prose:66ch;--measure-cjk:38em;--measure-ref:74ch;
+      --label-ink:var(--graphite);
+      --font-cjk:'Noto Serif TC', serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur: 0.3s;
+      --dur-slow: 0.6s;
+      --dur-slower: 1.1s;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius: 4px;
+      --radius-lg: 6px;
+      --max-w: 1100px;
+      --max-w-text: 64ch;
+      --measure: 64ch;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--charcoal);
+      line-height: var(--lh-prose);
+      font-size: clamp(1.1875rem, 1.06rem + 0.55vw, 1.3125rem);
+      font-weight: var(--wt-prose);
+      text-wrap: pretty;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+    p { overflow-wrap: anywhere; }
+    .cjk { font-family: var(--font-cjk); }
+    p.cjk, .cjk p { line-height: 1.95; font-weight: 600; letter-spacing: 0; max-width: var(--measure-cjk); }
+    .cjk-inline { font-size: .93em; vertical-align: .02em; letter-spacing: .02em; font-weight: 520; }
+    .cjk, .cjk-inline { line-break: strict; word-break: keep-all; }
+
+    ::selection { background: var(--signal); color: var(--white); }
+
+    nav.nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem 2.5rem;
+      padding-top: calc(1.5rem + env(safe-area-inset-top));
+      background: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem 1.6rem;
+    }
+
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--label-ink);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      transition: color var(--dur) var(--ease);
+    }
+
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.current { color: var(--black); }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      z-index: 101;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--charcoal);
+      margin: 5px 0;
+      transition: all 0.3s var(--ease);
+    }
+    .nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(4px,5px); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(4px,-5px); }
+
+    .nav-topbar { display: none; }
+    .nav-mobile-brand { display:none; font-family:var(--font-display); font-weight:800; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; font-size:0.65rem; line-height:1.3; }
+    .nav-mobile-brand .mobile-sub { font-family:var(--font-mono); font-size:.58rem; font-weight:400; color:var(--purple-deep); text-transform:uppercase; letter-spacing:.14em; }
+
+    .page-sidebar {
+      position: fixed;
+      left: 2.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+    }
+
+    .page-nums {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+    }
+
+    .page-num {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--label-ink);
+      cursor: pointer;
+      padding: 0.2rem 0;
+      transition: color var(--dur) var(--ease);
+      letter-spacing: 0.05em;
+      user-select: none;
+    }
+
+    .page-num:hover { color: var(--grey); }
+    .page-num.active { color: var(--black); font-weight: 700; }
+    .page-progress { display: none; font-family: var(--font-mono); font-size: var(--text-caption); color: var(--label-ink); letter-spacing: 0.08em; white-space: nowrap; }
+
+    .page-arrows {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+    }
+
+    .arrow-btn {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--silver);
+      border-radius: 50%;
+      background: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--grey-light);
+      font-size: 0.7rem;
+      transition: all var(--dur) var(--ease);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .arrow-btn:hover {
+      border-color: var(--signal);
+      color: var(--signal);
+    }
+
+    .arrow-btn svg {
+      width: 12px;
+      height: 12px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .pages-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      overscroll-behavior-y: contain;
+    }
+
+    .page {
+      min-height: 100vh; min-height: 100svh;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      padding: 5rem 2.5rem 3rem 6.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page-inner {
+      max-width: var(--max-w-text);
+      width: 100%;
+      margin: 0 auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cover {
+      height: 100vh;
+      min-height: 100vh; min-height: 100svh;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding-top: 0;
+    }
+
+    .cover .page-inner {
+      max-width: 800px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cover-eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--label-ink);
+      margin-bottom: 2.5rem;
+    }
+
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 1.35rem + 5.2vw, 8rem);
+      font-weight: 900;
+      line-height: 1.04;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin-bottom: 0.5rem;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+
+    .cover-accent {
+      color: var(--purple-deep);
+    }
+
+    .cover-year {
+      font-family: var(--font-mono);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 400;
+      color: var(--purple-light);
+      letter-spacing: 0.35em;
+      margin-bottom: 2rem;
+    }
+
+    .cover-subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(1.25rem, 1.05rem + 1.4vw, 1.5rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--graphite);
+      letter-spacing: 0;
+      line-height: 1.55;
+      max-width: var(--measure);
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 3rem;
+    }
+
+    .cover-meta {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--label-ink);
+      line-height: 2;
+      letter-spacing: 0.02em;
+    }
+
+    .cover-hint {
+      position: absolute;
+      bottom: calc(2rem + env(safe-area-inset-bottom));
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    .page-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--signal-dim);
+      margin-bottom: 1rem;
+    }
+
+    .page-title {
+      font-family: var(--font-display);
+      font-size: var(--text-h1);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--black);
+      margin-bottom: 2rem;
+      letter-spacing: -0.005em;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+    }
+
+    .content-block {
+      margin-bottom: 2rem;
+    }
+
+    .content-block h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 1.1rem + 1vw, 1.65rem);
+      font-weight: 600;
+      line-height: 1.25;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+
+    .content-block p {
+      margin-bottom: 0.75rem;
+      color: var(--graphite);
+    }
+
+    .content-block strong {
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    .content-block em {
+      font-style: italic;
+      color: var(--graphite);
+    }
+
+    .content-block ul, .content-block ol {
+      margin-left: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .content-block li {
+      margin-bottom: 0.4rem;
+      line-height: var(--lh-prose);
+      color: var(--graphite);
+    }
+
+    .part-divider {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--purple-light);
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--purple-light);
+      margin-bottom: 1.5rem;
+      display: inline-block;
+    }
+
+    .paper-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.55rem 1.1rem 0.55rem 0.9rem;
+      border-left: 3px solid var(--signal);
+      background: var(--signal-bg);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      text-decoration: none;
+      transition: all var(--dur) var(--ease);
+      margin-bottom: 1.5rem;
+    }
+    .paper-link:hover {
+      background: var(--signal-glow);
+      box-shadow: 0 2px 12px rgba(102,103,171,0.1);
+    }
+    .paper-link-icon {
+      width: 18px; height: 18px; flex-shrink: 0; color: var(--signal);
+    }
+    .paper-link-icon svg {
+      width: 18px; height: 18px; stroke: currentColor;
+      fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .paper-link-label {
+      font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 400;
+      color: var(--signal); letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .paper-link-arrow {
+      font-family: var(--font-mono); font-size: 0.85rem; color: var(--signal-dim);
+      transition: transform var(--dur) var(--ease); flex-shrink: 0;
+    }
+    .paper-link:hover .paper-link-arrow {
+      transform: translateX(3px);
+    }
+
+    .paper-link-badge {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 50;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.9rem 0.45rem 0.7rem;
+      background: var(--white);
+      border: 1px solid var(--border-light);
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all var(--dur) var(--ease);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    .paper-link-badge:hover {
+      border-color: var(--signal);
+      box-shadow: 0 4px 20px rgba(102,103,171,0.15);
+      transform: translateY(-2px);
+    }
+    .paper-link-badge .paper-link-icon { width: 16px; height: 16px; }
+    .paper-link-badge .paper-link-icon svg { width: 16px; height: 16px; }
+    .paper-link-badge .paper-link-label { font-size: 0.6rem; letter-spacing: 0.06em; }
+
+    sup.cite {
+      font-size: 0.75em;
+      vertical-align: super;
+    }
+
+    sup.cite a {
+      color: var(--signal);
+      text-decoration: none;
+      transition: color var(--dur) var(--ease);
+    }
+
+    sup.cite a:hover {
+      color: var(--signal-dim);
+      text-decoration: underline;
+    }
+
+    .refbox {
+      position: relative;
+      z-index: 2;
+      padding: clamp(2.4rem, 5vw, 3.6rem) 0 clamp(3rem, 7vw, 5rem);
+      border-top: 1px solid var(--border-light);
+    }
+
+    .refbox h2 {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--off-black);
+      margin-bottom: 1.1rem;
+    }
+
+    .refs {
+      font-size: var(--text-fine);
+      color: var(--graphite);
+      line-height: 1.7;
+      max-width: var(--measure-ref);
+    }
+
+    .refs ol {
+      margin: 0 0 0 1.2rem;
+      padding: 0;
+    }
+
+    .refs li {
+      margin-bottom: 0.55rem;
+    }
+
+    .refs li:target {
+      background: var(--signal-bg);
+      border-radius: var(--radius);
+      outline: 2px solid var(--signal-glow);
+    }
+
+    .refs .conf-sym {
+      font-style: normal;
+      margin-right: 0.4em;
+    }
+
+    .cite a {
+      font-family: var(--font-mono);
+      color: var(--signal);
+      padding: 0.1em 0.2em;
+      position: relative;
+      text-transform: none;
+      font-weight: 400;
+    }
+
+    .cite a:hover, .cite a:focus {
+      color: var(--signal-dim);
+    }
+
+    .cite a:focus-visible {
+      outline: 2px solid var(--signal);
+      outline-offset: 1px;
+      border-radius: 2px;
+    }
+
+    .cite a[data-tip]:hover::after, .cite a[data-tip]:focus::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: 150%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--off-black);
+      color: var(--snow);
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 300;
+      line-height: 1.5;
+      letter-spacing: 0.01em;
+      text-transform: none;
+      text-align: left;
+      padding: 0.6rem 0.85rem;
+      border-radius: var(--radius);
+      width: max-content;
+      max-width: min(320px, 78vw);
+      white-space: normal;
+      z-index: 60;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      pointer-events: none;
+    }
+
+    .source-info {
+      margin-top: auto;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-light);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--label-ink);
+      line-height: 1.8;
+    }
+
+    .source-info code {
+      font-family: var(--font-mono);
+      background: var(--white);
+      padding: 0.1rem 0.3rem;
+      border-radius: var(--radius);
+      font-size: inherit;
+      color: var(--label-ink);
+    }
+
+    .related-block {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .related-title {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--signal-dim);
+      margin-bottom: 1rem;
+    }
+
+    .related-block ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .related-block li {
+      margin-bottom: 0.5rem;
+    }
+
+    .related-block a {
+      color: var(--signal);
+      text-decoration: none;
+      transition: color var(--dur) var(--ease);
+    }
+
+    .related-block a:hover {
+      color: var(--signal-dim);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      nav.nav {
+        padding: 1rem 1.25rem;
+        padding-top: calc(1rem + env(safe-area-inset-top));
+        right: 0;
+        background: none;
+        border-bottom: none;
+      }
+      nav.nav.open {
+        background: rgba(244, 244, 245, 0.9);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+      .nav-toggle { display: block; }
+      .nav-topbar { display: flex; align-items: center; gap: 0.75rem; }
+      .nav-mobile-brand { display:block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 0.6rem;
+        margin-top: 0.75rem;
+      }
+      .nav-links.show { display: flex; }
+      .nav-links a { font-size: 0.85rem; }
+
+      .page-sidebar {
+        left: auto;
+        right: calc(1.25rem + env(safe-area-inset-right));
+        top: auto;
+        bottom: calc(1.5rem + env(safe-area-inset-bottom));
+        transform: none;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(244, 244, 245, 0.9);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        padding: 0.5rem 0.75rem;
+        border-radius: 20px;
+        border: 1px solid var(--border-light);
+      }
+
+      .page-nums { display: none; }
+      .page-progress { display: block; }
+
+      .page-arrows {
+        flex-direction: row;
+        margin-top: 0;
+        margin-left: 0.25rem;
+      }
+
+      .arrow-btn {
+        width: 44px;
+        height: 44px;
+      }
+
+      .arrow-btn svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      .page {
+        padding: 4.5rem clamp(0.9rem, 4vw, 1.25rem) calc(5.5rem + env(safe-area-inset-bottom)) clamp(0.9rem, 4vw, 1.25rem);
+      }
+      .content-block p + p { margin-top: 1.15em; }
+
+      .cover-title {
+        font-size: clamp(3rem, 14vw, 5rem);
+      }
+
+      .cover-year {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+        letter-spacing: 0.25em;
+      }
+
+      .cover-subtitle {
+        font-size: 0.85rem;
+      }
+
+      .page-title {
+        font-size: var(--text-h2);
+      }
+
+      .findings-table {
+        font-size: 0.82rem;
+      }
+
+      .paper-link { padding: 0.5rem 0.9rem 0.5rem 0.75rem; gap: 0.5rem; }
+      .paper-link-badge { bottom: 1.5rem; left: 1.25rem; right: auto; }
+      .paper-link-badge .paper-link-label { display: none; }
+    }
+
+    :root { --header-height: 4rem; --purple-mid: #7B5CA0; }
+    .part-divider { color: var(--purple-mid); border-bottom-color: var(--purple-mid); }
+    nav.nav.scrolled, .nav.scrolled { background: rgba(244, 244, 245, 0.85); }
+    .page-sidebar { box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+    .page-sidebar .arrow-btn { color: #3f3f46; }
+    .page-sidebar .arrow-btn:hover { color: #6667AB; }
+    .page-sidebar, .paper-link-badge { transition: transform 180ms cubic-bezier(0.4,0,0.2,1), opacity 180ms cubic-bezier(0.4,0,0.2,1); }
+    @media (max-width: 768px) {
+      :root { --header-height: 4.5rem; }
+      .page-sidebar { background: #f4f4f5; }
+      .page { padding: calc(var(--header-height) + 1.5rem) clamp(0.9rem, 4vw, 1.25rem) calc(6rem + env(safe-area-inset-bottom)) clamp(0.9rem, 4vw, 1.25rem); }
+      .cover { min-height: auto; height: clamp(28rem, 78vh, 42rem); }
+      .cover-hint { bottom: calc(1.25rem + env(safe-area-inset-bottom)); }
+      .paper-link-badge { left: auto; right: calc(1.25rem + env(safe-area-inset-right)); bottom: calc(6.5rem + env(safe-area-inset-bottom)); min-width: 44px; min-height: 44px; justify-content: center; }
+      body.controls-hidden .page-sidebar,
+      body.controls-hidden .paper-link-badge {
+        transform: translateY(calc(100% + 2rem));
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 240ms cubic-bezier(0.16,1,0.3,1), opacity 240ms cubic-bezier(0.16,1,0.3,1);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .page-sidebar, .paper-link-badge { transition: none !important; }
+      body.controls-hidden .page-sidebar,
+      body.controls-hidden .paper-link-badge { transform: none !important; opacity: 1 !important; pointer-events: auto !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-nav">Skip to main content</a>
+
+  <nav class="nav" role="navigation" aria-label="Site navigation">
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-topbar">
+      <div class="nav-mobile-brand">MH&W<br><span class="mobile-sub">Research</span></div>
+    </div>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="report-global-npo-landscape.html">Orgs Map</a>
+      <a href="org-study.html">Org Study</a>
+      <a href="policy-study.html">Policy Study</a>
+      <a href="research.html" class="current" aria-current="page">Research</a>
+      <a href="plan.html">Plan</a>
+      <a href="field-news.html">Field News</a>
+      <a href="search.html">Search</a>
+    </div>
+  </nav>
+
+  <div class="page-sidebar">
+    <div class="page-nums" id="page-nums"></div>
+    <div class="page-progress"></div>
+    <div class="page-arrows">
+      <button class="arrow-btn" aria-label="Previous page" onclick="prevPage()">
+        <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+      </button>
+      <button class="arrow-btn" aria-label="Next page" onclick="nextPage()">
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Pages -->
+  <div class="pages-container" id="main">
+
+    <!-- PAGE 01: COVER -->
+    <div class="page cover" id="page-0">
+      <div class="page-inner">
+        <p class="cover-eyebrow">MH&W RESEARCH</p>
+        <h1 class="cover-title">LI<br><span class="cover-accent">ET AL.</span></h1>
+        <p class="cover-year">2025</p>
+        <p class="cover-subtitle">Mental Health Literacy in<br>Performing and Creative Artists</p>
+        <div class="cover-meta">
+          <p>Frontiers in Psychology, 16, 1329029</p>
+          <p>DOI: 10.3389/fpsyg.2025.1329029 &middot; PMID 40918295</p>
+          <p>Reviewed by &#38515;&#26825; &middot; 2026-10-12</p>
+        </div>
+      </div>
+      <span class="cover-hint">&#8595; Scroll</span>
+    </div>
+
+    <!-- PAGE 02 -->
+    <div class="page" id="page-1">
+      <div class="page-inner">
+        <span class="part-divider">Part A &mdash; Framing</span>
+        <p class="page-label">Section &middot; 01</p>
+        <h2 class="page-title">Why Read This</h2>
+        <a href="https://doi.org/10.3389/fpsyg.2025.1329029" target="_blank" rel="noopener" class="paper-link">
+          <div class="paper-link-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <span class="paper-link-label">Read the Frontiers Paper</span>
+          <span class="paper-link-arrow">&#8594;</span>
+        </a>
+
+        <div class="content-block">
+          <p>The queue reached for this paper as the <strong>synthesis item</strong> and as a <strong>structural parallel</strong> to this project&rsquo;s own Taiwan-gap argument. It is both &mdash; and the parallel is sharper than expected, though not in the direction intended.</p>
+          <p>The review&rsquo;s argument shape is the one we use: <em>the construct is undefined, unmeasured, and has no validated instrument in this population, therefore no intervention here can be evaluated.</em> That shape is sound and transplants cleanly.</p>
+          <p>The review&rsquo;s execution of it is the cautionary half. A paper whose central complaint is that nobody defines the construct consistently builds its own analysis on a four-part framework that <strong>neither of the two sources it cites for that framework actually lists</strong>.</p>
+          <p>Read it for the gap claim and for the instrument warning. Do not read its counts as a map of the literature.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 03 -->
+    <div class="page" id="page-2">
+      <div class="page-inner">
+        <p class="page-label">Section &middot; 02</p>
+        <h2 class="page-title">What This Paper Is</h2>
+
+        <div class="content-block">
+          <p>A scoping review, following PRISMA-ScR, of how mental health literacy is conceptualised, operationalised and measured in the performing- and creative-arts health literature.<sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Abstract and Methods: scoping review following PRISMA-ScR; databases searched from inception to week 1 of June 2025">1</a></sup></p>
+          <p>Databases were searched from inception to week 1 of June 2025. <strong>669 records</strong> were screened, 53 sought at full text, 50 assessed, and <strong>26 studies included</strong> &mdash; published 1997&ndash;2024, spanning nine countries, with at least <strong>4,710 participants</strong>, of whom 1,502 (32%) were musicians and 3,848 (82%) were students.<sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Results, Characteristics of included studies: 26 studies, 1997-2024, nine countries, at least 4,710 participants, musicians 1,502 (32%), students 3,848 (82%)">1</a></sup><sup class="cite"><a href="#li-src-2" data-src="li-2025-prisma" data-tip="Appendix 3 PRISMA 2020 flow diagram: screened 669, sought for retrieval 53, assessed for eligibility 50, included 26">2</a></sup></p>
+          <p>Findings are organised against four components of mental health literacy: recognition of disorders; knowledge of risk factors and of information and support services; attitudes promoting help-seeking; and understanding of stigma.</p>
+          <p>The headline results: <strong>one</strong> included study defined mental health literacy, <strong>one</strong> covered all four components, stigma was the least examined component and almost exclusively in musicians, and <strong>no validated instrument for mental health literacy in artists exists</strong>. The authors additionally consulted eight knowledge stakeholders in Canada and the US &mdash; a mix of leaders in performing-arts-medicine research and practice, working performing and creative artists, and clinicians who specialise in caring for artists &mdash; <strong>none</strong> of whom could identify any literature on the topic.<sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Methods, Consultation with stakeholders, verbatim: 'None of the stakeholders have identified any information regarding this topic.'">1</a></sup></p>
+          <p>Received 2023-10-27, accepted 2025-06-25, published 2025-08-22, in the Performance Science section under the ISPS 2023 Research Topic. No correction or erratum is attached as of this reading.<sup class="cite"><a href="#li-src-10" data-src="frontiers-article-page" data-tip="Frontiers article page: received 27 October 2023, accepted 25 June 2025, published 22 August 2025; Performance Science section, ISPS 2023 Research Topic; no correction or erratum in Crossref, PubMed or Europe PMC as of 2026-10-12">10</a></sup></p>
+          <p>The null stakeholder consultation is, quietly, the most robust finding in the paper &mdash; eight people positioned to know, asked directly, knew of nothing. It is reported in Methods rather than Results, so it is not counted among the findings at all.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 04 -->
+    <div class="page" id="page-3">
+      <div class="page-inner">
+        <span class="part-divider">Part B &mdash; What Does Not Hold</span>
+        <p class="page-label">Section &middot; 03</p>
+        <h2 class="page-title">The Framework Is the Authors&rsquo; Own</h2>
+
+        <div class="content-block">
+          <p>This is the central defect. The review&rsquo;s four components are introduced as established: &ldquo;(i) recognition of mental health disorders, (ii) knowledge of their risk factors and of seeking mental health information and support services, (iii) attitudes that promote recognition and appropriate help-seeking; and (iv) understanding the concept of stigma,&rdquo; cited to <strong>Jorm (2000)</strong> and <strong>Sampaio et al. (2022)</strong>.<sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Introduction, verbatim four-component list, co-cited to Jorm 2000 and Sampaio et al. 2022">1</a></sup> Figure 1&rsquo;s caption reads &ldquo;Four components of mental health literacy (Jorm, 2000)&rdquo;; the Methods state &ldquo;we used the existing components of mental health literacy (Jorm, 2000) as a guiding framework.&rdquo;<sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Figure 1 caption and Methods, Analysis and presentation of results: both attribute the four-component framework to Jorm (2000) alone">1</a></sup></p>
+          <p><strong>Jorm (2000) enumerates six components, not four.</strong> Verbatim: &ldquo;(a) the ability to recognise specific disorders or different types of psychological distress; (b) knowledge and beliefs about risk factors and causes; (c) knowledge and beliefs about self-help interventions; (d) knowledge and beliefs about professional help available; (e) attitudes which facilitate recognition and appropriate help-seeking; and (f) knowledge of how to seek mental health information.&rdquo;<sup class="cite"><a href="#li-src-4" data-src="jorm-2000" data-tip="Jorm 2000, Br J Psychiatry 177(5):396-401, verbatim: 'several components, including' (a) through (f); stigma is not listed">4</a></sup> <strong>Stigma is not among them.</strong></p>
+          <p><strong>Sampaio et al. (2022) reproduces Jorm&rsquo;s six almost verbatim</strong> and cites them to Jorm. &ldquo;Stigma&rdquo; appears once in that paper &mdash; as an outcome that knowledge-based interventions fail to shift, not as a component.<sup class="cite"><a href="#li-src-5" data-src="sampaio-2022" data-tip="Sampaio, Goncalves & Sequeira 2022, IJERPH 19(12):7030: reproduces Jorm's six-item list and cites it to Jorm 2000; 'stigma' occurs once, as an outcome interventions fail to shift">5</a></sup></p>
+          <p>So the fourth component &mdash; the one the review finds least examined &mdash; is <strong>listed</strong> in neither cited source. Items (i)&ndash;(iii) are a defensible collapse of Jorm&rsquo;s six; item (iv) is an addition the paper makes without a source for it, attributed to a 25-year-old paper that does not list it.</p>
+          <p><strong>The fair qualification.</strong> Jorm&rsquo;s text does discuss stigma &mdash; the section headed &ldquo;ATTITUDES THAT FACILITATE RECOGNITION AND HELP-SEEKING&rdquo; opens &ldquo;There is a stigma associated with mental disorders and this may hinder seeking help&rdquo;<sup class="cite"><a href="#li-src-4" data-src="jorm-2000" data-tip="Jorm 2000, section headed ATTITUDES THAT FACILITATE RECOGNITION AND HELP-SEEKING, opening sentence verbatim: stigma is discussed in the body of the paper but is not one of the six listed components">4</a></sup> &mdash; so item (iv) is readable as an unlisted split-out of Jorm&rsquo;s component (e) rather than as a concept foreign to him. Li et al. also cite Kutcher, Wei &amp; Coniglio (2016) elsewhere in the Discussion, the plausible origin of the four-part regrouping and of the &ldquo;help-seeking efficacy&rdquo; wording, though that paper is not open access and could not be checked here.<sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Discussion: Li et al. cite Kutcher et al. (2016) for the claim that studies often do not address all facets of the construct; it is not open access and was not retrieved for this reading">1</a></sup></p>
+          <p>The defect is not that stigma is alien to the construct. It is that a paper whose thesis is unstandardised conceptualisation presents a four-item list as established and cites it to two sources that each enumerate six.</p>
+          <p>Whoever presents this should say so at the top, because the irony is load-bearing: <strong>the review&rsquo;s thesis is that the field suffers from unstandardised conceptualisation, and its own four-part conceptualisation is not sourced to any list that contains all four items.</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 05 -->
+    <div class="page" id="page-4">
+      <div class="page-inner">
+        <p class="page-label">Section &middot; 04</p>
+        <h2 class="page-title">The Counts Measure the Coding</h2>
+
+        <div class="content-block">
+          <p>The review&rsquo;s quantitative spine &mdash; <strong>13 studies covering one component, 8 two, 4 three, 1 all four</strong> &mdash; reads as a coverage map.<sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Results, Conceptualizing mental health literacy: 'Thirteen articles (46.2.%) ... eight (30.7%) ... four (15.4%) ... and one (5%) had all four components (Perkins et al., 2017)'">1</a></sup> It is not. Three things establish this.</p>
+          <p><strong>1. The framework was applied retrospectively to studies that never used it.</strong> Few of the 26 studies set out to measure the review&rsquo;s four components, and the paper itself reports that among the 18 studies with a quantitative component, <strong>none measured all four</strong>. The review&rsquo;s own prose concedes this at least nine times &mdash; &ldquo;this was not explicit&rdquo;; &ldquo;although not stated in the article, this could imply&rdquo;; &ldquo;we decided to include this component as representative of operationalizing mental health literacy&rdquo;; &ldquo;it was unclear whether the intervention had any focus on mental health risks&rdquo;; &ldquo;it is unclear whether these interventions are specifically targeting mental health promotion.&rdquo;<sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Results: nine separate passages in which the component is conceded not to be explicit in the source study, quoted verbatim">1</a></sup> A count assembled this way cannot distinguish <em>the literature covers this component</em> from <em>we could read this component into it</em>.</p>
+          <p><strong>2. The exemplars make the point concretely.</strong> The single study coded as covering all four components is <strong>Perkins et al. (2017)</strong> &mdash; twenty semi-structured interviews with current and recent students at six UK conservatoires, examining perceived enablers and barriers to health.<sup class="cite"><a href="#li-src-7" data-src="perkins-2017" data-tip="Perkins, Reid, Araujo, Clark & Williamon 2017, Front Psychol 8:968 - qualitative, N=20, six UK conservatoires; identified by the review as the one study covering all four components">7</a></sup> The review&rsquo;s own supplementary table records of it: &ldquo;<strong>Mental health literacy is not defined in this study.</strong>&rdquo;<sup class="cite"><a href="#li-src-3" data-src="li-2025-suppl-t1" data-tip="Supplementary Table 1, Perkins et al. (2017) main-findings cell, verbatim: 'Mental health literacy is not defined in this study.'">3</a></sup></p>
+          <p>The single study that <em>does</em> define the construct is <strong>Barnett et al. (2019)</strong> &mdash; a touring rural art exhibition in Australia whose purpose was community stigma reduction. Of its 168 participants, <strong>23 were artists and 145 were exhibition visitors</strong>, and its definition is a seven-word phrase, &ldquo;knowledge of mental health issues and services,&rdquo; covering at most part of one of the four components.<sup class="cite"><a href="#li-src-3" data-src="li-2025-suppl-t1" data-tip="Supplementary Table 1, Barnett et al. (2019): Australia, mixed methods, N=168 - 23 artists who submitted work, 145 exhibition visitors; definition cell verbatim">3</a></sup><sup class="cite"><a href="#li-src-6" data-src="barnett-2019" data-tip="Barnett, de Deuge & Bridgman 2019, Int J Ment Health Syst 13:44 - reference entry read from the target paper's list; study details as-reported from Supplementary Table 1">6</a></sup></p>
+          <p>The finding &ldquo;only one study defines mental health literacy&rdquo; is therefore weaker than it reads: <strong>the one definition is not a usable definition, and the one four-component study disclaims the construct.</strong></p>
+          <p><strong>3. The tallies do not reconcile with each other.</strong> Summed across components, the conceptualisation sections report 9 + 14 + 10 + 7 = <strong>40</strong> component-instances; the 13/8/4/1 distribution implies <strong>45</strong>. The operationalisation sections report 7 + 7 + 6 + 4 = <strong>24</strong>, against a stated &ldquo;All studies in our review operationalized at least one component&rdquo; and a distribution in which 13 studies touch two or more &mdash; arithmetically impossible. The stigma paragraph says seven studies, &ldquo;four of which were in music, one in visual arts, and one in dance&rdquo; &mdash; six.<sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Results: conceptualisation tallies nine / fourteen / ten / seven; operationalisation tallies seven / seven / six / four; stigma discipline breakdown four + one + one">1</a></sup></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 06 -->
+    <div class="page" id="page-5">
+      <div class="page-inner">
+        <p class="page-label">Section &middot; 05</p>
+        <h2 class="page-title">Numbers That Do Not Reconcile</h2>
+
+        <div class="content-block">
+          <p>Published, uncorrected, in the version of record:</p>
+          <p><strong>The abstract and the results disagree on the headline distribution.</strong> Abstract: &ldquo;Sixteen articles included one of the four components of mental health literacy, nine included two, four included three, and one had all four components&rdquo; &mdash; 16 + 9 + 4 + 1 = <strong>30</strong>, against 26 included studies. Results: &ldquo;Thirteen articles (46.2.%) &hellip; eight (30.7%) &hellip; four (15.4%) &hellip; and one (5%)&rdquo; &mdash; 13 + 8 + 4 + 1 = <strong>26</strong>.<sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Abstract and Results, both verbatim from the Frontiers version of record; confirmed not a PMC rendering artifact">1</a></sup> The Results counts are the arithmetically consistent set &mdash; though, as below, their percentages are not. The abstract&rsquo;s counts are consistent with nothing, and the abstract is what will be cited.</p>
+          <p><strong>The Results percentages contradict the Results counts.</strong> 13/26 is <strong>50.0%</strong>, not 46.2% (46.2% is 12/26); 8/26 is 30.8%, not 30.7%; 1/26 is 3.8%, not 5%.<sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Results percentages re-derived against the stated counts: 13/26=50.0%, 8/26=30.8%, 1/26=3.8%">1</a></sup> The bracket after &ldquo;Thirteen&rdquo; lists <strong>fourteen</strong> citations, because Bartos 2022a and 2022b are both named; the supplementary table counts Bartos once.<sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Results, Conceptualizing mental health literacy: the bracket following 'Thirteen articles' lists fourteen citations, Bartos 2022a and 2022b both named">1</a></sup><sup class="cite"><a href="#li-src-3" data-src="li-2025-suppl-t1" data-tip="Supplementary Table 1 merges Bartos 2022a/b into one study row, giving 26 distinct rows">3</a></sup></p>
+          <p><strong>The PRISMA diagram does not balance.</strong> Appendix 3 gives 50 reports assessed for eligibility, 23 ineligible, 26 included &mdash; <strong>50 &minus; 23 = 27</strong>. Its own exclusion sub-reasons (4 + 12 + 2 + 2 + 4) sum to <strong>24</strong>, not 23.<sup class="cite"><a href="#li-src-2" data-src="li-2025-prisma" data-tip="Appendix 3 PRISMA 2020 flow diagram: assessed 50, ineligible at full text 23, included 26; sub-reasons 4+12+2+2+4">2</a></sup> Since 50 &minus; 24 = 26, and 26 is the included count, the likelier error is the &ldquo;23&rdquo; box total rather than the included total.</p>
+          <p><strong>The Methods sentence invites the wrong reading of the paper&rsquo;s own flow diagram.</strong> The Methods say 44 handsearched papers were found &ldquo;eligible for full-text screening (n = 53),&rdquo; which is readable as 44 of the 53 coming from handsearching.<sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Methods, Study selection, verbatim: 'An additional 44 papers with relevant titles and abstracts were found through handsearching of the reference list of included articles eligible for full-text screening (n = 53).'">1</a></sup> The diagram gives the actual split: of the 53 sought at full text, <strong>41 came from the databases and 12 from handsearching</strong>.<sup class="cite"><a href="#li-src-2" data-src="li-2025-prisma" data-tip="Appendix 3: 'Reports sought for retrieval / From databases (n =41) / From hand searches (n = 12) / Total (n = 53)', read from the figure at 250 dpi">2</a></sup> (44 is the number <em>identified</em> by handsearching; the rest were excluded at title and abstract.) The sentence is ambiguous rather than false &mdash; &ldquo;n = 53&rdquo; can be read as the total pool &mdash; but it is ambiguous in the one place a reader would check whether the designed search actually worked. The Methods&rsquo; own &ldquo;625 unique citations&rdquo; does reconcile with the diagram (691 &minus; 62 &minus; 4 = 625); it is the <strong>abstract&rsquo;s</strong> &ldquo;669 unique citations&rdquo; that sits oddly against it, 669 being the screened total once the 44 handsearch records are added.</p>
+          <p><strong>The arithmetic the review does report is correct.</strong> Of its participant figures, 1,502/4,710 = 31.9%, 608/4,710 = 12.9%, 276/4,710 = 5.9%, 3,848/4,710 = 81.7%, and 6/26 = 23% all check out.<sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Results participant figures; percentages re-derived against the stated denominator of 4,710">1</a></sup> The defect is in the counts of <em>studies</em>, not of people &mdash; though &ldquo;most studies included students as the participants (n = 3,848; 82%)&rdquo; presents a participant count as a study count.<sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Results, Characteristics of included studies, verbatim: 'Most studies included students as the participants (n = 3,848; 82%)'">1</a></sup></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 07 -->
+    <div class="page" id="page-6">
+      <div class="page-inner">
+        <p class="page-label">Section &middot; 06</p>
+        <h2 class="page-title">Three Lists of the Databases Searched</h2>
+
+        <div class="content-block">
+          <p>The <strong>abstract</strong> names seven: MEDLINE, CINAHL, PubMed, EMBASE, PsycINFO, Web of Science, Cochrane. The <strong>Methods</strong> name six: MEDLINE, EMBASE, PubMed, CINAHL, Web of Science, PsycINFO &mdash; dropping Cochrane.<sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Abstract lists seven databases including Cochrane and Web of Science; Methods, Databases searched lists six, omitting Cochrane">1</a></sup> The <strong>PRISMA diagram</strong> identifies records from five: Cochrane 108, CINAHL 93, EMBASE 101, MEDLINE 220, PsycINFO 169 &mdash; restoring Cochrane and dropping both Web of Science and PubMed.<sup class="cite"><a href="#li-src-2" data-src="li-2025-prisma" data-tip="Appendix 3 identification boxes: Cochrane 108, CINAHL 93, EMBASE 101, MEDLINE 220, PsycINFO 169, hand search 44 - no Web of Science, no PubMed">2</a></sup></p>
+          <p>The search-strategy section says the MEDLINE strategy &ldquo;was adapted to PubMed, PsycINFO, and EMBASE databases,&rdquo; and is silent on CINAHL, Web of Science and Cochrane.<sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Methods, Search strategy, verbatim: the MEDLINE strategy 'was adapted to PubMed, PsycINFO, and EMBASE databases'">1</a></sup></p>
+          <p><strong>A reader cannot determine which databases were searched.</strong> For a scoping review whose entire claim is the <em>extent</em> of a literature, and whose search strategy was built with a university librarian and reported as following the PRESS guidelines, this is the most consequential reproducibility failure in the paper: the search cannot be repeated.</p>
+          <p>Relatedly, <strong>the nine countries are never named.</strong><sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Abstract and Results state 'nine countries'; the countries are nowhere enumerated in the article">1</a></sup> The supplementary table does carry a country column &mdash; but it is labelled <strong>&ldquo;Setting, Country of Publication,&rdquo;</strong> and that is what it records. Bartos is set in Granada, Spain and published in the USA; Harrison&rsquo;s setting reads &ldquo;location not specified &ndash; Australia?&rdquo; against a publication country of the Netherlands; Kaufman is the School of American Ballet, published in the United Kingdom.<sup class="cite"><a href="#li-src-3" data-src="li-2025-suppl-t1" data-tip="Supplementary Table 1 country column: internally inconsistent for Bartos, Harrison, Kaufman and Guptill; no Asian setting in any row">3</a></sup> A column of publication countries cannot establish that the included studies were <em>based in</em> nine countries. The Results make a setting claim; the only country data supplied is a publication-venue claim, and the nine-country figure therefore cannot be reconstructed from the material in the paper.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 08 -->
+    <div class="page" id="page-7">
+      <div class="page-inner">
+        <p class="page-label">Section &middot; 07</p>
+        <h2 class="page-title">Eligibility Criteria at War With Themselves</h2>
+
+        <div class="content-block">
+          <p><strong>Inclusion:</strong> &ldquo;Articles could be of any study design or publication (peer-reviewed articles, conference abstracts, protocols, dissertations and theses, and book chapters).&rdquo;</p>
+          <p><strong>Exclusion, criterion (v):</strong> publications that &ldquo;are not peer-reviewed.&rdquo;</p>
+          <p><strong>Limitations:</strong> &ldquo;our review can be at risk of publication bias, as we relied on peer-reviewed literature, potentially excluding unpublished or non-traditional forms of scholarship.&rdquo;<sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Methods, Eligibility criteria (inclusion and exclusion (v)) and Discussion limitations paragraph, all three verbatim">1</a></sup></p>
+          <p>All three cannot hold. The included set settles it in favour of the inclusion arm: Washington-Simon (2024) is a <strong>doctoral dissertation</strong>.<sup class="cite"><a href="#li-src-9" data-src="washington-simon-2024" data-tip="Washington-Simon 2024, 'All eyez on U' - doctoral dissertation, National University; no DOI; present in the included set">9</a></sup> The limitations paragraph therefore claims a restriction the review did not apply, and apologises for a bias it partly avoided.</p>
+          <p>Two further reporting mismatches. <strong>PRISMA-ScR</strong> is named as the reporting guideline, but the flow diagram supplied is labelled <strong>PRISMA 2020</strong>, the systematic-review instrument.<sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Methods: PRISMA-ScR named as the reporting guideline">1</a></sup><sup class="cite"><a href="#li-src-2" data-src="li-2025-prisma" data-tip="Appendix 3 is titled 'PRISMA 2020 flow diagram'">2</a></sup> And the analysis section states the authors &ldquo;<strong>meta-analyzed the findings</strong> to answer the research questions&rdquo; &mdash; in a narrative and thematic synthesis where nothing was meta-analysed.<sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Methods, Analysis and presentation of results, verbatim: '(iv) meta-analyzed the findings to answer the research questions'">1</a></sup></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 09 -->
+    <div class="page" id="page-8">
+      <div class="page-inner">
+        <span class="part-divider">Part C &mdash; For This Project</span>
+        <p class="page-label">Section &middot; 08</p>
+        <h2 class="page-title">So What &mdash; For a Taiwan Music NPO</h2>
+
+        <div class="content-block">
+          <p><strong>What it licenses, strongly.</strong> Across 26 English-language studies spanning 1997&ndash;2024, <strong>no study is set in Taiwan, China, Hong Kong, Japan, Korea or any other Asian country</strong>; the words Taiwan, Asia, Japan, Korea, Hong Kong and China do not appear in the article.<sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Full-text search of the article: the strings Taiwan, Asia, Japan, Korea, Hong Kong and China are absent">1</a></sup><sup class="cite"><a href="#li-src-3" data-src="li-2025-suppl-t1" data-tip="Supplementary Table 1: no Asian setting appears in any of the 26 study rows">3</a></sup> The settings the supplement records are confined to the UK, US, Canada, Australia, New Zealand, Switzerland, Germany, Spain, South Africa and Lithuania &mdash; none of them in Asia. (That list does not resolve to the paper&rsquo;s stated nine countries, for the reason given in Section 06.) Combined with the null result from the eight North American knowledge stakeholders, this is a strong premise for the gap argument &mdash; stated correctly as: <em>no mental health literacy research on artists has been published in the English-language indexed literature in any Asian setting</em>, with the review&rsquo;s own English-language restriction as the caveat. It is <strong>not</strong> a claim that none exists in Chinese.</p>
+          <p><strong>What it does not license.</strong> Anything about what works. The review conducted <strong>no quality appraisal</strong> of the included studies &mdash; a stated limitation of scoping-review method &mdash; and so cannot speak to the strength of any evidence in it. Its evidence that literacy interventions help comes from athletes, medical students and schoolchildren, not artists.<sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Discussion limitations: no formal appraisal of methodological quality, in alignment with scoping review methodology; intervention effectiveness evidence cited for athletes, medical students and school-aged children">1</a></sup> <strong>Cite it for the absence, never for an effect.</strong></p>
+          <p><strong>One concrete trap, worth the price of the reading.</strong> The <strong>MHL-Q19</strong> (Guptill et al., 2022) is the obvious instrument to reach for when building a Taiwan baseline &mdash; and MHL there stands for <strong>Musicians&rsquo; Health Literacy</strong>, not mental health literacy. The review is explicit that it &ldquo;asked questions about performance health issues and therefore, does not make any explicit inclusion of any of the components of mental health literacy,&rdquo; while allowing that three of its items might be adaptable.<sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Results, Measuring mental health literacy, verbatim on the MHL-Q19">1</a></sup><sup class="cite"><a href="#li-src-8" data-src="guptill-2022-mhlq19" data-tip="Guptill et al. 2022, Front Psychol 13:886815 - the Musicians' Health Literacy Questionnaire, MHL-Q19">8</a></sup> Anyone selecting a measure on the name alone would field the wrong instrument. The review&rsquo;s finding is that <strong>no validated instrument for mental health literacy in artists exists</strong> &mdash; so a Taiwan baseline would have to adapt a general-population instrument and validate it locally. That is a study in its own right, not a questionnaire to borrow.</p>
+          <p><strong>The transplantable service hint.</strong> The one finding that recurs across the review&rsquo;s <strong>music</strong> studies is that students take their health problems to their <strong>instrument teachers</strong> rather than to health professionals &mdash; reliance the review reads as &ldquo;symptomatic of a general deficiency of information&rdquo; (Williamon et al., 2006) &mdash; and that a music teacher with no psychotherapy training was nonetheless able to identify a student&rsquo;s performance anxiety from its symptoms (Shaw et al., 2020). The review&rsquo;s recommendation follows: raise teachers&rsquo; mental health literacy so they can recognise early signs.<sup class="cite"><a href="#li-src-1" data-src="li-2025" data-tip="Discussion: performing arts students establish trusting relationships with teachers and consult them; enhancing teachers' mental health literacy proposed as an effective approach">1</a></sup> This is a music finding, not an all-disciplines one &mdash; no dance or visual-arts study in the included set supports it. In a Taiwan context that points at <strong>&#34899;&#31185;&#32769;&#24107;</strong> and <strong>&#31995;&#19978;&#23566;&#24107;</strong> rather than at a counselling centre &mdash; and it is cheap, specific, and does not require clinical capacity.</p>
+          <p><strong>And the methodological lesson for our own work.</strong> The review demonstrates the failure mode of retrofitting a framework onto a literature that never used it: you produce counts that look like a map and are a record of your own coding generosity. If this project builds a Taiwan baseline, the construct has to be defined and measured <em>prospectively</em>. Coding backwards over existing &#25991;&#29563; would reproduce exactly this paper&rsquo;s problem.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 10 -->
+    <div class="page" id="page-9">
+      <div class="page-inner">
+        <p class="page-label">Section &middot; 09</p>
+        <h2 class="page-title">Bottom Line</h2>
+
+        <div class="content-block">
+          <p>A review that is <strong>right about the gap and unreliable about its own measurements</strong>.</p>
+          <p>The gap claim survives everything: one seven-word definition in twenty-eight years of literature, no validated instrument, zero Asian settings, and eight stakeholders positioned to know who knew of nothing. That is a well-established absence, and it is the citation to take.</p>
+          <p>Everything quantitative around it should be handled with gloves: an abstract whose counts exceed the included set, percentages that contradict their own numerators, a flow diagram that does not balance, Methods that invert their own diagram, three incompatible lists of databases searched, self-contradicting eligibility criteria, and a four-component framework attributed to two papers that each enumerate six, neither of which <strong>lists</strong> the fourth.</p>
+          <p><strong>Cite it for the hole in the literature and for the MHL-Q19 warning. Do not cite a number from it without re-deriving the number.</strong></p>
+        </div>
+
+        <!-- REFERENCES -->
+        <section class="refbox" id="sources" aria-labelledby="ref-title">
+          <div class="wrap">
+            <h2 id="ref-title">References</h2>
+            <div class="refs">
+              <ol>
+                <li id="li-src-1" data-src="li-2025">
+                  <span class="conf-sym">&#9989;</span>Li, S.-A., Sakata, N., &amp; Donn, G. (2025). A scoping review of mental health literacy in performing and creative artists: identifying current gaps and future directions. <em>Frontiers in Psychology, 16</em>, 1329029. <a href="https://doi.org/10.3389/fpsyg.2025.1329029" target="_blank" rel="noopener">https://doi.org/10.3389/fpsyg.2025.1329029</a> &mdash; Source: peer-reviewed, open access (PMC12412305) &middot; Method: full text read via PubMed Central and re-read against the Frontiers version of record, 2026-10-12 &middot; Basis: &#9989; Sourced (all quotations verified verbatim; all arithmetic re-derived from the paper&rsquo;s own stated counts; the abstract/results discrepancy and the three database lists confirmed present in the version of record, not artifacts of the PMC rendering)
+                </li>
+                <li id="li-src-2" data-src="li-2025-prisma">
+                  <span class="conf-sym">&#9989;</span>Li, S.-A., Sakata, N., &amp; Donn, G. (2025). <em>Appendix 3. PRISMA 2020 flow diagram</em> [Supplementary material]. In A scoping review of mental health literacy in performing and creative artists. <em>Frontiers in Psychology, 16</em>, 1329029. <a href="https://doi.org/10.3389/fpsyg.2025.1329029" target="_blank" rel="noopener">https://doi.org/10.3389/fpsyg.2025.1329029</a> &mdash; Source: peer-reviewed, open access (supplementary file) &middot; Method: supplementary PDF retrieved via Europe PMC and rendered at 250 dpi to read the flow boxes, 2026-10-12 &middot; Basis: &#9989; Sourced (Cochrane 108, CINAHL 93, EMBASE 101, MEDLINE 220, PsycINFO 169, hand search 44; duplicates 62; could not be located 4; screened 669; excluded at title/abstract 616; sought for retrieval 53 = databases 41 + hand searches 12; not retrieved 3; assessed 50; ineligible 23, sub-reasons summing to 24; included 26)
+                </li>
+                <li id="li-src-3" data-src="li-2025-suppl-t1">
+                  <span class="conf-sym">&#9989;</span>Li, S.-A., Sakata, N., &amp; Donn, G. (2025). <em>Supplementary Table 1. Characteristics of included studies</em> [Supplementary material]. In A scoping review of mental health literacy in performing and creative artists. <em>Frontiers in Psychology, 16</em>, 1329029. <a href="https://doi.org/10.3389/fpsyg.2025.1329029" target="_blank" rel="noopener">https://doi.org/10.3389/fpsyg.2025.1329029</a> &mdash; Source: peer-reviewed, open access (supplementary file) &middot; Method: supplementary .docx retrieved via Europe PMC and read cell by cell, 2026-10-12 &middot; Basis: &#9989; Sourced (Barnett 2019: Australia, mixed, N = 168 &mdash; 23 artists, 145 visitors; Perkins 2017: six UK conservatories, qualitative, N = 20, &ldquo;Mental health literacy is not defined in this study&rdquo;; no Asian setting in any row. The country column is headed &ldquo;Setting, Country of Publication&rdquo; and records publication country, which cannot support the Results&rsquo; claim that the studies were based in nine countries)
+                </li>
+                <li id="li-src-4" data-src="jorm-2000">
+                  <span class="conf-sym">&#9989;</span>Jorm, A. F. (2000). Mental health literacy: public knowledge and beliefs about mental disorders. <em>The British Journal of Psychiatry, 177</em>(5), 396&ndash;401. <a href="https://doi.org/10.1192/bjp.177.5.396" target="_blank" rel="noopener">https://doi.org/10.1192/bjp.177.5.396</a> &mdash; Source: peer-reviewed, PubMed-indexed (PMID 11059991) &middot; Method: article text read at the publisher; citation verified against PubMed, 2026-10-12 &middot; Basis: &#9989; Sourced (enumerates six components, (a) through (f), introduced as &ldquo;several components, including&rdquo;; stigma is <strong>not</strong> one of the listed components, though it is discussed in the body of the paper inside the component (e) section on attitudes)
+                </li>
+                <li id="li-src-5" data-src="sampaio-2022">
+                  <span class="conf-sym">&#9989;</span>Sampaio, F., Gon&ccedil;alves, P., &amp; Sequeira, C. (2022). Mental health literacy: it is now time to put knowledge into practice. <em>International Journal of Environmental Research and Public Health, 19</em>(12), 7030. <a href="https://doi.org/10.3390/ijerph19127030" target="_blank" rel="noopener">https://doi.org/10.3390/ijerph19127030</a> &mdash; Source: peer-reviewed, open access (MDPI; PMC9222847) &middot; Method: full text read via Europe PMC XML, 2026-10-12 (the MDPI page returned HTTP 403) &middot; Basis: &#9989; Sourced (reproduces Jorm&rsquo;s six-component list almost verbatim and cites it to Jorm 2000; &ldquo;stigma&rdquo; occurs once, as an outcome knowledge-based interventions fail to shift, not as a component). &#10067; No source located for the origin of the review&rsquo;s four-item regrouping: neither cited reference lists it, and Kutcher, Wei &amp; Coniglio (2016), the plausible alternative, is not open access and could not be retrieved
+                </li>
+                <li id="li-src-6" data-src="barnett-2019">
+                  <span class="conf-sym">&#9888;&#65039;</span>Barnett, T., de Deuge, J., &amp; Bridgman, H. (2019). Promoting mental health through a rural art roadshow: perspectives of participating artists. <em>International Journal of Mental Health Systems, 13</em>, 44. <a href="https://doi.org/10.1186/s13033-019-0302-y" target="_blank" rel="noopener">https://doi.org/10.1186/s13033-019-0302-y</a> &mdash; Source: peer-reviewed, open access &middot; Method: reference entry read from the target paper&rsquo;s reference list; study characteristics read from Supplementary Table 1, 2026-10-12 &middot; Basis: &#9888;&#65039; As-reported &mdash; design, sample composition and definition are reported as the review&rsquo;s supplementary table records them. The Barnett paper itself was not retrieved for this reading; anyone quoting its definition as its own wording should read it first
+                </li>
+                <li id="li-src-7" data-src="perkins-2017">
+                  <span class="conf-sym">&#9888;&#65039;</span>Perkins, R., Reid, H., Ara&uacute;jo, L. S., Clark, T., &amp; Williamon, A. (2017). Perceived enablers and barriers to optimal health among music students: a qualitative study in the music conservatoire setting. <em>Frontiers in Psychology, 8</em>, 968. <a href="https://doi.org/10.3389/fpsyg.2017.00968" target="_blank" rel="noopener">https://doi.org/10.3389/fpsyg.2017.00968</a> &mdash; Source: peer-reviewed, open access &middot; Method: reference entry read from the target paper&rsquo;s reference list; study characteristics read from Supplementary Table 1, 2026-10-12 &middot; Basis: &#9888;&#65039; As-reported &mdash; identified as the one included study coded for all four components, and recorded in the review&rsquo;s own supplementary table as not defining mental health literacy. The Perkins paper itself was not retrieved for this reading
+                </li>
+                <li id="li-src-8" data-src="guptill-2022-mhlq19">
+                  <span class="conf-sym">&#9989;</span>Guptill, C., Slade, T., Baadjou, V., Roduta Roberts, M., de Lisle, R., Ginsborg, J., et al. (2022). Validity and reliability of the musicians&rsquo; health literacy questionnaire, MHL-Q19. <em>Frontiers in Psychology, 13</em>, 886815. <a href="https://doi.org/10.3389/fpsyg.2022.886815" target="_blank" rel="noopener">https://doi.org/10.3389/fpsyg.2022.886815</a> &mdash; Source: peer-reviewed, open access &middot; Method: reference entry read from the target paper&rsquo;s reference list, 2026-10-12 &middot; Basis: &#9989; Sourced for the instrument&rsquo;s name and scope &mdash; MHL-Q19 is the Musicians&rsquo; Health Literacy Questionnaire. &#9888;&#65039; As-reported for its content: the characterisation that it makes no explicit inclusion of any mental health literacy component is the review&rsquo;s assessment; the instrument itself was not examined for this reading
+                </li>
+                <li id="li-src-9" data-src="washington-simon-2024">
+                  <span class="conf-sym">&#9989;</span>Washington-Simon, K. T. (2024). <em>All eyez on U: Exploring aspects of mental health and well-being with hip hop recording artists &mdash; a need assessment</em> [Doctoral dissertation, National University]. &mdash; Source: doctoral dissertation (not peer-reviewed; no DOI) &middot; Method: reference entry read from the target paper&rsquo;s reference list, 2026-10-12 &middot; Basis: &#9989; Sourced &mdash; cited here only to establish that the included set contains a dissertation, which is what makes the review&rsquo;s three eligibility statements mutually inconsistent
+                </li>
+                <li id="li-src-10" data-src="frontiers-article-page">
+                  <span class="conf-sym">&#9989;</span>Frontiers in Psychology. (2025). <em>Article page: A scoping review of mental health literacy in performing and creative artists.</em> <a href="https://www.frontiersin.org/articles/10.3389/fpsyg.2025.1329029/full" target="_blank" rel="noopener">https://www.frontiersin.org/articles/10.3389/fpsyg.2025.1329029/full</a> &mdash; Source: publisher primary &middot; Method: article page read 2026-10-12; Crossref record and PubMed XML checked for update/erratum relations &middot; Basis: &#9989; Sourced (received 27 October 2023, accepted 25 June 2025, published 22 August 2025; Performance Science section, ISPS 2023 Research Topic; edited by Bridget Rennie-Salonen, reviewed by Carlos Sequeira and Romualdas Malinauskas; no correction, erratum, retraction or expression of concern in Crossref, PubMed or Europe PMC as of 2026-10-12)
+                </li>
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        <nav class="related-block" aria-label="Related on this site">
+          <p class="related-title">Related</p>
+          <ul>
+            <li><a href="research.html">&larr; Research (all readings)</a></li>
+            <li><a href="research-musgrave-lamis-2025.html">Research &mdash; Musgrave &amp; Lamis (2025), the prevention-framework counterpart</a></li>
+            <li><a href="research-aalberg-2019.html">Research &mdash; Aalberg et al. (2019), the Norwegian union cohort</a></li>
+            <li><a href="research-overview-2021-2026.html">Research &mdash; Overview 2021&ndash;2026 (where this reading sits in the corpus)</a></li>
+            <li><a href="policy-study-united-kingdom.html">Policy Study &mdash; United Kingdom (where most included conservatoire studies are set)</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div><!-- /pages-container -->
+
+  <!-- Floating paper-link badge (v6) -->
+  <a href="https://doi.org/10.3389/fpsyg.2025.1329029" target="_blank" rel="noopener" class="paper-link-badge" aria-label="Read the original paper (DOI)">
+    <div class="paper-link-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    </div>
+    <span class="paper-link-label">Paper</span>
+  </a>
+
+  <script>
+    var container = document.querySelector('.pages-container');
+    var pages = document.querySelectorAll('.page');
+    var nums = document.querySelectorAll('.page-num');
+    var current = 0;
+    var RM = window.matchMedia('(prefers-reduced-motion: reduce)');
+    function scrollBehavior(){ return RM.matches ? 'auto' : 'smooth'; }
+
+    function goTo(index) {
+      if (index < 0 || index >= pages.length) return;
+      pages[index].scrollIntoView({ behavior: scrollBehavior() });
+    }
+
+    function nextPage() { goTo(current + 1); }
+    function prevPage() { goTo(current - 1); }
+
+    var progressEl = document.querySelector('.page-progress');
+    function pad(n){ return (n < 10 ? '0' : '') + n; }
+    function updateProgress() {
+      if (progressEl) progressEl.textContent = pad(current + 1) + ' / ' + pad(pages.length);
+    }
+    updateProgress();
+    if (nums[0]) nums[0].setAttribute('aria-current', 'true');
+
+    var scrollRaf = null;
+    container.addEventListener('scroll', function() {
+      if (scrollRaf) return;
+      scrollRaf = requestAnimationFrame(function() {
+        scrollRaf = null;
+        var scrollPos = container.scrollTop;
+        var viewH = container.clientHeight;
+        var best = 0;
+        var bestDist = Infinity;
+        for (var i = 0; i < pages.length; i++) {
+          var dist = Math.abs(pages[i].offsetTop - scrollPos);
+          if (dist < bestDist) { bestDist = dist; best = i; }
+        }
+        if (best !== current) {
+          nums[current].classList.remove('active');
+          nums[current].removeAttribute('aria-current');
+          current = best;
+          nums[current].classList.add('active');
+          nums[current].setAttribute('aria-current', 'true');
+          updateProgress();
+        }
+      });
+    }, { passive: true });
+
+    nums.forEach(function(num) {
+      num.addEventListener('click', function() {
+        goTo(parseInt(this.getAttribute('data-page')));
+      });
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        nextPage(); e.preventDefault();
+      }
+      if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        prevPage(); e.preventDefault();
+      }
+    });
+
+    // Initialize page numbers
+    for (var i = 0; i < pages.length; i++) {
+      var btn = document.createElement('div');
+      btn.className = 'page-num' + (i === 0 ? ' active' : '');
+      btn.setAttribute('data-page', i);
+      if (i === 0) btn.setAttribute('aria-current', 'true');
+      btn.textContent = pad(i + 1);
+      document.getElementById('page-nums').appendChild(btn);
+    }
+    nums = document.querySelectorAll('.page-num');
+    nums.forEach(function(num) {
+      num.addEventListener('click', function() {
+        goTo(parseInt(this.getAttribute('data-page')));
+      });
+    });
+  </script>
+
+  <script>
+  (function(){
+    var root = document.querySelector('.pages-container');
+    if (!root) return;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sel = '.page-title, .part-divider, .page-label, .stat-strip, .method-table, .table-wrap, figure';
+    var nodes = Array.prototype.slice.call(root.querySelectorAll(sel));
+    if (!('IntersectionObserver' in window) || reduce) {
+      nodes.forEach(function(el){ el.classList.add('reveal','in'); });
+      return;
+    }
+    nodes.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, p = el.parentElement, idx = 0;
+        if (p){ var sibs = Array.prototype.slice.call(p.children).filter(function(c){ return c.classList.contains('reveal'); }); idx = Math.max(0, sibs.indexOf(el)); }
+        el.style.transitionDelay = (Math.min(idx,5) * 60) + 'ms';
+        el.classList.add('in'); io.unobserve(el);
+      });
+    }, { root: root, threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
+
+  <style>
+    nav.nav, .nav { transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), -webkit-backdrop-filter var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease); border-bottom: 1px solid transparent; }
+    nav.nav.scrolled, .nav.scrolled {
+      right: 0;
+      background: rgba(244, 244, 245, 0.45);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    @media (prefers-reduced-motion: reduce){ nav.nav, .nav { transition: none; } }
+    .skip-nav { position: absolute; left: -9999px; top: 0; z-index: 200; background: var(--signal); color: var(--white); padding: 0.5rem 1rem; font-family: var(--font-mono); }
+    .skip-nav:focus { left: 0; }
+  </style>
+  <script>
+  (function(){
+    var nav = document.querySelector('nav.nav, .nav'); if (!nav) return;
+    var THRESH = 24;
+    function setS(on){ nav.classList.toggle('scrolled', !!on); }
+    var c = document.querySelector('.pages-container, .pages');
+    if (c && getComputedStyle(c).overflowY !== 'visible') {
+      var ticking = false;
+      c.addEventListener('scroll', function(){ if (ticking) return; ticking = true; requestAnimationFrame(function(){ ticking = false; setS(c.scrollTop > THRESH); }); }, { passive: true });
+      setS(c.scrollTop > THRESH); return;
+    }
+    var s = document.createElement('div'); s.setAttribute('aria-hidden', 'true');
+    s.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.insertBefore(s, document.body.firstChild);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){ setS(!es[0].isIntersecting); }, { rootMargin: '-' + THRESH + 'px 0px 0px 0px' }).observe(s);
+    } else {
+      window.addEventListener('scroll', function(){ setS((window.pageYOffset || document.documentElement.scrollTop || 0) > THRESH); }, { passive: true });
+    }
+  })();
+  </script>
+
+  <script>
+  function toggleNav() {
+    var btn = document.querySelector('.nav-toggle');
+    var links = document.getElementById('nav-links');
+    if (!btn || !links) return;
+    btn.classList.toggle('open');
+    links.classList.toggle('show');
+    btn.setAttribute('aria-expanded', links.classList.contains('show'));
+  }
+  </script>
+
+</body>
+</html>
